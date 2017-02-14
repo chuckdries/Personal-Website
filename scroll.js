@@ -7,16 +7,14 @@ var targetHeight = null;
 var prevHeight = null;
 var currentHeight = null;
 var startTime = null;
-var count = 0;
 /* does some basic checking then calls animate() to do the heavy lifting */
 function smoothScroll(targetId){
     target = document.getElementById(targetId);//grab the element
     targetHeight = target.offsetTop; //get its height
     currentHeight = getScrollY(); //grab the current scroll position
     prevHeight = null;
-    startTime = null; //we have to reset the start time every time the animation runs
+    startTime = performance.now(); //we have to reset the start time every time the animation runs
     if(currentHeight != targetHeight){
-        count = 0;
         window.requestAnimationFrame(animateScroll);//schedule the animation
     }
 }
