@@ -6,7 +6,8 @@
 body {
   font-family: serif;
   font-size: 1em;
-  line-height: 1.6; }
+  line-height: 1.6;
+  transition-duration: .2s; }
 
 #mast {
   background: none;
@@ -25,7 +26,8 @@ body {
     max-width: 400px; }
 
 .copy h1 {
-  text-decoration: underline; }
+  text-decoration: underline;
+  font-style: italic; }
 
 .nojs body {
   background: white; }
