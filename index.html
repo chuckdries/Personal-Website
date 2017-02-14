@@ -144,16 +144,16 @@
     </div>
     <script>
     /*why is this so indented?*/
-                                         x = document.getElementById("db");
-                                         mast = document.getElementById("mast");
-                                         style = window.getComputedStyle(mast);
-                                         var color = style.getPropertyValue('color');
-                                         if (color == "rgb(255, 255, 255)") { //we should check that the stylesheet is being applied to avoid making the entire page unreadable
+                                         //x = document.getElementById("db");
+                                         //mast = document.getElementById("mast");
+                                         //style = window.getComputedStyle(mast);
+                                         //var color = style.getPropertyValue('color');
+                                         //if (color == "rgb(255, 255, 255)") { //we should check that the stylesheet is being applied to avoid making the entire page unreadable
                                              document.getElementById("jscanary").className = "js";
                                              bgColor();
                                              document.addEventListener("scroll", bgColor);
                                              window.addEventListener("resize", bgColor);
-                                         }
+                                         //}
     </script>
     <script>
                                          (function (i, s, o, g, r, a, m) {
