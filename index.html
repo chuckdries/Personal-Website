@@ -21,8 +21,10 @@
 
         function bgColor() {
             var p = ((window.innerHeight - window.scrollY) / window.innerHeight); //calulate ratio of scroll
+            console.log(p);
             x.innerHTML = " " + String(parseInt(p * 100)); //display it
             var rgb = Math.floor(Math.abs(1 - p) * 255); //set the color
+            console.log(rgb);
             var colorString = "rgb(" + rgb + "," + rgb + "," + rgb + ")";
             document.body.style.backgroundColor = colorString;
             console.log(colorString);
