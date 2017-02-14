@@ -1,6 +1,6 @@
 /* A super simple smooth scroller without all the baggage. Written by Chuck Dries in 2017*/
 //settings
-var speed = .002; //speed multiplier
+var speed = .0005; //speed multiplier
 //setup necissary stuff
 var target  = null;
 var targetHeight = null;
