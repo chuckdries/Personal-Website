@@ -1,0 +1,23 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'lite-server',
+1 verbose cli   '--save-dev',
+1 verbose cli   '--no-bin-links' ]
+2 info using npm@4.1.2
+3 info using node@v7.5.0
+4 verbose stack Error: UNKNOWN: unknown error, scandir 'Z:\ChuckDries Website\v3'
+5 verbose cwd Z:\ChuckDries Website\v3
+6 error Windows_NT 10.0.14393
+7 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "lite-server" "--save-dev" "--no-bin-links"
+8 error node v7.5.0
+9 error npm  v4.1.2
+10 error path Z:\ChuckDries Website\v3
+11 error code UNKNOWN
+12 error errno -4094
+13 error syscall scandir
+14 error UNKNOWN: unknown error, scandir 'Z:\ChuckDries Website\v3'
+15 error If you need help, you may report this error at:
+15 error     <https://github.com/npm/npm/issues>
+16 verbose exit [ -4094, true ]

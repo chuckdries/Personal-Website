@@ -1,0 +1,63 @@
+.reset, body, .slide {
+  padding: 0px;
+  margin: 0px;
+  clear: both; }
+
+body {
+  font-family: serif;
+  font-size: 1em;
+  line-height: 1.6; }
+
+#mast {
+  background: none;
+  line-height: 1.2;
+  color: white; }
+  #mast a {
+    color: white;
+    font-style: italic; }
+  #mast a:hover {
+    color: #ed1a76; }
+  #mast .sub {
+    font-style: italic;
+    color: #ccc; }
+  #mast img {
+    width: 100%;
+    max-width: 400px; }
+
+.copy h1 {
+  text-decoration: underline; }
+
+.nojs body {
+  background: white; }
+.nojs #mast {
+  background: black; }
+
+.slide {
+  padding: 0px; }
+  .slide div {
+    /*width wrapping*/
+    max-width: 800px;
+    margin: auto; }
+
+.full {
+  height: 100vh;
+  width: 100%; }
+
+.vcwrapper {
+  display: table; }
+
+.arrow {
+  font-variant-position: sub;
+  font-size: .6em; }
+
+.arrow:before {
+  content: "\0025BC"; }
+
+h1 {
+  font-size: 2em; }
+
+h2 {
+  font-weight: normal;
+  font-style: italic; }
+
+/*# sourceMappingURL=style.css.map */
