@@ -6,6 +6,7 @@ var target  = null;
 var targetHeight = null;
 var currentHeight = null;
 var startTime = null;
+var count = 0;
 /* does some basic checking then calls animate() to do the heavy lifting */
 function smoothScroll(targetId){
     target = document.getElementById(targetId);//grab the element
@@ -13,6 +14,7 @@ function smoothScroll(targetId){
     currentHeight = getScrollY(); //grab the current scroll position
     startTime = null; //we have to reset the start time every time the animation runs
     if(currentHeight != targetHeight){
+        count = 0;
         window.requestAnimationFrame(animateScroll);//schedule the animation
     }
 }
@@ -24,7 +26,8 @@ function animateScroll(timeStamp){
     var deltaScroll = deltaStep  * offsetScroll; //decide how far to scroll this tick
     window.scroll(0, currentHeight + deltaScroll); //scroll!
     currentHeight = getScrollY();//re-record the current height after scrolling for comparison
-    if(currentHeight != targetHeight){ //schedule another tick if we need to
+    count++;
+    if((currentHeight != targetHeight) || ((currentHeight + offsetScroll < window.innerHeight)&& count < 50)){ //schedule another tick until we get where we're going or we get as far as we can
         window.requestAnimationFrame(animateScroll);
     }
 
