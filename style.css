@@ -13,7 +13,7 @@ body {
   transition: none; }
 
 #mast {
-  background: black;
+  background: none;
   line-height: 1.2;
   color: white; }
   #mast a {

@@ -20,15 +20,15 @@
         var mast;
 
         function bgColor() {
-            console.log("innerHeight = " + window.innerHeight + ", window.scrollY = " + window.scrollY);
-            var p = ((window.innerHeight - window.scrollY) / window.innerHeight); //calulate ratio of scroll
-            console.log(p);
+            var p = ((window.innerHeight - getScrollY()) / window.innerHeight); //calulate ratio of scroll
             x.innerHTML = " " + String(parseInt(p * 100)); //display it
             var rgb = Math.floor(Math.abs(1 - p) * 255); //set the color
-            console.log(rgb);
             var colorString = "rgb(" + rgb + "," + rgb + "," + rgb + ")";
             document.body.style.backgroundColor = colorString;
-            console.log(colorString);
+        }
+        function getScrollY(){
+            //internet explorer does not have a window.scrollY property, so we need to make our own
+            return typeof window.scrollY === "undefined" ? window.pageYOffset : window.scrollY;
         }
     </script>
     <style>
