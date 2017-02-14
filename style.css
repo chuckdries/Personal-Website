@@ -2,12 +2,15 @@
   padding: 0px;
   margin: 0px;
   clear: both; }
-
+*{
+  transition-duration: .2s;
+}
 body {
   font-family: serif;
   font-size: 1em;
   line-height: 1.6;
-  transition-duration: .2s; }
+  transition: none;
+}
 
 #mast {
   background: none;
