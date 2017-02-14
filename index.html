@@ -20,6 +20,7 @@
         var mast;
 
         function bgColor() {
+            console.log("innerHeight = " + window.innerHeight + ", window.scrollY = " + window.scrollY);
             var p = ((window.innerHeight - window.scrollY) / window.innerHeight); //calulate ratio of scroll
             console.log(p);
             x.innerHTML = " " + String(parseInt(p * 100)); //display it
