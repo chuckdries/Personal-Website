@@ -97,7 +97,7 @@
             <h2>Experience: Projects</h2>
         </div>
     </div>
-    <div class="slide">
+    <div id="design" class="slide">
         <div class="copy">
             <h1>Design</h1>
             <h2>Skills</h2>
@@ -111,7 +111,7 @@
             </div>
         </div>
     </div>
-    <div class="slide">
+    <div id="photography" class="slide">
         <div class="copy">
             <h1>Photography</h1>
             <h2>Skills</h2>
@@ -126,20 +126,23 @@
             </div>
         </div>
     </div>
-    <!--
-    <div class="slide slide-full vcwrapper">
-        <h1 class="under">Design</h1>
-        <div style="display:table-row;height:100%">
-            <div style="display:table-cell;vertical-align:middle;">
-                <div>
-                    Content
-                </div>
+    <div id="leadership" class="slide">
+        <div class="copy">
+            <h1>Leadership</h1>
+            <h2>Skills</h2>
+            <p>A skills list is definitely not relevant or helpful here!</p>
+            <div>
+                <table>
+                    <tr>
+                        <td class="ld">Design</td>
+                        <td>Photoshop, InDesign, After Effects, Premiere Pro</td>
+                    </tr>
+                </table>
             </div>
         </div>
-        <h2>Photography <span id="design" class="arrow"></span></h2>
     </div>
--->
     <script>
+    /*why is this so indented?*/
                                          x = document.getElementById("db");
                                          mast = document.getElementById("mast");
                                          style = window.getComputedStyle(mast);
@@ -152,20 +155,20 @@
                                          }
     </script>
     <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+                                         (function (i, s, o, g, r, a, m) {
+                                             i['GoogleAnalyticsObject'] = r;
+                                             i[r] = i[r] || function () {
+                                                 (i[r].q = i[r].q || []).push(arguments)
+                                             }, i[r].l = 1 * new Date();
+                                             a = s.createElement(o),
+                                                 m = s.getElementsByTagName(o)[0];
+                                             a.async = 1;
+                                             a.src = g;
+                                             m.parentNode.insertBefore(a, m)
+                                         })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', 'UA-34100225-1', 'auto');
-        ga('send', 'pageview');
+                                         ga('create', 'UA-34100225-1', 'auto');
+                                         ga('send', 'pageview');
     </script>
     <script src="scroll.js"></script>
 </body>
