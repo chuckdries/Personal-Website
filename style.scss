@@ -7,6 +7,9 @@ $pink: #ed1a76;
     margin: 0px;
     clear: both;
 }
+*{
+    transition-duration: .2s;
+}
 
 //sections
 body {
@@ -14,7 +17,7 @@ body {
     font-family: serif;
     font-size: 1em;
     line-height: 1.6;
-    transition-duration: .2s;
+    transition:none;
 }
 
 #mast {
@@ -42,6 +45,9 @@ body {
     h1 {
         text-decoration: underline;
         font-style: italic;
+        a{
+            color: black;
+        }
     }
 }
 
