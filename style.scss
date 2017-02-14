@@ -14,13 +14,13 @@ body {
     font-family: serif;
     font-size: 1em;
     line-height: 1.6;
-    transition-duration: .5s;
+    transition-duration: .2s;
 }
 
 #mast {
-    background:none;
+    background: none;
     line-height: 1.2;
-    color:white;
+    color: white;
     a {
         color: white;
         font-style: italic;
@@ -28,20 +28,23 @@ body {
     a:hover{
         color: $pink;
     }
-    .sub{
-        font-style:italic;
+    .sub {
+        font-style: italic;
         color: $grey;
     }
-    img{
+    img {
         width: 100%;
-        max-width:400px;
+        max-width: 400px;
     }
 }
-.copy{
-    h1{
+
+.copy {
+    h1 {
         text-decoration: underline;
+        font-style: italic;
     }
 }
+
 .nojs {
     body {
         background: white;
