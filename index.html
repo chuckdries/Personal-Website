@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chuck Dries</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        //we're going to do a quick thing to measure how long it takes the page to load
+        var timerStart = Date.now();
+        window.onload = function () {
+            var time = Date.now() - timerStart;
+            console.log(time);
+            if (time > 1000) {
+                //browser is fast enough, run download and run animation scripts!
+            }
+        }
+        var x;
+        var mast;
+
+        function bgColor() {
+            var p = ((window.innerHeight - window.scrollY) / window.innerHeight); //calulate ratio of scroll
+            x.innerHTML = " " + String(parseInt(p * 100)); //display it
+            var rgb = Math.floor(Math.abs(1 - p) * 255); //set the color
+            var colorString = "rgb(" + rgb + "," + rgb + "," + rgb + ")";
+            document.body.style.backgroundColor = colorString;
+        }
+    </script>
+    <style>
+        /*fallback styles*/
+    </style>
+
+</head>
+
+<body id="jscanary" class="nojs">
+    <div class="slide slide-full " id="mast">
+        <div class="vcwrapper full">
+            <!--Gross markup to facilitate vertical centering-->
+            <div style="display:table-row;height:100%;">
+                <!--ewwww tables-->
+                <div style="display:table-cell;vertical-align:middle;">
+                    <div>
+                        <h1 style="display:none;">Chuck Dries</h1>
+                        <img src="cd.png" alt="Chuck Dries">
+                        <h2 id="tagline">Tech / Design / Photography / Leadership</h2>
+                        <p>Digital Developer, <span class="sub">The State Press</span></p>
+                        <p>Computer Science Student, <span class="sub">Arizona State University</span></p>
+                        <p><a href="mailto:chuck@chuckdries.com">chuck@chuckdries.com</a> / 602.618.0414</p>
+                        <p>
+                            <a href="http://github.com/chuckdries">Github</a> /
+                            <a href="https://www.linkedin.com/in/chuckdries/">LinkedIn</a> /
+                            <a href="CharlesDriesResumeCurrent.pdf">Resume [pdf]</a> /
+                            <a href="https://medium.com/@chuckdries">Blog</a>
+                        </p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <h2>Learn more <span id="db" class="arrow"></span></h2>
+        </div>
+    </div>
+    <div class="slide">
+        <div class="copy">
+            <h1>About Me</h1>
+            <div class="header">
+                <h2>Overview</h2>
+            </div>
+            <div class="right">
+                <p>I'm currently studying Computer Science, and I have a wealth of experience through hackathons, odd jobs,
+                    and working with multiple tech support clients. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Curabitur vitae quam ut felis blandit luctus. Suspendisse potenti. Vivamus a metus ex. Pellentesque habitant
+                    morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec eget dapibus tortor, auctor
+                    dignissim metus. Aliquam at sollicitudin tortor. Donec finibus faucibus erat, vitae cursus urna maximus
+                    sed. Quisque tristique sit amet risus et tempus. Pellentesque sed metus nec nunc bibendum fringilla.
+                    Curabitur accumsan ultrices est ut dapibus.
+                </p>
+            </div>
+            <div class="header">
+                <h2>Skills</h2>
+            </div>
+
+            <div class="right">
+                <table>
+                    <tr>
+                        <td class="ld">Web</td>
+                        <td>HTML5, CSS3, Javascript &amp; Node</td>
+                    </tr>
+                    <tr>
+                        <td class="ld">Programming</td>
+                        <td>Java, C, C# with Unity, C++, Python, Scheme, Bash</td>
+                    </tr>
+                    <tr>
+                        <td class="ld">Design</td>
+                        <td>Photoshop, InDesign, After Effects, Premiere Pro</td>
+                    </tr>
+                    <tr>
+                        <td class="ld">Etcetera</td>
+                        <td>Leadership experience, KVM/LibVirt/QEMU, ESXi</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="header">
+                <h2>Experience</h2>
+            </div>
+            <div class="right"></div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+    <!--
+    <div class="slide slide-full vcwrapper">
+        <h1 class="under">Design</h1>
+        <div style="display:table-row;height:100%">
+            <div style="display:table-cell;vertical-align:middle;">
+                <div>
+                    Content
+                </div>
+            </div>
+        </div>
+        <h2>Photography <span id="design" class="arrow"></span></h2>
+    </div>
+-->
+    <script>
+        x = document.getElementById("db");
+        mast = document.getElementById("mast");
+        style = window.getComputedStyle(mast);
+        var color = style.getPropertyValue('color');
+        if (color == "rgb(255, 255, 255)") { //we should check that the stylesheet is being applied to avoid making the entire page unreadable
+            document.getElementById("jscanary").className = "js";
+            bgColor();
+            document.addEventListener("scroll", bgColor);
+        }
+    </script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-34100225-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+</body>
+
+</html>
