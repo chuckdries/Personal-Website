@@ -27,5 +27,4 @@ function animateScroll(timeStamp){
     if(Math.floor(currentHeight) != Math.floor(targetHeight)){ //schedule another tick if we need to
         window.requestAnimationFrame(animateScroll);
     }
-
 }
