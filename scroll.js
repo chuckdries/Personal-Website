@@ -2,32 +2,29 @@
 //settings
 var speed = .0005; //speed multiplier
 //setup necissary stuff
-var target = null;
+var target  = null;
 var targetHeight = null;
-var prevHeight = null;
 var currentHeight = null;
 var startTime = null;
 /* does some basic checking then calls animate() to do the heavy lifting */
-function smoothScroll(targetId) {
+function smoothScroll(targetId){
     target = document.getElementById(targetId);//grab the element
     targetHeight = target.offsetTop; //get its height
-    currentHeight = getScrollY(); //grab the current scroll position
-    prevHeight = null;
+    currentHeight = window.scrollY; //grab the current scroll position
     startTime = null; //we have to reset the start time every time the animation runs
-    if (currentHeight != targetHeight) {
+    if(currentHeight != targetHeight){
         window.requestAnimationFrame(animateScroll);//schedule the animation
     }
 }
-function animateScroll(timeStamp) {
+function animateScroll(timeStamp){
     if (startTime == null) startTime = timeStamp; //record the time the animation started if we're just starting
     var deltaStep = (timeStamp - startTime) * speed; //timeStamp - startTime gives us miliseconds since the animation started, we scale this down because its usually in the hundreds.
-    currentHeight = getScrollY(); //record the current scroll position of the window
-    prevHeight = currentHeight;//store height before scroll action so we can compare it to the height after we try to scroll
+    currentHeight = window.scrollY; //record the current scroll position of the window
     var offsetScroll = targetHeight - currentHeight; //calculate how far we still need to go
-    var deltaScroll = deltaStep * offsetScroll; //decide how far to scroll this tick
+    var deltaScroll = deltaStep  * offsetScroll; //decide how far to scroll this tick
     window.scroll(0, currentHeight + deltaScroll); //scroll!
-    currentHeight = getScrollY();//re-record the current height after scrolling for comparison
-    if ((currentHeight != targetHeight) && ((currentHeight != prevHeight) || (deltaStep == 0))) { //schedule another tick until we get where we're going or we get as far as we can. deltastep will always be 0 on the first frame.
+    currentHeight = window.scrollY;//re-record the current height after scrolling for comparison
+    if(Math.floor(currentHeight) != Math.floor(targetHeight)){ //schedule another tick if we need to
         window.requestAnimationFrame(animateScroll);
     }
 
