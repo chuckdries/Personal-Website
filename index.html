@@ -26,7 +26,7 @@
             var colorString = "rgb(" + rgb + "," + rgb + "," + rgb + ")";
             document.body.style.backgroundColor = colorString;
         }
-        function getScrollY(){
+        function getScrollY() {
             //internet explorer does not have a window.scrollY property, so we need to make our own
             return typeof window.scrollY === "undefined" ? window.pageYOffset : window.scrollY;
         }
@@ -66,15 +66,9 @@
     <div id="tech" class="slide">
         <div class="copy">
             <h1><a href="#tech" onclick="smoothScroll('tech'); return false;">Tech</a></h1>
-            <h2>Overview</h2>
+            <!--<h2>Overview</h2>-->
             <div class="right">
-                <p>I'm currently studying Computer Science, and I have a wealth of experience through hackathons, odd jobs,
-                    and working with multiple tech support clients. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Curabitur vitae quam ut felis blandit luctus. Suspendisse potenti. Vivamus a metus ex. Pellentesque habitant
-                    morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec eget dapibus tortor, auctor
-                    dignissim metus. Aliquam at sollicitudin tortor. Donec finibus faucibus erat, vitae cursus urna maximus
-                    sed. Quisque tristique sit amet risus et tempus. Pellentesque sed metus nec nunc bibendum fringilla.
-                    Curabitur accumsan ultrices est ut dapibus.
+                <p>I'm a motivated Computer Science student at ASU with a focus on the intersection of humanities and computers.
                 </p>
             </div>
             <h2>Skills</h2>
@@ -98,7 +92,29 @@
             </div>
             <h2>Experience: Jobs</h2>
             <!--we can do some product page like stuff with pictures and everything-->
+            <ul>
+                <li>
+                    <h3>The State Press</h3>
+                </li>
+                <li>
+                    <h3>Desert Community Robotics</h3>
+                </li>
+            </ul>
             <h2>Experience: Projects</h2>
+            <ul>
+                <li>
+                    <h3>Volunteer Management Portal</h3>
+                </li>
+                <li>
+                    <h3>PaperBoy</h3>
+                </li>
+                <li>
+                    <h3>Linker</h3>
+                </li>
+                <li>
+                    <h3>Sorting Algorithm Visualizer</h3>
+                </li>
+            </ul>
         </div>
     </div>
     <div id="design" class="slide">
@@ -146,33 +162,33 @@
         </div>
     </div>
     <script>
-    /*why is this so indented?*/
+                                         /*why is this so indented?*/
                                          x = document.getElementById("db"); //db is the scroll counter. Why is it called that?
                                          //mast = document.getElementById("mast");
                                          //style = window.getComputedStyle(mast);
                                          //var color = style.getPropertyValue('color');
                                          //if (color == "rgb(255, 255, 255)") { //we should check that the stylesheet is being applied to avoid making the entire page unreadable
-                                             document.getElementById("jscanary").className = "js";
-                                             bgColor();
-                                             document.addEventListener("scroll", bgColor);
-                                             window.addEventListener("resize", bgColor);
+                                         document.getElementById("jscanary").className = "js";
+                                         bgColor();
+                                         document.addEventListener("scroll", bgColor);
+                                         window.addEventListener("resize", bgColor);
                                          //}
     </script>
     <script>
-                                         (function (i, s, o, g, r, a, m) {
-                                             i['GoogleAnalyticsObject'] = r;
-                                             i[r] = i[r] || function () {
-                                                 (i[r].q = i[r].q || []).push(arguments)
-                                             }, i[r].l = 1 * new Date();
-                                             a = s.createElement(o),
-                                                 m = s.getElementsByTagName(o)[0];
-                                             a.async = 1;
-                                             a.src = g;
-                                             m.parentNode.insertBefore(a, m)
-                                         })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+                                             (function (i, s, o, g, r, a, m) {
+                                                 i['GoogleAnalyticsObject'] = r;
+                                                 i[r] = i[r] || function () {
+                                                     (i[r].q = i[r].q || []).push(arguments)
+                                                 }, i[r].l = 1 * new Date();
+                                                 a = s.createElement(o),
+                                                     m = s.getElementsByTagName(o)[0];
+                                                 a.async = 1;
+                                                 a.src = g;
+                                                 m.parentNode.insertBefore(a, m)
+                                             })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-                                         ga('create', 'UA-34100225-1', 'auto');
-                                         ga('send', 'pageview');
+                                             ga('create', 'UA-34100225-1', 'auto');
+                                             ga('send', 'pageview');
     </script>
     <script src="scroll.js"></script>
 </body>

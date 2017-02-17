@@ -3,14 +3,15 @@
   margin: 0px;
   clear: both; }
 
-* {
-  transition-duration: .2s; }
-
 body {
   font-family: serif;
   font-size: 1em;
   line-height: 1.6;
   transition: none; }
+
+#top {
+  position: fixed;
+  background: black; }
 
 #mast {
   background: none;
@@ -25,8 +26,26 @@ body {
     font-style: italic;
     color: #ccc; }
   #mast img {
-    width: 100%;
-    max-width: 400px; }
+    transition-duration: .2s; }
+  #mast .hideable {
+    transition-duration: .2s; }
+  #mast h2 {
+    transition-property: size;
+    transition-duration: .2s; }
+
+.small .hideable {
+  display: none;
+  opacity: 0; }
+.small img {
+  max-width: 200px; }
+.small h2 {
+  font-size: 1em; }
+
+.large img {
+  width: 100%;
+  max-width: 400px; }
+.large .hideable {
+  opacity: 1; }
 
 .copy h1 {
   text-decoration: underline;
@@ -40,7 +59,8 @@ body {
   background: black; }
 
 .slide {
-  padding: 0px; }
+  padding: 0px;
+  width: 100%; }
   .slide div {
     /*width wrapping*/
     max-width: 800px;
@@ -66,5 +86,8 @@ h1 {
 h2 {
   font-weight: normal;
   font-style: italic; }
+
+a {
+  transition-duration: .2s; }
 
 /*# sourceMappingURL=style.css.map */
