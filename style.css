@@ -14,6 +14,7 @@ body {
   background: black; }
 
 #mast {
+  margin-top: 10px;
   background: none;
   line-height: 1.2;
   color: white; }
@@ -26,8 +27,6 @@ body {
     font-style: italic;
     color: #ccc; }
   #mast img {
-    transition-duration: .2s; }
-  #mast .hideable {
     transition-duration: .2s; }
   #mast h2 {
     transition-property: size;
@@ -47,12 +46,6 @@ body {
 .large .hideable {
   opacity: 1; }
 
-.copy h1 {
-  text-decoration: underline;
-  font-style: italic; }
-  .copy h1 a {
-    color: black; }
-
 .nojs body {
   background: white; }
 .nojs #mast {
@@ -65,6 +58,12 @@ body {
     /*width wrapping*/
     max-width: 800px;
     margin: auto; }
+  .slide p {
+    max-width: 800px;
+    margin: auto; }
+  .slide .cover {
+    height: 500px;
+    background: url("Chuck.jpg"); }
 
 .full {
   height: 100vh;
