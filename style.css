@@ -10,6 +10,7 @@ body {
   transition: none; }
 
 #top {
+  padding-top: 10px;
   width: 100%;
   position: fixed;
   background: black; }
@@ -57,22 +58,40 @@ body {
 
 .slide {
   padding: 0px;
-  width: 100%; }
+  width: 100%;
+  line-height: 1.6; }
   .slide div {
-    /*width wrapping*/
+    /* width wrapping */
     max-width: 800px;
-    margin: auto;
-    border-radius: 5px;
-    padding: 0px; }
+    margin: auto; }
+    .slide div div {
+      /* Project bits */
+      transition-duration: .2s;
+      width: 390px;
+      border-radius: 5px;
+      padding: 0px;
+      display: inline-block;
+      margin: 3px; }
+      .slide div div .cover {
+        height: 300px;
+        background-position: center center;
+        background-size: cover;
+        margin: 0px; }
+        .slide div div .cover h2 {
+          text-align: center;
+          background: rgba(0, 0, 0, 0.5);
+          color: white; }
+      .slide div div .cover:hover {
+        box-shadow: 2px 2px 9px #666; }
   .slide p {
     max-width: 800px;
     margin: auto; }
-  .slide .cover {
-    height: 500px;
-    background: url("Chuck.jpg");
-    background-position: center center;
-    background-size: cover;
-    margin: 0px; }
+  .slide h1 {
+    font-size: 2em;
+    font-style: italic;
+    max-width: 800px;
+    margin: auto;
+    margin-top: 2.3em; }
 
 .arrow {
   font-variant-position: sub;
@@ -80,9 +99,6 @@ body {
 
 .arrow:before {
   content: "\0025BC"; }
-
-h1 {
-  font-size: 2em; }
 
 h2 {
   font-weight: normal;
