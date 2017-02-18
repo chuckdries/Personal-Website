@@ -74,13 +74,6 @@ body {
     background-size: cover;
     margin: 0px; }
 
-.full {
-  height: 100vh;
-  width: 100%; }
-
-.vcwrapper {
-  display: table; }
-
 .arrow {
   font-variant-position: sub;
   font-size: .6em; }
