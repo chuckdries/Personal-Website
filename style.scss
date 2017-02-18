@@ -2,6 +2,7 @@
 $width: 800px;
 $grey: #ccc;
 $pink: #ed1a76;
+$greybg: rgba(0, 0, 0, .5);
 .reset {
     padding: 0px;
     margin: 0px;
@@ -18,6 +19,7 @@ body {
 }
 
 #top {
+    padding-top: 10px;
     width: 100%;
     position: fixed;
     background: black;
@@ -94,23 +96,45 @@ body {
     @extend .reset;
     padding: 0px;
     width: 100%;
+    line-height: 1.6;
     div {
-        /*width wrapping*/
+        /* width wrapping */
         max-width: $width;
         margin: auto;
-        border-radius: 5px;
-        padding: 0px;
+        div {
+            /* Project bits */
+            transition-duration: .2s;
+            width: $width/2 - 10;
+            border-radius: 5px;
+            padding: 0px;
+            display: inline-block;
+            margin: 3px;
+            .cover {
+                height: 300px;
+                background-position: center center;
+                background-size: cover;
+                margin: 0px;
+                h2 {
+                    text-align: center;
+                    background: $greybg;
+                    color: white;
+                }
+            }
+            .cover:hover {
+                box-shadow: 2px 2px 9px #666;
+            }
+        }
     }
     p {
         max-width: $width;
         margin: auto;
     }
-    .cover {
-        height: 500px;
-        background: url("Chuck.jpg");
-        background-position: center center;
-        background-size: cover;
-        margin: 0px;
+    h1 {
+        font-size: 2em;
+        font-style: italic;
+        max-width: $width;
+        margin: auto;
+        margin-top: 2.3em;
     }
 }
 
@@ -121,10 +145,6 @@ body {
 
 .arrow:before {
     content: "\0025BC";
-}
-
-h1 {
-    font-size: 2em;
 }
 
 h2 {
