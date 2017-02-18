@@ -10,8 +10,12 @@ body {
   transition: none; }
 
 #top {
+  width: 100%;
   position: fixed;
   background: black; }
+  #top div {
+    margin: auto;
+    max-width: 800px; }
 
 #mast {
   margin-top: 10px;
@@ -57,13 +61,18 @@ body {
   .slide div {
     /*width wrapping*/
     max-width: 800px;
-    margin: auto; }
+    margin: auto;
+    border-radius: 5px;
+    padding: 0px; }
   .slide p {
     max-width: 800px;
     margin: auto; }
   .slide .cover {
     height: 500px;
-    background: url("Chuck.jpg"); }
+    background: url("Chuck.jpg");
+    background-position: center center;
+    background-size: cover;
+    margin: 0px; }
 
 .full {
   height: 100vh;

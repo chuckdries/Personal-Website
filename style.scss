@@ -17,8 +17,13 @@ body {
     transition: none;
 }
 #top{
+    width: 100%;
     position: fixed;
     background: black;
+    div{
+        margin: auto;
+        max-width: $width;
+    }
 }
 #mast {
     margin-top: 10px;
@@ -90,6 +95,8 @@ img {
         /*width wrapping*/
         max-width: $width;
         margin: auto;
+        border-radius: 5px;
+        padding: 0px;
     }
     p{
         max-width: $width;
@@ -98,6 +105,9 @@ img {
     .cover{
         height: 500px;
         background: url("Chuck.jpg");
+        background-position: center center;
+        background-size: cover;
+        margin: 0px;
     }
 }
 
