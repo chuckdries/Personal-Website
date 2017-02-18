@@ -21,6 +21,7 @@ body {
     background: black;
 }
 #mast {
+    margin-top: 10px;
     background: none;
     line-height: 1.2;
     color: white;
@@ -39,7 +40,8 @@ body {
         transition-duration: .2s;
     }
     .hideable{
-        transition-duration: .2s;
+        // transition-property: size;
+        // transition-duration: .2s;
     }
     h2{
         transition-property: size;
@@ -70,16 +72,6 @@ img {
     }
 }
 
-.copy {
-    h1 {
-        text-decoration: underline;
-        font-style: italic;
-        a {
-            color: black;
-        }
-    }
-}
-
 .nojs {
     body {
         background: white;
@@ -98,6 +90,14 @@ img {
         /*width wrapping*/
         max-width: $width;
         margin: auto;
+    }
+    p{
+        max-width: $width;
+        margin: auto;
+    }
+    .cover{
+        height: 500px;
+        background: url("Chuck.jpg");
     }
 }
 
