@@ -3,51 +3,25 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Chuck Dries</title>
+    <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script>
-        //we're going to do a quick thing to measure how long it takes the page to load
-        var timerStart = Date.now();
-        window.onload = function () {
-            var time = Date.now() - timerStart;
-            console.log(time);
-            if (time > 1000) {
-                //browser is fast enough, run download and run animation scripts!
-            }
-        }
-        var x;
-        var mast;
-
-        function bgColor() {
-            var p = ((window.innerHeight - getScrollY()) / window.innerHeight); //calulate ratio of scroll
-            x.innerHTML = " " + String(parseInt(p * 100)); //display it
-            var rgb = Math.floor(Math.abs(1 - p) * 255); //set the color
-            var colorString = "rgb(" + rgb + "," + rgb + "," + rgb + ")";
-            document.body.style.backgroundColor = colorString;
-        }
-        function getScrollY() {
-            //internet explorer does not have a window.scrollY property, so we need to make our own
-            return typeof window.scrollY === "undefined" ? window.pageYOffset : window.scrollY;
-        }
-    </script>
+    <link rel="stylesheet" href="covers.css">
     <style>
-        /*fallback styles*/
+        #spaceTakerUpper {
+            height: 105vh;
+        }
     </style>
-
 </head>
 
-<body id="jscanary" class="nojs">
-    <div class="slide slide-full " id="mast">
-        <div class="vcwrapper full">
-            <!--Gross markup to facilitate vertical centering-->
-            <div style="display:table-row;height:100%;">
-                <!--ewwww tables-->
-                <div style="display:table-cell;vertical-align:middle;">
-                    <div>
-                        <h1 style="display:none;">Chuck Dries</h1>
-                        <img src="cd.png" alt="Chuck Dries">
-                        <h2 id="tagline"><a href="#tech" onclick="smoothScroll('tech'); return false;">Tech</a> / <a href="#design">Design</a>                            / <a href="#photography">Photography</a> / <a href="#leadership">Leadership</a></h2>
+<body>
+    <div id="top">
+        <div style="display:table;width:100%;height: 100%">
+            <div style="display:table-cell;vertical-align:middle;">
+                <div id="mast">
+                    <h1 style="display:none;">Chuck Dries</h1>
+                    <img src="cd.png" alt="Chuck Dries">
+                    <h2 id="tagline"><a href="#tech" onclick="smoothScroll('tech'); return false;">Tech</a> / <a href="#design">Design</a> / <a href="#photography">Photography</a> / <a href="#leadership">Leadership</a></h2>
+                    <div class="hideable">
                         <p>Digital Developer, <span class="sub">The State Press</span></p>
                         <p>Computer Science Student, <span class="sub">Arizona State University</span></p>
                         <p><a href="mailto:chuck@chuckdries.com">chuck@chuckdries.com</a> / 602.618.0414</p>
@@ -60,137 +34,225 @@
                     </div>
                 </div>
             </div>
-            <h2>Learn more <span id="db" class="arrow"></span></h2>
         </div>
     </div>
-    <div id="tech" class="slide">
-        <div class="copy">
-            <h1><a href="#tech" onclick="smoothScroll('tech'); return false;">Tech</a></h1>
-            <!--<h2>Overview</h2>-->
-            <div class="right">
-                <p>I'm a motivated Computer Science student at ASU with a focus on the intersection of humanities and computers.
-                </p>
-            </div>
-            <h2>Skills</h2>
-
-            <div>
-                <table>
-                    <tr>
-                        <td class="ld">Web</td>
-                        <td>HTML5, CSS3, Javascript &amp; Node</td>
-                    </tr>
-                    <tr>
-                        <td class="ld">Programming</td>
-                        <td>Java, C, C# with Unity, C++, Python, Scheme, Bash</td>
-                    </tr>
-
-                    <tr>
-                        <td class="ld">Etcetera</td>
-                        <td>Leadership experience, KVM/LibVirt/QEMU, ESXi</td>
-                    </tr>
-                </table>
-            </div>
-            <h2>Experience: Jobs</h2>
-            <!--we can do some product page like stuff with pictures and everything-->
-            <ul>
-                <li>
-                    <h3>The State Press</h3>
-                </li>
-                <li>
-                    <h3>Desert Community Robotics</h3>
-                </li>
-            </ul>
-            <h2>Experience: Projects</h2>
-            <ul>
-                <li>
-                    <h3>Volunteer Management Portal</h3>
-                </li>
-                <li>
-                    <h3>PaperBoy</h3>
-                </li>
-                <li>
-                    <h3>Linker</h3>
-                </li>
-                <li>
-                    <h3>Sorting Algorithm Visualizer</h3>
-                </li>
-            </ul>
-        </div>
+    <div id="spaceTakerUpper">
     </div>
-    <div id="design" class="slide">
-        <div class="copy">
-            <h1>Design</h1>
-            <h2>Skills</h2>
-            <div>
-                <table>
-                    <tr>
-                        <td class="ld">Design</td>
-                        <td>Photoshop, InDesign, After Effects, Premiere Pro</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+    <div class="slide">
+        <h1>About Me</h1>
+        <p>&nbsp; &nbsp; &nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer risus lorem, pretium non suscipit vel, dapibus non dolor. Suspendisse potenti. Phasellus interdum tempus placerat. Vivamus nec interdum mauris. Integer eu neque
+            lacus. Nulla turpis turpis, fermentum in elementum nec, aliquam sed elit. Maecenas fringilla tristique leo quis mattis. In tempor justo id vehicula porta. Ut metus tortor, laoreet quis iaculis ac, aliquet et metus. Suspendisse potenti. Nullam
+            at hendrerit neque. Vestibulum scelerisque turpis felis, et mollis risus suscipit eget. Donec condimentum ornare dictum. Vivamus rhoncus felis nisl, suscipit imperdiet ante tempus sit amet. Nullam lobortis sem ultricies, tempus felis a, hendrerit
+            lacus. Suspendisse potenti. Suspendisse sollicitudin purus vitae felis molestie placerat. Vivamus aliquam tincidunt velit, id cursus purus euismod vitae. Praesent a rhoncus quam, non scelerisque lorem. Aenean mollis dapibus odio, ut bibendum
+            arcu mattis vitae. Maecenas id faucibus arcu. Aenean ullamcorper urna id cursus semper. Sed aliquet, est ut interdum ultrices, arcu libero venenatis lacus, ut viverra ante massa id elit. Mauris molestie enim sit amet neque viverra, luctus
+            laoreet dolor efficitur.</p>
     </div>
-    <div id="photography" class="slide">
-        <div class="copy">
-            <h1>Photography</h1>
-            <h2>Skills</h2>
-            <p>Replace this with something better</p>
+    <div class="slide">
+        <h1>Projects</h1>
+        <div>
             <div>
-                <table>
-                    <tr>
-                        <td class="ld">Design</td>
-                        <td>Photoshop, InDesign, After Effects, Premiere Pro</td>
-                    </tr>
-                </table>
+                <div class="cover" id="sierra">
+                    <!-- centering container -->
+                    <div style="display:table;width:100%;height:100%;margin:0px;">
+                        <div style="display:table-cell;vertical-align:middle;margin:0px;">
+                            <h2>Project Sierra</h2>
+                        </div>
+                    </div>
+                </div>
+                <p>Project description</p>
+            </div>
+            <div>
+                <div class="cover" id="sierra">
+                    <!-- centering container -->
+                    <div style="display:table;width:100%;height:100%;margin:0px;">
+                        <div style="display:table-cell;vertical-align:middle;margin:0px;">
+                            <h2>Project Sierra</h2>
+                        </div>
+                    </div>
+                </div>
+                <p>Project description</p>
+            </div>
+            <div>
+                <div class="cover" id="sierra">
+                    <!-- centering container -->
+                    <div style="display:table;width:100%;height:100%;margin:0px;">
+                        <div style="display:table-cell;vertical-align:middle;margin:0px;">
+                            <h2>Project Sierra</h2>
+                        </div>
+                    </div>
+                </div>
+                <p>Project description</p>
+            </div>
+            <div>
+                <div class="cover" id="sierra">
+                    <!-- centering container -->
+                    <div style="display:table;width:100%;height:100%;margin:0px;">
+                        <div style="display:table-cell;vertical-align:middle;margin:0px;">
+                            <h2>Project Sierra</h2>
+                        </div>
+                    </div>
+                </div>
+                <p>Project description</p>
             </div>
         </div>
-    </div>
-    <div id="leadership" class="slide">
-        <div class="copy">
-            <h1>Leadership</h1>
-            <h2>Skills</h2>
-            <p>A skills list is definitely not relevant or helpful here!</p>
-            <div>
-                <table>
-                    <tr>
-                        <td class="ld">Design</td>
-                        <td>Photoshop, InDesign, After Effects, Premiere Pro</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
     </div>
     <script>
-                                         /*why is this so indented?*/
-                                         x = document.getElementById("db"); //db is the scroll counter. Why is it called that?
-                                         //mast = document.getElementById("mast");
-                                         //style = window.getComputedStyle(mast);
-                                         //var color = style.getPropertyValue('color');
-                                         //if (color == "rgb(255, 255, 255)") { //we should check that the stylesheet is being applied to avoid making the entire page unreadable
-                                         document.getElementById("jscanary").className = "js";
-                                         bgColor();
-                                         document.addEventListener("scroll", bgColor);
-                                         window.addEventListener("resize", bgColor);
-                                         //}
-    </script>
-    <script>
-                                             (function (i, s, o, g, r, a, m) {
-                                                 i['GoogleAnalyticsObject'] = r;
-                                                 i[r] = i[r] || function () {
-                                                     (i[r].q = i[r].q || []).push(arguments)
-                                                 }, i[r].l = 1 * new Date();
-                                                 a = s.createElement(o),
-                                                     m = s.getElementsByTagName(o)[0];
-                                                 a.async = 1;
-                                                 a.src = g;
-                                                 m.parentNode.insertBefore(a, m)
-                                             })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        var last_known_scroll = getScrollY();
+        var queueing = false;
+        document.addEventListener("scroll", function() {
+            last_known_scroll = getScrollY();
+            if (!queueing) {
+                window.requestAnimationFrame(function() {
+                    sc(last_known_scroll);
+                    queueing = false;
+                });
+            }
+            queueing = true;
+        });
 
-                                             ga('create', 'UA-34100225-1', 'auto');
-                                             ga('send', 'pageview');
+        sc(last_known_scroll);
+
+        function sc(ypos) {
+
+            var wheight = window.innerHeight;
+            //top thing
+            var topDiv = document.getElementById("top");
+            var mast = document.getElementById("mast");
+            var hcalc = wheight - ypos;
+            var topHeight = 100;
+            if (hcalc > 100) {
+                topHeight = hcalc;
+            } else {
+                topHeight = 100;
+            }
+            // var mastHeight = mast.clientHeight;
+            // var halfHeight = Math.floor((topHeight / 2) - (mastHeight / 2));
+            if (topHeight < 300) {
+                mast.className = "small";
+            } else {
+                mast.className = "large";
+            }
+            topDiv.style.height = topHeight + "px";
+            console.log("topheight is " + topHeight + " and topDiv.style.height = " + topDiv.style.height);
+            // mast.style.marginTop = halfHeight + "px";
+
+            //background thing
+            var p = ((wheight - ypos) / wheight); //calulate ratio of scroll
+            // x.innerHTML = " " + String(parseInt(p * 100)); //display it
+            var rgb = Math.floor(Math.abs(1 - p) * 255); //set the color
+            var colorString = "rgb(" + rgb + "," + rgb + "," + rgb + ")";
+            document.body.style.backgroundColor = colorString;
+
+        }
+
+        function bgColor() {
+
+        }
+
+        function getScrollY() {
+            //internet explorer does not have a window.scrollY property, so we need to make our own
+            return typeof window.scrollY === "undefined" ? window.pageYOffset : window.scrollY;
+        }
     </script>
-    <script src="scroll.js"></script>
 </body>
 
 </html>
