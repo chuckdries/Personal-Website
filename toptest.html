@@ -196,7 +196,7 @@
         <br>
     </div>
     <script>
-        var last_known_scroll = 0;
+        var last_known_scroll = getScrollY();
         var queueing = false;
         sc();
         document.addEventListener("scroll", function() {
