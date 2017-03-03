@@ -87,7 +87,8 @@ body {
     margin: 0;
     padding: 2px;
     border-spacing: 0;
-    border-collapse: collapse; }
+    border-collapse: collapse;
+    vertical-align: text-top; }
   .slide ul {
     margin: 5px; }
   .slide p {
