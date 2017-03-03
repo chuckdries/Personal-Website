@@ -198,7 +198,6 @@
     <script>
         var last_known_scroll = getScrollY();
         var queueing = false;
-        //sc();
         document.addEventListener("scroll", function() {
             last_known_scroll = getScrollY();
             if (!queueing) {
@@ -209,6 +208,8 @@
             }
             queueing = true;
         });
+
+        sc(last_known_scroll);
 
         function sc(ypos) {
 
