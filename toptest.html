@@ -20,7 +20,7 @@
                 <div id="mast">
                     <h1 style="display:none;">Chuck Dries</h1>
                     <img src="cd.png" alt="Chuck Dries">
-                    <h2 id="tagline"><a href="#tech" onclick="smoothScroll('tech'); return false;">Tech</a> / <a href="#design">Design</a>                        / <a href="#photography">Photography</a> / <a href="#leadership">Leadership</a></h2>
+                    <h2 id="tagline"><a href="#tech" onclick="smoothScroll('tech'); return false;">Tech</a> / <a href="#design">Design</a> / <a href="#photography">Photography</a> / <a href="#leadership">Leadership</a></h2>
                     <div class="hideable">
                         <p>Digital Developer, <span class="sub">The State Press</span></p>
                         <p>Computer Science Student, <span class="sub">Arizona State University</span></p>
@@ -40,17 +40,12 @@
     </div>
     <div class="slide">
         <h1>About Me</h1>
-        <p>&nbsp; &nbsp; &nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer risus lorem, pretium non suscipit vel, dapibus non
-            dolor. Suspendisse potenti. Phasellus interdum tempus placerat. Vivamus nec interdum mauris. Integer eu neque
-            lacus. Nulla turpis turpis, fermentum in elementum nec, aliquam sed elit. Maecenas fringilla tristique leo quis
-            mattis. In tempor justo id vehicula porta. Ut metus tortor, laoreet quis iaculis ac, aliquet et metus. Suspendisse
-            potenti. Nullam at hendrerit neque. Vestibulum scelerisque turpis felis, et mollis risus suscipit eget. Donec
-            condimentum ornare dictum. Vivamus rhoncus felis nisl, suscipit imperdiet ante tempus sit amet. Nullam lobortis
-            sem ultricies, tempus felis a, hendrerit lacus. Suspendisse potenti. Suspendisse sollicitudin purus vitae felis
-            molestie placerat. Vivamus aliquam tincidunt velit, id cursus purus euismod vitae. Praesent a rhoncus quam, non
-            scelerisque lorem. Aenean mollis dapibus odio, ut bibendum arcu mattis vitae. Maecenas id faucibus arcu. Aenean
-            ullamcorper urna id cursus semper. Sed aliquet, est ut interdum ultrices, arcu libero venenatis lacus, ut viverra
-            ante massa id elit. Mauris molestie enim sit amet neque viverra, luctus laoreet dolor efficitur.</p>
+        <p>&nbsp; &nbsp; &nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer risus lorem, pretium non suscipit vel, dapibus non dolor. Suspendisse potenti. Phasellus interdum tempus placerat. Vivamus nec interdum mauris. Integer eu neque
+            lacus. Nulla turpis turpis, fermentum in elementum nec, aliquam sed elit. Maecenas fringilla tristique leo quis mattis. In tempor justo id vehicula porta. Ut metus tortor, laoreet quis iaculis ac, aliquet et metus. Suspendisse potenti. Nullam
+            at hendrerit neque. Vestibulum scelerisque turpis felis, et mollis risus suscipit eget. Donec condimentum ornare dictum. Vivamus rhoncus felis nisl, suscipit imperdiet ante tempus sit amet. Nullam lobortis sem ultricies, tempus felis a, hendrerit
+            lacus. Suspendisse potenti. Suspendisse sollicitudin purus vitae felis molestie placerat. Vivamus aliquam tincidunt velit, id cursus purus euismod vitae. Praesent a rhoncus quam, non scelerisque lorem. Aenean mollis dapibus odio, ut bibendum
+            arcu mattis vitae. Maecenas id faucibus arcu. Aenean ullamcorper urna id cursus semper. Sed aliquet, est ut interdum ultrices, arcu libero venenatis lacus, ut viverra ante massa id elit. Mauris molestie enim sit amet neque viverra, luctus
+            laoreet dolor efficitur.</p>
     </div>
     <div class="slide">
         <h1>Projects</h1>
@@ -66,7 +61,7 @@
                 </div>
                 <p>Project description</p>
             </div>
-             <div>
+            <div>
                 <div class="cover" id="sierra">
                     <!-- centering container -->
                     <div style="display:table;width:100%;height:100%;margin:0px;">
@@ -77,7 +72,7 @@
                 </div>
                 <p>Project description</p>
             </div>
-             <div>
+            <div>
                 <div class="cover" id="sierra">
                     <!-- centering container -->
                     <div style="display:table;width:100%;height:100%;margin:0px;">
@@ -201,10 +196,22 @@
         <br>
     </div>
     <script>
+        var last_known_scroll = 0;
+        var queueing = false;
         sc();
-        document.addEventListener("scroll", sc);
-        function sc() {
-            var ypos = getScrollY();
+        document.addEventListener("scroll", function() {
+            last_known_scroll = getScrollY();
+            if (!queueing) {
+                window.requestAnimationFrame(function() {
+                    sc(last_known_scroll);
+                    queueing = false;
+                });
+            }
+            queueing = true;
+        });
+
+        function sc(ypos) {
+
             var wheight = window.innerHeight;
             //top thing
             var topDiv = document.getElementById("top");
@@ -235,9 +242,11 @@
             document.body.style.backgroundColor = colorString;
 
         }
+
         function bgColor() {
 
         }
+
         function getScrollY() {
             //internet explorer does not have a window.scrollY property, so we need to make our own
             return typeof window.scrollY === "undefined" ? window.pageYOffset : window.scrollY;
