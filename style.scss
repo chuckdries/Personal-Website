@@ -9,6 +9,7 @@ $greybg: rgba(0, 0, 0, .5);
     clear: both;
 }
 
+@import 'covers';
 //sections
 body {
     @extend .reset;
@@ -100,6 +101,7 @@ body {
         /* width wrapping */
         max-width: $width;
         margin: auto;
+        text-align: center;
         div {
             /* Project bits */
             transition-duration: .2s;
@@ -122,6 +124,10 @@ body {
             .cover:hover {
                 box-shadow: 1px 1px 9px #444;
             }
+        }
+        p,
+        table {
+            text-align: left;
         }
     }
     table {
