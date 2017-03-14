@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>Chuck Dries</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="covers.css">
     <style>
         #spaceTakerUpper {
             height: 105vh;
@@ -42,8 +41,8 @@
         <h1>About Me</h1>
         <p>When I was a child I was obsessed with trains and vacuum cleaners. I spent many sleepless nights marveling at these incredible machines. Today, I spend my nights pulling my hair out over webkit paint timing graphs. In a way, these nights are not
             so different.</p>
-        <p>I'm a Computer Science student at Arizona State Univrsity interested in the intersection of technology and art. I pride myself in taking a diverse set of interests and my pixel perfect lovingly handcrafted 💯% good stuff 👍👌 HTML. These days,
-            you can find me at The State Press working on ways to innovate the news during the week and winning hackathons on the weekends.</p>
+        <p>I'm a Computer Science student and Hackathon winner at Arizona State University and I'm interested in the intersection of technology and art. I pride myself in taking a diverse set of interest and my pixel perfect lovingly handcrafted 💯% good
+            stuff 👍👌 HTML. These days, you can find me at The State Press working on ways to innovate the news during the week and winning hackathons on the weekends.</p>
         <p>This website is still an active development project, pls don't judge too harshly.</p>
         <h1>Skills <a id="skilltablebutton" style="text-decoration: underline; font-style: italic; font-weight: normal; font-size: 14px;" onclick="toggleSkillTable()">hide</a></h1>
         <div id="skilltable">
@@ -260,13 +259,15 @@
         var stb = document.getElementById("skilltablebutton");
         document.addEventListener("scroll", function() {
             last_known_scroll = getScrollY();
-            if (!queueing) {
-                window.requestAnimationFrame(function() {
-                    sc(last_known_scroll);
-                    queueing = false;
-                });
-            }
-            queueing = true;
+            sc(last_known_scroll);
+            // Usually an important performance consideration, this ends up significantly delaying the resizing of the top box, which is important to stay sized correctly
+            // if (!queueing) {
+            //     window.requestAnimationFrame(function() {
+            //         sc(last_known_scroll);
+            //         queueing = false;
+            //     });
+            // }
+            // queueing = true;
         });
 
         sc(last_known_scroll);
