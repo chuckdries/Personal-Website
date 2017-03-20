@@ -124,6 +124,7 @@ body {
         .project {
             transition-duration: .2s;
             width: $width/2 - 10;
+            padding: 0 0 1em 0;
             border: 1px solid #aaa;
             border-radius: 5px;
             overflow: hidden;
