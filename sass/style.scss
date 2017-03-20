@@ -10,9 +10,11 @@ $greybg: rgba(0, 0, 0, .5);
 }
 
 @import 'covers';
-//
-//sections
-//
+
+/*
+ * sections
+ */
+
 body {
     @extend .reset;
     font-family: serif;
@@ -108,34 +110,33 @@ body {
     div {
         max-width: $width;
         margin: auto;
-        text-align: center;
         /* Project bits */
         .project {
             transition-duration: .2s;
             width: $width/2 - 10;
-            border: 1px solid #333;
+            border: 1px solid #aaa;
             border-radius: 5px;
             padding: 0px;
             display: inline-block;
             margin: 3px;
+            overflow: hidden;
             .cover {
                 height: 300px;
                 background-position: center center;
                 background-size: cover;
                 margin: 0px;
-                h2 {
-                    text-align: center;
-                    background: $greybg;
-                    color: white;
-                }
+            }
+            h2 {
+                margin: .5em 0 0 1em;
+                padding: 0;
+            }
+            p {
+                margin: 0 0 0 1.5em;
+                text-indent: 0;
             }
         }
         .project:hover {
             box-shadow: 1px 1px 3px #333;
-        }
-        p,
-        table {
-            text-align: left;
         }
     }
     table {

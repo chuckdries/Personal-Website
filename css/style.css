@@ -4,8 +4,11 @@
   clear: both; }
 
 #sierra {
-  background-image: url("ChuckNew.jpg"); }
+  background-image: url("../images/ChuckNew.jpg"); }
 
+/*
+ * sections
+ */
 body {
   font-family: serif;
   font-size: 1em;
@@ -73,30 +76,29 @@ body {
   .slide div {
     max-width: 800px;
     margin: auto;
-    text-align: center;
     /* Project bits */ }
     .slide div .project {
       transition-duration: .2s;
       width: 390px;
-      border: 1px solid #333;
+      border: 1px solid #aaa;
       border-radius: 5px;
       padding: 0px;
       display: inline-block;
-      margin: 3px; }
+      margin: 3px;
+      overflow: hidden; }
       .slide div .project .cover {
         height: 300px;
         background-position: center center;
         background-size: cover;
         margin: 0px; }
-        .slide div .project .cover h2 {
-          text-align: center;
-          background: rgba(0, 0, 0, 0.5);
-          color: white; }
+      .slide div .project h2 {
+        margin: .5em 0 0 1em;
+        padding: 0; }
+      .slide div .project p {
+        margin: 0 0 0 1.5em;
+        text-indent: 0; }
     .slide div .project:hover {
       box-shadow: 1px 1px 3px #333; }
-    .slide div p,
-    .slide div table {
-      text-align: left; }
   .slide table {
     line-height: 1.3;
     margin: 0;
