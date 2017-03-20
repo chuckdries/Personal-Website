@@ -92,7 +92,9 @@ body {
       padding: 0 0 1em 0;
       border: 1px solid #aaa;
       border-radius: 5px;
-      overflow: hidden; }
+      overflow: hidden;
+      box-shadow: 1px 1px 4px #888;
+      background: white; }
       .slide div .project .cover {
         height: 15em;
         background-position: center center;
@@ -155,8 +157,6 @@ body {
           content: "";
           width: 2em;
           height: 3em; }
-    .slide div .project:hover {
-      box-shadow: 1px 1px 3px #333; }
   .slide table {
     line-height: 1.3;
     margin: 0;
@@ -181,10 +181,10 @@ body {
       margin: auto;
       padding: 0; }
       .slide div .project {
-        width: 95vw;
+        width: 90%;
         float: none;
         display: block;
-        margin: 0 0 .5em 1vw; }
+        margin: 0 0 .5em 5%; }
     .slide p,
     .slide h1,
     .slide h2,
