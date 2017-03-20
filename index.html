@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Chuck Dries</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="http://chuckdri.es/icons/apple-touch-icon-57x57.png" />
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://chuckdri.es/icons/apple-touch-icon-114x114.png" />
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://chuckdri.es/icons/apple-touch-icon-72x72.png" />
@@ -30,7 +30,7 @@
             <div style="display:table-cell;vertical-align:middle;">
                 <div id="mast">
                     <h1 style="display:none;">Chuck Dries</h1>
-                    <img src="cd.png" alt="Chuck Dries">
+                    <img src="images/cd.png" alt="Chuck Dries">
                     <h2 id="tagline"><a href="#tech" onclick="smoothScroll('tech'); return false;">Tech</a> / <a href="#design">Design</a> / <a href="#photography">Photography</a> / <a href="#leadership">Leadership</a></h2>
                     <div class="hideable">
                         <p>Digital Developer, <span class="sub">The State Press</span></p>
@@ -56,8 +56,8 @@
         <p>I'm a Computer Science student and Hackathon winner at Arizona State University and I'm interested in the intersection of technology and art. I pride myself in taking a diverse set of interest and my pixel perfect lovingly handcrafted 💯% good
             stuff 👍👌 HTML. These days, you can find me at The State Press working on ways to innovate the news during the week and winning hackathons on the weekends.</p>
         <p>This website is still an active development project, pls don't judge too harshly.</p>
-        <h1 id="skills">Skills <a id="skilltablebutton" style="text-decoration: underline; font-style: italic; font-weight: normal; font-size: 14px;" onclick="toggleSkillTable()">hide</a></h1>
-        <div id="skilltable">
+        <div id="skilltable" style="display:none; ">
+            <h1 id="skills">Skills</h1>
             <table>
                 <tr>
                     <td class="ld">The <span style="font-style:italic">Internet</span></td>
@@ -114,51 +114,30 @@
                 </tr>
             </table>
         </div>
+        <div><a id="skilltablebutton" style="text-decoration: underline; font-size: 1.1em; font-style: italic; font-weight: normal;" onclick="toggleSkillTable()">More about me ></a>
+        </div>
     </div>
     <div class="slide">
         <h1>Projects &amp; Experience</h1>
         <div>
             <div class="project">
                 <div class="cover" id="sierra">
-                    <!-- centering container -->
-                    <div style="display:table;width:100%;height:100%;margin:0px;">
-                        <div style="display:table-cell;vertical-align:middle;margin:0px;">
-                            <h2>Project Sierra</h2>
-                        </div>
-                    </div>
+                </div>
+                <h2>Project Name</h2>
+                <p>Project description</p>
+            </div>
+            <div class="project">
+                <div class="cover" id="sierra">
                 </div>
                 <p>Project description</p>
             </div>
             <div class="project">
                 <div class="cover" id="sierra">
-                    <!-- centering container -->
-                    <div style="display:table;width:100%;height:100%;margin:0px;">
-                        <div style="display:table-cell;vertical-align:middle;margin:0px;">
-                            <h2>Project Sierra</h2>
-                        </div>
-                    </div>
                 </div>
                 <p>Project description</p>
             </div>
             <div class="project">
                 <div class="cover" id="sierra">
-                    <!-- centering container -->
-                    <div style="display:table;width:100%;height:100%;margin:0px;">
-                        <div style="display:table-cell;vertical-align:middle;margin:0px;">
-                            <h2>Project Sierra</h2>
-                        </div>
-                    </div>
-                </div>
-                <p>Project description</p>
-            </div>
-            <div class="project">
-                <div class="cover" id="sierra">
-                    <!-- centering container -->
-                    <div style="display:table;width:100%;height:100%;margin:0px;">
-                        <div style="display:table-cell;vertical-align:middle;margin:0px;">
-                            <h2>Project Sierra</h2>
-                        </div>
-                    </div>
                 </div>
                 <p>Project description</p>
             </div>
@@ -266,7 +245,7 @@
     <script>
         var last_known_scroll = getScrollY();
         var queueing = false;
-        var t = true;
+        var t = false;
         var st = document.getElementById("skilltable");
         var stb = document.getElementById("skilltablebutton");
         document.addEventListener("scroll", function() {
@@ -284,6 +263,7 @@
 
         sc(last_known_scroll);
 
+        //execute scroll style modifications
         function sc(ypos) {
 
             var wheight = window.innerHeight;
@@ -329,11 +309,11 @@
         function toggleSkillTable() {
             if (t) {
                 st.style.display = "none";
-                stb.innerText = "show";
+                stb.innerText = "More about me";
                 t = false;
             } else {
                 st.style.display = "block";
-                stb.innerText = "hide";
+                stb.innerText = "Less about me";
                 t = true;
             }
         }
