@@ -1,10 +1,16 @@
-.reset, body, .slide {
-  padding: 0px;
-  margin: 0px;
-  clear: both; }
+.reset, body, .slide, .slide div .project .details h2, .slide div .project .details p, .slide div .project .details .award div p {
+  padding: 0;
+  margin: 0;
+  text-indent: 0; }
 
+/*
+ * Covers for projects section
+ */
 #sierra {
   background-image: url("../images/ChuckNew.jpg"); }
+
+#virtualKeyality {
+  background-image: url("../images/keyality.jpg"); }
 
 /*
  * sections
@@ -19,7 +25,8 @@ body {
   padding-top: 10px;
   width: 100%;
   position: fixed;
-  background: black; }
+  background: black;
+  z-index: 999; }
   #top div {
     margin: auto;
     max-width: 800px; }
@@ -84,9 +91,6 @@ body {
       width: 390px;
       border: 1px solid #aaa;
       border-radius: 5px;
-      padding: 0 0 1em 0;
-      display: inline-block;
-      margin: 3px;
       overflow: hidden; }
       .slide div .project .cover {
         height: 15em;
@@ -95,25 +99,61 @@ body {
         margin: 0px;
         padding: 1em; }
       .slide div .project .details {
-        padding: .5em 1em 0 1em; }
+        padding: 1em 1em 0 1em; }
         .slide div .project .details h2 {
-          margin: 0;
-          padding: 0; }
+          line-height: 1;
+          margin: 0 0 .5em 0; }
         .slide div .project .details p {
-          margin: 0 0 0 0;
-          text-indent: 0; }
+          margin: 0 0 .5em 0; }
         .slide div .project .details .tag {
           float: left;
           padding: 0 .3em 0 .3em;
           background: #eee;
           border: 1px solid #ccc;
           margin: .2em;
-          border-radius: .3em; }
-        .slide div .project .details .tag.upper {
-          margin-top: .5em;
-          float: right; }
-        .slide div .project .details .tag.award {
-          background: #FFFCB7; }
+          border-radius: 5px; }
+        .slide div .project .details .cat {
+          background: #B7EEFF;
+          border: 1px solid #8AC9DD; }
+        .slide div .project .details .award {
+          float: right;
+          background: none;
+          border: none;
+          margin: 0 0 .5em .5em; }
+          .slide div .project .details .award div {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            padding: 0; }
+            .slide div .project .details .award div h3 {
+              margin: 0;
+              padding: 0;
+              font-size: 1.6em;
+              line-height: 1;
+              font-weight: normal;
+              font-style: italic; }
+            .slide div .project .details .award div p {
+              font-size: .8em; }
+        .slide div .project .details .award::before {
+          vertical-align: middle;
+          background-image: url(../images/laurelleft.png);
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center center;
+          display: inline-block;
+          content: "";
+          width: 2em;
+          height: 3em; }
+        .slide div .project .details .award::after {
+          vertical-align: middle;
+          background-image: url(../images/laurelright.png);
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center center;
+          display: inline-block;
+          content: "";
+          width: 2em;
+          height: 3em; }
     .slide div .project:hover {
       box-shadow: 1px 1px 3px #333; }
   .slide table {
@@ -135,6 +175,24 @@ body {
     max-width: 800px;
     margin: auto;
     margin-top: 1.7em; }
+  @media (max-width: 800px) {
+    .slide div {
+      margin: auto;
+      padding: 0; }
+      .slide div .project {
+        width: 95vw;
+        float: none;
+        display: block;
+        margin: 0 0 .5em 1vw; }
+    .slide p,
+    .slide h1,
+    .slide h2,
+    .slide a {
+      margin: .5em; } }
+
+@media (max-width: 800px) {
+  #mast {
+    padding-left: 1em; } }
 
 h2 {
   font-style: italic; }

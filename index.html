@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Chuck Dries</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="http://chuckdri.es/icons/apple-touch-icon-57x57.png" />
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://chuckdri.es/icons/apple-touch-icon-114x114.png" />
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://chuckdri.es/icons/apple-touch-icon-72x72.png" />
@@ -119,18 +120,53 @@
     </div>
     <div class="slide">
         <h1>Projects &amp; Experience</h1>
-        <div>
+        <div class="grid" data-masonry='{ "itemSelector": ".project", "columnWidth": 400 }'>
             <div class="project">
-                <div class="cover" id="sierra">
+                <div class="cover" id="virtualKeyality">
                 </div>
                 <div class="details">
-                    <span class="award tag upper">Hackathon winner</span>
-                    <h2>Project Name</h2>
-                    <p class="description">Project description</p>
-                    <span class="tag">Tech</span>
-                    <span class="tag">Design</span>
-                    <span class="tag">Javascript</span>
-                    <span class="tag">NodeJs</span>
+                    <div class="award">
+                        <div>
+                            <h3>1st Place</h3>
+                            <p>Desert Hacks 2017</p>
+                        </div>
+                    </div>
+                    <h2>Virtual Keyality</h2>
+                    <p>A VR typing game.</p>
+                    <p>The idea started as something of a joke, but after prototyping we realized that we stumbled upon a killer feature: when you're wearing the headset, you can't see your keyboard. </p>
+                    <p><a href="https://github.com/James-Quigley/deserthacks">View on GitHub</a></p>
+                    <span class="tag cat">Tech</span>
+                    <span class="tag cat">Design</span>
+                    <span class="tag">Unity</span>
+                    <span class="tag">C#</span>
+                    <span class="tag">Virtual Reality</span>
+                    <span class="tag">SteamVR</span>
+                    <span class="tag">Hackathon projects</span>
+                </div>
+            </div>
+            <div class="project">
+                <div class="cover" id="virtualKeyality">
+                </div>
+                <div class="details">
+                    <div class="award">
+                        <div>
+                            <h3>3rd Place</h3>
+                            <p>Opportunity Hack 2016</p>
+                        </div>
+                    </div>
+                    <h2>Volunteer Management Portal</h2>
+                    <p>A MEAN web app for nonprofits.</p>
+                    <p>Opportunity Hack is a charity hackathon where hackers are paired with nonprofits to solve the real world problems they face. The Lost Our Home pet rescue needed a better way to track volunteers and encourage volunteers to keep coming
+                        back. Our solution revolved around easy to access scheduling and volunteer-hour leaderboards to encourage first time volunteers to return.</p>
+                    <p><a href="https://github.com/Opportunity-Hack-2016-AZ/Team15">View on GitHub</a></p>
+                    <span class="tag cat">Tech</span>
+                    <span class="tag cat">Design</span>
+                    <span class="tag">NodeJS</span>
+                    <span class="tag">MongoDB</span>
+                    <span class="tag">ExpressJS</span>
+                    <span class="tag">Bootstrap</span>
+                    <span class="tag">Web</span>
+                    <span class="tag">Hackathon projects</span>
                 </div>
             </div>
         </div>
