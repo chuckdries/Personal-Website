@@ -10,7 +10,9 @@ $greybg: rgba(0, 0, 0, .5);
 }
 
 @import 'covers';
+//
 //sections
+//
 body {
     @extend .reset;
     font-family: serif;
@@ -92,20 +94,26 @@ body {
     }
 }
 
-//standalone elements
+
+/*
+ * standalone elements
+ */
+
+// the standard section element */
 .slide {
     @extend .reset;
     padding: 0px;
     width: 100%;
+    /* width wrapping */
     div {
-        /* width wrapping */
         max-width: $width;
         margin: auto;
         text-align: center;
-        div {
-            /* Project bits */
+        /* Project bits */
+        .project {
             transition-duration: .2s;
             width: $width/2 - 10;
+            border: 1px solid #333;
             border-radius: 5px;
             padding: 0px;
             display: inline-block;
@@ -121,9 +129,9 @@ body {
                     color: white;
                 }
             }
-            .cover:hover {
-                box-shadow: 1px 1px 9px #444;
-            }
+        }
+        .project:hover {
+            box-shadow: 1px 1px 3px #333;
         }
         p,
         table {
@@ -153,15 +161,6 @@ body {
         margin: auto;
         margin-top: 1.7em;
     }
-}
-
-.arrow {
-    font-variant-position: sub;
-    font-size: .6em;
-}
-
-.arrow:before {
-    content: "\0025BC";
 }
 
 h2 {
