@@ -1,13 +1,19 @@
 //setup
+@import 'responsive';
 $width: 800px;
 $grey: #ccc;
 $pink: #ed1a76;
 $greybg: rgba(0, 0, 0, .5);
 .reset {
-    padding: 0px;
-    margin: 0px;
-    clear: both;
+    padding: 0;
+    margin: 0;
+    text-indent: 0;
 }
+
+
+/*
+ * Covers for projects section
+ */
 
 @import 'covers';
 
@@ -28,6 +34,7 @@ body {
     width: 100%;
     position: fixed;
     background: black;
+    z-index: 999;
     div {
         margin: auto;
         max-width: $width;
@@ -104,7 +111,7 @@ body {
  * standalone elements
  */
 
-// the standard section element */
+// the standard section element
 .slide {
     @extend .reset;
     padding: 0px;
@@ -119,9 +126,6 @@ body {
             width: $width/2 - 10;
             border: 1px solid #aaa;
             border-radius: 5px;
-            padding: 0 0 1em 0;
-            display: inline-block;
-            margin: 3px;
             overflow: hidden;
             .cover {
                 height: 15em;
@@ -131,14 +135,15 @@ body {
                 padding: 1em;
             }
             .details {
-                padding: .5em 1em 0 1em;
+                padding: 1em 1em 0 1em;
                 h2 {
-                    margin: 0;
-                    padding: 0;
+                    @extend .reset;
+                    line-height: 1;
+                    margin: 0 0 .5em 0;
                 }
                 p {
-                    margin: 0 0 0 0;
-                    text-indent: 0;
+                    @extend .reset;
+                    margin: 0 0 .5em 0;
                 }
                 .tag {
                     float: left;
@@ -146,14 +151,57 @@ body {
                     background: #eee;
                     border: 1px solid #ccc;
                     margin: .2em;
-                    border-radius: .3em;
+                    border-radius: 5px;
                 }
-                .tag.upper {
-                    margin-top: .5em;
+                .cat {
+                    background: #B7EEFF;
+                    border: 1px solid #8AC9DD;
+                }
+                .award {
                     float: right;
+                    background: none;
+                    border: none;
+                    margin: 0 0 .5em .5em;
+                    div {
+                        display: inline-block;
+                        text-align: center;
+                        vertical-align: middle;
+                        padding: 0;
+                        h3 {
+                            margin: 0;
+                            padding: 0;
+                            font-size: 1.6em;
+                            line-height: 1;
+                            font-weight: normal;
+                            font-style: italic;
+                        }
+                        p {
+                            @extend .reset;
+                            font-size: .8em;
+                        }
+                    }
                 }
-                .tag.award {
-                    background: #FFFCB7;
+                .award::before {
+                    vertical-align: middle;
+                    background-image: url(../images/laurelleft.png);
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    display: inline-block;
+                    content: "";
+                    width: 2em;
+                    height: 3em;
+                }
+                .award::after {
+                    vertical-align: middle;
+                    background-image: url(../images/laurelright.png);
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    display: inline-block;
+                    content: "";
+                    width: 2em;
+                    height: 3em;
                 }
             }
         }
@@ -183,6 +231,31 @@ body {
         max-width: $width;
         margin: auto;
         margin-top: 1.7em;
+    }
+    @include respond-to($width) {
+        div {
+            margin: auto;
+            padding: 0;
+            .project {
+                width: 95vw;
+                float: none;
+                display: block;
+                margin: 0 0 .5em 1vw;
+                ;
+            }
+        }
+        p,
+        h1,
+        h2,
+        a {
+            margin: .5em;
+        }
+    }
+}
+
+@include respond-to($width) {
+    #mast {
+        padding-left: 1em;
     }
 }
 
