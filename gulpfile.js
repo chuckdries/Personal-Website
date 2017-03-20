@@ -12,7 +12,7 @@ gulp.task('default', function() {
 })
 gulp.task('style', function() {
     // place code for your default task here
-    gulp.src('./sass/*.scss')
+    gulp.src('./sass/style.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('./css/'));
 });

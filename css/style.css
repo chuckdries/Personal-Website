@@ -89,6 +89,7 @@ body {
     .slide div .project {
       transition-duration: .2s;
       width: 390px;
+      padding: 0 0 1em 0;
       border: 1px solid #aaa;
       border-radius: 5px;
       overflow: hidden; }
