@@ -1,72 +1,71 @@
 {
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"name": "Launch Chrome",
-			"type": "chrome",
-			"request": "launch",
-			"url": "http://localhost:3000",
-			"sourceMaps": true,
-			"webRoot": "${workspaceRoot}"
-		},
-		{
-			"name": "Launch Unix",
-			"type": "node",
-			"request": "launch",
-			"program": "/usr/local/bin/lite-server",
-			"stopOnEntry": false,
-			"args": [],
-			"cwd": "${workspaceRoot}",
-			"preLaunchTask": null,
-			"runtimeExecutable": null,
-			"runtimeArgs": [
-				"--nolazy"
-			],
-			"env": {
-				"NODE_ENV": "development"
-			},
-			"externalConsole": false,
-			"sourceMaps": false,
-			"outDir": null
-		},
-		{
-			"name": "Launch on Windows",
-			"type": "node",
-			"request": "launch",
-			"program": "C:\\Users\\chuckdries\\AppData\\Roaming\\npm\\node_modules\\lite-server\\index.js",
-			"stopOnEntry": false,
-			"args": [],
-			"cwd": "${workspaceRoot}",
-			"preLaunchTask": null,
-			"runtimeExecutable": null,
-			"runtimeArgs": [
-				"--nolazy"
-			],
-			"env": {
-				"NODE_ENV": "development"
-			},
-			"console": "internalConsole",
-			"sourceMaps": true,
-			"outDir": null
-		},
+    "version": "0.2.0",
+    "configurations": [{
+            "name": "Launch Chrome",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "sourceMaps": true,
+            "webRoot": "${workspaceRoot}"
+        },
+        {
+            "name": "Launch Unix",
+            "type": "node",
+            "request": "launch",
+            "program": "/usr/local/bin/lite-server",
+            "stopOnEntry": false,
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": null,
+            "runtimeExecutable": null,
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "externalConsole": false,
+            "sourceMaps": false,
+            "outDir": null
+        },
+        {
+            "name": "Launch on Windows",
+            "type": "node",
+            "request": "launch",
+            "program": "C:\\Users\\chuckdries\\AppData\\Roaming\\npm\\node_modules\\lite-server\\index.js",
+            "stopOnEntry": false,
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": null,
+            "runtimeExecutable": null,
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "console": "internalConsole",
+            "sourceMaps": true,
+            "outDir": null
+        },
 
-		{
-			"name": "Attach Chrome",
-			"type": "chrome",
-			"request": "attach",
-			"port": 9222
-		},
-		{
-			"name": "Attach",
-			"type": "node",
-			"request": "attach",
-			"port": 3000,
-			"address": "localhost",
-			"restart": false,
-			"sourceMaps": false,
-			"outDir": null,
-			"localRoot": "${workspaceRoot}",
-			"remoteRoot": null
-		}
-	]
+        {
+            "name": "Attach Chrome",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222
+        },
+        {
+            "name": "Attach",
+            "type": "node",
+            "request": "attach",
+            "port": 3000,
+            "address": "localhost",
+            "restart": false,
+            "sourceMaps": false,
+            "outDir": null,
+            "localRoot": "${workspaceRoot}",
+            "remoteRoot": null
+        }
+    ]
 }
