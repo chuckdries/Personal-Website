@@ -32,6 +32,9 @@ body {
         margin: auto;
         max-width: $width;
     }
+    h2 {
+        font-weight: normal;
+    }
 }
 
 #mast {
@@ -127,13 +130,31 @@ body {
                 margin: 0px;
                 padding: 1em;
             }
-            h2 {
-                margin: .5em 0 0 1em;
-                padding: 0;
-            }
-            p {
-                margin: 0 0 0 1.5em;
-                text-indent: 0;
+            .details {
+                padding: .5em 1em 0 1em;
+                h2 {
+                    margin: 0;
+                    padding: 0;
+                }
+                p {
+                    margin: 0 0 0 0;
+                    text-indent: 0;
+                }
+                .tag {
+                    float: left;
+                    padding: 0 .3em 0 .3em;
+                    background: #eee;
+                    border: 1px solid #ccc;
+                    margin: .2em;
+                    border-radius: .3em;
+                }
+                .tag.upper {
+                    margin-top: .5em;
+                    float: right;
+                }
+                .tag.award {
+                    background: #FFFCB7;
+                }
             }
         }
         .project:hover {
