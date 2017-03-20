@@ -23,6 +23,8 @@ body {
   #top div {
     margin: auto;
     max-width: 800px; }
+  #top h2 {
+    font-weight: normal; }
 
 #mast {
   margin-top: 10px;
@@ -92,12 +94,26 @@ body {
         background-size: cover;
         margin: 0px;
         padding: 1em; }
-      .slide div .project h2 {
-        margin: .5em 0 0 1em;
-        padding: 0; }
-      .slide div .project p {
-        margin: 0 0 0 1.5em;
-        text-indent: 0; }
+      .slide div .project .details {
+        padding: .5em 1em 0 1em; }
+        .slide div .project .details h2 {
+          margin: 0;
+          padding: 0; }
+        .slide div .project .details p {
+          margin: 0 0 0 0;
+          text-indent: 0; }
+        .slide div .project .details .tag {
+          float: left;
+          padding: 0 .3em 0 .3em;
+          background: #eee;
+          border: 1px solid #ccc;
+          margin: .2em;
+          border-radius: .3em; }
+        .slide div .project .details .tag.upper {
+          margin-top: .5em;
+          float: right; }
+        .slide div .project .details .tag.award {
+          background: #FFFCB7; }
     .slide div .project:hover {
       box-shadow: 1px 1px 3px #333; }
   .slide table {
