@@ -12,6 +12,10 @@
 #virtualKeyality {
   background-image: url("../images/keyality.jpg"); }
 
+#ohack16 {
+  background-image: url("../images/ohackscreenshot.png");
+  background-size: contain; }
+
 /*
  * sections
  */
@@ -97,6 +101,7 @@ body {
         height: 15em;
         background-position: center center;
         background-size: cover;
+        background-repeat: no-repeat;
         margin: 0px;
         padding: 1em; }
       .slide div .project .details {
