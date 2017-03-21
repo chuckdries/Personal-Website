@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test Canvas Game</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="gc">
+    </canvas>
+    <script>
+        //setup
+        c = document.getElementById("gc");
+        cc = c.getContext('2d');
+        c.height = window.innerHeight;
+        c.width = window.innerWidth;
+        setInterval(update, 1000 / 30);
+        c.addEventListener('mousemove', function(e) {
+            p1y = e.clientY - ph / 2;
+        })
+
+        //game setup
+        p1y = p2y = 40;
+        pt = 10;
+        ph = 100;
+        bx = by = xv = yv = 10;
+        reset();
+        bd = 6;
+        score1 = score2 = 0;
+        ais = 5;
+
+
+        function reset() {
+            bx = c.width / 2;
+            by = c.height / 2;
+            xv = -xv;
+            yv = 4;
+        }
+
+        function update() {
+            //move ball
+            bx += xv;
+            by += yv;
+            if (by < 0 && yv < 0) {
+                yv = -yv;
+            }
+            if (by > c.height && yv > 0) {
+                yv = -yv;
+            }
+            //check collision with sides for scoring
+            if (bx > c.width) {
+                if (by > p2y && by < p2y + ph) {
+                    xv = -xv;
+                    dy = by - (p2y + ph / 2);
+                    yv = dy * .3;
+                } else {
+                    score1++;
+                    reset();
+                }
+            }
+            if (bx < 0) {
+                if (by > p1y && by < p1y + ph) {
+                    xv = -xv;
+                    dy = by - (p1y + ph / 2);
+                    yv = dy * .3;
+                } else {
+                    score2++
+                    reset();
+                }
+            }
+            //ai
+            if (p2y + ph / 2 < by) {
+                p2y += ais;
+            } else {
+                p2y -= ais;
+            }
+            //draw background
+            cc.fillStyle = 'black';
+            cc.fillRect(0, 0, c.width, c.height);
+            //draw paddles
+            cc.fillStyle = 'white';
+            cc.fillRect(0, p1y, pt, ph);
+            cc.fillRect(c.width - pt, p2y, pt, ph);
+            //draw ball
+            cc.fillRect(bx - bd / 2, by - bd / 2, bd, bd);
+            cc.fillText(score1, 100, 100);
+            cc.fillText(score2, c.width - 100, 100);
+        }
+    </script>
+</body>
+
+</html>
