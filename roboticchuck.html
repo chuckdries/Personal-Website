@@ -7,27 +7,33 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Robotic Chuck</title>
     <style>
-        body{
+        body {
             margin: auto;
             max-width: 800px;
             line-height: 1.5;
         }
-        code, #output {
+        
+        code,
+        #output {
             padding: 5px;
             background: #eee;
             border: 1px solid #ccc;
             border-radius: 3px;
             display: inline-block;
         }
-        p{
+        
+        p {
             max-width: 800px;
         }
-        input, textarea {
+        
+        input,
+        textarea {
             width: 100%;
             padding: 5px;
             /*max-width: 800px;*/
         }
-        #genbutton{
+        
+        #genbutton {
             color: white;
             background: #01C106;
             padding: 1em;
@@ -35,7 +41,6 @@
             font-size: 1em;
             border-radius: 3px;
         }
-        
     </style>
 </head>
 
@@ -65,11 +70,10 @@
 
     <p></p>
     <p>Title of box:</p> <input type="text" id="titleIn" placeholder="Investigating Hope: The Series">
-     <p>Description text:</p>
-    <input type="text" id="description" placeholder="This article is one in a series of investigative pieces about a complaint filed with ASU regarding accusations against on-campus ministry Hope Church."><br />
-
-        <p>Enter the links to generate according to this format:</p>
-        <pre><code class="json">[
+    <p>Description text:</p>
+    <input type="text" id="description" placeholder="This article is one in a series of investigative pieces about a complaint filed with ASU regarding accusations against on-campus ministry Hope Church.">
+    <p>Enter the links to generate according to this format:</p>
+    <pre><code class="json">[
     {
         "headline": "A Beautiful Headline!",
         "url": "this-is-a-sample-url"
@@ -83,17 +87,20 @@
         "url": "yet-another-url"
     }
 ]
-</code></pre>
-<p>This format is known as JSON, it's an internet standard that's supposed to be easy for humans and computers to read. Note how commas are used to separate multiple items but are never used after the last item in a set. This is important, it will not work if you include a trailing comma where there should not be one.</p>
-            <textarea name="input" id="in" cols="100" rows="30" placeholder="Please be careful, this will not work if you format the JSON incorrectly"></textarea>
-        <p><a id="genbutton" href="#output" onclick="generate()">Generate Code</a></p>
-        <p>Paste the following code into a safeembed</p>
-        <textarea id="output" cols="100" readonly ></textarea>
-        <p><em> Don't forget:</em> For each page you embed on, add the following bit of code just before the <code>&lt;/h4&gt;</code>            at the end of the line on the line that corresponds to the current page.
-            <pre><code>&lt;span class="here"&gt;(You are here)&lt;/span&gt;</pre></code>
-            <p>The code generated will look roughly like this:</P>
-            <div id="preview" style="max-width: 800px;"></div>
-            <p>Gryphon overrides certain styles by default, so make sure to test on your article.</p>
+    </code></pre>
+    <p>This format is known as JSON, it's an internet standard that's supposed to be easy for humans and computers to read.
+        Note how commas are used to separate multiple items but are never used after the last item in a set. This is important,
+        it will not work if you include a trailing comma where there should not be one.</p>
+    <textarea name="input" id="in" cols="100" rows="30" placeholder="Please be careful, this will not work if you format the JSON incorrectly"></textarea>
+    <p><a id="genbutton" href="#output" onclick="generate()">Generate Code</a></p>
+    <p>Paste the following code into a safeembed</p>
+    <textarea id="output" cols="100" readonly></textarea>
+    <p><em> Don't forget:</em> For each page you embed on, add the following bit of code just before the <code>&lt;/h4&gt;</code>        at the end of the line on the line that corresponds to the current page.</p>
+    <pre><code>&lt;span class="here"&gt;(You are here)&lt;/span&gt;</pre>
+    </code>
+    <p>The code generated will look roughly like this:</P>
+    <div id="preview" style="max-width: 800px;"></div>
+    <p>Gryphon overrides certain styles by default, so make sure to test on your article.</p>
 
 </body>
 
