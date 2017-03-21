@@ -44,6 +44,7 @@
             formatter = links.map((object) => "<h4><a href=\"" + object.url + "\">" + object.headline + "</a></h4>\n");
             tstring = tstring + formatter.join("");
             tstring = tstring + "</div>"
+            console.log(tstring);
             outBox.innerText = tstring;
             outBox.style.minHeight = (formatter.length + 9) + "em";
             document.getElementById("preview").innerHTML = tstring;
