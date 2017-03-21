@@ -7,16 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Robotic Chuck</title>
     <style>
-        code {
+        body{
+            margin: auto;
+            max-width: 800px;
+        }
+        code, #output {
             padding: 5px;
             background: #eee;
             border: 1px solid #ccc;
             border-radius: 3px;
             display: inline-block;
         }
-        input{
-            width: 100em;
+        
+        input {
+            width: 90%;
+            max-width: 800px;
         }
+        
     </style>
 </head>
 
@@ -38,17 +45,24 @@
             tstring = tstring + formatter.join("");
             tstring = tstring + "</div>"
             outBox.innerText = tstring;
+            outBox.style.minHeight = (formatter.length + 9) + "em";
+            document.getElementById("preview").innerHTML = tstring;
         }
     </script>
-    
+
     <p></p>
-    Title of box: <input type="text" id="titleIn" placeholder="Investigating Hope: The Series"><br />
-    Description text: <input type="text" id="description" placeholder="This article is one in a series of investigative pieces about a complaint filed with ASU regarding accusations against on-campus ministry Hope Church."><br />
-    <p>Enter the links to generate according to this format:</p>
-    <pre><code class="json">[
+    Title of box: <input type="text" id="titleIn" placeholder="Investigating Hope: The Series"><br /> Description text:
+    <input
+        type="text" id="description" placeholder="This article is one in a series of investigative pieces about a complaint filed with ASU regarding accusations against on-campus ministry Hope Church."><br />
+        <p>Enter the links to generate according to this format:</p>
+        <pre><code class="json">[
     {
-        "headline": "A beautiful headline!",
+        "headline": "A Beautiful Headline!",
         "url": "this-is-a-sample-url"
+    },
+    {
+        "headline": "A Second Beautiful Headline!",
+        "url": "second-sample-url"
     },
     {
         "headline": "Yet Another Headline",
@@ -56,14 +70,16 @@
     }
 ]
 </code></pre>
-    <textarea name="input" id="in" cols="90" rows="30"></textarea>
-    <h2><a href="#" onclick="generate()">click to generate</a></h2>
-    <p>Paste the following code into a safeembed</p>
-    <pre><code id="output">
-    </code></pre>
-    <p><em> Don't forget:</em> For each page you embed on, add the following bit of code just before the <code>&lt;/h4&gt;</code> at the end of the line on the line that corresponds to the current page.
-    <pre><code>&lt;span class="here"&gt;(You are here)&lt;/span&gt;
-</pre></code>
+<p>This format is known as JSON, it's an internet standard that's supposed to be easy for humans and computers to read. Note how commas are used to separate multiple items but are never used after the last item in a set. This is important, it will not work if you include a trailing comma where there should not be one.</p>
+            <textarea name="input" id="in" cols="100" rows="30"></textarea>
+        <h2><a href="#output" onclick="generate()" placeholder="Please be careful, this will not work if you format the JSON incorrectly">click to generate</a></h2>
+        <p>Paste the following code into a safeembed</p>
+        <textarea id="output" cols="100" readonly style=""></textarea>
+        <p><em> Don't forget:</em> For each page you embed on, add the following bit of code just before the <code>&lt;/h4&gt;</code>            at the end of the line on the line that corresponds to the current page.
+            <pre><code>&lt;span class="here"&gt;(You are here)&lt;/span&gt;</pre></code>
+            <p>The code generated will look roughly like this:</P>
+            <div id="preview" style="max-width: 800px;"></div>
+            <p>Gryphon overrides certain styles by default, so make sure to test on your article.</p>
 
 </body>
 
