@@ -233,8 +233,8 @@ body {
     }
     @include respond-to($width) {
         div {
-            margin: auto;
-            padding: 0;
+            // margin: auto;
+            // padding: 0;
             .project {
                 width: 90%;
                 float: none;
@@ -247,7 +247,7 @@ body {
         h1,
         h2,
         a {
-            margin: .5em;
+            margin: auto .5em auto .5em;
         }
     }
 }

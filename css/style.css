@@ -184,19 +184,16 @@ body {
     margin: auto;
     margin-top: 1.7em; }
   @media (max-width: 800px) {
-    .slide div {
-      margin: auto;
-      padding: 0; }
-      .slide div .project {
-        width: 90%;
-        float: none;
-        display: block;
-        margin: 0 0 .5em 5%; }
+    .slide div .project {
+      width: 90%;
+      float: none;
+      display: block;
+      margin: 0 0 .5em 5%; }
     .slide p,
     .slide h1,
     .slide h2,
     .slide a {
-      margin: .5em; } }
+      margin: auto .5em auto .5em; } }
 
 @media (max-width: 800px) {
   #mast {
