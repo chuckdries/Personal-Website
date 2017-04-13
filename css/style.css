@@ -180,19 +180,20 @@ body {
     font-style: italic;
     margin-top: 1.7em; }
   @media (max-width: 800px) {
+    .slide .widthCenter, .slide div, .slide p, .slide h1, .slide h2, .slide h3, .slide h4 {
+      margin-left: 12px;
+      margin-right: 12px; }
     .slide div .project {
       width: 90%;
       float: none;
       display: block;
-      margin: 0 0 .5em 5%; }
-    .slide table,
-    .slide p,
-    .slide h1,
-    .slide h2,
-    .slide h4,
-    .slide a {
-      margin-right: .8em;
-      margin-left: .8em; } }
+      margin: 0 0 .5em 5%; } }
+
+#skilltablebutton {
+  text-decoration: underline;
+  font-size: 1.1em;
+  font-style: italic;
+  font-weight: normal; }
 
 @media (max-width: 800px) {
   #mast {

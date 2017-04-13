@@ -226,14 +226,14 @@ body {
         font-style: italic;
         margin-top: 1.7em;
     }
-    p,
-    h1,
-    h2,
-    h3,
-    h4 {
+    @include textElements() {
         @extend .widthCenter;
     }
     @include respond-to($width) {
+        .widthCenter {
+            margin-left: 12px;
+            margin-right: 12px;
+        }
         div {
             // margin: auto;
             // padding: 0;
@@ -245,16 +245,18 @@ body {
                 ;
             }
         }
-        table,
-        p,
-        h1,
-        h2,
-        h4,
-        a {
-            margin-right: .8em;
-            margin-left: .8em;
+        @include textElements() {
+            // margin-right: .8em;
+            // margin-left: .8em;
         }
     }
+}
+
+#skilltablebutton {
+    text-decoration: underline;
+    font-size: 1.1em;
+    font-style: italic;
+    font-weight: normal;
 }
 
 @include respond-to($width) {
