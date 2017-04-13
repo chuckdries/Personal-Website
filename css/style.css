@@ -192,9 +192,11 @@ body {
       float: none;
       display: block;
       margin: 0 0 .5em 5%; }
+    .slide table,
     .slide p,
     .slide h1,
     .slide h2,
+    .slide h4,
     .slide a {
       margin-right: .8em;
       margin-left: .8em; } }
