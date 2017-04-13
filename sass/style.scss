@@ -1,5 +1,6 @@
 //setup
 @import 'responsive';
+@import 'animations';
 $width: 800px;
 $grey: #ccc;
 $pink: #ed1a76;
@@ -257,6 +258,11 @@ body {
     font-size: 1.1em;
     font-style: italic;
     font-weight: normal;
+}
+
+#scrollprompt {
+    // @include prefix(animation, 1s 1.1s 1 prompt)
+    @include prefix(animation, 2s ease fadeIn)
 }
 
 @include respond-to($width) {
