@@ -43,7 +43,7 @@
                             <a href="CharlesDriesResumeCurrent.pdf">Resume [pdf]</a> /
                             <a href="https://medium.com/chuckblog">Blog</a>
                         </p>
-                        <p>Scroll down!</p>
+                        <p id="scrollprompt">Scroll down!</p>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
     <div id="spaceTakerUpper">
     </div>
     <div class="slide" style="margin-top:0px;">
-        <h1>About Me <span style="font-size: .5em; font-weight:normal; color: #666;">(Why I rock)</span></h1>
+        <h1>About Me <span style="font-size: .5em; font-weight:normal; color: #666;">Why I rock</span></h1>
         <h3>A brief history of Chuck &amp; tech</h3>
         <p>When I was a child I was obsessed with trains and vacuum cleaners. In elementary school my grandma tried to teach me Photoshop. In seventh grade I started teaching myself HTML. Freshman year I started learning the basics of networking and BASH
             so I could run a Minecraft server on my sparkly new iMac. In the first half of high school I volunteered at Phoenix Children's Hospital and in the second half I taught robotics at The Waybright Academy. On top of that, I was active throughout
@@ -127,7 +127,7 @@
         </div>
     </div>
     <div class="slide">
-        <h1>Projects &amp; Experience</h1>
+        <h1>Projects &amp; Experience <span style="font-size: .5em; font-weight:normal; color: #666;">Things I've made: filter by clicking the bar above.</span></h1>
         <div class="grid" data-masonry='{ "itemSelector": ".project", "columnWidth": 400 }'>
             <div class="project">
                 <div class="cover" id="virtualKeyality">
@@ -184,9 +184,10 @@
     <script>
         var last_known_scroll = getScrollY();
         var queueing = false;
-        var t = false;
+        var t = false; //state of skill table
         var st = document.getElementById("skilltable");
         var stb = document.getElementById("skilltablebutton");
+        var sp = document.getElementById("scrollprompt");
         document.addEventListener("scroll", function() {
             last_known_scroll = getScrollY();
             sc(last_known_scroll);
@@ -224,7 +225,7 @@
                 mast.className = "large";
             }
             topDiv.style.height = topHeight + "px";
-            console.log("topheight is " + topHeight + " and topDiv.style.height = " + topDiv.style.height);
+            // console.log("topheight is " + topHeight + " and topDiv.style.height = " + topDiv.style.height);
             // mast.style.marginTop = halfHeight + "px";
 
             //background thing
@@ -233,10 +234,6 @@
             var rgb = Math.floor(Math.abs(1 - p) * 255); //set the color
             // var colorString = "rgb(" + rgb + "," + rgb + "," + rgb + ")";
             // document.body.style.backgroundColor = colorString;
-
-        }
-
-        function bgColor() {
 
         }
 
@@ -255,6 +252,10 @@
                 stb.innerText = "Less about me";
                 t = true;
             }
+        }
+
+        function prompt() {
+
         }
     </script>
 </body>
