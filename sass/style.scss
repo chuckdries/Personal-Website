@@ -10,6 +10,11 @@ $greybg: rgba(0, 0, 0, .5);
     text-indent: 0;
 }
 
+.widthCenter {
+    max-width: $width;
+    margin: auto;
+}
+
 
 /*
  * Covers for projects section
@@ -113,8 +118,7 @@ body {
     width: 100%;
     /* width wrapping */
     div {
-        max-width: $width;
-        margin: auto;
+        @extend .widthCenter;
         /* Project bits */
         .project {
             width: $width/2 - 10;
@@ -179,7 +183,8 @@ body {
                         }
                     }
                 }
-                .award::before {
+                .award::before,
+                .award::after {
                     vertical-align: middle;
                     background-image: url(../images/laurelleft.png);
                     background-size: contain;
@@ -189,20 +194,14 @@ body {
                     content: "";
                     width: 1.6em;
                     height: 3em;
-                    position: relative;
+                    position: relative
+                }
+                .award::before {
+                    background-image: url(../images/laurelleft.png);
                     left: .09em;
                 }
                 .award::after {
-                    vertical-align: middle;
                     background-image: url(../images/laurelright.png);
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                    background-position: center center;
-                    display: inline-block;
-                    content: "";
-                    width: 1.6em;
-                    height: 3em;
-                    position: relative;
                     right: .11em;
                 }
             }
@@ -221,19 +220,18 @@ body {
     }
     p {
         text-indent: 2em;
-        max-width: $width;
-        margin: auto;
     }
     h1 {
         font-size: 2em;
         font-style: italic;
-        max-width: $width;
-        margin: auto;
         margin-top: 1.7em;
     }
+    p,
+    h1,
+    h2,
+    h3,
     h4 {
-        max-width: $width;
-        margin: auto;
+        @extend .widthCenter;
     }
     @include respond-to($width) {
         div {
