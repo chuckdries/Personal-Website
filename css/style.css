@@ -174,7 +174,7 @@ body {
   .slide ul {
     margin: 5px; }
   .slide p {
-    text-indent: 1em;
+    text-indent: 2em;
     max-width: 800px;
     margin: auto; }
   .slide h1 {
@@ -183,6 +183,9 @@ body {
     max-width: 800px;
     margin: auto;
     margin-top: 1.7em; }
+  .slide h4 {
+    max-width: 800px;
+    margin: auto; }
   @media (max-width: 800px) {
     .slide div .project {
       width: 90%;
