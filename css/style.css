@@ -190,9 +190,11 @@ body {
       display: block;
       margin: 0 0 .5em 5%; }
     .slide p,
+    .slide h1,
     .slide h2,
     .slide a {
-      margin: auto .5em auto .5em; } }
+      margin-right: .5em;
+      margin-left: .5em; } }
 
 @media (max-width: 800px) {
   #mast {

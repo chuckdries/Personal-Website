@@ -244,9 +244,11 @@ body {
             }
         }
         p,
+        h1,
         h2,
         a {
-            margin: auto .5em auto .5em;
+            margin-right: .5em;
+            margin-left: .5em;
         }
     }
 }
