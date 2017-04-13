@@ -220,7 +220,7 @@ body {
         margin: 5px;
     }
     p {
-        text-indent: 1em;
+        text-indent: 2em;
         max-width: $width;
         margin: auto;
     }
@@ -230,6 +230,10 @@ body {
         max-width: $width;
         margin: auto;
         margin-top: 1.7em;
+    }
+    h4 {
+        max-width: $width;
+        margin: auto;
     }
     @include respond-to($width) {
         div {
