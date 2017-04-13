@@ -149,7 +149,9 @@ body {
           display: inline-block;
           content: "";
           width: 1.6em;
-          height: 3em; }
+          height: 3em;
+          position: relative;
+          left: .09em; }
         .slide div .project .details .award::after {
           vertical-align: middle;
           background-image: url(../images/laurelright.png);
@@ -159,7 +161,9 @@ body {
           display: inline-block;
           content: "";
           width: 1.6em;
-          height: 3em; }
+          height: 3em;
+          position: relative;
+          right: .11em; }
   .slide table {
     line-height: 1.3;
     margin: 0;
