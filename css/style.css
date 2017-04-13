@@ -193,8 +193,8 @@ body {
     .slide h1,
     .slide h2,
     .slide a {
-      margin-right: .5em;
-      margin-left: .5em; } }
+      margin-right: .8em;
+      margin-left: .8em; } }
 
 @media (max-width: 800px) {
   #mast {
