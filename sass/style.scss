@@ -189,6 +189,8 @@ body {
                     content: "";
                     width: 1.6em;
                     height: 3em;
+                    position: relative;
+                    left: .09em;
                 }
                 .award::after {
                     vertical-align: middle;
@@ -200,6 +202,8 @@ body {
                     content: "";
                     width: 1.6em;
                     height: 3em;
+                    position: relative;
+                    right: .11em;
                 }
             }
         }
