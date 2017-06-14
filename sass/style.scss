@@ -38,7 +38,7 @@ body {
     padding-top: 10px;
     width: 100%;
     position: fixed;
-    background: black;
+    // background: black;
     z-index: 999;
     div {
         margin: auto;
@@ -76,6 +76,7 @@ body {
 
 //small and large classes are applied to #top
 .small {
+    background: black;
     .hideable {
         display: none;
         opacity: 0;

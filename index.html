@@ -21,6 +21,7 @@
     <style>
         #spaceTakerUpper {
             height: 98vh;
+            background: black;
         }
     </style>
 </head>
@@ -220,9 +221,9 @@
             // var mastHeight = mast.clientHeight;
             // var halfHeight = Math.floor((topHeight / 2) - (mastHeight / 2));
             if (topHeight < 300) {
-                mast.className = "small";
+                topDiv.className = "small";
             } else {
-                mast.className = "large";
+                topDiv.className = "large";
             }
             topDiv.style.height = topHeight + "px";
             // console.log("topheight is " + topHeight + " and topDiv.style.height = " + topDiv.style.height);
