@@ -191,15 +191,15 @@
         var sp = document.getElementById("scrollprompt");
         document.addEventListener("scroll", function() {
             last_known_scroll = getScrollY();
-            sc(last_known_scroll);
+            // sc(last_known_scroll);
             // Usually an important performance consideration, this ends up significantly delaying the resizing of the top box, which is important to stay sized correctly
-            // if (!queueing) {
-            //     window.requestAnimationFrame(function() {
-            //         sc(last_known_scroll);
-            //         queueing = false;
-            //     });
-            // }
-            // queueing = true;
+            if (!queueing) {
+                window.requestAnimationFrame(function() {
+                    sc(last_known_scroll);
+                    queueing = false;
+                });
+            }
+            queueing = true;
         });
 
         sc(last_known_scroll);
