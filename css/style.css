@@ -152,7 +152,6 @@ body {
   padding-top: 10px;
   width: 100%;
   position: fixed;
-  background: black;
   z-index: 999; }
   #top div {
     margin: auto;
@@ -179,15 +178,15 @@ body {
     transition-property: size;
     transition-duration: .2s; }
 
-.small .hideable {
-  display: none;
-  opacity: 0; }
-
-.small img {
-  max-width: 200px; }
-
-.small h2 {
-  font-size: 1em; }
+.small {
+  background: black; }
+  .small .hideable {
+    display: none;
+    opacity: 0; }
+  .small img {
+    max-width: 200px; }
+  .small h2 {
+    font-size: 1em; }
 
 .large img {
   width: 100%;
