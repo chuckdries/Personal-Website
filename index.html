@@ -20,7 +20,8 @@
 
     <style>
         #spaceTakerUpper {
-            height: 98vh;
+            height: 100vh;
+            background: black;
         }
     </style>
 </head>
@@ -74,7 +75,7 @@
                         <ul>
                             <li>HTML5</li>
                             <li>CSS3 &amp; Sass</li>
-                            <li>Javascript, TypeScript, &amp; Node</li>
+                            <li>Javascript, TypeScript, VueJS, &amp; Node</li>
                         </ul>
                     </td>
                 </tr>
@@ -190,15 +191,15 @@
         var sp = document.getElementById("scrollprompt");
         document.addEventListener("scroll", function() {
             last_known_scroll = getScrollY();
-            sc(last_known_scroll);
+            // sc(last_known_scroll);
             // Usually an important performance consideration, this ends up significantly delaying the resizing of the top box, which is important to stay sized correctly
-            // if (!queueing) {
-            //     window.requestAnimationFrame(function() {
-            //         sc(last_known_scroll);
-            //         queueing = false;
-            //     });
-            // }
-            // queueing = true;
+            if (!queueing) {
+                window.requestAnimationFrame(function() {
+                    sc(last_known_scroll);
+                    queueing = false;
+                });
+            }
+            queueing = true;
         });
 
         sc(last_known_scroll);
@@ -206,11 +207,11 @@
         //execute scroll style modifications
         function sc(ypos) {
 
-            var wheight = window.innerHeight;
+            var windowHeight = window.innerHeight;
             //top thing
             var topDiv = document.getElementById("top");
             var mast = document.getElementById("mast");
-            var hcalc = wheight - ypos;
+            var hcalc = windowHeight - ypos;
             var topHeight = 100;
             if (hcalc > 100) {
                 topHeight = hcalc;
@@ -219,17 +220,17 @@
             }
             // var mastHeight = mast.clientHeight;
             // var halfHeight = Math.floor((topHeight / 2) - (mastHeight / 2));
-            if (topHeight < 300) {
-                mast.className = "small";
+            if (topHeight < 315) {
+                topDiv.className = "small";
             } else {
-                mast.className = "large";
+                topDiv.className = "large";
             }
-            topDiv.style.height = topHeight + "px";
+            topDiv.style.height = topHeight - 10 + "px"; //subtract 10 to account for padding-top on #top
             // console.log("topheight is " + topHeight + " and topDiv.style.height = " + topDiv.style.height);
             // mast.style.marginTop = halfHeight + "px";
 
             //background thing
-            var p = ((wheight - ypos) / wheight); //calulate ratio of scroll
+            var p = ((windowHeight - ypos) / windowHeight); //calulate ratio of scroll
             // x.innerHTML = " " + String(parseInt(p * 100)); //display it
             var rgb = Math.floor(Math.abs(1 - p) * 255); //set the color
             // var colorString = "rgb(" + rgb + "," + rgb + "," + rgb + ")";
@@ -238,7 +239,7 @@
         }
 
         function getScrollY() {
-            //internet explorer does not have a window.scrollY property, so we need to make our own
+            //internet explorer does not have a window.scrollY property, it has pageYOffset
             return typeof window.scrollY === "undefined" ? window.pageYOffset : window.scrollY;
         }
 
