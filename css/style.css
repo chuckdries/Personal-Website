@@ -176,7 +176,9 @@ body {
     transition-duration: .2s; }
   #mast h2 {
     transition-property: size;
-    transition-duration: .2s; }
+    transition-duration: .2s;
+    text-shadow: 1px 2px #ED1277;
+    color: #19DEFF; }
 
 .small {
   background: black; }
@@ -194,6 +196,9 @@ body {
 
 .large .hideable {
   opacity: 1; }
+
+.large h2 {
+  font-size: 1.3em; }
 
 .nojs body {
   background: white; }
