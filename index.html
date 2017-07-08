@@ -33,16 +33,18 @@
                 <div id="mast">
                     <h1 style="display:none;">Chuck Dries</h1>
                     <img src="images/cd.png" alt="Chuck Dries">
-                    <h2 id="tagline"><a href="#tech" onclick="smoothScroll('tech'); return false;">Tech</a> / <a href="#design">Design</a> / <a href="#photography">Photography</a> / <a href="#leadership">Leadership</a></h2>
+                    <!--<h2 id="tagline"><a href="#tech" onclick="smoothScroll('tech'); return false;">Tech</a> / <a href="#design">Design</a> / <a href="#photography">Photography</a> / <a href="#leadership">Leadership</a></h2>-->
+                    <h2 class="tagline">Programmer / Student / Nodejs / VR / Photography / Design / Friendly dude</h2>
                     <div class="hideable">
                         <p>Digital Developer, <span class="sub">The State Press</span></p>
                         <p>Computer Science Student, <span class="sub">Arizona State University</span></p>
                         <p><a href="mailto:chuck@chuckdries.com">chuck@chuckdries.com</a> / 602.618.0414</p>
                         <p>
                             <a href="http://github.com/chuckdries">Github</a> /
+                            <a href="https://devpost.com/chuckdries">Devpost</a> /
                             <a href="https://www.linkedin.com/in/chuckdries/">LinkedIn</a> /
                             <a href="CharlesDriesResumeCurrent.pdf">Resume [pdf]</a> /
-                            <a href="https://medium.com/chuckblog">Blog</a> / 
+                            <a href="https://medium.com/chuckblog">Blog</a> /
                             <a href="https://pgp.mit.edu/pks/lookup?op=get&search=0x2BD9D0871DB5A518">Public Key</a>
                         </p>
                         <p id="scrollprompt">Scroll down!</p>
@@ -54,8 +56,15 @@
     <div id="spaceTakerUpper">
     </div>
     <div class="slide" style="margin-top:0px;">
-        <h1>About Me <span style="font-size: .5em; font-weight:normal; color: #666;">Why I rock</span></h1>
+        <h1>About Me <span style="font-size: .5em; font-weight:normal; color: #666;">Why I rock 🎶</span></h1>
         <h3>A brief history of Chuck &amp; tech</h3>
+        <p>I'm mostly terrible at writing copy, but I think I'm a pretty good programmer. I've always been "into computers"
+            but I didn't really get into the technical stuff until middle school, where I had to learn about networking and
+            bash to run a minecraft server. Today, I do most of my "real" work in JavaScript (both on the client with VueJS
+            and the server with Node + Express), but I've been experimenting with Unity and keeping up with my Minecraft
+            habbit.
+        </p>
+        <!--<h3>A brief history of Chuck &amp; tech</h3>
         <p>When I was a child I was obsessed with trains and vacuum cleaners. In elementary school my grandma tried to teach me Photoshop. In seventh grade I started teaching myself HTML. Freshman year I started learning the basics of networking and BASH
             so I could run a Minecraft server on my sparkly new iMac. In high school I really started to branch out. I volunteered at Phoenix Children's Hospital and I taught robotics at The Waybright Academy. I was an officer on Firebird Robotics where I handled web development and video production for, among other things, the <a href="https://www.firstinspires.org/resource-library/frc/submitted-awards">Chairman's Award submission</a>. I an editor of Chaparral Ashes, where I joined as the Web Editor to manage the online front but quickly moved to the <a href="https://issuu.com/chaparralashes">Design Editor</a>. I was also a yearbook editor and the director of Firebird Word, the daily morning announcement broadcast. I've been digging around in computers my whole life.</p>
         <h3>My life today</h3>
@@ -65,7 +74,7 @@
         <h3>Bragging &amp; geeking out</h3>
         <p>Here comes the stuff that I couldn't fit anywhere else. This summer I worked at a Starbucks to save up money to build a new PC and buy an HTC Vive to go with it. <a href="https://medium.com/chuckblog/my-computer-is-super-weird-66f50c04a9ed">My computer runs windows in a virtual machine on top of Slackware linux</a>,
             a setup that causes me unending headaches but is actually a lot of fun to tinker with when I'm not busy with school. I'm a proud Eagle scout. I like to toot my own horn. I once got so frustrated manually retyping text between command line
-            systems that I built a cloud copy paste tool just for myself. </p>
+            systems that I built a cloud copy paste tool just for myself. </p>-->
         <div id="skilltable" style="display:none; ">
             <h2 id="skills">Skills</h2>
             <table>
@@ -128,7 +137,8 @@
         </div>
     </div>
     <div class="slide">
-        <h1>Projects &amp; Experience <span style="font-size: .5em; font-weight:normal; color: #666;">Things I've made: filter by clicking the bar above.</span></h1>
+        <h1>Projects &amp; Experience
+            <!--<span style="font-size: .5em; font-weight:normal; color: #666;">Things I've made: filter by clicking the bar above.</span>--></h1>
         <div class="grid" data-masonry='{ "itemSelector": ".project", "columnWidth": 400 }'>
             <div class="project">
                 <div class="cover" id="virtualKeyality">
@@ -142,10 +152,11 @@
                     </div>
                     <h2>Virtual Keyality</h2>
                     <p>A VR typing game.</p>
-                    <p>The idea started as something of a joke, but after prototyping we realized that we stumbled upon a killer feature: when you're wearing the headset, you can't see your keyboard. </p>
-                    <p><a href="https://github.com/James-Quigley/deserthacks">View on GitHub</a></p>
-                    <span class="tag cat">Tech</span>
-                    <span class="tag cat">Design</span>
+                    <p>The idea started as something of a joke, but after prototyping we realized that we stumbled upon a killer
+                        feature: when you're wearing the headset, you can't see your keyboard. </p>
+                    <p><a href="https://devpost.com/software/deserthacks">View on Devpost</a></p>
+                    <!--<span class="tag cat">Tech</span>-->
+                    <!--<span class="tag cat">Design</span>-->
                     <span class="tag">Unity</span>
                     <span class="tag">C#</span>
                     <span class="tag">Virtual Reality</span>
@@ -165,11 +176,13 @@
                     </div>
                     <h2>Volunteer Management Portal</h2>
                     <p>A web app for nonprofits.</p>
-                    <p>Opportunity Hack is a charity hackathon where hackers are paired with nonprofits to solve the real world problems they face. The Lost Our Home pet rescue needed a better way to track volunteers and encourage volunteers to keep coming
-                        back. Our solution revolved around easy to access scheduling and volunteer-hour leaderboards to encourage first time volunteers to return.</p>
+                    <p>Opportunity Hack is a charity hackathon where hackers are paired with nonprofits to solve the real world
+                        problems they face. The Lost Our Home pet rescue needed a better way to track volunteers and encourage
+                        volunteers to keep coming back. Our solution revolved around easy to access scheduling and volunteer-hour
+                        leaderboards to encourage first time volunteers to return.</p>
                     <p><a href="https://github.com/Opportunity-Hack-2016-AZ/Team15">View on GitHub</a></p>
-                    <span class="tag cat">Tech</span>
-                    <span class="tag cat">Design</span>
+                    <!--<span class="tag cat">Tech</span>-->
+                    <!--<span class="tag cat">Design</span>-->
                     <span class="tag">NodeJS</span>
                     <span class="tag">MongoDB</span>
                     <span class="tag">ExpressJS</span>
@@ -189,12 +202,12 @@
         var st = document.getElementById("skilltable");
         var stb = document.getElementById("skilltablebutton");
         var sp = document.getElementById("scrollprompt");
-        document.addEventListener("scroll", function() {
+        document.addEventListener("scroll", function () {
             last_known_scroll = getScrollY();
             // sc(last_known_scroll);
             // Usually an important performance consideration, this ends up significantly delaying the resizing of the top box, which is important to stay sized correctly
             if (!queueing) {
-                window.requestAnimationFrame(function() {
+                window.requestAnimationFrame(function () {
                     sc(last_known_scroll);
                     queueing = false;
                 });
