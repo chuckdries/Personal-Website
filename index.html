@@ -34,12 +34,17 @@
                     <h1 style="display:none;">Chuck Dries</h1>
                     <img src="images/cd.png" alt="Chuck Dries">
                     <!--<h2 id="tagline"><a href="#tech" onclick="smoothScroll('tech'); return false;">Tech</a> / <a href="#design">Design</a> / <a href="#photography">Photography</a> / <a href="#leadership">Leadership</a></h2>-->
-                    <h2 class="tagline">Programmer / Student / Nodejs / VR / Photography / Design / Friendly dude</h2>
+                    <h2 class="tagline">Programmer / Student / Friendly dude / JavaScript / VR / Photography / Design </h2>
+                    <p>
+                        <a href="#about">About Me</a> /
+                        <a href="#skills">Skills</a> /
+                        <a href="#projects">Projects</a>
+                    </p>
                     <div class="hideable">
                         <p>Digital Developer, <span class="sub">The State Press</span></p>
                         <p>Computer Science Student, <span class="sub">Arizona State University</span></p>
                         <p><a href="mailto:chuck@chuckdries.com">chuck@chuckdries.com</a> / 602.618.0414</p>
-                        <p>
+                        <p> Links:
                             <a href="http://github.com/chuckdries">Github</a> /
                             <a href="https://devpost.com/chuckdries">Devpost</a> /
                             <a href="https://www.linkedin.com/in/chuckdries/">LinkedIn</a> /
@@ -56,6 +61,7 @@
     <div id="spaceTakerUpper">
     </div>
     <div class="slide" style="margin-top:0px;">
+        <a name="about" style="padding-top: 130px"></a>
         <h1>About Me <span style="font-size: .5em; font-weight:normal; color: #666;">Why I rock 🎶</span></h1>
         <h3>A brief history of Chuck &amp; tech</h3>
         <p>I'm mostly terrible at writing copy, but I think I'm a pretty good programmer. I've always been "into computers"
@@ -76,6 +82,7 @@
             a setup that causes me unending headaches but is actually a lot of fun to tinker with when I'm not busy with school. I'm a proud Eagle scout. I like to toot my own horn. I once got so frustrated manually retyping text between command line
             systems that I built a cloud copy paste tool just for myself. </p>-->
         <div id="skilltable" style="display:none; ">
+            <a name="skills" style="padding-top: 130px;"></a>
             <h2 id="skills">Skills</h2>
             <table>
                 <tr>
@@ -137,6 +144,7 @@
         </div>
     </div>
     <div class="slide">
+        <a name="projects" style="padding-top: 130px;"></a>
         <h1>Projects &amp; Experience
             <!--<span style="font-size: .5em; font-weight:normal; color: #666;">Things I've made: filter by clicking the bar above.</span>--></h1>
         <div class="grid" data-masonry='{ "itemSelector": ".project", "columnWidth": 400 }'>
@@ -225,15 +233,15 @@
             var topDiv = document.getElementById("top");
             var mast = document.getElementById("mast");
             var hcalc = windowHeight - ypos;
-            var topHeight = 100;
-            if (hcalc > 100) {
+            var topheight;
+            if (hcalc > 130) {
                 topHeight = hcalc;
             } else {
-                topHeight = 100;
+                topHeight = 130;
             }
             // var mastHeight = mast.clientHeight;
             // var halfHeight = Math.floor((topHeight / 2) - (mastHeight / 2));
-            if (topHeight < 315) {
+            if (topHeight < 335) {
                 topDiv.className = "small";
             } else {
                 topDiv.className = "large";
