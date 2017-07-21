@@ -188,7 +188,10 @@ body {
   .small img {
     max-width: 200px; }
   .small h2 {
-    font-size: 1em; }
+    font-size: 1.2em;
+    margin: 5px; }
+  .small p {
+    margin: 5px; }
 
 .large img {
   width: 100%;
