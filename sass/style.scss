@@ -4,7 +4,8 @@
 $width: 800px;
 $grey: #ccc;
 $pink: #ed1a76;
-$greybg: rgba(0, 0, 0, .5);
+$blue: #91EFFF;
+$greybg: #202020;
 .reset {
     padding: 0;
     margin: 0;
@@ -55,7 +56,7 @@ body {
     color: white;
     a {
         color: white;
-        font-style: italic;
+        font-style: inherit;
     }
     a:hover {
         color: $pink;
@@ -74,9 +75,14 @@ body {
     }
 }
 
+#spaceTakerUpper {
+    height: 100vh;
+    background: $greybg;
+}
+
 //small and large classes are applied to #top
 .small {
-    background: black;
+    background: $greybg;
     .hideable {
         display: none;
         opacity: 0;
@@ -106,12 +112,13 @@ body {
     }
 }
 
+//TODO: fix
 .nojs {
     body {
         background: white;
     }
     #mast {
-        background: black;
+        background: $greybg;
     }
 }
 
@@ -132,10 +139,10 @@ body {
         .project {
             width: $width/2 - 10;
             padding: 0 0 1em 0;
-            border: 1px solid #aaa;
+            border: 1px solid #eee;
             border-radius: 5px;
             overflow: hidden;
-            box-shadow: 1px 1px 4px #888;
+            box-shadow: 1px 1px 3px #ddd;
             background: white;
             .cover {
                 height: 15em;
@@ -159,8 +166,8 @@ body {
                 .tag {
                     float: left;
                     padding: 0 .3em 0 .3em;
-                    background: #eee;
-                    border: 1px solid #ccc;
+                    background: #f3f3f3;
+                    border: 1px solid #ddd;
                     margin: .2em;
                     border-radius: 5px;
                 }

@@ -166,7 +166,7 @@ body {
   color: white; }
   #mast a {
     color: white;
-    font-style: italic; }
+    font-style: inherit; }
   #mast a:hover {
     color: #ed1a76; }
   #mast .sub {
@@ -179,8 +179,12 @@ body {
     transition-duration: .2s;
     color: #91EFFF; }
 
+#spaceTakerUpper {
+  height: 100vh;
+  background: #202020; }
+
 .small {
-  background: black; }
+  background: #202020; }
   .small .hideable {
     display: none;
     opacity: 0; }
@@ -206,7 +210,7 @@ body {
   background: white; }
 
 .nojs #mast {
-  background: black; }
+  background: #202020; }
 
 /*
  * standalone elements
@@ -220,10 +224,10 @@ body {
     .slide div .project {
       width: 390px;
       padding: 0 0 1em 0;
-      border: 1px solid #aaa;
+      border: 1px solid #eee;
       border-radius: 5px;
       overflow: hidden;
-      box-shadow: 1px 1px 4px #888;
+      box-shadow: 1px 1px 3px #ddd;
       background: white; }
       .slide div .project .cover {
         height: 15em;
@@ -242,8 +246,8 @@ body {
         .slide div .project .details .tag {
           float: left;
           padding: 0 .3em 0 .3em;
-          background: #eee;
-          border: 1px solid #ccc;
+          background: #f3f3f3;
+          border: 1px solid #ddd;
           margin: .2em;
           border-radius: 5px; }
         .slide div .project .details .cat {
