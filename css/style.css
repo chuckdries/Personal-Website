@@ -177,8 +177,7 @@ body {
   #mast h2 {
     transition-property: size;
     transition-duration: .2s;
-    text-shadow: 1px 2px #19DEFF;
-    color: #FFFFFF; }
+    color: #91EFFF; }
 
 .small {
   background: black; }
