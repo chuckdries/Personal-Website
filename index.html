@@ -17,13 +17,7 @@
     <meta name="application-name" content="Chuck Dries" />
     <meta name="msapplication-TileColor" content="#FFFFFF" />
     <meta name="msapplication-TileImage" content="http://chuckdri.es/icons/mstile-144x144.png" />
-
-    <style>
-        #spaceTakerUpper {
-            height: 100vh;
-            background: black;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
@@ -66,11 +60,10 @@
         <a name="about" style="padding-top: 130px"></a>
         <h1>About Me <span style="font-size: .5em; font-weight:normal; color: #666;">Why I rock 🎶</span></h1>
         <h3>A brief history of Chuck &amp; tech</h3>
-        <p>I'm mostly terrible at writing copy, but I think I'm a pretty good programmer. I've always been "into computers"
-            but I didn't really get into the technical stuff until middle school, where I had to learn about networking and
-            bash to run a minecraft server. Today, I do most of my "real" work in JavaScript (both on the client with VueJS
-            and the server with Node + Express), but I've been experimenting with Unity and keeping up with my Minecraft
-            habit.
+        <p>I'm a computer science student with experience in photography, digital and print graphic design, teaching, and leading.
+            I've been "into computers" my whole life, but I didn't really get into the technical stuff until middle school,
+            where I had to learn about networking and bash to run a minecraft server. Today, I do most of my work in JavaScript,
+            but in my free time I experiment with VR and game design.
         </p>
         <!--<h3>A brief history of Chuck &amp; tech</h3>
         <p>When I was a child I was obsessed with trains and vacuum cleaners. In elementary school my grandma tried to teach me Photoshop. In seventh grade I started teaching myself HTML. Freshman year I started learning the basics of networking and BASH
@@ -203,7 +196,8 @@
             </div>
         </div>
         <p>&copy; Chuck Dries 2017</p>
-        <p style="font-family: sans-serif">;)</p>
+        <br>
+        <!--ewwww-->
     </div>
     <script>
         var last_known_scroll = getScrollY();
@@ -272,6 +266,14 @@
                 stb.innerText = "More about me";
                 t = false;
             } else {
+                st.style.display = "block";
+                stb.innerText = "Less about me";
+                t = true;
+            }
+        }
+
+        function openSkillTable() {
+            if (!t) {
                 st.style.display = "block";
                 stb.innerText = "Less about me";
                 t = true;
