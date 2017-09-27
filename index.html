@@ -135,13 +135,13 @@
                 </tr>
             </table>
         </div>
-        <div><a id="skilltablebutton" style="" onclick="toggleSkillTable()">More about me</a>
+        <div><a id="skilltablebutton" style="" onclick="toggleSkillTable()">Show skills table</a>
         </div>
     </div>
     <div class="slide">
         <a name="projects" style="padding-top: 130px;"></a>
         <h1>Projects &amp; Experience
-            <!--<span style="font-size: .5em; font-weight:normal; color: #666;">Things I've made: filter by clicking the bar above.</span>--></h1>
+            <span style="font-size: .5em; font-weight:normal; color: #666;">More projects coming. For now, check my github or email me.</span></h1>
         <div class="grid" data-masonry='{ "itemSelector": ".project", "columnWidth": 400 }'>
             <div class="project">
                 <div class="cover" id="virtualKeyality">
@@ -158,8 +158,6 @@
                     <p>The idea started as something of a joke, but after prototyping we realized that we stumbled upon a killer
                         feature: when you're wearing the headset, you can't see your keyboard. </p>
                     <p><a href="https://devpost.com/software/deserthacks">View on Devpost</a></p>
-                    <!--<span class="tag cat">Tech</span>-->
-                    <!--<span class="tag cat">Design</span>-->
                     <span class="tag">Unity</span>
                     <span class="tag">C#</span>
                     <span class="tag">Virtual Reality</span>
@@ -243,15 +241,10 @@
                 topDiv.className = "large";
             }
             topDiv.style.height = topHeight - 10 + "px"; //subtract 10 to account for padding-top on #top
-            // console.log("topheight is " + topHeight + " and topDiv.style.height = " + topDiv.style.height);
-            // mast.style.marginTop = halfHeight + "px";
 
             //background thing
             var p = ((windowHeight - ypos) / windowHeight); //calulate ratio of scroll
-            // x.innerHTML = " " + String(parseInt(p * 100)); //display it
             var rgb = Math.floor(Math.abs(1 - p) * 255); //set the color
-            // var colorString = "rgb(" + rgb + "," + rgb + "," + rgb + ")";
-            // document.body.style.backgroundColor = colorString;
 
         }
 
@@ -263,7 +256,7 @@
         function toggleSkillTable() {
             if (t) {
                 st.style.display = "none";
-                stb.innerText = "More about me";
+                stb.innerText = "Show skills table";
                 t = false;
             } else {
                 st.style.display = "block";
