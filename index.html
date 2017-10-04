@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Chuck Dries</title>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="http://chuckdri.es/icons/apple-touch-icon-57x57.png" />
@@ -27,9 +28,7 @@
                 <div id="mast">
                     <h1 style="display:none;">Chuck Dries</h1>
                     <img src="images/cd.png" alt="Chuck Dries">
-                    <!--<h2 id="tagline"><a href="#tech" onclick="smoothScroll('tech'); return false;">Tech</a> / <a href="#design">Design</a> / <a href="#photography">Photography</a> / <a href="#leadership">Leadership</a></h2>-->
-                    <h2 class="tagline">Programmer / Student / Friendly dude
-                        <!--// JavaScript &bull; VR &bull; Photography &bull; Design-->
+                    <h2 class="tagline">Programmer <span style="font-style: normal">/</span> Student <span style="font-style: normal">/</span>                        Friendly dude
                     </h2>
                     <p>
                         <a href="#about">About Me</a> /
@@ -40,10 +39,10 @@
                         <p>Digital Developer, <span class="sub">The State Press</span></p>
                         <p>Computer Science Student, <span class="sub">Arizona State University</span></p>
                         <p><a href="mailto:chuck@chuckdries.com">chuck@chuckdries.com</a> / 602.618.0414</p>
-                        <p> Links:
-                            <a href="http://github.com/chuckdries">Github</a> /
-                            <a href="https://devpost.com/chuckdries">Devpost</a> /
+                        <p>
+                            <a href="http://github.com/chuckdries">Github</a>/
                             <a href="https://www.linkedin.com/in/chuckdries/">LinkedIn</a> /
+                            <a href="https://devpost.com/chuckdries">Devpost</a> /
                             <a href="CharlesDriesResumeCurrent.pdf">Resume [pdf]</a> /
                             <a href="https://medium.com/chuckblog">Blog</a> /
                             <a href="https://pgp.mit.edu/pks/lookup?op=get&search=0x2BD9D0871DB5A518">Public Key</a>
@@ -65,20 +64,11 @@
             where I had to learn about networking and bash to run a minecraft server. Today, I do most of my work in JavaScript,
             but in my free time I experiment with VR and game design.
         </p>
-        <!--<h3>A brief history of Chuck &amp; tech</h3>
-        <p>When I was a child I was obsessed with trains and vacuum cleaners. In elementary school my grandma tried to teach me Photoshop. In seventh grade I started teaching myself HTML. Freshman year I started learning the basics of networking and BASH
-            so I could run a Minecraft server on my sparkly new iMac. In high school I really started to branch out. I volunteered at Phoenix Children's Hospital and I taught robotics at The Waybright Academy. I was an officer on Firebird Robotics where I handled web development and video production for, among other things, the <a href="https://www.firstinspires.org/resource-library/frc/submitted-awards">Chairman's Award submission</a>. I an editor of Chaparral Ashes, where I joined as the Web Editor to manage the online front but quickly moved to the <a href="https://issuu.com/chaparralashes">Design Editor</a>. I was also a yearbook editor and the director of Firebird Word, the daily morning announcement broadcast. I've been digging around in computers my whole life.</p>
-        <h3>My life today</h3>
-        <p>I'm a Computer Science student and Hackathon winner at Arizona State University interested in the intersection of technology and art. I pride myself in taking a diverse set of interest and the resulting broad set of experiences. From editorial
-            experience at the State Press to random open source contributions in my free time, I do a lot. Less formally, I moonlight as a freelance tech support, web designer, and occasionally pick up work as a photographer. Lately I've been spending
-            a lot of time in JavaScript, but I've got a few interesting side projects on the back burner, including a SteamVR experiment. </p>
-        <h3>Bragging &amp; geeking out</h3>
-        <p>Here comes the stuff that I couldn't fit anywhere else. This summer I worked at a Starbucks to save up money to build a new PC and buy an HTC Vive to go with it. <a href="https://medium.com/chuckblog/my-computer-is-super-weird-66f50c04a9ed">My computer runs windows in a virtual machine on top of Slackware linux</a>,
-            a setup that causes me unending headaches but is actually a lot of fun to tinker with when I'm not busy with school. I'm a proud Eagle scout. I like to toot my own horn. I once got so frustrated manually retyping text between command line
-            systems that I built a cloud copy paste tool just for myself. </p>-->
-        <div id="skilltable" style="display:none; ">
-            <a name="skills" style="padding-top: 130px;"></a>
-            <h2 id="skills">Skills</h2>
+    </div>
+    <div class="slide">
+        <a name="skills" style="padding-top: 130px"></a>
+        <h2>Skills</h2>
+        <div id="skilltable" style="display:none;">
             <table>
                 <tr>
                     <td class="ld">The <span style="font-style:italic">Internet</span></td>
@@ -135,14 +125,14 @@
                 </tr>
             </table>
         </div>
-        <div><a id="skilltablebutton" style="" onclick="toggleSkillTable()">Show skills table</a>
+        <div><a id="skilltablebutton" onclick="toggleSkillTable()">Show skills table</a>
         </div>
     </div>
     <div class="slide">
         <a name="projects" style="padding-top: 130px;"></a>
-        <h1>Projects &amp; Experience
-            <span style="font-size: .5em; font-weight:normal; color: #666;">More projects coming. For now, check my github or email me.</span></h1>
-        <div class="grid" data-masonry='{ "itemSelector": ".project", "columnWidth": 400 }'>
+        <h1>Projects &amp; Experience</h1>
+        <p style="text-indent: 0; margin-bottom: 5px;font-style: italic; font-weight:normal; color: #555;">More projects coming. For now, check my github or email me.</p>
+        <div class="grid" data-masonry='{"itemSelector" :".project", "columnWidth": 400 }'>
             <div class="project">
                 <div class="cover" id="virtualKeyality">
                 </div>
@@ -182,8 +172,8 @@
                         volunteers to keep coming back. Our solution revolved around easy to access scheduling and volunteer-hour
                         leaderboards to encourage first time volunteers to return.</p>
                     <p><a href="https://github.com/Opportunity-Hack-2016-AZ/Team15">View on GitHub</a></p>
-                    <!--<span class="tag cat">Tech</span>-->
-                    <!--<span class="tag cat">Design</span>-->
+                    <!--<span class="tag cat ">Tech</span>-->
+                    <!--<span class="tag cat ">Design</span>-->
                     <span class="tag">NodeJS</span>
                     <span class="tag">MongoDB</span>
                     <span class="tag">ExpressJS</span>
@@ -235,7 +225,7 @@
             }
             // var mastHeight = mast.clientHeight;
             // var halfHeight = Math.floor((topHeight / 2) - (mastHeight / 2));
-            if (topHeight < 335) {
+            if (topHeight < 360) {
                 topDiv.className = "small";
             } else {
                 topDiv.className = "large";

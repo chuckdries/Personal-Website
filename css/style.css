@@ -144,9 +144,10 @@
  * sections
  */
 body {
-  font-family: serif;
-  font-size: 1em;
-  line-height: 1.6; }
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 700px; }
 
 #top {
   padding-top: 10px;
@@ -160,6 +161,7 @@ body {
     font-weight: normal; }
 
 #mast {
+  font-size: 1.1em;
   margin-top: 10px;
   background: none;
   line-height: 1.2;
