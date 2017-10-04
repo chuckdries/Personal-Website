@@ -29,10 +29,11 @@ $greybg: #202020;
  */
 
 body {
-    @extend .reset;
-    font-family: serif;
-    font-size: 1em;
+    @extend .reset; // font-family: 'Nota-serif', serif;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1em;
     line-height: 1.6;
+    margin-bottom: 700px;
 }
 
 #top {
@@ -50,13 +51,14 @@ body {
 }
 
 #mast {
+    font-size: 1.1em;
     margin-top: 10px;
     background: none;
     line-height: 1.2;
     color: white;
     a {
         color: white;
-        font-style: inherit;
+        font-style: inherit; // text-decoration: none;
     }
     a:hover {
         color: $pink;
@@ -239,7 +241,7 @@ body {
     }
     h1 {
         font-size: 2em;
-        font-style: italic;
+        font-style: italic; // font-weight: 700;
         margin-top: 1.7em;
     }
     @include textElements() {
