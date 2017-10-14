@@ -137,6 +137,7 @@ body {
     div {
         @extend .widthCenter;
         /* Project bits */
+        //TODO: un-nest this stuff
         .project {
             width: $width/2 - 10;
             padding: 0 0 1em 0;
@@ -145,6 +146,7 @@ body {
             overflow: hidden;
             box-shadow: 1px 1px 3px #ddd;
             background: white;
+            margin-bottom: 20px;
             .cover {
                 height: 15em;
                 background-position: center center;
@@ -152,6 +154,10 @@ body {
                 background-repeat: no-repeat;
                 margin: 0px;
                 padding: 1em;
+                video {
+                    height: 100%;
+                    width: 100%;
+                }
             }
             .details {
                 padding: 1em 1em 0 1em;
@@ -243,6 +249,9 @@ body {
         font-style: italic; // font-weight: 700;
         margin-top: 1.7em;
     }
+    .grid {
+        // columns: 2 auto;
+    }
     @include textElements() {
         @extend .widthCenter;
     }
@@ -265,6 +274,9 @@ body {
         @include textElements() {
             // margin-right: .8em;
             // margin-left: .8em;
+        }
+        .grid {
+            // columns: 1 auto;
         }
     }
 }

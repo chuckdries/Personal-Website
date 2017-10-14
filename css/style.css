@@ -229,7 +229,8 @@ body {
       border-radius: 5px;
       overflow: hidden;
       box-shadow: 1px 1px 3px #ddd;
-      background: white; }
+      background: white;
+      margin-bottom: 20px; }
       .slide div .project .cover {
         height: 15em;
         background-position: center center;
@@ -237,6 +238,9 @@ body {
         background-repeat: no-repeat;
         margin: 0px;
         padding: 1em; }
+        .slide div .project .cover video {
+          height: 100%;
+          width: 100%; }
       .slide div .project .details {
         padding: 1em 1em 0 1em; }
         .slide div .project .details h2 {
