@@ -114,12 +114,12 @@
     -o-transform: none;
     transform: none; } }
 
-.reset, body, .slide, .slide div .project .details h2, .slide div .project .details p, .slide div .project .details .award div p {
+.reset, body, .slide, .slide .project .details h2, .slide .project .details p, .slide .project .details .award div p {
   padding: 0;
   margin: 0;
   text-indent: 0; }
 
-.widthCenter, .slide div, .slide p,
+.widthCenter, .slide > div, .slide p,
 .slide h1,
 .slide h2,
 .slide h3,
@@ -145,7 +145,6 @@
  */
 body {
   font-family: 'Playfair Display', serif;
-  font-size: 1.1em;
   line-height: 1.6; }
 
 #top {
@@ -160,7 +159,6 @@ body {
     font-weight: normal; }
 
 #mast {
-  font-size: 1.1em;
   margin-top: 10px;
   background: none;
   line-height: 1.2;
@@ -173,12 +171,19 @@ body {
   #mast .sub {
     font-style: italic;
     color: #ccc; }
-  #mast img {
-    transition-duration: .2s; }
+  #mast h1 {
+    font-size: 2.5em;
+    font-style: italic;
+    font-weight: normal;
+    color: #ed1a76;
+    transition-property: size;
+    transition-duration: .2s;
+    margin: -18px 0 0 0; }
   #mast h2 {
     transition-property: size;
     transition-duration: .2s;
-    color: #91EFFF; }
+    color: #91EFFF;
+    margin: 0; }
 
 #spaceTakerUpper {
   height: 100vh;
@@ -219,82 +224,84 @@ body {
 .slide {
   padding: 0px;
   width: 100%;
-  /* width wrapping */ }
-  .slide div {
-    /* Project bits */ }
-    .slide div .project {
-      width: 390px;
-      padding: 0 0 1em 0;
-      border: 1px solid #eee;
-      border-radius: 5px;
-      overflow: hidden;
-      box-shadow: 1px 1px 3px #ddd;
-      background: white;
-      margin-bottom: 20px; }
-      .slide div .project .cover {
-        height: 15em;
-        background-position: center center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        margin: 0px;
-        padding: 1em; }
-        .slide div .project .cover video {
-          height: 100%;
-          width: 100%; }
-      .slide div .project .details {
-        padding: 1em 1em 0 1em; }
-        .slide div .project .details h2 {
-          line-height: 1;
-          margin: 0 0 .5em 0; }
-        .slide div .project .details p {
-          margin: 0 0 .5em 0; }
-        .slide div .project .details .tag {
-          float: left;
-          padding: 0 .3em 0 .3em;
-          background: #f3f3f3;
-          border: 1px solid #ddd;
-          margin: .2em;
-          border-radius: 5px; }
-        .slide div .project .details .cat {
-          background: #B7EEFF;
-          border: 1px solid #8AC9DD; }
-        .slide div .project .details .award {
-          float: right;
-          background: none;
-          border: none;
-          margin: 0 0 .5em .5em; }
-          .slide div .project .details .award div {
-            display: inline-block;
-            text-align: center;
-            vertical-align: middle;
-            padding: 0; }
-            .slide div .project .details .award div h3 {
-              margin: 0;
-              padding: 0;
-              font-size: 1.4em;
-              line-height: 1;
-              font-weight: normal;
-              font-style: italic; }
-            .slide div .project .details .award div p {
-              font-size: .8em; }
-        .slide div .project .details .award::before,
-        .slide div .project .details .award::after {
-          vertical-align: middle;
-          background-image: url(../images/laurelleft.png);
-          background-size: contain;
-          background-repeat: no-repeat;
-          background-position: center center;
+  /* width wrapping */
+  /* Project bits */ }
+  .slide .project {
+    width: 390px;
+    padding: 0 0 1em 0;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 1px 1px 3px #ddd;
+    background: white;
+    margin-bottom: 20px; }
+    .slide .project .cover {
+      height: 14em;
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin: 0px;
+      padding: 1em; }
+      .slide .project .cover video {
+        height: 100%;
+        width: 100%; }
+      @media (max-width: 800px) {
+        .slide .project .cover {
+          height: 45vw; } }
+    .slide .project .details {
+      padding: 1em 1em 0 1em; }
+      .slide .project .details h2 {
+        line-height: 1;
+        margin: 0 0 .5em 0; }
+      .slide .project .details p {
+        margin: 0 0 .5em 0; }
+      .slide .project .details .tag {
+        float: left;
+        padding: 0 .3em 0 .3em;
+        background: #f3f3f3;
+        border: 1px solid #ddd;
+        margin: .2em;
+        border-radius: 5px; }
+      .slide .project .details .cat {
+        background: #B7EEFF;
+        border: 1px solid #8AC9DD; }
+      .slide .project .details .award {
+        float: right;
+        background: none;
+        border: none;
+        margin: 0 0 .5em .5em; }
+        .slide .project .details .award div {
           display: inline-block;
-          content: "";
-          width: 1.6em;
-          height: 3em;
-          position: relative; }
-        .slide div .project .details .award::before {
-          background-image: url(../images/laurelleft.png);
-          left: .09em; }
-        .slide div .project .details .award::after {
-          background-image: url(../images/laurelright.png);
-          right: .11em; }
+          text-align: center;
+          vertical-align: middle;
+          padding: 0; }
+          .slide .project .details .award div h3 {
+            margin: 0;
+            padding: 0;
+            font-size: 1.4em;
+            line-height: 1;
+            font-weight: normal;
+            font-style: italic; }
+          .slide .project .details .award div p {
+            font-size: .8em; }
+      .slide .project .details .award::before,
+      .slide .project .details .award::after {
+        vertical-align: middle;
+        background-image: url(../images/laurelleft.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+        display: inline-block;
+        content: "";
+        width: 1.6em;
+        height: 3em;
+        position: relative; }
+      .slide .project .details .award::before {
+        background-image: url(../images/laurelleft.png);
+        left: .09em; }
+      .slide .project .details .award::after {
+        background-image: url(../images/laurelright.png);
+        right: .11em; }
   .slide table {
     line-height: 1.3;
     margin: 0;
@@ -311,7 +318,7 @@ body {
     font-style: italic;
     margin-top: 1.7em; }
   @media (max-width: 800px) {
-    .slide .widthCenter, .slide div, .slide p, .slide h1, .slide h2, .slide h3, .slide h4 {
+    .slide .widthCenter, .slide > div, .slide p, .slide h1, .slide h2, .slide h3, .slide h4 {
       margin-left: 12px;
       margin-right: 12px; }
     .slide div .project {
