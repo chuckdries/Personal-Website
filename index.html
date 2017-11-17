@@ -27,7 +27,8 @@
                 <div id="mast">
                     <h1>Chuck Dries</h1>
                     <!-- <img src="images/cd.png" alt="Chuck Dries"> -->
-                    <h2 class="tagline">Programmer, Student, Friendly dude <span style="font-style: normal">/</span> Web & VR</h2>
+                    <h2 class="tagline">Programmer, Student, Friendly dude
+                        <span style="font-style: normal">/</span> Web & VR</h2>
                     <p>
                         <a href="#about">About Me</a> /
                         <a href="#skills">Skills</a> /
@@ -202,11 +203,10 @@
                 <div class="details">
                     <h2>TechBuds Chat</h2>
                     <p>A realtime chat app in Vue</p>
-                    <p> A penny stock trading community needed a custom chat platform, so they hired my Desert Hacks '17 team.
-                        Our implementation relies on Mongo, Redis, Node, and Express in the backend, Vue, Vue-router, and
-                        Materialize on the front end, Socket.io handles real time communication between the two, and every
-                        ounce of javascript we write is transpiled by Babel. I'm in charge of the front end and responsible
-                        for the visual and architectural design of most of the SPA.</p>
+                    <p> Our back end relies on Mongo, Redis, Node, and Express; our front end uses Vue, Vue-router, and Materialize.
+                        Socket.io handles real time communication between the two, and every ounce of javascript we write
+                        is transpiled by Babel. I'm in charge of the front end and responsible for the visual and architectural
+                        design of most of the SPA.</p>
                     <p>Unfortunately, this project is closed source, but it's not under NDA. I can't publish the code online,
                         but I can show you if you ask.</p>
                     <!--<span class="tag cat ">Tech</span>-->
@@ -253,7 +253,7 @@
             document.addEventListener("scroll", function () {
                 last_known_scroll = getScrollY();
                 if (!queueing) {
-                    window.requestAnimationFrame(function () {//"queue up" animation
+                    window.requestAnimationFrame(function () { //"queue up" animation
                         queueing = false;
                         sc(last_known_scroll);
                     });
@@ -261,7 +261,7 @@
                 }
             });
 
-            window.addEventListener("resize",function() {
+            window.addEventListener("resize", function () {
                 last_known_scroll = getScrollY();
                 sc(last_known_scroll);
             });
