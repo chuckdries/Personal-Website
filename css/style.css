@@ -234,7 +234,8 @@ body {
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 1px 1px 3px #ddd;
-    background: white; }
+    background: white;
+    margin-bottom: 20px; }
     .slide .project .cover {
       height: 14em;
       background-position: center center;
