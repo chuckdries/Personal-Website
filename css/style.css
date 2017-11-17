@@ -336,7 +336,8 @@ body {
   -moz-animation: 2s ease fadeIn;
   -webkit-animation: 2s ease fadeIn;
   -o-animation: 2s ease fadeIn;
-  animation: 2s ease fadeIn; }
+  animation: 2s ease fadeIn;
+  color: #91EFFF; }
 
 @media (max-width: 800px) {
   #mast {
