@@ -224,6 +224,7 @@ body {
 .slide {
   padding: 0px;
   width: 100%;
+  margin-top: 50px;
   /* width wrapping */
   /* Project bits */ }
   .slide .project {
@@ -233,8 +234,7 @@ body {
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 1px 1px 3px #ddd;
-    background: white;
-    margin-bottom: 20px; }
+    background: white; }
     .slide .project .cover {
       height: 14em;
       background-position: center center;
@@ -315,8 +315,7 @@ body {
     text-indent: 2em; }
   .slide h1 {
     font-size: 2em;
-    font-style: italic;
-    margin-top: 1.7em; }
+    font-style: italic; }
   @media (max-width: 800px) {
     .slide .widthCenter, .slide > div, .slide p, .slide h1, .slide h2, .slide h3, .slide h4 {
       margin-left: 12px;

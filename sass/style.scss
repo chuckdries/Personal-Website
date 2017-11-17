@@ -130,6 +130,7 @@
         @extend .reset;
         padding: 0px;
         width: 100%;
+        margin-top: 50px;
         /* width wrapping */
         &>div {
             @extend .widthCenter;
@@ -144,7 +145,7 @@
             overflow: hidden;
             box-shadow: 1px 1px 3px #ddd;
             background: white;
-            margin-bottom: 20px;
+            // margin-bottom: 20px;
             .cover {
                 height: 14em;
                 background-position: center center;
@@ -247,7 +248,7 @@
         h1 {
             font-size: 2em;
             font-style: italic; // font-weight: 700;
-            margin-top: 1.7em;
+            // margin-top: 1.7em;
         }
         .grid {
             // columns: 2 auto;
