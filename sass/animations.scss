@@ -32,7 +32,7 @@ $prefixes: ("-moz-", "-webkit-", "-o-", "");
         @include prefix(opacity, 0);
         @include prefix(transform, translate(0, 10vh));
     }
-    20% {
+    50% {
         @include prefix(opacity, 0);
         @include prefix(transform, translate(0, 10vh));
     }
