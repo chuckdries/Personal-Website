@@ -167,7 +167,7 @@ body {
     color: white;
     font-style: inherit; }
   #mast a:hover {
-    color: #ed1a76; }
+    color: #ff429a; }
   #mast .sub {
     font-style: italic;
     color: #ccc; }
@@ -175,7 +175,7 @@ body {
     font-size: 2.8em;
     font-style: italic;
     font-weight: normal;
-    color: #ed1a76;
+    color: #ff429a;
     transition-property: size;
     transition-duration: .2s;
     margin: -18px 0 0 0; }
