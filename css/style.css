@@ -8,7 +8,7 @@
     -webkit-transform: translate(0, 10vh);
     -o-transform: translate(0, 10vh);
     transform: translate(0, 10vh); }
-  20% {
+  50% {
     -moz-opacity: 0;
     -webkit-opacity: 0;
     -o-opacity: 0;
@@ -37,7 +37,7 @@
     -webkit-transform: translate(0, 10vh);
     -o-transform: translate(0, 10vh);
     transform: translate(0, 10vh); }
-  20% {
+  50% {
     -moz-opacity: 0;
     -webkit-opacity: 0;
     -o-opacity: 0;
@@ -66,7 +66,7 @@
     -webkit-transform: translate(0, 10vh);
     -o-transform: translate(0, 10vh);
     transform: translate(0, 10vh); }
-  20% {
+  50% {
     -moz-opacity: 0;
     -webkit-opacity: 0;
     -o-opacity: 0;
@@ -95,7 +95,7 @@
     -webkit-transform: translate(0, 10vh);
     -o-transform: translate(0, 10vh);
     transform: translate(0, 10vh); }
-  20% {
+  50% {
     -moz-opacity: 0;
     -webkit-opacity: 0;
     -o-opacity: 0;
@@ -334,10 +334,10 @@ body {
   font-weight: normal; }
 
 #scrollprompt {
-  -moz-animation: 2s ease fadeIn;
-  -webkit-animation: 2s ease fadeIn;
-  -o-animation: 2s ease fadeIn;
-  animation: 2s ease fadeIn;
+  -moz-animation: 3s ease fadeIn;
+  -webkit-animation: 3s ease fadeIn;
+  -o-animation: 3s ease fadeIn;
+  animation: 3s ease fadeIn;
   color: #91EFFF; }
 
 @media (max-width: 800px) {
