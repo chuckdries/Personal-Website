@@ -1,312 +1,329 @@
-    //setup
-    @import 'responsive';
-    @import 'animations';
-    $width: 800px;
-    $grey: #ccc;
-    $pink: #ff429a;
-    $blue: #91EFFF;
-    $greybg: #202020;
-    .reset {
-        padding: 0;
-        margin: 0;
-        text-indent: 0;
-    }
+//setup
+@import "responsive";
+@import "animations";
+$width: 800px;
+$grey: #ccc;
+$pink: #ff429a;
+$blue: #91efff;
+$greybg: #202020;
+.reset {
+    padding: 0;
+    margin: 0;
+    text-indent: 0;
+}
 
-    .widthCenter {
-        max-width: $width;
-        margin: auto;
-    }
-    /*
+.widthCenter {
+    max-width: $width;
+    margin: auto;
+}
+/*
  * Covers for projects section
  */
 
-    @import 'covers';
-    /*
+@import "covers";
+/*
  * sections
  */
 
-    body {
-        @extend .reset; // font-family: 'Nota-serif', serif;
-        font-family: 'Playfair Display', serif;
-        line-height: 2; // margin-bottom: 700px;
-    }
+body {
+    @extend .reset; // font-family: 'Nota-serif', serif;
+    font-family: "Playfair Display", serif;
+    line-height: 2; // margin-bottom: 700px;
+}
 
-    #top {
-        padding-top: 10px;
-        width: 100%;
-        position: fixed; // background: black;
-        z-index: 999;
-        div {
-            margin: auto;
-            max-width: $width;
-        }
-        h2 {
-            font-weight: normal;
-        }
+#top {
+    padding-top: 10px;
+    width: 100%;
+    position: fixed; // background: black;
+    z-index: 999;
+    div {
+        margin: auto;
+        max-width: $width;
     }
+    h2 {
+        font-weight: normal;
+    }
+}
 
-    #mast {
-        margin-top: 10px;
-        // margin-top:0;
-        background: none;
-        line-height: 1.2;
+#mast {
+    margin-top: 10px;
+    // margin-top:0;
+    background: none;
+    line-height: 1.2;
+    color: white;
+    a {
         color: white;
-        a {
-            color: white;
-            font-style: inherit; // text-decoration: none;
-        }
-        a:hover {
-            color: $pink;
-        }
-        .sub {
-            font-style: italic;
-            color: $grey;
-        }
-        h1{
-            font-size: 2.8em;
-            font-style: italic;
-            font-weight: normal;
-            color: $pink;
-            transition-property: size;
-            transition-duration: .2s;
-            margin: -18px 0 0 0;
-        }
-        h2 {
-            transition-property: size;
-            transition-duration: .2s;
-            color: #91EFFF;
-            margin: 0;
-        }
+        font-style: inherit; // text-decoration: none;
     }
+    a:hover {
+        color: $pink;
+    }
+    .sub {
+        font-style: italic;
+        color: $grey;
+    }
+    h1 {
+        font-size: 2.8em;
+        font-style: italic;
+        font-weight: normal;
+        color: $pink;
+        transition-property: size;
+        transition-duration: 0.2s;
+        margin: -18px 0 0 0;
+    }
+    h2 {
+        transition-property: size;
+        transition-duration: 0.2s;
+        color: #91efff;
+        margin: 0;
+    }
+}
 
-    #spaceTakerUpper {
-        height: 100vh;
-        background: $greybg;
-    } //small and large classes are applied to #top
-    .small {
-        background: $greybg;
-        .hideable {
-            display: none;
-            opacity: 0;
-        }
-        img {
-            max-width: 200px;
-        }
-        h2 {
-            font-size: 1.2em;
-            margin: 5px;
-        }
-        p {
-            margin: 5px;
-        }
+#spaceTakerUpper {
+    height: 100vh;
+    background: $greybg;
+} //small and large classes are applied to #top
+.small {
+    background: $greybg;
+    .hideable {
+        display: none;
+        opacity: 0;
     }
+    img {
+        max-width: 200px;
+    }
+    h2 {
+        font-size: 1.2em;
+        margin: 5px;
+    }
+    p {
+        margin: 5px;
+    }
+}
 
-    .large {
-        img {
-            width: 100%;
-            max-width: 380px;
-        }
-        .hideable {
-            opacity: 1;
-        }
-        h2 {
-            font-size: 1.3em;
-        }
-    } //TODO: fix
-    .nojs {
-        body {
-            background: white;
-        }
-        #mast {
-            background: $greybg;
-        }
+.large {
+    img {
+        width: 100%;
+        max-width: 380px;
     }
-    /*
+    .hideable {
+        opacity: 1;
+    }
+    h2 {
+        font-size: 1.3em;
+    }
+} //TODO: fix
+.nojs {
+    body {
+        background: white;
+    }
+    #mast {
+        background: $greybg;
+    }
+}
+/*
  * standalone elements
  */
 
-    // the standard section element
-    .slide {
-        @extend .reset;
-        padding: 0px;
-        width: 100%;
-        margin-top: 50px;
-        /* width wrapping */
-        &>div {
-            @extend .widthCenter;
-        }
-        /* Project bits */
-        //TODO: un-nest this stuff
-        .project {
-            width: $width/2 - 10;
-            padding: 0 0 1em 0;
-            border: 1px solid #eee;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 1px 1px 3px #ddd;
-            background: white;
-            margin-bottom: 20px;
-            .cover {
-                height: 14em;
-                background-position: center center;
-                background-size: cover;
-                background-repeat: no-repeat;
-                margin: 0px;
-                padding: 1em;
-                video {
-                    height: 100%;
-                    width: 100%;
-                }
-                @include respond-to($width) {
-                    height: 45vw;
-                }
+// the standard section element
+.slide {
+    @extend .reset;
+    padding: 0px;
+    width: 100%;
+    // max-width: $width;
+    margin-top: 50px;
+    // margin: auto;
+    @extend .widthCenter;
+    /* Project bits */
+    //TODO: un-nest this stuff
+    .project {
+        width: $width/2 - 10;
+        padding: 0 0 1em 0;
+        border: 1px solid #eee;
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 1px 1px 3px #ddd;
+        background: white;
+        margin-bottom: 20px;
+        .cover {
+            height: 14em;
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0px;
+            padding: 1em;
+            video {
+                height: 100%;
+                width: 100%;
             }
-            .details {
-                padding: 1em 1em 0 1em;
-                h2 {
-                    @extend .reset;
-                    line-height: 1;
-                    margin: 0 0 .5em 0;
-                }
-                p {
-                    @extend .reset;
-                    margin: 0 0 .5em 0;
-                }
-                .tag {
-                    float: left;
-                    padding: 0 .3em 0 .3em;
-                    background: #f3f3f3;
-                    border: 1px solid #ddd;
-                    margin: .2em;
-                    border-radius: 5px;
-                }
-                .cat {
-                    background: #B7EEFF;
-                    border: 1px solid #8AC9DD;
-                }
-                .award {
-                    float: right;
-                    background: none;
-                    border: none;
-                    margin: 0 0 .5em .5em;
-                    div {
-                        display: inline-block;
-                        text-align: center;
-                        vertical-align: middle;
+            @include respond-to($width) {
+                height: 45vw;
+            }
+        }
+        .details {
+            padding: 1em 1em 0 1em;
+            h2 {
+                @extend .reset;
+                line-height: 1;
+                margin: 0 0 0.5em 0;
+            }
+            p {
+                @extend .reset;
+                margin: 0 0 0.5em 0;
+            }
+            .tag {
+                float: left;
+                padding: 0 0.3em 0 0.3em;
+                background: #f3f3f3;
+                border: 1px solid #ddd;
+                margin: 0.2em;
+                border-radius: 5px;
+            }
+            .cat {
+                background: #b7eeff;
+                border: 1px solid #8ac9dd;
+            }
+            .award {
+                float: right;
+                background: none;
+                border: none;
+                margin: 0 0 0.5em 0.5em;
+                div {
+                    display: inline-block;
+                    text-align: center;
+                    vertical-align: middle;
+                    padding: 0;
+                    h3 {
+                        margin: 0;
                         padding: 0;
-                        h3 {
-                            margin: 0;
-                            padding: 0;
-                            font-size: 1.4em;
-                            line-height: 1;
-                            font-weight: normal;
-                            font-style: italic;
-                        }
-                        p {
-                            @extend .reset;
-                            font-size: .8em;
-                        }
+                        font-size: 1.4em;
+                        line-height: 1;
+                        font-weight: normal;
+                        font-style: italic;
+                    }
+                    p {
+                        @extend .reset;
+                        font-size: 0.8em;
                     }
                 }
-                .award::before,
-                .award::after {
-                    vertical-align: middle;
-                    background-image: url(../images/laurelleft.png);
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                    background-position: center center;
-                    display: inline-block;
-                    content: "";
-                    width: 1.6em;
-                    height: 3em;
-                    position: relative
-                }
-                .award::before {
-                    background-image: url(../images/laurelleft.png);
-                    left: .09em;
-                }
-                .award::after {
-                    background-image: url(../images/laurelright.png);
-                    right: .11em;
-                }
+            }
+            .award::before,
+            .award::after {
+                vertical-align: middle;
+                background-image: url(../images/laurelleft.png);
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center center;
+                display: inline-block;
+                content: "";
+                width: 1.6em;
+                height: 3em;
+                position: relative;
+            }
+            .award::before {
+                background-image: url(../images/laurelleft.png);
+                left: 0.09em;
+            }
+            .award::after {
+                background-image: url(../images/laurelright.png);
+                right: 0.11em;
             }
         }
-        table {
-            line-height: 1.3;
-            margin: 0;
-            padding: 2px;
-            border-spacing: 0;
-            border-collapse: collapse;
-            vertical-align: text-top;
+    }
+    table {
+        line-height: 1.3;
+        margin: 0;
+        padding: 2px;
+        border-spacing: 0;
+        border-collapse: collapse;
+        vertical-align: text-top;
+    }
+    ul {
+        margin: 5px;
+    }
+    p {
+        text-indent: 2em;
+    }
+    h1 {
+        font-size: 2em;
+        font-style: italic; // font-weight: 700;
+        // margin-top: 1.7em;
+    }
+    .grid {
+        // columns: 2 auto;
+    }
+    @include textElements() {
+        @extend .widthCenter;
+    }
+    @include respond-to($width) {
+        .widthCenter {
+            margin-left: 12px;
+            margin-right: 12px;
         }
-        ul {
-            margin: 5px;
-        }
-        p {
-            text-indent: 2em;
-        }
-        h1 {
-            font-size: 2em;
-            font-style: italic; // font-weight: 700;
-            // margin-top: 1.7em;
-        }
-        .grid {
-            // columns: 2 auto;
+        div {
+            // margin: auto;
+            // padding: 0;
+            .project {
+                width: 90%;
+                float: none;
+                display: block;
+                margin: 0 0 0.5em 5%;
+            }
         }
         @include textElements() {
-            @extend .widthCenter;
+            // margin-right: .8em;
+            // margin-left: .8em;
         }
-        @include respond-to($width) {
-            .widthCenter {
-                margin-left: 12px;
-                margin-right: 12px;
-            }
-            div {
-                // margin: auto;
-                // padding: 0;
-                .project {
-                    width: 90%;
-                    float: none;
-                    display: block;
-                    margin: 0 0 .5em 5%;
-                    ;
-                }
-            }
-            @include textElements() {
-                // margin-right: .8em;
-                // margin-left: .8em;
-            }
-            .grid {
-                // columns: 1 auto;
-            }
+        .grid {
+            // columns: 1 auto;
         }
     }
+}
 
-    #skilltablebutton {
-        text-decoration: underline;
-        font-size: 1.1em;
-        font-style: italic;
-        font-weight: normal;
-    }
+#skilltablebutton {
+    text-decoration: underline;
+    font-size: 1.1em;
+    font-style: italic;
+    font-weight: normal;
+}
 
-    #scrollprompt {
-        // @include prefix(animation, 1s 1.1s 1 prompt)
-        @include prefix(animation, 3s ease fadeIn);
-        color: $blue;
-        // font-style: italic;
-    }
+#scrollprompt {
+    // @include prefix(animation, 1s 1.1s 1 prompt)
+    @include prefix(animation, 3s ease fadeIn);
+    color: $blue;
+    // font-style: italic;
+}
 
-    @include respond-to($width) {
-        #mast {
-            padding-left: 1em;
-        }
+@include respond-to($width) {
+    #mast {
+        padding-left: 1em;
     }
+}
 
-    h2 {
-        // font-weight: normal;
-        font-style: italic;
-    }
+h2 {
+    // font-weight: normal;
+    font-style: italic;
+}
 
-    a {
-        transition-duration: .2s;
+a {
+    transition-duration: 0.2s;
+}
+
+#picOfMe {
+    background-image: url('../images/ChuckNew.jpg');
+    width: 300px;
+    height: 300px;
+    float: right;
+    background-size: cover;
+    margin: 40px 10px;
+    border-radius: 150px;
+    background-position: center center;
+    @include respond-to(3*$width/4){
+        // float:left;
+        // margin: auto;
+        height: 150px;
+        width: 150px;
+        border-radius: 75px;
+        margin: 30px 8px 8px 8px;
     }
+}
