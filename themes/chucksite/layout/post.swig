@@ -1,0 +1,2 @@
+{{ page.layout }}
+{{ page.content }}
