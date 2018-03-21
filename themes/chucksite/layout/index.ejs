@@ -1,0 +1,13 @@
+
+<h2>Projects</h2>
+<% for(var post of page.posts.data) { %>
+  <% if (post.layout == 'project') { %>
+    <div>
+      <% if (post.cover) { %>
+        <img style="max-width: 300px;" src="<%= post.cover %>" />
+      <% } %>
+      <h3><a href="<%= post.path %>"><%= post.title %></a></h3>
+      <%# post.excert %>
+    </div>
+  <% } %>
+<% } %>
