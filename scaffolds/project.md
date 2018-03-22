@@ -5,8 +5,7 @@ tags:
 categories:
   - projects
 layout: project
-cover: /content/projects/
-coverVideo: /content/projects/
+cover: screenshot.png
 ---
 
 
