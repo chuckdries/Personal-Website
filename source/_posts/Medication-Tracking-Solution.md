@@ -11,10 +11,9 @@ tags:
 A system for a foster home to comply with regulations.
 
 <!-- more -->
-{% asset_img screenshot.png screenshot of sunhacks %}
+{% asset_img screenshot.png test %}
 
 This is a paragraph.  
-
 
 ![test](screenshot.png)
 
