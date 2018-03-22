@@ -1,0 +1,17 @@
+
+@mixin respond-to($breakpoint) {
+    @media (max-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin textElements() {
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    {
+        @content;
+    }
+}
