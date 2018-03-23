@@ -1,9 +1,44 @@
-
-<h2>Projects</h2>
-<div class="project-thumb-container">
-<% for(var post of page.posts.data) { %>
-  <% if (post.layout == 'project') { %>
-    <%- partial('partials/projectThumb', {post: post}) %>
-  <% } %>
-<% } %>
+<div id="top">
+  <div id="mast">
+    <div class="widthWrapper">
+      <h1>Chuck Dries</h1>
+      <h2 class="tagline">Programmer, Student, Friendly dude ➢ Web & VR</h2>
+      <p>
+        <a href="#about">About Me</a> /
+        <a href="#skills">Skills</a> /
+        <a href="#projects">Projects</a>
+      </p>
+      <div class="hideable">
+        <p>Software Development Intern,
+          <span class="sub">Axosoft</span>
+        </p>
+        <p>Informatics Student,
+          <span class="sub">Arizona State University</span>
+        </p>
+        <p>
+          <a href="mailto:chuck@chuckdries.com">chuck@chuckdries.com</a> / 602.618.0414</p>
+        <p>
+          <a href="http://github.com/chuckdries">Github</a>/
+          <a href="https://www.linkedin.com/in/chuckdries/">LinkedIn</a> /
+          <a href="https://devpost.com/chuckdries">Devpost</a> /
+          <a href="CharlesDriesResumeCurrent.pdf">Resume [pdf]</a> /
+          <a href="https://medium.com/chuckblog">Blog</a> /
+          <a href="https://pgp.mit.edu/pks/lookup?op=get&search=0x2BD9D0871DB5A518">Public Key</a>
+        </p>
+        <p id="scrollprompt">Scroll down ▼</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="spaceTakerUpper">
+</div>
+<div class="widthWrapper">
+  <h2>Projects</h2>
+  <div class="project-thumb-container">
+    <% for(var post of page.posts.data) { %>
+      <% if (post.layout == 'project') { %>
+        <%- partial('partials/projectThumb', {post: post}) %>
+          <% } %>
+            <% } %>
+  </div>
 </div>

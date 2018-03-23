@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
     body{
+        padding: 0;
+        margin: 0;
+        font-family: "Playfair Display";
+        background-color: #FAFAFA;
+    }
+    .widthWrapper {
         max-width: 1200px;
+        padding: 0 10x;
         margin: auto;
-        padding: 0 10px;
     }
     .project-thumb-container{
         display: flex;
@@ -19,11 +26,12 @@
     }
     .project-thumb{
         margin: 3px;
-        border: 1px solid grey;
-        border-radius: 3px;
-        /*flex-basis: 300px;*/
+        border: 1px solid rgb(238, 238, 238);
+        border-radius: 5px;
+        box-shadow: rgb(221, 221, 221) 1px 1px 3px 0px;
         flex: 1 1 300px;
-        max-width: 600px;
+        background-color: white;
+
     }
     .thumb-text {
         padding: 0 10px 10px 10px;
@@ -40,10 +48,25 @@
     }
     .content img{
         max-width: 800px;
-        /*float: right;
     }
-    .content img:nth-of-type(2n){
-        float: left;*/
+    #top {
+        height: 100vh;
+        width: 100%;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* align-items: center;*/
+    }
+    #mast{
+        color: white;
+    }
+    #mast a{
+        color: white;
+    }
+    #spaceTakerUpper {
+        background: #202020;
+        height: 100vh;
     }
     </style>
 </head>
