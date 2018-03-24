@@ -6,7 +6,11 @@
     "version": "3.6.0"
   },
   "dependencies": {
+    "del": "^3.0.0",
     "ejs-lint": "^0.3.0",
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.5.0",
+    "gulp-sass": "^3.1.0",
     "hexo": "^3.2.0",
     "hexo-generator-archive": "^0.1.4",
     "hexo-generator-category": "^0.1.3",

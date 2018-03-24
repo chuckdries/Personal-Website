@@ -11,7 +11,6 @@ gulp.task('default', function() {
     gulp.watch("*.html", ['reload']);
 })
 gulp.task('style', function() {
-    // place code for your default task here
     gulp.src('./sass/style.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('./css/'));
