@@ -77,4 +77,6 @@ theme: chucksite
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo: git@github.com:chuckdries/Personal-Website.git
+  branch: gh-pages
