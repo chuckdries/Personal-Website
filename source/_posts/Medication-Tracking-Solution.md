@@ -9,7 +9,7 @@ tags:
 award: 1st Place
 awardSub: OHack '17
 ---
-A system to help a foster home track medications given to children.
+A system to help a foster home track medications
 
 <!-- more -->
 Winner: Opportunity Hack 20XX

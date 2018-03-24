@@ -5,7 +5,7 @@ body {
   background-color: #FAFAFA;
   line-height: 1.8; }
 
-.wrapper-medium, .project h2, .project p {
+.wrapper-medium, .project h2, .project h3, .project h4, .project p {
   max-width: 800px;
   padding: 0 10px;
   margin: auto; }
