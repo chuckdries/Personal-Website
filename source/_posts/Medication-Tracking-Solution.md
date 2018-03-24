@@ -1,7 +1,7 @@
 ---
 title: Medication Tracking Solution
 categories:
-  - projects
+  - Projects
 layout: project
 cover: screenshot.png
 # coverVideo: /content/projects/

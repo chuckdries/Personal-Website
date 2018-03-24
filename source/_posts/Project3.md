@@ -1,9 +1,9 @@
 ---
 title: Project3
 categories:
-  - projects
+  - Projects
 layout: project
-cover: screenshot.png
+coverVideo: scroll.mp4
 date: 2018-03-22 19:25:11
 tags:
 ---

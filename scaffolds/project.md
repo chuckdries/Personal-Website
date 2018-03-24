@@ -3,7 +3,7 @@ title: {{ title }}
 date: {{ date }}
 tags:
 categories:
-  - projects
+  - Projects
 layout: project
 cover: screenshot.png
 ---

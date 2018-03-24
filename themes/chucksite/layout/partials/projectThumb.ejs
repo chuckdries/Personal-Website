@@ -3,16 +3,27 @@
     <div style="
       width: 100%;
       height: 250px;
-      background-image: url(<%= post.path + post.cover %>);
+      background-image: url(<%- url_for(post.path + post.cover) %>);
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
+      flex: 0 0 auto;
       ">
+    </div>
+  <% } %>
+  <% if (post.coverVideo) { %>
+    <div style="
+      width: 100%;
+      height: 250px;
+      flex: 0 0 auto;
+      overflow: hidden;
+      ">
+      <video src="<%- url_for(post.path + post.coverVideo) %>" loop autoplay width="100%">
     </div>
   <% } %>
   <div class="thumb-text">
     <h3><%= post.title %></h3>
     <%- post.excerpt %>
-    <a href="<%= post.path %>">Read More</a>
+    <a href="<%- url_for(post.path) %>">Read More</a>
   </div>
 </div>

@@ -22,7 +22,7 @@ source_dir: source
 public_dir: public
 tag_dir: tags
 archive_dir: archives
-category_dir: categories
+category_dir: /
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
@@ -78,6 +78,3 @@ theme: chucksite
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type:
-
-image_caption:
-  enable: true #false to disable

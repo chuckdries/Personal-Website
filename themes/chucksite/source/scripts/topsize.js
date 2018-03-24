@@ -1,9 +1,10 @@
 var last_known_scroll = getScrollY();
 var queueing = false;
 var t = false; //state of skill table
-var st = document.getElementById("skilltable");
-var stb = document.getElementById("skilltablebutton");
 var sp = document.getElementById("scrollprompt");
+var stu = document.getElementById("spaceTakerUpper");
+stu.className = "";
+
 document.addEventListener("scroll", function () {
   last_known_scroll = getScrollY();
   if (!queueing) {
@@ -31,10 +32,10 @@ function sc(ypos) {
   var mast = document.getElementById("mast");
   var hcalc = windowHeight - ypos;
   var topheight;
-  if (hcalc > 130) {
+  if (hcalc > 152) {
     topHeight = hcalc;
   } else {
-    topHeight = 130;
+    topHeight = 152;
   }
   // var mastHeight = mast.clientHeight;
   // var halfHeight = Math.floor((topHeight / 2) - (mastHeight / 2));
@@ -43,7 +44,7 @@ function sc(ypos) {
   } else {
     topDiv.className = "large";
   }
-  topDiv.style.height = topHeight - 10 + "px"; //subtract 10 to account for padding-top on #top
+  topDiv.style.height = topHeight + "px"; //subtract 10 to account for padding-top on #top
 
   //background thing
   var p = ((windowHeight - ypos) / windowHeight); //calulate ratio of scroll

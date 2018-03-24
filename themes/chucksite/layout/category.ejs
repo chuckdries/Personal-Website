@@ -1,0 +1,14 @@
+<%- partial('partials/topBar') %>
+
+<div class="wrapper-wide">
+  <h2><%= page.category %></h2>
+  <div class="project-thumb-container">
+  <% page.posts.each(function(post) { %>
+    <% if (post.layout == 'project') { %>
+      <%- partial('partials/projectThumb', {post: post}) %>
+    <% } else { %>
+      <%= post.title %>
+    <% } %>
+  <% }) %>
+  </div>
+</div>
