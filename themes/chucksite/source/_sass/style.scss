@@ -36,6 +36,10 @@ body {
   background-color: white;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  video {
+    object-fit: cover;
+  }
 }
 
 .thumb-text {
@@ -46,6 +50,9 @@ body {
   flex: 1 1 auto;
   h3 {
     margin-bottom: 0;
+    font-style: italic;
+    font-size: 1.5em;
+    line-height: 1;
   }
   p {
     margin: 10px 0 0 0;
@@ -54,10 +61,6 @@ body {
     display: block;
     margin: 10px 0 0 0;
   }
-}
-
-.content img {
-  max-width: 800px;
 }
 
 #top {
@@ -135,6 +138,7 @@ body {
 }
 
 .project {
+  margin-bottom: 100px;
   .content {
     width: 100%;
   }
@@ -143,9 +147,63 @@ body {
   }
   p {
     @extend .wrapper-medium;
+    margin: 16px auto;
   }
-  img {
-    margin: auto;
-    // max-width: 1200px;
+  figure {
+    @extend .project-thumb;
+    margin: 20px auto;
+    max-width: 1200px;
+    img {
+      width: 100%;
+    }
+    span {
+      padding: 10px;
+      display: block;
+    }
+  }
+}
+
+.award {
+  float: right;
+  background: none;
+  border: none;
+  margin: 1.5em 0 0.5em 0.5em;
+  div {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0;
+      line-height: 1;
+    h3 {
+      margin: 0;
+      padding: 0;
+      font-size: 1.4em;
+      font-weight: normal;
+      font-style: italic;
+    }
+    p {
+      // @extend .reset;
+      font-size: 0.8em;
+    }
+  }
+  &::before,
+  &::after {
+    vertical-align: middle;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: inline-block;
+    content: "";
+    width: 1.6em;
+    height: 3em;
+    position: relative;
+  }
+  &::before {
+    background-image: url(../images/laurelleft.png);
+    left: 0.09em;
+  }
+  &::after {
+    background-image: url(../images/laurelright.png);
+    right: 0.11em;
   }
 }

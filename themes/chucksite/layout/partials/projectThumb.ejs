@@ -22,7 +22,17 @@
     </div>
   <% } %>
   <div class="thumb-text">
+    <div>
+    <% if(post.award) { %>
+      <div class="award">
+        <div>
+          <h3><%= post.award %></h3>
+          <p><%= post.awardSub %></p>
+        </div>
+      </div>
+    <% } %>
     <h3><%= post.title %></h3>
+    </div>
     <%- post.excerpt %>
     <a href="<%- url_for(post.path) %>">Read More</a>
   </div>
