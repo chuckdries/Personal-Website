@@ -11,7 +11,9 @@ tags:
 A system for a foster home to comply with regulations.
 
 <!-- more -->
-{% asset_img screenshot.png test %}
+asdf  
+
+![test](screenshot.png)
 
 This is a paragraph.  
 

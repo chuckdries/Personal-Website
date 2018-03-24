@@ -1,4 +1,3 @@
-
 $pink: #FF429A;
 $blue: #91efff;
 body {
@@ -77,18 +76,18 @@ body {
   a {
     color: white;
   }
-  h1{
+  h1 {
     margin: 10px 0 0 0;
-     a{
-    color: $pink;
-    font-size: 1.5em;
-    font-style: italic;
-    font-weight: normal;
-    transition-property: size;
-    transition-duration: 0.2s;
-    text-decoration: none;
+    a {
+      color: $pink;
+      font-size: 1.5em;
+      font-style: italic;
+      font-weight: normal;
+      transition-property: size;
+      transition-duration: 0.2s;
+      text-decoration: none;
+    }
   }
-}
   h2 {
     transition-property: size;
     transition-duration: 0.2s;
@@ -119,7 +118,7 @@ body {
 #spaceTakerUpper {
   height: 100vh;
   background: #202020;
-  &.small{
+  &.small {
     height: 152px;
   }
 }
@@ -133,4 +132,20 @@ body {
   margin: 40px 10px;
   border-radius: 150px;
   background-position: center center;
+}
+
+.project {
+  .content {
+    width: 100%;
+  }
+  h2 {
+    @extend .wrapper-medium;
+  }
+  p {
+    @extend .wrapper-medium;
+  }
+  img {
+    margin: auto;
+    // max-width: 1200px;
+  }
 }
