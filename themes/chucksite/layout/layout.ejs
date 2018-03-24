@@ -1,76 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-    body{
-        padding: 0;
-        margin: 0;
-        font-family: "Playfair Display";
-        background-color: #FAFAFA;
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      font-family: "Playfair Display";
+      background-color: #FAFAFA;
+      line-height: 1.8;
     }
+
     .widthWrapper {
-        max-width: 1200px;
-        padding: 0 10x;
-        margin: auto;
+      max-width: 800px;
+      padding: 0 10x;
+      margin: auto;
     }
-    .project-thumb-container{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-content: center;
+
+    .project-thumb-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-content: center;
     }
-    .project-thumb{
-        margin: 3px;
-        border: 1px solid rgb(238, 238, 238);
-        border-radius: 5px;
-        box-shadow: rgb(221, 221, 221) 1px 1px 3px 0px;
-        flex: 1 1 300px;
-        background-color: white;
+
+    .project-thumb {
+      margin: 3px;
+      border: 1px solid rgb(238, 238, 238);
+      border-radius: 5px;
+      box-shadow: rgb(221, 221, 221) 1px 1px 3px 0px;
+      flex: 1 1 300px;
+      background-color: white;
 
     }
+
     .thumb-text {
-        padding: 0 10px 10px 10px;
+      padding: 0 10px 10px 10px;
     }
-    .thumb-text h3{
-        margin-bottom: 0;
+
+    .thumb-text h3 {
+      margin-bottom: 0;
     }
-    .thumb-text p{
-        margin: 10px 0 0 0;
+
+    .thumb-text p {
+      margin: 10px 0 0 0;
     }
-    .thumb-text a{
-        display: block;
-        margin: 10px 0 0 0;
+
+    .thumb-text a {
+      display: block;
+      margin: 10px 0 0 0;
     }
-    .content img{
-        max-width: 800px;
+
+    .content img {
+      max-width: 800px;
     }
+
     #top {
-        height: 100vh;
-        width: 100%;
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        /* align-items: center;*/
+      height: 100vh;
+      width: 100%;
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      /* align-items: center;*/
     }
-    #mast{
-        color: white;
+
+    #mast {
+      color: white;
+      padding-top: 10px;
+      line-height: 1.2;
     }
-    #mast a{
-        color: white;
+
+    #mast a {
+      color: white;
     }
+
+    #mast h1 {
+      color: #ff429a;
+      font-size: 2.8em;
+      font-style: italic;
+      font-weight: normal;
+      transition-property: size;
+      transition-duration: 0.2s;
+      margin: 10px 0 0 0;
+    }
+
+    #mast h2 {
+      transition-property: size;
+      transition-duration: 0.2s;
+      color: #91efff;
+      margin: 0;
+    }
+    
+    #scrollprompt{
+      color: #91efff;
+    }
+    .small h2 {
+      font-size: 1.2em;
+      margin: 5px;
+    }
+
+    .small #mast {
+      background: #202020;
+    }
+
     #spaceTakerUpper {
-        background: #202020;
-        height: 100vh;
+      height: 100vh;
+      background: #202020;
     }
-    </style>
+
+    .small .hideable {
+      display: none;
+    }
+    h2{
+      font-style: italic;
+    }
+    #picOfMe{
+      background-image: url("/images/ChuckNew.jpg");
+    width: 300px;
+    height: 300px;
+    float: right;
+    background-size: cover;
+    margin: 40px 10px;
+    border-radius: 150px;
+    background-position: center center;
+
+}
+    }
+  </style>
 </head>
+
 <body>
-    <%- body %>
+  <%- body %>
 </body>
+
 </html>
