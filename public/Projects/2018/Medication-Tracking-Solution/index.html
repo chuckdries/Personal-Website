@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i">
+  <link rel="stylesheet" href="/css/style.css"
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chuck Dries</title>
+</head>
+
+<body>
+  <div id="top" class="small">
+  <div id="mast">
+  <div class="wrapper-medium">
+      <h1><a href="/">Chuck Dries</a></h1>
+      <h2 class="tagline">Programmer, Student, Friendly dude ➢ Web & VR</h2>
+      <p>
+        <a href="/#about">About Me</a> /
+        <a href="/#projects">Projects</a> /
+        <a href="/#">Contact</a>
+      </p>
+      <div class="hideable">
+        <p>Software Development Intern,
+          <span class="sub">Axosoft</span>
+        </p>
+        <p>Informatics Student,
+          <span class="sub">Arizona State University</span>
+        </p>
+        <p>
+          <a href="mailto:chuck@chuckdries.com">chuck@chuckdries.com</a> / 602.618.0414</p>
+        <p>
+          <a href="http://github.com/chuckdries">Github</a>/
+          <a href="https://www.linkedin.com/in/chuckdries/">LinkedIn</a> /
+          <a href="https://devpost.com/chuckdries">Devpost</a> /
+          <a href="CharlesDriesResumeCurrent.pdf">Resume [pdf]</a> /
+          <a href="https://medium.com/@chuckdries">Blog</a> /
+          <a href="https://pgp.mit.edu/pks/lookup?op=get&search=0x2BD9D0871DB5A518">Public Key</a>
+        </p>
+        <p id="scrollprompt">Scroll down ▼</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="small" id="spaceTakerUpper"></div>
+
+<div class="project">
+  <h2>
+    Medication Tracking Solution
+  </h2>
+  <div class="content">
+    <p>A system to help a foster home track medications given to children.</p>
+<a id="more"></a>
+<p>Winner: Opportunity Hack 20XX</p>
+<p>A foster home needed to track the medication parents gave their kids and generate reports for DCS compliance. We split the application front end into two parts: a client for their health administrator to manage perscriptions, and a client for foster parents to log medications taken.</p>
+<p>I focused on the health administrator dashboard. This client was designed for a skilled user who knows exactly what their data needs to look like. My goal was to stay out of the way, to give them as much clear, straightforward access to the database as possible.</p>
+<p><figure><img src="screenshot.png" alt="The table UI"><span>The table UI</span></figure></p>
+<p>My biggest challenge in this project was the relationship between parents and homes. In the backend, this is a many-to-many relationship; every child who needs medication is assigned a home, but multiple homes can share parents, and a foster parent can be assigned to multiple homes.</p>
+<p>In the database, this is stored as its own table, but to a non-programmer, the idea of a separate table for this relationship might be confusing, and keeping track of it seemed like a hurdle. My problem was this: how do I let the user edit this table without exposing it directly?</p>
+<p>My solution seems obvious in retrospect: I parse the table and synthesize a multi-value attribute on the Homes table and on the Parents table. This way,a the administrator can assign a parent to a home through the parent list or through the home list, whichever is easiest.</p>
+<p>I make this process easier by looking up all foreign keys as I do the synthesis so I can present a list of check boxes.</p>
+<p><figure><img src="screenshot.png" alt="A many-to-many relationship editor"><span>A many-to-many relationship editor</span></figure></p>
+<p>This client was written in Typescript with Vue.js and Bootstrap.</p>
+
+  </div>
+</div>
+</body>
+
+</html>
