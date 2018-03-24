@@ -21,7 +21,7 @@ gulp.task('cleanStyle', function() {
 gulp.task('style', ['cleanStyle'], function () {
   return gulp.src('themes/chucksite/source/_sass/style.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('public/css/'));
+    .pipe(gulp.dest('themes/chucksite/source/css/'));
 });
 
 gulp.task('reload', function () {
