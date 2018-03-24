@@ -30,7 +30,8 @@ body {
   background-color: white;
   display: flex;
   flex-direction: column;
-  overflow: hidden; }
+  overflow: hidden;
+  max-width: 600px; }
   .project-thumb video, .project figure video {
     object-fit: cover; }
 
@@ -133,6 +134,8 @@ body {
     .project figure span {
       padding: 10px;
       display: block; }
+  .project iframe {
+    width: 100%; }
 
 .award {
   background: none;
