@@ -1,5 +1,6 @@
 $pink: #FF429A;
 $blue: #91efff;
+$root: '/Personal-website/';
 body {
   padding: 0;
   margin: 0;
@@ -134,7 +135,7 @@ body {
 }
 
 #picOfMe {
-  background-image: url("/images/ChuckNew.jpg");
+  background-image: url($root + "/images/ChuckNew.jpg");
   width: 300px;
   height: 300px;
   float: right;
