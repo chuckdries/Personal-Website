@@ -1,6 +1,9 @@
 $pink: #FF429A;
 $blue: #91efff;
 $root: '/Personal-Website';
+
+$medium-width: 800px;
+$wide-width: 1200px;
 body {
   padding: 0;
   margin: 0;
@@ -10,17 +13,18 @@ body {
 }
 
 .wrapper-medium {
-  max-width: 800px;
+  max-width: $medium-width;
   padding: 0 10px;
   margin: auto;
 }
 
 .wrapper-wide {
-  max-width: 1200px;
+  max-width: $wide-width;
   padding: 0 10px;
   margin: auto;
 }
 
+//project thumbs
 .project-thumb-container {
   display: flex;
   flex-wrap: wrap;
@@ -29,7 +33,7 @@ body {
 }
 
 .project-thumb {
-  margin: 3px;
+  margin: 15px;
   border: 1px solid rgb(238, 238, 238);
   border-radius: 5px;
   box-shadow: rgb(221, 221, 221) 1px 1px 3px 0px;
@@ -38,9 +42,20 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  max-width: 600px;
+  max-width: 800px;
   video {
     object-fit: cover;
+  }
+}
+
+.project-thumb:nth-child(1){
+  flex: 1 1 50%;
+}
+
+.project-thumb.portrait {
+  flex-direction: row;
+  .thumb-img {
+    flex: 0 0 50%;
   }
 }
 
@@ -72,6 +87,16 @@ body {
   margin: 1em 0 0 0;
 }
 
+.thumb-img {
+  // width: 100%;
+  // height: 200px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  flex: 0 0 200px;
+}
+
+//homepage
 #top {
   padding-top: 0px;
   width: 100%;
@@ -83,13 +108,17 @@ body {
 
 #mast {
   color: white;
-  padding-top: 10px;
+  padding-top: 1px;
+  margin: 0;
+  position: relative;
+  // top: -10px;
   line-height: 1.2;
   a {
     color: white;
   }
   h1 {
-    margin: 10px 0 0 0;
+    margin: 1px 0 0 0;
+
     a {
       color: $pink;
       font-size: 1.5em;
@@ -131,7 +160,7 @@ body {
   height: 100vh;
   background: #202020;
   &.small {
-    height: 152px;
+    height: 133px;
   }
 }
 
@@ -146,22 +175,26 @@ body {
   background-position: center center;
 }
 
+//project pages
 .project {
   margin-bottom: 100px;
   .content {
     width: 100%;
   }
-  h2, h3, h4 {
-    @extend .wrapper-medium;
+  h2,
+  h3,
+  h4 {
+    max-width: $medium-width;
+    margin: auto;
   }
   p {
-    @extend .wrapper-medium;
+    max-width: $medium-width;
     margin: 16px auto;
   }
   figure {
     @extend .project-thumb;
     margin: 20px auto;
-    max-width: 1200px;
+    max-width: $wide-width;
     img {
       width: 100%;
       margin: auto;
@@ -171,14 +204,17 @@ body {
       display: block;
     }
   }
-  iframe{
-    width: 100%;
+  iframe {
+    display: block;
+    width: $wide-width;
+    margin: auto;
   }
 }
 
+//award laurel
 .award {
   background: none;
-  border: none; 
+  border: none;
   margin-left: 0.5em;
   flex-shrink: 0;
   div {

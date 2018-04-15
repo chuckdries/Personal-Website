@@ -1,14 +1,12 @@
-<div class="project-thumb">
+<% if (post.portrait) { %>
+  <div class="project-thumb portrait">
+<% } else { %>
+  <div class="project-thumb">
+<% } %>
   <% if (post.cover) { %>
-    <div style="
-      width: 100%;
-      height: 200px;
+    <div class="thumb-img" style="
       background-image: url(<%- url_for(post.path + post.cover) %>);
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-      flex: 0 0 auto;
-      ">
+    ">
     </div>
   <% } %>
   <% if (post.coverVideo) { %>

@@ -12,7 +12,8 @@ awardSub: OHack '17
 A system to help a foster home track medications
 
 <!-- more -->
-Winner: Opportunity Hack 20XX
+Winner: Opportunity Hack 2017
+Created with James Quigley, Ali Bahremand, and Josh Hewlett
 
 A foster home needed to track the medication parents gave their kids and generate reports for DCS compliance. We split the application front end into two parts: a client for their health administrator to manage perscriptions, and a client for foster parents to log medications taken.
 

@@ -10,7 +10,7 @@ award:
 awardSub:
 ---
 
-An incandescent issue tracker
+An incandescent issue tracker by Axosoft, and my current day job.
 
 <!-- more -->
 

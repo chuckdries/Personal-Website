@@ -32,10 +32,10 @@ function sc(ypos) {
   var mast = document.getElementById("mast");
   var hcalc = windowHeight - ypos;
   var topheight;
-  if (hcalc > 152) {
+  if (hcalc > 133) {
     topHeight = hcalc;
   } else {
-    topHeight = 152;
+    topHeight = 133;
   }
   // var mastHeight = mast.clientHeight;
   // var halfHeight = Math.floor((topHeight / 2) - (mastHeight / 2));

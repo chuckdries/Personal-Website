@@ -5,7 +5,7 @@ body {
   background-color: #FAFAFA;
   line-height: 1.8; }
 
-.wrapper-medium, .project h2, .project h3, .project h4, .project p {
+.wrapper-medium {
   max-width: 800px;
   padding: 0 10px;
   margin: auto; }
@@ -22,7 +22,7 @@ body {
   align-content: center; }
 
 .project-thumb, .project figure {
-  margin: 3px;
+  margin: 15px;
   border: 1px solid #eeeeee;
   border-radius: 5px;
   box-shadow: #dddddd 1px 1px 3px 0px;
@@ -31,9 +31,17 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  max-width: 600px; }
+  max-width: 800px; }
   .project-thumb video, .project figure video {
     object-fit: cover; }
+
+.project-thumb:nth-child(1), .project figure:nth-child(1) {
+  flex: 1 1 50%; }
+
+.project-thumb.portrait, .project figure.portrait {
+  flex-direction: row; }
+  .project-thumb.portrait .thumb-img, .project figure.portrait .thumb-img {
+    flex: 0 0 50%; }
 
 .thumb-text {
   padding: 0 10px 10px 10px;
@@ -58,6 +66,12 @@ body {
   justify-content: space-between;
   margin: 1em 0 0 0; }
 
+.thumb-img {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  flex: 0 0 200px; }
+
 #top {
   padding-top: 0px;
   width: 100%;
@@ -68,12 +82,14 @@ body {
 
 #mast {
   color: white;
-  padding-top: 10px;
+  padding-top: 1px;
+  margin: 0;
+  position: relative;
   line-height: 1.2; }
   #mast a {
     color: white; }
   #mast h1 {
-    margin: 10px 0 0 0; }
+    margin: 1px 0 0 0; }
     #mast h1 a {
       color: #FF429A;
       font-size: 1.5em;
@@ -107,7 +123,7 @@ body {
   height: 100vh;
   background: #202020; }
   #spaceTakerUpper.small {
-    height: 152px; }
+    height: 133px; }
 
 #picOfMe {
   background-image: url("/Personal-Website/images/ChuckNew.jpg");
@@ -123,7 +139,13 @@ body {
   margin-bottom: 100px; }
   .project .content {
     width: 100%; }
+  .project h2,
+  .project h3,
+  .project h4 {
+    max-width: 800px;
+    margin: auto; }
   .project p {
+    max-width: 800px;
     margin: 16px auto; }
   .project figure {
     margin: 20px auto;
@@ -135,7 +157,9 @@ body {
       padding: 10px;
       display: block; }
   .project iframe {
-    width: 100%; }
+    display: block;
+    width: 1200px;
+    margin: auto; }
 
 .award {
   background: none;
