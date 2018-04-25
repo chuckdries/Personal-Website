@@ -19,7 +19,7 @@ A foster home needed to track the medication parents gave their kids and generat
 
 I focused on the health administrator dashboard. This client was designed for a skilled user who knows exactly what their data needs to look like. My goal was to stay out of the way, to give them as much clear, straightforward access to the database as possible.
 
-![The table UI](screenshot.png)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NWRdjot9wGA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 My biggest challenge in this project was the relationship between parents and homes. In the backend, this is a many-to-many relationship; every child who needs medication is assigned a home, but multiple homes can share parents, and a foster parent can be assigned to multiple homes.
 

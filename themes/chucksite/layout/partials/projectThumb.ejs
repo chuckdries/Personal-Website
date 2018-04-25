@@ -34,5 +34,10 @@
     </div>
     <%- post.excerpt %>
     <a href="<%- url_for(post.path) %>">Read More</a>
+    <div class="tags">
+    <% post.tags.each(function(tag) { %>
+      <a href="<%=tag.path%>#projects" class="tag"><%= tag.name %></a>
+    <% }); %>
+    </div>
   </div>
 </div>

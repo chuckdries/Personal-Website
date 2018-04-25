@@ -21,6 +21,10 @@
 
   <a name="projects" style="padding-top:150px"></a>
   <h2 style="margin-left: 15px">Projects & Experience</h2>
+  <% if(page.tag){ %>
+  <p style=" margin: -10px 0 5px 15px;font-style: italic; font-weight:normal; color: #555;">
+  Projects tagged with: <%= page.tag %>. <a href="<%- url_for('') %>#projects">all projects</a>
+  </p><% } %>
   <div class="project-thumb-container">
     <% page.posts.each(function(post) { %>
       <% if (post.layout == 'project') { %>
