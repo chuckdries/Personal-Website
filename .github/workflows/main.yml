@@ -20,10 +20,13 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-    - uses: appleboy/scp-action@v0.0.1
+    - name: ls
+      run: ls -al
+    - name: Copy folder content recursively to remote
+      uses: garygrossgarten/github-action-scp@release
       with:
-        host: "chuckdries.com"
+        local: "./"
+        remote: ${{ secrets.DEPLOY_PATH }}
+        host: ${{ secrets.HOST }}
         username: ${{ secrets.CI_USER }}
         password: ${{ secrets.CI_PASSWORD }}
-        source: "$(pwd)"
-        target: ${{ secrets.DEPLOY_PATH }}
