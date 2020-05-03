@@ -25,5 +25,5 @@ jobs:
         host: chuckdries.com
         username: ${{ secrets.CI_USER }}
         password: ${{ secrets.CI_PASSWORD }}
-        source: $(pwd)
+        source: "$(pwd)"
         target: ${{ secrets.DEPLOY_PATH }}
