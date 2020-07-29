@@ -20,7 +20,7 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-    - name: rsync deployments
+    - name: rsync directory
       uses: burnett01/rsync-deployments@4.1
       with:
         switches: -avzr --delete --exclude node_modules --exclude '.git*'
@@ -29,32 +29,3 @@ jobs:
         remote_host: server.chuckdries.com
         remote_user: ${{ secrets.CI_USER }}
         remote_key: ${{ secrets.CI_SSH_KEY }}
-#     - name: Deploy to server via rsync
-#       uses: trendyminds/github-actions-rsync@master
-#       with:
-#         RSYNC_OPTIONS: -avzr --delete --exclude node_modules --exclude '.git*'
-#         RSYNC_TARGET: /docker-services/letsencrypt/www
-#         RSYNC_SOURCE: ./
-#       env:
-#         SSH_PRIVATE_KEY: ${{secrets.CI_SSH_KEY}}
-#         SSH_USERNAME: ${{secrets.CI_USER}}
-#         SSH_HOSTNAME: server.chuckdries.com
-#     - name: Copy folder content recursively to remote
-#       uses: ThomasRutzer/github-action-scp@master
-#       with:
-#         local: "./"
-#         remote: ${{ secrets.DEPLOY_PATH }}
-#         host: "server.chuckdries.com"
-#         username: ${{ secrets.CI_USER }}
-#         password: ${{ secrets.CI_PASSWORD }}
-#         rmRemote: true
-#     - name: copy file via ssh password
-#       uses: appleboy/scp-action@master
-#       with:
-#         host: "server.chuckdries.com"
-#         username: ${{ secrets.CI_USER }}
-#         password: ${{ secrets.CI_PASSWORD }}
-# #         port: ${{ secrets.PORT }}
-#         source: "index.html"
-#         target: "/docker-services/letsencrypt/www"
-#         rm: true
