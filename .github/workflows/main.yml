@@ -20,16 +20,25 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-    - name: Deploy to server via rsync
-      uses: trendyminds/github-actions-rsync@master
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@4.1
       with:
-        RSYNC_OPTIONS: -avzr --delete --exclude node_modules --exclude '.git*'
-        RSYNC_TARGET: /docker-services/letsencrypt/www
-        RSYNC_SOURCE: ./
-      env:
-        SSH_PRIVATE_KEY: ${{secrets.CI_SSH_KEY}}
-        SSH_USERNAME: ${{secrets.CI_USER}}
-        SSH_HOSTNAME: server.chuckdries.com
+        switches: -avzr --delete --exclude node_modules --exclude '.git*'
+        path: ./
+        remote_path: /docker-services/letsencrypt/www
+        remote_host: server.chuckdries.com
+        remote_user: ${{ secrets.CI_USER }}
+        remote_key: ${{ secrets.CI_SSH_KEY }}
+#     - name: Deploy to server via rsync
+#       uses: trendyminds/github-actions-rsync@master
+#       with:
+#         RSYNC_OPTIONS: -avzr --delete --exclude node_modules --exclude '.git*'
+#         RSYNC_TARGET: /docker-services/letsencrypt/www
+#         RSYNC_SOURCE: ./
+#       env:
+#         SSH_PRIVATE_KEY: ${{secrets.CI_SSH_KEY}}
+#         SSH_USERNAME: ${{secrets.CI_USER}}
+#         SSH_HOSTNAME: server.chuckdries.com
 #     - name: Copy folder content recursively to remote
 #       uses: ThomasRutzer/github-action-scp@master
 #       with:
