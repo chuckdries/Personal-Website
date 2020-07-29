@@ -20,22 +20,22 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-    - name: Copy folder content recursively to remote
-      uses: ThomasRutzer/github-action-scp@master
-      with:
-        local: "./"
-        remote: ${{ secrets.DEPLOY_PATH }}
-        host: "server.chuckdries.com"
-        username: ${{ secrets.CI_USER }}
-        password: ${{ secrets.CI_PASSWORD }}
-        rmRemote: true
-#     - name: copy file via ssh password
-#       uses: appleboy/scp-action@master
+#     - name: Copy folder content recursively to remote
+#       uses: ThomasRutzer/github-action-scp@master
 #       with:
+#         local: "./"
+#         remote: ${{ secrets.DEPLOY_PATH }}
 #         host: "server.chuckdries.com"
 #         username: ${{ secrets.CI_USER }}
 #         password: ${{ secrets.CI_PASSWORD }}
-# #         port: ${{ secrets.PORT }}
-#         source: "*/*.*, *.*"
-#         target: "/docker-services/letsencrypt/www"
-#         rm: true
+#         rmRemote: true
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@master
+      with:
+        host: "server.chuckdries.com"
+        username: ${{ secrets.CI_USER }}
+        password: ${{ secrets.CI_PASSWORD }}
+#         port: ${{ secrets.PORT }}
+        source: "."
+        target: "/docker-services/letsencrypt/www"
+        rm: true
