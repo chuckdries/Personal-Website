@@ -35,6 +35,6 @@ jobs:
         username: ${{ secrets.CI_USER }}
         password: ${{ secrets.CI_PASSWORD }}
 #         port: ${{ secrets.PORT }}
-        source: "./"
+        source: ""
         target: "/docker-services/letsencrypt/www"
         rm: true
