@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "T7QVVUTZQ8.com.axosoft.glo.dev",
+        "paths": [ "/glo*"]
+      }
+  ]
+  }
+}
