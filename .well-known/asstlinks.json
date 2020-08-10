@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.chuckdries.testapp",
+    "sha256_cert_fingerprints":
+    ["4E:95:06:CC:CB:16:3B:34:84:4A:B1:4A:0C:89:5C:F7:0B:6C:10:49:FD:4C:93:22:94:FD:E4:41:FF:AD:00:36"]
+  }
+}]
