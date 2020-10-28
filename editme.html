@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>contenteditable demo</title>
+  </head>
+  <body>
+    <h1>contenteditable can be applied to visible style tags</h1>
+    <p contenteditable="true">
+      This paragraph is editable, as is the style tag below. Edit it to see the layout change in real time.
+    </p>
+    <pre>
+    <style contenteditable="true">
+      body {
+        margin: 40px auto;
+        max-width: 650px;
+        line-height: 1.6;
+        font-size: 18px;
+        color: #444;
+        padding: 0 10px;
+      }
+
+      h1, h2, h3 {
+        line-height: 1.2;
+      }
+
+      style {
+        background: rgb(222, 237, 255);
+        display: block;
+        font-size: 12px;
+      }
+
+      *[contenteditable=true] {
+        padding: 1em;
+        border: 1px solid rgb(145, 145, 145);
+      }
+    </style>
+    </pre>
+  </body>
+</html>
