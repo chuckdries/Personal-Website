@@ -25,7 +25,7 @@ jobs:
       with:
         switches: -avzr --delete --exclude node_modules --exclude '.git*'
         path: ./
-        remote_path: /docker-services/letsencrypt/www
+        remote_path: /docker-services/letsencrypt/www/personal-website
         remote_host: server.chuckdries.com
         remote_user: ${{ secrets.CI_USER }}
         remote_key: ${{ secrets.CI_SSH_KEY }}
