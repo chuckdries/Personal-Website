@@ -4,10 +4,20 @@
   - [ ] image details page (modal route?)
   - [ ] gallery page
 
-- [ ] homepage to gallery page transition
-- [ ] homepage basic layout
-- [ ] portfolio page
+- Homepage
+  - [ ] homepage basic layout
+  - [ ] homepage aesthetics
+  - [ ] homepage to gallery page transition
+  - [ ] homepage to portfolio transition
+  - [ ] homepage to about page transition?
 
-- [ ] tailwind
+- [ ] About page?
+
+- Portfolio/Projects page
+  - basic layout
+  - source data
+  - aesthetics
+
+- [x] tailwind (done-ish)
 - [ ] typescript
 - [ ] graphql codegen

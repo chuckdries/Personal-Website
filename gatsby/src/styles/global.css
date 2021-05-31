@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+@layer utilities {
+  .scroll-snap-none {
+    scroll-snap-type: none;
+  }
+  .scroll-snap-x {
+    scroll-snap-type: x mandatory;
+  }
+  .scroll-snap-y {
+    scroll-snap-type: y mandatory;
+  }
+  .scroll-snap-start {
+    scroll-snap-align: start;
+  }
+  .scroll-padding-6 {
+    scroll-padding: theme('spacing.6')
+  }
+}
+
+.gallery-img:first-child {
+  margin-left: theme('spacing.6')
+}
+body {
+  @apply bg-gray-900 text-white;
+}
