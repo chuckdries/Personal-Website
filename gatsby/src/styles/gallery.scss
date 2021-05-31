@@ -1,0 +1,29 @@
+.gallery {
+  width: 100%;
+  aspect-ratio: 5/3;
+  background: black;
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  padding: 2em 0;
+  scroll-padding: 3em;
+  // &::before {
+  //   content: ".";
+  //   background: linear-gradient(-90deg, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 04, 1) 100%);
+  //   display: block;
+  //   width: 120px;
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   height: 100%;
+  // }
+
+  .gatsby-image-wrapper {
+    aspect-ratio: 3/2;
+    flex-shrink: 0;
+    // height: 280px;
+    // width: 350px;
+    scroll-snap-align: start;
+    margin-left: 2em;
+  }
+}

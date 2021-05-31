@@ -3,7 +3,8 @@ module.exports = {
     title: "Chuck Dries",
   },
   plugins: [
-    "gatsby-plugin-styled-components",
+    // "gatsby-plugin-styled-components",
+    "gatsby-plugin-sass",
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
     {
@@ -22,6 +23,14 @@ module.exports = {
         path: "./src/images/",
       },
       __key: "images",
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "gallery",
+        path: "./data/gallery/",
+      },
+      __key: "gallery",
     },
     {
       resolve: "gatsby-source-filesystem",
