@@ -1,6 +1,6 @@
 .gallery {
   width: 100%;
-  aspect-ratio: 5/3;
+  // aspect-ratio: 5/3;
   background: black;
   display: flex;
   overflow-x: scroll;
@@ -20,6 +20,7 @@
 
   .gatsby-image-wrapper {
     aspect-ratio: 3/2;
+    width: 400px;
     flex-shrink: 0;
     // height: 280px;
     // width: 350px;
