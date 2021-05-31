@@ -12,11 +12,11 @@ const IndexPage = ({ data }) => {
   console.log('images', images)
 
   return (
-    <main className="">
-      <section className="m-2 py-6 intro flex flex-col justify-center flex-auto bg-black rounded-xl">
+    <main className="font-serif">
+      <section className="m-2 h-1/2 py-6 intro flex flex-col justify-center flex-auto bg-black rounded-xl">
         <div className="mx-auto px-4 md:px-2 w-full md:w-8 ">
-          <h1 className="text-6xl text-pink-600">Chuck Dries</h1>
-          <h2 className="text-blue-300">Software Engineer in web &amp; VR</h2>
+          <h1 className="italic font-semibold text-6xl text-pink-600">Chuck Dries</h1>
+          <h2 className="text-blue-300 text-2xl">Software Engineer in web &amp; VR</h2>
           <ul>
             <li>Software Developer, <span className="text-gray-300 italic">Axosoft</span></li>
             <li><a className="hover:text-pink-400 underline" href="mailto:chuck@chuckdries.com">chuck@chuckdries.com</a> / <span>602.618.0414</span></li>
