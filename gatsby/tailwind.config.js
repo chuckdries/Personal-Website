@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}'],
   darkMode: 'media', // or 'media' or 'class'
@@ -10,7 +12,12 @@ module.exports = {
       '5': '32px',
       '6': '48px',
       '7': '80px',
-      '8': '700px'
+      '8': '800px'
+    },
+    fontFamily: {
+      ...defaultTheme.fontFamily,
+      // serif: ['Didot', 'Didot LT', 'STD', 'Hoefler Text' , 'Garamond', 'Times New Roman', 'serif']
+      serif: ['Baskerville', 'Baskerville Old Face', 'Hoefler Text' , 'Garamond', 'Times New Roman', 'serif']
     },
     extend: {},
   },
