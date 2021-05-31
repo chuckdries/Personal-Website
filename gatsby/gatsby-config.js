@@ -16,6 +16,7 @@ module.exports = {
     "gatsby-plugin-mdx",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
+    // "gatsby-plugin-sharp-exif",
     {
       resolve: "gatsby-source-filesystem",
       options: {
