@@ -17,24 +17,26 @@
   "dependencies": {
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
+    "autoprefixer": "^10.2.6",
     "babel-plugin-styled-components": "^1.12.0",
     "fast-exif": "^1.0.1",
     "gatsby": "^3.4.1",
     "gatsby-plugin-image": "^1.6.0",
     "gatsby-plugin-manifest": "^3.6.0",
     "gatsby-plugin-mdx": "^2.6.0",
+    "gatsby-plugin-postcss": "^4.6.0",
     "gatsby-plugin-react-helmet": "^4.6.0",
     "gatsby-plugin-sass": "^4.6.0",
     "gatsby-plugin-sharp": "^3.6.0",
-    "gatsby-plugin-sharp-exif": "^1.0.4",
-    "gatsby-plugin-styled-components": "^4.6.0",
     "gatsby-source-filesystem": "^3.6.0",
     "gatsby-transformer-sharp": "^3.6.0",
     "node-iptc": "^1.0.5",
+    "postcss": "^8.2.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "sass": "^1.34.0",
-    "styled-components": "^5.3.0"
+    "styled-components": "^5.3.0",
+    "tailwindcss": "^2.1.2"
   }
 }

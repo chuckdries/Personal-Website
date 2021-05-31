@@ -50,7 +50,6 @@ function transformMetaToNodeData(exifData, iptcData) {
 exports.onCreateNode = async function ({ node, getNode, actions }) {
   const { createNodeField } = actions;
   if (node.internal.type === 'ImageSharp') {
-    console.log(node)
     const parent = getNode(node.parent);
 
     const file = await readFile(parent.absolutePath)
