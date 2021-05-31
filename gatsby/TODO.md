@@ -21,3 +21,4 @@
 - [x] tailwind (done-ish)
 - [ ] typescript
 - [ ] graphql codegen
+- [ ] static files (resume)
