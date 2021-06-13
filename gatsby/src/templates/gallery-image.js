@@ -8,11 +8,13 @@ const GalleryImage = ({ pageContext, data }) => {
   console.log(getMeta(image));
   const name = getName(image);
   return (
-    <div className="bg-black h-screen">
+    <div className="bg-black min-h-screen">
       <h1>{name}</h1>
       <GatsbyImage
         className=""
         style={{
+          width: '100vw',
+          maxHeight: '100%'
           // maxHeight: "800px"
           // width: '400px',
           // height: '100%'
@@ -37,9 +39,9 @@ export const query = graphql`
             aspectRatio
           }
           gatsbyImageData(
-            layout: FULL_WIDTH
+            layout: CONSTRAINED
             placeholder: BLURRED
-            # width: 400
+            width: 1920
           )
           fields {
             imageMeta {
