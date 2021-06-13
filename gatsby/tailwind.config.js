@@ -17,7 +17,7 @@ module.exports = {
     fontFamily: {
       ...defaultTheme.fontFamily,
       // serif: ['Didot', 'Didot LT', 'STD', 'Hoefler Text' , 'Garamond', 'Times New Roman', 'serif']
-      serif: ['Baskerville', 'Baskerville Old Face', 'Hoefler Text' , 'Garamond', 'Times New Roman', 'serif']
+      serif: ['Playfair Display', 'serif']
     },
     extend: {},
   },

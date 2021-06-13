@@ -13,10 +13,10 @@ const IndexPage = ({ data }) => {
 
   return (
     <main className="font-serif">
-      <section className="m-2 h-1/2 py-6 intro flex flex-col justify-center flex-auto bg-black rounded-xl">
+      <section style={{ height: '50vh' }} className="m-2 py-6 intro flex flex-col justify-center flex-auto bg-black rounded-xl">
         <div className="mx-auto px-4 md:px-2 w-full md:w-8 ">
-          <h1 className="italic font-semibold text-6xl text-pink-600">Chuck Dries</h1>
-          <h2 className="text-blue-300 text-2xl">Software Engineer in web &amp; VR</h2>
+          <h1 className="italic font-normal text-5xl text-pink-500">Chuck Dries</h1>
+          <h2 className="italic text-blue-300 text-2xl">Software Engineer in web &amp; VR</h2>
           <ul>
             <li>Software Developer, <span className="text-gray-300 italic">Axosoft</span></li>
             <li><a className="hover:text-pink-400 underline" href="mailto:chuck@chuckdries.com">chuck@chuckdries.com</a> / <span>602.618.0414</span></li>
@@ -39,8 +39,8 @@ const IndexPage = ({ data }) => {
           🎉🎉🎉
         </span>
       </h1> */}
-      <section className="mt-0 m-2 max-w-full flex flex-col bg-black text-gray-200 py-2 rounded-xl">
-        <h2 className="ml-6 text-2xl">Photography</h2>
+      <section className="mt-0 m-2 max-w-full flex flex-col shadow-md bg-black text-gray-200 py-2 rounded-xl">
+        <h2 className="ml-6 text-2xl mb-2">Photography</h2>
         <div className="gallery gallery flex-auto flex overflow-x-scroll w-full scroll-snap-x scroll-padding-6 ">
           {images.map(image => {
             const name = image.childImageSharp.fields.imageMeta.iptc.object_name || image.base
@@ -81,16 +81,14 @@ query HomePageGallery {
         childImageSharp{
           gatsbyImageData(
             layout: CONSTRAINED,
-            placeholder: BLURRED,
+            placeholder: DOMINANT_COLOR,
             # width: 400
             # height: 900
-            height: 400
+            height: 600
           )
           fields {
             imageMeta {
-              meta {
-                dateTaken
-              }
+              dateTaken
               iptc {
                 caption
                 object_name
