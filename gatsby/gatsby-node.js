@@ -1,5 +1,6 @@
 const fs = require('fs');
-const util = require('util')
+const util = require('util');
+const path = require('path');
 const { read } = require('fast-exif');
 const iptc = require('node-iptc');
 
@@ -34,14 +35,12 @@ function transformMetaToNodeData(exifData, iptcData) {
       );
     }
   }
-  
+
 
   return {
     exif: exifData?.exif,
     gps,
-    meta: {
-      dateTaken: exifData?.exif?.DateTimeOriginal
-    },
+    dateTaken: exifData?.exif?.DateTimeOriginal,
     iptc: iptcData || undefined
   };
 }
@@ -61,4 +60,45 @@ exports.onCreateNode = async function ({ node, getNode, actions }) {
       value: transformMetaToNodeData(exifData, iptcData)
     });
   }
+}
+
+// Implement the Gatsby API “createPages”. This is called once the
+// data layer is bootstrapped to let plugins create pages from data.
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const { createPage } = actions;
+  // get all images
+  const galleryImages = await graphql(
+    `
+      {
+        allFile(filter: {
+          sourceInstanceName: { eq: "gallery" }}) {
+          edges {
+            node {
+              relativePath,
+              base
+            }
+          }
+        }
+      }
+    `
+  )
+  // Handle errors
+  if (galleryImages.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`)
+    return
+  }
+  // Create pages for each markdown file.
+  const galleryImageTemplate = path.resolve(`src/templates/gallery-image.js`)
+  galleryImages.data.allFile.edges.forEach(({ node }) => {
+    // const path = node.base
+    createPage({
+      path: `gallery/${node.base}`,
+      component: galleryImageTemplate,
+      // In your blog post template's graphql query, you can use pagePath
+      // as a GraphQL variable to query for data from the markdown file.
+      context: {
+        imageFilename: node.base,
+      },
+    })
+  })
 }

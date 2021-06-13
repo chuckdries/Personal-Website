@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,5 +29,7 @@
   margin-left: theme('spacing.6')
 }
 body {
-  @apply bg-gray-900 text-white;
+  @apply bg-gray-100;
+  /* @apply bg-black; */
+  @apply text-white;
 }
