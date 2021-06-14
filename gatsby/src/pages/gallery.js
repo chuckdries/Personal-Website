@@ -32,6 +32,8 @@ const GalleryPage = ({ data }) => {
     <div className="bg-black min-h-screen">
       <h1 className="text-2xl">Gallery</h1>
       <div className="mx-auto" style={{maxWidth: '1800px'}}>
+        {/* TODO swap masonry plugin, this one makes really unbalanced columns */}
+        {/* ...implement manually :sadge: */}
       <ResponsiveMasonry
         columnsCountBreakPoints={{ 350: 1, 650: 2, 1200: 3 }}
       >
