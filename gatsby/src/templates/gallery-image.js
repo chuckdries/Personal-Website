@@ -6,27 +6,40 @@ import { Helmet } from "react-helmet";
 
 const GalleryImage = ({ pageContext, data }) => {
   const image = data.allFile.edges[0].node
-  console.log(getMeta(image));
+  const ar = image.childImageSharp.fluid.aspectRatio;
+  console.log(ar);
+  // const imageStyle = {}
+  // if (ar > 1) {
+  //   imageStyle.width = '90vw'
+  // } else {
+  //   imageStyle.height = '90vh'
+  // }
+
   const name = getName(image);
   return (<>
-  <Helmet>
-    <title>{name} - Gallery | Chuck Dries</title>
-    <body className="bg-black" />
-  </Helmet>
-    <div className="h-screen w-screen flex flex-col">
-      <h1>{name}</h1>
-      <GatsbyImage
-        className="flex-auto"
-        loading='eager'
-        objectFit='contain'
-        style={{
-          width: '100%',
-          height: '100%'
-        }}
-        key={image.base}
-        image={getImage(image)}
-        alt={name} />
-      <p>{getMeta(image).iptc.caption}</p>
+    <Helmet>
+      <title>{name} - Gallery | Chuck Dries</title>
+      <body className="bg-black" />
+    </Helmet>
+    <div className="min-h-screen flex flex-col justify-center">
+      {/* use inline-block to set width to same as children but it still doesn't work for vert images */}
+      {/* todo: totally different layout for vertical images? by inspecting aspect ratio? Ohhhh yes */}
+      <div style={{margin: '0 5vw'}} className="mx-auto">
+        <h1 className="text-2xl mt-2">{name}</h1>
+        <GatsbyImage
+          className=""
+          loading='eager'
+          objectFit='contain'
+          style={{
+            // width: '90vw',
+            height: '100%',
+            maxHeight: '90vh'
+          }}
+          key={image.base}
+          image={getImage(image)}
+          alt={name} />
+        <p>{getMeta(image).iptc.caption}</p>
+      </div>
     </div>
   </>);
 }
@@ -44,7 +57,7 @@ export const query = graphql`
           }
           gatsbyImageData(
             layout: CONSTRAINED
-            placeholder: BLURRED
+            # placeholder: BLURRED
             # placeholder: DOMINANT_COLOR
             # placeholder: TRACED_SVG
             height: 2048
