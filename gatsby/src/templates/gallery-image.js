@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { getMeta, getName } from '../utils';
+import { getMeta, getName, hasName } from '../utils';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { Helmet } from 'react-helmet';
 import classnames from 'classnames'
@@ -28,7 +28,6 @@ const GalleryImage = ({ data }) => {
       {/* TODO: change layout by amount of empty space on side of page, not aspect ratio? */}
       <div style={{ margin: '0 5vw' }} className={classnames('flex mx-auto', ar > 1 ? 'flex-col' : 'flex-row-reverse')}>
         <div className='flex-grow-0'>
-          <h1 className="text-2xl mt-2">{name}</h1>
           <GatsbyImage
             className=""
             loading='eager'
@@ -44,6 +43,7 @@ const GalleryImage = ({ data }) => {
             alt={name} />
         </div>
         <div className={classnames('flex-shrink-0 mr-4', ar <= 1 && 'pt-4 flex-auto text-right')}>
+          {hasName(image) && <h1 className="text-2xl mt-2">{name}</h1>}
           <p>{getMeta(image).iptc.caption}</p>
           <p>some other meta</p>
         </div>
@@ -67,7 +67,7 @@ export const query = graphql`
             layout: CONSTRAINED
             # placeholder: BLURRED
             # placeholder: DOMINANT_COLOR
-            # placeholder: TRACED_SVG
+            placeholder: TRACED_SVG
             height: 2048
           )
           fields {
