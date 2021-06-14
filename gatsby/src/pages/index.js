@@ -2,10 +2,6 @@ import * as React from "react"
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
-import '../styles/global.css';
-// import "../styles/gallery.scss"
-// import "../styles/index.scss"
-
 // markup
 const IndexPage = ({ data }) => {
   const images = React.useMemo(() => data.allFile.edges.map(edge => edge.node, [data]))

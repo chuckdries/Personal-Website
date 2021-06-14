@@ -2,7 +2,7 @@ import * as React from "react"
 import { graphql, Link } from 'gatsby'
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { getMeta } from "../utils"
-
+import { Helmet } from "react-helmet"
 
 const GalleryPage = ({ data }) => {
   const images = React.useMemo(() =>
@@ -20,9 +20,13 @@ const GalleryPage = ({ data }) => {
         }
         return 0;
       }) // TODO HERE
-    , data)
-  return (<div className="bg-black">
+    , [data])
 
+  return (<>
+  <Helmet>
+    <title>Gallery | Chuck Dries</title>
+  </Helmet>
+  <div className="bg-black">
     <h1 className="text-2xl">Gallery</h1>
     {images.map(image => {
       console.log('ar', image.childImageSharp)
@@ -37,7 +41,7 @@ const GalleryPage = ({ data }) => {
       return (
         // <div style={{ maxHeight: '500px' }} className="flex-shrink-0 mr-4 scroll-snap-start bg-red-300">
         // .
-        <>
+        <React.Fragment key={name}>
           <Link to={`/gallery/${image.base}`}>
             {/* <span>{name}</span> */}
             <GatsbyImage
@@ -51,10 +55,11 @@ const GalleryPage = ({ data }) => {
               image={getImage(image)}
               alt={name} />
           </Link>
-        </>
+        </React.Fragment>
       );
     })}
-  </div>)
+  </div>
+  </>)
 }
 
 export const query = graphql`
