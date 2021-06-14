@@ -11,23 +11,15 @@ const GalleryImage = ({ pageContext, data }) => {
   return (<>
   <Helmet>
     <title>{name} - Gallery | Chuck Dries</title>
+    <body className="bg-black" />
   </Helmet>
-    <div className="bg-black h-screen w-screen">
+    <div className="h-screen w-screen flex flex-col">
       <h1>{name}</h1>
       <GatsbyImage
-        className=""
+        className="flex-auto"
         loading='eager'
         objectFit='contain'
         style={{
-          // width: '100%',
-          // height: '100%',
-          // objectFit: 'contain',
-          // objectPosition: 'center',
-          // maxWidth: 'min(100vw, 1500px)',
-          // maxWidth: '100%',
-          // maxHeight: '100vh'
-          // maxHeight: "800px"
-          // width: '400px',
           width: '100%',
           height: '100%'
         }}
@@ -63,6 +55,7 @@ export const query = graphql`
               iptc {
                 caption
                 object_name
+                keywords
               }
               exif {
                 FNumber
