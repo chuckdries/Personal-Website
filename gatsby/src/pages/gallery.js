@@ -1,8 +1,10 @@
 import * as React from "react"
 import { graphql, Link } from 'gatsby'
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import { getMeta } from "../utils"
 import { Helmet } from "react-helmet"
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
+
+import { getMeta } from "../utils"
 
 const GalleryPage = ({ data }) => {
   const images = React.useMemo(() =>
@@ -23,42 +25,35 @@ const GalleryPage = ({ data }) => {
     , [data])
 
   return (<>
-  <Helmet>
-    <title>Gallery | Chuck Dries</title>
-  </Helmet>
-  <div className="bg-black">
-    <h1 className="text-2xl">Gallery</h1>
-    {images.map(image => {
-      console.log('ar', image.childImageSharp)
-      const name = getMeta(image).iptc.object_name || image.base
-      // const {
-      //   name: object_name,
-      //   aspectRatio
-      // }
-      // const file = data.allFile
-      // console.log(fileName)
-      // return <></>
-      return (
-        // <div style={{ maxHeight: '500px' }} className="flex-shrink-0 mr-4 scroll-snap-start bg-red-300">
-        // .
-        <React.Fragment key={name}>
-          <Link to={`/gallery/${image.base}`}>
-            {/* <span>{name}</span> */}
-            <GatsbyImage
-              className=""
-              style={{
-                // maxHeight: "800px"
-                // width: '400px',
-                // height: '100%'
-              }}
-              key={image.base}
-              image={getImage(image)}
-              alt={name} />
-          </Link>
-        </React.Fragment>
-      );
-    })}
-  </div>
+    <Helmet>
+      <title>Gallery | Chuck Dries</title>
+      <body className="bg-black" />
+    </Helmet>
+    <div className="bg-black min-h-screen">
+      <h1 className="text-2xl">Gallery</h1>
+      <div className="mx-auto" style={{maxWidth: '1800px'}}>
+      <ResponsiveMasonry
+        columnsCountBreakPoints={{ 350: 1, 650: 2, 1200: 3 }}
+      >
+        <Masonry gutter='5px'>
+          {images.map(image => {
+            console.log('ar', image.childImageSharp)
+            const name = getMeta(image).iptc.object_name || image.base
+            return (
+              <React.Fragment key={name}>
+                <Link state={{modal: true}} to={`/gallery/${image.base}`}>
+                  <GatsbyImage
+                    key={image.base}
+                    image={getImage(image)}
+                    alt={name} />
+                </Link>
+              </React.Fragment>
+            );
+          })}
+        </Masonry>
+      </ResponsiveMasonry>
+      </div>
+    </div>
   </>)
 }
 
@@ -76,21 +71,21 @@ query GalleryPageQuery {
           },
           gatsbyImageData(
             layout: CONSTRAINED,
-            width: 400
+            width: 650
           )
           fields {
             imageMeta {
               dateTaken
               iptc {
-                caption
+                # caption
                 object_name
               }
-              exif {
-                FNumber
-                ExposureTime
-                ShutterSpeedValue
-                ISO
-              }
+              # exif {
+              #   FNumber
+              #   ExposureTime
+              #   ShutterSpeedValue
+              #   ISO
+              # }
             }
           }
         }
