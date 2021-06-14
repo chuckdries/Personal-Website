@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import { getMeta, getName } from "../utils";
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Helmet } from "react-helmet";
+import classnames from 'classnames'
 
 const GalleryImage = ({ pageContext, data }) => {
   const image = data.allFile.edges[0].node
@@ -15,6 +16,8 @@ const GalleryImage = ({ pageContext, data }) => {
   //   imageStyle.height = '90vh'
   // }
 
+  console.log(`calc(90vw * ${ar})px`)
+
   const name = getName(image);
   return (<>
     <Helmet>
@@ -22,23 +25,28 @@ const GalleryImage = ({ pageContext, data }) => {
       <body className="bg-black" />
     </Helmet>
     <div className="min-h-screen flex flex-col justify-center">
-      {/* use inline-block to set width to same as children but it still doesn't work for vert images */}
-      {/* todo: totally different layout for vertical images? by inspecting aspect ratio? Ohhhh yes */}
-      <div style={{margin: '0 5vw'}} className="mx-auto">
-        <h1 className="text-2xl mt-2">{name}</h1>
-        <GatsbyImage
-          className=""
-          loading='eager'
-          objectFit='contain'
-          style={{
-            // width: '90vw',
-            height: '100%',
-            maxHeight: '90vh'
-          }}
-          key={image.base}
-          image={getImage(image)}
-          alt={name} />
-        <p>{getMeta(image).iptc.caption}</p>
+      {/* TODO: change layout by amount of empty space on side of page, not aspect ratio? */}
+      <div style={{ margin: '0 5vw' }} className={classnames("flex mx-auto", ar > 1 ? 'flex-col' : 'flex-row-reverse')}>
+        <div className='flex-grow-0'>
+          <h1 className="text-2xl mt-2">{name}</h1>
+          <GatsbyImage
+            className=""
+            loading='eager'
+            objectFit='contain'
+            style={{
+              maxWidth: `calc(max(90vh, 500px) * ${ar})`,
+              // height: '90vh',
+              maxHeight: '90vh',
+              minHeight: '500px'
+            }}
+            key={image.base}
+            image={getImage(image)}
+            alt={name} />
+        </div>
+        <div className={classnames('flex-shrink-0 mr-4', ar <= 1 && 'pt-4 flex-auto text-right')}>
+          <p>{getMeta(image).iptc.caption}</p>
+          <p>some other meta</p>
+        </div>
       </div>
     </div>
   </>);
