@@ -1,11 +1,11 @@
-import React from "react"
+import React from 'react'
 import { graphql } from 'gatsby'
-import { getMeta, getName } from "../utils";
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import { Helmet } from "react-helmet";
+import { getMeta, getName } from '../utils';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { Helmet } from 'react-helmet';
 import classnames from 'classnames'
 
-const GalleryImage = ({ pageContext, data }) => {
+const GalleryImage = ({ data }) => {
   const image = data.allFile.edges[0].node
   const ar = image.childImageSharp.fluid.aspectRatio;
   console.log(ar);
@@ -26,7 +26,7 @@ const GalleryImage = ({ pageContext, data }) => {
     </Helmet>
     <div className="min-h-screen flex flex-col justify-center">
       {/* TODO: change layout by amount of empty space on side of page, not aspect ratio? */}
-      <div style={{ margin: '0 5vw' }} className={classnames("flex mx-auto", ar > 1 ? 'flex-col' : 'flex-row-reverse')}>
+      <div style={{ margin: '0 5vw' }} className={classnames('flex mx-auto', ar > 1 ? 'flex-col' : 'flex-row-reverse')}>
         <div className='flex-grow-0'>
           <h1 className="text-2xl mt-2">{name}</h1>
           <GatsbyImage

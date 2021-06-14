@@ -1,10 +1,10 @@
-import * as React from "react"
+import * as React from 'react'
 import { graphql, Link } from 'gatsby'
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import { Helmet } from "react-helmet"
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { Helmet } from 'react-helmet'
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 
-import { getMeta } from "../utils"
+import { getMeta } from '../utils'
 
 const GalleryPage = ({ data }) => {
   const images = React.useMemo(() =>
