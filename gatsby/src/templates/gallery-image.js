@@ -2,29 +2,41 @@ import React from "react"
 import { graphql } from 'gatsby'
 import { getMeta, getName } from "../utils";
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { Helmet } from "react-helmet";
 
 const GalleryImage = ({ pageContext, data }) => {
   const image = data.allFile.edges[0].node
   console.log(getMeta(image));
   const name = getName(image);
-  return (
-    <div className="bg-black min-h-screen">
+  return (<>
+  <Helmet>
+    <title>{name} - Gallery | Chuck Dries</title>
+  </Helmet>
+    <div className="bg-black h-screen w-screen">
       <h1>{name}</h1>
       <GatsbyImage
         className=""
+        loading='eager'
+        objectFit='contain'
         style={{
-          width: '100vw',
-          maxHeight: '100%'
+          // width: '100%',
+          // height: '100%',
+          // objectFit: 'contain',
+          // objectPosition: 'center',
+          // maxWidth: 'min(100vw, 1500px)',
+          // maxWidth: '100%',
+          // maxHeight: '100vh'
           // maxHeight: "800px"
           // width: '400px',
-          // height: '100%'
+          width: '100%',
+          height: '100%'
         }}
         key={image.base}
         image={getImage(image)}
         alt={name} />
       <p>{getMeta(image).iptc.caption}</p>
     </div>
-  );
+  </>);
 }
 
 export const query = graphql`
@@ -41,7 +53,9 @@ export const query = graphql`
           gatsbyImageData(
             layout: CONSTRAINED
             placeholder: BLURRED
-            width: 1920
+            # placeholder: DOMINANT_COLOR
+            # placeholder: TRACED_SVG
+            height: 2048
           )
           fields {
             imageMeta {
