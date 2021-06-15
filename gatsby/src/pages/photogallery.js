@@ -11,18 +11,6 @@ const GalleryPage = ({ data }) => {
   const images = React.useMemo(() =>
     data.allFile.edges
       .map(edge => edge.node, [data])
-      // .sort((left, right) => {
-      //   const leftDate = new Date(getMeta(left).dateTaken);
-      //   console.log(leftDate);
-      //   const rightDate = new Date(getMeta(right).dateTaken);
-      //   if (leftDate < rightDate) {
-      //     return 1;
-      //   }
-      //   if (leftDate > rightDate) {
-      //     return -1;
-      //   }
-      //   return 0;
-      // }) // TODO HERE
   , [data]);
 
   return (<>
@@ -32,7 +20,7 @@ const GalleryPage = ({ data }) => {
     </Helmet>
     <div className="bg-black min-h-screen">
       <h1 className="text-2xl">Gallery</h1>
-      <div className="mx-auto" style={{maxWidth: '1800px'}}>
+      <div className="mx-auto 2xl:container">
         <MasonryGallery
           images={images}
           itemsPerRow={{
