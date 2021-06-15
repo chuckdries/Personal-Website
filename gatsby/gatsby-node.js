@@ -41,7 +41,7 @@ function transformMetaToNodeData(exifData, iptcData) {
     exif: exifData?.exif,
     gps,
     dateTaken: exifData?.exif?.DateTimeOriginal,
-    iptc: iptcData || undefined
+    iptc: iptcData || undefined,
   };
 }
 
@@ -57,7 +57,7 @@ exports.onCreateNode = async function ({ node, getNode, actions }) {
     createNodeField({
       node,
       name: 'imageMeta',
-      value: transformMetaToNodeData(exifData, iptcData)
+      value: transformMetaToNodeData(exifData, iptcData),
     });
   }
 };
