@@ -1,59 +1,47 @@
 import * as React from 'react';
-import { graphql, Link } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { graphql } from 'gatsby';
+// import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { Helmet } from 'react-helmet';
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+// import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 
-import { getMeta } from '../utils';
+// import { getMeta } from '../utils';
+import MasonryGallery from '../components/MasonryGallery';
 
 const GalleryPage = ({ data }) => {
   const images = React.useMemo(() =>
     data.allFile.edges
       .map(edge => edge.node, [data])
-      .sort((left, right) => {
-        const leftDate = new Date(getMeta(left).dateTaken);
-        console.log(leftDate);
-        const rightDate = new Date(getMeta(right).dateTaken);
-        if (leftDate < rightDate) {
-          return 1;
-        }
-        if (leftDate > rightDate) {
-          return -1;
-        }
-        return 0;
-      }) // TODO HERE
+      // .sort((left, right) => {
+      //   const leftDate = new Date(getMeta(left).dateTaken);
+      //   console.log(leftDate);
+      //   const rightDate = new Date(getMeta(right).dateTaken);
+      //   if (leftDate < rightDate) {
+      //     return 1;
+      //   }
+      //   if (leftDate > rightDate) {
+      //     return -1;
+      //   }
+      //   return 0;
+      // }) // TODO HERE
   , [data]);
 
   return (<>
     <Helmet>
       <title>Gallery | Chuck Dries</title>
-      <body className="bg-black" />
+      <body className="bg-black text-white" />
     </Helmet>
     <div className="bg-black min-h-screen">
       <h1 className="text-2xl">Gallery</h1>
       <div className="mx-auto" style={{maxWidth: '1800px'}}>
-        {/* TODO swap masonry plugin, this one makes really unbalanced columns */}
-        {/* ...implement manually :sadge: */}
-        <ResponsiveMasonry
-          columnsCountBreakPoints={{ 350: 1, 650: 2, 1200: 3 }}
-        >
-          <Masonry gutter='5px'>
-            {images.map(image => {
-              console.log('ar', image.childImageSharp);
-              const name = getMeta(image).iptc.object_name || image.base;
-              return (
-                <React.Fragment key={name}>
-                  <Link state={{modal: true}} to={`/photogallery/${image.base}`}>
-                    <GatsbyImage
-                      key={image.base}
-                      image={getImage(image)}
-                      alt={name} />
-                  </Link>
-                </React.Fragment>
-              );
-            })}
-          </Masonry>
-        </ResponsiveMasonry>
+        <MasonryGallery
+          images={images}
+          itemsPerRow={{
+            sm: 2,
+            md: 3,
+            lg: 4,
+            xl: 5,
+          }}
+        />
       </div>
     </div>
   </>);
@@ -62,7 +50,9 @@ const GalleryPage = ({ data }) => {
 export const query = graphql`
 query GalleryPageQuery {
   allFile(filter: {
-    sourceInstanceName: { eq: "gallery" }}) {
+    sourceInstanceName: { eq: "gallery" }}
+    sort: {order: DESC, fields: childrenImageSharp___fields___imageMeta___dateTaken}
+  ) {
     edges {
       node {
       	relativePath,
@@ -73,7 +63,7 @@ query GalleryPageQuery {
           },
           gatsbyImageData(
             layout: CONSTRAINED,
-            width: 650
+            height: 400
           )
           fields {
             imageMeta {

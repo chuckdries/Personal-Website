@@ -67,11 +67,11 @@ exports.onCreateNode = async function ({ node, getNode, actions }) {
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
   // get all images
-  const galleryImages = await graphql(
-    `
+  const galleryImages = await graphql(`
       {
         allFile(filter: {
-          sourceInstanceName: { eq: "gallery" }}) {
+          sourceInstanceName: { eq: "gallery" }}
+        ) {
           edges {
             node {
               relativePath,
@@ -80,8 +80,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
-    `
-  );
+    `);
   // Handle errors
   if (galleryImages.errors) {
     reporter.panicOnBuild('Error while running GraphQL query.');

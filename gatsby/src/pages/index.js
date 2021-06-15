@@ -8,7 +8,7 @@ const IndexPage = ({ data }) => {
   console.log('images', images);
 
   return (
-    <main className="font-serif">
+    <main className="font-serif text-white">
       <section style={{ height: '50vh' }} className="m-2 py-6 intro flex flex-col justify-center flex-auto bg-black rounded-xl">
         <div className="mx-auto px-4 md:px-2 w-full md:w-8 ">
           <h1 className="italic font-normal text-5xl text-pink-500">Chuck Dries</h1>
@@ -61,7 +61,9 @@ const IndexPage = ({ data }) => {
 export const query = graphql`
 query HomePageGallery {
   allFile(filter: {
-    sourceInstanceName: { eq: "gallery" }}) {
+    sourceInstanceName: { eq: "gallery" }}
+    sort: {order: DESC, fields: childrenImageSharp___fields___imageMeta___dateTaken}
+  ) {
     edges {
       node {
       	relativePath,

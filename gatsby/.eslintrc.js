@@ -22,5 +22,6 @@ module.exports = {
     'semi': 1,
     'indent': ['warn', 2],
     'comma-dangle': ['warn', 'always-multiline'],
+    'no-unused-vars': 1,
   },
 };
