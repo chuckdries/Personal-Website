@@ -18,6 +18,7 @@ module.exports = {
   ],
   'rules': {
     'react/prop-types': 0,
-    'quotes': ['warn', 'single']
+    'quotes': ['warn', 'single'],
+    'semi': 1
   }
-}
+};

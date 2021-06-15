@@ -1,0 +1,7 @@
+.resume {
+  background: green;
+}
+.resume h1 {
+  @apply text-3xl font-bold;
+}
+

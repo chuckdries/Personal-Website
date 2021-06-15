@@ -1,19 +1,19 @@
-import * as React from 'react'
-import { graphql, Link } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { Helmet } from 'react-helmet'
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
+import * as React from 'react';
+import { graphql, Link } from 'gatsby';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { Helmet } from 'react-helmet';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 
-import { getMeta } from '../utils'
+import { getMeta } from '../utils';
 
 const GalleryPage = ({ data }) => {
   const images = React.useMemo(() =>
     data.allFile.edges
       .map(edge => edge.node, [data])
       .sort((left, right) => {
-        const leftDate = new Date(getMeta(left).dateTaken)
-        console.log(leftDate)
-        const rightDate = new Date(getMeta(right).dateTaken)
+        const leftDate = new Date(getMeta(left).dateTaken);
+        console.log(leftDate);
+        const rightDate = new Date(getMeta(right).dateTaken);
         if (leftDate < rightDate) {
           return 1;
         }
@@ -22,7 +22,7 @@ const GalleryPage = ({ data }) => {
         }
         return 0;
       }) // TODO HERE
-    , [data])
+    , [data]);
 
   return (<>
     <Helmet>
@@ -39,8 +39,8 @@ const GalleryPage = ({ data }) => {
       >
         <Masonry gutter='5px'>
           {images.map(image => {
-            console.log('ar', image.childImageSharp)
-            const name = getMeta(image).iptc.object_name || image.base
+            console.log('ar', image.childImageSharp);
+            const name = getMeta(image).iptc.object_name || image.base;
             return (
               <React.Fragment key={name}>
                 <Link state={{modal: true}} to={`/photogallery/${image.base}`}>
@@ -56,8 +56,8 @@ const GalleryPage = ({ data }) => {
       </ResponsiveMasonry>
       </div>
     </div>
-  </>)
-}
+  </>);
+};
 
 export const query = graphql`
 query GalleryPageQuery {
@@ -96,4 +96,4 @@ query GalleryPageQuery {
   }
 }`;
 
-export default GalleryPage
+export default GalleryPage;

@@ -4,7 +4,7 @@ const path = require('path');
 const { read } = require('fast-exif');
 const iptc = require('node-iptc');
 
-const readFile = util.promisify(fs.readFile)
+const readFile = util.promisify(fs.readFile);
 
 
 function convertDMSToDD(dms, positiveDirection) {
@@ -51,16 +51,16 @@ exports.onCreateNode = async function ({ node, getNode, actions }) {
   if (node.internal.type === 'ImageSharp') {
     const parent = getNode(node.parent);
 
-    const file = await readFile(parent.absolutePath)
-    const iptcData = iptc(file)
-    const exifData = await read(parent.absolutePath)
+    const file = await readFile(parent.absolutePath);
+    const iptcData = iptc(file);
+    const exifData = await read(parent.absolutePath);
     createNodeField({
       node,
       name: 'imageMeta',
       value: transformMetaToNodeData(exifData, iptcData)
     });
   }
-}
+};
 
 // Implement the Gatsby API “createPages”. This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
@@ -81,14 +81,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         }
       }
     `
-  )
+  );
   // Handle errors
   if (galleryImages.errors) {
-    reporter.panicOnBuild('Error while running GraphQL query.')
-    return
+    reporter.panicOnBuild('Error while running GraphQL query.');
+    return;
   }
   // Create pages for each markdown file.
-  const galleryImageTemplate = path.resolve('src/components/gallery-image.js')
+  const galleryImageTemplate = path.resolve('src/components/gallery-image.js');
   galleryImages.data.allFile.edges.forEach(({ node }) => {
     // const path = node.base
     createPage({
@@ -99,6 +99,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       context: {
         imageFilename: node.base,
       },
-    })
-  })
-}
+    });
+  });
+};

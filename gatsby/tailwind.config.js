@@ -2,7 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}'],
-  darkMode: 'media', // or 'media' or 'class'
+  // darkMode: 'media', // or 'media' or 'class'
   theme: {
     spacing: {
       '1': '8px',
