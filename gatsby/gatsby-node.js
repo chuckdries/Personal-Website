@@ -84,15 +84,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   )
   // Handle errors
   if (galleryImages.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`)
+    reporter.panicOnBuild('Error while running GraphQL query.')
     return
   }
   // Create pages for each markdown file.
-  const galleryImageTemplate = path.resolve(`src/templates/gallery-image.js`)
+  const galleryImageTemplate = path.resolve('src/components/gallery-image.js')
   galleryImages.data.allFile.edges.forEach(({ node }) => {
     // const path = node.base
     createPage({
-      path: `gallery/${node.base}`,
+      path: `photogallery/${node.base}`,
       component: galleryImageTemplate,
       // In your blog post template's graphql query, you can use pagePath
       // as a GraphQL variable to query for data from the markdown file.

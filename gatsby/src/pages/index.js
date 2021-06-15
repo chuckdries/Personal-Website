@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 // markup
@@ -36,7 +36,7 @@ const IndexPage = ({ data }) => {
         </span>
       </h1> */}
       <section className="mt-0 m-2 max-w-full flex flex-col shadow-md bg-black text-gray-200 py-2 rounded-xl">
-        <h2 className="ml-6 text-2xl mb-2">Photography</h2>
+        <h2 className="ml-6 text-2xl mb-2"><Link to='/photogallery'>Photography</Link></h2>
         <div className="gallery gallery flex-auto flex overflow-x-scroll w-full scroll-snap-x scroll-padding-6 ">
           {images.map(image => {
             const name = image.childImageSharp.fields.imageMeta.iptc.object_name || image.base
