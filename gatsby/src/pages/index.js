@@ -1,11 +1,11 @@
-import * as React from 'react'
-import { graphql, Link } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import * as React from 'react';
+import { graphql, Link } from 'gatsby';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 // markup
 const IndexPage = ({ data }) => {
-  const images = React.useMemo(() => data.allFile.edges.map(edge => edge.node), [data])
-  console.log('images', images)
+  const images = React.useMemo(() => data.allFile.edges.map(edge => edge.node), [data]);
+  console.log('images', images);
 
   return (
     <main className="font-serif">
@@ -27,20 +27,12 @@ const IndexPage = ({ data }) => {
           </ul>
         </div>
       </section>
-      {/* <h1 >
-        Congratulations
-        <br />
-        <span >— you just made a Gatsby site! </span>
-        <span role="img" aria-label="Party popper emojis">
-          🎉🎉🎉
-        </span>
-      </h1> */}
       <section className="mt-0 m-2 max-w-full flex flex-col shadow-md bg-black text-gray-200 py-2 rounded-xl">
         <h2 className="ml-6 text-2xl mb-2"><Link to='/photogallery'>Photography</Link></h2>
         <div className="gallery gallery flex-auto flex overflow-x-scroll w-full scroll-snap-x scroll-padding-6 ">
           {images.map(image => {
-            const name = image.childImageSharp.fields.imageMeta.iptc.object_name || image.base
-            console.log('name', name)
+            const name = image.childImageSharp.fields.imageMeta.iptc.object_name || image.base;
+            console.log('name', name);
             // const file = data.allFile
             // console.log(fileName)
             // return <></>
@@ -63,8 +55,8 @@ const IndexPage = ({ data }) => {
         </div>
       </section>
     </main>
-  )
-}
+  );
+};
 
 export const query = graphql`
 query HomePageGallery {
@@ -103,4 +95,4 @@ query HomePageGallery {
   }
 }`;
 
-export default IndexPage
+export default IndexPage;
