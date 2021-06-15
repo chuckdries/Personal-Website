@@ -43,7 +43,7 @@ const GalleryPage = ({ data }) => {
             const name = getMeta(image).iptc.object_name || image.base
             return (
               <React.Fragment key={name}>
-                <Link state={{modal: true}} to={`/gallery/${image.base}`}>
+                <Link state={{modal: true}} to={`/photogallery/${image.base}`}>
                   <GatsbyImage
                     key={image.base}
                     image={getImage(image)}

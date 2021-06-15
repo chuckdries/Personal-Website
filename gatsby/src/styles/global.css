@@ -21,15 +21,25 @@
     scroll-snap-align: start;
   }
   .scroll-padding-6 {
-    scroll-padding: theme('spacing.6')
+    scroll-padding: theme('spacing.6');
   }
 }
 
-.gallery-img:first-child {
-  margin-left: theme('spacing.6')
-}
 body {
   @apply bg-gray-100;
   /* @apply bg-black; */
   @apply text-white;
+}
+
+h1 {
+  @apply text-2xl;
+}
+h2 {
+  @apply text-xl;
+}
+h3 {
+  @apply text-lg;
+}
+a {
+  @apply text-blue-600;
 }
