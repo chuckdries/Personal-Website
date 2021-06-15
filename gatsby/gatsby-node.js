@@ -88,7 +88,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return;
   }
   // Create pages for each markdown file.
-  const galleryImageTemplate = path.resolve('src/components/gallery-image.js');
+  const galleryImageTemplate = path.resolve('src/components/GalleryImage.js');
   galleryImages.data.allFile.edges.forEach(({ node }) => {
     // const path = node.base
     createPage({

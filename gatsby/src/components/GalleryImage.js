@@ -36,7 +36,7 @@ const GalleryImage = ({ data }) => {
               maxWidth: `calc(max(90vh, 500px) * ${ar})`,
               // height: '90vh',
               maxHeight: '90vh',
-              minHeight: '500px'
+              minHeight: '500px',
             }}
             key={image.base}
             image={getImage(image)}
