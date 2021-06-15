@@ -8,9 +8,9 @@ import resolveConfig from 'tailwindcss/resolveConfig';
 import tailwindConfig from '../../tailwind.config.js';
 import useBreakpoint from 'use-breakpoint';
 
-const {theme: {screens}} = resolveConfig(tailwindConfig);
-const themeBreakpoints = R.map(size => parseInt(size, 10), screens);
-console.log(themeBreakpoints);
+const {theme} = resolveConfig(tailwindConfig);
+const themeBreakpoints = R.map(size => parseInt(size, 10), theme.screens);
+console.log(theme);
 
 const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
   const breakpoints = React.useMemo(() => 
@@ -25,49 +25,49 @@ const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
     R.map(R.sum)
   ))(itemsPerRowByBreakpoint), [aspectRatios, itemsPerRowByBreakpoint]);
 
-  // console.log('bp', breakpoint);
+  const itemsPerRow = itemsPerRowByBreakpoint[breakpoint];
   const rowAspectRatioSumsForCurrentBP = rowAspectRatioSumsByBreakpoint[breakpoint];
-  // console.log('rowAspectRatioSumsForCurrentBP :', rowAspectRatioSumsForCurrentBP);
   
   return (
     <div
+      className='w-full'
       style={{
-        width: '100%',
         position: 'relative',
       }}
-      // className='mx-auto'
       // style={{ maxWidth: minWidth }}
     >
       {images.map((image, i) => {
-        const rowIndex = Math.floor(i / itemsPerRowByBreakpoint[breakpoint]);
+        const rowIndex = Math.floor(i / itemsPerRow);
         const rowAspectRatioSum = rowAspectRatioSumsForCurrentBP[rowIndex];
-        const width = ((getAspectRatio(image) / rowAspectRatioSum) * 100).toFixed(10);
+        // const width = ((getAspectRatio(image) / rowAspectRatioSum) * 100).toFixed(10);
+        const ar = getAspectRatio(image);
+        const widthNumber = ((ar / rowAspectRatioSum) * 100);
+        const gutterReserve = parseInt(theme.spacing['1'], 10) * (itemsPerRow - 1);
+        const width = `${widthNumber}%`;
+        // const width = `${widthNumber}%`;
         // console.log('ars', rowAspectRatioSum);
         if (i === 0) {
           // console.log(rowIndex, rowAspectRatioSum);
-          console.log(getName(image), `${width}%`);
+          console.log(getName(image), width);
         }
         return (
-          <div 
+          <Link 
             key={`${image.base}`}
             className='inline-block'
             style={{
-              width: `${width}%`,
+              width,
+              // marginLeft: '8px',
             }}
+            state={{modal: true}} to={`/photogallery/${image.base}`}
           >
-            {/* // <Link className='inline-block' key={image.base} state={{modal: true}} to={`/photogallery/${image.base}`}> */}
             <GatsbyImage
-              // key={`${image.base}-img`}
-              // className='p-2'
-              style={{
-                width: '100%',
-              }}
-              objectFit='contain'
+              className='w-full'
+              objectFit='cover'
+              // style={{ width }}
               image={getImage(image)}
               alt={getName(image)}
             />
-            {/* // </Link> */}
-          </div>
+          </Link>
         );
       })}
     </div>);
