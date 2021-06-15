@@ -1,12 +1,12 @@
-import React from 'react'
-import { graphql } from 'gatsby'
+import React from 'react';
+import { graphql } from 'gatsby';
 import { getMeta, getName, hasName } from '../utils';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { Helmet } from 'react-helmet';
-import classnames from 'classnames'
+import classnames from 'classnames';
 
 const GalleryImage = ({ data }) => {
-  const image = data.allFile.edges[0].node
+  const image = data.allFile.edges[0].node;
   const ar = image.childImageSharp.fluid.aspectRatio;
   console.log(ar);
   // const imageStyle = {}
@@ -16,7 +16,7 @@ const GalleryImage = ({ data }) => {
   //   imageStyle.height = '90vh'
   // }
 
-  console.log(`calc(90vw * ${ar})px`)
+  console.log(`calc(90vw * ${ar})px`);
 
   const name = getName(image);
   return (<>
@@ -50,7 +50,7 @@ const GalleryImage = ({ data }) => {
       </div>
     </div>
   </>);
-}
+};
 
 export const query = graphql`
   query GalleryImage($imageFilename: String) {
@@ -93,6 +93,6 @@ export const query = graphql`
 }
 
 
-`
+`;
 
-export default GalleryImage
+export default GalleryImage;
