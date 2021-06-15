@@ -4,30 +4,29 @@ import { StaticImage } from 'gatsby-plugin-image';
 
 const IndexPage = () => {
   return (
-    <main className="font-serif text-white sm:block lg:grid">
+    <main className="font-serif sm:block lg:grid">
       <StaticImage
         style={{
           gridArea: '1/1',
-          maxHeight: '90vh',
+          // maxHeight: '90vh',
           // height: '100vh',
         }}
+        className='sm:h-auto lg:h-screen'
         layout='fullWidth'
         alt=''
-        src='../../data/gallery/_DSC4949.jpg'
+        src='../../data/gallery/DSC4180.jpg'
       />
-      <div className='relative' style={{gridArea: '1/1'}}>
+      <div className='relative grid place-items-center' style={{gridArea: '1/1'}}>
         <div
-          className="lg:inline-block sm:relative lg:absolute m-2 flex flex-col items-end"
-          style={{
-            right: 0,
-          }}
+          className="m-2 flex flex-col items-end"
         >
-          <section className='bg-black rounded-xl py-6'>
+          {/* TODO: color thief and fonts */}
+          <section className='bg-green-200 bg-opacity-80 rounded-xl py-6'>
             <div className="mx-auto px-6">
-              <h1 className="italic font-normal text-5xl text-pink-500">Chuck Dries</h1>
+              <h1 className="italic font-normal text-5xl ">Chuck Dries</h1>
               <h2 className="italic text-blue-300 text-2xl">Full stack software engineer &amp; hobbyist photographer</h2>
               <ul>
-                <li>Software Developer, <span className="text-gray-300 italic">Axosoft</span></li>
+                <li>Software Developer, <span className="text-gray-800 italic">Axosoft</span></li>
                 <li><a className="hover:text-pink-400 underline" href="mailto:chuck@chuckdries.com">chuck@chuckdries.com</a> / <span>602.618.0414</span></li>
                 <li>
                   <a className="mr-1 hover:text-pink-400 underline" href="http://github.com/chuckdries">Github</a>/
