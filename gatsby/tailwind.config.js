@@ -1,9 +1,16 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}'],
   // darkMode: 'media', // or 'media' or 'class'
   theme: {
+    screens: {
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    },
     spacing: {
       '1': '8px',
       '2': '12px',
@@ -12,12 +19,12 @@ module.exports = {
       '5': '32px',
       '6': '48px',
       '7': '80px',
-      '8': '800px'
+      '8': '800px',
     },
     fontFamily: {
       ...defaultTheme.fontFamily,
       // serif: ['Didot', 'Didot LT', 'STD', 'Hoefler Text' , 'Garamond', 'Times New Roman', 'serif']
-      serif: ['Playfair Display', 'serif']
+      serif: ['Playfair Display', 'serif'],
     },
     extend: {},
   },
@@ -25,4 +32,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-}
+};

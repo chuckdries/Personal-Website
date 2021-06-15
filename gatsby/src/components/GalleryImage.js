@@ -1,13 +1,13 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { getMeta, getName, hasName } from '../utils';
+import { getAspectRatio, getMeta, getName, hasName } from '../utils';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { Helmet } from 'react-helmet';
 import classnames from 'classnames';
 
 const GalleryImage = ({ data }) => {
   const image = data.allFile.edges[0].node;
-  const ar = image.childImageSharp.fluid.aspectRatio;
+  const ar = getAspectRatio(image);
   console.log(ar);
   // const imageStyle = {}
   // if (ar > 1) {
@@ -22,7 +22,7 @@ const GalleryImage = ({ data }) => {
   return (<>
     <Helmet>
       <title>{name} - Gallery | Chuck Dries</title>
-      <body className="bg-black" />
+      <body className="bg-black text-white" />
     </Helmet>
     <div className="min-h-screen flex flex-col justify-center">
       {/* TODO: change layout by amount of empty space on side of page, not aspect ratio? */}
