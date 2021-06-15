@@ -36,10 +36,11 @@ const GalleryPage = ({ data }) => {
         <MasonryGallery
           images={images}
           itemsPerRow={{
-            sm: 2,
-            md: 3,
-            lg: 4,
-            xl: 5,
+            sm: 1,
+            md: 2,
+            lg: 2,
+            xl: 3,
+            '2xl': 4,
           }}
         />
       </div>
@@ -63,7 +64,7 @@ query GalleryPageQuery {
           },
           gatsbyImageData(
             layout: CONSTRAINED,
-            height: 400
+            height: 550
           )
           fields {
             imageMeta {

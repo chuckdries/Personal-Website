@@ -27,7 +27,7 @@ const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
 
   // console.log('bp', breakpoint);
   const rowAspectRatioSumsForCurrentBP = rowAspectRatioSumsByBreakpoint[breakpoint];
-  console.log('rowAspectRatioSumsForCurrentBP :', rowAspectRatioSumsForCurrentBP);
+  // console.log('rowAspectRatioSumsForCurrentBP :', rowAspectRatioSumsForCurrentBP);
   
   return (
     <div
@@ -41,24 +41,33 @@ const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
       {images.map((image, i) => {
         const rowIndex = Math.floor(i / itemsPerRowByBreakpoint[breakpoint]);
         const rowAspectRatioSum = rowAspectRatioSumsForCurrentBP[rowIndex];
+        const width = ((getAspectRatio(image) / rowAspectRatioSum) * 100).toFixed(10);
         // console.log('ars', rowAspectRatioSum);
         if (i === 0) {
-          console.log(rowIndex, rowAspectRatioSum);
-          console.log(getName(image), `${(getAspectRatio(image) / rowAspectRatioSum) * 100}%`);
+          // console.log(rowIndex, rowAspectRatioSum);
+          console.log(getName(image), `${width}%`);
         }
         return (
-          // <Link className='inline-block' key={image.base} state={{modal: true}} to={`/photogallery/${image.base}`}>
-          <GatsbyImage
-            key={`${image.base}-img`}
+          <div 
+            key={`${image.base}`}
             className='inline-block'
             style={{
-              width: `${(getAspectRatio(image) / rowAspectRatioSum) * 100}%`,
+              width: `${width}%`,
             }}
-            // objectFit='contain'
-            image={getImage(image)}
-            alt={getName(image)}
-          />
-          // </Link>
+          >
+            {/* // <Link className='inline-block' key={image.base} state={{modal: true}} to={`/photogallery/${image.base}`}> */}
+            <GatsbyImage
+              // key={`${image.base}-img`}
+              // className='p-2'
+              style={{
+                width: '100%',
+              }}
+              objectFit='contain'
+              image={getImage(image)}
+              alt={getName(image)}
+            />
+            {/* // </Link> */}
+          </div>
         );
       })}
     </div>);
