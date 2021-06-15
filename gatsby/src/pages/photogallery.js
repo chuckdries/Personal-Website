@@ -22,7 +22,7 @@ const GalleryPage = ({ data }) => {
         }
         return 0;
       }) // TODO HERE
-    , [data]);
+  , [data]);
 
   return (<>
     <Helmet>
@@ -34,26 +34,26 @@ const GalleryPage = ({ data }) => {
       <div className="mx-auto" style={{maxWidth: '1800px'}}>
         {/* TODO swap masonry plugin, this one makes really unbalanced columns */}
         {/* ...implement manually :sadge: */}
-      <ResponsiveMasonry
-        columnsCountBreakPoints={{ 350: 1, 650: 2, 1200: 3 }}
-      >
-        <Masonry gutter='5px'>
-          {images.map(image => {
-            console.log('ar', image.childImageSharp);
-            const name = getMeta(image).iptc.object_name || image.base;
-            return (
-              <React.Fragment key={name}>
-                <Link state={{modal: true}} to={`/photogallery/${image.base}`}>
-                  <GatsbyImage
-                    key={image.base}
-                    image={getImage(image)}
-                    alt={name} />
-                </Link>
-              </React.Fragment>
-            );
-          })}
-        </Masonry>
-      </ResponsiveMasonry>
+        <ResponsiveMasonry
+          columnsCountBreakPoints={{ 350: 1, 650: 2, 1200: 3 }}
+        >
+          <Masonry gutter='5px'>
+            {images.map(image => {
+              console.log('ar', image.childImageSharp);
+              const name = getMeta(image).iptc.object_name || image.base;
+              return (
+                <React.Fragment key={name}>
+                  <Link state={{modal: true}} to={`/photogallery/${image.base}`}>
+                    <GatsbyImage
+                      key={image.base}
+                      image={getImage(image)}
+                      alt={name} />
+                  </Link>
+                </React.Fragment>
+              );
+            })}
+          </Masonry>
+        </ResponsiveMasonry>
       </div>
     </div>
   </>);
