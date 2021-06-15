@@ -2864,6 +2864,15 @@ babel-plugin-polyfill-regenerator@^0.2.2:
   dependencies:
     "@babel/helper-define-polyfill-provider" "^0.2.2"
 
+babel-plugin-preval@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-preval/-/babel-plugin-preval-5.0.0.tgz#6cabb947ecc241664966e1f99eb56a3b4bb63d1e"
+  integrity sha512-8DqJq6/LPUjSZ0Qq6bVIFpsj2flCEE0Cbnbut9TvGU6jP9g3dOWEXtQ/sdvsA9d6souza8eNGh04WRXpuH9ThA==
+  dependencies:
+    "@babel/runtime" "^7.9.2"
+    babel-plugin-macros "^2.8.0"
+    require-from-string "^2.0.2"
+
 babel-plugin-remove-graphql-queries@^3.7.1:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-remove-graphql-queries/-/babel-plugin-remove-graphql-queries-3.7.1.tgz#e041f933dd08556b7786cb4fd44ccb99c8dffaa6"
@@ -6223,6 +6232,11 @@ gatsby-plugin-postcss@^4.6.0:
   dependencies:
     "@babel/runtime" "^7.14.0"
     postcss-loader "^4.3.0"
+
+gatsby-plugin-preval@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-preval/-/gatsby-plugin-preval-1.0.0.tgz#b0e9dcc9ef568cb6ca998f7211b5365824b97201"
+  integrity sha512-HpPp2bdA4nZsuD3R++GRhM9BPlFp8+ilkXIo53hNr14OlHXxrgimh9lqVVvP3q4JriHh+bYcvmfqm6msIsxxLg==
 
 gatsby-plugin-react-helmet@^4.6.0:
   version "4.7.1"

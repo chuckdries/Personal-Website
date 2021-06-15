@@ -47,7 +47,8 @@ module.exports = {
         extensions: ['js', 'jsx'],
         exclude: ['node_modules', '.cache', 'public'],
         // Any eslint-webpack-plugin options below
-      }
-    }
+      },
+    },
+    'gatsby-plugin-preval',
   ],
 };

@@ -3,21 +3,23 @@ import { Link } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import * as R from 'ramda';
 import { getAspectRatio, getName } from '../utils';
-// TODO: use resolveCOnfig to not need to define screens in theme file
-import resolveConfig from 'tailwindcss/resolveConfig';
-import tailwindConfig from '../../tailwind.config.js';
 import useBreakpoint from 'use-breakpoint';
 
+import preval from 'babel-plugin-preval/macro';
+const themeBreakpoints = preval`
+const R = require('ramda')
+const resolveConfig = require('tailwindcss/resolveConfig');
+const tailwindConfig = require('../../tailwind.config.js');
 const {theme} = resolveConfig(tailwindConfig);
-const themeBreakpoints = R.map(size => parseInt(size, 10), theme.screens);
-console.log(theme);
+module.exports = R.map(size => parseInt(size, 10), theme.screens);
+`;
 
 const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
   const breakpoints = React.useMemo(() => 
     R.pick(R.keys(itemsPerRowByBreakpoint), themeBreakpoints)
   , [itemsPerRowByBreakpoint]);
 
-  const { breakpoint, maxWidth, minWidth } = useBreakpoint(breakpoints, 'md');
+  const { breakpoint } = useBreakpoint(breakpoints, 'md');
 
   const aspectRatios = React.useMemo(() => R.map(getAspectRatio, images), [images]);
   const rowAspectRatioSumsByBreakpoint = React.useMemo(() => R.map(R.pipe(
@@ -42,7 +44,6 @@ const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
         // const width = ((getAspectRatio(image) / rowAspectRatioSum) * 100).toFixed(10);
         const ar = getAspectRatio(image);
         const widthNumber = ((ar / rowAspectRatioSum) * 100);
-        const gutterReserve = parseInt(theme.spacing['1'], 10) * (itemsPerRow - 1);
         const width = `${widthNumber}%`;
         // const width = `${widthNumber}%`;
         // console.log('ars', rowAspectRatioSum);
