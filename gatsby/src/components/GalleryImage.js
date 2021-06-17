@@ -36,7 +36,7 @@ const GalleryImage = ({ data }) => {
         style={getVibrantToHelmetSafeBodyStyle(vibrant)}
       />
     </Helmet>
-    <Link className="underline text-vibrant-light arrow-left-before" to="/photogallery">back</Link>
+    <Link className="underline text-vibrant-light arrow-left-before absolute" to="/photogallery">back</Link>
     <div className="min-h-screen flex flex-col justify-center">
       <div className={classnames('flex mx-auto', ar > 1 ? 'flex-col' : 'flex-row-reverse')} style={{ margin: '0 5vw' }}>
         <div className="flex-grow-0">
@@ -82,7 +82,7 @@ export const query = graphql`
             # placeholder: BLURRED
             placeholder: DOMINANT_COLOR
             # placeholder: TRACED_SVG
-            height: 2048
+            height: 2160
           )
           fields {
             imageMeta {
