@@ -9,9 +9,9 @@
 * {
   box-sizing: border-box;
 }
-.hero * {
+/* .hero * {
   transition: color .2s, background-color .2s;
-}
+} */
 @layer utilities {
   .scroll-snap-none {
     scroll-snap-type: none;
