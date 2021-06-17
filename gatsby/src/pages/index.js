@@ -1,50 +1,106 @@
 import * as React from 'react';
-import { Link } from 'gatsby';
-import { StaticImage } from 'gatsby-plugin-image';
+import { Link, graphql } from 'gatsby';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { getVibrantToHelmetSafeBodyStyle, getVibrant } from '../utils';
+import { Helmet } from 'react-helmet';
+import { HeroA } from '../components/IndexComponents';
 
-const IndexPage = () => {
-  return (
-    <main className="font-serif sm:block lg:grid">
-      <StaticImage
+const IndexPage = ({ data }) => {
+  const images = data.allFile.edges.map((edge) => edge.node);
+  const [palette, setPalette] = React.useState([
+    [0, 0, 0],
+    [254, 254, 254],
+    [200, 200, 200],
+    [200, 200, 200],
+    [180, 180, 180],
+  ]);
+  const image = React.useRef(images[Math.floor(Math.random() * images.length)]).current;
+  const vibrant = getVibrant(image);
+  console.log('vibrant', getVibrant(image));
+  return (<>
+    <Helmet>
+      <body
+        className="bg-vibrant-dark"
+        style={getVibrantToHelmetSafeBodyStyle(vibrant)}
+      />
+    </Helmet>
+    <main
+      className="font-serif sm:block lg:grid"
+    >
+      <GatsbyImage
+        alt=""
+        className="sm:h-auto lg:h-screen hero-img"
+        image={getImage(image)}
+        loading="eager"
         style={{
           gridArea: '1/1',
-          // maxHeight: '90vh',
-          // height: '100vh',
-        }}
-        className='sm:h-auto lg:h-screen'
-        layout='fullWidth'
-        alt=''
-        src='../../data/gallery/DSC4180.jpg'
-      />
-      <div className='relative grid place-items-center' style={{gridArea: '1/1'}}>
-        <div
-          className="m-2 flex flex-col items-end"
-        >
-          {/* TODO: color thief and fonts */}
-          <section className='bg-green-200 bg-opacity-80 rounded-xl py-6'>
+        }} />
+      <div className="relative grid place-items-center" style={{gridArea: '1/1'}}>
+        <div className="m-2 flex flex-col items-end">
+          <section className="rounded-xl py-6 bg-vibrant-dark-75">
             <div className="mx-auto px-6">
-              <h1 className="italic font-normal text-5xl ">Chuck Dries</h1>
-              <h2 className="italic text-blue-300 text-2xl">Full stack software engineer &amp; hobbyist photographer</h2>
-              <ul>
-                <li>Software Developer, <span className="text-gray-800 italic">Axosoft</span></li>
-                <li><a className="hover:text-pink-400 underline" href="mailto:chuck@chuckdries.com">chuck@chuckdries.com</a> / <span>602.618.0414</span></li>
+              <h1 className="text-vibrant-light font-black text-6xl">Chuck Dries</h1>
+              <h2 className="text-vibrant italic text-2xl" >Full stack software engineer &amp; hobbyist photographer</h2>
+              <ul className="text-muted-light">
+                <li>Software Developer, <span className="italic">Axosoft</span></li>
+                <li><HeroA className="ml-0" href="mailto:chuck@chuckdries.com">chuck@chuckdries.com</HeroA>/<span className="ml-1">602.618.0414</span></li>
                 <li>
-                  <a className="mr-1 hover:text-pink-400 underline" href="http://github.com/chuckdries">Github</a>/
-                  <a className="mx-1 hover:text-pink-400 underline" href="https://www.linkedin.com/in/chuckdries/">LinkedIn</a>/
-                  <a className="mx-1 hover:text-pink-400 underline" href="https://devpost.com/chuckdries">Devpost</a>/
-                  <a className="mx-1 hover:text-pink-400 underline" href="CharlesDriesResumeCurrent.pdf">Resume [pdf]</a>/
-                  <a className="mx-1 hover:text-pink-400 underline" href="https://medium.com/@chuckdries">Medium (blog)</a>
+                  <HeroA className="ml-0" href="http://github.com/chuckdries">Github</HeroA>/
+                  <HeroA href="https://www.linkedin.com/in/chuckdries/">LinkedIn</HeroA>/
+                  <HeroA href="https://devpost.com/chuckdries">Devpost</HeroA>/
+                  <HeroA href="CharlesDriesResumeCurrent.pdf">Resume [pdf]</HeroA>/
+                  <HeroA href="https://medium.com/@chuckdries">Medium (blog)</HeroA>
                   {/* <a href="https://pgp.mit.edu/pks/lookup?op=get&search=0x2BD9D0871DB5A518">Public Key</a> */}
                 </li>
               </ul>
             </div>
           </section>
-          <Link className='text-black hover:underline font-sans inline-block p-3 my-2 rounded-md bg-gray-300 border-2 arrow-after font-bold border-gray-400' to='/photogallery'>
+          <Link className="text-muted-dark bg-muted-light border-muted-light hover:underline font-sans inline-block p-3 my-2 rounded-md border-2 arrow-after font-bold" to="/photogallery">
             Photography</Link>
         </div>
       </div>
+      <div id="asdf" style={{ display: 'block'}}></div>
     </main>
-  );
+  </>);
 };
+
+export const query = graphql`
+{
+  allFile(
+    filter: {
+      sourceInstanceName: {eq: "gallery"},
+      base: {in: ["DSC00201.jpg", "DSC05851.jpg", "DSC4180.jpg", "DSC08521.jpg", "DSC06245.jpg", "_DSC4949.jpg"]}
+      }
+  ) {
+    edges {
+      node {
+        relativePath
+        base
+        childImageSharp {
+          gatsbyImageData(
+            layout: FULL_WIDTH
+            # placeholder: BLURRED
+            placeholder: NONE
+            # blurredOptions: {width: 200}
+            breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
+          )
+          fields {
+            imageMeta {
+              vibrant {
+                DarkMuted
+                DarkVibrant
+                LightMuted
+                LightVibrant
+                Muted
+                Vibrant
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`;
 
 export default IndexPage;

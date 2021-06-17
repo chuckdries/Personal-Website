@@ -26,21 +26,21 @@ const GalleryImage = ({ data }) => {
     </Helmet>
     <div className="min-h-screen flex flex-col justify-center">
       {/* TODO: change layout by amount of empty space on side of page, not aspect ratio? */}
-      <div style={{ margin: '0 5vw' }} className={classnames('flex mx-auto', ar > 1 ? 'flex-col' : 'flex-row-reverse')}>
-        <div className='flex-grow-0'>
+      <div className={classnames('flex mx-auto', ar > 1 ? 'flex-col' : 'flex-row-reverse')} style={{ margin: '0 5vw' }}>
+        <div className="flex-grow-0">
           <GatsbyImage
+            alt={name}
             className=""
-            loading='eager'
-            objectFit='contain'
+            image={getImage(image)}
+            key={image.base}
+            loading="eager"
+            objectFit="contain"
             style={{
               maxWidth: `calc(max(90vh, 500px) * ${ar})`,
               // height: '90vh',
               maxHeight: '90vh',
               minHeight: '500px',
-            }}
-            key={image.base}
-            image={getImage(image)}
-            alt={name} />
+            }} />
         </div>
         <div className={classnames('flex-shrink-0 mr-4', ar <= 1 && 'pt-4 flex-auto text-right')}>
           {hasName(image) && <h1 className="text-2xl mt-2">{name}</h1>}
@@ -57,7 +57,6 @@ export const query = graphql`
   allFile(filter: {sourceInstanceName: {eq: "gallery"}, base: {eq: $imageFilename}}) {
     edges {
       node {
-        relativePath
         base
         childImageSharp{
           fluid {
