@@ -20,7 +20,7 @@ export const getVibrantToHelmetSafeBodyStyle = (vibrant) => {
     '--vibrant': vibrant.Vibrant,
     '--dark-vibrant': vibrant.DarkVibrant,
     '--light-vibrant': vibrant.LightVibrant,
-  }
+  };
   if (typeof window === 'undefined') {
     return style;
   }

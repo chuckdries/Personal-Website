@@ -51,8 +51,6 @@ function transformMetaToNodeData(exifData, iptcData, vibrantData) {
   // })
   , vibrantData);
 
-  console.log(vibrant);
-
   return {
     exif: exifData?.exif,
     gps,
