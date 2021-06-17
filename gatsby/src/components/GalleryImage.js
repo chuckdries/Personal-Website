@@ -36,7 +36,7 @@ const GalleryImage = ({ data }) => {
         style={getVibrantToHelmetSafeBodyStyle(vibrant)}
       />
     </Helmet>
-    <Link className="underline text-vibrant-light arrow-left-before absolute" to="/photogallery">back</Link>
+    <Link className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before absolute" to="/photogallery">gallery</Link>
     <div className="min-h-screen flex flex-col justify-center">
       <div className={classnames('flex mx-auto', ar > 1 ? 'flex-col' : 'flex-row-reverse')} style={{ margin: '0 5vw' }}>
         <div className="flex-grow-0">

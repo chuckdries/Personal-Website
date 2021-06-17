@@ -24,6 +24,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
   }, [isClient]);
   return (<>
     <Helmet>
+      <title>Chuck Dries</title>
       <body
         className={classnames(isClient ? 'bg-vibrant-dark' : '')}
         style={getVibrantToHelmetSafeBodyStyle(vibrant)}
@@ -67,7 +68,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
           </section>
           <Link
             className={classnames(
-              'hover:underline inline-block p-4 px-5 my-2 rounded-md border-2 arrow-right-after font-bold font-serif',
+              'hover:underline inline-block p-2 px-4 my-2 text-lg rounded-md border-2 arrow-right-after font-bold font-serif',
               isClient && 'text-muted-dark bg-muted-light border-muted-light')} 
             to="/photogallery"
           >

@@ -20,7 +20,7 @@ const GalleryPage = ({ data }) => {
       <body className="bg-black text-white" />
     </Helmet>
     <div className="bg-black min-h-screen 2xl:container">
-      <Link className="text-blue-300 arrow-left-before" to="/">back</Link>
+      <Link className="hover:underline hover:text-blue-200 text-blue-300 arrow-left-before" to="/">home</Link>
       <h1 className="text-5xl mt-2 ml-4 font-serif font-black z-10 relative">Photo Gallery</h1>
       <div className="mx-auto">
         <MasonryGallery
