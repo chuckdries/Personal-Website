@@ -32,7 +32,7 @@ const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
   
   return (
     <div
-      className='w-full'
+      className="w-full"
       style={{
         position: 'relative',
       }}
@@ -53,20 +53,20 @@ const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
         }
         return (
           <Link 
+            className="inline-block"
             key={`${image.base}`}
-            className='inline-block'
+            state={{modal: true}}
             style={{
               width,
               // marginLeft: '8px',
-            }}
-            state={{modal: true}} to={`/photogallery/${image.base}`}
+            }} to={`/photogallery/${image.base}`}
           >
             <GatsbyImage
-              className='w-full'
-              objectFit='cover'
+              alt={getName(image)}
+              className="w-full"
               // style={{ width }}
               image={getImage(image)}
-              alt={getName(image)}
+              objectFit="cover"
             />
           </Link>
         );

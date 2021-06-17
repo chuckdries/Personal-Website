@@ -10,6 +10,7 @@ module.exports = {
   },
   'env': {
     'node': true, // defines things like process.env when generating through node
+    'browser': true
   },
   'extends': [
     'eslint:recommended', // use recommended configs
@@ -23,5 +24,7 @@ module.exports = {
     'indent': ['warn', 2],
     'comma-dangle': ['warn', 'always-multiline'],
     'no-unused-vars': 1,
+    'jsx-quotes': 1,
+    'react/jsx-sort-props': 1,
   },
 };

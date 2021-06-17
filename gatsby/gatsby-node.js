@@ -3,6 +3,8 @@ const util = require('util');
 const path = require('path');
 const { read } = require('fast-exif');
 const iptc = require('node-iptc');
+const Vibrant = require('node-vibrant');
+const R = require('ramda');
 
 const readFile = util.promisify(fs.readFile);
 
@@ -16,7 +18,7 @@ function convertDMSToDD(dms, positiveDirection) {
   return positiveDirection ? res : -res;
 }
 
-function transformMetaToNodeData(exifData, iptcData) {
+function transformMetaToNodeData(exifData, iptcData, vibrantData) {
   const gps = { longitude: null, latitude: null };
 
   if (exifData) {
@@ -36,12 +38,27 @@ function transformMetaToNodeData(exifData, iptcData) {
     }
   }
 
+  // console.log('asdf', JSON.stringify(vibrantData.Vibrant.getTitleTextColor()));
+
+  const vibrant = R.map((swatch) => 
+    swatch.getRgb()
+  // ({
+  //   // rgb: swatch.getRgb(),
+  //   // hsl: swatch.getHsl(),
+  //   // hex: swatch.getHex(),
+  //   // // titleTextColor: swatch.getTitleTextColor(),
+  //   // // bodyTextColor: swatch.getBodyTextColor(),
+  // })
+  , vibrantData);
+
+  console.log(vibrant);
 
   return {
     exif: exifData?.exif,
     gps,
     dateTaken: exifData?.exif?.DateTimeOriginal,
     iptc: iptcData || undefined,
+    vibrant,
   };
 }
 
@@ -54,10 +71,14 @@ exports.onCreateNode = async function ({ node, getNode, actions }) {
     const file = await readFile(parent.absolutePath);
     const iptcData = iptc(file);
     const exifData = await read(parent.absolutePath);
+    const vibrantData = await Vibrant.from(parent.absolutePath)
+      .quality(1)
+      .getPalette();
+
     createNodeField({
       node,
       name: 'imageMeta',
-      value: transformMetaToNodeData(exifData, iptcData),
+      value: transformMetaToNodeData(exifData, iptcData, vibrantData),
     });
   }
 };
