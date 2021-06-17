@@ -8,6 +8,7 @@
 
 * {
   box-sizing: border-box;
+  transition: color .2s, background .2s;
 }
 @layer utilities {
   .scroll-snap-none {

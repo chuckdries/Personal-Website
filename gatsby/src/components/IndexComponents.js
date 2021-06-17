@@ -5,10 +5,11 @@ export const HeroA = ({
   href,
   children,
   className,
+  isClient,
   ...linkProps
 }) => (
   <a
-    className={classnames('text-muted-light mx-1 hover:text-vibrant-light underline', className)}
+    className={classnames('mx-1 underline', isClient && 'text-muted-light hover:text-vibrant-light', className)}
     href={href}
     {...linkProps}
   >{children}</a>
