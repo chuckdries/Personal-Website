@@ -68,5 +68,5 @@ a {
   margin-left: 3px;
   transform: translate(0px);
   display: inline-block;
-  transition: all .2s;
+  /* transition: all .2s; */
 }
