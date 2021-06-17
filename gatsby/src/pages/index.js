@@ -9,7 +9,7 @@ const IndexPage = ({ data }) => {
   const images = data.allFile.edges.map((edge) => edge.node);
   const image = React.useRef(images[Math.floor(Math.random() * images.length)]).current;
   const vibrant = getVibrant(image);
-  console.log('vibrant', getVibrant(image));
+  console.log('image', image);
   return (<>
     <Helmet>
       <body
@@ -24,6 +24,7 @@ const IndexPage = ({ data }) => {
         alt=""
         className="sm:h-auto lg:h-screen hero-img"
         image={getImage(image)}
+        key={image.base}
         loading="eager"
         style={{
           gridArea: '1/1',
@@ -62,7 +63,7 @@ export const query = graphql`
   allFile(
     filter: {
       sourceInstanceName: {eq: "gallery"},
-      # base: {in: ["DSC00201.jpg", "DSC05851.jpg", "DSC4180.jpg", "DSC08521.jpg", "DSC06245.jpg", "_DSC4949.jpg"]}
+      base: {nin: ["DSC01699.jpg", "DSC02981.jpg", "_DSC4155.jpg"]}
       }
   ) {
     edges {
@@ -76,7 +77,7 @@ export const query = graphql`
             placeholder: TRACED_SVG
             # placeholder: NONE
             # blurredOptions: {width: 50}
-            breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
+            breakpoints: [750, 1080, 1366, 1920, 2560]
           )
           fields {
             imageMeta {
