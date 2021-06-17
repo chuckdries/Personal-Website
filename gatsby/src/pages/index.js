@@ -4,14 +4,10 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { getVibrantToHelmetSafeBodyStyle, getVibrant } from '../utils';
 import { Helmet } from 'react-helmet';
 import classnames from 'classnames';
-import useBreakpoint from 'use-breakpoint';
 
 import { HeroA } from '../components/IndexComponents';
 
-import themeBreakpoints from '../breakpoints';
-
 const IndexPage = ({ data: { allFile: { edges } } }) => {
-  const { breakpoint } = useBreakpoint(themeBreakpoints, 'md');
   const [isClient, setIsClient] = React.useState(false);
   const images = React.useMemo(() => edges.map((edge) => edge.node), [edges]);
   const image = React.useMemo(() => {
@@ -21,7 +17,6 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
     return images[Math.floor(Math.random() * images.length)];
   }, [images, isClient]);
   const vibrant = getVibrant(image, isClient);
-  console.log('vibrant', vibrant);
   React.useEffect(() => {
     if (!isClient) {
       setIsClient(true);
@@ -49,7 +44,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
             gridArea: '1/1',
           }} />
         // 67vw = 1/1.49253731 = 1/aspect ratio of my camera lol
-        : <div className="md:h-screen sm:h-auto" style={{gridArea: '1/1', height: breakpoint === 'sm' ? '67vw' : '100vh'}}></div> }
+        : <div className="md:h-screen sm:h-two-thirds-vw" style={{gridArea: '1/1' }}></div> }
       <div className="relative grid place-items-center" style={{gridArea: '1/1'}}>
         <div className="m-2 flex flex-col items-end">
           <section className={classnames('rounded-xl py-6', isClient && ' bg-vibrant-dark-75')}>

@@ -28,6 +28,12 @@
   .scroll-padding-6 {
     scroll-padding: theme('spacing.6');
   }
+  @variants responsive {
+
+    .h-two-thirds-vw {
+      height: 67vw;
+    }
+  }
 }
 
 body {
