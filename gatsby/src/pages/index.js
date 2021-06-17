@@ -7,13 +7,6 @@ import { HeroA } from '../components/IndexComponents';
 
 const IndexPage = ({ data }) => {
   const images = data.allFile.edges.map((edge) => edge.node);
-  const [palette, setPalette] = React.useState([
-    [0, 0, 0],
-    [254, 254, 254],
-    [200, 200, 200],
-    [200, 200, 200],
-    [180, 180, 180],
-  ]);
   const image = React.useRef(images[Math.floor(Math.random() * images.length)]).current;
   const vibrant = getVibrant(image);
   console.log('vibrant', getVibrant(image));
@@ -69,7 +62,7 @@ export const query = graphql`
   allFile(
     filter: {
       sourceInstanceName: {eq: "gallery"},
-      base: {in: ["DSC00201.jpg", "DSC05851.jpg", "DSC4180.jpg", "DSC08521.jpg", "DSC06245.jpg", "_DSC4949.jpg"]}
+      # base: {in: ["DSC00201.jpg", "DSC05851.jpg", "DSC4180.jpg", "DSC08521.jpg", "DSC06245.jpg", "_DSC4949.jpg"]}
       }
   ) {
     edges {
@@ -80,8 +73,9 @@ export const query = graphql`
           gatsbyImageData(
             layout: FULL_WIDTH
             # placeholder: BLURRED
-            placeholder: NONE
-            # blurredOptions: {width: 200}
+            placeholder: TRACED_SVG
+            # placeholder: NONE
+            # blurredOptions: {width: 50}
             breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
           )
           fields {
