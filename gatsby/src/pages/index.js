@@ -36,7 +36,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
         <GatsbyImage
           alt=""
           className={classnames(
-            'md:h-screen hero-img sm:h-auto',
+            'md:h-screen sm:h-two-thirds-vw',
           )}
           image={getImage(image)}
           loading="eager"
@@ -74,7 +74,6 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
             Photo Gallery</Link>
         </div>
       </div>
-      <div id="asdf" style={{ display: 'block'}}></div>
     </main>
   </>);
 };
@@ -84,7 +83,9 @@ export const query = graphql`
   allFile(
     filter: {
       sourceInstanceName: {eq: "gallery"},
-      base: {nin: ["DSC01699.jpg", "DSC02981.jpg", "_DSC4155.jpg", "DSC02538.jpg", "DSC05851.jpg"]}
+      # base: {nin: ["DSC01699.jpg", "DSC02981.jpg", "_DSC4155.jpg", "DSC02538.jpg", "DSC05851.jpg"]}
+      # no vertical images
+      childrenImageSharp: {elemMatch: {fluid: {aspectRatio: {gte: 1.4}}}}
       }
   ) {
     edges {
