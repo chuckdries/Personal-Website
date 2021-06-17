@@ -3,10 +3,15 @@ import { Link, graphql } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { getVibrantToHelmetSafeBodyStyle, getVibrant } from '../utils';
 import { Helmet } from 'react-helmet';
-import { HeroA } from '../components/IndexComponents';
 import classnames from 'classnames';
+import useBreakpoint from 'use-breakpoint';
+
+import { HeroA } from '../components/IndexComponents';
+
+import themeBreakpoints from '../breakpoints';
 
 const IndexPage = ({ data: { allFile: { edges } } }) => {
+  const { breakpoint } = useBreakpoint(themeBreakpoints, 'md');
   const [isClient, setIsClient] = React.useState(false);
   const images = React.useMemo(() => edges.map((edge) => edge.node), [edges]);
   const image = React.useMemo(() => {
@@ -32,22 +37,19 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
     <main
       className="font-serif sm:block md:grid hero"
     >
-      <GatsbyImage
-        alt=""
-        className={classnames(
-          'md:h-screen hero-img sm:h-auto',
-          // isClient ? 'sm:h-auto' : 'sm:h-2'
-        )}
-        image={getImage(image)}
-        key={image.base}
-        loading="eager"
-        style={{
-          gridArea: '1/1',
-          // hide for SSR pass so it doesn't flash in then get replaced when we pick a new random one
-          // TODO: replace image with empty div for SSR so we don't always load duck image
-          // TODO: hardcode height on mobile for empty div
-          visibility: isClient ? 'visible' : 'hidden',
-        }} />
+      {isClient ? 
+        <GatsbyImage
+          alt=""
+          className={classnames(
+            'md:h-screen hero-img sm:h-auto',
+          )}
+          image={getImage(image)}
+          loading="eager"
+          style={{
+            gridArea: '1/1',
+          }} />
+        // 67vw = 1/1.49253731 = 1/aspect ratio of my camera lol
+        : <div className="md:h-screen sm:h-auto" style={{gridArea: '1/1', height: breakpoint === 'sm' ? '67vw' : '100vh'}}></div> }
       <div className="relative grid place-items-center" style={{gridArea: '1/1'}}>
         <div className="m-2 flex flex-col items-end">
           <section className={classnames('rounded-xl py-6', isClient && ' bg-vibrant-dark-75')}>
@@ -61,7 +63,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
                   <HeroA className="ml-0" href="http://github.com/chuckdries" isClient={isClient}>Github</HeroA>/
                   <HeroA href="https://www.linkedin.com/in/chuckdries/" isClient={isClient}>LinkedIn</HeroA>/
                   <HeroA href="https://devpost.com/chuckdries" isClient={isClient}>Devpost</HeroA>/
-                  <HeroA href="/public/CharlesDriesResumeCurrent.pdf" isClient={isClient}>Resume [pdf]</HeroA>/
+                  <HeroA href="/CharlesDriesResumeCurrent.pdf" isClient={isClient}>Resume [pdf]</HeroA>/
                   <HeroA href="https://medium.com/@chuckdries" isClient={isClient}>Medium (blog)</HeroA>
                   {/* <a href="https://pgp.mit.edu/pks/lookup?op=get&search=0x2BD9D0871DB5A518">Public Key</a> */}
                 </li>
