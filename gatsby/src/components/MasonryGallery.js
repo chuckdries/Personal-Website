@@ -49,7 +49,7 @@ const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
         // console.log('ars', rowAspectRatioSum);
         if (i === 0) {
           // console.log(rowIndex, rowAspectRatioSum);
-          console.log(getName(image), width);
+          // console.log(getName(image), width);
         }
         return (
           <Link 

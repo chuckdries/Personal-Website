@@ -1,6 +1,14 @@
 import React from 'react';
-import { graphql } from 'gatsby';
-import { getAspectRatio, getMeta, getName, hasName } from '../utils';
+import { graphql, Link } from 'gatsby';
+import {
+  getAspectRatio,
+  getMeta,
+  getName,
+  getShutterFractionFromExposureTime,
+  getVibrant,
+  getVibrantToHelmetSafeBodyStyle,
+  hasName,
+} from '../utils';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { Helmet } from 'react-helmet';
 import classnames from 'classnames';
@@ -8,24 +16,28 @@ import classnames from 'classnames';
 const GalleryImage = ({ data }) => {
   const image = data.allFile.edges[0].node;
   const ar = getAspectRatio(image);
-  console.log(ar);
-  // const imageStyle = {}
-  // if (ar > 1) {
-  //   imageStyle.width = '90vw'
-  // } else {
-  //   imageStyle.height = '90vh'
-  // }
+  // console.log(ar);
 
-  console.log(`calc(90vw * ${ar})px`);
+  // TODO: layout by comparing aspect ratio of browser to aspect ratio of image
+  // TODO: metadata
+
+  // console.log(`calc(90vw * ${ar})px`);
 
   const name = getName(image);
+  const meta = getMeta(image);
+  const vibrant = getVibrant(image, true);
+
+  const shutterSpeed = React.useMemo(() => getShutterFractionFromExposureTime(meta.exif.ExposureTime || 0), [meta]);
   return (<>
     <Helmet>
       <title>{name} - Gallery | Chuck Dries</title>
-      <body className="bg-black text-white" />
+      <body
+        className="text-vibrant-light bg-vibrant-dark"
+        style={getVibrantToHelmetSafeBodyStyle(vibrant)}
+      />
     </Helmet>
+    <Link className="underline text-vibrant-light arrow-left-before" to="/photogallery">back</Link>
     <div className="min-h-screen flex flex-col justify-center">
-      {/* TODO: change layout by amount of empty space on side of page, not aspect ratio? */}
       <div className={classnames('flex mx-auto', ar > 1 ? 'flex-col' : 'flex-row-reverse')} style={{ margin: '0 5vw' }}>
         <div className="flex-grow-0">
           <GatsbyImage
@@ -37,15 +49,18 @@ const GalleryImage = ({ data }) => {
             objectFit="contain"
             style={{
               maxWidth: `calc(max(90vh, 500px) * ${ar})`,
-              // height: '90vh',
               maxHeight: '90vh',
               minHeight: '500px',
             }} />
         </div>
-        <div className={classnames('flex-shrink-0 mr-4', ar <= 1 && 'pt-4 flex-auto text-right')}>
-          {hasName(image) && <h1 className="text-2xl mt-2">{name}</h1>}
-          <p>{getMeta(image).iptc.caption}</p>
-          <p>some other meta</p>
+        <div className={classnames('flex-shrink-0 mr-2 flex flex-row', ar <= 1 && 'pt-4 flex-col flex-auto text-right')}>
+          <div className="flex-auto mr-1">
+            {hasName(image) && <h1 className="text-2xl mt-2 font-serif">{name}</h1>}
+            <p className="mr-1">{meta.iptc.caption}</p>
+          </div>
+          {shutterSpeed && <p className="mr-1">Shutter speed: {shutterSpeed}</p>}
+          {meta.exif.FNumber && <p className="mr-1">Aperture: f/{meta.exif.FNumber}</p>}
+          {meta.exif.ISO && <p className="mr-1">ISO: {meta.exif.ISO}</p>}
         </div>
       </div>
     </div>
@@ -65,8 +80,8 @@ export const query = graphql`
           gatsbyImageData(
             layout: CONSTRAINED
             # placeholder: BLURRED
-            # placeholder: DOMINANT_COLOR
-            placeholder: TRACED_SVG
+            placeholder: DOMINANT_COLOR
+            # placeholder: TRACED_SVG
             height: 2048
           )
           fields {
@@ -80,8 +95,15 @@ export const query = graphql`
               exif {
                 FNumber
                 ExposureTime
-                ShutterSpeedValue
                 ISO
+              }
+              vibrant {
+                DarkMuted
+                DarkVibrant
+                LightMuted
+                LightVibrant
+                Muted
+                Vibrant
               }
             }
           }

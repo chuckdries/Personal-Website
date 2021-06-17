@@ -30,12 +30,12 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
       />
     </Helmet>
     <main
-      className="font-serif sm:block lg:grid"
+      className="font-serif sm:block md:grid hero"
     >
       <GatsbyImage
         alt=""
         className={classnames(
-          'lg:h-screen hero-img sm:h-auto',
+          'md:h-screen hero-img sm:h-auto',
           // isClient ? 'sm:h-auto' : 'sm:h-2'
         )}
         image={getImage(image)}
@@ -61,7 +61,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
                   <HeroA className="ml-0" href="http://github.com/chuckdries" isClient={isClient}>Github</HeroA>/
                   <HeroA href="https://www.linkedin.com/in/chuckdries/" isClient={isClient}>LinkedIn</HeroA>/
                   <HeroA href="https://devpost.com/chuckdries" isClient={isClient}>Devpost</HeroA>/
-                  <HeroA href="CharlesDriesResumeCurrent.pdf" isClient={isClient}>Resume [pdf]</HeroA>/
+                  <HeroA href="/public/CharlesDriesResumeCurrent.pdf" isClient={isClient}>Resume [pdf]</HeroA>/
                   <HeroA href="https://medium.com/@chuckdries" isClient={isClient}>Medium (blog)</HeroA>
                   {/* <a href="https://pgp.mit.edu/pks/lookup?op=get&search=0x2BD9D0871DB5A518">Public Key</a> */}
                 </li>
@@ -70,11 +70,11 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
           </section>
           <Link
             className={classnames(
-              'hover:underline font-sans inline-block p-3 my-2 rounded-md border-2 arrow-after font-bold',
+              'hover:underline inline-block p-4 px-5 my-2 rounded-md border-2 arrow-right-after font-bold font-serif',
               isClient && 'text-muted-dark bg-muted-light border-muted-light')} 
             to="/photogallery"
           >
-            Photography</Link>
+            Photo Gallery</Link>
         </div>
       </div>
       <div id="asdf" style={{ display: 'block'}}></div>
