@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { graphql } from 'gatsby';
 // import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { Link } from 'gatsby';
 import { Helmet } from 'react-helmet';
 // import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 
@@ -15,12 +16,13 @@ const GalleryPage = ({ data }) => {
 
   return (<>
     <Helmet>
-      <title>Gallery | Chuck Dries</title>
+      <title>Photo Gallery | Chuck Dries</title>
       <body className="bg-black text-white" />
     </Helmet>
-    <div className="bg-black min-h-screen">
-      <h1 className="text-2xl">Gallery</h1>
-      <div className="mx-auto 2xl:container">
+    <div className="bg-black min-h-screen 2xl:container">
+      <Link className="text-blue-300 arrow-left-before" to="/">back</Link>
+      <h1 className="text-5xl mt-2 ml-4 font-serif font-black z-10 relative">Photo Gallery</h1>
+      <div className="mx-auto">
         <MasonryGallery
           images={images}
           itemsPerRow={{

@@ -8,7 +8,9 @@
 
 * {
   box-sizing: border-box;
-  transition: color .2s, background .2s;
+}
+.hero * {
+  transition: color .2s, background-color .2s;
 }
 @layer utilities {
   .scroll-snap-none {
@@ -47,8 +49,16 @@ a {
   @apply text-blue-600;
 }
 
-.arrow-after:after {
+.arrow-right-after:after {
   content: "\279C";
+  margin-left: 3px;
+  transform: translate(0px);
+  display: inline-block;
+  transition: all .2s;
+}
+
+.arrow-left-before:before {
+  content: "\21AB";
   margin-left: 3px;
   transform: translate(0px);
   display: inline-block;
