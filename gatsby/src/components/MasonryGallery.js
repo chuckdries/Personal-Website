@@ -11,8 +11,9 @@ const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
   const breakpoints = React.useMemo(() => 
     R.pick(R.keys(itemsPerRowByBreakpoint), themeBreakpoints)
   , [itemsPerRowByBreakpoint]);
+  console.log(breakpoints);
 
-  const { breakpoint } = useBreakpoint(breakpoints, 'md');
+  const { breakpoint } = useBreakpoint(breakpoints, 'sm');
 
   const aspectRatios = React.useMemo(() => R.map(getAspectRatio, images), [images]);
   const rowAspectRatioSumsByBreakpoint = React.useMemo(() => R.map(R.pipe(
@@ -36,7 +37,7 @@ const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
         const rowAspectRatioSum = rowAspectRatioSumsForCurrentBP[rowIndex];
         // const width = ((getAspectRatio(image) / rowAspectRatioSum) * 100).toFixed(10);
         const ar = getAspectRatio(image);
-        const widthNumber = ((ar / rowAspectRatioSum) * 100);
+        const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(5);
         const width = `${widthNumber}%`;
         // const width = `${widthNumber}%`;
         // console.log('ars', rowAspectRatioSum);

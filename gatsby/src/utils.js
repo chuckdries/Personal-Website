@@ -5,14 +5,7 @@ export const getMeta = (image) => image.childImageSharp.fields.imageMeta;
 export const getName = (image) => getMeta(image)?.iptc.object_name || image.base;
 
 // some pleasing default colors for SSR and initial hydration
-export const getVibrant = (image, isClient) => isClient ? getMeta(image)?.vibrant : {
-  'DarkMuted': [ 63, 64, 73 ],
-  'DarkVibrant': [ 52, 75, 116 ],
-  'LightMuted': [ 211, 194, 181 ],
-  'LightVibrant': [ 224, 183, 140 ],
-  'Muted': [ 155, 123, 114 ],
-  'Vibrant': [ 226, 116, 81 ],
-};
+export const getVibrant = (image) => getMeta(image)?.vibrant;
 
 export const hasName = (image) => Boolean(getMeta(image)?.iptc.object_name);
 
@@ -23,12 +16,12 @@ export const getRgba = (palette, alpha) => `rgba(${palette[0]}, ${palette[1]}, $
 // work around SSR bug in react-helmet
 export const getVibrantToHelmetSafeBodyStyle = (vibrant) => {
   const style = {
-    '--muted': vibrant.Muted,
-    '--dark-muted': vibrant.DarkMuted,
-    '--light-muted': vibrant.LightMuted,
-    '--vibrant': vibrant.Vibrant,
-    '--dark-vibrant': vibrant.DarkVibrant,
-    '--light-vibrant': vibrant.LightVibrant,
+    '--muted': vibrant.Muted.rgb,
+    '--dark-muted': vibrant.DarkMuted.rgb,
+    '--light-muted': vibrant.LightMuted.rgb,
+    '--vibrant': vibrant.Vibrant.rgb,
+    '--dark-vibrant': vibrant.DarkVibrant.rgb,
+    '--light-vibrant': vibrant.LightVibrant.rgb,
   };
   if (typeof window === 'undefined') {
     return style;

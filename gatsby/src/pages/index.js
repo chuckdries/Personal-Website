@@ -29,7 +29,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
     localStorage.setItem('lastHeros', JSON.stringify(take(3, [imageIndex, ...lastThreeImages])));
     return images[imageIndex];
   }, [images, isClient]);
-  const vibrant = getVibrant(image, isClient);
+  const vibrant = getVibrant(image);
   React.useEffect(() => {
     if (!isClient) {
       setIsClient(true);
@@ -118,12 +118,7 @@ export const query = graphql`
           fields {
             imageMeta {
               vibrant {
-                DarkMuted
-                DarkVibrant
-                LightMuted
-                LightVibrant
-                Muted
-                Vibrant
+                ...VibrantColors
               }
             }
           }
