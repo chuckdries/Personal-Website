@@ -3,9 +3,19 @@ import { Link, graphql } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { getVibrantToHelmetSafeBodyStyle, getVibrant } from '../utils';
 import { Helmet } from 'react-helmet';
+import { take } from 'ramda';
 import classnames from 'classnames';
 
 import { HeroA } from '../components/IndexComponents';
+
+const getDifferentRand = (range, lastNs, iterations = 0) => {
+  const n = Math.floor(Math.random() * range);
+  if (lastNs.findIndex(x => x === n) > -1 && iterations < 5) {
+    console.log('got dupe, trying again', n);
+    return getDifferentRand(range, lastNs, iterations + 1);
+  }
+  return n;
+};
 
 const IndexPage = ({ data: { allFile: { edges } } }) => {
   const [isClient, setIsClient] = React.useState(false);
@@ -14,7 +24,10 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
     if (!isClient) {
       return images[0];
     }
-    return images[Math.floor(Math.random() * images.length)];
+    const lastThreeImages = JSON.parse(localStorage.getItem('lastHeros')) || [];
+    const imageIndex = getDifferentRand(images.length, lastThreeImages);
+    localStorage.setItem('lastHeros', JSON.stringify(take(3, [imageIndex, ...lastThreeImages])));
+    return images[imageIndex];
   }, [images, isClient]);
   const vibrant = getVibrant(image, isClient);
   React.useEffect(() => {
@@ -48,8 +61,8 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
         : <div className="md:h-screen sm:h-two-thirds-vw" style={{gridArea: '1/1' }}></div> }
       <div className="relative grid place-items-center" style={{gridArea: '1/1'}}>
         <div className="m-2 flex flex-col items-end">
-          <section className={classnames('rounded-xl py-6', isClient && ' bg-vibrant-dark-75')}>
-            <div className="mx-auto px-6">
+          <section className={classnames('rounded-xl py-5', isClient && ' bg-vibrant-dark-75')}>
+            <div className="mx-auto px-5">
               <h1 className={classnames('font-black text-6xl', isClient && 'text-vibrant-light')}>Chuck Dries</h1>
               <h2 className={classnames('italic text-2xl', isClient && 'text-vibrant')}>Full stack software engineer &amp; hobbyist photographer</h2>
               <ul className={classnames(isClient && 'text-muted-light')}>
