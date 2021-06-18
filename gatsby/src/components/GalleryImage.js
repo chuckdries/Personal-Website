@@ -50,7 +50,7 @@ const GalleryImage = ({ data }) => {
             style={{
               maxWidth: `calc(max(90vh, 500px) * ${ar})`,
               maxHeight: '90vh',
-              minHeight: '500px',
+              // minHeight: '500px',
             }} />
         </div>
         <div className={classnames('flex-shrink-0 mr-2 flex flex-row', ar <= 1 && 'pt-4 flex-col flex-auto text-right')}>
@@ -98,12 +98,7 @@ export const query = graphql`
                 ISO
               }
               vibrant {
-                DarkMuted
-                DarkVibrant
-                LightMuted
-                LightVibrant
-                Muted
-                Vibrant
+                ...VibrantColors
               }
             }
           }
