@@ -4,7 +4,6 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { Helmet } from 'react-helmet';
 import { take } from 'ramda';
 import classnames from 'classnames';
-import useHotkeys from '@reecelucas/react-use-hotkeys';
 
 import { getVibrantToHelmetSafeBodyStyle, getVibrant } from '../utils';
 import { HeroA } from '../components/IndexComponents';
@@ -44,20 +43,33 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
     }
   }, [isClient, imageIndex, shuffleImage]);
 
-  useHotkeys('ArrowRight', () => {
-    if (imageIndex === images.length - 1) {
-      setImageIndex(0);
-      return;
-    }
-    setImageIndex(imageIndex + 1);
-  });
-  useHotkeys('ArrowLeft', () => {
-    if (imageIndex === 0) {
-      setImageIndex(images.length - 1);
-      return;
-    }
-    setImageIndex(imageIndex - 1);
-  });
+  React.useEffect(() => {
+    const keyListener = (e) => {
+      switch (e.code) {
+      case 'ArrowRight': {
+        if (imageIndex === images.length - 1) {
+          setImageIndex(0);
+          return;
+        }
+        setImageIndex(imageIndex + 1);
+        return;
+      }
+
+      case 'ArrowLeft': {
+        if (imageIndex === 0) {
+          setImageIndex(images.length - 1);
+          return;
+        }
+        setImageIndex(imageIndex - 1);
+        return;
+      }
+      }
+    };
+    document.addEventListener('keydown', keyListener);
+    return () => {
+      document.removeEventListener('keydown', keyListener);
+    };
+  }, [imageIndex, images.length]);
 
   const vibrant = getVibrant(image);
   return (<>
@@ -106,7 +118,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
           <div>
             <button
               className={classnames(
-                'hover:underline inline-block p-3 px-5 m-3 text-lg rounded-md border-2 font-bold font-serif',
+                'hover:underline inline-block p-3 px-5 my-3 mr-3 text-lg rounded-md border-2 font-bold font-serif',
                 isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')}
               onClick={shuffleImage} 
               type="button"
