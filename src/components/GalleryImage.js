@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, Link } from 'gatsby';
+import { graphql, Link, navigate } from 'gatsby';
 import {
   getAspectRatio,
   getMeta,
@@ -39,7 +39,11 @@ const GalleryImage = ({ data }) => {
         style={getVibrantToHelmetSafeBodyStyle(vibrant)}
       />
     </Helmet>
-    <Link className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before absolute" to="/photogallery">gallery</Link>
+    <button
+      className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before absolute"
+      onClick={() => navigate(-1)}
+      type="button"
+    >back</button>
     <div className="min-h-screen pt-5 flex flex-col justify-center">
       <div className={classnames('flex', orientationClasses)}>
         <div className="flex-grow-0">
@@ -58,28 +62,33 @@ const GalleryImage = ({ data }) => {
         </div>
         <div className={classnames('flex-shrink-0 mx-2 flex flex-row', ar <= 1 && 'pt-5 flex-col flex-auto text-right')}>
           <div className="flex-auto mr-2">
-            {hasName(image) && <h1 className="text-2xl mt-3 font-serif">{name}</h1>}
+            <p className="text-muted-light font-mono text-sm m-0 mt-1">{image.base}</p>
+            {hasName(image) && <h1 className="text-4xl mt-0 font-serif">{name}</h1>}
             <p className="mr-2">{meta.iptc.caption}</p>
           </div>
-          {(locationString) && <div className={classnames('flex items-baseline ml-2 text-lg', ar <= 1 && 'flex-row-reverse')}>
-            <span className="relative mr-1" style={{top: '2px'}}>
+          {(locationString) && <div className={classnames('flex items-baseline ml-2 text-lg', ar <= 1 && 'flex-row-reverse')} title="location">
+            <span className="icon-offset mr-1">
               <ion-icon name="location-sharp"></ion-icon>
             </span>
             <span className="mr-1">{locationString}</span>
           </div>}
-          {shutterSpeed && <div className={classnames('flex items-baseline ml-2 text-lg', ar <= 1 && 'flex-row-reverse')}>
-            <span className="relative mr-1" style={{top: '2px'}}><ion-icon name="stopwatch-sharp"></ion-icon></span>
+          {shutterSpeed && <div className={classnames('flex items-baseline ml-2 text-lg', ar <= 1 && 'flex-row-reverse')} title="shutter speed">
+            <span className="icon-offset mr-1">
+              <ion-icon name="stopwatch-sharp"></ion-icon>
+            </span>
             <span className="mr-1">{shutterSpeed}</span>
           </div>}
-          {meta.exif.FNumber && <div className={classnames('flex items-baseline ml-2 text-lg', ar <= 1 && 'flex-row-reverse')}>
-            <span className="relative mr-1" style={{top: '2px'}}>
+          {meta.exif.FNumber && <div className={classnames('flex items-baseline ml-2 text-lg', ar <= 1 && 'flex-row-reverse')} title="aperture">
+            <span className="icon-offset mr-1">
               <ion-icon name="aperture-sharp"></ion-icon>
             </span>
             <span className="mr-1">f/{meta.exif.FNumber}</span>
           </div>}
-          {meta.exif.ISO && <div className="align-baseline ml-2 text-lg">
-            <span className="font-mono" style={{fontSize: '12px'}}>ISO</span>
-            <span className="mx-1">{meta.exif.ISO}</span>
+          {meta.exif.ISO && <div className={classnames('flex items-baseline ml-2 text-lg', ar <= 1 && 'flex-row-reverse')} title="ISO">
+            <span className="icon-offset mr-1">
+              <ion-icon name="film-outline"></ion-icon>
+            </span>
+            <span className="mr-1">{meta.exif.ISO}</span>
           </div>}
         </div>
       </div>
