@@ -16,12 +16,8 @@ import classnames from 'classnames';
 const GalleryImage = ({ data }) => {
   const image = data.allFile.edges[0].node;
   const ar = getAspectRatio(image);
-  // console.log(ar);
 
-  // TODO: layout by comparing aspect ratio of browser to aspect ratio of image
-  // TODO: metadata
-
-  // console.log(`calc(90vw * ${ar})px`);
+  // TODO: metadata icons
 
   const name = getName(image);
   const meta = getMeta(image);

@@ -8,6 +8,8 @@ import classnames from 'classnames';
 
 import { HeroA } from '../components/IndexComponents';
 
+// TODO: better text colors in situations of low contrast
+
 const getDifferentRand = (range, lastNs, iterations = 0) => {
   const n = Math.floor(Math.random() * range);
   if (lastNs.findIndex(x => x === n) > -1 && iterations < 5) {
