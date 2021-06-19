@@ -4,11 +4,61 @@ const path = require('path');
 const { read } = require('fast-exif');
 const iptc = require('node-iptc');
 const Vibrant = require('node-vibrant');
-const R = require('ramda');
 const chroma = require('chroma-js');
+const chalk = require('chalk');
 
 const readFile = util.promisify(fs.readFile);
 
+const badContrast = (color1, color2) => chroma.contrast(color1, color2) < 4.5;
+
+function processColors(vibrantData, imagePath) {
+  let Vibrant = chroma(vibrantData.Vibrant.getRgb());
+  let DarkVibrant = chroma(vibrantData.DarkVibrant.getRgb());
+  let LightVibrant = chroma(vibrantData.LightVibrant.getRgb());
+  let Muted = chroma(vibrantData.Muted.getRgb());
+  let DarkMuted = chroma(vibrantData.DarkMuted.getRgb());
+  let LightMuted = chroma(vibrantData.LightMuted.getRgb());
+
+  // first pass - darken bg and lighten relevant fg colors
+  if (badContrast(DarkVibrant, Vibrant) || badContrast(DarkVibrant, LightMuted)) {
+    DarkVibrant = DarkVibrant.darken();
+    if (badContrast(DarkVibrant, Vibrant)) {
+      Vibrant = Vibrant.brighten();
+    }
+    if (badContrast(DarkVibrant, Vibrant)) {
+      Vibrant = Vibrant.brighten();
+    }
+  }
+  // second pass - first doesn't always get it right.
+  if (badContrast(DarkVibrant, Vibrant) || badContrast(DarkVibrant, LightMuted)) {
+    DarkVibrant = DarkVibrant.darken();
+    if (badContrast(DarkVibrant, Vibrant)) {
+      Vibrant = Vibrant.brighten(2);
+    }
+    if (badContrast(DarkVibrant, LightMuted)) {
+      LightMuted = LightMuted.brighten(2);
+    }
+  }
+
+  if (badContrast(DarkVibrant, Vibrant)){
+    console.log('contrast still too low', imagePath);
+    console.log(chalk.hex(Vibrant.hex()).bgHex(DarkVibrant.hex())(`DV-V: ${chroma.contrast(DarkVibrant, Vibrant)}`));
+  }
+  if (badContrast(DarkVibrant, LightMuted)){
+    console.log('contrast still too low', imagePath);
+    console.log(chalk.hex(LightMuted.hex()).bgHex(DarkVibrant.hex())(`DV-LM: ${chroma.contrast(DarkVibrant, LightMuted)}`));
+  }
+
+
+  return {
+    Vibrant: Vibrant.rgb(),
+    DarkVibrant: DarkVibrant.rgb(),
+    LightVibrant: LightVibrant.rgb(),
+    Muted: Muted.rgb(),
+    DarkMuted: DarkMuted.rgb(),
+    LightMuted: LightMuted.rgb(),
+  };
+}
 
 function convertDMSToDD(dms, positiveDirection) {
   const res = dms
@@ -19,7 +69,7 @@ function convertDMSToDD(dms, positiveDirection) {
   return positiveDirection ? res : -res;
 }
 
-function transformMetaToNodeData(exifData, iptcData, vibrantData) {
+function transformMetaToNodeData(exifData, iptcData, vibrantData, imagePath) {
   const gps = { longitude: null, latitude: null };
 
   if (exifData) {
@@ -39,22 +89,7 @@ function transformMetaToNodeData(exifData, iptcData, vibrantData) {
     }
   }
 
-  const vbChroma = R.map((swatch) => (chroma(swatch.getRgb()))
-    , vibrantData);
-
-
-  if (chroma.contrast(vbChroma.DarkVibrant, vbChroma.Vibrant) < 4.5) {
-    // console.log('adjusting colors', chroma.contrast(vbChroma.DarkVibrant, vbChroma.Vibrant));
-    // console.log(vbChroma.DarkVibrant.hex());
-    // console.log(vbChroma.Vibrant.hex());
-    vbChroma.DarkVibrant = vbChroma.DarkVibrant.darken();
-    vbChroma.Vibrant = vbChroma.Vibrant.brighten();
-    // console.log('adjusted', chroma.contrast(vbChroma.DarkVibrant, vbChroma.Vibrant));
-    // console.log(vbChroma.DarkVibrant.hex());
-    // console.log(vbChroma.Vibrant.hex());
-  }
-
-  const vibrantRgb = R.map((color) => color.rgb(), vbChroma);
+  const vibrant = processColors(vibrantData, imagePath);
 
 
   return {
@@ -62,7 +97,7 @@ function transformMetaToNodeData(exifData, iptcData, vibrantData) {
     gps,
     dateTaken: exifData?.exif?.DateTimeOriginal,
     iptc: iptcData || undefined,
-    vibrant: vibrantRgb,
+    vibrant,
   };
 }
 
@@ -82,7 +117,7 @@ exports.onCreateNode = async function ({ node, getNode, actions }) {
     createNodeField({
       node,
       name: 'imageMeta',
-      value: transformMetaToNodeData(exifData, iptcData, vibrantData),
+      value: transformMetaToNodeData(exifData, iptcData, vibrantData, parent.absolutePath),
     });
   }
 };
