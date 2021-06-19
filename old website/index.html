@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chuck Dries</title>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="http://chuckdri.es/icons/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://chuckdri.es/icons/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://chuckdri.es/icons/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://chuckdri.es/icons/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://chuckdri.es/icons/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://chuckdri.es/icons/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="http://chuckdri.es/icons/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="http://chuckdri.es/icons/favicon-16x16.png" sizes="16x16" />
+    <meta name="application-name" content="Chuck Dries" />
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="http://chuckdri.es/icons/mstile-144x144.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .jump {
+            margin-top: -130px;
+            /* height: 120px; */
+            position: absolute;
+            display: block;
+            visibility: hidden;
+        }
+    </style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34100225-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-34100225-1');
+    </script>
+
+</head>
+
+<body>
+    <div id="top">
+        <div style="display:table;width:100%;height: 100%">
+            <div style="display:table-cell;vertical-align:middle;">
+                <div id="mast">
+                    <h1>Chuck Dries</h1>
+                    <!-- <img src="images/cd.png" alt="Chuck Dries"> -->
+                    <h2 class="tagline">Software Engineer in web & VR</h2>
+                    <p>
+                        <a href="#about">About Me</a> /
+                        <a href="#skills">Skills</a> /
+                        <a href="#projects">Projects</a>
+                    </p>
+                    <div class="hideable">
+                        <p>Software Developer,
+                            <span class="sub">Axosoft</span>
+                        </p>
+                        <p>
+                            <a href="mailto:chuck@chuckdries.com">chuck@chuckdries.com</a> / 602.618.0414</p>
+                        <p>
+                            <a href="http://github.com/chuckdries">Github</a>/
+                            <a href="https://www.linkedin.com/in/chuckdries/">LinkedIn</a> /
+                            <a href="https://devpost.com/chuckdries">Devpost</a> /
+                            <a href="CharlesDriesResumeCurrent.pdf">Resume [pdf]</a> /
+                            <a href="https://medium.com/@chuckdries">Blog</a> /
+                            <a href="https://pgp.mit.edu/pks/lookup?op=get&search=0x2BD9D0871DB5A518">Public Key</a>
+                        </p>
+                        <p id="scrollprompt">Scroll down ▼</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="spaceTakerUpper">
+    </div>
+    <div class="slide" style="margin-top:0px;">
+        <a name="about" class="jump"></a>
+        <div id="picOfMe"></div>
+        <h1>About Me
+            <span style="font-size: .5em; font-weight:normal; color: #666;">Why I rock 🎶</span>
+        </h1>
+        <h3>A brief history of Chuck &amp; tech</h3>
+        <p>I'm a software engineer with experience in photography, digital and print graphic design, teaching, and leading.
+            I've been "into computers" my whole life, but I didn't really get into the technical stuff until middle school,
+            where I had to learn about networking and bash to run a minecraft server. Today, I do most of my work in JavaScript
+            and I experiment with VR and game design in my free time.
+        </p>
+    </div>
+    <div class="slide">
+        <a name="skills" class="jump"></a>
+        <h2>Skills</h2>
+        <div id="skilltable" style="display:none;">
+            <table>
+                <tr>
+                    <td class="ld">The
+                        <span style="font-style:italic">Internet</span>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>HTML5</li>
+                            <li>CSS3 &amp; Sass</li>
+                            <li>Javascript, TypeScript, VueJS, &amp; Node</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ld">General Programming &amp; Scripting</td>
+                    <td>
+                        <ul>
+                            <li>Java</li>
+                            <li>C++</li>
+                            <li>C# with Unity</li>
+                            <li>Python</li>
+                            <li>Scheme</li>
+                            <li>Bash</li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="ld">System Administration</td>
+                    <td>
+                        <ul>
+                            <li>Virtualization with KVM/LibVirt/QEMU and ESXi</li>
+                            <li>A
+                                <span style="font-style:italic">lot</span> of time spent managing POSIX and Windows environments</li>
+                            <li>Network configuration in PFSense and in general</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ld">Software Packages</td>
+                    <td>
+                        <ul>
+                            <li>Adobe Photoshop, Indesign, Premiere, &amp; After Effects</li>
+                            <li>Microsoft Office</li>
+                            <li>MatLab and IPython/Anaconda Suite</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ld">Life &amp; non-technology skills</td>
+                    <td>
+                        <ul>
+                            <li>A plethora of leadership experience</li>
+                            <li>A Decent understanding of photography</li>
+                            <li>A borderline unhealthy amount of curiosity</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <a id="skilltablebutton" onclick="toggleSkillTable()">Show skills table</a>
+        </div>
+    </div>
+    <div class="slide">
+        <a name="projects" class="jump"></a>
+        <h1>Projects &amp; Experience</h1>
+        <p style="text-indent: 0; margin-bottom: 5px;font-style: italic; font-weight:normal; color: #555;">More projects coming. For now, check my github or email me.</p>
+        <div class="grid">
+            <div class="project">
+                <div class="cover" id="virtualKeyality">
+                </div>
+                <div class="details">
+                    <div class="award">
+                        <div>
+                            <h3>1st Place</h3>
+                            <p>Desert Hacks '17</p>
+                        </div>
+                    </div>
+                    <h2>Virtual Keyality</h2>
+                    <p>A VR typing game.</p>
+                    <p>The idea started as something of a joke, but after prototyping we realized that we stumbled upon a killer
+                        feature: when you're wearing the headset, you can't see your keyboard. </p>
+                    <p>
+                        <a href="https://devpost.com/software/deserthacks">View on Devpost</a>
+                    </p>
+                    <span class="tag">Unity</span>
+                    <span class="tag">C#</span>
+                    <span class="tag">Virtual Reality</span>
+                    <span class="tag">SteamVR</span>
+                    <span class="tag">Hackathon projects</span>
+                </div>
+            </div>
+            <div class="project">
+                <div class="cover" id="ohack16">
+                </div>
+                <div class="details">
+                    <div class="award">
+                        <div>
+                            <h3>3rd Place</h3>
+                            <p>OHack '16</p>
+                        </div>
+                    </div>
+                    <h2>Volunteer Management Portal</h2>
+                    <p>A web app for nonprofits.</p>
+                    <p>Opportunity Hack is a charity hackathon where hackers are paired with nonprofits to solve the real world
+                        problems they face. The Lost Our Home pet rescue needed a better way to track volunteers and encourage
+                        volunteers to keep coming back. Our solution revolved around easy to access scheduling and volunteer-hour
+                        leaderboards to encourage first time volunteers to return.</p>
+                    <p>
+                        <a href="https://github.com/Opportunity-Hack-2016-AZ/Team15">View on GitHub</a>
+                    </p>
+                    <!--<span class="tag cat ">Tech</span>-->
+                    <!--<span class="tag cat ">Design</span>-->
+                    <span class="tag">NodeJS</span>
+                    <span class="tag">MongoDB</span>
+                    <span class="tag">ExpressJS</span>
+                    <span class="tag">Bootstrap</span>
+                    <span class="tag">Web</span>
+                    <span class="tag">Hackathon projects</span>
+                </div>
+            </div>
+            <div class="project">
+                <div class="cover" id="tb">
+                    <video autoplay loop src="images/tb.mp4"></video>
+                </div>
+                <div class="details">
+                    <h2>TechBuds Chat</h2>
+                    <p>A realtime chat app in Vue</p>
+                    <p> A penny stock trading community outgrew the size limit on their Slack team, so they hired us to replace
+                        it. Our back end relies on Mongo, Redis, Node, and Express; our front end uses Vue, Vue-router, and
+                        Materialize. Socket.io handles real time communication between the two, and every ounce of javascript
+                        we write is transpiled by Babel. I'm in charge of the front end and responsible for the visual and
+                        architectural design of most of the SPA.</p>
+                    <p>Unfortunately, this project is closed source, but it's not under NDA. I can't publish the code online,
+                        but I can show you if you ask.</p>
+                    <!--<span class="tag cat ">Tech</span>-->
+                    <!--<span class="tag cat ">Design</span>-->
+                    <span class="tag">Web</span>
+                    <span class="tag">NodeJS</span>
+                    <span class="tag">MongoDB</span>
+                    <span class="tag">ExpressJS</span>
+                    <span class="tag">VueJS</span>
+                    <span class="tag">BabelJS</span>
+                    <span class="tag">Socket.io</span>
+                </div>
+            </div>
+            <div class="project">
+                <div class="cover" id="fbr">
+                    <video autoplay loop src="images/scroll.mp4"></video>
+                </div>
+                <div class="details">
+                    <h2>Firebird Robotics Website</h2>
+                    <p>My First Real Website</p>
+                    <p>I was on my high school's robotics team, and we needed a website. This is where I really learned CSS
+                        in depth, I handled the photography and wrote the entire site by hand fresh every year. I no longer
+                        control the content of the site, so instead of linking it directly, I'm linking it as it existed
+                        in two different school years while I was still in charge.</p>
+                    <p>
+                        <a href="http://web.archive.org/web/20150209123618im_/http://firebirdrobotics.com/default.html">2014 School Year</a>
+                    </p>
+                    <p>
+                        <a href="http://web.archive.org/web/20150908032117im_/http://www.firebirdrobotics.com:80/">2015 School Year</a>
+                    </p>
+                    <!--<span class="tag cat ">Tech</span>-->
+                    <!--<span class="tag cat ">Design</span>-->
+                    <span class="tag">Web</span>
+                </div>
+            </div>
+        </div>
+        <script>
+            var last_known_scroll = getScrollY();
+            var queueing = false;
+            var t = false; //state of skill table
+            var st = document.getElementById("skilltable");
+            var stb = document.getElementById("skilltablebutton");
+            var sp = document.getElementById("scrollprompt");
+            document.addEventListener("scroll", function () {
+                last_known_scroll = getScrollY();
+                if (!queueing) {
+                    window.requestAnimationFrame(function () { //"queue up" animation
+                        queueing = false;
+                        sc(last_known_scroll);
+                    });
+                    queueing = true;
+                }
+            });
+
+            window.addEventListener("resize", function () {
+                last_known_scroll = getScrollY();
+                sc(last_known_scroll);
+            });
+
+            sc(last_known_scroll);
+
+            //execute scroll style modifications
+            function sc(ypos) {
+
+                var windowHeight = window.innerHeight;
+                //top thing
+                var topDiv = document.getElementById("top");
+                var mast = document.getElementById("mast");
+                var hcalc = windowHeight - ypos;
+                var topheight;
+                if (hcalc > 130) {
+                    topHeight = hcalc;
+                } else {
+                    topHeight = 130;
+                }
+                // var mastHeight = mast.clientHeight;
+                // var halfHeight = Math.floor((topHeight / 2) - (mastHeight / 2));
+                if (topHeight < 310) {
+                    topDiv.className = "small";
+                } else {
+                    topDiv.className = "large";
+                }
+                topDiv.style.height = topHeight - 10 + "px"; //subtract 10 to account for padding-top on #top
+
+                //background thing
+                var p = ((windowHeight - ypos) / windowHeight); //calulate ratio of scroll
+                var rgb = Math.floor(Math.abs(1 - p) * 255); //set the color
+
+            }
+
+            function getScrollY() {
+                //internet explorer does not have a window.scrollY property, it has pageYOffset
+                return typeof window.scrollY === "undefined" ? window.pageYOffset : window.scrollY;
+            }
+
+            function toggleSkillTable() {
+                if (t) {
+                    st.style.display = "none";
+                    stb.innerText = "Show skills table";
+                    t = false;
+                } else {
+                    st.style.display = "block";
+                    stb.innerText = "Less about me";
+                    t = true;
+                }
+            }
+
+            function openSkillTable() {
+                if (!t) {
+                    st.style.display = "block";
+                    stb.innerText = "Less about me";
+                    t = true;
+                }
+            }
+
+            function prompt() {
+
+            }
+        </script>
+        <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+        <script>
+            var msnry = new Masonry('.grid', {
+                itemSelector: '.project',
+                columnWidth: 400,
+                // disable initial layout
+                initLayout: false
+            });
+            window.onload = function () {
+                msnry.layout();
+            }
+        </script>
+</body>
+
+</html>

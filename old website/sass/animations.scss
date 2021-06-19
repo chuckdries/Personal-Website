@@ -1,0 +1,66 @@
+$prefixes: ("-moz-", "-webkit-", "-o-", "");
+@mixin prefix($property, $value) {
+    @each $prefix in $prefixes {
+        #{$prefix +  $property}: $value;
+    }
+}
+
+// @mixin keyframePrefix($name) {
+//     @each $prefix in $prefixes {
+//         \@#{$prefix}keyframes #{$name} {
+//             @content;
+//         }
+//     }
+// }
+@mixin keyframePrefix($name) {
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+    @-moz-keyframes #{$name} {
+        @content;
+    }
+    @-o-keyframes #{$name} {
+        @content;
+    }
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
+@include keyframePrefix(fadeIn) {
+    0% {
+        @include prefix(opacity, 0);
+        @include prefix(transform, translate(0, 10vh));
+    }
+    50% {
+        @include prefix(opacity, 0);
+        @include prefix(transform, translate(0, 10vh));
+    }
+    100% {
+        @include prefix(opacity, 1);
+        @include prefix(transform, none);
+    }
+}
+
+// @include keyframePrefix("prompt") {
+//     from,
+//     20%,
+//     53%,
+//     80%,
+//     to {
+//         @include prefix(animation-timing-function, cubic-bezier(0.215, 0.610, 0.355, 1.000));
+//         @include prefix(transform, translate(0, 0));
+//     }
+//     40%,
+//     43% {
+//         @include prefix(animation-timing-function, cubic-bezier(0.755, 0.050, 0.855, 0.060));
+//         @include prefix(transform, translate(0, -20px));
+//     }
+//     70% {
+//         @include prefix(animation-timing-function, cubic-bezier(0.755, 0.050, 0.855, 0.060));
+//         @include prefix(transform, translate(0, -10px));
+//     }
+//     90% {
+//         @include prefix(transform, translate(0, -2px));
+//     }
+// }

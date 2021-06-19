@@ -1,0 +1,115 @@
+body {
+    max-width: 800px;
+    font-family: serif;
+    margin: auto;
+    padding: 0px;
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+h1 {
+    font-size: 2em;
+    /*            color: #ff0076;*/
+    font-weight: normal;
+    font-style: italic;
+}
+
+h2 {
+    font-weight: normal;
+    font-style: italic;
+}
+
+p {
+    max-width: 600px;
+}
+
+.slide {
+    clear: both;
+}
+
+.slide-full {
+    height: 100vh;
+    margin: 0;
+}
+
+.vcwrapper {
+    display: table;
+}
+
+.under {
+    text-decoration: underline;
+}
+
+#mast {
+    color: white;
+    line-height: 1.2;
+}
+
+#mast a {
+    color: white;
+}
+
+.sub {
+    color: #ddd;
+    font-style: italic;
+}
+
+.arrow {
+    font-variant-position: sub;
+    font-size: .6em;
+}
+
+.arrow:before {
+    content: "\0025BC";
+}
+
+.copy .header {
+    float: left;
+    min-width: 150px;
+    color: black;
+    vertical-align: top;
+    margin: 0px 20px 20px 0px;
+    padding: 0px;
+    text-align: right;
+}
+
+.copy .right {
+    /*I used this and .header to achieve the left right hanging indent section thing */
+    overflow: hidden;
+    padding: 0px;
+    margin: 30px;
+}
+
+.copy h1 {
+    text-decoration: underline;
+}
+
+.right p {
+    margin: 2px;
+}
+
+.copy .header h2 {
+    padding: 0px;
+    margin: 0px;
+}
+
+
+/*gross vertical centering hack. I can't wait for FlexBox support to be more common!*/
+
+table {
+    border-spacing: 5px;
+    border-collapse: collapse;
+}
+
+tr:last-child td {
+    border: none;
+}
+
+td {
+    padding: 10px 10px 10px 0px;
+    /*            border-bottom: 1px solid black;*/
+}
+
+.ld {
+    text-align: right;
+}
