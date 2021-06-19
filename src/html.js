@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const env = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
+
 export default function HTML(props) {
   return (
     <html {...props.htmlAttributes}>
@@ -13,7 +15,7 @@ export default function HTML(props) {
           name="viewport"
         />
         {props.headComponents}
-        <script async data-domain="chuckdries.com" defer src="https://analytics.chuckdries.com/js/plausible.js"></script>
+        {env === 'production' && <script async data-domain="chuckdries.com" defer src="https://analytics.chuckdries.com/js/plausible.js"></script>}
       </head>
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}
