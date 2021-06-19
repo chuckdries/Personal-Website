@@ -13,6 +13,10 @@
   transition: color .2s, background-color .2s;
 } */
 @layer utilities {
+  .icon-offset {
+    position: relative;
+    top: 2px;
+  }
   .scroll-snap-none {
     scroll-snap-type: none;
   }

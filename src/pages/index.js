@@ -115,15 +115,40 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
               </ul>
             </div>
           </section>
-          <div>
+          <div className="align-top">
+            <Link
+              className={classnames(
+                'hover:underline icon-offset inline-block p-2 px-4 my-3 mr-3 text-3xl rounded-md border-2 font-bold font-serif',
+                isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')} 
+              style={{top: '5px'}}
+              title="view image details"
+              to={`/photogallery/${image.base}/`}
+            >
+              <span className="icon-offset"><ion-icon name="image"></ion-icon></span>
+              <span
+                className="absolute text-muted-dark"
+                style={{
+                  fontSize: 18,
+                  bottom: 6,
+                  right: 9,
+                  height: 18,
+                  width: 18,
+                  background: 'rgb(var(--light-muted))',
+                  borderRadius: '50%',
+                  transform: 'rotate(-15deg)',
+                }}
+              ><span className="absolute" style={{top: '-8px'}}><ion-icon name="arrow-redo-circle-sharp"></ion-icon></span></span>
+            </Link>
             <button
               className={classnames(
-                'hover:underline inline-block p-3 px-5 my-3 mr-3 text-lg rounded-md border-2 font-bold font-serif',
+                'hover:underline icon-offset inline-block p-2 px-4 my-3 mr-3 text-3xl rounded-md border-2 font-bold font-serif',
                 isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')}
               onClick={shuffleImage} 
+              style={{top: '5px'}}
+              title="shuffle image"
               type="button"
             >
-              Shuffle <span className="relative" style={{top: '2px'}}><ion-icon name="shuffle"></ion-icon></span>
+              <span className="icon-offset"><ion-icon name="shuffle"></ion-icon></span>
             </button>
             <Link
               className={classnames(
