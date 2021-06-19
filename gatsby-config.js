@@ -1,6 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: 'Chuck Dries',
+    siteUrl: 'https://chuckdries.com',
   },
   plugins: [
     'gatsby-plugin-sass',
@@ -50,5 +51,6 @@ module.exports = {
       },
     },
     'gatsby-plugin-preval',
+    'gatsby-plugin-robots-txt',
   ],
 };
