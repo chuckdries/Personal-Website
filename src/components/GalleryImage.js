@@ -78,7 +78,7 @@ const GalleryImage = ({ data }) => {
             <span className="mr-1">f/{meta.exif.FNumber}</span>
           </div>}
           {meta.exif.ISO && <div className="align-baseline ml-2 text-lg">
-            <span style={{fontSize: '12px'}}>ISO</span>
+            <span className="font-mono" style={{fontSize: '12px'}}>ISO</span>
             <span className="mx-1">{meta.exif.ISO}</span>
           </div>}
         </div>
