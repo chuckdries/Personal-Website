@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Link, graphql } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import { getVibrantToHelmetSafeBodyStyle, getVibrant } from '../utils';
 import { Helmet } from 'react-helmet';
 import { take } from 'ramda';
 import classnames from 'classnames';
+import useHotkeys from '@reecelucas/react-use-hotkeys';
 
+import { getVibrantToHelmetSafeBodyStyle, getVibrant } from '../utils';
 import { HeroA } from '../components/IndexComponents';
 
 // TODO: better text colors in situations of low contrast
@@ -21,22 +22,44 @@ const getDifferentRand = (range, lastNs, iterations = 0) => {
 
 const IndexPage = ({ data: { allFile: { edges } } }) => {
   const [isClient, setIsClient] = React.useState(false);
+  const [imageIndex, setImageIndex] = React.useState(0);
   const images = React.useMemo(() => edges.map((edge) => edge.node), [edges]);
   const image = React.useMemo(() => {
-    if (!isClient) {
-      return images[0];
-    }
-    const lastThreeImages = JSON.parse(localStorage.getItem('lastHeros')) || [];
-    const imageIndex = getDifferentRand(images.length, lastThreeImages);
-    localStorage.setItem('lastHeros', JSON.stringify(take(3, [imageIndex, ...lastThreeImages])));
+    console.log('ii', imageIndex);
     return images[imageIndex];
-  }, [images, isClient]);
-  const vibrant = getVibrant(image);
+  }, [images, imageIndex]);
+
+  const shuffleImage = React.useCallback(() => {
+    const lastThreeImages = JSON.parse(localStorage.getItem('lastHeros')) || [];
+    const index = getDifferentRand(images.length, lastThreeImages);
+    localStorage.setItem('lastHeros', JSON.stringify(take(3, [index, ...lastThreeImages])));
+    setImageIndex(index);
+  }, [images.length]);
+
+  // pick random image on page hydration
   React.useEffect(() => {
     if (!isClient) {
       setIsClient(true);
+      shuffleImage();
     }
-  }, [isClient]);
+  }, [isClient, imageIndex, shuffleImage]);
+
+  useHotkeys('ArrowRight', () => {
+    if (imageIndex === images.length - 1) {
+      setImageIndex(0);
+      return;
+    }
+    setImageIndex(imageIndex + 1);
+  });
+  useHotkeys('ArrowLeft', () => {
+    if (imageIndex === 0) {
+      setImageIndex(images.length - 1);
+      return;
+    }
+    setImageIndex(imageIndex - 1);
+  });
+
+  const vibrant = getVibrant(image);
   return (<>
     <Helmet>
       <title>Chuck Dries</title>
@@ -80,13 +103,25 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
               </ul>
             </div>
           </section>
-          <Link
-            className={classnames(
-              'hover:underline inline-block p-3 px-5 my-3 text-lg rounded-md border-2 arrow-right-after font-bold font-serif',
-              isClient && 'text-muted-dark bg-muted-light border-muted-light')} 
-            to="/photogallery"
-          >
-            Photography Gallery</Link>
+          <div>
+            <button
+              className={classnames(
+                'hover:underline inline-block p-3 px-5 m-3 text-lg rounded-md border-2 font-bold font-serif',
+                isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')}
+              onClick={shuffleImage} 
+              type="button"
+            >
+              Shuffle <span className="relative" style={{top: '2px'}}><ion-icon name="shuffle"></ion-icon></span>
+            </button>
+            <Link
+              className={classnames(
+                'hover:underline inline-block p-3 px-5 my-3 text-lg rounded-md border-2 arrow-right-after font-bold font-serif',
+                isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')} 
+              to="/photogallery"
+            >
+            Photography Gallery
+            </Link>
+          </div>
         </div>
       </div>
     </main>
@@ -99,7 +134,7 @@ export const query = graphql`
     filter: {
       sourceInstanceName: {eq: "gallery"},
       # images that don't work well
-      base: {nin: ["DSC00340.jpg"]}
+      base: {nin: ["DSC06517.jpg"]}
       childrenImageSharp: {elemMatch: {fluid: {aspectRatio: {gte: 1.4}}}}
       }
   ) {
