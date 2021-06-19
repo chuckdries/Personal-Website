@@ -5,6 +5,7 @@ const { read } = require('fast-exif');
 const iptc = require('node-iptc');
 const Vibrant = require('node-vibrant');
 const R = require('ramda');
+const chroma = require('chroma-js');
 
 const readFile = util.promisify(fs.readFile);
 
@@ -38,19 +39,30 @@ function transformMetaToNodeData(exifData, iptcData, vibrantData) {
     }
   }
 
-  const vibrant = R.map((swatch) => ({
-    rgb: swatch.getRgb(),
-    titleTextColor: swatch.getTitleTextColor(),
-    bodyTextColor: swatch.getBodyTextColor(),
-  })
-  , vibrantData);
+  const vbChroma = R.map((swatch) => (chroma(swatch.getRgb()))
+    , vibrantData);
+
+
+  if (chroma.contrast(vbChroma.DarkVibrant, vbChroma.Vibrant) < 4.5) {
+    // console.log('adjusting colors', chroma.contrast(vbChroma.DarkVibrant, vbChroma.Vibrant));
+    // console.log(vbChroma.DarkVibrant.hex());
+    // console.log(vbChroma.Vibrant.hex());
+    vbChroma.DarkVibrant = vbChroma.DarkVibrant.darken();
+    vbChroma.Vibrant = vbChroma.Vibrant.brighten();
+    // console.log('adjusted', chroma.contrast(vbChroma.DarkVibrant, vbChroma.Vibrant));
+    // console.log(vbChroma.DarkVibrant.hex());
+    // console.log(vbChroma.Vibrant.hex());
+  }
+
+  const vibrantRgb = R.map((color) => color.rgb(), vbChroma);
+
 
   return {
     exif: exifData?.exif,
     gps,
     dateTaken: exifData?.exif?.DateTimeOriginal,
     iptc: iptcData || undefined,
-    vibrant,
+    vibrant: vibrantRgb,
   };
 }
 
