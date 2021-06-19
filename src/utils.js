@@ -16,12 +16,12 @@ export const getRgba = (palette, alpha) => `rgba(${palette[0]}, ${palette[1]}, $
 // work around SSR bug in react-helmet
 export const getVibrantToHelmetSafeBodyStyle = (vibrant) => {
   const style = {
-    '--muted': vibrant.Muted.rgb,
-    '--dark-muted': vibrant.DarkMuted.rgb,
-    '--light-muted': vibrant.LightMuted.rgb,
-    '--vibrant': vibrant.Vibrant.rgb,
-    '--dark-vibrant': vibrant.DarkVibrant.rgb,
-    '--light-vibrant': vibrant.LightVibrant.rgb,
+    '--muted': vibrant.Muted,
+    '--dark-muted': vibrant.DarkMuted,
+    '--light-muted': vibrant.LightMuted,
+    '--vibrant': vibrant.Vibrant,
+    '--dark-vibrant': vibrant.DarkVibrant,
+    '--light-vibrant': vibrant.LightVibrant,
   };
   if (typeof window === 'undefined') {
     return style;
