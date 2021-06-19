@@ -98,8 +98,8 @@ export const query = graphql`
   allFile(
     filter: {
       sourceInstanceName: {eq: "gallery"},
-      # base: {nin: ["DSC01699.jpg", "DSC02981.jpg", "_DSC4155.jpg", "DSC02538.jpg", "DSC05851.jpg"]}
-      # no vertical images
+      # images that don't work well
+      base: {nin: ["DSC00340.jpg"]}
       childrenImageSharp: {elemMatch: {fluid: {aspectRatio: {gte: 1.4}}}}
       }
   ) {
