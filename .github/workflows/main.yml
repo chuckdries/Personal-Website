@@ -35,7 +35,7 @@ jobs:
       with:
         switches: -zr --delete --exclude node_modules --exclude '.git*'
         path: ./public/
-        remote_path: /www/personal-website
+        remote_path: www/personal-website
         remote_host: droplet.chuckdries.com
         remote_user: ${{ secrets.CI_USER }}
         remote_key: ${{ secrets.CI_SSH_KEY }}
