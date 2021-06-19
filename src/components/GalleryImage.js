@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, Link, navigate } from 'gatsby';
+import { graphql, navigate, Link } from 'gatsby';
 import {
   getAspectRatio,
   getMeta,
@@ -13,11 +13,11 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { Helmet } from 'react-helmet';
 import classnames from 'classnames';
 
-const GalleryImage = ({ data }) => {
+const GalleryImage = ({ data, pageContext }) => {
   const image = data.allFile.edges[0].node;
   const ar = getAspectRatio(image);
 
-  // TODO: metadata icons
+  console.log(pageContext);
 
   const name = getName(image);
   const meta = getMeta(image);
@@ -39,12 +39,30 @@ const GalleryImage = ({ data }) => {
         style={getVibrantToHelmetSafeBodyStyle(vibrant)}
       />
     </Helmet>
-    <button
-      className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before absolute"
-      onClick={() => navigate(-1)}
-      type="button"
-    >back</button>
-    <div className="min-h-screen pt-5 flex flex-col justify-center">
+    <nav className="mt-0">
+      <button
+        className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before  mr-1"
+        onClick={() => navigate(-1)}
+        type="button"
+      >back</button>
+      <Link
+        className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
+        to="/"
+      >home</Link>
+      <Link
+        className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
+        to="/photogallery/"
+      >gallery</Link>
+      {pageContext.prevImage && <Link
+        className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
+        to={`/photogallery/${pageContext.prevImage}/`}
+      >previous</Link>}
+      {pageContext.nextImage && <Link
+        className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
+        to={`/photogallery/${pageContext.nextImage}/`}
+      >next</Link>}
+    </nav>
+    <div className="min-h-screen flex flex-col justify-center">
       <div className={classnames('flex', orientationClasses)}>
         <div className="flex-grow-0">
           <GatsbyImage
