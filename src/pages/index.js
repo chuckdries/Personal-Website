@@ -62,14 +62,14 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
         // 67vw = 1/1.49253731 = 1/aspect ratio of my camera lol
         : <div className="md:h-screen sm:h-two-thirds-vw" style={{gridArea: '1/1' }}></div> }
       <div className="relative grid place-items-center" style={{gridArea: '1/1'}}>
-        <div className="m-2 flex flex-col items-end">
-          <section className={classnames('rounded-xl py-5', isClient && ' bg-vibrant-dark-75')}>
-            <div className="mx-auto px-5">
+        <div className="m-3 flex flex-col items-end">
+          <section className={classnames('rounded-xl py-6', isClient && ' bg-vibrant-dark-75')}>
+            <div className="mx-auto px-6">
               <h1 className={classnames('font-black text-6xl', isClient && 'text-vibrant-light')}>Chuck Dries</h1>
               <h2 className={classnames('italic text-2xl', isClient && 'text-vibrant')}>Full stack software engineer &amp; hobbyist photographer</h2>
               <ul className={classnames(isClient && 'text-muted-light')}>
                 <li>Software Developer, <span className="italic">Axosoft</span></li>
-                <li><HeroA className="ml-0" href="mailto:chuck@chuckdries.com" isClient={isClient}>chuck@chuckdries.com</HeroA>/<span className="ml-1">602.618.0414</span></li>
+                <li><HeroA className="ml-0" href="mailto:chuck@chuckdries.com" isClient={isClient}>chuck@chuckdries.com</HeroA>/<span className="ml-2">602.618.0414</span></li>
                 <li>
                   <HeroA className="ml-0" href="http://github.com/chuckdries" isClient={isClient}>Github</HeroA>/
                   <HeroA href="https://www.linkedin.com/in/chuckdries/" isClient={isClient}>LinkedIn</HeroA>/
@@ -82,7 +82,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
           </section>
           <Link
             className={classnames(
-              'hover:underline inline-block p-2 px-4 my-2 text-lg rounded-md border-2 arrow-right-after font-bold font-serif',
+              'hover:underline inline-block p-3 px-5 my-3 text-lg rounded-md border-2 arrow-right-after font-bold font-serif',
               isClient && 'text-muted-dark bg-muted-light border-muted-light')} 
             to="/photogallery"
           >

@@ -14,7 +14,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "lint-fix": "eslint --fix --ext .jsx,.js src",
-    "deploy": "yarn build && rsync -rzP --delete public/ chuckdries@droplet.chuckdries.com:www/personal-website-staging"
+    "deploy": "yarn build && rsync -rzP --delete public/ chuckdries@droplet.chuckdries.com:www/personal-website"
   },
   "dependencies": {
     "@mdx-js/mdx": "^1.6.22",
