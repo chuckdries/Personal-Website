@@ -14,7 +14,8 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "lint-fix": "eslint --fix --ext .jsx,.js src",
-    "upload": "rsync -rz --delete public/ chuckdries@droplet.chuckdries.com:www/personal-website",
+    "upload": "rsync -rz --delete public/ ci@droplet.chuckdries.com:www/personal-website",
+    "upload-staging": "rsync -rz --delete public/ ci@droplet.chuckdries.com:www/personal-website-staging",
     "deploy": "yarn build && yarn upload"
   },
   "dependencies": {
