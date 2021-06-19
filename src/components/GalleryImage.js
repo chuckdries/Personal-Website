@@ -21,6 +21,11 @@ const GalleryImage = ({ data }) => {
 
   const name = getName(image);
   const meta = getMeta(image);
+  let locationString;
+  if (meta.iptc.city || meta.iptc.province_or_state) {
+    const location = [meta.iptc.city, meta.iptc.province_or_state].filter(Boolean);
+    locationString = location.join(', ');
+  }
   const vibrant = getVibrant(image, true);
 
   const orientationClasses = ar > 1 ? 'flex-col mx-auto' : 'portrait:mx-auto landscape:mx-5 landscape:flex-row-reverse portrait:flex-col';
@@ -56,17 +61,26 @@ const GalleryImage = ({ data }) => {
             {hasName(image) && <h1 className="text-2xl mt-3 font-serif">{name}</h1>}
             <p className="mr-2">{meta.iptc.caption}</p>
           </div>
-          {shutterSpeed && <div className="ml-2 text-lg">
-            <span className="mr-1">{shutterSpeed}</span>
-            <span className="relative" style={{top: '2px'}}><ion-icon name="stopwatch-outline"></ion-icon></span>
-          </div>}
-          {meta.exif.FNumber && <div className="ml-2 text-lg">
-            <span className="mr-1">f/{meta.exif.FNumber}</span>
-            <span className="relative" style={{top: '2px'}}>
-              <ion-icon name="aperture-outline"></ion-icon>
+          {(locationString) && <div className={classnames('flex items-baseline ml-2 text-lg', ar <= 1 && 'flex-row-reverse')}>
+            <span className="relative mr-1" style={{top: '2px'}}>
+              <ion-icon name="location-sharp"></ion-icon>
             </span>
+            <span className="mr-1">{locationString}</span>
           </div>}
-          {meta.exif.ISO && <div className="align-baseline ml-2 text-lg"><span className="mr-1">{meta.exif.ISO}</span><span className="text-xs" style={{marginRight: '-3px'}}>ISO</span></div>}
+          {shutterSpeed && <div className={classnames('flex items-baseline ml-2 text-lg', ar <= 1 && 'flex-row-reverse')}>
+            <span className="relative mr-1" style={{top: '2px'}}><ion-icon name="stopwatch-sharp"></ion-icon></span>
+            <span className="mr-1">{shutterSpeed}</span>
+          </div>}
+          {meta.exif.FNumber && <div className={classnames('flex items-baseline ml-2 text-lg', ar <= 1 && 'flex-row-reverse')}>
+            <span className="relative mr-1" style={{top: '2px'}}>
+              <ion-icon name="aperture-sharp"></ion-icon>
+            </span>
+            <span className="mr-1">f/{meta.exif.FNumber}</span>
+          </div>}
+          {meta.exif.ISO && <div className="align-baseline ml-2 text-lg">
+            <span style={{fontSize: '12px'}}>ISO</span>
+            <span className="mx-1">{meta.exif.ISO}</span>
+          </div>}
         </div>
       </div>
     </div>
@@ -97,6 +111,8 @@ export const query = graphql`
                 caption
                 object_name
                 keywords
+                city
+                province_or_state
               }
               exif {
                 FNumber
