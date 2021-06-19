@@ -86,7 +86,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
               isClient && 'text-muted-dark bg-muted-light border-muted-light')} 
             to="/photogallery"
           >
-            Photo Gallery</Link>
+            Photography Gallery</Link>
         </div>
       </div>
     </main>

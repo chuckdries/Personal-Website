@@ -12,6 +12,7 @@ export default function HTML(props) {
           name="viewport"
         />
         {props.headComponents}
+        <script async defer data-domain="chuckdries.com" src="https://analytics.chuckdries.com/js/plausible.js"></script>
       </head>
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}
