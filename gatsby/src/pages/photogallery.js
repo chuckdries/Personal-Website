@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { graphql } from 'gatsby';
-// import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { Link } from 'gatsby';
 import { Helmet } from 'react-helmet';
-// import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 
-// import { getMeta } from '../utils';
 import MasonryGallery from '../components/MasonryGallery';
+
+// TODO: caption and title more images
+// TODO: more images
 
 const GalleryPage = ({ data }) => {
   const images = React.useMemo(() =>
