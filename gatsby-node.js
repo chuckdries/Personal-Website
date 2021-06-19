@@ -11,6 +11,14 @@ const readFile = util.promisify(fs.readFile);
 
 const badContrast = (color1, color2) => chroma.contrast(color1, color2) < 4.5;
 
+const logColorsWithContrast = (color1, color2, text) => {
+  const c1hex = color1.hex();
+  const c2hex = color2.hex();
+  console.log(chalk.hex(c1hex).bgHex(c2hex)(
+    `${text} ${c1hex}/${c2hex} ${chroma.contrast(color1, color2)}`
+  ));
+};
+
 function processColors(vibrantData, imagePath) {
   let Vibrant = chroma(vibrantData.Vibrant.getRgb());
   let DarkVibrant = chroma(vibrantData.DarkVibrant.getRgb());
@@ -29,9 +37,9 @@ function processColors(vibrantData, imagePath) {
       Vibrant = Vibrant.brighten();
     }
   }
-  // second pass - first doesn't always get it right.
+  // second pass - first doesn't always do enough
   if (badContrast(DarkVibrant, Vibrant) || badContrast(DarkVibrant, LightMuted)) {
-    DarkVibrant = DarkVibrant.darken();
+    // DarkVibrant = DarkVibrant.darken();
     if (badContrast(DarkVibrant, Vibrant)) {
       Vibrant = Vibrant.brighten(2);
     }
@@ -41,12 +49,12 @@ function processColors(vibrantData, imagePath) {
   }
 
   if (badContrast(DarkVibrant, Vibrant)){
-    console.log('contrast still too low', imagePath);
-    console.log(chalk.hex(Vibrant.hex()).bgHex(DarkVibrant.hex())(`DV-V: ${chroma.contrast(DarkVibrant, Vibrant)}`));
+    console.warn('contrast still too low', imagePath);
+    logColorsWithContrast(Vibrant, DarkVibrant, 'V-DV');
   }
   if (badContrast(DarkVibrant, LightMuted)){
-    console.log('contrast still too low', imagePath);
-    console.log(chalk.hex(LightMuted.hex()).bgHex(DarkVibrant.hex())(`DV-LM: ${chroma.contrast(DarkVibrant, LightMuted)}`));
+    console.warn('contrast still too low', imagePath);
+    logColorsWithContrast(LightMuted, DarkVibrant, 'LM-DV');
   }
 
 
