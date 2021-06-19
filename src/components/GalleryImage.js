@@ -23,7 +23,7 @@ const GalleryImage = ({ data }) => {
   const meta = getMeta(image);
   const vibrant = getVibrant(image, true);
 
-  const orientationClasses = ar > 1 ? 'flex-col mx-auto' : 'portrait:mx-auto landscape:mx-4 landscape:flex-row-reverse portrait:flex-col';
+  const orientationClasses = ar > 1 ? 'flex-col mx-auto' : 'portrait:mx-auto landscape:mx-5 landscape:flex-row-reverse portrait:flex-col';
   console.log(ar, orientationClasses);
   const shutterSpeed = React.useMemo(() => getShutterFractionFromExposureTime(meta.exif.ExposureTime || 0), [meta]);
   return (<>
@@ -35,7 +35,7 @@ const GalleryImage = ({ data }) => {
       />
     </Helmet>
     <Link className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before absolute" to="/photogallery">gallery</Link>
-    <div className="min-h-screen pt-4 flex flex-col justify-center">
+    <div className="min-h-screen pt-5 flex flex-col justify-center">
       <div className={classnames('flex', orientationClasses)}>
         <div className="flex-grow-0">
           <GatsbyImage
@@ -51,14 +51,22 @@ const GalleryImage = ({ data }) => {
               // minHeight: '500px',
             }} />
         </div>
-        <div className={classnames('flex-shrink-0 mx-2 flex flex-row', ar <= 1 && 'pt-4 flex-col flex-auto text-right')}>
-          <div className="flex-auto mr-1">
-            {hasName(image) && <h1 className="text-2xl mt-2 font-serif">{name}</h1>}
-            <p className="mr-1">{meta.iptc.caption}</p>
+        <div className={classnames('flex-shrink-0 mx-2 flex flex-row', ar <= 1 && 'pt-5 flex-col flex-auto text-right')}>
+          <div className="flex-auto mr-2">
+            {hasName(image) && <h1 className="text-2xl mt-3 font-serif">{name}</h1>}
+            <p className="mr-2">{meta.iptc.caption}</p>
           </div>
-          {shutterSpeed && <p className="mr-1">Shutter speed: {shutterSpeed}</p>}
-          {meta.exif.FNumber && <p className="mr-1">Aperture: f/{meta.exif.FNumber}</p>}
-          {meta.exif.ISO && <p className="mr-1">ISO: {meta.exif.ISO}</p>}
+          {shutterSpeed && <div className="ml-2 text-lg">
+            <span className="mr-1">{shutterSpeed}</span>
+            <span className="relative" style={{top: '2px'}}><ion-icon name="stopwatch-outline"></ion-icon></span>
+          </div>}
+          {meta.exif.FNumber && <div className="ml-2 text-lg">
+            <span className="mr-1">f/{meta.exif.FNumber}</span>
+            <span className="relative" style={{top: '2px'}}>
+              <ion-icon name="aperture-outline"></ion-icon>
+            </span>
+          </div>}
+          {meta.exif.ISO && <div className="align-baseline ml-2 text-lg"><span className="mr-1">{meta.exif.ISO}</span><span className="text-xs" style={{marginRight: '-3px'}}>ISO</span></div>}
         </div>
       </div>
     </div>
