@@ -38,20 +38,11 @@ function transformMetaToNodeData(exifData, iptcData, vibrantData) {
     }
   }
 
-  // console.log('asdf', JSON.stringify(vibrantData.Vibrant.getTitleTextColor()));
-
   const vibrant = R.map((swatch) => ({
     rgb: swatch.getRgb(),
     titleTextColor: swatch.getTitleTextColor(),
     bodyTextColor: swatch.getBodyTextColor(),
   })
-  // ({
-  //   // rgb: swatch.getRgb(),
-  //   // hsl: swatch.getHsl(),
-  //   // hex: swatch.getHex(),
-  //   // // titleTextColor: swatch.getTitleTextColor(),
-  //   // // bodyTextColor: swatch.getBodyTextColor(),
-  // })
   , vibrantData);
 
   return {
