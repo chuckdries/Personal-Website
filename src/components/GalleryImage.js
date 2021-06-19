@@ -17,7 +17,28 @@ const GalleryImage = ({ data, pageContext }) => {
   const image = data.allFile.edges[0].node;
   const ar = getAspectRatio(image);
 
-  console.log(pageContext);
+  React.useEffect(() => {
+    const keyListener = (e) => {
+      switch (e.code) {
+      case 'ArrowRight': {
+        if (pageContext.nextImage) {
+          navigate(`/photogallery/${pageContext.nextImage}/`);
+        }
+        return;
+      }
+      case 'ArrowLeft': {
+        if (pageContext.prevImage) {
+          navigate(`/photogallery/${pageContext.prevImage}/`);
+        }
+        return;
+      }
+      }
+    };
+    document.addEventListener('keydown', keyListener);
+    return () => {
+      document.removeEventListener('keydown', keyListener);
+    };
+  }, [pageContext]);
 
   const name = getName(image);
   const meta = getMeta(image);
@@ -39,30 +60,30 @@ const GalleryImage = ({ data, pageContext }) => {
         style={getVibrantToHelmetSafeBodyStyle(vibrant)}
       />
     </Helmet>
-    <nav className="mt-0">
-      <button
-        className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before  mr-1"
-        onClick={() => navigate(-1)}
-        type="button"
-      >back</button>
-      <Link
-        className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-        to="/"
-      >home</Link>
-      <Link
-        className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-        to="/photogallery/"
-      >gallery</Link>
-      {pageContext.prevImage && <Link
-        className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-        to={`/photogallery/${pageContext.prevImage}/`}
-      >previous</Link>}
-      {pageContext.nextImage && <Link
-        className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-        to={`/photogallery/${pageContext.nextImage}/`}
-      >next</Link>}
-    </nav>
-    <div className="min-h-screen flex flex-col justify-center">
+    <div className="min-h-screen flex flex-col justify-between">
+      <nav className="mt-0">
+        <button
+          className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before  mr-1"
+          onClick={() => navigate(-1)}
+          type="button"
+        >back</button>
+        <Link
+          className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
+          to="/"
+        >home</Link>
+        <Link
+          className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
+          to="/photogallery/"
+        >gallery</Link>
+        {pageContext.prevImage && <Link
+          className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
+          to={`/photogallery/${pageContext.prevImage}/`}
+        >previous</Link>}
+        {pageContext.nextImage && <Link
+          className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
+          to={`/photogallery/${pageContext.nextImage}/`}
+        >next</Link>}
+      </nav>
       <div className={classnames('flex', orientationClasses)}>
         <div className="flex-grow-0">
           <GatsbyImage
@@ -110,6 +131,7 @@ const GalleryImage = ({ data, pageContext }) => {
           </div>}
         </div>
       </div>
+      <div></div>
     </div>
   </>);
 };

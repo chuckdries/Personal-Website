@@ -6,6 +6,7 @@ const iptc = require('node-iptc');
 const Vibrant = require('node-vibrant');
 const chroma = require('chroma-js');
 const chalk = require('chalk');
+const R = require('ramda');
 
 const readFile = util.promisify(fs.readFile);
 
@@ -143,7 +144,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           edges {
             node {
               relativePath,
-              base
+              base,
+              childImageSharp {
+                fields {
+                  imageMeta {
+                    dateTaken
+                  }
+                }
+              }
             }
           }
         }
@@ -156,7 +164,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
   // Create pages for each markdown file.
   const galleryImageTemplate = path.resolve('src/components/GalleryImage.js');
-  const edges = galleryImages.data.allFile.edges;
+  const edges = R.sort((edge) => 
+    new Date(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken'], edge)),
+  galleryImages.data.allFile.edges);
+  
+  console.log(R.map(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken']), edges));
 
   edges.forEach(({ node }, index) => {
     const nextImage = index === edges.length - 1
@@ -165,7 +177,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     const prevImage = index === 0
       ? null
       : edges[index - 1].node.base;
-    console.log('next', nextImage);
 
     createPage({
       path: `photogallery/${node.base}`,
