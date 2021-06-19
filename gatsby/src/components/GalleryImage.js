@@ -27,7 +27,7 @@ const GalleryImage = ({ data }) => {
   const meta = getMeta(image);
   const vibrant = getVibrant(image, true);
 
-  const orientationClasses = ar > 1 ? 'flex-col' : 'landscape:flex-row-reverse portrait:flex-col';
+  const orientationClasses = ar > 1 ? 'flex-col mx-auto' : 'portrait:mx-auto landscape:mx-4 landscape:flex-row-reverse portrait:flex-col';
   console.log(ar, orientationClasses);
   const shutterSpeed = React.useMemo(() => getShutterFractionFromExposureTime(meta.exif.ExposureTime || 0), [meta]);
   return (<>
@@ -40,7 +40,7 @@ const GalleryImage = ({ data }) => {
     </Helmet>
     <Link className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before absolute" to="/photogallery">gallery</Link>
     <div className="min-h-screen pt-4 flex flex-col justify-center">
-      <div className={classnames('flex mx-auto landscpae:mx-1', orientationClasses)}>
+      <div className={classnames('flex', orientationClasses)}>
         <div className="flex-grow-0">
           <GatsbyImage
             alt={name}

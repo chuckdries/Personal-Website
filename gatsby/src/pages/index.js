@@ -74,7 +74,6 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
                   <HeroA href="https://devpost.com/chuckdries" isClient={isClient}>Devpost</HeroA>/
                   <HeroA href="/CharlesDriesResumeCurrent.pdf" isClient={isClient}>Resume [pdf]</HeroA>/
                   <HeroA href="https://medium.com/@chuckdries" isClient={isClient}>Medium (blog)</HeroA>
-                  {/* <a href="https://pgp.mit.edu/pks/lookup?op=get&search=0x2BD9D0871DB5A518">Public Key</a> */}
                 </li>
               </ul>
             </div>
@@ -109,10 +108,7 @@ export const query = graphql`
         childImageSharp {
           gatsbyImageData(
             layout: FULL_WIDTH
-            # placeholder: BLURRED
-            # placeholder: TRACED_SVG
             placeholder: NONE
-            # blurredOptions: {width: 50}
             breakpoints: [750, 1080, 1366, 1920, 2560]
           )
           fields {
