@@ -119,7 +119,7 @@ exports.onCreateNode = async function ({ node, getNode, actions }) {
     const iptcData = iptc(file);
     const exifData = await read(parent.absolutePath);
     const vibrantData = await Vibrant.from(parent.absolutePath)
-      .quality(1)
+      .quality(2)
       .getPalette();
 
     createNodeField({
@@ -156,15 +156,24 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
   // Create pages for each markdown file.
   const galleryImageTemplate = path.resolve('src/components/GalleryImage.js');
-  galleryImages.data.allFile.edges.forEach(({ node }) => {
-    // const path = node.base
+  const edges = galleryImages.data.allFile.edges;
+
+  edges.forEach(({ node }, index) => {
+    const nextImage = index === edges.length - 1
+      ? null
+      : edges[index + 1].node.base;
+    const prevImage = index === 0
+      ? null
+      : edges[index - 1].node.base;
+    console.log('next', nextImage);
+
     createPage({
       path: `photogallery/${node.base}`,
       component: galleryImageTemplate,
-      // In your blog post template's graphql query, you can use pagePath
-      // as a GraphQL variable to query for data from the markdown file.
       context: {
         imageFilename: node.base,
+        nextImage,
+        prevImage,
       },
     });
   });

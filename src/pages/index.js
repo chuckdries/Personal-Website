@@ -154,7 +154,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
               className={classnames(
                 'hover:underline inline-block p-3 px-5 my-3 text-lg rounded-md border-2 arrow-right-after font-bold font-serif',
                 isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')} 
-              to="/photogallery"
+              to="/photogallery/"
             >
             Photography Gallery
             </Link>

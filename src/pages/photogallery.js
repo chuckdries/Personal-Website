@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import { navigate } from 'gatsby';
 import { Helmet } from 'react-helmet';
 
@@ -19,13 +19,23 @@ const GalleryPage = ({ data }) => {
       <title>Photo Gallery | Chuck Dries</title>
       <body className="bg-black text-white" />
     </Helmet>
-    <div className="bg-black min-h-screen 2xl:container">
+    <nav className="mt-0 mb-4">
       <button
-        className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before absolute"
+        className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before  mr-1"
         onClick={() => navigate(-1)}
         type="button"
       >back</button>
-      <h1 className="text-5xl mt-3 ml-5 font-serif font-black z-10 relative">Photo Gallery</h1>
+      <Link
+        className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
+        to="/"
+      >home</Link>
+      <Link
+        className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
+        to="/photogallery/"
+      >gallery</Link>
+    </nav>
+    <div className="bg-black min-h-screen 2xl:container">
+      <h1 className="text-5xl mt-0 ml-5 font-serif font-black z-10 relative">Photo Gallery</h1>
       <div className="mx-auto">
         <MasonryGallery
           images={images}
