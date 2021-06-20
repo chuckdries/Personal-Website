@@ -1,4 +1,10 @@
 import './src/styles/global.css';
+import posthog from 'posthog-js';
+
+const env = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
+if (env === 'production') {
+  posthog.init('HR8Gte105aCHNx2BqhL1XkbvH9kzKGptxjkbhuTj6Ek', { api_host: 'https://posthog.chuckdries.com' });
+}
 // import * as React from 'react';
 // import { MDXProvider } from '@mdx-js/react';
 
