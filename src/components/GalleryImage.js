@@ -107,9 +107,9 @@ const GalleryImage = ({ data, pageContext }) => {
           <div className="flex-auto mr-2">
             <p className="text-muted-light font-mono text-sm m-0 mt-1">{image.base}</p>
             {hasName(image) && <h1 className="text-4xl mt-0 font-serif">{name}</h1>}
-            <p className="mr-2">{meta.iptc.caption}</p>
+            <p className="landscape:mr-2">{meta.iptc.caption}</p>
           </div>
-          {<div className="portrait:border-t-2 border-gray-200 portrait:mt-2 mr-3 portrait:mb-1" style={{width: 30}}></div>}
+          {<div className="portrait:border-t-2 border-muted-light portrait:mt-2 mr-2 portrait:mb-1" style={{width: 30}}></div>}
           {(locationString) &&
             <div className={classnames('flex items-baseline ml-2 text-lg',
               ar <= 1 ? 'flex-row-reverse' : 'portrait:flex-row-reverse')}
