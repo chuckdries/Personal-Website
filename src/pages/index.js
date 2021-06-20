@@ -6,8 +6,8 @@ import { take } from 'ramda';
 import classnames from 'classnames';
 import posthog from 'posthog-js';
 
-import { getVibrantToHelmetSafeBodyStyle, getVibrant } from '../utils';
-import { HeroA } from '../components/IndexComponents';
+import { getVibrantToHelmetSafeBodyStyle, getVibrant, getAspectRatio } from '../utils';
+import { HeroA } from '../components/Index/HeroLink';
 
 // TODO: better text colors in situations of low contrast
 
@@ -81,6 +81,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
   }, [imageIndex, images.length]);
 
   const vibrant = getVibrant(image);
+  const ar = getAspectRatio(image);
   return (<>
     <Helmet>
       <title>Chuck Dries</title>
@@ -90,13 +91,13 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
       />
     </Helmet>
     <main
-      className="font-serif block md:grid hero"
+      className={classnames('font-serif hero', ar > 1 ? 'flex md:grid flex-col' : 'grid md:flex md:flex-row-reverse')}
     >
       {isClient ? 
         <GatsbyImage
           alt=""
           className={classnames(
-            'md:h-screen h-two-thirds-vw',
+            ar > 1 ? 'md:h-screen h-two-thirds-vw' : 'h-screen w-full md:w-1/2',
           )}
           image={getImage(image)}
           loading="eager"
@@ -176,8 +177,8 @@ export const query = graphql`
     filter: {
       sourceInstanceName: {eq: "gallery"},
       # images that don't work well
-      base: {nin: ["DSC06517.jpg"]}
-      childrenImageSharp: {elemMatch: {fluid: {aspectRatio: {gte: 1.4}}}}
+      # base: {nin: ["DSC06517.jpg"]}
+      # childrenImageSharp: {elemMatch: {fluid: {aspectRatio: {lte: 1.3}}}}
       }
   ) {
     edges {
@@ -185,6 +186,9 @@ export const query = graphql`
         relativePath
         base
         childImageSharp {
+          fluid {
+            aspectRatio
+          }
           gatsbyImageData(
             layout: FULL_WIDTH
             placeholder: NONE
