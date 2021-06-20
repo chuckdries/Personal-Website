@@ -137,7 +137,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
                 title="view image details"
                 to={`/photogallery/${image.base}/`}
               >
-                <span className="icon-offset"><ion-icon name="image"></ion-icon></span>
+                <span className="icon-offset"><ion-icon name="expand"></ion-icon></span>
               </Link>
               <button
                 className={classnames(
