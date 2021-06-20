@@ -98,8 +98,8 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
         : <div className="md:h-screen sm:h-two-thirds-vw" style={{gridArea: '1/1' }}></div> }
       <div className="relative grid place-items-center" style={{gridArea: '1/1'}}>
         <div className="m-3 flex flex-col items-end">
-          <section className={classnames('rounded-xl py-6', isClient && ' bg-vibrant-dark-75')}>
-            <div className="mx-auto px-6">
+          <section className={classnames('rounded-xl py-5 portrait:py-3', isClient && ' bg-vibrant-dark-75')}>
+            <div className="mx-auto px-6 portrait:px-4">
               <h1 className={classnames('font-black text-6xl', isClient && 'text-vibrant-light')}>Chuck Dries</h1>
               <h2 className={classnames('italic text-2xl', isClient && 'text-vibrant')}>Full stack software engineer &amp; hobbyist photographer</h2>
               <ul className={classnames(isClient && 'text-muted-light')}>
@@ -115,44 +115,32 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
               </ul>
             </div>
           </section>
-          <div className="align-top">
+          <div className="flex">
+            <div className="flex my-2 items-center flex-col">
+              <Link
+                className={classnames(
+                  'hover:underline inline-block px-1 my-1 mr-2 text-md rounded-md border-2',
+                  isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')} 
+                // style={{top: '5px'}}
+                title="view image details"
+                to={`/photogallery/${image.base}/`}
+              >
+                <span className="icon-offset"><ion-icon name="image"></ion-icon></span>
+              </Link>
+              <button
+                className={classnames(
+                  'hover:underline inline-block px-1 my-1 mr-2 text-md rounded-md border-2',
+                  isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')}
+                onClick={shuffleImage} 
+                title="shuffle image"
+                type="button"
+              >
+                <span className="icon-offset"><ion-icon name="shuffle"></ion-icon></span>
+              </button>
+            </div>
             <Link
               className={classnames(
-                'hover:underline icon-offset inline-block p-2 px-4 my-3 mr-3 text-3xl rounded-md border-2 font-bold font-serif',
-                isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')} 
-              style={{top: '5px'}}
-              title="view image details"
-              to={`/photogallery/${image.base}/`}
-            >
-              <span className="icon-offset"><ion-icon name="image"></ion-icon></span>
-              <span
-                className="absolute text-muted-dark"
-                style={{
-                  fontSize: 18,
-                  bottom: 6,
-                  right: 9,
-                  height: 18,
-                  width: 18,
-                  background: 'rgb(var(--light-muted))',
-                  borderRadius: '50%',
-                  transform: 'rotate(-15deg)',
-                }}
-              ><span className="absolute" style={{top: '-8px'}}><ion-icon name="arrow-redo-circle-sharp"></ion-icon></span></span>
-            </Link>
-            <button
-              className={classnames(
-                'hover:underline icon-offset inline-block p-2 px-4 my-3 mr-3 text-3xl rounded-md border-2 font-bold font-serif',
-                isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')}
-              onClick={shuffleImage} 
-              style={{top: '5px'}}
-              title="shuffle image"
-              type="button"
-            >
-              <span className="icon-offset"><ion-icon name="shuffle"></ion-icon></span>
-            </button>
-            <Link
-              className={classnames(
-                'hover:underline inline-block p-3 px-5 my-3 text-lg rounded-md border-2 arrow-right-after font-bold font-serif',
+                'hover:underline p-3 px-5 py-4 my-3 text-lg rounded-md border-2 arrow-right-after font-bold font-serif',
                 isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')} 
               to="/photogallery/"
             >
@@ -161,6 +149,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
           </div>
         </div>
       </div>
+
     </main>
   </>);
 };
