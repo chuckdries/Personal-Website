@@ -81,13 +81,13 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
       />
     </Helmet>
     <main
-      className="font-serif sm:block md:grid hero"
+      className="font-serif block md:grid hero"
     >
       {isClient ? 
         <GatsbyImage
           alt=""
           className={classnames(
-            'md:h-screen sm:h-two-thirds-vw',
+            'md:h-screen h-two-thirds-vw',
           )}
           image={getImage(image)}
           loading="eager"
@@ -95,11 +95,11 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
             gridArea: '1/1',
           }} />
         // 67vw = 1/1.49253731 = 1/aspect ratio of my camera lol
-        : <div className="md:h-screen sm:h-two-thirds-vw" style={{gridArea: '1/1' }}></div> }
+        : <div className="md:h-screen h-two-thirds-vw" style={{gridArea: '1/1' }}></div> }
       <div className="relative grid place-items-center" style={{gridArea: '1/1'}}>
         <div className="m-3 flex flex-col items-end">
-          <section className={classnames('rounded-xl py-5 portrait:py-3', isClient && ' bg-vibrant-dark-75')}>
-            <div className="mx-auto px-6 portrait:px-4">
+          <section className={classnames('rounded-xl md:py-5 py-3', isClient && ' bg-vibrant-dark-75')}>
+            <div className="mx-auto md:px-6 px-4">
               <h1 className={classnames('font-black text-6xl', isClient && 'text-vibrant-light')}>Chuck Dries</h1>
               <h2 className={classnames('italic text-2xl', isClient && 'text-vibrant')}>Full stack software engineer &amp; hobbyist photographer</h2>
               {<div className="border-t-2 border-muted-light mt-2 mr-2 mb-1" style={{width: 30}}></div>}
