@@ -11,6 +11,8 @@ import { HeroA } from '../components/IndexComponents';
 
 // TODO: better text colors in situations of low contrast
 
+const env = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
+
 const getDifferentRand = (range, lastNs, iterations = 0) => {
   const n = Math.floor(Math.random() * range);
   if (lastNs.findIndex(x => x === n) > -1 && iterations < 5) {
@@ -31,12 +33,11 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
 
   const shuffleImage = React.useCallback((currentImage) => {
     const lastThreeImages = JSON.parse(localStorage.getItem('lastHeros')) || [];
-    try {
-      // eslint-disable-next-line
-      posthog.capture('[shuffle image]', { currentImage: currentImage?.base });
-    } catch (e) {
-      console.log('failed to send shuffle image', e);
-      // do nothing
+    if (env === 'production') {
+      try {
+        // eslint-disable-next-line
+        posthog.capture('[shuffle image]', { currentImage: currentImage?.base });
+      } catch (e) {/* do nothing */}
     }
     const index = getDifferentRand(images.length, lastThreeImages);
     localStorage.setItem('lastHeros', JSON.stringify(take(3, [index, ...lastThreeImages])));
