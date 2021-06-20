@@ -97,11 +97,11 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
         // 67vw = 1/1.49253731 = 1/aspect ratio of my camera lol
         : <div className="md:h-screen h-two-thirds-vw" style={{gridArea: '1/1' }}></div> }
       <div className="relative grid place-items-center" style={{gridArea: '1/1'}}>
-        <div className="m-3 flex flex-col items-end">
+        <div className="m-0 sm:m-3 flex flex-col items-end">
           <section className={classnames('rounded-xl md:py-5 py-3', isClient && ' bg-vibrant-dark-75')}>
             <div className="mx-auto md:px-6 px-4">
-              <h1 className={classnames('font-black text-6xl', isClient && 'text-vibrant-light')}>Chuck Dries</h1>
-              <h2 className={classnames('italic text-2xl', isClient && 'text-vibrant')}>Full stack software engineer &amp; hobbyist photographer</h2>
+              <h1 className={classnames('font-black text-4xl sm:text-5xl md:text-6xl', isClient && 'text-vibrant-light')}>Chuck Dries</h1>
+              <h2 className={classnames('italic text-xl md:text-2xl', isClient && 'text-vibrant')}>Full stack software engineer &amp; hobbyist photographer</h2>
               {<div className="border-t-2 border-muted-light mt-2 mr-2 mb-1" style={{width: 30}}></div>}
 
               <ul className={classnames(isClient && 'text-muted-light')}>
@@ -117,7 +117,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
               </ul>
             </div>
           </section>
-          <div className="flex">
+          <div className="flex mr-2">
             <div className="flex my-2 items-center flex-col">
               <Link
                 className={classnames(
@@ -142,7 +142,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
             </div>
             <Link
               className={classnames(
-                'hover:underline p-3 px-5 py-4 my-3 text-lg rounded-md border-2 arrow-right-after font-bold font-serif',
+                'hover:underline p-3 px-5 py-4 my-3 text-md sm:text-lg rounded-md border-2 arrow-right-after font-bold font-serif',
                 isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')} 
               to="/photogallery/"
             >

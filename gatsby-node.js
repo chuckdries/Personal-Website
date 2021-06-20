@@ -171,8 +171,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     new Date(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken'], edge))),
   galleryImages.data.allFile.edges);
 
-  console.log(R.map(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken']), edges));
-
   edges.forEach(({ node }, index) => {
     const nextImage = index === edges.length - 1
       ? null
