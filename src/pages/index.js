@@ -133,6 +133,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
                   'hover:underline inline-block px-1 my-1 mr-2 text-md rounded-md border-2',
                   isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')} 
                 // style={{top: '5px'}}
+                id="image-link"
                 title="view image details"
                 to={`/photogallery/${image.base}/`}
               >
@@ -156,6 +157,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
               className={classnames(
                 'hover:underline p-3 px-5 py-4 my-3 text-md sm:text-lg rounded-md border-2 arrow-right-after font-bold font-serif',
                 isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')} 
+              id="photogallery-link"
               to="/photogallery/"
             >
             Photography Gallery
