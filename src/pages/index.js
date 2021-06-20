@@ -4,6 +4,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { Helmet } from 'react-helmet';
 import { take } from 'ramda';
 import classnames from 'classnames';
+import posthog from 'posthog-js';
 
 import { getVibrantToHelmetSafeBodyStyle, getVibrant } from '../utils';
 import { HeroA } from '../components/IndexComponents';
@@ -28,8 +29,15 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
     return images[imageIndex];
   }, [images, imageIndex]);
 
-  const shuffleImage = React.useCallback(() => {
+  const shuffleImage = React.useCallback((currentImage) => {
     const lastThreeImages = JSON.parse(localStorage.getItem('lastHeros')) || [];
+    try {
+      // eslint-disable-next-line
+      posthog.capture('[shuffle image]', { currentImage: currentImage?.base });
+    } catch (e) {
+      console.log('failed to send shuffle image', e);
+      // do nothing
+    }
     const index = getDifferentRand(images.length, lastThreeImages);
     localStorage.setItem('lastHeros', JSON.stringify(take(3, [index, ...lastThreeImages])));
     setImageIndex(index);
@@ -39,9 +47,9 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
   React.useEffect(() => {
     if (!isClient) {
       setIsClient(true);
-      shuffleImage();
+      shuffleImage(image);
     }
-  }, [isClient, imageIndex, shuffleImage]);
+  }, [isClient, imageIndex, image, shuffleImage]);
 
   React.useEffect(() => {
     const keyListener = (e) => {
@@ -133,7 +141,10 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
                 className={classnames(
                   'hover:underline inline-block px-1 my-1 mr-2 text-md rounded-md border-2',
                   isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')}
-                onClick={shuffleImage} 
+                id="shuffle-button"
+                onClick={() => {
+                  shuffleImage(image);
+                }}
                 title="shuffle image"
                 type="button"
               >
