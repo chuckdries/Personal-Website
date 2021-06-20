@@ -164,10 +164,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
   // Create pages for each markdown file.
   const galleryImageTemplate = path.resolve('src/components/GalleryImage.js');
-  const edges = R.sort((edge) => 
-    new Date(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken'], edge)),
-  galleryImages.data.allFile.edges);
+  // const diffDate = (a, b) => 
+  //   new Date(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken'], a)).getTime() - new Date(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken'],b)).getTime();
   
+  const edges = R.sort(R.descend((edge) => 
+    new Date(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken'], edge))),
+  galleryImages.data.allFile.edges);
+
   console.log(R.map(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken']), edges));
 
   edges.forEach(({ node }, index) => {

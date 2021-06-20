@@ -56,7 +56,7 @@ export const query = graphql`
 query GalleryPageQuery {
   allFile(filter: {
     sourceInstanceName: { eq: "gallery" }}
-    sort: {order: DESC, fields: childrenImageSharp___fields___imageMeta___dateTaken}
+    # sort: {order: DESC, fields: childrenImageSharp___fields___imageMeta___dateTaken}
   ) {
     edges {
       node {
