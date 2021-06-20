@@ -90,14 +90,15 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
         style={getVibrantToHelmetSafeBodyStyle(vibrant)}
       />
     </Helmet>
+    {/* WIP: ipad portrait hits md breakpoint, looks bad */}
     <main
-      className={classnames('font-serif hero', ar > 1 ? 'flex md:grid flex-col' : 'grid md:flex md:flex-row-reverse')}
+      className={classnames('font-serif hero', ar > 1 ? 'landscape:grid portrait:flex portrait:flex-col' : 'portrait:grid landscape:flex landscape:flex-row-reverse')}
     >
       {isClient ? 
         <GatsbyImage
           alt=""
           className={classnames(
-            ar > 1 ? 'md:h-screen h-two-thirds-vw' : 'h-screen w-full md:w-1/2',
+            ar > 1 ? 'landscape:h-screen portrait:h-two-thirds-vw' : 'h-screen portrait:w-full landscape:w-1/2',
           )}
           image={getImage(image)}
           loading="eager"
