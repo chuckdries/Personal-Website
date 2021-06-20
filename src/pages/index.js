@@ -102,8 +102,10 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
             <div className="mx-auto px-6 portrait:px-4">
               <h1 className={classnames('font-black text-6xl', isClient && 'text-vibrant-light')}>Chuck Dries</h1>
               <h2 className={classnames('italic text-2xl', isClient && 'text-vibrant')}>Full stack software engineer &amp; hobbyist photographer</h2>
+              {<div className="border-t-2 border-muted-light mt-2 mr-2 mb-1" style={{width: 30}}></div>}
+
               <ul className={classnames(isClient && 'text-muted-light')}>
-                <li>Software Developer, <span className="italic">Axosoft</span></li>
+                <li>Software Engineer, Axosoft</li>
                 <li><HeroA className="ml-0" href="mailto:chuck@chuckdries.com" isClient={isClient}>chuck@chuckdries.com</HeroA>/<span className="ml-2">602.618.0414</span></li>
                 <li>
                   <HeroA className="ml-0" href="http://github.com/chuckdries" isClient={isClient}>Github</HeroA>/
