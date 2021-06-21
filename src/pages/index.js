@@ -92,8 +92,8 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
     </Helmet>
     {/* WIP: ipad portrait hits md breakpoint, looks bad */}
     <main
-      className={classnames('font-serif hero', ar > 1
-        ? 'landscape:grid portrait:flex portrait:flex-col' : 'portrait:grid landscape:flex landscape:flex-row-reverse')}
+      className={classnames('font-serif hero', ar < 1
+        ? 'portrait:grid landscape:flex landscape:flex-row-reverse' : 'landscape:grid portrait:flex portrait:flex-col')}
     >
       {isClient ? 
         <GatsbyImage
@@ -110,18 +110,19 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
         : <div className="md:h-screen h-two-thirds-vw" style={{gridArea: '1/1' }}></div> }
       <div className="relative grid place-items-center" style={{gridArea: '1/1'}}>
         <div className="m-0 sm:m-3 flex flex-col items-end">
-          <section className={classnames('rounded-xl md:py-5 py-3 relative', isClient && 'md:border-2 border-vibrant-light bg-vibrant-dark-75')}>
+          <section className={classnames('rounded-xl md:py-5 py-3 relative', isClient && 'landscape:border-2 border-vibrant-light bg-vibrant-dark-75')}>
             <div className="mx-auto md:px-6 px-4">
               <StaticImage
-                className="rounded-full block md:absolute md:headshot-offset border-2 border-vibrant-light drop-shadow-xl"
-                height={150}
-                layout="fixed"
+              // landscape:absolute landscape:headshot-offset
+                className="absolute headshot-offset rounded-full block w-1/4 border-2 border-vibrant-light drop-shadow-xl"
+                layout="constrained"
                 src="../images/chuck-headshot.jpg"
+                width={150}
                 // style={{ top: '-80px', right: 25}}
                 // width={150}
               />
               <h1 className={classnames('font-black text-4xl sm:text-5xl md:text-6xl', isClient && 'text-vibrant-light')}>Chuck Dries</h1>
-              <h2 className={classnames('italic text-xl md:text-2xl', isClient && 'text-vibrant')}>Full stack software engineer &amp; hobbyist photographer</h2>
+              <h2 className={classnames('text-xl md:text-2xl', isClient && 'text-vibrant')}>Full stack software engineer &amp; hobbyist photographer</h2>
               {<div className="border-t-2 border-muted-light mt-2 mr-2 mb-1" style={{width: 30}}></div>}
 
               <ul className={classnames(isClient && 'text-muted-light')}>
