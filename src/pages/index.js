@@ -92,7 +92,8 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
     </Helmet>
     {/* WIP: ipad portrait hits md breakpoint, looks bad */}
     <main
-      className={classnames('font-serif hero', ar > 1 ? 'landscape:grid portrait:flex portrait:flex-col' : 'portrait:grid landscape:flex landscape:flex-row-reverse')}
+      className={classnames('font-serif hero', ar > 1
+        ? 'landscape:grid portrait:flex portrait:flex-col' : 'portrait:grid landscape:flex landscape:flex-row-reverse')}
     >
       {isClient ? 
         <GatsbyImage
