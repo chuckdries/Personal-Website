@@ -32,6 +32,9 @@ const GalleryImage = ({ data, pageContext }) => {
         }
         return;
       }
+      case 'KeyG': {
+        navigate('/photogallery/');
+      }
       }
     };
     document.addEventListener('keydown', keyListener);
@@ -74,15 +77,15 @@ const GalleryImage = ({ data, pageContext }) => {
         <Link
           className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
           to="/photogallery/"
-        >gallery</Link>
+        >gallery <span className="bg-gray-300 text-black">g</span></Link>
         {pageContext.prevImage && <Link
           className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
           to={`/photogallery/${pageContext.prevImage}/`}
-        >previous</Link>}
+        >previous <span className="bg-gray-300 text-black">&#11104;</span></Link>}
         {pageContext.nextImage && <Link
           className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
           to={`/photogallery/${pageContext.nextImage}/`}
-        >next</Link>}
+        >next <span className="bg-gray-300 text-black">&#11106;</span></Link>}
       </nav>
       <div className={classnames('flex', orientationClasses)}>
         <div className="flex-grow-0">
