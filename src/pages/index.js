@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link, graphql } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image';
 import { Helmet } from 'react-helmet';
 import { take } from 'ramda';
 import classnames from 'classnames';
@@ -110,8 +110,16 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
         : <div className="md:h-screen h-two-thirds-vw" style={{gridArea: '1/1' }}></div> }
       <div className="relative grid place-items-center" style={{gridArea: '1/1'}}>
         <div className="m-0 sm:m-3 flex flex-col items-end">
-          <section className={classnames('rounded-xl md:py-5 py-3', isClient && ' bg-vibrant-dark-75')}>
+          <section className={classnames('rounded-xl md:py-5 py-3 relative', isClient && 'md:border-2 border-vibrant-light bg-vibrant-dark-75')}>
             <div className="mx-auto md:px-6 px-4">
+              <StaticImage
+                className="rounded-full block md:absolute md:headshot-offset border-2 border-vibrant-light drop-shadow-xl"
+                height={150}
+                layout="fixed"
+                src="../images/chuck-headshot.jpg"
+                // style={{ top: '-80px', right: 25}}
+                // width={150}
+              />
               <h1 className={classnames('font-black text-4xl sm:text-5xl md:text-6xl', isClient && 'text-vibrant-light')}>Chuck Dries</h1>
               <h2 className={classnames('italic text-xl md:text-2xl', isClient && 'text-vibrant')}>Full stack software engineer &amp; hobbyist photographer</h2>
               {<div className="border-t-2 border-muted-light mt-2 mr-2 mb-1" style={{width: 30}}></div>}

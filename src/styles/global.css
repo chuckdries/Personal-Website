@@ -33,9 +33,15 @@
     scroll-padding: theme('spacing.6');
   }
   @variants responsive {
-
     .h-two-thirds-vw {
       height: 67vw;
+    }
+    .headshot-offset {
+      top: -80px;
+      right: 25px;
+    }
+    .headshot-offset-y {
+      top: -30px;
     }
   }
 }
