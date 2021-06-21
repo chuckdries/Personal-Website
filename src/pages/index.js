@@ -92,14 +92,14 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
     </Helmet>
     {/* WIP: ipad portrait hits md breakpoint, looks bad */}
     <main
-      className={classnames('font-serif hero', ar > 1
+      className={classnames('font-serif hero', ar > 1 || !isClient
         ? 'landscape:grid portrait:flex portrait:flex-col' : 'portrait:grid landscape:flex landscape:flex-row-reverse')}
     >
       {isClient ? 
         <GatsbyImage
           alt=""
           className={classnames(
-            ar > 1 ? 'landscape:h-screen portrait:h-two-thirds-vw' : 'h-screen portrait:w-full landscape:w-1/2',
+            ar > 1 || !isClient ? 'landscape:h-screen portrait:h-two-thirds-vw' : 'h-screen portrait:w-full landscape:w-1/2',
           )}
           image={getImage(image)}
           loading="eager"
@@ -107,7 +107,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
             gridArea: '1/1',
           }} />
         // 67vw = 1/1.49253731 = 1/aspect ratio of my camera lol
-        : <div className="md:h-screen h-two-thirds-vw" style={{gridArea: '1/1' }}></div> }
+        : <div className="landscape:h-screen portrait:h-two-thirds-vw w-full" style={{gridArea: '1/1' }}></div> }
       <div className="relative grid place-items-center" style={{gridArea: '1/1'}}>
         <div className="m-0 sm:m-3 flex flex-col items-end">
           <section className={classnames('rounded-xl md:py-5 py-3', isClient && ' bg-vibrant-dark-75')}>
