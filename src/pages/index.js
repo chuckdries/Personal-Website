@@ -92,14 +92,14 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
     </Helmet>
     {/* WIP: ipad portrait hits md breakpoint, looks bad */}
     <main
-      className={classnames('font-serif hero', ar < 1
-        ? 'portrait:grid landscape:flex landscape:flex-row-reverse' : 'landscape:grid portrait:flex portrait:flex-col')}
+      className={classnames('font-serif hero', ar > 1 || !isClient
+        ? 'landscape:grid portrait:flex portrait:flex-col' : 'portrait:grid landscape:flex landscape:flex-row-reverse')}
     >
       {isClient ? 
         <GatsbyImage
           alt=""
           className={classnames(
-            ar > 1 ? 'landscape:h-screen portrait:h-two-thirds-vw' : 'h-screen portrait:w-full landscape:w-1/2',
+            ar > 1 || !isClient ? 'landscape:h-screen portrait:h-two-thirds-vw' : 'h-screen portrait:w-full landscape:w-1/2',
           )}
           image={getImage(image)}
           loading="eager"
@@ -107,19 +107,22 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
             gridArea: '1/1',
           }} />
         // 67vw = 1/1.49253731 = 1/aspect ratio of my camera lol
-        : <div className="md:h-screen h-two-thirds-vw" style={{gridArea: '1/1' }}></div> }
+        : <div className="landscape:h-screen portrait:h-two-thirds-vw w-full" style={{gridArea: '1/1' }}></div> }
       <div className="relative grid place-items-center" style={{gridArea: '1/1'}}>
         <div className="m-0 sm:m-3 flex flex-col items-end">
           <section className={classnames('rounded-xl md:py-5 py-3 relative', isClient && 'landscape:border-2 border-vibrant-light bg-vibrant-dark-75')}>
             <div className="mx-auto md:px-6 px-4">
               <StaticImage
               // landscape:absolute landscape:headshot-offset
-                className="absolute headshot-offset rounded-full block w-1/4 border-2 border-vibrant-light drop-shadow-xl"
+                className={classnames('headshot-offset rounded-full block w-1/4 border-2 drop-shadow-xl', isClient && 'border-vibrant-light')}
                 layout="constrained"
                 src="../images/chuck-headshot.jpg"
+                // placeholder='none'
+                style={{
+                  position: 'absolute',
+                  overflow: 'hidden',
+                }}
                 width={150}
-                // style={{ top: '-80px', right: 25}}
-                // width={150}
               />
               <h1 className={classnames('font-black text-4xl sm:text-5xl md:text-6xl', isClient && 'text-vibrant-light')}>Chuck Dries</h1>
               <h2 className={classnames('text-xl md:text-2xl', isClient && 'text-vibrant')}>Full stack software engineer &amp; hobbyist photographer</h2>

@@ -65,6 +65,11 @@ a {
   @apply text-blue-600;
 }
 
+/* fix safari bug */
+.rounded-full img, .rounded-full div {
+  border-radius: 100%;
+}
+
 .arrow-right-after:after {
   content: "\279C";
   margin-left: 3px;
