@@ -110,7 +110,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
         : <div className="landscape:h-screen portrait:h-two-thirds-vw w-full" style={{gridArea: '1/1' }}></div> }
       <div className="relative grid place-items-center" style={{gridArea: '1/1'}}>
         <div className="m-0 sm:m-3 flex flex-col items-end">
-          <section className={classnames('rounded-xl md:px-6 px-4 md:py-5 py-3', isClient && 'border-2 border-vibrant-light bg-vibrant-dark-75')}>
+          <section className={classnames('md:px-6 px-4 rounded-t-lg md:py-5 py-3', isClient && 'border-b-2 border-vibrant-light bg-vibrant-dark-75')}>
             <div className="mx-auto">
               <h1 className={classnames('font-black text-4xl sm:text-5xl md:text-6xl', isClient && 'text-vibrant-light')}>Chuck Dries</h1>
               <h2 className={classnames('text-xl md:text-2xl', isClient && 'text-vibrant')}>Full stack software engineer &amp; hobbyist photographer</h2>
@@ -129,12 +129,12 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
               </ul>
             </div>
           </section>
-          <div className="flex mr-2">
-            <div className="flex my-2 items-center flex-col">
+          <div className="flex">
+            <div className="flex items-center flex-col">
               <Link
                 className={classnames(
                   'hover:underline inline-block px-1 my-1 mr-2 text-md rounded-md border-2',
-                  isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')} 
+                  isClient && 'text-vibrant-dark bg-vibrant hover:border-muted border-vibrant-dark')} 
                 // style={{top: '5px'}}
                 id="image-link"
                 title="view image details"
@@ -145,7 +145,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
               <button
                 className={classnames(
                   'hover:underline inline-block px-1 my-1 mr-2 text-md rounded-md border-2',
-                  isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')}
+                  isClient && 'text-vibrant-dark bg-vibrant hover:border-muted border-vibrant-dark')}
                 id="shuffle-button"
                 onClick={() => {
                   shuffleImage(image);
@@ -158,8 +158,8 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
             </div>
             <Link
               className={classnames(
-                'hover:underline p-3 px-5 py-4 my-3 text-md sm:text-lg rounded-md border-2 arrow-right-after font-bold font-serif',
-                isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')} 
+                'hover:underline p-3 px-5 py-4 text-md sm:text-lg rounded-b-md border-2 border-l-2 border-r-2 arrow-right-after font-bold font-serif',
+                isClient && 'text-vibrant-dark bg-vibrant hover:border-muted border-vibrant-dark')} 
               id="photogallery-link"
               to="/photogallery/"
             >
