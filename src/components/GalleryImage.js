@@ -12,6 +12,15 @@ import {
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { Helmet } from 'react-helmet';
 import classnames from 'classnames';
+import posthog from 'posthog-js';
+
+const logKeyShortcut = (keyCode: string) => {
+  try {
+    // eslint-disable-next-line
+    posthog.capture('[key shortcut]', { keyCode });
+    window.plausible('KeyShortcut', {props: { keyCode }});
+  } catch (e) {/* do nothing */}
+};
 
 const GalleryImage = ({ data, pageContext }) => {
   const image = data.allFile.edges[0].node;
@@ -19,14 +28,17 @@ const GalleryImage = ({ data, pageContext }) => {
 
   React.useEffect(() => {
     const keyListener = (e) => {
+      
       switch (e.code) {
       case 'ArrowRight': {
+        logKeyShortcut(e.code);
         if (pageContext.nextImage) {
           navigate(`/photogallery/${pageContext.nextImage}/`);
         }
         return;
       }
       case 'ArrowLeft': {
+        logKeyShortcut(e.code);
         if (pageContext.prevImage) {
           navigate(`/photogallery/${pageContext.prevImage}/`);
         }
@@ -34,6 +46,7 @@ const GalleryImage = ({ data, pageContext }) => {
       }
       case 'Escape':
       case 'KeyG': {
+        logKeyShortcut(e.code);
         navigate('/photogallery/');
       }
       }

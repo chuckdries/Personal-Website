@@ -37,6 +37,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
       try {
         // eslint-disable-next-line
         posthog.capture('[shuffle image]', { currentImage: currentImage?.base });
+        window.plausible('Shuffle', {props: { currentImage: currentImage?.base }});
       } catch (e) {/* do nothing */}
     }
     const index = getDifferentRand(images.length, lastThreeImages);

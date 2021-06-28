@@ -16,6 +16,8 @@ export default function HTML(props) {
         />
         {props.headComponents}
         {env === 'production' && <script async data-domain="chuckdries.com" defer src="https://analytics.chuckdries.com/js/plausible.js"></script>}
+        {/* eslint-disable-next-line */}
+        {env === 'production' && <script>{`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`}</script>}
       </head>
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}
