@@ -5,7 +5,7 @@ const env = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'developmen
 if (env === 'production') {
   posthog.init('HR8Gte105aCHNx2BqhL1XkbvH9kzKGptxjkbhuTj6Ek', { api_host: 'https://posthog.chuckdries.com' });
 }
-exports.onRouteUpdate = function () {
+export const onRouteUpdate = function () {
   if (
     process.env.NODE_ENV === 'production' &&
     typeof window.plausible === 'object'
