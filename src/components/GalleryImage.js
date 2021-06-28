@@ -14,7 +14,7 @@ import { Helmet } from 'react-helmet';
 import classnames from 'classnames';
 import posthog from 'posthog-js';
 
-const logKeyShortcut = (keyCode: string) => {
+const logKeyShortcut = (keyCode) => {
   try {
     // eslint-disable-next-line
     posthog.capture('[key shortcut]', { keyCode });
