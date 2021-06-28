@@ -32,6 +32,7 @@ const GalleryImage = ({ data, pageContext }) => {
         }
         return;
       }
+      case 'Escape':
       case 'KeyG': {
         navigate('/photogallery/');
       }
@@ -77,7 +78,7 @@ const GalleryImage = ({ data, pageContext }) => {
         <Link
           className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
           to="/photogallery/"
-        >gallery <span className="bg-gray-300 text-black">g</span></Link>
+        >gallery <span className="bg-gray-300 text-black">esc</span></Link>
         {pageContext.prevImage && <Link
           className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
           to={`/photogallery/${pageContext.prevImage}/`}
