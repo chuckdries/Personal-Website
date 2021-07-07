@@ -78,7 +78,7 @@ const GalleryImage = ({ data, pageContext }) => {
       />
     </Helmet>
     <div className="min-h-screen flex flex-col justify-between">
-      <nav className="mt-0">
+      <nav className="mt-1 ml-1 text-lg mb-4">
         <button
           className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before  mr-1"
           onClick={() => navigate(-1)}

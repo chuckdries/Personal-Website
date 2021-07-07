@@ -19,7 +19,7 @@ const GalleryPage = ({ data }) => {
       <title>Photo Gallery | Chuck Dries</title>
       <body className="bg-black text-white" />
     </Helmet>
-    <nav className="mt-0 mb-4">
+    <nav className="mt-1 ml-1 text-lg mb-4">
       <button
         className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before  mr-1"
         onClick={() => navigate(-1)}
@@ -34,7 +34,7 @@ const GalleryPage = ({ data }) => {
         to="/photogallery/"
       >gallery</Link>
     </nav>
-    <div className="bg-black min-h-screen 2xl:container">
+    <div className="bg-black min-h-screen mx-auto 2xl:container">
       <h1 className="text-5xl mt-0 ml-5 font-serif font-black z-10 relative">Photo Gallery</h1>
       <div className="mx-auto">
         <MasonryGallery
