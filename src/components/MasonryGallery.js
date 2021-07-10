@@ -37,14 +37,13 @@ const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
         const rowAspectRatioSum = rowAspectRatioSumsForCurrentBP[rowIndex];
         // const width = ((getAspectRatio(image) / rowAspectRatioSum) * 100).toFixed(10);
         const ar = getAspectRatio(image);
-        const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(5);
+        const widthNumber = rowAspectRatioSum === ar
+          // image is only one in row
+          ? 100 / itemsPerRow
+          // image is one of several in row
+          : ((ar / rowAspectRatioSum) * 100).toFixed(5);
+
         const width = `${widthNumber}%`;
-        // const width = `${widthNumber}%`;
-        // console.log('ars', rowAspectRatioSum);
-        if (i === 0) {
-          // console.log(rowIndex, rowAspectRatioSum);
-          // console.log(getName(image), width);
-        }
         return (
           <Link 
             className="inline-block"
