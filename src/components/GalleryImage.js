@@ -69,6 +69,7 @@ const GalleryImage = ({ data, pageContext }) => {
   const orientationClasses = ar > 1 ? 'flex-col mx-auto' : 'portrait:mx-auto landscape:mx-5 landscape:flex-row-reverse portrait:flex-col';
   console.log(ar, orientationClasses);
   const shutterSpeed = React.useMemo(() => getShutterFractionFromExposureTime(meta.exif.ExposureTime || 0), [meta]);
+  const dateTaken = React.useMemo(() => new Date(meta.dateTaken), [meta]);
   return (<>
     <Helmet>
       <title>{name} - Gallery | Chuck Dries</title>
@@ -127,6 +128,16 @@ const GalleryImage = ({ data, pageContext }) => {
             <p className="landscape:mr-2">{meta.iptc.caption}</p>
           </div>
           {<div className="portrait:border-t-2 border-muted-light portrait:mt-2 mr-2 portrait:mb-1" style={{width: 30}}></div>}
+          {dateTaken &&
+            <div className={classnames('flex items-baseline ml-2 text-lg',
+              ar <= 1 ? 'flex-row-reverse' : 'portrait:flex-row-reverse')}
+            title="shutter speed"
+            >
+              <span className="icon-offset mr-1">
+                <ion-icon name="calendar"></ion-icon>
+              </span>
+              <span className="mr-1">{dateTaken.toLocaleDateString()}</span>
+            </div>}
           {(locationString) &&
             <div className={classnames('flex items-baseline ml-2 text-lg',
               ar <= 1 ? 'flex-row-reverse' : 'portrait:flex-row-reverse')}
