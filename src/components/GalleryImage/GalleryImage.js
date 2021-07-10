@@ -8,11 +8,12 @@ import {
   getVibrant,
   getVibrantToHelmetSafeBodyStyle,
   hasName,
-} from '../utils';
+} from '../../utils';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { Helmet } from 'react-helmet';
 import classnames from 'classnames';
 import posthog from 'posthog-js';
+import MetadataItem from './MetadataItem';
 
 const logKeyShortcut = (keyCode) => {
   try {
@@ -128,56 +129,11 @@ const GalleryImage = ({ data, pageContext }) => {
             <p className="landscape:mr-2">{meta.iptc.caption}</p>
           </div>
           {<div className="portrait:border-t-2 border-muted-light portrait:mt-2 mr-2 portrait:mb-1" style={{width: 30}}></div>}
-          {dateTaken &&
-            <div className={classnames('flex items-baseline ml-2 text-lg',
-              ar <= 1 ? 'flex-row-reverse' : 'portrait:flex-row-reverse')}
-            title="shutter speed"
-            >
-              <span className="icon-offset mr-1">
-                <ion-icon name="calendar"></ion-icon>
-              </span>
-              <span className="mr-1">{dateTaken.toLocaleDateString()}</span>
-            </div>}
-          {(locationString) &&
-            <div className={classnames('flex items-baseline ml-2 text-lg',
-              ar <= 1 ? 'flex-row-reverse' : 'portrait:flex-row-reverse')}
-            title="location"
-            >
-              <span className="icon-offset mr-1">
-                <ion-icon name="location-sharp"></ion-icon>
-              </span>
-              <span className="mr-1">{locationString}</span>
-            </div>}
-          {shutterSpeed &&
-            <div className={classnames('flex items-baseline ml-2 text-lg',
-              ar <= 1 ? 'flex-row-reverse' : 'portrait:flex-row-reverse')}
-            title="shutter speed"
-            >
-              <span className="icon-offset mr-1">
-                <ion-icon name="stopwatch-sharp"></ion-icon>
-              </span>
-              <span className="mr-1">{shutterSpeed}</span>
-            </div>}
-          {meta.exif.FNumber &&
-            <div className={classnames('flex items-baseline ml-2 text-lg',
-              ar <= 1 ? 'flex-row-reverse' : 'portrait:flex-row-reverse')}
-            title="shutter speed"
-            >
-              <span className="icon-offset mr-1">
-                <ion-icon name="aperture-sharp"></ion-icon>
-              </span>
-              <span className="mr-1">f/{meta.exif.FNumber}</span>
-            </div>}
-          {meta.exif.ISO && 
-            <div className={classnames('flex items-baseline ml-2 text-lg',
-              ar <= 1 ? 'flex-row-reverse' : 'portrait:flex-row-reverse')}
-            title="shutter speed"
-            >
-              <span className="icon-offset mr-1">
-                <ion-icon name="film-outline"></ion-icon>
-              </span>
-              <span className="mr-1">{meta.exif.ISO}</span>
-            </div>}
+          <MetadataItem aspectRatio={ar} data={dateTaken} icon="calendar-sharp" title="date taken"/>
+          <MetadataItem aspectRatio={ar} data={locationString} icon="location-sharp" title="location"/>
+          <MetadataItem aspectRatio={ar} data={shutterSpeed} icon="stopwatch-sharp" title="shutter speed" />
+          <MetadataItem aspectRatio={ar} data={meta.exif.FNumber} icon="aperture-sharp" title="aperture" />
+          <MetadataItem aspectRatio={ar} data={meta.exif.ISO} icon="film-outline" title="ISO" />
         </div>
       </div>
       <div></div>
