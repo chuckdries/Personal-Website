@@ -9,8 +9,6 @@ import posthog from 'posthog-js';
 import { getVibrantToHelmetSafeBodyStyle, getVibrant, getAspectRatio } from '../utils';
 import { HeroA } from '../components/Index/HeroLink';
 
-// TODO: better text colors in situations of low contrast
-
 const env = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
 
 const getDifferentRand = (range, lastNs, iterations = 0) => {
