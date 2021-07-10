@@ -14,7 +14,7 @@ const MetadataItem = ({
     <span className="icon-offset mr-1">
       <ion-icon name={icon}></ion-icon>
     </span>
-    <span className="mr-1">f/{data}</span>
+    <span className="mr-1">{data}</span>
   </div>
 ) : null;
 

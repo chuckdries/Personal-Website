@@ -129,10 +129,10 @@ const GalleryImage = ({ data, pageContext }) => {
             <p className="landscape:mr-2">{meta.iptc.caption}</p>
           </div>
           {<div className="portrait:border-t-2 border-muted-light portrait:mt-2 mr-2 portrait:mb-1" style={{width: 30}}></div>}
-          <MetadataItem aspectRatio={ar} data={dateTaken} icon="calendar-sharp" title="date taken"/>
+          <MetadataItem aspectRatio={ar} data={dateTaken.toLocaleDateString()} icon="calendar-sharp" title="date taken"/>
           <MetadataItem aspectRatio={ar} data={locationString} icon="location-sharp" title="location"/>
           <MetadataItem aspectRatio={ar} data={shutterSpeed} icon="stopwatch-sharp" title="shutter speed" />
-          <MetadataItem aspectRatio={ar} data={meta.exif.FNumber} icon="aperture-sharp" title="aperture" />
+          <MetadataItem aspectRatio={ar} data={`f/${meta.exif.FNumber}`} icon="aperture-sharp" title="aperture" />
           <MetadataItem aspectRatio={ar} data={meta.exif.ISO} icon="film-outline" title="ISO" />
         </div>
       </div>
