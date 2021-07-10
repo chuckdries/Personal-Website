@@ -141,7 +141,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
                 title="view image details"
                 to={`/photogallery/${image.base}/`}
               >
-                <span className="icon-offset"><ion-icon name="expand"></ion-icon></span>
+                <span className="icon-offset"><ion-icon name="image"></ion-icon></span>
               </Link>
               <button
                 className={classnames(
@@ -182,7 +182,8 @@ export const query = graphql`
       # images that don't work well
       # base: {nin: ["DSC06517.jpg"]}
       # childrenImageSharp: {elemMatch: {fluid: {aspectRatio: {lte: 1.3}}}}
-      }
+      },
+    sort: {order: DESC, fields: childrenImageSharp___fields___imageMeta___dateTaken}
   ) {
     edges {
       node {
