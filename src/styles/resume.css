@@ -1,14 +1,13 @@
-.resume {
+.resume-table {
+  li:last-child {
+    border-bottom: none;
+  }
+}
+.resume-table-list {
   ul {
     @apply list-disc;
   }
   li {
     @apply ml-5;
-  }
-  table {
-    /* border-collapse: collapse; */
-  }
-  tr:last-child {
-    border-bottom: none;
   }
 }
