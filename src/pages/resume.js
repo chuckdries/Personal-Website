@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, Link, navigate } from 'gatsby';
 import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
-import { groupBy, path, prop } from 'ramda';
+import { groupBy, map, path, pipe, sortBy } from 'ramda';
 
 import '../styles/resume.css';
 import { Helmet } from 'react-helmet';
@@ -40,8 +40,10 @@ const ResumeSection = ({
 };
 
 const Resume = ({ data: { allMdx } }) => {
-  const sections = groupBy(path(['node', 'frontmatter', 'type']), allMdx.edges);
-
+  const sections = pipe(
+    groupBy(path(['node', 'frontmatter', 'type'])),
+    map(sortBy(path(['node', 'frontmatter', 'order'])))
+  )(allMdx.edges);
   return (<>
     <Helmet>
       <title>Interactive Resume | Chuck Dries</title>
@@ -112,6 +114,7 @@ export const query = graphql`
     edges {
       node {
         frontmatter {
+          order
           name
           type
           position
