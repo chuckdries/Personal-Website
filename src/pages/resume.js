@@ -8,18 +8,29 @@ import '../styles/resume.css';
 import { Helmet } from 'react-helmet';
 
 const ResumeSection = ({
-  node,
+  node: {
+    frontmatter: {
+      name,
+      position,
+      timeframe,
+      items,
+      links,
+    },
+  },
 }) => {
   return (
     <li className="md:flex align-top py-2 md:border-b border-gray-300">
-      <div className="md:text-right flex-grow-0 flex-shrink-0" style={{width: '200px'}}>
-        <h3 className="font-bold text-xl">{node.frontmatter.name}</h3>
-        <span>{node.frontmatter.timeframe}</span>
+      <div className="md:text-right flex-grow-0 flex-shrink-0" style={{width: '250px'}}>
+        <h3 className="font-bold text-xl">{name}</h3>
+        <p>{timeframe}</p>
+        {links && <div>
+          {links.map((link) => <a className="hover:underline mx-1" href={link.url} key={link.url}>{link.name}</a>)}
+        </div>}
       </div>
       <div className="md:pl-4 resume-table-list">
-        <p className="italic">{node.frontmatter.position}</p>
+        {position && <p className="italic">{position}</p>}
         <ul>
-          {node.frontmatter.items.map((item) => (
+          {items.map((item) => (
             <li key={item.value}><MDXRenderer>{item.value}</MDXRenderer></li>
           ))}
         </ul>
@@ -53,7 +64,7 @@ const Resume = ({ data: { allMdx } }) => {
     <div className="resume font-serif container mx-auto px-2">
       <div className="md:flex items-center">
         <div className="flex-auto">
-          <h1 className="text-3xl font-bold">Chuck Dries</h1>
+          <h1 className="text-4xl font-bold">Chuck Dries</h1>
           <h2>Software Engineer • Web Developer • Teacher • Eagle Scout</h2>
         </div>
         <div className="md:text-right">
@@ -65,16 +76,32 @@ const Resume = ({ data: { allMdx } }) => {
           </ul>
         </div>
       </div>
-      <section>
-        <header>
-          <h2 className="mt-4 font-bold">Work Experience</h2>
-        </header>
-        <ul className="resume-table">
-          <MDXProvider>
+      <MDXProvider>
+        <section id="work-experience">
+          <header>
+            <h2 className="mt-4 font-bold text-2xl">Work Experience</h2>
+          </header>
+          <ul className="resume-table">
             {sections.workexperience.map(({ node }) => <ResumeSection key={node.slug} node={node} />)}
-          </MDXProvider>
-        </ul>
-      </section>
+          </ul>
+        </section>
+        <section id="education">
+          <header>
+            <h2 className="mt-4 font-bold text-2xl">Education</h2>
+          </header>
+          <ul className="resume-table">
+            {sections.education.map(({ node }) => <ResumeSection key={node.slug} node={node} />)}
+          </ul>
+        </section>
+        <section id="Projects">
+          <header>
+            <h2 className="mt-4 font-bold text-2xl">Projects</h2>
+          </header>
+          <ul className="resume-table">
+            {sections.project.map(({ node }) => <ResumeSection key={node.slug} node={node} />)}
+          </ul>
+        </section>
+      </MDXProvider>
     </div>
   </>);
 };
@@ -91,6 +118,10 @@ export const query = graphql`
           timeframe
           items {
             value
+          }
+          links {
+            name
+            url
           }
         }
         slug
