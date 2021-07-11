@@ -190,3 +190,21 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     });
   });
 };
+
+exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
+  console.log('createTypes', createTypes);
+  createTypes(`
+    type Mdx implements Node {
+      frontmatter: MdxFrontmatter
+    }
+
+    type MdxFrontmatter {
+      items: [ItemValues]
+      content: String @mdx
+    }
+
+    type ItemValues {
+      value: String @mdx
+    }
+  `);
+};

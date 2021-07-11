@@ -1,6 +1,14 @@
 .resume {
-  h1 {
-    @apply text-3xl font-bold;
+  ul {
+    @apply list-disc;
+  }
+  li {
+    @apply ml-5;
+  }
+  table {
+    /* border-collapse: collapse; */
+  }
+  tr:last-child {
+    border-bottom: none;
   }
 }
-

@@ -36,6 +36,14 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
+        name: 'resume',
+        path: './data/resume/',
+      },
+      __key: 'resume',
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
         name: 'pages',
         path: './src/pages/',
       },
@@ -52,5 +60,6 @@ module.exports = {
     },
     'gatsby-plugin-preval',
     'gatsby-plugin-robots-txt',
+    'gatsby-plugin-mdx-frontmatter',
   ],
 };
