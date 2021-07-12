@@ -166,7 +166,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const edges = R.sort(R.descend((edge) => 
     new Date(R.path(['node', 'fields', 'imageMeta', 'dateTaken'], edge))),
   galleryImages.data.allFile.edges);
-  console.log('edges', edges[0].node.fields.imageMeta);
 
   edges.forEach(({ node }, index) => {
     const nextImage = index === edges.length - 1
@@ -184,7 +183,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         prevImage,
       },
     };
-    console.log('page', page);
     createPage(page);
   });
 };
