@@ -39,12 +39,12 @@ const gcd = (a, b) => {
 
 export const getShutterFractionFromExposureTime = (exposureTime) => {
   let fraction = exposureTime;
-  var len = fraction.toString().length - 2;
+  const len = fraction.toString().length - 2;
   
-  var denominator = Math.pow(10, len);
-  var numerator = fraction * denominator;
+  let denominator = Math.pow(10, len);
+  let numerator = fraction * denominator;
   
-  var divisor = gcd(numerator, denominator);
+  const divisor = gcd(numerator, denominator);
   
   numerator /= divisor;
   denominator /= divisor;
