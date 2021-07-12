@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 
 export const VibrantColorsFragment = graphql`
-  fragment VibrantColors on ImageSharpFieldsImageMetaVibrant {
+  fragment VibrantColors on FileFieldsImageMetaVibrant {
     DarkMuted
     DarkVibrant
     LightMuted

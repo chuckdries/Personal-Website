@@ -68,7 +68,6 @@ const GalleryImage = ({ data, pageContext }) => {
   const vibrant = getVibrant(image, true);
 
   const orientationClasses = ar > 1 ? 'flex-col mx-auto' : 'portrait:mx-auto landscape:mx-5 landscape:flex-row-reverse portrait:flex-col';
-  console.log(ar, orientationClasses);
   const shutterSpeed = React.useMemo(() => getShutterFractionFromExposureTime(meta.exif.ExposureTime || 0), [meta]);
   const dateTaken = React.useMemo(() => new Date(meta.dateTaken), [meta]);
   return (<>
@@ -158,24 +157,24 @@ export const query = graphql`
             # placeholder: TRACED_SVG
             height: 2160
           )
-          fields {
-            imageMeta {
-              dateTaken
-              iptc {
-                caption
-                object_name
-                keywords
-                city
-                province_or_state
-              }
-              exif {
-                FNumber
-                ExposureTime
-                ISO
-              }
-              vibrant {
-                ...VibrantColors
-              }
+        }
+        fields {
+          imageMeta {
+            dateTaken
+            iptc {
+              caption
+              object_name
+              keywords
+              city
+              province_or_state
+            }
+            exif {
+              FNumber
+              ExposureTime
+              ISO
+            }
+            vibrant {
+              ...VibrantColors
             }
           }
         }
