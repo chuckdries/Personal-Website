@@ -107,33 +107,9 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
           }} />
         // 67vw = 1/1.49253731 = 1/aspect ratio of my camera lol
         : <div className="landscape:h-screen portrait:h-two-thirds-vw w-full" style={{gridArea: '1/1' }}></div> }
-      <div className="relative grid place-items-center" style={{gridArea: '1/1'}}>
-        <div className="m-0 sm:m-3 flex flex-col items-end">
-          <section
-            className={classnames(
-              'rounded-xl md:px-6 px-4 md:py-5 py-3', isClient &&
-              'border-2 border-vibrant-light bg-vibrant-dark bg-opacity-60 backdrop-filter backdrop-blur-lg'
-            )}
-          >
-            <div className="mx-auto">
-              <h1 className={classnames('font-black text-4xl sm:text-5xl md:text-6xl', isClient && 'text-vibrant-light')}>Chuck Dries</h1>
-              <h2 className={classnames('text-xl md:text-2xl', isClient && 'text-vibrant')}>Full stack software engineer &amp; hobbyist photographer</h2>
-              {<div className="border-t-2 border-muted-light mt-2 mr-2 mb-1" style={{width: 30}}></div>}
-
-              <ul className={classnames(isClient && 'text-muted-light')}>
-                <li>Software Engineer, Axosoft</li>
-                <li><HeroA className="ml-0" href="mailto:chuck@chuckdries.com" isClient={isClient}>chuck@chuckdries.com</HeroA>/<span className="ml-2">602.618.0414</span></li>
-                <li>
-                  <HeroA className="ml-0" href="http://github.com/chuckdries" isClient={isClient}>Github</HeroA>/
-                  <HeroA href="https://www.linkedin.com/in/chuckdries/" isClient={isClient}>LinkedIn</HeroA>/
-                  <HeroA href="https://devpost.com/chuckdries" isClient={isClient}>Devpost</HeroA>/
-                  <HeroA href="/CharlesDriesResumeCurrent.pdf" isClient={isClient}>Resume [pdf]</HeroA>/
-                  <HeroA href="https://medium.com/@chuckdries" isClient={isClient}>Medium (blog)</HeroA>
-                </li>
-              </ul>
-            </div>
-          </section>
-          <div className="flex mr-2">
+      <div className={classnames('relative grid', ar <= 1 ? 'place-items-end landscape:place-items-center' : 'place-items-end')} style={{gridArea: '1/1'}}>
+        <div className="">
+          <div className="flex mx-6 justify-end">
             <div className="flex my-2 items-center flex-col">
               <Link
                 className={classnames(
@@ -170,6 +146,35 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
             Photography Gallery
             </Link>
           </div>
+          <section
+            className={classnames(
+              ar > 1 && 'landscape:shadow-lg',
+              'md:px-6 px-4 md:py-5 py-3 rounded-l-md mb-4', isClient &&
+              'bg-vibrant-dark bg-opacity-60 backdrop-filter backdrop-blur-xl'
+            )}
+          >
+            <div
+              className={classnames('mx-auto filter drop-shadow items-end', ar > 1 || !isClient ? 'landscape:flex' : 'portrait:flex')}
+            >
+              <div className="mr-5 flex-auto">
+                <h1 className={classnames('font-black text-4xl sm:text-5xl md:text-6xl', isClient && 'text-vibrant-light')}>Chuck Dries</h1>
+                <h2 className={classnames('text-xl md:text-2xl', isClient && 'text-vibrant')}>Full Stack Software Engineer &amp; Hobbyist Photographer</h2>
+              </div>
+              {/* {<div className="border-t-2 border-muted-light mt-2 mr-2 mb-1" style={{width: 30}}></div>} */}
+
+              <ul className={'md:mr-4', classnames(isClient && 'text-muted-light')}>
+                <li>Software Engineer, Axosoft</li>
+                <li><HeroA className="ml-0" href="mailto:chuck@chuckdries.com" isClient={isClient}>chuck@chuckdries.com</HeroA>/<span className="ml-2">602.618.0414</span></li>
+                <li>
+                  <HeroA className="ml-0" href="http://github.com/chuckdries" isClient={isClient}>Github</HeroA>/
+                  <HeroA href="https://www.linkedin.com/in/chuckdries/" isClient={isClient}>LinkedIn</HeroA>/
+                  <HeroA href="https://devpost.com/chuckdries" isClient={isClient}>Devpost</HeroA>/
+                  <HeroA href="/CharlesDriesResumeCurrent.pdf" isClient={isClient}>Resume [pdf]</HeroA>/
+                  <HeroA href="https://medium.com/@chuckdries" isClient={isClient}>Medium (blog)</HeroA>
+                </li>
+              </ul>
+            </div>
+          </section>
         </div>
       </div>
 
