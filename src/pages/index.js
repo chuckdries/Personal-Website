@@ -175,13 +175,8 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
 export const query = graphql`
 {
   allFile(
-    filter: {
-      sourceInstanceName: {eq: "gallery"},
-      # images that don't work well
-      # base: {nin: ["DSC06517.jpg"]}
-      # childrenImageSharp: {elemMatch: {fluid: {aspectRatio: {lte: 1.3}}}}
-      },
-    sort: {order: DESC, fields: childrenImageSharp___fields___imageMeta___dateTaken}
+    filter: { sourceInstanceName: {eq: "gallery"} }
+    sort: {order: DESC, fields: fields___imageMeta___dateTaken}
   ) {
     edges {
       node {
@@ -196,11 +191,11 @@ export const query = graphql`
             placeholder: NONE
             breakpoints: [750, 1080, 1366, 1920, 2560]
           )
-          fields {
-            imageMeta {
-              vibrant {
-                ...VibrantColors
-              }
+        }
+        fields {
+          imageMeta {
+            vibrant {
+              ...VibrantColors
             }
           }
         }

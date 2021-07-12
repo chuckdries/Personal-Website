@@ -11,7 +11,6 @@ const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
   const breakpoints = React.useMemo(() => 
     R.pick(R.keys(itemsPerRowByBreakpoint), themeBreakpoints)
   , [itemsPerRowByBreakpoint]);
-  console.log(breakpoints);
 
   const { breakpoint } = useBreakpoint(breakpoints, 'sm');
 

@@ -98,7 +98,7 @@ function transformMetaToNodeData(exifData, iptcData, vibrantData, imagePath) {
     }
   }
 
-  const vibrant = processColors(vibrantData, imagePath);
+  const vibrant = vibrantData ? processColors(vibrantData, imagePath) : null;
 
 
   return {
@@ -111,22 +111,20 @@ function transformMetaToNodeData(exifData, iptcData, vibrantData, imagePath) {
 }
 
 
-exports.onCreateNode = async function ({ node, getNode, actions }) {
+exports.onCreateNode = async function ({ node, actions }) {
   const { createNodeField } = actions;
-  if (node.internal.type === 'ImageSharp') {
-    const parent = getNode(node.parent);
-
-    const file = await readFile(parent.absolutePath);
+  if (node.internal.type === 'File' && node.sourceInstanceName === 'gallery') {
+    const file = await readFile(node.absolutePath);
     const iptcData = iptc(file);
-    const exifData = await read(parent.absolutePath);
-    const vibrantData = await Vibrant.from(parent.absolutePath)
-      .quality(2)
+    const exifData = await read(node.absolutePath);
+    const vibrantData = await Vibrant.from(node.absolutePath)
+      .quality(3)
       .getPalette();
 
     createNodeField({
       node,
       name: 'imageMeta',
-      value: transformMetaToNodeData(exifData, iptcData, vibrantData, parent.absolutePath),
+      value: transformMetaToNodeData(exifData, iptcData, vibrantData, node.absolutePath),
     });
   }
 };
@@ -145,11 +143,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             node {
               relativePath,
               base,
-              childImageSharp {
-                fields {
-                  imageMeta {
-                    dateTaken
-                  }
+              fields {
+                imageMeta {
+                  dateTaken
                 }
               }
             }
@@ -168,8 +164,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   //   new Date(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken'], a)).getTime() - new Date(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken'],b)).getTime();
   
   const edges = R.sort(R.descend((edge) => 
-    new Date(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken'], edge))),
+    new Date(R.path(['node', 'fields', 'imageMeta', 'dateTaken'], edge))),
   galleryImages.data.allFile.edges);
+  console.log('edges', edges[0].node.fields.imageMeta);
 
   edges.forEach(({ node }, index) => {
     const nextImage = index === edges.length - 1
@@ -178,8 +175,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     const prevImage = index === 0
       ? null
       : edges[index - 1].node.base;
-
-    createPage({
+    const page = {
       path: `photogallery/${node.base}`,
       component: galleryImageTemplate,
       context: {
@@ -187,6 +183,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         nextImage,
         prevImage,
       },
-    });
+    };
+    console.log('page', page);
+    createPage(page);
   });
 };

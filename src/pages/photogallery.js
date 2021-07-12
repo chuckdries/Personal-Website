@@ -56,33 +56,26 @@ export const query = graphql`
 query GalleryPageQuery {
   allFile(
     filter: { sourceInstanceName: { eq: "gallery" } }
-    sort: {order: DESC, fields: childrenImageSharp___fields___imageMeta___dateTaken}
+    sort: {order: DESC, fields: fields___imageMeta___dateTaken}
   ) {
     edges {
       node {
-      	relativePath,
-        base,
+      	relativePath
+        base
         childImageSharp{
           fluid {
             aspectRatio
-          },
+          }
           gatsbyImageData(
-            layout: CONSTRAINED,
+            layout: CONSTRAINED
             height: 550
           )
-          fields {
-            imageMeta {
-              dateTaken
-              iptc {
-                # caption
-                object_name
-              }
-              # exif {
-              #   FNumber
-              #   ExposureTime
-              #   ShutterSpeedValue
-              #   ISO
-              # }
+        }
+        fields {
+          imageMeta {
+            dateTaken
+            iptc {
+              object_name
             }
           }
         }
