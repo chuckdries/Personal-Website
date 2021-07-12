@@ -7,7 +7,7 @@ if (env === 'production') {
 }
 export const onRouteUpdate = function () {
   if (
-    process.env.NODE_ENV === 'production' &&
+    env === 'production' &&
     typeof window.plausible === 'object'
   ) {
     window.plausible('pageview');
