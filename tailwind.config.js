@@ -33,20 +33,62 @@ module.exports = {
     extend: {
       colors: {
         vibrant: {
-          DEFAULT: 'rgb(var(--vibrant))',
-          light: 'rgb(var(--light-vibrant))',
-          dark: 'rgb(var(--dark-vibrant))',
-          '75': 'rgba(var(--vibrant), .8)',
-          'light-75': 'rgba(var(--light-vibrant), .8)',
-          'dark-75': 'rgba(var(--dark-vibrant), .8)',
+          DEFAULT: ({ opacityVariable, opacityValue }) => {
+            if (opacityValue !== undefined) {
+              return `rgba(var(--vibrant), ${opacityValue})`;
+            }
+            if (opacityVariable !== undefined) {
+              return `rgba(var(--vibrant), var(${opacityVariable}, 1))`;
+            }
+            return 'rgb(var(--vibrant))';
+          },
+          light: ({ opacityVariable, opacityValue }) => {
+            if (opacityValue !== undefined) {
+              return `rgba(var(--light-vibrant), ${opacityValue})`;
+            }
+            if (opacityVariable !== undefined) {
+              return `rgba(var(--light-vibrant), var(${opacityVariable}, 1))`;
+            }
+            return 'rgb(var(--light-vibrant))';
+          },
+          dark: ({ opacityVariable, opacityValue }) => {
+            if (opacityValue !== undefined) {
+              return `rgba(var(--dark-vibrant), ${opacityValue})`;
+            }
+            if (opacityVariable !== undefined) {
+              return `rgba(var(--dark-vibrant), var(${opacityVariable}, 1))`;
+            }
+            return 'rgb(var(--dark-vibrant))';
+          },
         },
         muted: {
-          DEFAULT: 'rgb(var(--muted))',
-          light: 'rgb(var(--light-muted))',
-          dark: 'rgb(var(--dark-muted))',
-          '75': 'rgba(var(--muted), .8)',
-          'light-75': 'rgba(var(--light-muted), .8)',
-          'dark-75': 'rgba(var(--dark-muted), .8)',
+          DEFAULT: ({ opacityVariable, opacityValue }) => {
+            if (opacityValue !== undefined) {
+              return `rgba(var(--muted), ${opacityValue})`;
+            }
+            if (opacityVariable !== undefined) {
+              return `rgba(var(--muted), var(${opacityVariable}, 1))`;
+            }
+            return 'rgb(var(--muted))';
+          },
+          light: ({ opacityVariable, opacityValue }) => {
+            if (opacityValue !== undefined) {
+              return `rgba(var(--light-muted), ${opacityValue})`;
+            }
+            if (opacityVariable !== undefined) {
+              return `rgba(var(--light-muted), var(${opacityVariable}, 1))`;
+            }
+            return 'rgb(var(--light-muted))';
+          },
+          dark: ({ opacityVariable, opacityValue }) => {
+            if (opacityValue !== undefined) {
+              return `rgba(var(--dark-muted), ${opacityValue})`;
+            }
+            if (opacityVariable !== undefined) {
+              return `rgba(var(--dark-muted), var(${opacityVariable}, 1))`;
+            }
+            return 'rgb(var(--dark-muted))';
+          },
         },
       },
     },
