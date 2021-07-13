@@ -32,6 +32,20 @@
   .scroll-padding-6 {
     scroll-padding: theme('spacing.6');
   }
+  .blurred-or-opaque-bg-1 {
+    @apply bg-opacity-80;
+  }
+  .blurred-or-opaque-bg-2 {
+    @apply bg-opacity-100;
+  }
+  @supports (backdrop-filter: blur(24px)) {
+    .blurred-or-opaque-bg-1 {
+      @apply bg-opacity-50 backdrop-filter backdrop-blur-lg;
+    }
+    .blurred-or-opaque-bg-2 {
+      @apply bg-opacity-70 backdrop-filter backdrop-blur;
+    }
+  }
   @variants responsive {
     .h-two-thirds-vw {
       height: 67vw;
