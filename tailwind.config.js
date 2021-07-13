@@ -32,7 +32,7 @@ module.exports = {
     },
     extend: {
       dropShadow: {
-        'dark': '0 1px 2px rgba(0, 0, 0, 0.8)',
+        'dark': '0 1px 2px rgba(0, 0, 0, 0.5)',
       },
       colors: {
         vibrant: {
