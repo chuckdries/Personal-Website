@@ -109,7 +109,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
         : <div className="landscape:h-screen portrait:h-two-thirds-vw w-full" style={{gridArea: '1/1' }}></div> }
       {/* <div className={classnames('relative grid', ar <= 1 ? 'place-items-end landscape:place-items-center' : 'place-items-end')} style={{gridArea: '1/1'}}> */}
       <div
-        className={classnames('flex flex-col items-end justify-between', ar > 1 || !isClient ? 'portrait:items-center' : 'landscape:justify-center')}
+        className={classnames('flex flex-col items-center justify-between', ar > 1 || !isClient ? 'portrait:items-center' : 'landscape:justify-center')}
         style={{gridArea: '1/1'}}
       >
         <nav className="w-screen text-vibrant-dark px-6 p-4" style={{zIndex: 100}}>
@@ -157,12 +157,12 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
             Photography Gallery
             </Link>
           </div> */}
-        <div>
-          <h1 className={classnames('font-black filter drop-shadow', isClient && 'mb-2 mt-0 text-vibrant-light')} style={{fontSize: '120px', lineHeight: '80%'}}>Chuck Dries</h1>
+        <div className="flex flex-col items-center">
+          <h1 className={classnames('font-black filter drop-shadow-dark z-20', isClient && 'mb-5 mt-0 text-vibrant')} style={{fontSize: '120px', lineHeight: '80%'}}>Chuck Dries</h1>
           <div
             className={classnames(
               ar > 1 && 'landscape:shadow-lg',
-              'rounded-l-md mb-4', isClient &&
+              'mb-4 inline-block', isClient &&
               'bg-vibrant-dark blurred-or-opaque-bg-1'
             )}
           >
@@ -170,7 +170,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
             // className="mx-auto filter drop-shadow"
               className={classnames('mx-auto filter drop-shadow items-end', ar > 1 || !isClient ? '' : '')}
             >
-              <div className="mr-5 flex-auto">
+              <div className="flex-auto">
                 <h2 className={classnames('p-3 text-xl md:text-xl', isClient && 'text-vibrant-light')}>Full Stack Software Engineer &amp; Hobbyist Photographer</h2>
               </div>
               {/* {<div className="border-t-2 border-muted-light mt-2 mr-2 mb-1" style={{width: 30}}></div>} */}

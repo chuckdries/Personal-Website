@@ -31,6 +31,9 @@ module.exports = {
       serif: ['Playfair Display', 'serif'],
     },
     extend: {
+      dropShadow: {
+        'dark': '0 1px 2px rgba(0, 0, 0, 0.8)',
+      },
       colors: {
         vibrant: {
           DEFAULT: ({ opacityVariable, opacityValue }) => {
