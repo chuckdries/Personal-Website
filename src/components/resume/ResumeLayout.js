@@ -1,10 +1,10 @@
-import * as React from 'react';
-import classnames from 'classnames';
-import { MDXProvider } from '@mdx-js/react';
+import * as React from "react";
+import classnames from "classnames";
+import { MDXProvider } from "@mdx-js/react";
 
-import '../../styles/resume.css';
+import "../../styles/resume.css";
 
-const MyH1 = props => <h1 style={{ color: 'tomato' }} {...props} />;
+const MyH1 = (props) => <h1 style={{ color: "tomato" }} {...props} />;
 // const MyParagraph = props => (
 //   <p style={{ fontSize: '18px', lineHeight: 1.6 }} {...props} />
 // );
@@ -14,12 +14,13 @@ const components = {
   // p: MyParagraph,
 };
 
-
 const ResumeLayout = ({ pageContext, children }) => {
-  console.log('pc', pageContext);
+  console.log("pc", pageContext);
   return (
     <MDXProvider components={components}>
-      <div className={classnames('font-serif container mx-auto resume')}>{children}</div>
+      <div className={classnames("font-serif container mx-auto resume")}>
+        {children}
+      </div>
     </MDXProvider>
   );
 };

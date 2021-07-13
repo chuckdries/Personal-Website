@@ -1,34 +1,34 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}'],
+  purge: ["./src/**/*.{js,jsx,ts,tsx}"],
   // darkMode: 'media', // or 'media' or 'class'
   theme: {
     screens: {
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1280px',
-      '2xl': '1536px',
-      'portrait': {'raw': '(orientation: portrait)'},
-      'landscape': {'raw': '(orientation: landscape)'},
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+      portrait: { raw: "(orientation: portrait)" },
+      landscape: { raw: "(orientation: landscape)" },
     },
     spacing: {
-      '0': '0px',
-      '1': '4px',
-      '2': '8px',
-      '3': '12px',
-      '4': '16px',
-      '5': '24px',
-      '6': '32px',
-      '7': '48px',
-      '8': '80px',
-      '9': '800px',
+      0: "0px",
+      1: "4px",
+      2: "8px",
+      3: "12px",
+      4: "16px",
+      5: "24px",
+      6: "32px",
+      7: "48px",
+      8: "80px",
+      9: "800px",
     },
     fontFamily: {
       ...defaultTheme.fontFamily,
       // serif: ['Didot', 'Didot LT', 'STD', 'Hoefler Text' , 'Garamond', 'Times New Roman', 'serif']
-      serif: ['Playfair Display', 'serif'],
+      serif: ["Playfair Display", "serif"],
     },
     extend: {
       colors: {
@@ -40,7 +40,7 @@ module.exports = {
             if (opacityVariable !== undefined) {
               return `rgba(var(--vibrant), var(${opacityVariable}, 1))`;
             }
-            return 'rgb(var(--vibrant))';
+            return "rgb(var(--vibrant))";
           },
           light: ({ opacityVariable, opacityValue }) => {
             if (opacityValue !== undefined) {
@@ -49,7 +49,7 @@ module.exports = {
             if (opacityVariable !== undefined) {
               return `rgba(var(--light-vibrant), var(${opacityVariable}, 1))`;
             }
-            return 'rgb(var(--light-vibrant))';
+            return "rgb(var(--light-vibrant))";
           },
           dark: ({ opacityVariable, opacityValue }) => {
             if (opacityValue !== undefined) {
@@ -58,7 +58,7 @@ module.exports = {
             if (opacityVariable !== undefined) {
               return `rgba(var(--dark-vibrant), var(${opacityVariable}, 1))`;
             }
-            return 'rgb(var(--dark-vibrant))';
+            return "rgb(var(--dark-vibrant))";
           },
         },
         muted: {
@@ -69,7 +69,7 @@ module.exports = {
             if (opacityVariable !== undefined) {
               return `rgba(var(--muted), var(${opacityVariable}, 1))`;
             }
-            return 'rgb(var(--muted))';
+            return "rgb(var(--muted))";
           },
           light: ({ opacityVariable, opacityValue }) => {
             if (opacityValue !== undefined) {
@@ -78,7 +78,7 @@ module.exports = {
             if (opacityVariable !== undefined) {
               return `rgba(var(--light-muted), var(${opacityVariable}, 1))`;
             }
-            return 'rgb(var(--light-muted))';
+            return "rgb(var(--light-muted))";
           },
           dark: ({ opacityVariable, opacityValue }) => {
             if (opacityValue !== undefined) {
@@ -87,7 +87,7 @@ module.exports = {
             if (opacityVariable !== undefined) {
               return `rgba(var(--dark-muted), var(${opacityVariable}, 1))`;
             }
-            return 'rgb(var(--dark-muted))';
+            return "rgb(var(--dark-muted))";
           },
         },
       },

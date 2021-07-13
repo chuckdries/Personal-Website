@@ -1,4 +1,4 @@
-import preval from 'babel-plugin-preval/macro';
+import preval from "babel-plugin-preval/macro";
 const themeBreakpoints = preval`
 const R = require('ramda')
 const resolveConfig = require('tailwindcss/resolveConfig');
