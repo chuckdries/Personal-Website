@@ -109,13 +109,19 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
         : <div className="landscape:h-screen portrait:h-two-thirds-vw w-full" style={{gridArea: '1/1' }}></div> }
       {/* <div className={classnames('relative grid', ar <= 1 ? 'place-items-end landscape:place-items-center' : 'place-items-end')} style={{gridArea: '1/1'}}> */}
       <div
-        className={classnames('flex flex-col items-end justify-center', ar > 1 || !isClient ? 'portrait:items-center' : 'landscape:justify-center')}
+        className={classnames('flex flex-col items-end justify-between', ar > 1 || !isClient ? 'portrait:items-center' : 'landscape:justify-center')}
         style={{gridArea: '1/1'}}
       >
-        <div
-          className={classnames('flex flex-col items-end', ar > 1 || !isClient ? 'portrait:flex-col-reverse' : 'landscape:flex-col-reverse')}
-        >
-          {/* <div className="flex mx-6 justify-end">
+        <nav className="w-screen text-vibrant-dark px-6 p-4" style={{zIndex: 100}}>
+          <ul className="flex justify-between">
+
+            <li>
+            gallery
+            </li>
+            <li>resume</li> <li>github</li> <li>devpost</li> <li>contact</li>
+          </ul>
+        </nav>
+        {/* <div className="flex mx-6 justify-end">
             <div className="flex my-2 items-center flex-col">
               <Link
                 className={classnames(
@@ -151,8 +157,9 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
             Photography Gallery
             </Link>
           </div> */}
+        <div>
           <h1 className={classnames('font-black filter drop-shadow', isClient && 'mb-2 mt-0 text-vibrant-light')} style={{fontSize: '120px', lineHeight: '80%'}}>Chuck Dries</h1>
-          <section
+          <div
             className={classnames(
               ar > 1 && 'landscape:shadow-lg',
               'rounded-l-md mb-4', isClient &&
@@ -160,7 +167,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
             )}
           >
             <div
-              // className="mx-auto filter drop-shadow"
+            // className="mx-auto filter drop-shadow"
               className={classnames('mx-auto filter drop-shadow items-end', ar > 1 || !isClient ? '' : '')}
             >
               <div className="mr-5 flex-auto">
@@ -181,9 +188,11 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
               </ul> */}
             
             </div>
-          </section>
+          </div>
         </div>
+        <div></div>
       </div>
+
     </main>
   </>);
 };
