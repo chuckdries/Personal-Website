@@ -19,12 +19,7 @@ module.exports = {
   ],
   'rules': {
     'react/prop-types': 0,
-    'quotes': ['warn', 'single'],
-    'semi': 1,
-    'indent': ['warn', 2],
-    'comma-dangle': ['warn', 'always-multiline'],
     'no-unused-vars': 1,
-    'jsx-quotes': 1,
     'react/jsx-sort-props': 1,
   },
 };

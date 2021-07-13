@@ -17,7 +17,8 @@
     "lint": "eslint --ext .jsx,.js src",
     "upload": "rsync -rz --delete public/ ci@droplet.chuckdries.com:www/personal-website",
     "upload-staging": "rsync -rz --delete public/ ci@droplet.chuckdries.com:www/personal-website-staging",
-    "deploy": "yarn build && yarn upload"
+    "deploy": "yarn build && yarn upload",
+    "pretty": "prettier --write ."
   },
   "dependencies": {
     "@mdx-js/mdx": "^1.6.22",
@@ -64,5 +65,7 @@
     "tailwindcss": "^2.1.2",
     "use-breakpoint": "^2.0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "prettier": "2.3.2"
+  }
 }
