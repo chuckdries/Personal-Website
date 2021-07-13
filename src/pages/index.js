@@ -112,7 +112,8 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
         className={classnames('flex flex-col items-center justify-between', ar > 1 || !isClient ? 'portrait:items-center' : 'landscape:justify-center')}
         style={{gridArea: '1/1'}}
       >
-        <nav className="w-screen text-vibrant-dark px-6 p-4" style={{zIndex: 100}}>
+        {/* CQ change based on sampling of picture? add background? */}
+        <nav className={classnames('text-vibrant-dark px-6 p-4', ar > 1 || !isClient ? 'landscape:w-screen' : 'portrait:w-screen')} style={{zIndex: 100}}>
           <ul className="flex justify-between">
 
             <li>
@@ -158,7 +159,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
             </Link>
           </div> */}
         <div className="flex flex-col items-center">
-          <h1 className={classnames('font-black filter drop-shadow-dark z-20', isClient && 'mb-5 mt-0 text-vibrant')} style={{fontSize: '120px', lineHeight: '80%'}}>Chuck Dries</h1>
+          <h1 className={classnames('font-black filter drop-shadow-dark z-20', isClient && 'mb-5 mt-0 text-vibrant-light')} style={{fontSize: 'max(8vw, 100px)', lineHeight: '80%'}}>Chuck Dries</h1>
           <div
             className={classnames(
               ar > 1 && 'landscape:shadow-lg',
@@ -171,7 +172,7 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
               className={classnames('mx-auto filter drop-shadow items-end', ar > 1 || !isClient ? '' : '')}
             >
               <div className="flex-auto">
-                <h2 className={classnames('p-3 text-xl md:text-xl', isClient && 'text-vibrant-light')}>Full Stack Software Engineer &amp; Hobbyist Photographer</h2>
+                <h2 className={classnames('p-3', isClient && 'text-vibrant-light')} style={{fontSize: 'max(1vw, 20px)'}}>Full Stack Software Engineer &amp; Hobbyist Photographer</h2>
               </div>
               {/* {<div className="border-t-2 border-muted-light mt-2 mr-2 mb-1" style={{width: 30}}></div>} */}
 
