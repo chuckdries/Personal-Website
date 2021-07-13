@@ -1,12 +1,12 @@
-const fs = require('fs');
-const util = require('util');
-const path = require('path');
-const { read } = require('fast-exif');
-const iptc = require('node-iptc');
-const Vibrant = require('node-vibrant');
-const chroma = require('chroma-js');
-const chalk = require('chalk');
-const R = require('ramda');
+const fs = require("fs");
+const util = require("util");
+const path = require("path");
+const { read } = require("fast-exif");
+const iptc = require("node-iptc");
+const Vibrant = require("node-vibrant");
+const chroma = require("chroma-js");
+const chalk = require("chalk");
+const R = require("ramda");
 
 const readFile = util.promisify(fs.readFile);
 
@@ -15,9 +15,11 @@ const badContrast = (color1, color2) => chroma.contrast(color1, color2) < 4.5;
 const logColorsWithContrast = (color1, color2, text) => {
   const c1hex = color1.hex();
   const c2hex = color2.hex();
-  console.log(chalk.hex(c1hex).bgHex(c2hex)(
-    `${text} ${c1hex}/${c2hex} ${chroma.contrast(color1, color2)}`
-  ));
+  console.log(
+    chalk.hex(c1hex).bgHex(c2hex)(
+      `${text} ${c1hex}/${c2hex} ${chroma.contrast(color1, color2)}`
+    )
+  );
 };
 
 function processColors(vibrantData, imagePath) {
@@ -29,7 +31,10 @@ function processColors(vibrantData, imagePath) {
   let LightMuted = chroma(vibrantData.LightMuted.getRgb());
 
   // first pass - darken bg and lighten relevant fg colors
-  if (badContrast(DarkVibrant, Vibrant) || badContrast(DarkVibrant, LightMuted)) {
+  if (
+    badContrast(DarkVibrant, Vibrant) ||
+    badContrast(DarkVibrant, LightMuted)
+  ) {
     DarkVibrant = DarkVibrant.darken();
     if (badContrast(DarkVibrant, Vibrant)) {
       Vibrant = Vibrant.brighten();
@@ -39,7 +44,10 @@ function processColors(vibrantData, imagePath) {
     }
   }
   // second pass - first doesn't always do enough
-  if (badContrast(DarkVibrant, Vibrant) || badContrast(DarkVibrant, LightMuted)) {
+  if (
+    badContrast(DarkVibrant, Vibrant) ||
+    badContrast(DarkVibrant, LightMuted)
+  ) {
     // DarkVibrant = DarkVibrant.darken();
     if (badContrast(DarkVibrant, Vibrant)) {
       Vibrant = Vibrant.brighten(2);
@@ -49,15 +57,14 @@ function processColors(vibrantData, imagePath) {
     }
   }
 
-  if (badContrast(DarkVibrant, Vibrant)){
-    console.warn('contrast still too low', imagePath);
-    logColorsWithContrast(Vibrant, DarkVibrant, 'V-DV');
+  if (badContrast(DarkVibrant, Vibrant)) {
+    console.warn("contrast still too low", imagePath);
+    logColorsWithContrast(Vibrant, DarkVibrant, "V-DV");
   }
-  if (badContrast(DarkVibrant, LightMuted)){
-    console.warn('contrast still too low', imagePath);
-    logColorsWithContrast(LightMuted, DarkVibrant, 'LM-DV');
+  if (badContrast(DarkVibrant, LightMuted)) {
+    console.warn("contrast still too low", imagePath);
+    logColorsWithContrast(LightMuted, DarkVibrant, "LM-DV");
   }
-
 
   return {
     Vibrant: Vibrant.rgb(),
@@ -82,24 +89,19 @@ function transformMetaToNodeData(exifData, iptcData, vibrantData, imagePath) {
   const gps = { longitude: null, latitude: null };
 
   if (exifData) {
-    if (
-      exifData.gps &&
-      exifData.gps.GPSLongitude &&
-      exifData.gps.GPSLatitude
-    ) {
+    if (exifData.gps && exifData.gps.GPSLongitude && exifData.gps.GPSLatitude) {
       gps.longitude = convertDMSToDD(
         exifData.gps.GPSLongitude,
-        exifData.gps.GPSLongitudeRef === 'E'
+        exifData.gps.GPSLongitudeRef === "E"
       );
       gps.latitude = convertDMSToDD(
         exifData.gps.GPSLatitude,
-        exifData.gps.GPSLatitudeRef === 'N'
+        exifData.gps.GPSLatitudeRef === "N"
       );
     }
   }
 
   const vibrant = vibrantData ? processColors(vibrantData, imagePath) : null;
-
 
   return {
     exif: exifData?.exif,
@@ -110,10 +112,9 @@ function transformMetaToNodeData(exifData, iptcData, vibrantData, imagePath) {
   };
 }
 
-
 exports.onCreateNode = async function ({ node, actions }) {
   const { createNodeField } = actions;
-  if (node.internal.type === 'File' && node.sourceInstanceName === 'gallery') {
+  if (node.internal.type === "File" && node.sourceInstanceName === "gallery") {
     const file = await readFile(node.absolutePath);
     const iptcData = iptc(file);
     const exifData = await read(node.absolutePath);
@@ -123,8 +124,13 @@ exports.onCreateNode = async function ({ node, actions }) {
 
     createNodeField({
       node,
-      name: 'imageMeta',
-      value: transformMetaToNodeData(exifData, iptcData, vibrantData, node.absolutePath),
+      name: "imageMeta",
+      value: transformMetaToNodeData(
+        exifData,
+        iptcData,
+        vibrantData,
+        node.absolutePath
+      ),
     });
   }
 };
@@ -135,45 +141,46 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
   // get all images
   const galleryImages = await graphql(`
-      {
-        allFile(filter: {
-          sourceInstanceName: { eq: "gallery" }}
-        ) {
-          edges {
-            node {
-              relativePath,
-              base,
-              fields {
-                imageMeta {
-                  dateTaken
-                }
+    {
+      allFile(filter: { sourceInstanceName: { eq: "gallery" } }) {
+        edges {
+          node {
+            relativePath
+            base
+            fields {
+              imageMeta {
+                dateTaken
               }
             }
           }
         }
       }
-    `);
+    }
+  `);
   // Handle errors
   if (galleryImages.errors) {
-    reporter.panicOnBuild('Error while running GraphQL query.');
+    reporter.panicOnBuild("Error while running GraphQL query.");
     return;
   }
   // Create pages for each markdown file.
-  const galleryImageTemplate = path.resolve('src/components/GalleryImage/GalleryImage.js');
-  // const diffDate = (a, b) => 
+  const galleryImageTemplate = path.resolve(
+    "src/components/GalleryImage/GalleryImage.js"
+  );
+  // const diffDate = (a, b) =>
   //   new Date(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken'], a)).getTime() - new Date(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken'],b)).getTime();
-  
-  const edges = R.sort(R.descend((edge) => 
-    new Date(R.path(['node', 'fields', 'imageMeta', 'dateTaken'], edge))),
-  galleryImages.data.allFile.edges);
+
+  const edges = R.sort(
+    R.descend(
+      (edge) =>
+        new Date(R.path(["node", "fields", "imageMeta", "dateTaken"], edge))
+    ),
+    galleryImages.data.allFile.edges
+  );
 
   edges.forEach(({ node }, index) => {
-    const nextImage = index === edges.length - 1
-      ? null
-      : edges[index + 1].node.base;
-    const prevImage = index === 0
-      ? null
-      : edges[index - 1].node.base;
+    const nextImage =
+      index === edges.length - 1 ? null : edges[index + 1].node.base;
+    const prevImage = index === 0 ? null : edges[index - 1].node.base;
     const page = {
       path: `photogallery/${node.base}`,
       component: galleryImageTemplate,
