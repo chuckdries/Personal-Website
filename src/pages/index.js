@@ -151,20 +151,20 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
             Photography Gallery
             </Link>
           </div> */}
+          <h1 className={classnames('font-black filter drop-shadow', isClient && 'mb-2 mt-0 text-vibrant-light')} style={{fontSize: '120px', lineHeight: '80%'}}>Chuck Dries</h1>
           <section
             className={classnames(
               ar > 1 && 'landscape:shadow-lg',
-              'md:px-6 px-4 md:py-5 py-3 rounded-l-md mb-4', isClient &&
+              'rounded-l-md mb-4', isClient &&
               'bg-vibrant-dark blurred-or-opaque-bg-1'
             )}
           >
             <div
               // className="mx-auto filter drop-shadow"
-              className={classnames('mx-auto filter drop-shadow items-end', ar > 1 || !isClient ? 'portrait:flex' : 'portrait:flex')}
+              className={classnames('mx-auto filter drop-shadow items-end', ar > 1 || !isClient ? '' : '')}
             >
               <div className="mr-5 flex-auto">
-                <h1 className={classnames('font-black', isClient && 'text-vibrant-light')} style={{fontSize: '120px'}}>Chuck Dries</h1>
-                {/* <h2 className={classnames('text-xl md:text-2xl', isClient && 'text-vibrant')}>Full Stack Software Engineer &amp; Hobbyist Photographer</h2> */}
+                <h2 className={classnames('p-3 text-xl md:text-xl', isClient && 'text-vibrant-light')}>Full Stack Software Engineer &amp; Hobbyist Photographer</h2>
               </div>
               {/* {<div className="border-t-2 border-muted-light mt-2 mr-2 mb-1" style={{width: 30}}></div>} */}
 
