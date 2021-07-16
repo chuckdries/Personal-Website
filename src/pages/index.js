@@ -25,6 +25,55 @@ const getDifferentRand = (range, lastNs, iterations = 0) => {
   return n;
 };
 
+const ImageButtons = ({ isClient, image, shuffleImage }) => (
+  <div className="flex mx-6 justify-end">
+    <div className="flex my-2 items-center flex-col">
+      <Link
+        className={classnames(
+          "z-20 hover:underline inline-block px-1 my-1 mr-2 text-md rounded-md border-2",
+          isClient &&
+            "text-muted-dark bg-muted-light hover:bg-muted border-muted-dark"
+        )}
+        id="image-link"
+        title="view image details"
+        to={`/photogallery/${image.base}/`}
+      >
+        <span className="icon-offset">
+          <ion-icon name="image"></ion-icon>
+        </span>
+      </Link>
+      <button
+        className={classnames(
+          "z-20 hover:underline inline-block px-1 my-1 mr-2 text-md rounded-md border-2",
+          isClient &&
+            "text-muted-dark bg-muted-light hover:bg-muted border-muted-dark"
+        )}
+        id="shuffle-button"
+        onClick={() => {
+          shuffleImage(image);
+        }}
+        title="shuffle image"
+        type="button"
+      >
+        <span className="icon-offset">
+          <ion-icon name="shuffle"></ion-icon>
+        </span>
+      </button>
+    </div>
+    <Link
+      className={classnames(
+        "z-20 hover:underline p-3 px-5 py-4 my-3 text-md sm:text-lg rounded-md border-2 arrow-right-after font-bold font-serif",
+        isClient &&
+          "text-muted-dark bg-muted-light border-muted-dark hover:bg-muted"
+      )}
+      id="photogallery-link"
+      to="/photogallery/"
+    >
+      Gallery
+    </Link>
+  </div>
+);
+
 const IndexPage = ({
   data: {
     allFile: { edges },
@@ -152,55 +201,55 @@ const IndexPage = ({
           )}
           style={{ gridArea: "1/1" }}
         >
-          {/* CQ change based on sampling of picture? add background? */}
           <nav
             className={classnames(
-              "text-vibrant-dark px-6 p-4",
+              "text-vibrant-dark px-6 p-2 bg-vibrant-dark blurred-or-opaque-bg-2",
               ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen"
             )}
             style={{ zIndex: 100 }}
           >
             <ul className="flex justify-between">
-              <li>gallery</li>
-              <li>resume</li> <li>github</li> <li>devpost</li> <li>contact</li>
+              <li>
+                <HeroA
+                  href="/CharlesDriesResumeCurrent.pdf"
+                  isClient={isClient}
+                >
+                  Resume
+                </HeroA>
+              </li>
+              <li>
+                {" "}
+                <HeroA href="https://github.com/chuckdries" isClient={isClient}>
+                  Github
+                </HeroA>
+              </li>
+              <li>
+                <HeroA
+                  href="https://www.linkedin.com/in/chuckdries/"
+                  isClient={isClient}
+                >
+                  LinkedIn
+                </HeroA>
+              </li>
+              <li>
+                <HeroA
+                  href="https://devpost.com/chuckdries"
+                  isClient={isClient}
+                >
+                  Devpost
+                </HeroA>
+              </li>
+              <li>
+                <HeroA
+                  href="https://medium.com/@chuckdries"
+                  isClient={isClient}
+                >
+                  Medium (blog)
+                </HeroA>
+              </li>
             </ul>
           </nav>
-          {/* <div className="flex mx-6 justify-end">
-            <div className="flex my-2 items-center flex-col">
-              <Link
-                className={classnames(
-                  'hover:underline inline-block px-1 my-1 mr-2 text-md rounded-md border-2',
-                  isClient && 'text-muted-dark bg-muted-light blurred-or-opaque-bg-2 hover:bg-muted border-muted-dark')} 
-                id="image-link"
-                title="view image details"
-                to={`/photogallery/${image.base}/`}
-              >
-                Photography Gallery
-              </Link>
-              <button
-                className={classnames(
-                  'hover:underline inline-block px-1 my-1 mr-2 text-md rounded-md border-2',
-                  isClient && 'text-muted-dark bg-muted-light hover:bg-muted border-muted-dark')}
-                id="shuffle-button"
-                onClick={() => {
-                  shuffleImage(image);
-                }}
-                title="shuffle image"
-                type="button"
-              >
-                <span className="icon-offset"><ion-icon name="shuffle"></ion-icon></span>
-              </button>
-            </div>
-            <section
-              className={classnames(
-                'hover:underline p-3 px-5 py-4 my-3 text-md sm:text-lg rounded-md border-2 arrow-right-after font-bold font-serif',
-                isClient && 'text-muted-dark bg-muted-light bg-opacity-70 border-muted-dark hover:bg-muted')} 
-              id="photogallery-link"
-              to="/photogallery/"
-            >
-            Photography Gallery
-            </Link>
-          </div> */}
+
           <div className="flex flex-col items-center">
             <h1
               className={classnames(
@@ -218,37 +267,16 @@ const IndexPage = ({
                 isClient && "bg-vibrant-dark blurred-or-opaque-bg-1"
               )}
             >
-              <div
-                // className="mx-auto filter drop-shadow"
-                className={classnames(
-                  "mx-auto filter drop-shadow items-end",
-                  ar > 1 || !isClient ? "" : ""
-                )}
-              >
-                <div className="flex-auto">
-                  <h2
-                    className={classnames(
-                      "p-3",
-                      isClient && "text-vibrant-light"
-                    )}
-                    style={{ fontSize: "max(1vw, 20px)" }}
-                  >
-                    Full Stack Software Engineer &amp; Hobbyist Photographer
-                  </h2>
-                </div>
-                {/* {<div className="border-t-2 border-muted-light mt-2 mr-2 mb-1" style={{width: 30}}></div>} */}
-
-                {/* <ul className={' md:mr-4', classnames(isClient && 'text-muted-light')}>
-                <li>Software Engineer, Axosoft</li>
-                <li><HeroA className="ml-0" href="mailto:chuck@chuckdries.com" isClient={isClient}>chuck@chuckdries.com</HeroA>/<span className="ml-2">602.618.0414</span></li>
-                <li>
-                  <HeroA className="ml-0" href="http://github.com/chuckdries" isClient={isClient}>Github</HeroA>/
-                  <HeroA href="https://www.linkedin.com/in/chuckdries/" isClient={isClient}>LinkedIn</HeroA>/
-                  <HeroA href="https://devpost.com/chuckdries" isClient={isClient}>Devpost</HeroA>/
-                  <HeroA href="/CharlesDriesResumeCurrent.pdf" isClient={isClient}>Resume [pdf]</HeroA>/
-                  <HeroA href="https://medium.com/@chuckdries" isClient={isClient}>Medium (blog)</HeroA>
-                </li>
-              </ul> */}
+              <div className="flex-auto">
+                <h2
+                  className={classnames(
+                    "p-3",
+                    isClient && "text-vibrant-light"
+                  )}
+                  style={{ fontSize: "max(1vw, 20px)" }}
+                >
+                  Full Stack Software Engineer &amp; Hobbyist Photographer
+                </h2>
               </div>
             </div>
           </div>
