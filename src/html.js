@@ -1,7 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-const env = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
+const env =
+  process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
 
 export default function HTML(props) {
   return (
@@ -9,25 +10,40 @@ export default function HTML(props) {
       <head>
         <meta charSet="utf-8" />
         <meta content="ie=edge" httpEquiv="x-ua-compatible" />
-        <meta content="Chuck Dries: Full Stack Software Engineer and Photographer" name="description" />
+        <meta
+          content="Chuck Dries: Full Stack Software Engineer and Photographer"
+          name="description"
+        />
         <meta
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
           name="viewport"
         />
         {props.headComponents}
-        {env === 'production' && <script async data-domain="chuckdries.com" defer src="https://analytics.chuckdries.com/js/plausible.js"></script>}
+        {env === "production" && (
+          <script
+            async
+            data-domain="chuckdries.com"
+            defer
+            src="https://analytics.chuckdries.com/js/plausible.js"
+          ></script>
+        )}
         {/* eslint-disable-next-line */}
-        {env === 'production' && <script>{`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`}</script>}
+        {env === "production" && (
+          <script>{`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`}</script>
+        )}
       </head>
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}
         <div
           dangerouslySetInnerHTML={{ __html: props.body }}
           id="___gatsby"
-          key={'body'}
+          key={"body"}
         />
         {props.postBodyComponents}
-        <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" type="module"></script>
+        <script
+          src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+          type="module"
+        ></script>
       </body>
     </html>
   );
