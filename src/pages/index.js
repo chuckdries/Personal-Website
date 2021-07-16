@@ -175,7 +175,7 @@ const IndexPage = ({
                 title="view image details"
                 to={`/photogallery/${image.base}/`}
               >
-                <span className="icon-offset"><ion-icon name="image"></ion-icon></span>
+                Photography Gallery
               </Link>
               <button
                 className={classnames(
@@ -191,7 +191,7 @@ const IndexPage = ({
                 <span className="icon-offset"><ion-icon name="shuffle"></ion-icon></span>
               </button>
             </div>
-            <Link
+            <section
               className={classnames(
                 'hover:underline p-3 px-5 py-4 my-3 text-md sm:text-lg rounded-md border-2 arrow-right-after font-bold font-serif',
                 isClient && 'text-muted-dark bg-muted-light bg-opacity-70 border-muted-dark hover:bg-muted')} 

@@ -1,10 +1,12 @@
 - Gallery
+
   - [x] Custom image metadata
   - [ ] add metadata to image files
   - [ ] image details page (modal route?)
   - [ ] gallery page
 
 - Homepage
+
   - [ ] homepage basic layout
   - [ ] homepage aesthetics
   - [ ] homepage to gallery page transition
@@ -14,6 +16,7 @@
 - [ ] About page?
 
 - Portfolio/Projects page
+
   - basic layout
   - source data
   - aesthetics
