@@ -61,7 +61,8 @@ const ImageButtons = ({ isClient, image, shuffleImage }) => (
     <Link
       className={classnames(
         "self-center z-20 underline rounded-md px-4 py-2 text-md arrow-right-after font-bold font-serif",
-        isClient && "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
+        isClient &&
+          "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
       )}
       id="photogallery-link"
       to="/photogallery/"
@@ -80,7 +81,6 @@ const IndexPage = ({
   const [imageIndex, setImageIndex] = React.useState(0);
   const images = React.useMemo(() => edges.map((edge) => edge.node), [edges]);
   const image = React.useMemo(() => {
-    console.log("ii", imageIndex);
     return images[imageIndex];
   }, [images, imageIndex]);
 
@@ -149,7 +149,7 @@ const IndexPage = ({
 
   const vibrant = getVibrant(image);
   const ar = getAspectRatio(image);
-  console.log("ar", ar);
+  console.log("bg", image.base);
   return (
     <>
       <Helmet>
@@ -267,7 +267,7 @@ const IndexPage = ({
               <div className="flex-auto">
                 <h2
                   className={classnames(
-                    "p-3",
+                    "p-3 text-center",
                     isClient && "text-vibrant-light"
                   )}
                   style={{ fontSize: "max(1vw, 20px)" }}
@@ -291,7 +291,10 @@ const IndexPage = ({
 export const query = graphql`
   {
     allFile(
-      filter: { sourceInstanceName: { eq: "gallery" } }
+      filter: {
+        sourceInstanceName: { eq: "gallery" }
+        base: { nin: ["DSC4180.jpg", "DSC00887.jpg", "DSC00879.jpg", "DSC02233.jpg", "DSC00340.jpg"] }
+      }
       sort: { order: DESC, fields: fields___imageMeta___dateTaken }
     ) {
       edges {
