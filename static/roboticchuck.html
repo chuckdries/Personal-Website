@@ -1,77 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Robotic Chuck</title>
     <style>
-        body {
-            margin: auto;
-            max-width: 800px;
-            line-height: 1.5;
-        }
-        
-        code,
-        #output {
-            padding: 5px;
-            background: #eee;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            display: inline-block;
-        }
-        
-        p {
-            max-width: 800px;
-        }
-        
-        input,
-        textarea {
-            width: 100%;
-            padding: 5px;
-            /*max-width: 800px;*/
-        }
-        
-        #genbutton {
-            color: white;
-            background: #01C106;
-            padding: 1em;
-            border: 1px solid #1E7931;
-            font-size: 1em;
-            border-radius: 3px;
-        }
-    </style>
-</head>
+      body {
+        margin: auto;
+        max-width: 800px;
+        line-height: 1.5;
+      }
 
-<body>
+      code,
+      #output {
+        padding: 5px;
+        background: #eee;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        display: inline-block;
+      }
+
+      p {
+        max-width: 800px;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 5px;
+        /*max-width: 800px;*/
+      }
+
+      #genbutton {
+        color: white;
+        background: #01c106;
+        padding: 1em;
+        border: 1px solid #1e7931;
+        font-size: 1em;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+
+  <body>
     <script>
-        console.log("load");
-        function generate() {
-            console.log("go!");
-            var inBox = document.getElementById("in");
-            console.log(inBox.value);
-            var links = JSON.parse(inBox.value);
-            var outBox = document.getElementById("output");
-            var titleBox = document.getElementById("titleIn");
-            var descBox = document.getElementById("description");
-            var tstring = "<style>.here,.invmenu a{font-style:italic}.here{font-size:14px;font-weight:400;color:grey}.invmenu{padding:5px 20px;margin:10px 0}</style>\n";
-            tstring = tstring + "<" + "div class=\"invmenu\" style=\"max-width:100%;background: #f2f2f2;\">\n<h3 style=\"text-align:left;\">" + titleBox.value + "</h3>\n<p><em>";
-            tstring = tstring + descBox.value + "</em></p>\n<hr style=\"border: 1px solid #cfcfcf\">\n"
-            formatter = links.map((object) => "<h4><a href=\"" + object.url + "\">" + object.headline + "</a></h4>\n");
-            tstring = tstring + formatter.join("");
-            tstring = tstring + "</div>"
-            console.log(tstring);
-            outBox.innerText = tstring;
-            outBox.style.minHeight = (formatter.length + 9) + "em";
-            document.getElementById("preview").innerHTML = tstring;
-        }
+      console.log("load");
+      function generate() {
+        console.log("go!");
+        var inBox = document.getElementById("in");
+        console.log(inBox.value);
+        var links = JSON.parse(inBox.value);
+        var outBox = document.getElementById("output");
+        var titleBox = document.getElementById("titleIn");
+        var descBox = document.getElementById("description");
+        var tstring =
+          "<style>.here,.invmenu a{font-style:italic}.here{font-size:14px;font-weight:400;color:grey}.invmenu{padding:5px 20px;margin:10px 0}</style>\n";
+        tstring =
+          tstring +
+          "<" +
+          'div class="invmenu" style="max-width:100%;background: #f2f2f2;">\n<h3 style="text-align:left;">' +
+          titleBox.value +
+          "</h3>\n<p><em>";
+        tstring =
+          tstring +
+          descBox.value +
+          '</em></p>\n<hr style="border: 1px solid #cfcfcf">\n';
+        formatter = links.map(
+          (object) =>
+            '<h4><a href="' +
+            object.url +
+            '">' +
+            object.headline +
+            "</a></h4>\n"
+        );
+        tstring = tstring + formatter.join("");
+        tstring = tstring + "</div>";
+        console.log(tstring);
+        outBox.innerText = tstring;
+        outBox.style.minHeight = formatter.length + 9 + "em";
+        document.getElementById("preview").innerHTML = tstring;
+      }
     </script>
 
     <p></p>
-    <p>Title of box:</p> <input type="text" id="titleIn" placeholder="Investigating Hope: The Series">
+    <p>Title of box:</p>
+    <input
+      type="text"
+      id="titleIn"
+      placeholder="Investigating Hope: The Series"
+    />
     <p>Description text:</p>
-    <input type="text" id="description" placeholder="This article is one in a series of investigative pieces about a complaint filed with ASU regarding accusations against on-campus ministry Hope Church.">
+    <input
+      type="text"
+      id="description"
+      placeholder="This article is one in a series of investigative pieces about a complaint filed with ASU regarding accusations against on-campus ministry Hope Church."
+    />
     <p>Enter the links to generate according to this format:</p>
     <pre><code class="json">[
     {
@@ -87,20 +111,37 @@
         "url": "yet-another-url"
     }
 ]</code></pre>
-    <p>This format is known as JSON, it's an internet standard that's supposed to be easy for humans and computers to read.
-        Note how commas are used to separate multiple items but are never used after the last item in a set. This is important,
-        it will not work if you include a trailing comma where there should not be one.</p>
-    <textarea name="input" id="in" cols="100" rows="30" placeholder="Please be careful, this will not work if you format the JSON incorrectly"></textarea>
-    <p><a id="genbutton" href="#output" onclick="generate()">Generate Code</a></p>
+    <p>
+      This format is known as JSON, it's an internet standard that's supposed to
+      be easy for humans and computers to read. Note how commas are used to
+      separate multiple items but are never used after the last item in a set.
+      This is important, it will not work if you include a trailing comma where
+      there should not be one.
+    </p>
+    <textarea
+      name="input"
+      id="in"
+      cols="100"
+      rows="30"
+      placeholder="Please be careful, this will not work if you format the JSON incorrectly"
+    ></textarea>
+    <p>
+      <a id="genbutton" href="#output" onclick="generate()">Generate Code</a>
+    </p>
     <p>Paste the following code into a safeembed</p>
     <textarea id="output" cols="100" readonly></textarea>
-    <p><em> Don't forget:</em> For each page you embed on, add the following bit of code just before the <code>&lt;/h4&gt;</code>        at the end of the line on the line that corresponds to the current page.</p>
+    <p>
+      <em> Don't forget:</em> For each page you embed on, add the following bit
+      of code just before the <code>&lt;/h4&gt;</code> at the end of the line on
+      the line that corresponds to the current page.
+    </p>
     <pre><code>&lt;span class="here"&gt;(You are here)&lt;/span&gt;</code></pre>
-   
-    <p>The code generated will look roughly like this:</P>
-    <div id="preview" style="max-width: 800px;"></div>
-    <p>Gryphon overrides certain styles by default, so make sure to test on your article.</p>
 
-</body>
-
+    <p>The code generated will look roughly like this:</p>
+    <div id="preview" style="max-width: 800px"></div>
+    <p>
+      Gryphon overrides certain styles by default, so make sure to test on your
+      article.
+    </p>
+  </body>
 </html>

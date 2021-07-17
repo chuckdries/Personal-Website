@@ -1,52 +1,101 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}'],
+  purge: ["./src/**/*.{js,jsx,ts,tsx}"],
   // darkMode: 'media', // or 'media' or 'class'
   theme: {
     screens: {
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1280px',
-      '2xl': '1536px',
-      'portrait': {'raw': '(orientation: portrait)'},
-      'landscape': {'raw': '(orientation: landscape)'},
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+      portrait: { raw: "(orientation: portrait)" },
+      landscape: { raw: "(orientation: landscape)" },
     },
     spacing: {
-      '0': '0px',
-      '1': '4px',
-      '2': '8px',
-      '3': '12px',
-      '4': '16px',
-      '5': '24px',
-      '6': '32px',
-      '7': '48px',
-      '8': '80px',
-      '9': '800px',
+      0: "0px",
+      1: "4px",
+      2: "8px",
+      3: "12px",
+      4: "16px",
+      5: "24px",
+      6: "32px",
+      7: "48px",
+      8: "80px",
+      9: "800px",
     },
     fontFamily: {
       ...defaultTheme.fontFamily,
       // serif: ['Didot', 'Didot LT', 'STD', 'Hoefler Text' , 'Garamond', 'Times New Roman', 'serif']
-      serif: ['Playfair Display', 'serif'],
+      serif: ["Playfair Display", "serif"],
     },
     extend: {
+      dropShadow: {
+        'dark': '0 1px 2px rgba(0, 0, 0, 0.8)',
+      },
+      fontSize: {
+        'huge-1': '80px',
+        'huge-2': 'max(7.8vw, 100px)'
+      },
       colors: {
         vibrant: {
-          DEFAULT: 'rgb(var(--vibrant))',
-          light: 'rgb(var(--light-vibrant))',
-          dark: 'rgb(var(--dark-vibrant))',
-          '75': 'rgba(var(--vibrant), .8)',
-          'light-75': 'rgba(var(--light-vibrant), .8)',
-          'dark-75': 'rgba(var(--dark-vibrant), .8)',
+          DEFAULT: ({ opacityVariable, opacityValue }) => {
+            if (opacityValue !== undefined) {
+              return `rgba(var(--vibrant), ${opacityValue})`;
+            }
+            if (opacityVariable !== undefined) {
+              return `rgba(var(--vibrant), var(${opacityVariable}, 1))`;
+            }
+            return "rgb(var(--vibrant))";
+          },
+          light: ({ opacityVariable, opacityValue }) => {
+            if (opacityValue !== undefined) {
+              return `rgba(var(--light-vibrant), ${opacityValue})`;
+            }
+            if (opacityVariable !== undefined) {
+              return `rgba(var(--light-vibrant), var(${opacityVariable}, 1))`;
+            }
+            return "rgb(var(--light-vibrant))";
+          },
+          dark: ({ opacityVariable, opacityValue }) => {
+            if (opacityValue !== undefined) {
+              return `rgba(var(--dark-vibrant), ${opacityValue})`;
+            }
+            if (opacityVariable !== undefined) {
+              return `rgba(var(--dark-vibrant), var(${opacityVariable}, 1))`;
+            }
+            return "rgb(var(--dark-vibrant))";
+          },
         },
         muted: {
-          DEFAULT: 'rgb(var(--muted))',
-          light: 'rgb(var(--light-muted))',
-          dark: 'rgb(var(--dark-muted))',
-          '75': 'rgba(var(--muted), .8)',
-          'light-75': 'rgba(var(--light-muted), .8)',
-          'dark-75': 'rgba(var(--dark-muted), .8)',
+          DEFAULT: ({ opacityVariable, opacityValue }) => {
+            if (opacityValue !== undefined) {
+              return `rgba(var(--muted), ${opacityValue})`;
+            }
+            if (opacityVariable !== undefined) {
+              return `rgba(var(--muted), var(${opacityVariable}, 1))`;
+            }
+            return "rgb(var(--muted))";
+          },
+          light: ({ opacityVariable, opacityValue }) => {
+            if (opacityValue !== undefined) {
+              return `rgba(var(--light-muted), ${opacityValue})`;
+            }
+            if (opacityVariable !== undefined) {
+              return `rgba(var(--light-muted), var(${opacityVariable}, 1))`;
+            }
+            return "rgb(var(--light-muted))";
+          },
+          dark: ({ opacityVariable, opacityValue }) => {
+            if (opacityValue !== undefined) {
+              return `rgba(var(--dark-muted), ${opacityValue})`;
+            }
+            if (opacityVariable !== undefined) {
+              return `rgba(var(--dark-muted), var(${opacityVariable}, 1))`;
+            }
+            return "rgb(var(--dark-muted))";
+          },
         },
       },
     },
