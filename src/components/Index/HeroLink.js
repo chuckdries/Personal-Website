@@ -1,5 +1,5 @@
-import * as React from 'react';
-import classnames from 'classnames';
+import * as React from "react";
+import classnames from "classnames";
 
 export const HeroA = ({
   href,
@@ -9,8 +9,14 @@ export const HeroA = ({
   ...linkProps
 }) => (
   <a
-    className={classnames('mx-2 underline', isClient && 'text-muted-light hover:text-vibrant-light', className)}
+    className={classnames(
+      "mx-3 ",
+      isClient && "text-muted-light hover:text-vibrant-light",
+      className
+    )}
     href={href}
     {...linkProps}
-  >{children}</a>
+  >
+    {children}
+  </a>
 );

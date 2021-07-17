@@ -1,47 +1,115 @@
-import * as React from 'react';
-import { Link, graphql } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import { Helmet } from 'react-helmet';
-import { take } from 'ramda';
-import classnames from 'classnames';
-import posthog from 'posthog-js';
+import * as React from "react";
+import { Link, graphql } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { Helmet } from "react-helmet";
+import { take } from "ramda";
+import classnames from "classnames";
+import posthog from "posthog-js";
 
-import { getVibrantToHelmetSafeBodyStyle, getVibrant, getAspectRatio } from '../utils';
-import { HeroA } from '../components/Index/HeroLink';
+import {
+  getVibrantToHelmetSafeBodyStyle,
+  getVibrant,
+  getAspectRatio,
+} from "../utils";
+import { HeroA } from "../components/Index/HeroLink";
 
-const env = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
+const env =
+  process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
 
 const getDifferentRand = (range, lastNs, iterations = 0) => {
   const n = Math.floor(Math.random() * range);
-  if (lastNs.findIndex(x => x === n) > -1 && iterations < 5) {
-    console.log('got dupe, trying again', n);
+  if (lastNs.findIndex((x) => x === n) > -1 && iterations < 5) {
+    console.log("got dupe, trying again", n);
     return getDifferentRand(range, lastNs, iterations + 1);
   }
   return n;
 };
 
-const IndexPage = ({ data: { allFile: { edges } } }) => {
+const ImageButtons = ({ isClient, image, shuffleImage }) => (
+  <div className="flex mx-6 mb-6">
+    <Link
+      className={classnames(
+        "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md",
+        isClient &&
+          "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
+      )}
+      id="image-link"
+      title="view image details"
+      to={`/photogallery/${image.base}/`}
+    >
+      <span className="icon-offset">
+        <ion-icon name="image"></ion-icon>
+      </span>
+    </Link>
+    <button
+      className={classnames(
+        "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md",
+        isClient &&
+          "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
+      )}
+      id="shuffle-button"
+      onClick={() => {
+        shuffleImage(image);
+      }}
+      title="shuffle image"
+      type="button"
+    >
+      <span className="icon-offset">
+        <ion-icon name="shuffle"></ion-icon>
+      </span>
+    </button>
+    <Link
+      className={classnames(
+        "self-center z-20 hover:underline rounded-md px-4 py-2 text-md arrow-right-after font-bold font-serif",
+        isClient &&
+          "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
+      )}
+      id="photogallery-link"
+      to="/photogallery/"
+    >
+      Photography Gallery
+    </Link>
+  </div>
+);
+
+const IndexPage = ({
+  data: {
+    allFile: { edges },
+  },
+}) => {
   const [isClient, setIsClient] = React.useState(false);
   const [imageIndex, setImageIndex] = React.useState(0);
   const images = React.useMemo(() => edges.map((edge) => edge.node), [edges]);
   const image = React.useMemo(() => {
-    console.log('ii', imageIndex);
     return images[imageIndex];
   }, [images, imageIndex]);
 
-  const shuffleImage = React.useCallback((currentImage) => {
-    const lastThreeImages = JSON.parse(localStorage.getItem('lastHeros')) || [];
-    if (env === 'production') {
-      try {
-        // eslint-disable-next-line
-        posthog.capture('[shuffle image]', { currentImage: currentImage?.base });
-        window.plausible('Shuffle', {props: { currentImage: currentImage?.base }});
-      } catch (e) {/* do nothing */}
-    }
-    const index = getDifferentRand(images.length, lastThreeImages);
-    localStorage.setItem('lastHeros', JSON.stringify(take(3, [index, ...lastThreeImages])));
-    setImageIndex(index);
-  }, [images.length]);
+  const shuffleImage = React.useCallback(
+    (currentImage) => {
+      const lastThreeImages =
+        JSON.parse(localStorage.getItem("lastHeros")) || [];
+      if (env === "production") {
+        try {
+          // eslint-disable-next-line
+          posthog.capture("[shuffle image]", {
+            currentImage: currentImage?.base,
+          });
+          window.plausible("Shuffle", {
+            props: { currentImage: currentImage?.base },
+          });
+        } catch (e) {
+          /* do nothing */
+        }
+      }
+      const index = getDifferentRand(images.length, lastThreeImages);
+      localStorage.setItem(
+        "lastHeros",
+        JSON.stringify(take(3, [index, ...lastThreeImages]))
+      );
+      setImageIndex(index);
+    },
+    [images.length]
+  );
 
   // pick random image on page hydration
   React.useEffect(() => {
@@ -54,155 +122,224 @@ const IndexPage = ({ data: { allFile: { edges } } }) => {
   React.useEffect(() => {
     const keyListener = (e) => {
       switch (e.code) {
-      case 'ArrowRight': {
-        if (imageIndex === images.length - 1) {
-          setImageIndex(0);
+        case "ArrowRight": {
+          if (imageIndex === images.length - 1) {
+            setImageIndex(0);
+            return;
+          }
+          setImageIndex(imageIndex + 1);
           return;
         }
-        setImageIndex(imageIndex + 1);
-        return;
-      }
 
-      case 'ArrowLeft': {
-        if (imageIndex === 0) {
-          setImageIndex(images.length - 1);
+        case "ArrowLeft": {
+          if (imageIndex === 0) {
+            setImageIndex(images.length - 1);
+            return;
+          }
+          setImageIndex(imageIndex - 1);
           return;
         }
-        setImageIndex(imageIndex - 1);
-        return;
-      }
       }
     };
-    document.addEventListener('keydown', keyListener);
+    document.addEventListener("keydown", keyListener);
     return () => {
-      document.removeEventListener('keydown', keyListener);
+      document.removeEventListener("keydown", keyListener);
     };
   }, [imageIndex, images.length]);
 
   const vibrant = getVibrant(image);
   const ar = getAspectRatio(image);
-  return (<>
-    <Helmet>
-      <title>Chuck Dries</title>
-      <body
-        className={classnames(isClient ? 'bg-vibrant-dark' : '')}
-        style={getVibrantToHelmetSafeBodyStyle(vibrant)}
-      />
-    </Helmet>
-    {/* WIP: ipad portrait hits md breakpoint, looks bad */}
-    <main
-      className={classnames('font-serif hero', ar > 1 || !isClient
-        ? 'landscape:grid portrait:flex portrait:flex-col' : 'portrait:grid landscape:flex landscape:flex-row-reverse')}
-    >
-      {isClient ? 
-        <GatsbyImage
-          alt=""
+  console.log("bg", image.base);
+  return (
+    <>
+      <Helmet>
+        <title>Chuck Dries</title>
+        <body
+          className={classnames(isClient ? "bg-vibrant-dark" : "")}
+          style={getVibrantToHelmetSafeBodyStyle(vibrant)}
+        />
+      </Helmet>
+      {/* WIP: ipad portrait hits md breakpoint, looks bad */}
+      <main
+        className={classnames(
+          "font-serif hero",
+          ar > 1 || !isClient
+            ? "landscape:grid portrait:flex portrait:flex-col"
+            : "portrait:grid landscape:flex landscape:flex-row-reverse"
+        )}
+      >
+        {isClient ? (
+          <GatsbyImage
+            alt=""
+            className={classnames(
+              ar > 1 || !isClient
+                ? "landscape:h-screen portrait:h-two-thirds-vw"
+                : "h-screen portrait:w-full landscape:w-1/2"
+            )}
+            image={getImage(image)}
+            loading="eager"
+            style={{
+              gridArea: "1/1",
+            }}
+          />
+        ) : (
+          // 67vw = 1/1.49253731 = 1/aspect ratio of my camera lol
+          <div
+            className="landscape:h-screen portrait:h-two-thirds-vw w-full"
+            style={{ gridArea: "1/1" }}
+          ></div>
+        )}
+        <div
           className={classnames(
-            ar > 1 || !isClient ? 'landscape:h-screen portrait:h-two-thirds-vw' : 'h-screen portrait:w-full landscape:w-1/2',
+            "flex flex-auto flex-col items-center justify-between",
+            ar > 1 || !isClient
+              ? "portrait:items-center"
+              : "landscape:justify-center"
           )}
-          image={getImage(image)}
-          loading="eager"
-          style={{
-            gridArea: '1/1',
-          }} />
-        // 67vw = 1/1.49253731 = 1/aspect ratio of my camera lol
-        : <div className="landscape:h-screen portrait:h-two-thirds-vw w-full" style={{gridArea: '1/1' }}></div> }
-      <div className="relative grid place-items-center" style={{gridArea: '1/1'}}>
-        <div className="m-0 sm:m-3 flex flex-col items-end">
-          <section className={classnames('rounded-xl md:px-6 px-4 md:py-5 py-3', isClient && 'border-2 border-vibrant-light bg-vibrant-dark-75')}>
-            <div className="mx-auto">
-              <h1 className={classnames('font-black text-4xl sm:text-5xl md:text-6xl', isClient && 'text-vibrant-light')}>Chuck Dries</h1>
-              <h2 className={classnames('text-xl md:text-2xl', isClient && 'text-vibrant')}>Full stack software engineer &amp; hobbyist photographer</h2>
-              {<div className="border-t-2 border-muted-light mt-2 mr-2 mb-1" style={{width: 30}}></div>}
+          style={{ gridArea: "1/1" }}
+        >
+          <nav
+            className={classnames(
+              isClient &&
+                "text-vibrant-dark bg-vibrant-dark blurred-or-opaque-bg-2",
+              "px-6 p-2",
+              ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen"
+            )}
+            style={{ zIndex: 100 }}
+          >
+            <ul className="flex flex-wrap justify-center">
+              <li>
+                <HeroA
+                  href="/CharlesDriesResumeCurrent.pdf"
+                  isClient={isClient}
+                >
+                  Resume
+                </HeroA>
+              </li>
+              <li>
+                {" "}
+                <HeroA href="https://github.com/chuckdries" isClient={isClient}>
+                  Github
+                </HeroA>
+              </li>
+              <li>
+                <HeroA
+                  href="https://www.linkedin.com/in/chuckdries/"
+                  isClient={isClient}
+                >
+                  LinkedIn
+                </HeroA>
+              </li>
+              <li>
+                <HeroA
+                  href="https://devpost.com/chuckdries"
+                  isClient={isClient}
+                >
+                  Devpost
+                </HeroA>
+              </li>
+              <li>
+                <HeroA
+                  href="https://medium.com/@chuckdries"
+                  isClient={isClient}
+                >
+                  Medium (blog)
+                </HeroA>
+              </li>
+            </ul>
+          </nav>
 
-              <ul className={classnames(isClient && 'text-muted-light')}>
-                <li>Software Engineer, Axosoft</li>
-                <li><HeroA className="ml-0" href="mailto:chuck@chuckdries.com" isClient={isClient}>chuck@chuckdries.com</HeroA>/<span className="ml-2">602.618.0414</span></li>
-                <li>
-                  <HeroA className="ml-0" href="http://github.com/chuckdries" isClient={isClient}>Github</HeroA>/
-                  <HeroA href="https://www.linkedin.com/in/chuckdries/" isClient={isClient}>LinkedIn</HeroA>/
-                  <HeroA href="https://devpost.com/chuckdries" isClient={isClient}>Devpost</HeroA>/
-                  <HeroA href="/CharlesDriesResumeCurrent.pdf" isClient={isClient}>Resume [pdf]</HeroA>/
-                  <HeroA href="https://medium.com/@chuckdries" isClient={isClient}>Medium (blog)</HeroA>
-                </li>
-              </ul>
-            </div>
-          </section>
-          <div className="flex mr-2">
-            <div className="flex my-2 items-center flex-col">
-              <Link
-                className={classnames(
-                  'hover:underline inline-block px-1 my-1 mr-2 text-md rounded-md border-2',
-                  isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')} 
-                // style={{top: '5px'}}
-                id="image-link"
-                title="view image details"
-                to={`/photogallery/${image.base}/`}
-              >
-                <span className="icon-offset"><ion-icon name="image"></ion-icon></span>
-              </Link>
-              <button
-                className={classnames(
-                  'hover:underline inline-block px-1 my-1 mr-2 text-md rounded-md border-2',
-                  isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')}
-                id="shuffle-button"
-                onClick={() => {
-                  shuffleImage(image);
-                }}
-                title="shuffle image"
-                type="button"
-              >
-                <span className="icon-offset"><ion-icon name="shuffle"></ion-icon></span>
-              </button>
-            </div>
-            <Link
+          <div className="flex flex-col items-center">
+            <h1
               className={classnames(
-                'hover:underline p-3 px-5 py-4 my-3 text-md sm:text-lg rounded-md border-2 arrow-right-after font-bold font-serif',
-                isClient && 'text-muted-dark bg-muted-light hover:border-muted border-muted-dark')} 
-              id="photogallery-link"
-              to="/photogallery/"
+                "mb-5 mt-0 text-huge-1 md:text-huge-2 text-center font-black filter drop-shadow-dark z-20",
+                isClient && ( ar > 1 ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-80" : 'text-gray-50 opacity-80 landscape:text-vibrant-light')
+              )}
+              style={{ lineHeight: "85%" }}
             >
-            Photography Gallery
-            </Link>
+              Chuck Dries
+            </h1>
+            <div
+              className={classnames(
+                ar > 1 && "landscape:shadow-lg",
+                "z-20 mb-4 inline-block mx-2",
+                isClient && "bg-vibrant-dark blurred-or-opaque-bg-1"
+              )}
+            >
+              <div className="flex-auto">
+                <h2
+                  className={classnames(
+                    "p-3 text-center",
+                    isClient && "text-vibrant-light"
+                  )}
+                  style={{ fontSize: "max(1vw, 20px)" }}
+                >
+                  Full Stack Software Engineer &amp; Hobbyist Photographer
+                </h2>
+              </div>
+            </div>
           </div>
+          <ImageButtons
+            image={image}
+            isClient={isClient}
+            shuffleImage={shuffleImage}
+          />
         </div>
-      </div>
-
-    </main>
-  </>);
+      </main>
+    </>
+  );
 };
 
 export const query = graphql`
-{
-  allFile(
-    filter: { sourceInstanceName: {eq: "gallery"} }
-    sort: {order: DESC, fields: fields___imageMeta___dateTaken}
-  ) {
-    edges {
-      node {
-        relativePath
-        base
-        childImageSharp {
-          fluid {
-            aspectRatio
-          }
-          gatsbyImageData(
-            layout: FULL_WIDTH
-            placeholder: NONE
-            breakpoints: [750, 1080, 1366, 1920, 2560]
-          )
+  {
+    allFile(
+      filter: {
+        sourceInstanceName: { eq: "gallery" }
+        base: {
+          in: [
+            "20160530-DSC09108.jpg"
+            "20180424-DSC07948.jpg"
+            "20200215-DSC02694.jpg"
+            "DSC00201.jpg"
+            "DSC01699.jpg"
+            "DSC04905.jpg"
+            "DSC05761.jpg"
+            "DSC05851.jpg"
+            "DSC06245.jpg"
+            "DSC08511.jpg"
+            "DSC08521.jpg"
+            "DSC07490.jpg"
+            "DSC02538.jpg"
+          ]
         }
-        fields {
-          imageMeta {
-            vibrant {
-              ...VibrantColors
+      }
+      sort: { order: DESC, fields: fields___imageMeta___dateTaken }
+    ) {
+      edges {
+        node {
+          relativePath
+          base
+          childImageSharp {
+            fluid {
+              aspectRatio
+            }
+            gatsbyImageData(
+              layout: FULL_WIDTH
+              placeholder: NONE
+              breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
+            )
+          }
+          fields {
+            imageMeta {
+              vibrant {
+                ...VibrantColors
+              }
             }
           }
         }
       }
     }
   }
-}
 `;
 
 export default IndexPage;
