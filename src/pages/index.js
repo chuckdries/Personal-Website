@@ -35,7 +35,7 @@ const Nav = ({ ar, isClient }) => (
   <nav
     className={classnames(
       ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen",
-      "p-2"
+      "p-2 flex justify-center"
     )}
     style={{ zIndex: 100 }}
   >
