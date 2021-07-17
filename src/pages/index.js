@@ -149,7 +149,7 @@ const IndexPage = ({
     return () => {
       document.removeEventListener("keydown", keyListener);
     };
-  }, [imageIndex, images.length]);
+  }, [imageIndex, images.length, image, shuffleImage]);
 
   const vibrant = getVibrant(image);
   const ar = getAspectRatio(image);
