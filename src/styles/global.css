@@ -33,10 +33,10 @@
     scroll-padding: theme("spacing.6");
   }
   .blurred-or-opaque-bg-1 {
-    @apply bg-opacity-80;
+    @apply bg-opacity-70;
   }
   .blurred-or-opaque-bg-2 {
-    @apply bg-opacity-100;
+    @apply bg-opacity-90;
   }
   @supports (backdrop-filter: blur(24px)) {
     .blurred-or-opaque-bg-1 {

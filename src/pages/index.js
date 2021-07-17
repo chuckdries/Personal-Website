@@ -26,50 +26,47 @@ const getDifferentRand = (range, lastNs, iterations = 0) => {
 };
 
 const ImageButtons = ({ isClient, image, shuffleImage }) => (
-  <div className="flex mx-6 justify-end">
-    <div className="flex my-2 items-center flex-col">
-      <Link
-        className={classnames(
-          "z-20 hover:underline inline-block px-1 my-1 mr-2 text-md rounded-md border-2",
-          isClient &&
-            "text-muted-dark bg-muted-light hover:bg-muted border-muted-dark"
-        )}
-        id="image-link"
-        title="view image details"
-        to={`/photogallery/${image.base}/`}
-      >
-        <span className="icon-offset">
-          <ion-icon name="image"></ion-icon>
-        </span>
-      </Link>
-      <button
-        className={classnames(
-          "z-20 hover:underline inline-block px-1 my-1 mr-2 text-md rounded-md border-2",
-          isClient &&
-            "text-muted-dark bg-muted-light hover:bg-muted border-muted-dark"
-        )}
-        id="shuffle-button"
-        onClick={() => {
-          shuffleImage(image);
-        }}
-        title="shuffle image"
-        type="button"
-      >
-        <span className="icon-offset">
-          <ion-icon name="shuffle"></ion-icon>
-        </span>
-      </button>
-    </div>
+  <div className="flex mx-6 mb-4">
     <Link
       className={classnames(
-        "z-20 hover:underline p-3 px-5 py-4 my-3 text-md sm:text-lg rounded-md border-2 arrow-right-after font-bold font-serif",
+        "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md",
         isClient &&
-          "text-muted-dark bg-muted-light border-muted-dark hover:bg-muted"
+          "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
+      )}
+      id="image-link"
+      title="view image details"
+      to={`/photogallery/${image.base}/`}
+    >
+      <span className="icon-offset">
+        <ion-icon name="image"></ion-icon>
+      </span>
+    </Link>
+    <button
+      className={classnames(
+        "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md",
+        isClient &&
+          "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
+      )}
+      id="shuffle-button"
+      onClick={() => {
+        shuffleImage(image);
+      }}
+      title="shuffle image"
+      type="button"
+    >
+      <span className="icon-offset">
+        <ion-icon name="shuffle"></ion-icon>
+      </span>
+    </button>
+    <Link
+      className={classnames(
+        "self-center z-20 underline rounded-md px-4 py-2 text-md arrow-right-after font-bold font-serif",
+        isClient && "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
       )}
       id="photogallery-link"
       to="/photogallery/"
     >
-      Gallery
+      Photography Gallery
     </Link>
   </div>
 );
@@ -152,6 +149,7 @@ const IndexPage = ({
 
   const vibrant = getVibrant(image);
   const ar = getAspectRatio(image);
+  console.log("ar", ar);
   return (
     <>
       <Helmet>
@@ -191,10 +189,9 @@ const IndexPage = ({
             style={{ gridArea: "1/1" }}
           ></div>
         )}
-        {/* <div className={classnames('relative grid', ar <= 1 ? 'place-items-end landscape:place-items-center' : 'place-items-end')} style={{gridArea: '1/1'}}> */}
         <div
           className={classnames(
-            "flex flex-col items-center justify-between",
+            "flex flex-auto flex-col items-center justify-between",
             ar > 1 || !isClient
               ? "portrait:items-center"
               : "landscape:justify-center"
@@ -208,7 +205,7 @@ const IndexPage = ({
             )}
             style={{ zIndex: 100 }}
           >
-            <ul className="flex justify-between">
+            <ul className="flex flex-wrap justify-between">
               <li>
                 <HeroA
                   href="/CharlesDriesResumeCurrent.pdf"
@@ -253,17 +250,17 @@ const IndexPage = ({
           <div className="flex flex-col items-center">
             <h1
               className={classnames(
-                "font-black filter drop-shadow-dark z-20",
+                "text-huge-1 md:text-huge-2 text-center font-black filter drop-shadow-dark z-20",
                 isClient && "mb-5 mt-0 text-vibrant-light"
               )}
-              style={{ fontSize: "max(8vw, 100px)", lineHeight: "80%" }}
+              style={{ lineHeight: "85%" }}
             >
               Chuck Dries
             </h1>
             <div
               className={classnames(
                 ar > 1 && "landscape:shadow-lg",
-                "mb-4 inline-block",
+                "z-20 mb-4 inline-block",
                 isClient && "bg-vibrant-dark blurred-or-opaque-bg-1"
               )}
             >
@@ -280,7 +277,11 @@ const IndexPage = ({
               </div>
             </div>
           </div>
-          <div></div>
+          <ImageButtons
+            image={image}
+            isClient={isClient}
+            shuffleImage={shuffleImage}
+          />
         </div>
       </main>
     </>
