@@ -26,7 +26,7 @@ const getDifferentRand = (range, lastNs, iterations = 0) => {
 };
 
 const ImageButtons = ({ isClient, image, shuffleImage }) => (
-  <div className="flex mx-6 mb-4">
+  <div className="flex mx-6 mb-6">
     <Link
       className={classnames(
         "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md",
@@ -207,7 +207,7 @@ const IndexPage = ({
             )}
             style={{ zIndex: 100 }}
           >
-            <ul className="flex flex-wrap justify-between">
+            <ul className="flex flex-wrap justify-around">
               <li>
                 <HeroA
                   href="/CharlesDriesResumeCurrent.pdf"
@@ -262,7 +262,7 @@ const IndexPage = ({
             <div
               className={classnames(
                 ar > 1 && "landscape:shadow-lg",
-                "z-20 mb-4 inline-block",
+                "z-20 mb-4 inline-block mx-2",
                 isClient && "bg-vibrant-dark blurred-or-opaque-bg-1"
               )}
             >
@@ -296,18 +296,16 @@ export const query = graphql`
       filter: {
         sourceInstanceName: { eq: "gallery" }
         base: {
-          nin: [
-            "DSC4180.jpg"
-            "DSC00887.jpg"
-            "DSC00879.jpg"
-            "DSC02233.jpg"
-            "DSC00340.jpg"
-            "_DSC4949.jpg"
-            "_DSC4155.jpg"
-            "_DSC4830.jpg"
-            "_DSC4792.jpg"
-            "20200215-DSC02584.jpg"
-            "DSC07463.jpg"
+          in: [
+            "20160530-DSC09108.jpg"
+            "20180424-DSC07948.jpg"
+            "20200215-DSC02694.jpg"
+            "DSC00201.jpg"
+            "DSC01699.jpg"
+            "DSC04905.jpg"
+            "DSC05761.jpg"
+            "DSC05851.jpg"
+            "DSC06245.jpg"
           ]
         }
       }
