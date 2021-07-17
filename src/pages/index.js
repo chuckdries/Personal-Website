@@ -163,7 +163,6 @@ const IndexPage = ({
           style={getVibrantToHelmetSafeBodyStyle(vibrant)}
         />
       </Helmet>
-      {/* WIP: ipad portrait hits md breakpoint, looks bad */}
       <main
         className={classnames(
           "font-serif hero",
@@ -187,7 +186,6 @@ const IndexPage = ({
             }}
           />
         ) : (
-          // 67vw = 1/1.49253731 = 1/aspect ratio of my camera lol
           <div
             className="landscape:h-screen portrait:h-two-thirds-vw w-full"
             style={{ gridArea: "1/1" }}
@@ -204,14 +202,12 @@ const IndexPage = ({
         >
           <nav
             className={classnames(
-              isClient &&
-                "text-vibrant-dark bg-vibrant-dark blurred-or-opaque-bg-2",
-              "px-6 p-2",
-              ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen"
+              // ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen"
+              "w-screen p-2 flex justify-center"
             )}
             style={{ zIndex: 100 }}
           >
-            <ul className="flex flex-wrap justify-center">
+            <ul className="text-vibrant-dark px-6 p-2 bg-vibrant-dark blurred-or-opaque-bg-2 inline-flex flex-wrap justify-center">
               <li>
                 <HeroA
                   href="/CharlesDriesResumeCurrent.pdf"
