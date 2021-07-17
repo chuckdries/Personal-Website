@@ -36,7 +36,7 @@ module.exports = {
       },
       fontSize: {
         'huge-1': '80px',
-        'huge-2': 'max(7.8vw, 100px)'
+        'huge-2': 'max(7.8vw, 120px)'
       },
       colors: {
         vibrant: {
