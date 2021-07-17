@@ -39,7 +39,6 @@ const Nav = ({ ar, isClient }) => (
     )}
     style={{ zIndex: 100 }}
   >
-    {/* <ul className="text-vibrant-dark px-6 p-2 bg-vibrant-dark blurred-or-opaque-bg-2 inline-flex flex-wrap justify-center"> */}
     <ul className="inline-flex flex-wrap justify-center">
       <li>
         <a
@@ -138,7 +137,6 @@ const IndexPage = ({
         JSON.parse(localStorage.getItem("lastHeros")) || [];
       if (env === "production") {
         try {
-          // eslint-disable-next-line
           posthog.capture("[shuffle image]", {
             currentImage: currentImage?.base,
           });
