@@ -200,7 +200,9 @@ const IndexPage = ({
         >
           <nav
             className={classnames(
-              "text-vibrant-dark px-6 p-2 bg-vibrant-dark blurred-or-opaque-bg-2",
+              isClient &&
+                "text-vibrant-dark bg-vibrant-dark blurred-or-opaque-bg-2",
+              "px-6 p-2",
               ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen"
             )}
             style={{ zIndex: 100 }}
@@ -293,7 +295,15 @@ export const query = graphql`
     allFile(
       filter: {
         sourceInstanceName: { eq: "gallery" }
-        base: { nin: ["DSC4180.jpg", "DSC00887.jpg", "DSC00879.jpg", "DSC02233.jpg", "DSC00340.jpg"] }
+        base: {
+          nin: [
+            "DSC4180.jpg"
+            "DSC00887.jpg"
+            "DSC00879.jpg"
+            "DSC02233.jpg"
+            "DSC00340.jpg"
+          ]
+        }
       }
       sort: { order: DESC, fields: fields___imageMeta___dateTaken }
     ) {
