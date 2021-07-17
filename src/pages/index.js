@@ -207,7 +207,7 @@ const IndexPage = ({
             )}
             style={{ zIndex: 100 }}
           >
-            <ul className="flex flex-wrap justify-around">
+            <ul className="flex flex-wrap justify-center">
               <li>
                 <HeroA
                   href="/CharlesDriesResumeCurrent.pdf"

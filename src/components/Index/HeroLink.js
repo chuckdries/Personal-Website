@@ -10,7 +10,7 @@ export const HeroA = ({
 }) => (
   <a
     className={classnames(
-      "mx-2 underline",
+      "mx-3 ",
       isClient && "text-muted-light hover:text-vibrant-light",
       className
     )}
