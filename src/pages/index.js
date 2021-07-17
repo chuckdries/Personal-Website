@@ -24,12 +24,11 @@ const getDifferentRand = (range, lastNs, iterations = 0) => {
   return n;
 };
 
-const getButtonClasses = (isClient, colorMode = 'vibrant') =>
+const getButtonClasses = (isClient, colorMode = "vibrant") =>
   classnames(
     "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md hover:underline",
-    isClient &&
-      `text-muted-light bg-${colorMode}-dark blurred-or-opaque-bg-2`,
-    isClient && colorMode === 'muted' ? `hover:bg-muted` : ''
+    isClient && `text-muted-light bg-${colorMode}-dark blurred-or-opaque-bg-2`,
+    isClient && colorMode === "muted" ? `hover:bg-muted` : ""
   );
 
 const Nav = ({ ar, isClient }) => (
@@ -89,7 +88,7 @@ const Nav = ({ ar, isClient }) => (
 const ImageButtons = ({ isClient, image, shuffleImage }) => (
   <div className="flex mx-6 mb-6">
     <Link
-      className={getButtonClasses(isClient, 'muted')}
+      className={getButtonClasses(isClient, "muted")}
       id="image-link"
       title="view image details"
       to={`/photogallery/${image.base}/`}
@@ -99,7 +98,7 @@ const ImageButtons = ({ isClient, image, shuffleImage }) => (
       </span>
     </Link>
     <button
-      className={getButtonClasses(isClient, 'muted')}
+      className={getButtonClasses(isClient, "muted")}
       id="shuffle-button"
       onClick={() => {
         shuffleImage(image);
@@ -112,7 +111,7 @@ const ImageButtons = ({ isClient, image, shuffleImage }) => (
       </span>
     </button>
     <Link
-      className={getButtonClasses(isClient, 'muted')}
+      className={getButtonClasses(isClient, "muted")}
       id="photogallery-link"
       to="/photogallery/"
     >
