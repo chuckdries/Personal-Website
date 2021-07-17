@@ -302,6 +302,12 @@ export const query = graphql`
             "DSC00879.jpg"
             "DSC02233.jpg"
             "DSC00340.jpg"
+            "_DSC4949.jpg"
+            "_DSC4155.jpg"
+            "_DSC4830.jpg"
+            "_DSC4792.jpg"
+            "20200215-DSC02584.jpg"
+            "DSC07463.jpg"
           ]
         }
       }
