@@ -24,56 +24,63 @@ const getDifferentRand = (range, lastNs, iterations = 0) => {
   return n;
 };
 
-const NavLink = ({ href, children, isClient }) => (
-  <a
-    className={classnames(
-      "mx-3 ",
-      isClient && "text-muted-light hover:text-vibrant-light"
-    )}
-    href={href}
-  >
-    {children}
-  </a>
-);
+const getButtonClasses = (isClient, colorMode = 'vibrant') =>
+  classnames(
+    "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md hover:underline",
+    isClient &&
+      `text-muted-light bg-${colorMode}-dark blurred-or-opaque-bg-2`,
+    isClient && colorMode === 'muted' ? `hover:bg-muted` : ''
+  );
 
-const Nav = ({ isClient, ar }) => (
+const Nav = ({ ar, isClient }) => (
   <nav
     className={classnames(
-      isClient && "text-vibrant-dark bg-vibrant-dark blurred-or-opaque-bg-2",
-      "px-6 p-2",
-      ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen"
+      ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen",
+      "p-2 flex justify-center"
     )}
     style={{ zIndex: 100 }}
   >
-    <ul className="flex flex-wrap justify-center">
+    {/* <ul className="text-vibrant-dark px-6 p-2 bg-vibrant-dark blurred-or-opaque-bg-2 inline-flex flex-wrap justify-center"> */}
+    <ul className="inline-flex flex-wrap">
       <li>
-        <NavLink href="/CharlesDriesResumeCurrent.pdf" isClient={isClient}>
+        <a
+          className={getButtonClasses(isClient)}
+          href="/CharlesDriesResumeCurrent.pdf"
+        >
           Resume
-        </NavLink>
+        </a>
       </li>
       <li>
-        {" "}
-        <NavLink href="https://github.com/chuckdries" isClient={isClient}>
+        <a
+          className={getButtonClasses(isClient)}
+          href="https://github.com/chuckdries"
+        >
           Github
-        </NavLink>
+        </a>
       </li>
       <li>
-        <NavLink
+        <a
+          className={getButtonClasses(isClient)}
           href="https://www.linkedin.com/in/chuckdries/"
-          isClient={isClient}
         >
           LinkedIn
-        </NavLink>
+        </a>
       </li>
       <li>
-        <NavLink href="https://devpost.com/chuckdries" isClient={isClient}>
+        <a
+          className={getButtonClasses(isClient)}
+          href="https://devpost.com/chuckdries"
+        >
           Devpost
-        </NavLink>
+        </a>
       </li>
       <li>
-        <NavLink href="https://medium.com/@chuckdries" isClient={isClient}>
+        <a
+          className={getButtonClasses(isClient)}
+          href="https://medium.com/@chuckdries"
+        >
           Medium (blog)
-        </NavLink>
+        </a>
       </li>
     </ul>
   </nav>
@@ -82,11 +89,7 @@ const Nav = ({ isClient, ar }) => (
 const ImageButtons = ({ isClient, image, shuffleImage }) => (
   <div className="flex mx-6 mb-6">
     <Link
-      className={classnames(
-        "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md",
-        isClient &&
-          "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
-      )}
+      className={getButtonClasses(isClient, 'muted')}
       id="image-link"
       title="view image details"
       to={`/photogallery/${image.base}/`}
@@ -96,11 +99,7 @@ const ImageButtons = ({ isClient, image, shuffleImage }) => (
       </span>
     </Link>
     <button
-      className={classnames(
-        "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md",
-        isClient &&
-          "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
-      )}
+      className={getButtonClasses(isClient, 'muted')}
       id="shuffle-button"
       onClick={() => {
         shuffleImage(image);
@@ -113,11 +112,7 @@ const ImageButtons = ({ isClient, image, shuffleImage }) => (
       </span>
     </button>
     <Link
-      className={classnames(
-        "self-center z-20 hover:underline rounded-md px-4 py-2 text-md font-bold font-serif",
-        isClient &&
-          "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
-      )}
+      className={getButtonClasses(isClient, 'muted')}
       id="photogallery-link"
       to="/photogallery/"
     >
@@ -208,6 +203,7 @@ const IndexPage = ({
   const vibrant = getVibrant(image);
   const ar = getAspectRatio(image);
   console.log("bg", image.base);
+
   return (
     <>
       <Helmet>
@@ -217,7 +213,6 @@ const IndexPage = ({
           style={getVibrantToHelmetSafeBodyStyle(vibrant)}
         />
       </Helmet>
-      {/* WIP: ipad portrait hits md breakpoint, looks bad */}
       <main
         className={classnames(
           "font-serif hero",
@@ -256,7 +251,6 @@ const IndexPage = ({
           style={{ gridArea: "1/1" }}
         >
           <Nav ar={ar} isClient={isClient} />
-
           <div className="flex flex-col items-center">
             <h1
               className={classnames(
