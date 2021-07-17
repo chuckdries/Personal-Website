@@ -25,14 +25,72 @@ const getDifferentRand = (range, lastNs, iterations = 0) => {
   return n;
 };
 
+const getButtonClasses = (isClient, colorMode = 'vibrant') =>
+  classnames(
+    "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md hover:underline",
+    isClient &&
+      `text-muted-light bg-${colorMode}-dark blurred-or-opaque-bg-2`,
+    isClient && colorMode === 'muted' ? `hover:bg-muted` : ''
+  );
+
+const Nav = ({ ar, isClient }) => (
+  <nav
+    className={classnames(
+      ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen",
+      "p-2 flex justify-center"
+    )}
+    style={{ zIndex: 100 }}
+  >
+    {/* <ul className="text-vibrant-dark px-6 p-2 bg-vibrant-dark blurred-or-opaque-bg-2 inline-flex flex-wrap justify-center"> */}
+    <ul className="inline-flex flex-wrap">
+      <li>
+        <a
+          className={getButtonClasses(isClient)}
+          href="/CharlesDriesResumeCurrent.pdf"
+        >
+          Resume
+        </a>
+      </li>
+      <li>
+        <a
+          className={getButtonClasses(isClient)}
+          href="https://github.com/chuckdries"
+        >
+          Github
+        </a>
+      </li>
+      <li>
+        <a
+          className={getButtonClasses(isClient)}
+          href="https://www.linkedin.com/in/chuckdries/"
+        >
+          LinkedIn
+        </a>
+      </li>
+      <li>
+        <a
+          className={getButtonClasses(isClient)}
+          href="https://devpost.com/chuckdries"
+        >
+          Devpost
+        </a>
+      </li>
+      <li>
+        <a
+          className={getButtonClasses(isClient)}
+          href="https://medium.com/@chuckdries"
+        >
+          Medium (blog)
+        </a>
+      </li>
+    </ul>
+  </nav>
+);
+
 const ImageButtons = ({ isClient, image, shuffleImage }) => (
   <div className="flex mx-6 mb-6">
     <Link
-      className={classnames(
-        "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md",
-        isClient &&
-          "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
-      )}
+      className={getButtonClasses(isClient, 'muted')}
       id="image-link"
       title="view image details"
       to={`/photogallery/${image.base}/`}
@@ -42,11 +100,7 @@ const ImageButtons = ({ isClient, image, shuffleImage }) => (
       </span>
     </Link>
     <button
-      className={classnames(
-        "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md",
-        isClient &&
-          "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
-      )}
+      className={getButtonClasses(isClient, 'muted')}
       id="shuffle-button"
       onClick={() => {
         shuffleImage(image);
@@ -59,11 +113,7 @@ const ImageButtons = ({ isClient, image, shuffleImage }) => (
       </span>
     </button>
     <Link
-      className={classnames(
-        "self-center z-20 hover:underline rounded-md px-4 py-2 text-md font-bold font-serif",
-        isClient &&
-          "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
-      )}
+      className={getButtonClasses(isClient, 'muted')}
       id="photogallery-link"
       to="/photogallery/"
     >
@@ -154,6 +204,7 @@ const IndexPage = ({
   const vibrant = getVibrant(image);
   const ar = getAspectRatio(image);
   console.log("bg", image.base);
+
   return (
     <>
       <Helmet>
@@ -200,55 +251,7 @@ const IndexPage = ({
           )}
           style={{ gridArea: "1/1" }}
         >
-          <nav
-            className={classnames(
-              ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen",
-              "p-2 flex justify-center"
-            )}
-            style={{ zIndex: 100 }}
-          >
-            <ul className="text-vibrant-dark px-6 p-2 bg-vibrant-dark blurred-or-opaque-bg-2 inline-flex flex-wrap justify-center">
-              <li>
-                <HeroA
-                  href="/CharlesDriesResumeCurrent.pdf"
-                  isClient={isClient}
-                >
-                  Resume
-                </HeroA>
-              </li>
-              <li>
-                {" "}
-                <HeroA href="https://github.com/chuckdries" isClient={isClient}>
-                  Github
-                </HeroA>
-              </li>
-              <li>
-                <HeroA
-                  href="https://www.linkedin.com/in/chuckdries/"
-                  isClient={isClient}
-                >
-                  LinkedIn
-                </HeroA>
-              </li>
-              <li>
-                <HeroA
-                  href="https://devpost.com/chuckdries"
-                  isClient={isClient}
-                >
-                  Devpost
-                </HeroA>
-              </li>
-              <li>
-                <HeroA
-                  href="https://medium.com/@chuckdries"
-                  isClient={isClient}
-                >
-                  Medium (blog)
-                </HeroA>
-              </li>
-            </ul>
-          </nav>
-
+          <Nav isClient={isClient} ar={ar} />
           <div className="flex flex-col items-center">
             <h1
               className={classnames(
