@@ -60,7 +60,7 @@ const ImageButtons = ({ isClient, image, shuffleImage }) => (
     </button>
     <Link
       className={classnames(
-        "self-center z-20 hover:underline rounded-md px-4 py-2 text-md arrow-right-after font-bold font-serif",
+        "self-center z-20 hover:underline rounded-md px-4 py-2 text-md font-bold font-serif",
         isClient &&
           "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
       )}
