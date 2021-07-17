@@ -48,7 +48,6 @@ function processColors(vibrantData, imagePath) {
     badContrast(DarkVibrant, Vibrant) ||
     badContrast(DarkVibrant, LightMuted)
   ) {
-    // DarkVibrant = DarkVibrant.darken();
     if (badContrast(DarkVibrant, Vibrant)) {
       Vibrant = Vibrant.brighten(2);
     }
