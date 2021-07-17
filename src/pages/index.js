@@ -122,6 +122,10 @@ const IndexPage = ({
   React.useEffect(() => {
     const keyListener = (e) => {
       switch (e.code) {
+        case "Space": {
+          shuffleImage(image);
+          return;
+        }
         case "ArrowRight": {
           if (imageIndex === images.length - 1) {
             setImageIndex(0);
@@ -253,7 +257,10 @@ const IndexPage = ({
             <h1
               className={classnames(
                 "mb-5 mt-0 text-huge-1 md:text-huge-2 text-center font-black filter drop-shadow-dark z-20",
-                isClient && ( ar > 1 ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-80" : 'text-gray-50 opacity-80 landscape:text-vibrant-light')
+                isClient &&
+                  (ar > 1
+                    ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-80"
+                    : "text-gray-50 opacity-80 landscape:text-vibrant-light")
               )}
               style={{ lineHeight: "85%" }}
             >
