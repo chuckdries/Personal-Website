@@ -1,12 +1,12 @@
 # This is a basic workflow to help you get started with Actions
 
-name: build and deploy main
+name: build and deploy staging
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
   push:
-    branches: [master]
+    branches: [staging]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -41,7 +41,7 @@ jobs:
         with:
           switches: -zr --delete --exclude node_modules --exclude '.git*'
           path: ./public/
-          remote_path: www/personal-website
+          remote_path: www/personal-website-staging
           remote_host: droplet.chuckdries.com
           remote_user: ${{ secrets.CI_USER }}
           remote_key: ${{ secrets.CI_SSH_KEY }}
