@@ -255,7 +255,7 @@ const IndexPage = ({
           )}
           style={{ gridArea: "1/1" }}
         >
-          <Nav isClient={isClient} ar={ar} />
+          <Nav ar={ar} isClient={isClient} />
 
           <div className="flex flex-col items-center">
             <h1
