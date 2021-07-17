@@ -27,8 +27,13 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: yarn install --prod --pure-lockfile
-      - name: Lint
-        run: yarn run lint
+      - name: Cache gatsby cache
+        uses: actions/cache@v2
+        with:
+          key: ${{ runner.os }}-gatsby-build-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-gatsby-build-
+          path: .cache
       - name: Build
         run: yarn run build
       - name: upload
