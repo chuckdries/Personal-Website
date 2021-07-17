@@ -24,6 +24,7 @@ jobs:
         uses: actions/setup-node@master
         with:
           node-version: 16.x
+          cache: yarn
       - name: Install dependencies
         run: yarn install --prod --pure-lockfile
       - name: Lint
