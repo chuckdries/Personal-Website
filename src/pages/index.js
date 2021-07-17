@@ -36,12 +36,12 @@ const Nav = ({ ar, isClient }) => (
   <nav
     className={classnames(
       ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen",
-      "p-2 flex justify-center"
+      "p-2"
     )}
     style={{ zIndex: 100 }}
   >
     {/* <ul className="text-vibrant-dark px-6 p-2 bg-vibrant-dark blurred-or-opaque-bg-2 inline-flex flex-wrap justify-center"> */}
-    <ul className="inline-flex flex-wrap">
+    <ul className="inline-flex flex-wrap justify-center">
       <li>
         <a
           className={getButtonClasses(isClient)}
