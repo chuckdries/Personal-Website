@@ -35,7 +35,7 @@ module.exports = {
         'dark': '0 1px 2px rgba(0, 0, 0, 0.8)',
       },
       fontSize: {
-        'huge-1': '80px',
+        'huge-1': '95px',
         'huge-2': 'max(7.8vw, 120px)'
       },
       colors: {
