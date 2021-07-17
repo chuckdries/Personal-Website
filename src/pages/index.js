@@ -11,7 +11,6 @@ import {
   getVibrant,
   getAspectRatio,
 } from "../utils";
-import { HeroA } from "../components/Index/HeroLink";
 
 const env =
   process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
@@ -24,6 +23,61 @@ const getDifferentRand = (range, lastNs, iterations = 0) => {
   }
   return n;
 };
+
+const NavLink = ({ href, children, isClient }) => (
+  <a
+    className={classnames(
+      "mx-3 ",
+      isClient && "text-muted-light hover:text-vibrant-light"
+    )}
+    href={href}
+  >
+    {children}
+  </a>
+);
+
+const Nav = ({ isClient, ar }) => (
+  <nav
+    className={classnames(
+      isClient && "text-vibrant-dark bg-vibrant-dark blurred-or-opaque-bg-2",
+      "px-6 p-2",
+      ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen"
+    )}
+    style={{ zIndex: 100 }}
+  >
+    <ul className="flex flex-wrap justify-center">
+      <li>
+        <NavLink href="/CharlesDriesResumeCurrent.pdf" isClient={isClient}>
+          Resume
+        </NavLink>
+      </li>
+      <li>
+        {" "}
+        <NavLink href="https://github.com/chuckdries" isClient={isClient}>
+          Github
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          href="https://www.linkedin.com/in/chuckdries/"
+          isClient={isClient}
+        >
+          LinkedIn
+        </NavLink>
+      </li>
+      <li>
+        <NavLink href="https://devpost.com/chuckdries" isClient={isClient}>
+          Devpost
+        </NavLink>
+      </li>
+      <li>
+        <NavLink href="https://medium.com/@chuckdries" isClient={isClient}>
+          Medium (blog)
+        </NavLink>
+      </li>
+    </ul>
+  </nav>
+);
 
 const ImageButtons = ({ isClient, image, shuffleImage }) => (
   <div className="flex mx-6 mb-6">
@@ -187,7 +241,6 @@ const IndexPage = ({
             }}
           />
         ) : (
-          // 67vw = 1/1.49253731 = 1/aspect ratio of my camera lol
           <div
             className="landscape:h-screen portrait:h-two-thirds-vw w-full"
             style={{ gridArea: "1/1" }}
@@ -202,56 +255,7 @@ const IndexPage = ({
           )}
           style={{ gridArea: "1/1" }}
         >
-          <nav
-            className={classnames(
-              isClient &&
-                "text-vibrant-dark bg-vibrant-dark blurred-or-opaque-bg-2",
-              "px-6 p-2",
-              ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen"
-            )}
-            style={{ zIndex: 100 }}
-          >
-            <ul className="flex flex-wrap justify-center">
-              <li>
-                <HeroA
-                  href="/CharlesDriesResumeCurrent.pdf"
-                  isClient={isClient}
-                >
-                  Resume
-                </HeroA>
-              </li>
-              <li>
-                {" "}
-                <HeroA href="https://github.com/chuckdries" isClient={isClient}>
-                  Github
-                </HeroA>
-              </li>
-              <li>
-                <HeroA
-                  href="https://www.linkedin.com/in/chuckdries/"
-                  isClient={isClient}
-                >
-                  LinkedIn
-                </HeroA>
-              </li>
-              <li>
-                <HeroA
-                  href="https://devpost.com/chuckdries"
-                  isClient={isClient}
-                >
-                  Devpost
-                </HeroA>
-              </li>
-              <li>
-                <HeroA
-                  href="https://medium.com/@chuckdries"
-                  isClient={isClient}
-                >
-                  Medium (blog)
-                </HeroA>
-              </li>
-            </ul>
-          </nav>
+          <Nav isClient={isClient} ar={ar} />
 
           <div className="flex flex-col items-center">
             <h1
