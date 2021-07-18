@@ -321,6 +321,7 @@ export const query = graphql`
             "DSC08521.jpg"
             "DSC07490.jpg"
             "DSC02538.jpg"
+            "DSC08831.jpg"
           ]
         }
       }
