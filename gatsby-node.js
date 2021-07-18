@@ -7,6 +7,7 @@ const Vibrant = require("node-vibrant");
 const chroma = require("chroma-js");
 const chalk = require("chalk");
 const R = require("ramda");
+const ThumbnailGenerator = require("video-thumbnail-generator").default;
 
 const readFile = util.promisify(fs.readFile);
 
@@ -111,6 +112,8 @@ function transformMetaToNodeData(exifData, iptcData, vibrantData, imagePath) {
   };
 }
 
+const videos = {};
+
 exports.onCreateNode = async function ({ node, actions }) {
   const { createNodeField } = actions;
   if (node.internal.type === "File" && node.sourceInstanceName === "gallery") {
@@ -131,6 +134,19 @@ exports.onCreateNode = async function ({ node, actions }) {
         node.absolutePath
       ),
     });
+  }
+  if (node.internal.type === "File" && node.sourceInstanceName === "videos") {
+    const ext = path.extname(node.absolutePath);
+    if (ext === ".mp4") {
+      const tg = new ThumbnailGenerator({
+        sourcePath: node.absolutePath,
+        thumbnailPath: ".thumbnails",
+      });
+      const thumbFilename = await tg.generateOneByPercent(0, {
+        size: "1920x1080",
+      });
+      console.log(thumbFilename);
+    }
   }
 };
 

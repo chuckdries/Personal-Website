@@ -36,10 +36,10 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "pages",
-        path: "./src/pages/",
+        name: "videos",
+        path: "./data/videos/",
       },
-      __key: "pages",
+      __key: "videos",
     },
     {
       resolve: "gatsby-plugin-eslint",
