@@ -139,6 +139,8 @@ const IndexPage = ({
           window.plausible("Shuffle", {
             props: { currentImage: currentImage?.base },
           });
+          // eslint-disable-next-line
+          _paq.push(['trackEvent', 'Index', 'Shuffle', currentImage?.base]);
         } catch (e) {
           /* do nothing */
         }

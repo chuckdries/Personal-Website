@@ -18,6 +18,8 @@ const logKeyShortcut = (keyCode) => {
   try {
     // eslint-disable-next-line
     window.plausible("KeyShortcut", { props: { keyCode } });
+    // eslint-disable-next-line
+    _paq.push(['trackEvent', 'GalleryImage', 'KeyShortcut', keyCode]);
   } catch (e) {
     /* do nothing */
   }
