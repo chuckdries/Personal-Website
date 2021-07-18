@@ -31,7 +31,7 @@ export default function HTML(props) {
         {env === "production" && (
           <script>{`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`}</script>
         )}
-        {true && (
+        {env === "production" && (
           <script
             dangerouslySetInnerHTML={{
               __html: `
