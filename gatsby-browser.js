@@ -5,6 +5,12 @@ const env =
 export const onRouteUpdate = function () {
   if (env === "production" && typeof window.plausible === "object") {
     window.plausible("pageview");
+    // eslint-disable-next-line
+    _paq.push(['setCustomUrl', '/' + window.location.pathname]);
+    // eslint-disable-next-line
+    _paq.push(['setDocumentTitle', document.title]);
+    // eslint-disable-next-line
+    _paq.push(['trackPageView']);
   }
 };
 // import * as React from 'react';
