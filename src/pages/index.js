@@ -4,7 +4,6 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
 import { take } from "ramda";
 import classnames from "classnames";
-import posthog from "posthog-js";
 
 import {
   getVibrantToHelmetSafeBodyStyle,
@@ -137,9 +136,6 @@ const IndexPage = ({
         JSON.parse(localStorage.getItem("lastHeros")) || [];
       if (env === "production") {
         try {
-          posthog.capture("[shuffle image]", {
-            currentImage: currentImage?.base,
-          });
           window.plausible("Shuffle", {
             props: { currentImage: currentImage?.base },
           });

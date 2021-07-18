@@ -12,13 +12,11 @@ import {
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
 import classnames from "classnames";
-import posthog from "posthog-js";
 import MetadataItem from "./MetadataItem";
 
 const logKeyShortcut = (keyCode) => {
   try {
     // eslint-disable-next-line
-    posthog.capture("[key shortcut]", { keyCode });
     window.plausible("KeyShortcut", { props: { keyCode } });
   } catch (e) {
     /* do nothing */
