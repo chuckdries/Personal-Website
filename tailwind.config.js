@@ -32,10 +32,11 @@ module.exports = {
     },
     extend: {
       dropShadow: {
-        'dark': '0 1px 1px rgba(0, 0, 0, 0.8)',
+        dark: "0 1px 1px rgba(0, 0, 0, 0.8)",
       },
       fontSize: {
-        'huge': 'max(7.8vw, 120px)'
+        huge: "max(8.5vw, 120px)",
+        "huge-2": "max(8.5vw, 120px)",
       },
       colors: {
         vibrant: {

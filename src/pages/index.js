@@ -253,7 +253,7 @@ const IndexPage = ({
           <div className="flex flex-col items-center">
             <h1
               className={classnames(
-                "my-0 text-7xl md:text-huge text-center font-black  z-20",
+                "my-0 text-7xl md:text-huge-2 2xl:text-huge text-center font-black  z-20",
                 isClient &&
                   (ar > 1
                     ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-80 landscape:filter landscape:drop-shadow-dark"
