@@ -4,7 +4,6 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
 import { take } from "ramda";
 import classnames from "classnames";
-import posthog from "posthog-js";
 
 import {
   getVibrantToHelmetSafeBodyStyle,
@@ -24,56 +23,61 @@ const getDifferentRand = (range, lastNs, iterations = 0) => {
   return n;
 };
 
-const NavLink = ({ href, children, isClient }) => (
-  <a
-    className={classnames(
-      "mx-3 ",
-      isClient && "text-muted-light hover:text-vibrant-light"
-    )}
-    href={href}
-  >
-    {children}
-  </a>
-);
+const getButtonClasses = (isClient, colorMode = "vibrant") =>
+  classnames(
+    "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md hover:underline",
+    isClient && `text-muted-light bg-${colorMode}-dark blurred-or-opaque-bg-2`,
+    isClient && colorMode === "muted" ? `hover:bg-muted` : ""
+  );
 
-const Nav = ({ isClient, ar }) => (
+const Nav = ({ ar, isClient }) => (
   <nav
     className={classnames(
-      isClient && "text-vibrant-dark bg-vibrant-dark blurred-or-opaque-bg-2",
-      "px-6 p-2",
-      ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen"
+      ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen",
+      "p-2 flex justify-center"
     )}
     style={{ zIndex: 100 }}
   >
-    <ul className="flex flex-wrap justify-center">
+    <ul className="inline-flex flex-wrap justify-center">
       <li>
-        <NavLink href="/CharlesDriesResumeCurrent.pdf" isClient={isClient}>
+        <a
+          className={getButtonClasses(isClient)}
+          href="/CharlesDriesResumeCurrent.pdf"
+        >
           Resume
-        </NavLink>
+        </a>
       </li>
       <li>
-        {" "}
-        <NavLink href="https://github.com/chuckdries" isClient={isClient}>
+        <a
+          className={getButtonClasses(isClient)}
+          href="https://github.com/chuckdries"
+        >
           Github
-        </NavLink>
+        </a>
       </li>
       <li>
-        <NavLink
+        <a
+          className={getButtonClasses(isClient)}
           href="https://www.linkedin.com/in/chuckdries/"
-          isClient={isClient}
         >
           LinkedIn
-        </NavLink>
+        </a>
       </li>
       <li>
-        <NavLink href="https://devpost.com/chuckdries" isClient={isClient}>
+        <a
+          className={getButtonClasses(isClient)}
+          href="https://devpost.com/chuckdries"
+        >
           Devpost
-        </NavLink>
+        </a>
       </li>
       <li>
-        <NavLink href="https://medium.com/@chuckdries" isClient={isClient}>
+        <a
+          className={getButtonClasses(isClient)}
+          href="https://medium.com/@chuckdries"
+        >
           Medium (blog)
-        </NavLink>
+        </a>
       </li>
     </ul>
   </nav>
@@ -82,11 +86,7 @@ const Nav = ({ isClient, ar }) => (
 const ImageButtons = ({ isClient, image, shuffleImage }) => (
   <div className="flex mx-6 mb-6">
     <Link
-      className={classnames(
-        "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md",
-        isClient &&
-          "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
-      )}
+      className={getButtonClasses(isClient, "muted")}
       id="image-link"
       title="view image details"
       to={`/photogallery/${image.base}/`}
@@ -96,11 +96,7 @@ const ImageButtons = ({ isClient, image, shuffleImage }) => (
       </span>
     </Link>
     <button
-      className={classnames(
-        "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md",
-        isClient &&
-          "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
-      )}
+      className={getButtonClasses(isClient, "muted")}
       id="shuffle-button"
       onClick={() => {
         shuffleImage(image);
@@ -113,11 +109,7 @@ const ImageButtons = ({ isClient, image, shuffleImage }) => (
       </span>
     </button>
     <Link
-      className={classnames(
-        "self-center z-20 hover:underline rounded-md px-4 py-2 text-md font-bold font-serif",
-        isClient &&
-          "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
-      )}
+      className={getButtonClasses(isClient, "muted")}
       id="photogallery-link"
       to="/photogallery/"
     >
@@ -144,13 +136,11 @@ const IndexPage = ({
         JSON.parse(localStorage.getItem("lastHeros")) || [];
       if (env === "production") {
         try {
-          // eslint-disable-next-line
-          posthog.capture("[shuffle image]", {
-            currentImage: currentImage?.base,
-          });
           window.plausible("Shuffle", {
             props: { currentImage: currentImage?.base },
           });
+          // eslint-disable-next-line
+          _paq.push(['trackEvent', 'Index', 'Shuffle', currentImage?.base]);
         } catch (e) {
           /* do nothing */
         }
@@ -208,6 +198,7 @@ const IndexPage = ({
   const vibrant = getVibrant(image);
   const ar = getAspectRatio(image);
   console.log("bg", image.base);
+
   return (
     <>
       <Helmet>
@@ -217,7 +208,6 @@ const IndexPage = ({
           style={getVibrantToHelmetSafeBodyStyle(vibrant)}
         />
       </Helmet>
-      {/* WIP: ipad portrait hits md breakpoint, looks bad */}
       <main
         className={classnames(
           "font-serif hero",
@@ -256,7 +246,6 @@ const IndexPage = ({
           style={{ gridArea: "1/1" }}
         >
           <Nav ar={ar} isClient={isClient} />
-
           <div className="flex flex-col items-center">
             <h1
               className={classnames(
@@ -321,7 +310,8 @@ export const query = graphql`
             "DSC08521.jpg"
             "DSC07490.jpg"
             "DSC02538.jpg"
-            "DSC08831.jpg"
+            "DSC06451-3-Enhanced.jpg"
+            "20190624-DSC00771.jpg"
           ]
         }
       }

@@ -1,17 +1,16 @@
 import "./src/styles/global.css";
-import posthog from "posthog-js";
 
 const env =
   process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
-if (env === "production") {
-  posthog.init("HR8Gte105aCHNx2BqhL1XkbvH9kzKGptxjkbhuTj6Ek", {
-    api_host: "https://posthog.chuckdries.com",
-  });
-}
 export const onRouteUpdate = function () {
   if (env === "production" && typeof window.plausible === "object") {
     window.plausible("pageview");
-    posthog.capture("$pageview");
+    // eslint-disable-next-line
+    _paq.push(['setCustomUrl', '/' + window.location.pathname]);
+    // eslint-disable-next-line
+    _paq.push(['setDocumentTitle', document.title]);
+    // eslint-disable-next-line
+    _paq.push(['trackPageView']);
   }
 };
 // import * as React from 'react';

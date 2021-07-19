@@ -5897,11 +5897,6 @@ fd@~0.0.2:
   resolved "https://registry.yarnpkg.com/fd/-/fd-0.0.3.tgz#b3240de86dbf5a345baae7382a07d4713566ff0c"
   integrity sha512-iAHrIslQb3U68OcMSP0kkNWabp7sSN6d2TBSb2JO3gcLJVDd4owr/hKM4SFJovFOUeeXeItjYgouEDTMWiVAnA==
 
-fflate@^0.4.1:
-  version "0.4.8"
-  resolved "https://registry.yarnpkg.com/fflate/-/fflate-0.4.8.tgz#f90b82aefbd8ac174213abb338bd7ef848f0f5ae"
-  integrity sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==
-
 figures@^1.3.5:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/figures/-/figures-1.7.0.tgz#cbe1e3affcf1cd44b80cadfed28dc793a9701d2e"
@@ -11032,13 +11027,6 @@ postcss@^8.2.15, postcss@^8.2.9:
     colorette "^1.2.2"
     nanoid "^3.1.23"
     source-map-js "^0.6.2"
-
-posthog-js@^1.11.3:
-  version "1.11.3"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.11.3.tgz#52e0b9265f22505a1ca4f6b5007090cab2692c5b"
-  integrity sha512-udk6Yv34XSzBl5P36H0fFCeL00/BbtjA9KpxvoXyGsxq5zCLkiS0x7FR+qde2AQJ+TNwEY/GZQVXs0hT66+Zng==
-  dependencies:
-    fflate "^0.4.1"
 
 potrace@^2.1.8:
   version "2.1.8"
