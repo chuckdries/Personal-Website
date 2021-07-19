@@ -26,7 +26,7 @@ const getDifferentRand = (range, lastNs, iterations = 0) => {
 const getButtonClasses = (isClient, colorMode = "vibrant") =>
   classnames(
     "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md hover:underline",
-    isClient && `text-muted-light bg-${colorMode}-dark blurred-or-opaque-bg-2`,
+    isClient && `text-${colorMode}-light bg-${colorMode}-dark blurred-or-opaque-bg-2`,
     isClient && colorMode === "muted" ? `hover:bg-muted` : ""
   );
 
@@ -245,8 +245,9 @@ const IndexPage = ({
           )}
           style={{ gridArea: "1/1" }}
         >
-          <Nav ar={ar} isClient={isClient} />
+          <div></div>
           <div className="flex flex-col items-center">
+          <Nav ar={ar} isClient={isClient} />
             <h1
               className={classnames(
                 "mb-5 mt-0 text-huge-1 md:text-huge-2 text-center font-black filter drop-shadow-dark z-20",
@@ -263,7 +264,7 @@ const IndexPage = ({
               className={classnames(
                 ar > 1 && "landscape:shadow-lg",
                 "z-20 mb-4 inline-block mx-2",
-                isClient && "bg-vibrant-dark blurred-or-opaque-bg-1"
+                isClient && "bg-vibrant-dark blurred-or-opaque-bg-2"
               )}
             >
               <div className="flex-auto">

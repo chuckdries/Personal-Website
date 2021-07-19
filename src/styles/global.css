@@ -38,12 +38,20 @@
   .blurred-or-opaque-bg-2 {
     @apply bg-opacity-90;
   }
-  @supports (backdrop-filter: blur(24px)) {
+  @supports (backdrop-filter: none) {
     .blurred-or-opaque-bg-1 {
       @apply bg-opacity-50 backdrop-filter backdrop-blur-lg;
     }
     .blurred-or-opaque-bg-2 {
       @apply bg-opacity-70 backdrop-filter backdrop-blur;
+    }
+  }
+  @supports not (backdrop-filter: none) {
+    .blurred-or-opaque-bg-1 {
+      @apply bg-opacity-70;
+    }
+    .blurred-or-opaque-bg-2 {
+      @apply bg-opacity-90;
     }
   }
   @variants responsive {
