@@ -27,7 +27,7 @@ const getButtonClasses = (isClient, colorMode = "vibrant") => {
   const textColor = colorMode === 'vibrant' ? 'text-vibrant-light' : 'text-muted-light'
   const bgColor = colorMode === 'vibrant' ? 'bg-vibrant-dark' : 'bg-muted-dark'
   return classnames(
-    "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md hover:underline",
+    "z-20 rounded-md text-md inline-block px-2 py-1 mt-1 md:py-2 md:px-3 md:my-1 mr-2 text-md hover:underline",
     isClient && `${textColor} ${bgColor} blurred-or-opaque-bg-2`,
     isClient && colorMode === "muted" ? `hover:bg-muted` : ""
   );
@@ -241,23 +241,23 @@ const IndexPage = ({
         )}
         <div
           className={classnames(
-            "flex flex-auto flex-col items-center justify-between",
+            "flex flex-auto flex-col items-center justify-between border-0 border-vibrant-dark",
             ar > 1 || !isClient
               ? "portrait:items-center"
               : "landscape:justify-center"
           )}
           style={{ gridArea: "1/1" }}
         >
-          <div></div>
-          <div className="flex flex-col items-center">
+          {/* <div></div> */}
           <Nav ar={ar} isClient={isClient} />
+          <div className="flex flex-col items-center">
             <h1
               className={classnames(
-                "mb-5 mt-0 text-huge-1 md:text-huge-2 text-center font-black filter drop-shadow-dark z-20",
+                "my-0 text-7xl md:text-huge text-center font-black  z-20",
                 isClient &&
                   (ar > 1
-                    ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-80"
-                    : "text-gray-50 opacity-80 landscape:text-vibrant-light")
+                    ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-80 landscape:filter landscape:drop-shadow-dark"
+                    : "text-vibrant-light portrait:text-gray-50 portrait:opacity-80 portrait:filter portrait:drop-shadow-dark")
               )}
               style={{ lineHeight: "85%" }}
             >
@@ -265,18 +265,18 @@ const IndexPage = ({
             </h1>
             <div
               className={classnames(
-                ar > 1 && "landscape:shadow-lg",
                 "z-20 mb-4 inline-block mx-2",
-                isClient && "bg-vibrant-dark blurred-or-opaque-bg-2"
               )}
             >
               <div className="flex-auto">
                 <h2
                   className={classnames(
-                    "p-3 text-center",
-                    isClient && "text-vibrant-light"
+                    "p-3 text-center text-xl md:text-2xl lg:text-3xl",
+                    isClient &&
+                    (ar > 1
+                      ? "text-vibrant-light landscape:text-gray-50 landscape:font-bold landscape:filter landscape:drop-shadow-dark"
+                      : "text-vibrant-light portrait:text-gray-50 portrait:font-bold portrait:filter portrait:drop-shadow-dark")
                   )}
-                  style={{ fontSize: "max(1vw, 20px)" }}
                 >
                   Full Stack Software Engineer &amp; Hobbyist Photographer
                 </h2>
@@ -311,7 +311,6 @@ export const query = graphql`
             "DSC05851.jpg"
             "DSC06245.jpg"
             "DSC08511.jpg"
-            "DSC08521.jpg"
             "DSC07490.jpg"
             "DSC02538.jpg"
             "DSC06451-3-Enhanced.jpg"
