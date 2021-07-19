@@ -28,7 +28,7 @@ module.exports = {
     fontFamily: {
       ...defaultTheme.fontFamily,
       // serif: ['Didot', 'Didot LT', 'STD', 'Hoefler Text' , 'Garamond', 'Times New Roman', 'serif']
-      serif: ["Comic Neue", "serif"],
+      serif: ["Playfair Display", "serif"],
     },
     extend: {
       dropShadow: {
