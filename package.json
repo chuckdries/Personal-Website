@@ -46,6 +46,8 @@
     "gatsby-plugin-robots-txt": "^1.6.2",
     "gatsby-plugin-sass": "^4.6.0",
     "gatsby-plugin-sharp": "^3.6.0",
+    "gatsby-plugin-typegen": "^2.2.4",
+    "gatsby-plugin-typescript": "^3.9.0",
     "gatsby-source-filesystem": "^3.6.0",
     "gatsby-transformer-sharp": "^3.6.0",
     "kebab-case": "^1.0.1",
@@ -60,9 +62,13 @@
     "react-responsive-masonry": "^2.1.2",
     "sass": "^1.34.0",
     "tailwindcss": "^2.1.2",
+    "typescript": "^4.3.5",
     "use-breakpoint": "^2.0.1"
   },
   "devDependencies": {
+    "@types/node": "^16.3.3",
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
     "prettier": "2.3.2"
   }
 }

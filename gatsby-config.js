@@ -4,6 +4,13 @@ module.exports = {
     siteUrl: "https://chuckdries.com",
   },
   plugins: [
+    {
+      resolve: "gatsby-plugin-typegen",
+      options: {
+        outputPath: `src/__generated__/gatsby-types.d.ts`,
+      },
+    },
+    "gatsby-plugin-typescript",
     "gatsby-plugin-sass",
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",

@@ -1,9 +1,10 @@
 import * as React from "react";
-import { Link, graphql } from "gatsby";
+import { Link, graphql, PageProps } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
 import { take } from "ramda";
 import classnames from "classnames";
+// import GatsbyTypes from '../__generated__/gatsby-types';
 
 import {
   getVibrantToHelmetSafeBodyStyle,
@@ -23,14 +24,17 @@ const getDifferentRand = (range, lastNs, iterations = 0) => {
   return n;
 };
 
-const getButtonClasses = (isClient, colorMode = "vibrant") =>
+const getButtonClasses = (isClient: boolean, colorMode: 'vibrant' | 'muted' = "vibrant") =>
   classnames(
     "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md hover:underline",
     isClient && `text-muted-light bg-${colorMode}-dark blurred-or-opaque-bg-2`,
     isClient && colorMode === "muted" ? `hover:bg-muted` : ""
   );
 
-const Nav = ({ ar, isClient }) => (
+const Nav: React.FC<{
+  ar: number;
+  isClient: boolean;
+}> = ({ ar, isClient }) => (
   <nav
     className={classnames(
       ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen",
@@ -83,7 +87,13 @@ const Nav = ({ ar, isClient }) => (
   </nav>
 );
 
-const ImageButtons = ({ isClient, image, shuffleImage }) => (
+const ImageButtons: React.FC<{
+  isClient: boolean;
+  image: {
+    base?: string;
+  };
+  shuffleImage: (image: { base?: string }) => void;
+}> = ({ isClient, image, shuffleImage }) => (
   <div className="flex mx-6 mb-6">
     <Link
       className={getButtonClasses(isClient, "muted")}
@@ -118,7 +128,7 @@ const ImageButtons = ({ isClient, image, shuffleImage }) => (
   </div>
 );
 
-const IndexPage = ({
+const IndexPage: React.FC<PageProps<any>> = ({
   data: {
     allFile: { edges },
   },
@@ -291,7 +301,7 @@ const IndexPage = ({
 };
 
 export const query = graphql`
-  {
+  query Homepage {
     allFile(
       filter: {
         sourceInstanceName: { eq: "gallery" }
