@@ -23,12 +23,15 @@ const getDifferentRand = (range, lastNs, iterations = 0) => {
   return n;
 };
 
-const getButtonClasses = (isClient, colorMode = "vibrant") =>
-  classnames(
+const getButtonClasses = (isClient, colorMode = "vibrant") => {
+  const textColor = colorMode === 'vibrant' ? 'text-vibrant-light' : 'text-muted-light'
+  const bgColor = colorMode === 'vibrant' ? 'bg-vibrant-dark' : 'bg-muted-dark'
+  return classnames(
     "z-20 rounded-md text-md inline-block px-3 py-2 my-1 mr-2 text-md hover:underline",
     isClient && `text-${colorMode}-light bg-${colorMode}-dark blurred-or-opaque-bg-2`,
     isClient && colorMode === "muted" ? `hover:bg-muted` : ""
   );
+};
 
 const Nav = ({ ar, isClient }) => (
   <nav
