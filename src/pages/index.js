@@ -257,7 +257,7 @@ const IndexPage = ({
                 "my-0 text-7xl md:text-huge-2 2xl:text-huge text-center font-black  z-20",
                 isClient &&
                   (ar > 1
-                    ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-90 landscape:filter landscape:drop-shadow-dark"
+                    ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-80 landscape:filter landscape:drop-shadow-dark"
                     : "text-vibrant-light portrait:text-gray-50 portrait:opacity-90 portrait:filter portrait:drop-shadow-dark")
               )}
               style={{ lineHeight: "85%" }}
