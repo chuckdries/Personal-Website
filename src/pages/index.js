@@ -23,29 +23,22 @@ const getDifferentRand = (range, lastNs, iterations = 0) => {
   return n;
 };
 
-const getButtonClasses = (isClient, colorMode = "vibrant") => {
-  const textColor =
-    colorMode === "vibrant" ? "text-vibrant-light" : "text-muted-light";
-  const bgColor = colorMode === "vibrant" ? "bg-vibrant-dark" : "bg-muted-dark";
-  return classnames(
-    "z-20 rounded-md text-md inline-block px-2 py-1 mt-1 md:py-2 md:px-3 md:my-1 mr-2 text-md hover:underline",
-    isClient && `${textColor} ${bgColor} blurred-or-opaque-bg-2`,
-    isClient && colorMode === "muted" ? `hover:bg-muted` : ""
-  );
-};
+const getNavClasses = (isClient) =>
+  classnames("hover:underline mx-2 md:mx-3", isClient && "text-vibrant-light");
 
 const Nav = ({ ar, isClient }) => (
   <nav
     className={classnames(
       ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen",
-      "p-2 flex justify-center"
+      "p-2 flex justify-center",
+      isClient && "bg-vibrant-dark blurred-or-opaque-bg-2"
     )}
     style={{ zIndex: 100 }}
   >
     <ul className="inline-flex flex-wrap justify-center">
       <li>
         <a
-          className={getButtonClasses(isClient)}
+          className={getNavClasses(isClient)}
           href="/CharlesDriesResumeCurrent.pdf"
         >
           Resume
@@ -53,7 +46,7 @@ const Nav = ({ ar, isClient }) => (
       </li>
       <li>
         <a
-          className={getButtonClasses(isClient)}
+          className={getNavClasses(isClient)}
           href="https://github.com/chuckdries"
         >
           Github
@@ -61,7 +54,7 @@ const Nav = ({ ar, isClient }) => (
       </li>
       <li>
         <a
-          className={getButtonClasses(isClient)}
+          className={getNavClasses(isClient)}
           href="https://www.linkedin.com/in/chuckdries/"
         >
           LinkedIn
@@ -69,7 +62,7 @@ const Nav = ({ ar, isClient }) => (
       </li>
       <li>
         <a
-          className={getButtonClasses(isClient)}
+          className={getNavClasses(isClient)}
           href="https://devpost.com/chuckdries"
         >
           Devpost
@@ -77,7 +70,7 @@ const Nav = ({ ar, isClient }) => (
       </li>
       <li>
         <a
-          className={getButtonClasses(isClient)}
+          className={getNavClasses(isClient)}
           href="https://medium.com/@chuckdries"
         >
           Medium (blog)
@@ -86,6 +79,13 @@ const Nav = ({ ar, isClient }) => (
     </ul>
   </nav>
 );
+
+const getButtonClasses = (isClient) =>
+  classnames(
+    "z-20 rounded-md text-md inline-block px-2 py-1 mt-1 md:py-2 md:px-3 md:my-1 mr-2 text-md hover:underline",
+    isClient &&
+      `text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2`
+  );
 
 const ImageButtons = ({ isClient, image, shuffleImage }) => (
   <div className="flex mx-6 mb-6">
