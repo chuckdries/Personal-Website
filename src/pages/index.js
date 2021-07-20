@@ -24,8 +24,9 @@ const getDifferentRand = (range, lastNs, iterations = 0) => {
 };
 
 const getButtonClasses = (isClient, colorMode = "vibrant") => {
-  const textColor = colorMode === 'vibrant' ? 'text-vibrant-light' : 'text-muted-light'
-  const bgColor = colorMode === 'vibrant' ? 'bg-vibrant-dark' : 'bg-muted-dark'
+  const textColor =
+    colorMode === "vibrant" ? "text-vibrant-light" : "text-muted-light";
+  const bgColor = colorMode === "vibrant" ? "bg-vibrant-dark" : "bg-muted-dark";
   return classnames(
     "z-20 rounded-md text-md inline-block px-2 py-1 mt-1 md:py-2 md:px-3 md:my-1 mr-2 text-md hover:underline",
     isClient && `${textColor} ${bgColor} blurred-or-opaque-bg-2`,
@@ -143,7 +144,7 @@ const IndexPage = ({
             props: { currentImage: currentImage?.base },
           });
           // eslint-disable-next-line
-          _paq.push(['trackEvent', 'Index', 'Shuffle', currentImage?.base]);
+          _paq.push(["trackEvent", "Index", "Shuffle", currentImage?.base]);
         } catch (e) {
           /* do nothing */
         }
@@ -224,8 +225,8 @@ const IndexPage = ({
             alt=""
             className={classnames(
               ar > 1 || !isClient
-                ? "landscape:h-screen portrait:h-two-thirds-vw"
-                : "h-screen portrait:w-full landscape:w-1/2"
+                ? "landscape:h-screen portrait:h-two-thirds-vw landscape:opacity-90"
+                : "h-screen portrait:w-full landscape:w-1/2 portrait:opacity-90"
             )}
             image={getImage(image)}
             loading="eager"
@@ -256,31 +257,25 @@ const IndexPage = ({
                 "my-0 text-7xl md:text-huge-2 2xl:text-huge text-center font-black  z-20",
                 isClient &&
                   (ar > 1
-                    ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-80 landscape:filter landscape:drop-shadow-dark"
-                    : "text-vibrant-light portrait:text-gray-50 portrait:opacity-80 portrait:filter portrait:drop-shadow-dark")
+                    ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-90 landscape:filter landscape:drop-shadow-dark"
+                    : "text-vibrant-light portrait:text-gray-50 portrait:opacity-90 portrait:filter portrait:drop-shadow-dark")
               )}
               style={{ lineHeight: "85%" }}
             >
               Chuck Dries
             </h1>
-            <div
-              className={classnames(
-                "z-20 mb-4 inline-block mx-2",
-              )}
-            >
-              <div className="flex-auto">
-                <h2
-                  className={classnames(
-                    "p-3 text-center text-xl md:text-2xl lg:text-3xl",
-                    isClient &&
+            <div className={classnames("z-20 mb-4 inline-block mx-2")}>
+              <h2
+                className={classnames(
+                  "p-3 text-center text-xl md:text-3xl 2xl:text-4xl",
+                  isClient &&
                     (ar > 1
                       ? "text-vibrant-light landscape:text-gray-50 landscape:font-bold landscape:filter landscape:drop-shadow-dark"
                       : "text-vibrant-light portrait:text-gray-50 portrait:font-bold portrait:filter portrait:drop-shadow-dark")
-                  )}
-                >
-                  Full Stack Software Engineer &amp; Hobbyist Photographer
-                </h2>
-              </div>
+                )}
+              >
+                Full Stack Software Engineer &amp; Hobbyist Photographer
+              </h2>
             </div>
           </div>
           <ImageButtons
@@ -302,7 +297,6 @@ export const query = graphql`
         base: {
           in: [
             "20160530-DSC09108.jpg"
-            "20180424-DSC07948.jpg"
             "20200215-DSC02694.jpg"
             "DSC01699.jpg"
             "DSC04905.jpg"

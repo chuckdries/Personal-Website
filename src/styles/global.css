@@ -32,26 +32,20 @@
   .scroll-padding-6 {
     scroll-padding: theme("spacing.6");
   }
-  .blurred-or-opaque-bg-1 {
-    @apply bg-opacity-70;
-  }
-  .blurred-or-opaque-bg-2 {
-    @apply bg-opacity-90;
-  }
   @supports (backdrop-filter: none) {
     .blurred-or-opaque-bg-1 {
-      @apply bg-opacity-60 backdrop-filter backdrop-blur-lg;
+      @apply bg-opacity-50 backdrop-filter backdrop-blur-lg;
     }
     .blurred-or-opaque-bg-2 {
-      @apply bg-opacity-70 backdrop-filter backdrop-blur;
+      @apply bg-opacity-60 backdrop-filter backdrop-blur;
     }
   }
   @supports not (backdrop-filter: none) {
     .blurred-or-opaque-bg-1 {
-      @apply bg-opacity-70;
+      @apply bg-opacity-60;
     }
     .blurred-or-opaque-bg-2 {
-      @apply bg-opacity-80;
+      @apply bg-opacity-70;
     }
   }
   @variants responsive {
