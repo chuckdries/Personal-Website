@@ -56,6 +56,11 @@ function processColors(vibrantData, imagePath) {
     }
   }
 
+  // only used for hover styles, so we should give it a shot but it's not a huge deal if it's not very legible
+  if (badContrast(Muted, LightMuted)) {
+    Muted = Muted.darken();
+  }
+
   if (badContrast(DarkVibrant, Vibrant)) {
     console.warn("contrast still too low", imagePath);
     logColorsWithContrast(Vibrant, DarkVibrant, "V-DV");
