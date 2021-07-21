@@ -24,7 +24,7 @@ const getDifferentRand = (range, lastNs, iterations = 0) => {
 };
 
 const getNavClasses = (isClient) =>
-  classnames("hover:underline mx-2 md:mx-3", isClient && "text-vibrant-light");
+  classnames("underline mx-2 md:mx-3", isClient && "text-vibrant-light hover:text-white");
 
 const Nav = ({ ar, isClient }) => (
   <nav
@@ -113,7 +113,7 @@ const ImageButtons = ({ isClient, image, shuffleImage }) => (
       </span>
     </button>
     <Link
-      className={getButtonClasses(isClient, "muted")}
+      className={classnames('underline', getButtonClasses(isClient, "muted"))}
       id="photogallery-link"
       to="/photogallery/"
     >
