@@ -183,12 +183,12 @@ const GalleryImage = ({ data, pageContext }) => {
               icon="stopwatch-sharp"
               title="shutter speed"
             />
-            <MetadataItem
+            {meta.exif.FNumber && <MetadataItem
               aspectRatio={ar}
               data={`f/${meta.exif.FNumber}`}
               icon="aperture-sharp"
               title="aperture"
-            />
+            />}
             <MetadataItem
               aspectRatio={ar}
               data={meta.exif.ISO}
