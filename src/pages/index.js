@@ -76,6 +76,14 @@ const Nav = ({ ar, isClient }) => (
           Medium (blog)
         </a>
       </li>
+      <li>
+        <a
+          className={getNavClasses(isClient)}
+          href="mailto:chuck@chuckdries.com"
+        >
+          chuck@chuckdries.com
+        </a>
+      </li>
     </ul>
   </nav>
 );
@@ -305,7 +313,6 @@ export const query = graphql`
             "20180424-DSC07948.jpg"
             "20200215-DSC02694.jpg"
             "DSC00201.jpg"
-            "DSC01699.jpg"
             "DSC04905.jpg"
             "DSC05761.jpg"
             "DSC05851.jpg"
