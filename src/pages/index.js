@@ -79,6 +79,14 @@ const Nav = ({ ar, isClient }) => (
       <li>
         <a
           className={getNavClasses(isClient)}
+          href="https://www.youtube.com/channel/UCknR_DdytuOgzus--b2gZhg"
+        >
+          YouTube
+        </a>
+      </li>
+      <li>
+        <a
+          className={getNavClasses(isClient)}
           href="mailto:chuck@chuckdries.com"
         >
           chuck@chuckdries.com
