@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, graphql } from "gatsby";
+import { graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
 import { take } from "ramda";
@@ -10,6 +10,8 @@ import {
   getVibrant,
   getAspectRatio,
 } from "../utils";
+import Nav from "../components/index/Nav";
+import ActionButtons from "../components/index/ActionButtons";
 
 const env =
   process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
@@ -22,121 +24,6 @@ const getDifferentRand = (range, lastNs, iterations = 0) => {
   }
   return n;
 };
-
-const getNavClasses = (isClient) =>
-  classnames("hover:underline mx-2 md:mx-3", isClient && "text-vibrant-light");
-
-const Nav = ({ ar, isClient }) => (
-  <nav
-    className={classnames(
-      ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen",
-      "p-2 flex justify-center",
-      isClient && "bg-vibrant-dark blurred-or-opaque-bg-2"
-    )}
-    style={{ zIndex: 100 }}
-  >
-    <ul className="inline-flex flex-wrap justify-center">
-      <li>
-        <a
-          className={getNavClasses(isClient)}
-          href="/CharlesDriesResumeCurrent.pdf"
-        >
-          Resume
-        </a>
-      </li>
-      <li>
-        <a
-          className={getNavClasses(isClient)}
-          href="https://github.com/chuckdries"
-        >
-          Github
-        </a>
-      </li>
-      <li>
-        <a
-          className={getNavClasses(isClient)}
-          href="https://www.linkedin.com/in/chuckdries/"
-        >
-          LinkedIn
-        </a>
-      </li>
-      <li>
-        <a
-          className={getNavClasses(isClient)}
-          href="https://devpost.com/chuckdries"
-        >
-          Devpost
-        </a>
-      </li>
-      <li>
-        <a
-          className={getNavClasses(isClient)}
-          href="https://medium.com/@chuckdries"
-        >
-          Medium (blog)
-        </a>
-      </li>
-      <li>
-        <a
-          className={getNavClasses(isClient)}
-          href="https://www.youtube.com/channel/UCknR_DdytuOgzus--b2gZhg"
-        >
-          YouTube
-        </a>
-      </li>
-      <li>
-        <a
-          className={getNavClasses(isClient)}
-          href="mailto:chuck@chuckdries.com"
-        >
-          chuck@chuckdries.com
-        </a>
-      </li>
-    </ul>
-  </nav>
-);
-
-const getButtonClasses = (isClient) =>
-  classnames(
-    "z-20 rounded-md text-md inline-block px-2 py-1 mt-1 md:py-2 md:px-3 md:my-1 mr-2 text-md hover:underline",
-    isClient &&
-      `text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2`
-  );
-
-const ImageButtons = ({ isClient, image, shuffleImage }) => (
-  <div className="flex mx-6 mb-6">
-    <Link
-      className={getButtonClasses(isClient, "muted")}
-      id="image-link"
-      title="view image details"
-      to={`/photogallery/${image.base}/`}
-    >
-      <span className="icon-offset">
-        <ion-icon name="image"></ion-icon>
-      </span>
-    </Link>
-    <button
-      className={getButtonClasses(isClient, "muted")}
-      id="shuffle-button"
-      onClick={() => {
-        shuffleImage(image);
-      }}
-      title="shuffle image"
-      type="button"
-    >
-      <span className="icon-offset">
-        <ion-icon name="shuffle"></ion-icon>
-      </span>
-    </button>
-    <Link
-      className={getButtonClasses(isClient, "muted")}
-      id="photogallery-link"
-      to="/photogallery/"
-    >
-      Photography Gallery
-    </Link>
-  </div>
-);
 
 const IndexPage = ({
   data: {
@@ -299,7 +186,7 @@ const IndexPage = ({
               </div>
             </div>
           </div>
-          <ImageButtons
+          <ActionButtons
             image={image}
             isClient={isClient}
             shuffleImage={shuffleImage}
