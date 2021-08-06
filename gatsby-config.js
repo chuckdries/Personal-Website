@@ -1,4 +1,7 @@
 module.exports = {
+  flags: {
+    FAST_DEV: true
+  },
   siteMetadata: {
     title: "Chuck Dries",
     siteUrl: "https://chuckdries.com",
