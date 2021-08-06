@@ -156,7 +156,7 @@ const IndexPage = ({
           <div className="flex flex-col items-center">
             <h1
               className={classnames(
-                "mb-5 mt-0 text-huge-1 md:text-huge-2 text-center font-black filter drop-shadow-dark z-20",
+                "mb-3 mt-0 text-huge-1 md:text-huge-2 text-center font-black filter drop-shadow-dark z-20",
                 isClient &&
                   (ar > 1
                     ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-80"
@@ -179,7 +179,7 @@ const IndexPage = ({
                     "p-3 text-center",
                     isClient && "text-vibrant-light"
                   )}
-                  style={{ fontSize: "max(1vw, 20px)" }}
+                  style={{ fontSize: "max(1.25vw, 25px)" }}
                 >
                   Full Stack Software Engineer &amp; Hobbyist Photographer
                 </h2>
