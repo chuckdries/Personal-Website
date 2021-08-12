@@ -166,25 +166,18 @@ const IndexPage = ({
             >
               Chuck Dries
             </h1>
-            <div
+            <h2
               className={classnames(
-                ar > 1 && "landscape:shadow-lg",
-                "z-20 mb-4 inline-block mx-2",
-                isClient && "bg-vibrant-dark blurred-or-opaque-bg-2"
+                "p-3 text-center z-20 filter drop-shadow-dark font-bold",
+                isClient &&
+                  (ar > 1
+                    ? "text-vibrant-light landscape:text-gray-100"
+                    : "text-gray-100 landscape:text-vibrant-light")
               )}
+              style={{ fontSize: "max(1.3vw, 35px)" }}
             >
-              <div className="flex-auto">
-                <h2
-                  className={classnames(
-                    "p-3 text-center",
-                    isClient && "text-vibrant-light"
-                  )}
-                  style={{ fontSize: "max(1.25vw, 25px)" }}
-                >
-                  Full Stack Software Engineer &amp; Hobbyist Photographer
-                </h2>
-              </div>
-            </div>
+              Full Stack Software Engineer &amp; Hobbyist Photographer
+            </h2>
           </div>
           <ActionButtons
             image={image}
