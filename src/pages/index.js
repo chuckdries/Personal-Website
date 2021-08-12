@@ -156,7 +156,7 @@ const IndexPage = ({
           <div className="flex flex-col items-center">
             <h1
               className={classnames(
-                "mb-3 mt-0 text-huge-1 md:text-huge-2 text-center font-black filter drop-shadow-dark z-20",
+                "mb-0 mt-0 text-huge-1 md:text-huge-2 text-center font-black filter drop-shadow-dark z-20",
                 isClient &&
                   (ar > 1
                     ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-80"
@@ -174,7 +174,7 @@ const IndexPage = ({
                     ? "text-vibrant-light landscape:text-gray-100"
                     : "text-gray-100 landscape:text-vibrant-light")
               )}
-              style={{ fontSize: "max(1.3vw, 35px)" }}
+              style={{ fontSize: "max(1.3vw, 35px)", lineHeight: '110%' }}
             >
               Full Stack Software Engineer &amp; Hobbyist Photographer
             </h2>
@@ -198,7 +198,6 @@ export const query = graphql`
         base: {
           in: [
             "20160530-DSC09108.jpg"
-            "20180424-DSC07948.jpg"
             "20200215-DSC02694.jpg"
             "DSC00201.jpg"
             "DSC04905.jpg"
@@ -209,9 +208,7 @@ export const query = graphql`
             "DSC08521.jpg"
             "DSC07490.jpg"
             "DSC02538.jpg"
-            "DSC06451-3-Enhanced.jpg"
             "20190624-DSC00771.jpg"
-            "_DSC5896.jpg"
           ]
         }
       }
