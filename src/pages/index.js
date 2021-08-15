@@ -197,19 +197,20 @@ export const query = graphql`
         sourceInstanceName: { eq: "gallery" }
         base: {
           in: [
-            "20160530-DSC09108.jpg"
-            "20200215-DSC02694.jpg"
-            "DSC00201.jpg"
-            "DSC04905.jpg"
-            "DSC05761.jpg"
-            "DSC05851.jpg"
-            "DSC06245.jpg"
-            "DSC08511.jpg"
-            "DSC08521.jpg"
-            "DSC07490.jpg"
-            "DSC02538.jpg"
-            "20190624-DSC00771.jpg"
-            "DSC00237.jpg"
+            "20160530-DSC09108.jpg" # portrait red flowers
+            "DSC00201.jpg" # duck
+            "DSC04905.jpg" # purple layers
+            "DSC05761.jpg" # monument valley
+            "DSC05851.jpg" # utahn highway sunset
+            "DSC06245.jpg" # snowy milky way
+            "DSC08521.jpg" # firepit bloom j&e
+            "DSC07490.jpg" # house on prairie
+            "DSC02538.jpg" # portrait pink cactus bloom
+            "20190624-DSC00771.jpg" # glacier forest fog
+            "DSC00237.jpg" # cotton candy clouds
+            "_DSC6066.jpg" # wildflowers in rear view
+            "_DSC6062.jpg" # field of wildflowers
+            "_DSC6060.jpg" # edge of the world
           ]
         }
       }
