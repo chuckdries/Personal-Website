@@ -49,7 +49,7 @@ const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
             ? // image is only one in row
               100 / itemsPerRow
             : // image is one of several in row
-              ((ar / rowAspectRatioSum) * 100).toFixed(5);
+              ((ar / rowAspectRatioSum) * 100).toFixed(7);
 
         const width = `${widthNumber}%`;
         return (
