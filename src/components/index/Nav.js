@@ -65,14 +65,6 @@ const Nav = ({ ar, isClient }) => (
       <li>
         <a
           className={getNavClasses(isClient)}
-          href="https://nextcloud.chuckdries.com/s/D7C7rtiTYyaFRp7"
-        >
-          Wallpaper
-        </a>
-      </li>
-      <li>
-        <a
-          className={getNavClasses(isClient)}
           href="mailto:chuck@chuckdries.com"
         >
           chuck@chuckdries.com
