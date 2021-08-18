@@ -174,7 +174,7 @@ const IndexPage = ({
                     ? "text-vibrant-light landscape:text-gray-100"
                     : "text-gray-100 landscape:text-vibrant-light")
               )}
-              style={{ fontSize: "max(1.3vw, 30px)", lineHeight: '110%' }}
+              style={{ fontSize: "max(1.3vw, 25px)", lineHeight: '110%' }}
             >
               Full Stack Software Engineer &amp; Hobbyist Photographer
             </h2>
