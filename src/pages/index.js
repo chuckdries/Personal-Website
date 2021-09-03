@@ -208,9 +208,9 @@ export const query = graphql`
             "DSC02538.jpg" # portrait pink cactus bloom
             "20190624-DSC00771.jpg" # glacier forest fog
             "DSC00237.jpg" # cotton candy clouds
-            "_DSC6066.jpg" # wildflowers in rear view
             "_DSC6062.jpg" # field of wildflowers
             "_DSC6060.jpg" # edge of the world
+            "_DSC6219.jpg" # whihte/yellow rosebush
           ]
         }
       }
