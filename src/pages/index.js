@@ -198,16 +198,16 @@ export const query = graphql`
         base: {
           in: [
             "20160530-DSC09108.jpg" # portrait red flowers
-            "DSC00201.jpg" # duck
+            # "DSC00201.jpg" # duck
             "DSC04905.jpg" # purple layers
             "DSC05761.jpg" # monument valley
             "DSC05851.jpg" # utahn highway sunset
             "DSC06245.jpg" # snowy milky way
-            "DSC08521.jpg" # firepit bloom j&e
-            "DSC07490.jpg" # house on prairie
+            # "DSC08521.jpg" # firepit bloom j&e
+            # "DSC07490.jpg" # house on prairie
             "DSC02538.jpg" # portrait pink cactus bloom
             "20190624-DSC00771.jpg" # glacier forest fog
-            "DSC00237.jpg" # cotton candy clouds
+            # "DSC00237.jpg" # cotton candy clouds
             "_DSC6062.jpg" # field of wildflowers
             "_DSC6060.jpg" # edge of the world
             "_DSC6219.jpg" # whihte/yellow rosebush
