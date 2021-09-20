@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 
 const getNavClasses = (isClient) =>
-  classnames("hover:underline mx-2 md:mx-3", isClient && "text-vibrant-light");
+  classnames("hover:underline mx-2 md:mx-3", isClient ? "text-vibrant-light" : 'text-gray-200');
 
 const Nav = ({ ar, isClient }) => (
   <nav
