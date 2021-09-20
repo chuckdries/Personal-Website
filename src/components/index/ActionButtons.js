@@ -5,8 +5,9 @@ import { Link } from "gatsby";
 const getButtonClasses = (isClient) =>
   classnames(
     "z-20 rounded-md text-md inline-block px-2 py-1 mt-1 md:py-2 md:px-3 md:my-1 mr-2 text-md hover:underline",
-    isClient &&
-      `text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2`
+    isClient 
+      ? 'text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2'
+      : 'text-gray-200'
   );
 
 const ActionButtons = ({ isClient, image, shuffleImage }) => (

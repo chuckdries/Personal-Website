@@ -105,7 +105,7 @@ const IndexPage = ({
   const vibrant = getVibrant(image);
   const ar = getAspectRatio(image);
 
-  const isLandscape = isClient ? ar > 1 : false;
+  const isLandscape = isClient ? ar > 1 : true;
 
   return (
     <>
@@ -118,7 +118,7 @@ const IndexPage = ({
       </Helmet>
       <main
         className={classnames(
-          "font-serif hero",
+          "font-serif",
           isLandscape
             ? "landscape:grid portrait:flex portrait:flex-col"
             : "portrait:grid landscape:flex landscape:flex-row"
@@ -135,10 +135,12 @@ const IndexPage = ({
           <div className="flex flex-col items-center">
             <h1
               className={classnames(
-                "mb-0 mt-0 text-center font-black filter drop-shadow-dark z-20 text-7xl md:text-8xl lg:text-9xl",
-                isLandscape
-                  ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-80"
-                  : "text-gray-50 opacity-80 landscape:text-vibrant-light"
+                "mb-0 mt-0 text-center font-black z-20 text-7xl md:text-8xl lg:text-9xl",
+                isClient ? 'filter drop-shadow-dark' : 'text-white',
+                isClient &&
+                  (isLandscape
+                    ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-80"
+                    : "text-gray-50 opacity-80 landscape:text-vibrant-light")
               )}
               style={{ lineHeight: "85%" }}
             >
@@ -146,24 +148,29 @@ const IndexPage = ({
             </h1>
             <h2
               className={classnames(
-                "p-3 text-center z-20 filter drop-shadow-dark font-bold text-xl lg:text-2xl",
-                isLandscape
+                "p-3 text-center z-20 font-bold text-xl lg:text-2xl",
+                isClient ? 'filter drop-shadow-dark' : 'text-white',
+                isClient && (isLandscape
                   ? "text-vibrant-light landscape:text-gray-100"
-                  : "text-gray-100 landscape:text-vibrant-light"
+                  : "text-gray-100 landscape:text-vibrant-light")
               )}
               style={{ lineHeight: "110%" }}
             >
               Full Stack Software Engineer &amp; Hobbyist Photographer
             </h2>
           </div>
-          
-            <div className={classnames(isLandscape ? "block portrait:hidden" : "block")}>
-              <ActionButtons
-                image={image}
-                isClient={isClient}
-                shuffleImage={shuffleImage}
-              />
-            </div>
+
+          <div
+            className={classnames(
+              isLandscape ? "block portrait:hidden" : "block"
+            )}
+          >
+            <ActionButtons
+              image={image}
+              isClient={isClient}
+              shuffleImage={shuffleImage}
+            />
+          </div>
         </div>
         {isClient ? (
           <GatsbyImage
@@ -181,17 +188,17 @@ const IndexPage = ({
           />
         ) : (
           <div
-            className="landscape:h-screen portrait:h-two-thirds-vw w-full"
+            className="landscape:h-screen portrait:h-two-thirds-vw w-full bg-gray-800"
             style={{ gridArea: "1/1" }}
           ></div>
         )}
         {isLandscape && (
           <div className="hidden portrait:flex justify-center my-2">
-          <ActionButtons
-            image={image}
-            isClient={isClient}
-            shuffleImage={shuffleImage}
-          />
+            <ActionButtons
+              image={image}
+              isClient={isClient}
+              shuffleImage={shuffleImage}
+            />
           </div>
         )}
       </main>
