@@ -104,7 +104,8 @@ const IndexPage = ({
 
   const vibrant = getVibrant(image);
   const ar = getAspectRatio(image);
-  console.log("bg", image.base);
+
+  const isLandscape = isClient ? ar > 1 : false;
 
   return (
     <>
@@ -118,16 +119,57 @@ const IndexPage = ({
       <main
         className={classnames(
           "font-serif hero",
-          ar > 1 || !isClient
+          isLandscape
             ? "landscape:grid portrait:flex portrait:flex-col"
-            : "portrait:grid landscape:flex landscape:flex-row-reverse"
+            : "portrait:grid landscape:flex landscape:flex-row"
         )}
       >
+        <div
+          className={classnames(
+            "flex flex-auto flex-col items-center justify-between",
+            isLandscape ? "portrait:items-center" : "landscape:justify-center"
+          )}
+          style={{ gridArea: "1/1" }}
+        >
+          <Nav ar={ar} isClient={isClient} />
+          <div className="flex flex-col items-center">
+            <h1
+              className={classnames(
+                "mb-0 mt-0 text-center font-black filter drop-shadow-dark z-20 text-7xl md:text-8xl lg:text-9xl",
+                isLandscape
+                  ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-80"
+                  : "text-gray-50 opacity-80 landscape:text-vibrant-light"
+              )}
+              style={{ lineHeight: "85%" }}
+            >
+              Chuck Dries
+            </h1>
+            <h2
+              className={classnames(
+                "p-3 text-center z-20 filter drop-shadow-dark font-bold text-xl lg:text-2xl",
+                isLandscape
+                  ? "text-vibrant-light landscape:text-gray-100"
+                  : "text-gray-100 landscape:text-vibrant-light"
+              )}
+              style={{ lineHeight: "110%" }}
+            >
+              Full Stack Software Engineer &amp; Hobbyist Photographer
+            </h2>
+          </div>
+          
+            <div className={classnames(isLandscape ? "block portrait:hidden" : "block")}>
+              <ActionButtons
+                image={image}
+                isClient={isClient}
+                shuffleImage={shuffleImage}
+              />
+            </div>
+        </div>
         {isClient ? (
           <GatsbyImage
             alt=""
             className={classnames(
-              ar > 1 || !isClient
+              isLandscape
                 ? "landscape:h-screen portrait:h-two-thirds-vw"
                 : "h-screen portrait:w-full landscape:w-1/2"
             )}
@@ -143,48 +185,15 @@ const IndexPage = ({
             style={{ gridArea: "1/1" }}
           ></div>
         )}
-        <div
-          className={classnames(
-            "flex flex-auto flex-col items-center justify-between",
-            ar > 1 || !isClient
-              ? "portrait:items-center"
-              : "landscape:justify-center"
-          )}
-          style={{ gridArea: "1/1" }}
-        >
-          <Nav ar={ar} isClient={isClient} />
-          <div className="flex flex-col items-center">
-            <h1
-              className={classnames(
-                "mb-0 mt-0 text-huge-1 md:text-huge-2 text-center font-black filter drop-shadow-dark z-20",
-                isClient &&
-                  (ar > 1
-                    ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-80"
-                    : "text-gray-50 opacity-80 landscape:text-vibrant-light")
-              )}
-              style={{ lineHeight: "85%" }}
-            >
-              Chuck Dries
-            </h1>
-            <h2
-              className={classnames(
-                "p-3 text-center z-20 filter drop-shadow-dark font-bold",
-                isClient &&
-                  (ar > 1
-                    ? "text-vibrant-light landscape:text-gray-100"
-                    : "text-gray-100 landscape:text-vibrant-light")
-              )}
-              style={{ fontSize: "max(1.3vw, 25px)", lineHeight: '110%' }}
-            >
-              Full Stack Software Engineer &amp; Hobbyist Photographer
-            </h2>
-          </div>
+        {isLandscape && (
+          <div className="hidden portrait:flex justify-center my-2">
           <ActionButtons
             image={image}
             isClient={isClient}
             shuffleImage={shuffleImage}
           />
-        </div>
+          </div>
+        )}
       </main>
     </>
   );
