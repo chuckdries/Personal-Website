@@ -120,13 +120,13 @@ const IndexPage = ({
         className={classnames(
           "font-serif",
           isLandscape
-            ? "landscape:grid portrait:flex portrait:flex-col"
-            : "portrait:grid landscape:flex landscape:flex-row"
+            ? "landscape:grid portrait:h-screen portrait:flex flex-col justify-evenly"
+            : "portrait:grid landscape:flex flex-row"
         )}
       >
         <div
           className={classnames(
-            "flex flex-auto flex-col items-center justify-between",
+            "landscape:flex-auto flex flex-col items-center justify-between",
             isLandscape ? "portrait:items-center" : "landscape:justify-center"
           )}
           style={{ gridArea: "1/1" }}
@@ -171,6 +171,7 @@ const IndexPage = ({
               shuffleImage={shuffleImage}
             />
           </div>
+          {/* <div className={isLandscape ? 'hidden portrait:block' : 'hidden'}></div> */}
         </div>
         {isClient ? (
           <GatsbyImage
