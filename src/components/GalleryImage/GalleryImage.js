@@ -19,7 +19,7 @@ const logKeyShortcut = (keyCode) => {
     // eslint-disable-next-line
     window.plausible("KeyShortcut", { props: { keyCode } });
     // eslint-disable-next-line
-    _paq.push(['trackEvent', 'GalleryImage', 'KeyShortcut', keyCode]);
+    _paq.push(["trackEvent", "GalleryImage", "KeyShortcut", keyCode]);
   } catch (e) {
     /* do nothing */
   }
@@ -144,7 +144,7 @@ const GalleryImage = ({ data, pageContext }) => {
           </div>
           <div
             className={classnames(
-              "flex-shrink-0 mx-2 flex flex-row portrait:items-end",
+              "mx-2 flex flex-row portrait:items-end",
               ar <= 1
                 ? "pt-5 flex-col flex-auto text-right"
                 : "portrait:pt-5 portrait:flex-col portrait:text-right"
@@ -165,51 +165,54 @@ const GalleryImage = ({ data, pageContext }) => {
                 style={{ width: 30 }}
               ></div>
             }
-            <MetadataItem
-              aspectRatio={ar}
-              data={dateTaken.toLocaleDateString()}
-              icon="calendar-sharp"
-              title="date taken"
-            />
-            <MetadataItem
-              aspectRatio={ar}
-              data={locationString}
-              icon="location"
-              title="location"
-            />
-            {(meta.exif.Make || meta.exif.Model) && <MetadataItem
-              aspectRatio={ar}
-              data={[meta.exif.Make, meta.exif.Model].join(' ')}
-              icon="camera"
-              title="camera"
-            />}
-            {(meta.exif.LensModel || meta.exif.FocalLength) && <MetadataItem
-              aspectRatio={ar}
-              data={[
-                meta.exif.LensModel === '----' ? null : meta.exif.LensModel,
-                meta.exif.FocalLength && `${meta.exif.FocalLength}mm`
-              ].filter(Boolean).join(' @')}
-              icon="ellipse"
-              title="lens"
-            />}
-            <MetadataItem
-              aspectRatio={ar}
-              data={shutterSpeed}
-              icon="stopwatch"
-              title="shutter speed"
-            />
-            {meta.exif.FNumber && <MetadataItem
-              aspectRatio={ar}
-              data={`f/${meta.exif.FNumber}`}
-              icon="aperture-sharp"
-              title="aperture"
-            />}
-            <MetadataItem
-              aspectRatio={ar}
-              data={meta.exif.ISO}
-              icon="film-outline"
-              title="ISO"
-            />
+            <div className='flex flex-col'>
+              <MetadataItem
+                data={dateTaken.toLocaleDateString()}
+                icon="calendar-outline"
+                title="date taken"
+              />
+              <MetadataItem
+                data={locationString}
+                icon="location"
+                title="location"
+              />
+              {(meta.exif.Make || meta.exif.Model) && (
+                <MetadataItem
+                  data={[meta.exif.Make, meta.exif.Model].join(" ")}
+                  icon="camera-outline"
+                  title="camera"
+                />
+              )}
+              {(meta.exif.LensModel || meta.exif.FocalLength) && (
+                <MetadataItem
+                  data={[
+                    meta.exif.LensModel === "----" ? null : meta.exif.LensModel,
+                    meta.exif.FocalLength && `${meta.exif.FocalLength}mm`,
+                  ]
+                    .filter(Boolean)
+                    .join(" @")}
+                  icon="ellipse"
+                  title="lens"
+                />
+              )}
+              <MetadataItem
+                data={shutterSpeed}
+                icon="stopwatch-outline"
+                title="shutter speed"
+              />
+              {meta.exif.FNumber && (
+                <MetadataItem
+                  data={`f/${meta.exif.FNumber}`}
+                  icon="aperture-outline"
+                  title="aperture"
+                />
+              )}
+              <MetadataItem
+                data={meta.exif.ISO}
+                icon="film-outline"
+                title="ISO"
+              />
+            </div>
           </div>
         </div>
         <div></div>

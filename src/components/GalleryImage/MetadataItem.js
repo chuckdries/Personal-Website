@@ -1,19 +1,15 @@
-import classNames from "classnames";
 import React from "react";
 
-const MetadataItem = ({ aspectRatio, icon, data, title }) =>
+const MetadataItem = ({ icon, data, title }) =>
   data ? (
-    <div
-      className={classNames(
-        "flex items-baseline ml-2 text-lg",
-        aspectRatio <= 1 ? "flex-row-reverse" : "portrait:flex-row-reverse"
-      )}
-      title={title}
-    >
-      <span className="icon-offset mr-1">
+    <div className="flex justify-end items-end mr-2">
+      <div className="flex flex-col items-end">
+        <span className="font-mono text-sm m-0 mt-2 ">{title}</span>
+        <span className="text-lg whitespace-nowrap">{data}</span>
+      </div>
+      <span className="icon-offset ml-2 mt-1 text-2xl">
         <ion-icon name={icon} title={title}></ion-icon>
       </span>
-      <span className="mr-1">{data}</span>
     </div>
   ) : null;
 
