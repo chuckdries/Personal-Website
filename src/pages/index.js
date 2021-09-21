@@ -105,7 +105,7 @@ const IndexPage = ({
   const vibrant = getVibrant(image);
   const ar = getAspectRatio(image);
 
-  const isLandscape = isClient ? ar > 1 : true;
+  const imageIsLandscape = isClient ? ar > 1 : true;
 
   return (
     <>
@@ -119,7 +119,7 @@ const IndexPage = ({
       <main
         className={classnames(
           "font-serif",
-          isLandscape
+          imageIsLandscape
             ? "landscape:grid portrait:h-screen portrait:flex flex-col justify-evenly"
             : "portrait:grid landscape:flex flex-row"
         )}
@@ -127,7 +127,9 @@ const IndexPage = ({
         <div
           className={classnames(
             "landscape:flex-auto flex flex-col items-center justify-between",
-            isLandscape ? "portrait:items-center" : "landscape:justify-center"
+            imageIsLandscape
+              ? "portrait:items-center"
+              : "landscape:justify-center"
           )}
           style={{ gridArea: "1/1" }}
         >
@@ -136,9 +138,9 @@ const IndexPage = ({
             <h1
               className={classnames(
                 "mb-0 mt-0 text-center font-black z-20 text-7xl md:text-8xl lg:text-9xl",
-                isClient ? 'filter drop-shadow-dark' : 'text-white',
+                isClient ? "filter drop-shadow-dark" : "text-white",
                 isClient &&
-                  (isLandscape
+                  (imageIsLandscape
                     ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-80"
                     : "text-gray-50 opacity-80 landscape:text-vibrant-light")
               )}
@@ -149,10 +151,11 @@ const IndexPage = ({
             <h2
               className={classnames(
                 "p-3 text-center z-20 font-bold text-xl lg:text-2xl",
-                isClient ? 'filter drop-shadow-dark' : 'text-white',
-                isClient && (isLandscape
-                  ? "text-vibrant-light landscape:text-gray-100"
-                  : "text-gray-100 landscape:text-vibrant-light")
+                isClient ? "filter drop-shadow-dark" : "text-white",
+                isClient &&
+                  (imageIsLandscape
+                    ? "text-vibrant-light landscape:text-gray-100"
+                    : "text-gray-100 landscape:text-vibrant-light")
               )}
               style={{ lineHeight: "110%" }}
             >
@@ -162,7 +165,7 @@ const IndexPage = ({
 
           <div
             className={classnames(
-              isLandscape ? "block portrait:hidden" : "block"
+              imageIsLandscape ? "block portrait:hidden" : "block"
             )}
           >
             <ActionButtons
@@ -177,7 +180,7 @@ const IndexPage = ({
           <GatsbyImage
             alt=""
             className={classnames(
-              isLandscape
+              imageIsLandscape
                 ? "landscape:h-screen portrait:h-two-thirds-vw"
                 : "h-screen portrait:w-full landscape:w-1/2"
             )}
@@ -193,7 +196,7 @@ const IndexPage = ({
             style={{ gridArea: "1/1" }}
           ></div>
         )}
-        {isLandscape && (
+        {imageIsLandscape && (
           <div className="hidden portrait:flex justify-center my-2">
             <ActionButtons
               image={image}
