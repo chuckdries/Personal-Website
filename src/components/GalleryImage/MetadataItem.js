@@ -11,7 +11,7 @@ const MetadataItem = ({ aspectRatio, icon, data, title }) =>
       title={title}
     >
       <span className="icon-offset mr-1">
-        <ion-icon name={icon}></ion-icon>
+        <ion-icon name={icon} title={title}></ion-icon>
       </span>
       <span className="mr-1">{data}</span>
     </div>
