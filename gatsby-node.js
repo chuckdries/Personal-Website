@@ -108,7 +108,10 @@ function transformMetaToNodeData(exifData, iptcData, vibrantData, imagePath) {
   const vibrant = vibrantData ? processColors(vibrantData, imagePath) : null;
 
   return {
-    exif: exifData?.exif,
+    exif: {
+      ...exifData?.exif,
+      ...exifData?.image
+    },
     gps,
     dateTaken: exifData?.exif?.DateTimeOriginal,
     iptc: iptcData || undefined,

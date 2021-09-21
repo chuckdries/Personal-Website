@@ -174,13 +174,28 @@ const GalleryImage = ({ data, pageContext }) => {
             <MetadataItem
               aspectRatio={ar}
               data={locationString}
-              icon="location-sharp"
+              icon="location"
               title="location"
             />
+            {(meta.exif.Make || meta.exif.Model) && <MetadataItem
+              aspectRatio={ar}
+              data={[meta.exif.Make, meta.exif.Model].join(' ')}
+              icon="camera"
+              title="camera"
+            />}
+            {(meta.exif.LensModel || meta.exif.FocalLength) && <MetadataItem
+              aspectRatio={ar}
+              data={[
+                meta.exif.LensModel === '----' ? null : meta.exif.LensModel,
+                meta.exif.FocalLength && `${meta.exif.FocalLength}mm`
+              ].filter(Boolean).join(' @')}
+              icon="ellipse"
+              title="lens"
+            />}
             <MetadataItem
               aspectRatio={ar}
               data={shutterSpeed}
-              icon="stopwatch-sharp"
+              icon="stopwatch"
               title="shutter speed"
             />
             {meta.exif.FNumber && <MetadataItem
@@ -239,7 +254,11 @@ export const query = graphql`
               exif {
                 FNumber
                 ExposureTime
+                FocalLength
                 ISO
+                LensModel
+                Make
+                Model
               }
               vibrant {
                 ...VibrantColors
