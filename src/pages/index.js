@@ -231,6 +231,7 @@ export const query = graphql`
             "_DSC6062.jpg" # field of wildflowers
             "_DSC6060.jpg" # edge of the world
             "_DSC6219.jpg" # whihte/yellow rosebush
+            "_DSC6243.jpg" # bright rose in darkness
           ]
         }
       }
