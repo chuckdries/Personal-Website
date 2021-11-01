@@ -232,6 +232,7 @@ export const query = graphql`
             "_DSC6060.jpg" # edge of the world
             "_DSC6219.jpg" # whihte/yellow rosebush
             "_DSC6243.jpg" # bright rose in darkness
+            "_DSC6400-2.jpg" # Horsetail falls
           ]
         }
       }
