@@ -81,9 +81,7 @@ export const query = graphql`
           fields {
             imageMeta {
               dateTaken
-              iptc {
-                object_name
-              }
+              ObjectName
             }
           }
         }
