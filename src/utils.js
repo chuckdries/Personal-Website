@@ -3,12 +3,12 @@
 export const getMeta = (image) => image.fields.imageMeta;
 
 export const getName = (image) =>
-  getMeta(image)?.iptc.object_name || image.base;
+  getMeta(image)?.meta?.ObjectName || image.base;
 
 // some pleasing default colors for SSR and initial hydration
 export const getVibrant = (image) => getMeta(image)?.vibrant;
 
-export const hasName = (image) => Boolean(getMeta(image)?.iptc.object_name);
+export const hasName = (image) => Boolean(getMeta(image)?.meta?.ObjectName);
 
 export const getAspectRatio = (image) =>
   image.childImageSharp.fluid.aspectRatio;
