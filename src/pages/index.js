@@ -233,6 +233,8 @@ export const query = graphql`
             "_DSC6219.jpg" # whihte/yellow rosebush
             "_DSC6243.jpg" # bright rose in darkness
             "_DSC6400-2.jpg" # Horsetail falls
+            "_DSC6798.jpg" # Japanese zen garden
+            "_DSC6481.jpg" # Mt Hood from Powell Butte
           ]
         }
       }

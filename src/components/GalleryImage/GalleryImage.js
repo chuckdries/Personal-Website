@@ -60,10 +60,11 @@ const GalleryImage = ({ data, pageContext }) => {
   }, [pageContext]);
 
   const name = getName(image);
-  const meta = getMeta(image);
+  const {meta, dateTaken: dt} = getMeta(image);
+  // const locationString = meta.City;
   let locationString;
-  if (meta.iptc.city || meta.iptc.province_or_state) {
-    const location = [meta.iptc.city, meta.iptc.province_or_state].filter(
+  if (meta.City || meta.State || meta.Location) {
+    const location = [meta.Location, meta.City, meta.State].filter(
       Boolean
     );
     locationString = location.join(", ");
@@ -75,10 +76,10 @@ const GalleryImage = ({ data, pageContext }) => {
       ? "flex-col mx-auto"
       : "portrait:mx-auto landscape:mx-5 landscape:flex-row-reverse portrait:flex-col";
   const shutterSpeed = React.useMemo(
-    () => getShutterFractionFromExposureTime(meta.exif.ExposureTime || 0),
+    () => getShutterFractionFromExposureTime(meta.ExposureTime || 0),
     [meta]
   );
-  const dateTaken = React.useMemo(() => new Date(meta.dateTaken), [meta]);
+  const dateTaken = React.useMemo(() => new Date(dt), [dt]);
   return (
     <>
       <Helmet>
@@ -144,7 +145,7 @@ const GalleryImage = ({ data, pageContext }) => {
           </div>
           <div
             className={classnames(
-              "mx-2 flex flex-row portrait:items-end",
+              "px-2 flex flex-row portrait:items-end container mx-auto",
               ar <= 1
                 ? "pt-5 flex-col flex-auto text-right"
                 : "portrait:pt-5 portrait:flex-col portrait:text-right"
@@ -157,7 +158,7 @@ const GalleryImage = ({ data, pageContext }) => {
               {hasName(image) && (
                 <h1 className="text-4xl mt-0 font-serif">{name}</h1>
               )}
-              <p className="landscape:mr-2">{meta.iptc.caption}</p>
+              <p className="landscape:mr-2">{meta.Caption}</p>
             </div>
             {
               <div
@@ -173,21 +174,21 @@ const GalleryImage = ({ data, pageContext }) => {
               />
               <MetadataItem
                 data={locationString}
-                icon="location"
+                icon="map-outline"
                 title="location"
               />
-              {(meta.exif.Make || meta.exif.Model) && (
+              {(meta.Make || meta.Model) && (
                 <MetadataItem
-                  data={[meta.exif.Make, meta.exif.Model].join(" ")}
+                  data={[meta.Make, meta.Model].join(" ")}
                   icon="camera-outline"
                   title="camera"
                 />
               )}
-              {(meta.exif.LensModel || meta.exif.FocalLength) && (
+              {(meta.LensModel || meta.FocalLength) && (
                 <MetadataItem
                   data={[
-                    meta.exif.LensModel === "----" ? null : meta.exif.LensModel,
-                    meta.exif.FocalLength && `${meta.exif.FocalLength}mm`,
+                    meta.LensModel === "----" ? null : meta.LensModel,
+                    meta.FocalLength && `${meta.FocalLength}mm`,
                   ]
                     .filter(Boolean)
                     .join(" @")}
@@ -200,15 +201,15 @@ const GalleryImage = ({ data, pageContext }) => {
                 icon="stopwatch-outline"
                 title="shutter speed"
               />
-              {meta.exif.FNumber && (
+              {meta.FNumber && (
                 <MetadataItem
-                  data={`f/${meta.exif.FNumber}`}
+                  data={`f/${meta.FNumber}`}
                   icon="aperture-outline"
                   title="aperture"
                 />
               )}
               <MetadataItem
-                data={meta.exif.ISO}
+                data={meta.ISO}
                 icon="film-outline"
                 title="ISO"
               />
@@ -247,21 +248,23 @@ export const query = graphql`
           fields {
             imageMeta {
               dateTaken
-              iptc {
-                caption
-                object_name
-                keywords
-                city
-                province_or_state
-              }
-              exif {
-                FNumber
-                ExposureTime
-                FocalLength
-                ISO
-                LensModel
+              meta {
                 Make
                 Model
+                ExposureTime
+                FNumber
+                ISO
+                DateTimeOriginal
+                CreateDate
+                ShutterSpeedValue
+                ApertureValue
+                FocalLength
+                LensModel
+                ObjectName
+                Caption
+                Location
+                City
+                State
               }
               vibrant {
                 ...VibrantColors

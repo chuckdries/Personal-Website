@@ -1,14 +1,9 @@
-const fs = require("fs");
-const util = require("util");
 const path = require("path");
-const { read } = require("fast-exif");
-const iptc = require("node-iptc");
 const Vibrant = require("node-vibrant");
 const chroma = require("chroma-js");
 const chalk = require("chalk");
 const R = require("ramda");
-
-const readFile = util.promisify(fs.readFile);
+const exifr = require("exifr");
 
 const badContrast = (color1, color2) => chroma.contrast(color1, color2) < 4.5;
 
@@ -89,32 +84,27 @@ function convertDMSToDD(dms, positiveDirection) {
   return positiveDirection ? res : -res;
 }
 
-function transformMetaToNodeData(exifData, iptcData, vibrantData, imagePath) {
-  const gps = { longitude: null, latitude: null };
+function transformMetaToNodeData(metaData, vibrantData, imagePath) {
+  // const gps = { longitude: null, latitude: null };
 
-  if (exifData) {
-    if (exifData.gps && exifData.gps.GPSLongitude && exifData.gps.GPSLatitude) {
-      gps.longitude = convertDMSToDD(
-        exifData.gps.GPSLongitude,
-        exifData.gps.GPSLongitudeRef === "E"
-      );
-      gps.latitude = convertDMSToDD(
-        exifData.gps.GPSLatitude,
-        exifData.gps.GPSLatitudeRef === "N"
-      );
-    }
-  }
+  // if (exifData) {
+  //   if (exifData.gps && exifData.gps.GPSLongitude && exifData.gps.GPSLatitude) {
+  //     gps.longitude = convertDMSToDD(
+  //       exifData.gps.GPSLongitude,
+  //       exifData.gps.GPSLongitudeRef === "E"
+  //     );
+  //     gps.latitude = convertDMSToDD(
+  //       exifData.gps.GPSLatitude,
+  //       exifData.gps.GPSLatitudeRef === "N"
+  //     );
+  //   }
+  // }
 
   const vibrant = vibrantData ? processColors(vibrantData, imagePath) : null;
 
   return {
-    exif: {
-      ...exifData?.exif,
-      ...exifData?.image
-    },
-    gps,
-    dateTaken: exifData?.exif?.DateTimeOriginal,
-    iptc: iptcData || undefined,
+    dateTaken: metaData.DateTimeOriginal,
+    meta: metaData,
     vibrant,
   };
 }
@@ -122,9 +112,11 @@ function transformMetaToNodeData(exifData, iptcData, vibrantData, imagePath) {
 exports.onCreateNode = async function ({ node, actions }) {
   const { createNodeField } = actions;
   if (node.internal.type === "File" && node.sourceInstanceName === "gallery") {
-    const file = await readFile(node.absolutePath);
-    const iptcData = iptc(file);
-    const exifData = await read(node.absolutePath);
+    const metaData = await exifr.parse(node.absolutePath, {
+      iptc: true,
+      xmp: true,
+      // icc: true
+    });
     const vibrantData = await Vibrant.from(node.absolutePath)
       .quality(3)
       .getPalette();
@@ -132,12 +124,7 @@ exports.onCreateNode = async function ({ node, actions }) {
     createNodeField({
       node,
       name: "imageMeta",
-      value: transformMetaToNodeData(
-        exifData,
-        iptcData,
-        vibrantData,
-        node.absolutePath
-      ),
+      value: transformMetaToNodeData(metaData, vibrantData, node.absolutePath),
     });
   }
 };
