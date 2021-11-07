@@ -81,7 +81,9 @@ export const query = graphql`
           fields {
             imageMeta {
               dateTaken
-              ObjectName
+              meta{
+                ObjectName
+              }
             }
           }
         }
