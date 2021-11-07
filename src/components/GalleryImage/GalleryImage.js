@@ -145,10 +145,10 @@ const GalleryImage = ({ data, pageContext }) => {
           </div>
           <div
             className={classnames(
-              "px-2 flex flex-row portrait:items-end container mx-auto",
+              "px-2 flex flex-row portrait:items-end mx-auto",
               ar <= 1
                 ? "pt-5 flex-col flex-auto text-right"
-                : "portrait:pt-5 portrait:flex-col portrait:text-right"
+                : "container portrait:pt-5 portrait:flex-col portrait:text-right"
             )}
           >
             <div className="flex-auto mr-2">
