@@ -235,6 +235,7 @@ export const query = graphql`
             "_DSC6400-2.jpg" # Horsetail falls
             "_DSC6798.jpg" # Japanese zen garden
             "_DSC6481.jpg" # Mt Hood from Powell Butte
+            "_DSC5916.jpg" # blue dart stinger
           ]
         }
       }
