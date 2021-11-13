@@ -53,7 +53,6 @@ const GalleryPage = ({ data }) => {
               md: 2,
               lg: 3,
               xl: 3,
-              "2xl": 4,
             }}
           />
         </div>
