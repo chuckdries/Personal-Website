@@ -12,12 +12,9 @@ const getButtonClasses = (isClient) =>
 
 const ActionButtons = ({ isClient, image, shuffleImage }) => (
   <div className="flex flex-col">
-    <div className="p-4 m-4 bg-buzzwordsPrimary bg-opacity-50 rounded-xl flex flex-col text-center">
+    <div className="p-4 m-4 bg-buzzwordsPrimary blurred-or-opaque-bg-1 rounded-xl flex flex-col text-center z-10">
       <h3>Try the game I&apos;m making!</h3>
-      <a
-        className={getButtonClasses(isClient)}
-        href="https://buzzwords.gg"
-      >
+      <a className={getButtonClasses(isClient)} href="https://buzzwords.gg">
         Buzzwords
       </a>
     </div>
