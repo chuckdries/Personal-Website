@@ -39,6 +39,7 @@ module.exports = {
         'huge-2': 'max(7.8vw, 120px)'
       },
       colors: {
+        buzzwordsPrimary: '#F6C54B',
         vibrant: {
           DEFAULT: ({ opacityVariable, opacityValue }) => {
             if (opacityValue !== undefined) {
