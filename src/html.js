@@ -24,7 +24,7 @@ export default function HTML(props) {
             async
             data-domain="chuckdries.com"
             defer
-            src="https://analytics.chuckdries.com/js/plausible.js"
+            src="https://analytics.chuckdries.com/js/plausible.outbound-links.js"
           ></script>
         )}
         {/* eslint-disable-next-line */}
