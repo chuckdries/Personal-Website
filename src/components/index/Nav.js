@@ -18,6 +18,13 @@ const Nav = ({ ar, isClient }) => (
         <a
           className={getNavClasses(isClient)}
           href="/CharlesDriesResumeCurrent.pdf"
+          onClick={() => {
+            try {
+              window.plausible("Resume Click");
+            } catch {
+              // do nothing
+            }
+          }}
         >
           Resume
         </a>
