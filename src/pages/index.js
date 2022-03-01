@@ -115,7 +115,7 @@ const IndexPage = ({
       <Helmet>
         <title>Chuck Dries</title>
         <body
-          className={classnames(isClient ? "bg-vibrant-dark" : "")}
+          className={classnames(isClient ? "bg-vibrant-dark" : "bg-gray-800")}
           style={getHelmetSafeBodyStyle(vibrant, screenHeight)}
         />
       </Helmet>
@@ -195,7 +195,7 @@ const IndexPage = ({
           />
         ) : (
           <div
-            className="landscape:h-actual-screen portrait:h-two-thirds-vw w-full bg-gray-800"
+            className="landscape:h-actual-screen portrait:h-two-thirds-vw w-full"
             style={{ gridArea: "1/1" }}
           ></div>
         )}
