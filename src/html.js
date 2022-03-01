@@ -15,7 +15,7 @@ export default function HTML(props) {
           name="description"
         />
         <meta
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
           name="viewport"
         />
         {props.headComponents}
