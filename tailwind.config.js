@@ -31,6 +31,9 @@ module.exports = {
       serif: ["Playfair Display", "serif"],
     },
     extend: {
+      height: {
+        "actual-screen": "var(--height-screen)"
+      },
       dropShadow: {
         'dark': '0 1px 2px rgba(0, 0, 0, 0.8)',
       },

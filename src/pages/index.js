@@ -6,12 +6,13 @@ import { take } from "ramda";
 import classnames from "classnames";
 
 import {
-  getVibrantToHelmetSafeBodyStyle,
+  getHelmetSafeBodyStyle,
   getVibrant,
   getAspectRatio,
 } from "../utils";
 import Nav from "../components/index/Nav";
 import ActionButtons from "../components/index/ActionButtons";
+import { use100vh } from "react-div-100vh";
 
 const env =
   process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
@@ -105,6 +106,8 @@ const IndexPage = ({
   const vibrant = getVibrant(image);
   const ar = getAspectRatio(image);
 
+  const screenHeight = use100vh();
+
   const imageIsLandscape = isClient ? ar > 1 : true;
 
   return (
@@ -113,14 +116,14 @@ const IndexPage = ({
         <title>Chuck Dries</title>
         <body
           className={classnames(isClient ? "bg-vibrant-dark" : "")}
-          style={getVibrantToHelmetSafeBodyStyle(vibrant)}
+          style={getHelmetSafeBodyStyle(vibrant, screenHeight)}
         />
       </Helmet>
       <main
         className={classnames(
           "font-serif",
           imageIsLandscape
-            ? "landscape:grid portrait:h-screen portrait:flex flex-col justify-evenly"
+            ? "landscape:grid portrait:h-actual-screen portrait:flex flex-col justify-evenly"
             : "portrait:grid landscape:flex flex-row"
         )}
       >
@@ -181,8 +184,8 @@ const IndexPage = ({
             alt=""
             className={classnames(
               imageIsLandscape
-                ? "landscape:h-screen portrait:h-two-thirds-vw"
-                : "h-screen portrait:w-full landscape:w-1/2"
+                ? "landscape:h-actual-screen portrait:h-two-thirds-vw"
+                : "h-actual-screen portrait:w-full landscape:w-1/2"
             )}
             image={getImage(image)}
             loading="eager"
@@ -192,7 +195,7 @@ const IndexPage = ({
           />
         ) : (
           <div
-            className="landscape:h-screen portrait:h-two-thirds-vw w-full bg-gray-800"
+            className="landscape:h-actual-screen portrait:h-two-thirds-vw w-full bg-gray-800"
             style={{ gridArea: "1/1" }}
           ></div>
         )}
