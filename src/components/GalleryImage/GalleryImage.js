@@ -6,7 +6,7 @@ import {
   getName,
   getShutterFractionFromExposureTime,
   getVibrant,
-  getVibrantToHelmetSafeBodyStyle,
+  getHelmetSafeBodyStyle,
   hasName,
 } from "../../utils";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -86,7 +86,7 @@ const GalleryImage = ({ data, pageContext }) => {
         <title>{name} - Gallery | Chuck Dries</title>
         <body
           className="text-vibrant-light bg-vibrant-dark"
-          style={getVibrantToHelmetSafeBodyStyle(vibrant)}
+          style={getHelmetSafeBodyStyle(vibrant)}
         />
       </Helmet>
       <div className="min-h-screen flex flex-col justify-between">
