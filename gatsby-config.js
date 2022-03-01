@@ -17,7 +17,14 @@ module.exports = {
       },
     },
     "gatsby-plugin-mdx",
-    "gatsby-plugin-sharp",
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        defaults: {
+          quality: 75
+        }
+      }
+    },
     "gatsby-transformer-sharp",
     "gatsby-plugin-postcss",
     {
