@@ -243,6 +243,7 @@ export const query = graphql`
               placeholder: DOMINANT_COLOR
               # placeholder: TRACED_SVG
               height: 2160
+              quality: 90
             )
           }
           fields {
