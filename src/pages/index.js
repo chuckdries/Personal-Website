@@ -241,6 +241,8 @@ export const query = graphql`
             "_DSC5916.jpg" # blue dart stinger
             "_DSC0286.jpg" # god rays
             "_DSC8998.jpg" # forest road
+            "DSC01169.jpg" # ferris wheel reflection
+            "DSC01142.jpg" # cali adventure cherry blossoms
           ]
         }
       }
