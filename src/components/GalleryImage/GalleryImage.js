@@ -162,6 +162,13 @@ const GalleryImage = ({ data, pageContext }) => {
                 className="inline-block bg-muted-light text-vibrant-dark underline font-serif p-1 my-1 rounded"
                 download
                 href={image.publicURL}
+                onClick={() => {
+                  try {
+                    window.plausible("Download Wallpaper", { props: { image: image.base } });
+                  } catch {
+                    // do nothing
+                  }
+                }}
               >
                 Download wallpaper
               </a>
