@@ -244,6 +244,8 @@ export const query = graphql`
             "DSC01169.jpg" # ferris wheel reflection
             "DSC01142.jpg" # cali adventure cherry blossoms
             "DSC01753.jpg" # rainy window cherry blossoms
+            "DSC01800.jpg" # cherry blossom landscape sunny sky
+            "DSC01772.jpg" # cherry blossom portrait sunny sky
           ]
         }
       }
