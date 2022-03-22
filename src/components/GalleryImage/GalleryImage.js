@@ -28,6 +28,7 @@ const logKeyShortcut = (keyCode) => {
 const GalleryImage = ({ data, pageContext }) => {
   const image = data.allFile.edges[0].node;
   const ar = getAspectRatio(image);
+  console.log(image);
 
   React.useEffect(() => {
     const keyListener = (e) => {
@@ -60,13 +61,11 @@ const GalleryImage = ({ data, pageContext }) => {
   }, [pageContext]);
 
   const name = getName(image);
-  const {meta, dateTaken: dt} = getMeta(image);
+  const { meta, dateTaken: dt } = getMeta(image);
   // const locationString = meta.City;
   let locationString;
   if (meta.City || meta.State || meta.Location) {
-    const location = [meta.Location, meta.City, meta.State].filter(
-      Boolean
-    );
+    const location = [meta.Location, meta.City, meta.State].filter(Boolean);
     locationString = location.join(", ");
   }
   const vibrant = getVibrant(image, true);
@@ -159,6 +158,13 @@ const GalleryImage = ({ data, pageContext }) => {
                 <h1 className="text-4xl mt-0 font-serif">{name}</h1>
               )}
               <p className="landscape:mr-2">{meta.Caption}</p>
+              <a
+                className="inline-block bg-muted-light text-vibrant-dark underline font-serif p-1 my-1 rounded"
+                download
+                href={image.publicURL}
+              >
+                Download wallpaper
+              </a>
             </div>
             {
               <div
@@ -166,7 +172,7 @@ const GalleryImage = ({ data, pageContext }) => {
                 style={{ width: 30 }}
               ></div>
             }
-            <div className='flex flex-col'>
+            <div className="flex flex-col">
               <MetadataItem
                 data={dateTaken.toLocaleDateString()}
                 icon="calendar-outline"
@@ -208,11 +214,7 @@ const GalleryImage = ({ data, pageContext }) => {
                   title="aperture"
                 />
               )}
-              <MetadataItem
-                data={meta.ISO}
-                icon="film-outline"
-                title="ISO"
-              />
+              <MetadataItem data={meta.ISO} icon="film-outline" title="ISO" />
             </div>
           </div>
         </div>
@@ -233,6 +235,7 @@ export const query = graphql`
       edges {
         node {
           base
+          publicURL
           childImageSharp {
             fluid {
               aspectRatio
