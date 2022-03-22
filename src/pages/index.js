@@ -243,6 +243,7 @@ export const query = graphql`
             "_DSC8998.jpg" # forest road
             "DSC01169.jpg" # ferris wheel reflection
             "DSC01142.jpg" # cali adventure cherry blossoms
+            "DSC01753.jpg" # rainy window cherry blossoms
           ]
         }
       }
