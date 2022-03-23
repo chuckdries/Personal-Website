@@ -159,7 +159,7 @@ const GalleryImage = ({ data, pageContext }) => {
               )}
               <p className="landscape:mr-2">{meta.Caption}</p>
               <a
-                className="inline-block bg-muted-light text-vibrant-dark underline font-serif p-1 my-1 rounded"
+                className="cursor-pointer inline-block bg-muted-light text-vibrant-dark font-serif p-1 my-1 rounded"
                 download
                 href={image.publicURL}
                 onClick={() => {
