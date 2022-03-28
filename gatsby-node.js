@@ -4,6 +4,7 @@ const chroma = require("chroma-js");
 const chalk = require("chalk");
 const R = require("ramda");
 const exifr = require("exifr");
+const sharp = require('sharp');
 
 const badContrast = (color1, color2) => chroma.contrast(color1, color2) < 4.5;
 
@@ -75,31 +76,31 @@ function processColors(vibrantData, imagePath) {
   };
 }
 
-function convertDMSToDD(dms, positiveDirection) {
-  const res = dms
-    .map((item, i) => {
-      return item / Math.pow(60, i);
-    })
-    .reduce((a, b) => a + b);
-  return positiveDirection ? res : -res;
-}
+// function convertDMSToDD(dms, positiveDirection) {
+//   const res = dms
+//     .map((item, i) => {
+//       return item / Math.pow(60, i);
+//     })
+//     .reduce((a, b) => a + b);
+//   return positiveDirection ? res : -res;
+// }
+
+// const gps = { longitude: null, latitude: null };
+
+// if (exifData) {
+//   if (exifData.gps && exifData.gps.GPSLongitude && exifData.gps.GPSLatitude) {
+//     gps.longitude = convertDMSToDD(
+//       exifData.gps.GPSLongitude,
+//       exifData.gps.GPSLongitudeRef === "E"
+//     );
+//     gps.latitude = convertDMSToDD(
+//       exifData.gps.GPSLatitude,
+//       exifData.gps.GPSLatitudeRef === "N"
+//     );
+//   }
+// }
 
 function transformMetaToNodeData(metaData, vibrantData, imagePath) {
-  // const gps = { longitude: null, latitude: null };
-
-  // if (exifData) {
-  //   if (exifData.gps && exifData.gps.GPSLongitude && exifData.gps.GPSLatitude) {
-  //     gps.longitude = convertDMSToDD(
-  //       exifData.gps.GPSLongitude,
-  //       exifData.gps.GPSLongitudeRef === "E"
-  //     );
-  //     gps.latitude = convertDMSToDD(
-  //       exifData.gps.GPSLatitude,
-  //       exifData.gps.GPSLatitudeRef === "N"
-  //     );
-  //   }
-  // }
-
   const vibrant = vibrantData ? processColors(vibrantData, imagePath) : null;
 
   return {
@@ -117,8 +118,15 @@ exports.onCreateNode = async function ({ node, actions }) {
       xmp: true,
       // icc: true
     });
-    const vibrantData = await Vibrant.from(node.absolutePath)
-      .quality(3)
+    const resizedImage = await sharp(node.absolutePath)
+      .resize({
+        width: 3000,
+        height: 3000,
+        fit: 'inside'
+      })
+      .toBuffer()
+    const vibrantData = await Vibrant.from(resizedImage)
+      .quality(1)
       .getPalette();
 
     createNodeField({

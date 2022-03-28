@@ -7,7 +7,6 @@ module.exports = {
     siteUrl: "https://chuckdries.com",
   },
   plugins: [
-    "gatsby-plugin-sass",
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
     {

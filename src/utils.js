@@ -44,6 +44,9 @@ const gcd = (a, b) => {
 };
 
 export const getShutterFractionFromExposureTime = (exposureTime) => {
+  if (exposureTime === 0.016666666666666666) {
+    return '1/60'
+  }
   let fraction = exposureTime;
   const len = fraction.toString().length - 2;
 
@@ -54,5 +57,8 @@ export const getShutterFractionFromExposureTime = (exposureTime) => {
 
   numerator /= divisor;
   denominator /= divisor;
+  if (numerator > 1) {
+    return `${exposureTime}`
+  }
   return `${numerator}/${denominator}`;
 };
