@@ -28,7 +28,6 @@ const logKeyShortcut = (keyCode) => {
 const GalleryImage = ({ data, pageContext }) => {
   const image = data.allFile.edges[0].node;
   const ar = getAspectRatio(image);
-  console.log(image);
 
   React.useEffect(() => {
     const keyListener = (e) => {
