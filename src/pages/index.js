@@ -249,6 +249,7 @@ export const query = graphql`
             "DSC06201.jpg" # Wheatland snowy hills
             "DSC01849.jpg" # cherry blossom among many
             "DSC01924.jpg" # cherry blossom sea
+            "DSC03157.jpg" # constellation of flowers
           ]
         }
       }
