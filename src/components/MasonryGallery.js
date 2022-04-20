@@ -1,11 +1,53 @@
-import * as React from "react";
-import { Link } from "gatsby";
+import React, { useEffect, useRef, useState } from "react";
+// import { Link } from "gatsby";
+import Link from 'gatsby-plugin-transition-link';
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import * as R from "ramda";
 import { getAspectRatio, getName } from "../utils";
+import { useScroll } from "../hooks";
 import useBreakpoint from "use-breakpoint";
 
 import themeBreakpoints from "../breakpoints";
+
+const GalleryTile = ({ image, width }) => {
+  const ref = useRef();
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  // const x = useScroll();
+  // useEffect(() => {
+  //   if (ref.current && window) {
+  //     const boundingClient = ref.current.getBoundingClientRect();
+  //     setPosition({
+  //       x: boundingClient.x,
+  //       y: boundingClient.y,
+  //     });
+  //   }
+  // }, [ref, setPosition, x]);
+  return (
+    <Link
+      className="inline-block"
+      ref={ref}
+      style={{
+        width,
+      }}
+      to={`/photogallery/${image.base}`}
+      exit={{
+        trigger: ({node, e, exit, entry}) => {
+          // CQ: get bounding rect of current image and store in a context
+        }
+      }}
+    >
+      <div className="z-50 absolute x-[0] y-[0] font-bold text-white">
+        {position.x},{position.y}
+      </div>
+      <GatsbyImage
+        alt={getName(image)}
+        className="w-full"
+        image={getImage(image)}
+        objectFit="cover"
+      />
+    </Link>
+  );
+};
 
 const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
   const breakpoints = React.useMemo(
@@ -52,26 +94,7 @@ const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
               ((ar / rowAspectRatioSum) * 100).toFixed(7);
 
         const width = `${widthNumber}%`;
-        return (
-          <Link
-            className="inline-block"
-            key={`${image.base}`}
-            state={{ modal: true }}
-            style={{
-              width,
-              // marginLeft: '8px',
-            }}
-            to={`/photogallery/${image.base}`}
-          >
-            <GatsbyImage
-              alt={getName(image)}
-              className="w-full"
-              // style={{ width }}
-              image={getImage(image)}
-              objectFit="cover"
-            />
-          </Link>
-        );
+        return <GalleryTile key={image.base} image={image} width={width} />;
       })}
     </div>
   );

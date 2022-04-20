@@ -61,5 +61,6 @@ module.exports = {
     },
     "gatsby-plugin-preval",
     "gatsby-plugin-robots-txt",
+    "gatsby-plugin-transition-link"
   ],
 };

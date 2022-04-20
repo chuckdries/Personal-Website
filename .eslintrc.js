@@ -2,7 +2,10 @@ module.exports = {
   globals: {
     __PATH_PREFIX__: true,
   },
-  parser: "babel-eslint", // uses babel-eslint transforms
+  parser: '@typescript-eslint/parser',
+  plugins: [
+    '@typescript-eslint',
+  ],
   settings: {
     react: {
       version: "detect", // detect react version
@@ -16,10 +19,12 @@ module.exports = {
     "eslint:recommended", // use recommended configs
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   rules: {
     "react/prop-types": 0,
     "no-unused-vars": 1,
     "react/jsx-sort-props": 1,
+    "@typescript-eslint/no-var-requires": 0
   },
 };
