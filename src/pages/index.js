@@ -242,14 +242,13 @@ export const query = graphql`
             "_DSC0286.jpg" # god rays
             "_DSC8998.jpg" # forest road
             "DSC01169.jpg" # ferris wheel reflection
-            "DSC01142.jpg" # cali adventure cherry blossoms
-            "DSC01753.jpg" # rainy window cherry blossoms
             "DSC01800.jpg" # cherry blossom landscape sunny sky
             "DSC01772.jpg" # cherry blossom portrait sunny sky
             "DSC06201.jpg" # Wheatland snowy hills
-            "DSC01849.jpg" # cherry blossom among many
             "DSC01924.jpg" # cherry blossom sea
             "DSC03157.jpg" # constellation of flowers
+            "DSC02610.jpg" # peter iredale portrait
+            "DSC02615.jpg" # rori iredale beach field camera
           ]
         }
       }
