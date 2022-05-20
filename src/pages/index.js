@@ -113,7 +113,7 @@ const IndexPage = ({
       <Helmet>
         <title>Chuck Dries</title>
         <body
-          className={classnames(isClient ? "bg-vibrant-dark" : "bg-gray-800")}
+          className={classnames(isClient ? "bg-muted-dark" : "bg-gray-800")}
           style={getHelmetSafeBodyStyle(vibrant, screenHeight)}
         />
       </Helmet>
@@ -134,11 +134,12 @@ const IndexPage = ({
           )}
           style={{ gridArea: "1/1" }}
         >
-          <Nav ar={ar} isClient={isClient} />
+          <Nav imageIsLandscape={imageIsLandscape} isClient={isClient} />
           <div
             className={classnames(
               "rounded-[50px] p-3 md:p-5 flex flex-col items-center z-10 border-r-[20px] border-b-[20px] mb-3 mx-2 md:mb-[-90px]",
-              isClient ? "cool-border-big" : "bg-gray-50"
+              isClient ? "cool-border-big" : "bg-gray-50",
+              !imageIsLandscape && "landscape:mr-4" // text is on left side of image, make some room for drop shadow
             )}
           >
             <h1
