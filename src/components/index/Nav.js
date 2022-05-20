@@ -1,13 +1,18 @@
-import React from 'react';
-import classnames from 'classnames';
+import React from "react";
+import classnames from "classnames";
 
 const getNavClasses = (isClient) =>
-  classnames("hover:underline mx-2 md:mx-3", isClient ? "text-vibrant-light" : 'text-gray-200');
+  classnames(
+    "hover:underline mx-2 md:mx-3",
+    isClient ? "text-vibrant-light" : "text-gray-200"
+  );
 
-const Nav = ({ ar, isClient }) => (
+const Nav = ({ imageIsLandscape, isClient }) => (
   <nav
     className={classnames(
-      ar > 1 || !isClient ? "landscape:w-screen" : "portrait:w-screen",
+      imageIsLandscape
+        ? "landscape:w-screen portrait:rounded-xl portrait:m-2 portrait:border-2 border-vibrant-light"
+        : "portrait:w-screen landscape:rounded-xl landscape:m-2 landscape:border-2 border-vibrant-light",
       "p-2 flex justify-center",
       isClient && "bg-vibrant-dark blurred-or-opaque-bg-2"
     )}
