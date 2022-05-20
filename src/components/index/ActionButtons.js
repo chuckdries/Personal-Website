@@ -4,17 +4,17 @@ import { Link } from "gatsby";
 
 const getButtonClasses = (isClient) =>
   classnames(
-    "z-20 rounded-md text-md inline-block px-2 py-1 mt-1 md:py-2 md:px-3 md:my-1 mr-2 text-md hover:underline",
+    "z-20 rounded-md text-md inline-block px-2 py-1 mt-1 md:py-2 md:px-3 md:my-1 mr-2 text-md hover:underline text-black",
     isClient
-      ? "text-muted-light bg-muted-dark hover:bg-muted blurred-or-opaque-bg-2"
+      ? "cool-border-small hover:bg-vibrant"
       : "text-gray-200"
   );
 
 const ActionButtons = ({ isClient, image, shuffleImage }) => (
   <div className="flex flex-col">
-    <div className="text-white p-4 m-4 bg-buzzwordsPrimary blurred-or-opaque-bg-1 rounded-xl flex flex-col text-center z-10">
+    <div className="text-muted-light p-4 m-4 bg-muted-dark rounded-xl flex flex-col text-center z-10">
       <h3 className="mb-2 drop-shadow">Try my word game!</h3>
-      <a className="rounded-full bg-buzzwordsPrimary hover:bg-yellow-300 text-black p-2" href="https://buzzwords.gg">
+      <a className="rounded-full bg-muted-light hover:bg-vibrant text-muted-dark p-2" href="https://buzzwords.gg">
         Buzzwords
       </a>
     </div>

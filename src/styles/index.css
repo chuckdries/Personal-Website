@@ -1,3 +1,20 @@
 /* main.hero {
+text-vibrant-dark border-vibrant bg-vibrant-light
   
 } */
+
+.cool-border-big {
+  color: rgb(var(--dark-vibrant));
+  border: 1px solid rgb(var(--dark-vibrant));
+  background: rgb(var(--light-vibrant));
+  box-shadow: 10px 10px 0px 0px rgb(var(--dark-vibrant));
+}
+.cool-border-small {
+  color: rgb(var(--dark-vibrant));
+  border: 1px solid black;
+  background: rgb(var(--light-vibrant));
+  box-shadow: 3px 3px 0px 0px rgb(var(--dark-vibrant));
+}
+.cool-border-small:hover{
+  box-shadow: 6px 6px 0px 0px rgb(var(--dark-vibrant));
+}

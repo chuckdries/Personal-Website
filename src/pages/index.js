@@ -5,11 +5,9 @@ import { Helmet } from "react-helmet";
 import { take } from "ramda";
 import classnames from "classnames";
 
-import {
-  getHelmetSafeBodyStyle,
-  getVibrant,
-  getAspectRatio,
-} from "../utils";
+import '../styles/index.css';
+
+import { getHelmetSafeBodyStyle, getVibrant, getAspectRatio } from "../utils";
 import Nav from "../components/index/Nav";
 import ActionButtons from "../components/index/ActionButtons";
 import { use100vh } from "react-div-100vh";
@@ -123,7 +121,7 @@ const IndexPage = ({
         className={classnames(
           "font-serif",
           imageIsLandscape
-            ? "landscape:grid portrait:h-actual-screen portrait:flex flex-col justify-evenly"
+            ? "landscape:grid portrait:h-actual-screen portrait:flex flex-col justify-center"
             : "portrait:grid landscape:flex flex-row"
         )}
       >
@@ -137,15 +135,18 @@ const IndexPage = ({
           style={{ gridArea: "1/1" }}
         >
           <Nav ar={ar} isClient={isClient} />
-          <div className="flex flex-col items-center">
+          <div
+            className={classnames(
+              "rounded-[50px] p-5 flex flex-col items-center z-10 border-r-[20px] border-b-[20px]",
+              isClient ? "cool-border-big" : "bg-gray-50"
+            )}
+            style={{
+              marginBottom: "-90px",
+            }}
+          >
             <h1
               className={classnames(
-                "mb-0 mt-0 text-center font-black z-20 text-7xl md:text-8xl lg:text-9xl",
-                isClient ? "filter drop-shadow-dark" : "text-white",
-                isClient &&
-                  (imageIsLandscape
-                    ? "text-vibrant-light landscape:text-gray-50 landscape:opacity-80"
-                    : "text-gray-50 opacity-80 landscape:text-vibrant-light")
+                "mb-0 mt-0 text-center font-black z-20 text-7xl md:text-8xl lg:text-9xl"
               )}
               style={{ lineHeight: "85%" }}
             >
@@ -153,21 +154,17 @@ const IndexPage = ({
             </h1>
             <h2
               className={classnames(
-                "p-3 text-center z-20 font-bold text-xl lg:text-2xl",
-                isClient ? "filter drop-shadow-dark" : "text-white",
-                isClient &&
-                  (imageIsLandscape
-                    ? "text-vibrant-light landscape:text-gray-100"
-                    : "text-gray-100 landscape:text-vibrant-light")
+                "p-3 text-center z-20 font-bold text-lg md:text-2xl lg:text-3xl"
               )}
               style={{ lineHeight: "110%" }}
             >
-              Full Stack Software Engineer &amp; Hobbyist Photographer
+              Full Stack Software Engineer &amp; Photographer
             </h2>
           </div>
 
           <div
             className={classnames(
+              "mt-[100px]",
               imageIsLandscape ? "block portrait:hidden" : "block"
             )}
           >
@@ -177,7 +174,6 @@ const IndexPage = ({
               shuffleImage={shuffleImage}
             />
           </div>
-          {/* <div className={isLandscape ? 'hidden portrait:block' : 'hidden'}></div> */}
         </div>
         {isClient ? (
           <GatsbyImage
@@ -220,35 +216,38 @@ export const query = graphql`
         sourceInstanceName: { eq: "gallery" }
         base: {
           in: [
-            "20160530-DSC09108.jpg" # portrait red flowers
-            # "DSC00201.jpg" # duck
-            "DSC04905.jpg" # purple layers
-            "DSC05761.jpg" # monument valley
-            "DSC05851.jpg" # utahn highway sunset
-            "DSC06245.jpg" # snowy milky way
-            # "DSC08521.jpg" # firepit bloom j&e
+            # "20160530-DSC09108.jpg" # portrait red flowers
+            # # "DSC00201.jpg" # duck
+            # "DSC04905.jpg" # purple layers
+            # "DSC05761.jpg" # monument valley
+            # "DSC05851.jpg" # utahn highway sunset
+            # "DSC06245.jpg" # snowy milky way
+            # # "DSC08521.jpg" # firepit bloom j&e
             # "DSC07490.jpg" # house on prairie
-            "DSC02538.jpg" # portrait pink cactus bloom
-            "20190624-DSC00771.jpg" # glacier forest fog
-            # "DSC00237.jpg" # cotton candy clouds
-            "_DSC6062.jpg" # field of wildflowers
-            "_DSC6060.jpg" # edge of the world
-            "_DSC6219.jpg" # whihte/yellow rosebush
-            "_DSC6243.jpg" # bright rose in darkness
-            "_DSC6400-2.jpg" # Horsetail falls
-            "_DSC6798.jpg" # Japanese zen garden
-            "_DSC6481.jpg" # Mt Hood from Powell Butte
-            "_DSC5916.jpg" # blue dart stinger
-            "_DSC0286.jpg" # god rays
-            "_DSC8998.jpg" # forest road
-            "DSC01169.jpg" # ferris wheel reflection
+            # "DSC02538.jpg" # portrait pink cactus bloom
+            # "20190624-DSC00771.jpg" # glacier forest fog
+            # # "DSC00237.jpg" # cotton candy clouds
+            # "_DSC6062.jpg" # field of wildflowers
+            # "_DSC6060.jpg" # edge of the world
+            # "_DSC6219.jpg" # whihte/yellow rosebush
+            # "_DSC6243.jpg" # bright rose in darkness
+            # "_DSC6400-2.jpg" # Horsetail falls
+            # "_DSC6798.jpg" # Japanese zen garden
+            # "_DSC6481.jpg" # Mt Hood from Powell Butte
+            # "_DSC5916.jpg" # blue dart stinger
+            # "_DSC0286.jpg" # god rays
+            # "_DSC8998.jpg" # forest road
+            # "DSC01169.jpg" # ferris wheel reflection
             "DSC01800.jpg" # cherry blossom landscape sunny sky
             "DSC01772.jpg" # cherry blossom portrait sunny sky
-            "DSC06201.jpg" # Wheatland snowy hills
-            "DSC01924.jpg" # cherry blossom sea
+            # "DSC06201.jpg" # Wheatland snowy hills
+            # "DSC01924.jpg" # cherry blossom sea
             "DSC03157.jpg" # constellation of flowers
             "DSC02610.jpg" # peter iredale portrait
             "DSC02615.jpg" # rori iredale beach field camera
+            "DSC06490.jpg" # Japanese garden steps
+            "DSC06687.jpg" # Multnomah Falls long exposure
+            "DSC06616.jpg" # B&W abstract
           ]
         }
       }
