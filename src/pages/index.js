@@ -225,9 +225,9 @@ export const query = graphql`
             # "DSC02538.jpg" # portrait pink cactus bloom
             # "20190624-DSC00771.jpg" # glacier forest fog
             # # "DSC00237.jpg" # cotton candy clouds
-            # "_DSC6062.jpg" # field of wildflowers
+            "_DSC6062.jpg" # field of wildflowers
             # "_DSC6060.jpg" # edge of the world
-            # "_DSC6219.jpg" # whihte/yellow rosebush
+            "_DSC6219.jpg" # whihte/yellow rosebush
             # "_DSC6243.jpg" # bright rose in darkness
             # "_DSC6400-2.jpg" # Horsetail falls
             # "_DSC6798.jpg" # Japanese zen garden
@@ -240,7 +240,7 @@ export const query = graphql`
             "DSC01772.jpg" # cherry blossom portrait sunny sky
             # "DSC06201.jpg" # Wheatland snowy hills
             # "DSC01924.jpg" # cherry blossom sea
-            "DSC03157.jpg" # constellation of flowers
+            # "DSC03157.jpg" # constellation of flowers
             "DSC02610.jpg" # peter iredale portrait
             "DSC02615.jpg" # rori iredale beach field camera
             "DSC06490.jpg" # Japanese garden steps
