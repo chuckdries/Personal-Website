@@ -127,7 +127,7 @@ const IndexPage = ({
       >
         <div
           className={classnames(
-            "landscape:flex-auto flex flex-col items-center justify-between",
+            "landscape:flex-auto flex flex-col items-center justify-between w-screen",
             imageIsLandscape
               ? "portrait:items-center"
               : "landscape:justify-center"
@@ -246,6 +246,7 @@ export const query = graphql`
             "DSC06490.jpg" # Japanese garden steps
             "DSC06687.jpg" # Multnomah Falls long exposure
             "DSC06616.jpg" # B&W abstract
+            "DSC05930.jpg" # Sedona thumb
           ]
         }
       }
