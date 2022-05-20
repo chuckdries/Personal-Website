@@ -137,12 +137,9 @@ const IndexPage = ({
           <Nav ar={ar} isClient={isClient} />
           <div
             className={classnames(
-              "rounded-[50px] p-5 flex flex-col items-center z-10 border-r-[20px] border-b-[20px]",
+              "rounded-[50px] p-3 md:p-5 flex flex-col items-center z-10 border-r-[20px] border-b-[20px] mb-3 mx-2 md:mb-[-90px]",
               isClient ? "cool-border-big" : "bg-gray-50"
             )}
-            style={{
-              marginBottom: "-90px",
-            }}
           >
             <h1
               className={classnames(
