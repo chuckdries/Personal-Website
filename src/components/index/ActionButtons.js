@@ -12,7 +12,7 @@ const getButtonClasses = (isClient) =>
 
 const ActionButtons = ({ isClient, image, shuffleImage }) => (
   <div className="flex flex-col">
-    <div className="text-muted-light p-4 m-4 bg-muted-dark rounded-xl flex flex-col text-center z-10 border-2 border-vibrant">
+    <div className="text-muted-light p-4 m-4 bg-muted-dark rounded-xl flex flex-col text-center z-10 cool-border-small-light">
       <h3 className="mb-2 drop-shadow">Try my word game!</h3>
       <a className="rounded-full bg-muted-light hover:bg-vibrant text-muted-dark p-2" href="https://buzzwords.gg">
         Buzzwords

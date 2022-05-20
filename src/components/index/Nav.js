@@ -10,11 +10,12 @@ const getNavClasses = (isClient) =>
 const Nav = ({ imageIsLandscape, isClient }) => (
   <nav
     className={classnames(
-      imageIsLandscape
-        ? "landscape:w-screen portrait:rounded-xl portrait:m-2 portrait:border-2 border-vibrant-light"
-        : "portrait:w-screen landscape:rounded-xl landscape:m-2 landscape:border-2 border-vibrant-light",
+      // imageIsLandscape
+      //   ? "landscape:w-screen portrait:rounded-3xl portrait:m-2"
+      //   : "portrait:w-screen landscape:rounded-3xl landscape:m-2",
+      "rounded-3xl m-2",
       "p-2 flex justify-center",
-      isClient && "bg-vibrant-dark blurred-or-opaque-bg-2"
+      isClient && "bg-vibrant-dark cool-border-small-light"
     )}
     style={{ zIndex: 100 }}
   >
