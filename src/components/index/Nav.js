@@ -64,14 +64,6 @@ const Nav = ({ ar, isClient }) => (
       <li>
         <a
           className={getNavClasses(isClient)}
-          href="https://devpost.com/chuckdries"
-        >
-          Devpost
-        </a>
-      </li>
-      <li>
-        <a
-          className={getNavClasses(isClient)}
           href="https://medium.com/@chuckdries"
         >
           Medium
