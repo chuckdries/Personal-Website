@@ -127,10 +127,10 @@ const IndexPage = ({
       >
         <div
           className={classnames(
-            "landscape:flex-auto flex flex-col items-center justify-between w-screen",
+            "landscape:flex-auto flex flex-col items-center justify-between",
             imageIsLandscape
-              ? "portrait:items-center"
-              : "landscape:justify-center"
+              ? "portrait:items-center landscape:w-screen"
+              : "landscape:justify-center portrait:w-screen"
           )}
           style={{ gridArea: "1/1" }}
         >
