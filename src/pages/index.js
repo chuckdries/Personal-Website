@@ -217,8 +217,8 @@ export const query = graphql`
             # "20160530-DSC09108.jpg" # portrait red flowers
             # # "DSC00201.jpg" # duck
             # "DSC04905.jpg" # purple layers
-            # "DSC05761.jpg" # monument valley
-            # "DSC05851.jpg" # utahn highway sunset
+            "DSC05761.jpg" # monument valley
+            "DSC05851.jpg" # utahn highway sunset
             # "DSC06245.jpg" # snowy milky way
             # # "DSC08521.jpg" # firepit bloom j&e
             # "DSC07490.jpg" # house on prairie
