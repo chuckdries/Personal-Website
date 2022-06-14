@@ -11,19 +11,23 @@ const BlogPost = ({ data }) => {
     data.mdx.frontmatter.hero_image.fields.imageMeta.meta.Caption,
   ].join("-");
   return (
-    <Layout pageTitle={data.mdx.frontmatter.title}>
-      <div className="container mx-auto p-2 bg-gray-200">
-        <div className="flex flex-col lg:w-1/2">
-          <GatsbyImage className="" image={image} alt={caption} />
-          <span className="flex-auto">
-            <Link to={`/photogallery/${data.mdx.frontmatter.hero_image.base}`}>
-              {data.mdx.frontmatter.hero_image.base}
-            </Link>
-          </span>
+    <Layout className="font-serif" pageTitle={data.mdx.frontmatter.title}>
+      {data.mdx.frontmatter.hero_image && (
+        <div className="content-container mx-auto p-2 bg-gray-200">
+          <div className="flex flex-col">
+            <GatsbyImage alt={caption} className="" image={image} />
+            <span className="flex-auto">
+              <Link
+                to={`/photogallery/${data.mdx.frontmatter.hero_image.base}`}
+              >
+                {data.mdx.frontmatter.hero_image.base}
+              </Link>
+            </span>
+          </div>
+          <span className="">{caption}</span>
         </div>
-        <span className="">{caption}</span>
-      </div>
-      <p className="container mx-auto">{data.mdx.frontmatter.date}</p>
+      )}
+      <p className="content-container mx-auto">{data.mdx.frontmatter.date}</p>
       <MDXRenderer>{data.mdx.body}</MDXRenderer>
     </Layout>
   );

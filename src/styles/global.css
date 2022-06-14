@@ -56,6 +56,9 @@
     .h-two-thirds-vw {
       height: 67vw;
     }
+    .content-container {
+      max-width: 600px;
+    }
   }
 }
 

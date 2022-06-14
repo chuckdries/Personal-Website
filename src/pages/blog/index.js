@@ -4,14 +4,15 @@ import Layout from "../../components/Layout";
 
 const BlogPage = ({ data }) => {
   return (
-    <Layout pageTitle="My Blog Posts">
-      <ul className="container mx-auto">
+    <Layout className="font-serif" pageTitle="Chuck's Blog">
+      <h1 className="max-w-[600px] mx-auto text-4xl font-black mb-4">Chuck&apos;s Blog</h1>
+      <ul className="max-w-[600px] mx-auto">
         {data.allMdx.nodes.map((node) => (
           <li key={node.id}>
             <article>
               <Link to={`/blog/${node.slug}`}>
                 <span>/blog/{node.slug.toLowerCase()}</span>
-                <h2>{node.frontmatter.title}</h2>
+                <h2 className="font-bold text-3xl">{node.frontmatter.title}</h2>
               </Link>
               <span>{node.frontmatter.date}</span>
             </article>

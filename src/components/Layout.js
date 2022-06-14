@@ -1,24 +1,23 @@
 import * as React from "react";
-import { Link } from "gatsby";
 import { Helmet } from "react-helmet";
 import GlobalNav from "./GlobalNav";
 import classNames from "classnames";
 import { MDXProvider } from "@mdx-js/react";
 
-const Container = ({ ...props }) => (
-  <div className="container mx-auto" {...props} />
+const ContentContainer = ({ ...props }) => (
+  <div className="content-container mx-auto" {...props} />
 );
 
 const Paragraph = ({ className, ...props }) => (
-  <Container>
+  <ContentContainer>
     <p className={classNames("max-w-[600px] my-4", className)} {...props} />
-  </Container>
+  </ContentContainer>
 );
 
 const H1 = ({ className, ...props }) => (
-  <Container>
-    <h1 className={classNames("", className)} {...props} />
-  </Container>
+  <ContentContainer>
+    <h1 className={classNames("font-bold", className)} {...props} />
+  </ContentContainer>
 );
 
 export const components = {
@@ -26,7 +25,7 @@ export const components = {
   h1: H1,
 };
 
-const Layout = ({ pageTitle, children }) => {
+const Layout = ({ pageTitle, children, className }) => {
   return (
     <>
       <Helmet>
@@ -34,7 +33,7 @@ const Layout = ({ pageTitle, children }) => {
       </Helmet>
       <GlobalNav />
       <MDXProvider components={components}>
-        <main>
+        <main className={className}>
           <div>{children}</div>
         </main>
       </MDXProvider>
