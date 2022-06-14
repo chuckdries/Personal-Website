@@ -7,10 +7,13 @@ import useBreakpoint from "use-breakpoint";
 
 import themeBreakpoints from "../breakpoints";
 
-const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
+const MasonryGallery = ({
+  images,
+  aspectsByBreakpoint: aspectTargetsByBreakpoint,
+}) => {
   const breakpoints = React.useMemo(
-    () => R.pick(R.keys(itemsPerRowByBreakpoint), themeBreakpoints),
-    [itemsPerRowByBreakpoint]
+    () => R.pick(R.keys(aspectTargetsByBreakpoint), themeBreakpoints),
+    [aspectTargetsByBreakpoint]
   );
 
   const { breakpoint } = useBreakpoint(breakpoints, "sm");
@@ -19,54 +22,78 @@ const MasonryGallery = ({ images, itemsPerRow: itemsPerRowByBreakpoint }) => {
     () => R.map(getAspectRatio, images),
     [images]
   );
-  const rowAspectRatioSumsByBreakpoint = React.useMemo(
+
+  const rowsByBreakpoint = React.useMemo(
     () =>
-      R.map(R.pipe(R.splitEvery(R.__, aspectRatios), R.map(R.sum)))(
-        itemsPerRowByBreakpoint
-      ),
-    [aspectRatios, itemsPerRowByBreakpoint]
+      R.map(
+        R.pipe(
+          (targetAspect) =>
+            R.reduce(
+              (acc, currentAspect) => {
+                const currentRow = acc.pop();
+                if (currentRow.aspect + currentAspect > targetAspect) {
+                  return [
+                    ...acc,
+                    currentRow,
+                    {
+                      aspect: currentAspect,
+                      images: 1,
+                      startIndex: currentRow.startIndex + currentRow.images,
+                    },
+                  ];
+                }
+                return [
+                  ...acc,
+                  {
+                    aspect: currentRow.aspect + currentAspect,
+                    images: currentRow.images + 1,
+                    startIndex: currentRow.startIndex,
+                  },
+                ];
+              },
+              [{ aspect: 0, startIndex: 0, images: 0 }],
+              aspectRatios
+            ),
+          R.indexBy(R.prop("startIndex"))
+        )
+      )(aspectTargetsByBreakpoint),
+    [aspectRatios, aspectTargetsByBreakpoint]
   );
 
-  const itemsPerRow = itemsPerRowByBreakpoint[breakpoint];
-  const rowAspectRatioSumsForCurrentBP =
-    rowAspectRatioSumsByBreakpoint[breakpoint];
+  const rows = rowsByBreakpoint[breakpoint];
 
+  let cursor = 0;
   return (
     <div
       className="w-full"
       style={{
         position: "relative",
       }}
-      // style={{ maxWidth: minWidth }}
     >
       {images.map((image, i) => {
-        const rowIndex = Math.floor(i / itemsPerRow);
-        const rowAspectRatioSum = rowAspectRatioSumsForCurrentBP[rowIndex];
-        // const width = ((getAspectRatio(image) / rowAspectRatioSum) * 100).toFixed(10);
+        let currentRow = rows[cursor];
+        if (rows[i]) {
+          cursor = i;
+          currentRow = rows[i];
+        }
+        const rowAspectRatioSum = currentRow.aspect;
         const ar = getAspectRatio(image);
-        const widthNumber =
-          rowAspectRatioSum === ar
-            ? // image is only one in row
-              100 / itemsPerRow
-            : // image is one of several in row
-              ((ar / rowAspectRatioSum) * 100).toFixed(7);
+        const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
 
         const width = `${widthNumber}%`;
         return (
           <Link
-            className="inline-block"
+            className="border border-black inline-block"
             key={`${image.base}`}
             state={{ modal: true }}
             style={{
               width,
-              // marginLeft: '8px',
             }}
             to={`/photogallery/${image.base}`}
           >
             <GatsbyImage
               alt={getName(image)}
               className="w-full"
-              // style={{ width }}
               image={getImage(image)}
               objectFit="cover"
             />
