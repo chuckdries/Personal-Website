@@ -65,7 +65,7 @@ const MasonryGallery = ({
   let cursor = 0;
   return (
     <div
-      className="w-full"
+      className="w-full flex items-center flex-wrap"
       style={{
         position: "relative",
       }}
