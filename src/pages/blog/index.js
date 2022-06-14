@@ -5,13 +5,16 @@ import Layout from "../../components/Layout";
 const BlogPage = ({ data }) => {
   return (
     <Layout pageTitle="My Blog Posts">
-      <ul>
+      <ul className="container mx-auto">
         {data.allMdx.nodes.map((node) => (
           <li key={node.id}>
-            <Link to={`/blog/${node.slug}`}>
-              <span>{node.slug.toLowerCase()}</span>
-              <h2>{node.frontmatter.title}</h2>
-            </Link>
+            <article>
+              <Link to={`/blog/${node.slug}`}>
+                <span>/blog/{node.slug.toLowerCase()}</span>
+                <h2>{node.frontmatter.title}</h2>
+              </Link>
+              <span>{node.frontmatter.date}</span>
+            </article>
           </li>
         ))}
       </ul>
@@ -28,7 +31,7 @@ export const query = graphql`
         excerpt
         frontmatter {
           title
-          date
+          date(formatString: "MMMM D, YYYY")
         }
       }
     }
