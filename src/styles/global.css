@@ -78,6 +78,15 @@ a {
   @apply text-blue-600;
 }
 
+kbd {
+    /* background-color: #1F2937; coolGray-800 */
+    /* color: #94A3B8; blueGray-400 */
+    /* padding: 3px 5px;
+    border: solid 1px #6B7280; /* coolGray-500 */
+    /* border-radius: 6px; */ 
+    @apply bg-gray-300 text-black border border-gray-700 rounded p-1;
+}
+
 .arrow-right-after:after {
   content: "\279C";
   margin-left: 3px;

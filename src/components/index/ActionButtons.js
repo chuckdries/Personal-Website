@@ -8,7 +8,7 @@ import Shuffle from "@spectrum-icons/workflow/Shuffle";
 const getButtonClasses = (isClient) =>
   classnames(
     "z-20 rounded-md text-md inline-block px-2 py-1 mt-1 md:py-2 md:px-3 md:my-1 mr-2 text-md hover:underline text-black",
-    isClient ? "cool-border-small hover:bg-vibrant" : "text-gray-200"
+    isClient ? "cool-border-small hover:bg-vibrant" : "text-white"
   );
 
 const ActionButtons = ({ isClient, image, shuffleImage }) => (
@@ -22,7 +22,7 @@ const ActionButtons = ({ isClient, image, shuffleImage }) => (
         Buzzwords
       </a>
     </div>
-    <div className="flex mx-6 mb-6">
+    <div className="flex justify-center mx-6 mb-6">
       <Link
         className={getButtonClasses(isClient, "muted")}
         id="image-link"
@@ -42,13 +42,6 @@ const ActionButtons = ({ isClient, image, shuffleImage }) => (
       >
         <Shuffle aria-label="shuffle image" />
       </button>
-      <Link
-        className={getButtonClasses(isClient, "muted")}
-        id="photogallery-link"
-        to="/photogallery/"
-      >
-        Photography Gallery
-      </Link>
     </div>
   </div>
 );
