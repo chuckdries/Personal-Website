@@ -25,7 +25,7 @@ export const getHelmetSafeBodyStyle = (vibrant, screenHeight) => {
     "--vibrant": vibrant.Vibrant,
     "--dark-vibrant": vibrant.DarkVibrant,
     "--light-vibrant": vibrant.LightVibrant,
-    "--height-screen": screenHeight ? `${screenHeight}px` : '100vh'
+    "--height-screen": screenHeight ? `${screenHeight}px` : "100vh",
   };
   if (typeof window === "undefined") {
     return style;
@@ -45,7 +45,10 @@ const gcd = (a, b) => {
 
 export const getShutterFractionFromExposureTime = (exposureTime) => {
   if (exposureTime === 0.016666666666666666) {
-    return '1/60'
+    return "1/60";
+  }
+  if (exposureTime === 0.0011111111111111111) {
+    return "1/900";
   }
   let fraction = exposureTime;
   const len = fraction.toString().length - 2;
@@ -58,7 +61,7 @@ export const getShutterFractionFromExposureTime = (exposureTime) => {
   numerator /= divisor;
   denominator /= divisor;
   if (numerator > 1) {
-    return `${exposureTime}`
+    return `${exposureTime}`;
   }
   return `${numerator}/${denominator}`;
 };

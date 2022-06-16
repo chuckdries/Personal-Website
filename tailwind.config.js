@@ -2,7 +2,7 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}"],
-  mode: 'jit',
+  mode: "jit",
   // darkMode: 'media', // or 'media' or 'class'
   theme: {
     screens: {
@@ -33,17 +33,17 @@ module.exports = {
     },
     extend: {
       height: {
-        "actual-screen": "var(--height-screen)"
+        "actual-screen": "var(--height-screen)",
       },
       dropShadow: {
-        'dark': '0 1px 2px rgba(0, 0, 0, 0.8)',
+        dark: "0 1px 2px rgba(0, 0, 0, 0.8)",
       },
       fontSize: {
-        'huge-1': '95px',
-        'huge-2': 'max(7.8vw, 120px)'
+        "huge-1": "95px",
+        "huge-2": "max(7.8vw, 120px)",
       },
       colors: {
-        buzzwordsPrimary: '#F6C54B',
+        buzzwordsPrimary: "#F6C54B",
         vibrant: {
           DEFAULT: ({ opacityVariable, opacityValue }) => {
             if (opacityValue !== undefined) {
