@@ -16,10 +16,9 @@ const MasonryGallery = ({
     [aspectTargetsByBreakpoint]
   );
 
-  const { breakpoint } = useBreakpoint(breakpoints, "xs");
+  const { breakpoint } = useBreakpoint(breakpoints, "sm");
   console.log("🚀 ~ file: MasonryGallery.js ~ line 20 ~ breakpoint", breakpoint)
 
-  // const [scrolled, setScrolled] = React.useState(false);
   const scrollIntoView = React.useCallback(() => {
     if (!window.location.hash) {
       return;
@@ -28,20 +27,15 @@ const MasonryGallery = ({
     if (!el) {
       return;
     }
-    console.log("el", el);
     el.scrollIntoView();
-    console.log(
-      "🚀 ~ file: MasonryGallery.js ~ line 21 ~ scrollIntoView ~ el.offsetTop",
-      el.offsetTop
-    );
-    if (el.offsetTop > window.innerHeight && window.scrollY === 0) {
-      // queue another
-    }
   }, []);
 
   React.useEffect(() => {
-    scrollIntoView();
-  }, [scrollIntoView, breakpoint]);
+    // hacky but it works for now
+    setTimeout(() => {
+      scrollIntoView();
+    }, 100)
+  }, [scrollIntoView]);
 
   const aspectRatios = React.useMemo(
     () => R.map(getAspectRatio, images),
