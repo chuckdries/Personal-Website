@@ -1,9 +1,9 @@
 import * as React from "react";
 import { graphql, Link } from "gatsby";
-import { navigate } from "gatsby";
 import { Helmet } from "react-helmet";
 
 import MasonryGallery from "../components/MasonryGallery";
+import GlobalNav from "../components/GlobalNav";
 
 const GalleryPage = ({ data }) => {
   const images = React.useMemo(
@@ -17,27 +17,7 @@ const GalleryPage = ({ data }) => {
         <title>Photo Gallery | Chuck Dries</title>
         <body className="bg-black text-white" />
       </Helmet>
-      <nav className="mt-1 ml-1 text-lg mb-4">
-        <button
-          className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before  mr-1"
-          onClick={() => navigate(-1)}
-          type="button"
-        >
-          back
-        </button>
-        <Link
-          className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-          to="/"
-        >
-          home
-        </Link>
-        <Link
-          className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-          to="/photogallery/"
-        >
-          gallery
-        </Link>
-      </nav>
+      <GlobalNav />
       <div className="bg-black min-h-screen mx-auto">
         <h1 className="text-5xl mt-0 ml-5 font-serif font-black z-10 relative">
           Photo Gallery
@@ -77,7 +57,7 @@ export const query = graphql`
           fields {
             imageMeta {
               dateTaken
-              meta{
+              meta {
                 ObjectName
               }
             }

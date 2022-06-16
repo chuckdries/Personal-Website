@@ -1,5 +1,6 @@
 import React from "react";
 import classnames from "classnames";
+import { Link } from "gatsby";
 
 const getNavClasses = (isClient) =>
   classnames(
@@ -14,13 +15,19 @@ const Nav = ({ imageIsLandscape, isClient }) => (
       //   ? "landscape:w-screen portrait:rounded-3xl portrait:m-2"
       //   : "portrait:w-screen landscape:rounded-3xl landscape:m-2",
       "rounded-3xl m-2",
-      "p-2 flex justify-center",
+      "p-2 flex justify-center items-center",
       isClient && "bg-vibrant-dark cool-border-small-light"
     )}
     style={{ zIndex: 100 }}
   >
     <ul className="inline-flex flex-wrap justify-center">
-      <li>
+      <li className="text-center">
+        <Link className={getNavClasses(isClient)} to="/photogallery">Photography Gallery</Link>
+      </li>
+    </ul>
+    <span className='text-gray-400 mx-2'>|</span>
+    <ul className="inline-flex flex-wrap justify-center">
+      {/* <li>
         <a
           className={getNavClasses(isClient)}
           href="/CharlesDriesResumeCurrent.pdf"
@@ -34,7 +41,7 @@ const Nav = ({ imageIsLandscape, isClient }) => (
         >
           Resume
         </a>
-      </li>
+      </li> */}
       <li>
         <a
           className={getNavClasses(isClient)}
@@ -59,22 +66,22 @@ const Nav = ({ imageIsLandscape, isClient }) => (
           Github
         </a>
       </li>
-      <li>
+      {/* <li>
         <a
           className={getNavClasses(isClient)}
           href="https://www.linkedin.com/in/chuckdries/"
         >
           LinkedIn
         </a>
-      </li>
-      <li>
+      </li> */}
+      {/* <li>
         <a
           className={getNavClasses(isClient)}
           href="https://medium.com/@chuckdries"
         >
           Medium
         </a>
-      </li>
+      </li> */}
       <li>
         <a
           className={getNavClasses(isClient)}
@@ -83,14 +90,14 @@ const Nav = ({ imageIsLandscape, isClient }) => (
           YouTube
         </a>
       </li>
-      <li>
+      {/* <li>
         <a
           className={getNavClasses(isClient)}
           href="mailto:chuck@chuckdries.com"
         >
           chuck@chuckdries.com
         </a>
-      </li>
+      </li> */}
     </ul>
   </nav>
 );

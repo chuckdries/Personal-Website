@@ -13,6 +13,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
 import classnames from "classnames";
 import MetadataItem from "./MetadataItem";
+import GlobalNav from "../GlobalNav";
 
 const logKeyShortcut = (keyCode) => {
   try {
@@ -92,43 +93,7 @@ const GalleryImage = ({ data, pageContext }) => {
         />
       </Helmet>
       <div className="min-h-screen flex flex-col justify-between">
-        <nav className="mt-1 ml-1 text-lg mb-4">
-          <button
-            className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before  mr-1"
-            onClick={() => navigate(-1)}
-            type="button"
-          >
-            back
-          </button>
-          <Link
-            className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-            to="/"
-          >
-            home
-          </Link>
-          <Link
-            className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-            to="/photogallery/"
-          >
-            gallery <span className="bg-gray-300 text-black">esc</span>
-          </Link>
-          {pageContext.prevImage && (
-            <Link
-              className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-              to={`/photogallery/${pageContext.prevImage}/`}
-            >
-              previous <span className="bg-gray-300 text-black">&#11104;</span>
-            </Link>
-          )}
-          {pageContext.nextImage && (
-            <Link
-              className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-              to={`/photogallery/${pageContext.nextImage}/`}
-            >
-              next <span className="bg-gray-300 text-black">&#11106;</span>
-            </Link>
-          )}
-        </nav>
+        <GlobalNav prevImage={pageContext.prevImage} nextImage={pageContext.nextImage} />
         <div className={classnames("flex", orientationClasses)}>
           <div
             className="flex-grow-0 mb-2 overflow-hidden"
