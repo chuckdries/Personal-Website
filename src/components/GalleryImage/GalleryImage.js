@@ -136,7 +136,9 @@ const GalleryImage = ({ data, pageContext }) => {
               maxWidth: zoom
                 ? "unset"
                 : `calc(max(calc(100vh - ${verticalPad}), 500px) * ${ar})`,
-              width: zoom ? `max(calc(100vw - 16px), calc(100vh * ${ar}))` : 'unset'
+              width: zoom
+                ? `max(calc(100vw - 16px), calc(100vh * ${ar}))`
+                : "unset",
               // minHeight: zoom ? "100vh" : "unset",
             }}
           >
@@ -198,7 +200,7 @@ const GalleryImage = ({ data, pageContext }) => {
                 icon="calendar-outline"
                 title="date taken"
               />
-              <div className="flex justify-between w-[350px]">
+              <div className="flex justify-end gap-2 border border-vibrant-light pl-2 rounded">
                 <MetadataItem
                   data={shutterSpeed}
                   icon="stopwatch-outline"
