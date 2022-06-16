@@ -44,13 +44,13 @@ const GalleryPage = ({ data }) => {
         </h1>
         <div className="mx-auto">
           <MasonryGallery
-            images={images}
             aspectsByBreakpoint={{
               sm: 3.6,
               md: 4,
               lg: 5,
               xl: 6.1,
             }}
+            images={images}
           />
         </div>
       </div>

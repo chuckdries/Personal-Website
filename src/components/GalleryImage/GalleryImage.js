@@ -51,7 +51,7 @@ const GalleryImage = ({ data, pageContext }) => {
         case "Escape":
         case "KeyG": {
           logKeyShortcut(e.code);
-          navigate("/photogallery/");
+          navigate(`/photogallery/#${image.base}`);
         }
       }
     };
@@ -59,7 +59,7 @@ const GalleryImage = ({ data, pageContext }) => {
     return () => {
       document.removeEventListener("keydown", keyListener);
     };
-  }, [pageContext]);
+  }, [pageContext, image.base]);
 
   const name = getName(image);
   const { meta, dateTaken: dt } = getMeta(image);
@@ -108,7 +108,7 @@ const GalleryImage = ({ data, pageContext }) => {
           </Link>
           <Link
             className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-            to="/photogallery/"
+            to={`/photogallery/#${image.base}`}
           >
             gallery <span className="bg-gray-300 text-black">esc</span>
           </Link>
