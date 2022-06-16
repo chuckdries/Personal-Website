@@ -32,6 +32,14 @@
   .scroll-padding-6 {
     scroll-padding: theme("spacing.6");
   }
+  .cursor-zoom-in {
+    cursor: -webkit-zoom-in;
+    cursor: zoom-in;
+  }
+  .cursor-zoom-out {
+    cursor: -webkit-zoom-out;
+    cursor: zoom-out;
+  }
   @supports (backdrop-filter: none) {
     .blurred-or-opaque-bg-1 {
       @apply bg-opacity-50 backdrop-filter backdrop-blur-lg;

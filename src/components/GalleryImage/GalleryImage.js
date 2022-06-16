@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { graphql, navigate, Link } from "gatsby";
 import {
   getAspectRatio,
@@ -28,6 +28,8 @@ const logKeyShortcut = (keyCode) => {
 const GalleryImage = ({ data, pageContext }) => {
   const image = data.allFile.edges[0].node;
   const ar = getAspectRatio(image);
+
+  const [zoom, setZoom] = useState(false);
 
   React.useEffect(() => {
     const keyListener = (e) => {
@@ -73,6 +75,8 @@ const GalleryImage = ({ data, pageContext }) => {
     ar > 1
       ? "flex-col mx-auto"
       : "portrait:mx-auto landscape:mx-5 landscape:flex-row-reverse portrait:flex-col";
+  const verticalPad = ar > 1 ? "170px" : "70px";
+
   const shutterSpeed = React.useMemo(
     () => getShutterFractionFromExposureTime(meta.ExposureTime || 0),
     [meta]
@@ -126,19 +130,27 @@ const GalleryImage = ({ data, pageContext }) => {
           )}
         </nav>
         <div className={classnames("flex", orientationClasses)}>
-          <div className="flex-grow-0">
+          <div
+            className="flex-grow-0 mb-2 overflow-hidden"
+            style={{
+              maxWidth: zoom
+                ? "unset"
+                : `calc(max(calc(100vh - ${verticalPad}), 500px) * ${ar})`,
+              width: zoom ? `max(calc(100vw - 16px), calc(100vh * ${ar}))` : 'unset'
+              // minHeight: zoom ? "100vh" : "unset",
+            }}
+          >
             <GatsbyImage
               alt={name}
-              className=""
+              className={classnames(
+                "border-4 border-muted-light",
+                zoom ? "cursor-zoom-out" : "cursor-zoom-in"
+              )}
               image={getImage(image)}
               key={image.base}
               loading="eager"
               objectFit="contain"
-              style={{
-                maxWidth: `calc(max(90vh, 500px) * ${ar})`,
-                maxHeight: "90vh",
-                // minHeight: '500px',
-              }}
+              onClick={() => setZoom((_zoom) => !_zoom)}
             />
           </div>
           <div
@@ -163,7 +175,9 @@ const GalleryImage = ({ data, pageContext }) => {
                 href={image.publicURL}
                 onClick={() => {
                   try {
-                    window.plausible("Download Wallpaper", { props: { image: image.base } });
+                    window.plausible("Download Wallpaper", {
+                      props: { image: image.base },
+                    });
                   } catch {
                     // do nothing
                   }
@@ -178,12 +192,27 @@ const GalleryImage = ({ data, pageContext }) => {
                 style={{ width: 30 }}
               ></div>
             }
-            <div className="flex flex-col">
+            <div className="flex flex-col items-end">
               <MetadataItem
                 data={dateTaken.toLocaleDateString()}
                 icon="calendar-outline"
                 title="date taken"
               />
+              <div className="flex justify-between w-[350px]">
+                <MetadataItem
+                  data={shutterSpeed}
+                  icon="stopwatch-outline"
+                  title="shutter speed"
+                />
+                {meta.FNumber && (
+                  <MetadataItem
+                    data={`f/${meta.FNumber}`}
+                    icon="aperture-outline"
+                    title="aperture"
+                  />
+                )}
+                <MetadataItem data={meta.ISO} icon="film-outline" title="ISO" />
+              </div>
               <MetadataItem
                 data={locationString}
                 icon="map-outline"
@@ -208,19 +237,6 @@ const GalleryImage = ({ data, pageContext }) => {
                   title="lens"
                 />
               )}
-              <MetadataItem
-                data={shutterSpeed}
-                icon="stopwatch-outline"
-                title="shutter speed"
-              />
-              {meta.FNumber && (
-                <MetadataItem
-                  data={`f/${meta.FNumber}`}
-                  icon="aperture-outline"
-                  title="aperture"
-                />
-              )}
-              <MetadataItem data={meta.ISO} icon="film-outline" title="ISO" />
             </div>
           </div>
         </div>
