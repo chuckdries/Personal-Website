@@ -108,7 +108,7 @@ const GalleryImage = ({ data, pageContext }) => {
           </Link>
           <Link
             className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-            to="/photogallery/"
+            to={`/photogallery/#${image.base}`}
           >
             gallery <span className="bg-gray-300 text-black">esc</span>
           </Link>

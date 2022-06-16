@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "develop": "gatsby develop",
-    "start": "gatsby develop -H 0.0.0.0",
+    "start": "cross-env NODE_OPTIONS=--no-experimental-fetch gatsby develop -H 0.0.0.0",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
@@ -63,6 +63,7 @@
     "use-breakpoint": "^2.0.1"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "prettier": "2.3.2"
   }
 }
