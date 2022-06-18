@@ -145,7 +145,7 @@ const GalleryImage = ({ data, pageContext }) => {
             <GatsbyImage
               alt={name}
               className={classnames(
-                "border-4 border-muted-light",
+                "border-4 border-vibrant",
                 zoom ? "cursor-zoom-out" : "cursor-zoom-in"
               )}
               image={getImage(image)}
