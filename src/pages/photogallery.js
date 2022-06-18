@@ -45,10 +45,10 @@ const GalleryPage = ({ data }) => {
         <div className="mx-auto">
           <MasonryGallery
             aspectsByBreakpoint={{
-              sm: 3.6,
+              sm: 3,
               md: 4,
-              lg: 5,
-              xl: 6.1,
+              lg: 4,
+              xl: 5,
             }}
             images={images}
           />
@@ -62,7 +62,7 @@ export const query = graphql`
   query GalleryPageQuery {
     allFile(
       filter: { sourceInstanceName: { eq: "gallery" } }
-      sort: { order: DESC, fields: fields___imageMeta___dateTaken }
+      sort: { fields: fields___imageMeta___dominantHue, order: DESC }
     ) {
       edges {
         node {
@@ -72,12 +72,17 @@ export const query = graphql`
             fluid {
               aspectRatio
             }
-            gatsbyImageData(layout: CONSTRAINED, height: 550)
+            gatsbyImageData(
+              layout: CONSTRAINED
+              height: 550
+              placeholder: DOMINANT_COLOR
+            )
           }
           fields {
             imageMeta {
+              dominantHue
               dateTaken
-              meta{
+              meta {
                 ObjectName
               }
             }

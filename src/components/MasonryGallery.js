@@ -17,7 +17,6 @@ const MasonryGallery = ({
   );
 
   const { breakpoint } = useBreakpoint(breakpoints, "sm");
-  console.log("🚀 ~ file: MasonryGallery.js ~ line 20 ~ breakpoint", breakpoint)
 
   const scrollIntoView = React.useCallback(() => {
     if (!window.location.hash) {
@@ -34,7 +33,7 @@ const MasonryGallery = ({
     // hacky but it works for now
     setTimeout(() => {
       scrollIntoView();
-    }, 100)
+    }, 100);
   }, [scrollIntoView]);
 
   const aspectRatios = React.useMemo(

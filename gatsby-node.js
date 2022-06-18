@@ -4,7 +4,7 @@ const chroma = require("chroma-js");
 const chalk = require("chalk");
 const R = require("ramda");
 const exifr = require("exifr");
-const sharp = require('sharp');
+const sharp = require("sharp");
 
 const badContrast = (color1, color2) => chroma.contrast(color1, color2) < 4.5;
 
@@ -102,11 +102,13 @@ function processColors(vibrantData, imagePath) {
 
 function transformMetaToNodeData(metaData, vibrantData, imagePath) {
   const vibrant = vibrantData ? processColors(vibrantData, imagePath) : null;
+  let dominantHue = vibrantData.Vibrant.getHsl()[0] * 360;
 
   return {
     dateTaken: metaData.DateTimeOriginal,
     meta: metaData,
     vibrant,
+    dominantHue,
   };
 }
 
@@ -118,13 +120,15 @@ exports.onCreateNode = async function ({ node, actions }) {
       xmp: true,
       // icc: true
     });
+
     const resizedImage = await sharp(node.absolutePath)
       .resize({
         width: 3000,
         height: 3000,
-        fit: 'inside'
+        fit: "inside",
       })
-      .toBuffer()
+      .toBuffer();
+
     const vibrantData = await Vibrant.from(resizedImage)
       .quality(1)
       .getPalette();
@@ -132,7 +136,11 @@ exports.onCreateNode = async function ({ node, actions }) {
     createNodeField({
       node,
       name: "imageMeta",
-      value: transformMetaToNodeData(metaData, vibrantData, node.absolutePath),
+      value: transformMetaToNodeData(
+        metaData,
+        vibrantData,
+        node.absolutePath
+      ),
     });
   }
 };
