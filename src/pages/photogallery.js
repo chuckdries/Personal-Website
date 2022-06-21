@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as R from "ramda";
 import { graphql, Link } from "gatsby";
 import { navigate } from "gatsby";
 import { Helmet } from "react-helmet";
@@ -6,9 +7,15 @@ import { Helmet } from "react-helmet";
 import MasonryGallery from "../components/MasonryGallery";
 
 const GalleryPage = ({ data }) => {
+  const [debug, setDebug] = React.useState(false);
+
   const images = React.useMemo(
-    () => data.allFile.edges.map((edge) => edge.node, [data]),
-    [data]
+    () =>
+      R.pipe(
+        R.map((edge) => edge.node),
+        debug ? R.sortBy(R.path(["fields", "imageMeta", "dominantHue", 0])) : R.identity
+      )(data.allFile.edges),
+    [data, debug]
   );
 
   return (
@@ -39,9 +46,24 @@ const GalleryPage = ({ data }) => {
         </Link>
       </nav>
       <div className="bg-black min-h-screen mx-auto">
-        <h1 className="text-5xl mt-0 ml-5 font-serif font-black z-10 relative">
-          Photo Gallery
-        </h1>
+        <div className="flex flex-col md:flex-row">
+          <h1 className="text-5xl mt-0 ml-5 font-serif font-black z-10 flex-auto">
+            Photo Gallery
+          </h1>
+          {window && window.location.hash.includes("debug") ? (
+            <div className="m-2">
+              <label>
+                <input
+                  className="mr-1"
+                  onChange={() => setDebug(!debug)}
+                  type="checkbox"
+                  value={debug}
+                />
+                [debug] use stats.dominant instead of vibrant.Vibrant
+              </label>
+            </div>
+          ) : null}
+        </div>
         <div className="mx-auto">
           <MasonryGallery
             aspectsByBreakpoint={{
@@ -50,6 +72,7 @@ const GalleryPage = ({ data }) => {
               lg: 4,
               xl: 5,
             }}
+            debug={debug}
             images={images}
           />
         </div>
@@ -62,7 +85,7 @@ export const query = graphql`
   query GalleryPageQuery {
     allFile(
       filter: { sourceInstanceName: { eq: "gallery" } }
-      sort: { fields: fields___imageMeta___dominantHue, order: DESC }
+      sort: { fields: fields___imageMeta___vibrantHue, order: DESC }
     ) {
       edges {
         node {
@@ -84,6 +107,9 @@ export const query = graphql`
               dateTaken
               meta {
                 ObjectName
+              }
+              vibrant {
+                Vibrant
               }
             }
           }
