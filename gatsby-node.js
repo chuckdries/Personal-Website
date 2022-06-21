@@ -100,15 +100,19 @@ function processColors(vibrantData, imagePath) {
 //   }
 // }
 
-function transformMetaToNodeData(metaData, vibrantData, imagePath) {
+function transformMetaToNodeData(metaData, vibrantData, imagePath, { r, g, b }) {
   const vibrant = vibrantData ? processColors(vibrantData, imagePath) : null;
-  let dominantHue = vibrantData.Vibrant.getHsl()[0] * 360;
-
+  const vibrantHue = vibrantData.Vibrant.getHsl()[0] * 360;
+  let dominantHue = chroma(r,g,b).hsl();
+  if (isNaN(dominantHue[0])) {
+    dominantHue[0] = 0
+  }
   return {
     dateTaken: metaData.DateTimeOriginal,
     meta: metaData,
     vibrant,
-    dominantHue,
+    vibrantHue,
+    dominantHue
   };
 }
 
@@ -121,7 +125,9 @@ exports.onCreateNode = async function ({ node, actions }) {
       // icc: true
     });
 
-    const resizedImage = await sharp(node.absolutePath)
+    const sharpImage = sharp(node.absolutePath);
+    const { dominant } = await sharpImage.stats();
+    const resizedImage = await sharpImage
       .resize({
         width: 3000,
         height: 3000,
@@ -139,7 +145,8 @@ exports.onCreateNode = async function ({ node, actions }) {
       value: transformMetaToNodeData(
         metaData,
         vibrantData,
-        node.absolutePath
+        node.absolutePath,
+        dominant
       ),
     });
   }

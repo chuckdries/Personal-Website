@@ -6,10 +6,12 @@ import { getAspectRatio, getName } from "../utils";
 import useBreakpoint from "use-breakpoint";
 
 import themeBreakpoints from "../breakpoints";
+import classNames from "classnames";
 
 const MasonryGallery = ({
   images,
   aspectsByBreakpoint: aspectTargetsByBreakpoint,
+  debug,
 }) => {
   const breakpoints = React.useMemo(
     () => R.pick(R.keys(aspectTargetsByBreakpoint), themeBreakpoints),
@@ -99,20 +101,42 @@ const MasonryGallery = ({
         const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
 
         const width = `${widthNumber}%`;
+        console.log(image.fields.imageMeta.dominantHue);
         return (
           <Link
-            className="border border-black inline-block"
+            className={classNames(
+              "border-4 overflow-hidden",
+              debug && "border-8"
+            )}
             id={image.base}
             key={`${image.base}`}
             state={{ modal: true }}
             style={{
+              height: `calc(100vw / ${rowAspectRatioSum} - 10px)`,
               width,
+              // borderColor: `hsl(${image.fields.imageMeta.dominantHue}, 100%, 50%)`
+              // borderColor: `rgb(${image.fields.imageMeta.vibrant.Vibrant.join(',')})`
+              borderColor: debug
+                ? `hsl(
+                    ${image.fields.imageMeta.dominantHue[0]},
+                    ${image.fields.imageMeta.dominantHue[1] * 100}%,
+                    ${image.fields.imageMeta.dominantHue[2] * 100}%
+                  )`
+                : "black",
             }}
             to={`/photogallery/${image.base}`}
           >
+            {debug && (
+              <span className="text-white z-20 absolute bg-black">
+                hsl(
+                {image.fields.imageMeta.dominantHue[0]},{' '}
+                {(image.fields.imageMeta.dominantHue[1] * 100).toFixed(2)}%,{' '}
+                {(image.fields.imageMeta.dominantHue[2] * 100).toFixed(2)}% )
+              </span>
+            )}
             <GatsbyImage
               alt={getName(image)}
-              className="w-full"
+              className="w-full h-full"
               image={getImage(image)}
               objectFit="cover"
             />
