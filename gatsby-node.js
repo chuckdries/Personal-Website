@@ -156,7 +156,6 @@ exports.onCreateNode = async function ({ node, actions }) {
 // data layer is bootstrapped to let plugins create pages from data.
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
-  // get all images
   const galleryImages = await graphql(`
     {
       allFile(filter: { sourceInstanceName: { eq: "gallery" } }) {
