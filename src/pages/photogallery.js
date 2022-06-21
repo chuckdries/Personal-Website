@@ -15,7 +15,7 @@ const GalleryPage = ({ data }) => {
         R.map((edge) => edge.node),
         debug
           ? R.sortBy(R.path(["fields", "imageMeta", "dominantHue", 0]))
-          : R.identity
+          : R.sortBy(R.path(["fields", "imageMeta", "vibrantHue"]))
       )(data.allFile.edges),
     [data, debug]
   );

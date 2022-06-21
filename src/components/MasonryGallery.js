@@ -101,7 +101,6 @@ const MasonryGallery = ({
         const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
 
         const width = `${widthNumber}%`;
-        console.log(image.fields.imageMeta.dominantHue);
         return (
           <Link
             className={classNames(
