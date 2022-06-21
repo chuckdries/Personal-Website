@@ -13,7 +13,9 @@ const GalleryPage = ({ data }) => {
     () =>
       R.pipe(
         R.map((edge) => edge.node),
-        debug ? R.sortBy(R.path(["fields", "imageMeta", "dominantHue", 0])) : R.identity
+        debug
+          ? R.sortBy(R.path(["fields", "imageMeta", "dominantHue", 0]))
+          : R.identity
       )(data.allFile.edges),
     [data, debug]
   );
@@ -50,7 +52,8 @@ const GalleryPage = ({ data }) => {
           <h1 className="text-5xl mt-0 ml-5 font-serif font-black z-10 flex-auto">
             Photo Gallery
           </h1>
-          {window && window.location.hash.includes("debug") ? (
+          {typeof window !== "undefined" &&
+          window.location.hash.includes("debug") ? (
             <div className="m-2">
               <label>
                 <input
