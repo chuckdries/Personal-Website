@@ -3,22 +3,36 @@ import * as R from "ramda";
 import { graphql, Link } from "gatsby";
 import { navigate } from "gatsby";
 import { Helmet } from "react-helmet";
+import { Picker, Item } from "@adobe/react-spectrum";
 
 import MasonryGallery from "../components/MasonryGallery";
 
+const SORT_KEYS = {
+  hue: ["fields", "imageMeta", "vibrantHue"],
+  hue_debug: ["fields", "imageMeta", "dominantHue", 0],
+  date: [],
+};
+
 const GalleryPage = ({ data }) => {
-  const [debug, setDebug] = React.useState(false);
+  const [sortKey, setSortKey] = React.useState("hue");
 
   const images = React.useMemo(
     () =>
       R.pipe(
         R.map((edge) => edge.node),
-        debug
-          ? R.sortBy(R.path(["fields", "imageMeta", "dominantHue", 0]))
-          : R.sortBy(R.path(["fields", "imageMeta", "vibrantHue"]))
+        sortKey === "date"
+          ? R.sort((node1, node2) => {
+            const date1 = new Date(R.path(["fields", "imageMeta", "dateTaken"], node1));
+            const date2 = new Date(R.path(["fields", "imageMeta", "dateTaken"], node2));
+            return -1 * (date1.getTime() - date2.getTime())
+          })
+          : R.sortBy(R.path(SORT_KEYS[sortKey]))
       )(data.allFile.edges),
-    [data, debug]
+    [data, sortKey]
   );
+
+  const showDebug = typeof window !== "undefined" &&
+  window.location.search.includes("debug=true")
 
   return (
     <>
@@ -48,24 +62,23 @@ const GalleryPage = ({ data }) => {
         </Link>
       </nav>
       <div className="bg-black min-h-screen mx-auto">
-        <div className="flex flex-col md:flex-row">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-end">
           <h1 className="text-5xl mt-0 ml-5 font-serif font-black z-10 flex-auto">
             Photo Gallery
           </h1>
-          {typeof window !== "undefined" &&
-          window.location.hash.includes("debug") ? (
-            <div className="m-2">
-              <label>
-                <input
-                  className="mr-1"
-                  onChange={() => setDebug(!debug)}
-                  type="checkbox"
-                  value={debug}
-                />
-                [debug] use stats.dominant instead of vibrant.Vibrant
-              </label>
-            </div>
-          ) : null}
+          <div className="m-2 ml-5 self-end">
+            <Picker
+              label="Sort by..."
+              onSelectionChange={setSortKey}
+              selectedKey={sortKey}
+            >
+              <Item key="hue">Hue</Item>
+              {showDebug && (
+                  <Item key="hue_debug">Dominant hue[debug]</Item>
+                )}
+              <Item key="date">Date</Item>
+            </Picker>
+          </div>
         </div>
         <div className="mx-auto">
           <MasonryGallery
@@ -74,8 +87,9 @@ const GalleryPage = ({ data }) => {
               md: 4,
               lg: 4,
               xl: 5,
+              // '2xl': 6.1,
             }}
-            debug={debug}
+            debug={sortKey === 'hue_debug'}
             images={images}
           />
         </div>

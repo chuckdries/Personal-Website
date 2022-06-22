@@ -35,6 +35,7 @@ const IndexPage = ({
   const image = React.useMemo(() => {
     return images[imageIndex];
   }, [images, imageIndex]);
+  console.log(image);
 
   const shuffleImage = React.useCallback(
     (currentImage) => {
@@ -214,6 +215,7 @@ export const query = graphql`
         sourceInstanceName: { eq: "gallery" }
         base: {
           in: [
+            "DSC06616.jpg" # B&W abstract ## KEEP ON TOP
             # "20160530-DSC09108.jpg" # portrait red flowers
             # # "DSC00201.jpg" # duck
             # "DSC04905.jpg" # purple layers
@@ -245,7 +247,6 @@ export const query = graphql`
             "DSC02615.jpg" # rori iredale beach field camera
             "DSC06490.jpg" # Japanese garden steps
             "DSC06687.jpg" # Multnomah Falls long exposure
-            "DSC06616.jpg" # B&W abstract
           ]
         }
       }
