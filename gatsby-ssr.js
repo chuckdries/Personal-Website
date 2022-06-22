@@ -1,16 +1,20 @@
 import * as React from "react";
 import { darkTheme, Provider } from "@adobe/react-spectrum";
 import "./src/styles/global.css";
+import { SSRProvider } from "@react-aria/ssr";
 
 export const wrapRootElement = ({ element }) => (
-  <Provider
-    UNSAFE_style={{
-      background: "transparent !important",
-      color: 'unset !important'
-    }}
-    colorScheme="dark"
-    theme={darkTheme}
-  >
-    {element}
-  </Provider>
+  <SSRProvider>
+    <Provider
+      UNSAFE_style={{
+        background: "transparent !important",
+        color: "unset !important",
+      }}
+      colorScheme="dark"
+      scale="medium"
+      theme={darkTheme}
+    >
+      {element}
+    </Provider>
+  </SSRProvider>
 );
