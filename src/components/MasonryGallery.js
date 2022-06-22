@@ -117,6 +117,7 @@ const MasonryGallery = ({
             state={{ modal: true }}
             style={{
               height: `calc(100vw / ${rowAspectRatioSum} - 10px)`,
+              maxHeight: '50vh',
               width,
               // borderColor: `hsl(${image.fields.imageMeta.dominantHue}, 100%, 50%)`
               // borderColor: `rgb(${image.fields.imageMeta.vibrant.Vibrant.join(',')})`
