@@ -1,3 +1,5 @@
+import * as React from "react";
+import { darkTheme, Provider } from "@adobe/react-spectrum";
 import "./src/styles/global.css";
 
 const env =
@@ -6,11 +8,11 @@ export const onRouteUpdate = function () {
   if (env === "production" && typeof window.plausible === "object") {
     window.plausible("pageview");
     // eslint-disable-next-line
-    _paq.push(['setCustomUrl', '/' + window.location.pathname]);
+    _paq.push(["setCustomUrl", "/" + window.location.pathname]);
     // eslint-disable-next-line
-    _paq.push(['setDocumentTitle', document.title]);
+    _paq.push(["setDocumentTitle", document.title]);
     // eslint-disable-next-line
-    _paq.push(['trackPageView']);
+    _paq.push(["trackPageView"]);
   }
 };
 // import * as React from 'react';
@@ -26,6 +28,19 @@ export const onRouteUpdate = function () {
 //   p: MyParagraph,
 // };
 
-// export const wrapRootElement = ({ element }) => (
-//   <MDXProvider components={components}>{element}</MDXProvider>
-// );
+
+export const wrapRootElement = ({ element }) => (
+  <Provider
+    UNSAFE_style={{
+      background: "transparent !important",
+      color: 'unset !important'
+    }}
+    colorScheme="dark"
+    theme={darkTheme}
+  >
+    {element}
+  </Provider>
+);
+
+
+// {/* // <MDXProvider components={components}>{element}</MDXProvider> */}

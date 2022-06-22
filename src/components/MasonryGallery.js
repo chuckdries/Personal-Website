@@ -51,23 +51,28 @@ const MasonryGallery = ({
             R.reduce(
               (acc, currentAspect) => {
                 const currentRow = acc.pop();
-                if (currentRow.aspect + currentAspect > targetAspect) {
+                const currentDiff = Math.abs(targetAspect - currentRow.aspect);
+                const diffIfImageIsAddedToCurrentRow = Math.abs(
+                  targetAspect - (currentRow.aspect + currentAspect)
+                );
+                // add image to current row if it gets us closer to our target aspect ratio
+                if (currentDiff > diffIfImageIsAddedToCurrentRow) {
                   return [
                     ...acc,
-                    currentRow,
                     {
-                      aspect: currentAspect,
-                      images: 1,
-                      startIndex: currentRow.startIndex + currentRow.images,
+                      aspect: currentRow.aspect + currentAspect,
+                      images: currentRow.images + 1,
+                      startIndex: currentRow.startIndex,
                     },
                   ];
                 }
                 return [
                   ...acc,
+                  currentRow,
                   {
-                    aspect: currentRow.aspect + currentAspect,
-                    images: currentRow.images + 1,
-                    startIndex: currentRow.startIndex,
+                    aspect: currentAspect,
+                    images: 1,
+                    startIndex: currentRow.startIndex + currentRow.images,
                   },
                 ];
               },
@@ -128,8 +133,8 @@ const MasonryGallery = ({
             {debug && (
               <span className="text-white z-20 absolute bg-black">
                 hsl(
-                {image.fields.imageMeta.dominantHue[0]},{' '}
-                {(image.fields.imageMeta.dominantHue[1] * 100).toFixed(2)}%,{' '}
+                {image.fields.imageMeta.dominantHue[0]},{" "}
+                {(image.fields.imageMeta.dominantHue[1] * 100).toFixed(2)}%,{" "}
                 {(image.fields.imageMeta.dominantHue[2] * 100).toFixed(2)}% )
               </span>
             )}
