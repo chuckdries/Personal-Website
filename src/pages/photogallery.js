@@ -17,6 +17,13 @@ const GalleryPage = ({ data }) => {
   const [sortKey, _setSortKey] = React.useState("hue");
   const setSortKey = React.useCallback(
     (key) => {
+      try {
+        window.plausible("Sort Gallery", {
+          props: { key }
+        })
+      } catch (e) {
+        // do nothing
+      }
       localStorage?.setItem("photogallery.sortkey", key);
       _setSortKey(key);
     },
