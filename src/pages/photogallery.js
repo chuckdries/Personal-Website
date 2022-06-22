@@ -14,7 +14,21 @@ const SORT_KEYS = {
 };
 
 const GalleryPage = ({ data }) => {
-  const [sortKey, setSortKey] = React.useState("hue");
+  const [sortKey, _setSortKey] = React.useState("hue");
+  const setSortKey = React.useCallback(
+    (key) => {
+      localStorage?.setItem("photogallery.sortkey", key);
+      _setSortKey(key);
+    },
+    [_setSortKey]
+  );
+
+  React.useEffect(() => {
+    const _sortKey = localStorage.getItem("photogallery.sortkey");
+    if (_sortKey) {
+      setSortKey(_sortKey)
+    }
+  }, [setSortKey])
 
   const images = React.useMemo(
     () =>
@@ -22,17 +36,22 @@ const GalleryPage = ({ data }) => {
         R.map((edge) => edge.node),
         sortKey === "date"
           ? R.sort((node1, node2) => {
-            const date1 = new Date(R.path(["fields", "imageMeta", "dateTaken"], node1));
-            const date2 = new Date(R.path(["fields", "imageMeta", "dateTaken"], node2));
-            return -1 * (date1.getTime() - date2.getTime())
-          })
+              const date1 = new Date(
+                R.path(["fields", "imageMeta", "dateTaken"], node1)
+              );
+              const date2 = new Date(
+                R.path(["fields", "imageMeta", "dateTaken"], node2)
+              );
+              return -1 * (date1.getTime() - date2.getTime());
+            })
           : R.sortBy(R.path(SORT_KEYS[sortKey]))
       )(data.allFile.edges),
     [data, sortKey]
   );
 
-  const showDebug = typeof window !== "undefined" &&
-  window.location.search.includes("debug=true")
+  const showDebug =
+    typeof window !== "undefined" &&
+    window.location.search.includes("debug=true");
 
   return (
     <>
@@ -73,9 +92,7 @@ const GalleryPage = ({ data }) => {
               selectedKey={sortKey}
             >
               <Item key="hue">Hue</Item>
-              {showDebug && (
-                  <Item key="hue_debug">Dominant hue[debug]</Item>
-                )}
+              {showDebug && <Item key="hue_debug">Dominant hue[debug]</Item>}
               <Item key="date">Date</Item>
             </Picker>
           </div>
@@ -89,7 +106,7 @@ const GalleryPage = ({ data }) => {
               xl: 5,
               // '2xl': 6.1,
             }}
-            debug={sortKey === 'hue_debug'}
+            debug={sortKey === "hue_debug"}
             images={images}
           />
         </div>

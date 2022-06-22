@@ -1,5 +1,5 @@
 import * as React from "react";
-import { darkTheme, Provider } from "@adobe/react-spectrum";
+import { darkTheme, Provider, SSRProvider } from "@adobe/react-spectrum";
 import "./src/styles/global.css";
 
 const env =
@@ -28,19 +28,20 @@ export const onRouteUpdate = function () {
 //   p: MyParagraph,
 // };
 
-
 export const wrapRootElement = ({ element }) => (
-  <Provider
-    UNSAFE_style={{
-      background: "transparent !important",
-      color: 'unset !important'
-    }}
-    colorScheme="dark"
-    theme={darkTheme}
-  >
-    {element}
-  </Provider>
+  <SSRProvider>
+    <Provider
+      UNSAFE_style={{
+        background: "transparent !important",
+        color: "unset !important",
+      }}
+      colorScheme="dark"
+      scale="medium"
+      theme={darkTheme}
+    >
+      {element}
+    </Provider>
+  </SSRProvider>
 );
-
 
 // {/* // <MDXProvider components={components}>{element}</MDXProvider> */}
