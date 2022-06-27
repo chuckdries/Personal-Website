@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "develop": "gatsby develop",
-    "start": "cross-env NODE_OPTIONS=--no-experimental-fetch gatsby develop -H 0.0.0.0",
+    "start": "cross-env NODE_OPTIONS=--no-experimental-fetch gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",

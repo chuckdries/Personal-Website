@@ -247,6 +247,8 @@ export const query = graphql`
             "DSC02615.jpg" # rori iredale beach field camera
             "DSC06490.jpg" # Japanese garden steps
             "DSC06687.jpg" # Multnomah Falls long exposure
+            "DSC09932.jpg" # milky way
+            "DSC09944.jpg" # milky way rori
           ]
         }
       }
