@@ -14,7 +14,7 @@ const SORT_KEYS = {
 };
 
 const GalleryPage = ({ data }) => {
-  const [sortKey, _setSortKey] = React.useState("hue");
+  const [sortKey, _setSortKey] = React.useState("date");
   const setSortKey = React.useCallback(
     (key) => {
       try {
@@ -126,7 +126,6 @@ export const query = graphql`
   query GalleryPageQuery {
     allFile(
       filter: { sourceInstanceName: { eq: "gallery" } }
-      sort: { fields: fields___imageMeta___vibrantHue, order: DESC }
     ) {
       edges {
         node {
