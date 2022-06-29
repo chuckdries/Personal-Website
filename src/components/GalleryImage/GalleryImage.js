@@ -20,6 +20,7 @@ import {
   getVibrant,
   getHelmetSafeBodyStyle,
   hasName,
+  getCanonicalSize,
 } from "../../utils";
 import MetadataItem from "./MetadataItem";
 
@@ -35,7 +36,7 @@ const logKeyShortcut = (keyCode) => {
 };
 
 const GalleryImage = ({ data, pageContext }) => {
-  const image = data.allFile.edges[0].node;
+  const image = data.file;
   const ar = getAspectRatio(image);
 
   const [zoom, setZoom] = useState(false);
@@ -72,13 +73,13 @@ const GalleryImage = ({ data, pageContext }) => {
 
   const name = getName(image);
   const { meta, dateTaken: dt } = getMeta(image);
-  // const locationString = meta.City;
   let locationString;
   if (meta.City || meta.State || meta.Location) {
     const location = [meta.Location, meta.City, meta.State].filter(Boolean);
     locationString = location.join(", ");
   }
   const vibrant = getVibrant(image, true);
+  const canonicalSize = getCanonicalSize(image);
 
   const orientationClasses =
     ar > 1
@@ -140,29 +141,33 @@ const GalleryImage = ({ data, pageContext }) => {
         </nav>
         <div className={classnames("flex", orientationClasses)}>
           <div
-            className="flex-grow-0 mb-2 overflow-hidden"
+            className={classnames(
+              zoom ? "cursor-zoom-out" : "cursor-zoom-in",
+              "mb-2"
+            )}
+            onClick={() => setZoom((_zoom) => !_zoom)}
             style={{
-              maxWidth: zoom
-                ? "unset"
-                : `calc(max(calc(100vh - ${verticalPad}), 500px) * ${ar})`,
-              width: zoom
-                ? `max(calc(100vw - 16px), calc(100vh * ${ar}))`
-                : "unset",
-              // minHeight: zoom ? "100vh" : "unset",
+              maxWidth: `calc(max(calc(100vh - ${verticalPad}), 500px) * ${ar})`,
             }}
           >
-            <GatsbyImage
-              alt={name}
-              className={classnames(
-                "border-4 border-vibrant",
-                zoom ? "cursor-zoom-out" : "cursor-zoom-in"
-              )}
-              image={getImage(image)}
-              key={image.base}
-              loading="eager"
-              objectFit="contain"
-              onClick={() => setZoom((_zoom) => !_zoom)}
-            />
+            {zoom ? (
+              <img
+                alt={name}
+                src={image.publicURL}
+                style={{
+                  maxWidth: "unset",
+                }}
+              />
+            ) : (
+              <GatsbyImage
+                alt={name}
+                className="border-4 border-vibrant"
+                image={getImage(image)}
+                key={image.base}
+                loading="eager"
+                objectFit="contain"
+              />
+            )}
           </div>
           <div
             className={classnames(
@@ -259,54 +264,42 @@ const GalleryImage = ({ data, pageContext }) => {
 
 export const query = graphql`
   query GalleryImage($imageFilename: String) {
-    allFile(
-      filter: {
-        sourceInstanceName: { eq: "gallery" }
-        base: { eq: $imageFilename }
+    file(base: { eq: $imageFilename }) {
+      base
+      publicURL
+      childImageSharp {
+        fluid {
+          aspectRatio
+        }
+        gatsbyImageData(
+          layout: CONSTRAINED
+          placeholder: DOMINANT_COLOR
+          quality: 90
+        )
       }
-    ) {
-      edges {
-        node {
-          base
-          publicURL
-          childImageSharp {
-            fluid {
-              aspectRatio
-            }
-            gatsbyImageData(
-              layout: CONSTRAINED
-              # placeholder: BLURRED
-              placeholder: DOMINANT_COLOR
-              # placeholder: TRACED_SVG
-              height: 2160
-              quality: 90
-            )
+      fields {
+        imageMeta {
+          dateTaken
+          meta {
+            Make
+            Model
+            ExposureTime
+            FNumber
+            ISO
+            DateTimeOriginal
+            CreateDate
+            ShutterSpeedValue
+            ApertureValue
+            FocalLength
+            LensModel
+            ObjectName
+            Caption
+            Location
+            City
+            State
           }
-          fields {
-            imageMeta {
-              dateTaken
-              meta {
-                Make
-                Model
-                ExposureTime
-                FNumber
-                ISO
-                DateTimeOriginal
-                CreateDate
-                ShutterSpeedValue
-                ApertureValue
-                FocalLength
-                LensModel
-                ObjectName
-                Caption
-                Location
-                City
-                State
-              }
-              vibrant {
-                ...VibrantColors
-              }
-            }
+          vibrant {
+            ...VibrantColors
           }
         }
       }
