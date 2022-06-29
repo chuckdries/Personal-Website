@@ -155,6 +155,7 @@ const GalleryImage = ({ data, pageContext }) => {
                 alt={name}
                 src={image.publicURL}
                 style={{
+                  width: canonicalSize.width / window.devicePixelRatio,
                   maxWidth: "unset",
                 }}
               />
