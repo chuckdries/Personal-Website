@@ -103,9 +103,15 @@ const MasonryGallery = ({
         }
         const rowAspectRatioSum = currentRow.aspect;
         const ar = getAspectRatio(image);
-        const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
-
-        const width = `${widthNumber}%`;
+        let width;
+        let height = `calc(100vw / ${rowAspectRatioSum} - 10px)`
+        if (ar === rowAspectRatioSum) {
+          width = `calc(300px * ${ar})`;
+          height = 'unset'
+        } else {
+          const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
+          width = `${widthNumber}%`;
+        }
         return (
           <Link
             className={classNames(
@@ -116,8 +122,7 @@ const MasonryGallery = ({
             key={`${image.base}`}
             state={{ modal: true }}
             style={{
-              height: `calc(100vw / ${rowAspectRatioSum} - 10px)`,
-              maxHeight: '50vh',
+              height,
               width,
               // borderColor: `hsl(${image.fields.imageMeta.dominantHue}, 100%, 50%)`
               // borderColor: `rgb(${image.fields.imageMeta.vibrant.Vibrant.join(',')})`
