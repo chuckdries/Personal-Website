@@ -7,8 +7,8 @@ export const wrapRootElement = ({ element }) => (
   <SSRProvider>
     <Provider
       UNSAFE_style={{
-        background: "transparent !important",
-        color: "unset !important",
+        background: "unset",
+        color: "unset",
       }}
       colorScheme="dark"
       scale="medium"
