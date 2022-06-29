@@ -1,7 +1,4 @@
 module.exports = {
-  flags: {
-    FAST_DEV: true
-  },
   siteMetadata: {
     title: "Chuck Dries",
     siteUrl: "https://chuckdries.com",
@@ -9,12 +6,6 @@ module.exports = {
   plugins: [
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
-    {
-      resolve: "gatsby-plugin-manifest",
-      options: {
-        icon: "src/images/glasses-outline.svg",
-      },
-    },
     "gatsby-plugin-mdx",
     {
       resolve: `gatsby-plugin-sharp`,
@@ -61,5 +52,11 @@ module.exports = {
     },
     "gatsby-plugin-preval",
     "gatsby-plugin-robots-txt",
+    {
+      resolve: "gatsby-plugin-manifest",
+      options: {
+        icon: "src/images/glasses-outline.svg",
+      },
+    },
   ],
 };
