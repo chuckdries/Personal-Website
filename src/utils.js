@@ -13,6 +13,11 @@ export const hasName = (image) => Boolean(getMeta(image)?.meta?.ObjectName);
 export const getAspectRatio = (image) =>
   image.childImageSharp.fluid.aspectRatio;
 
+export const getCanonicalSize = (image) => ({
+  height: image.childImageSharp.gatsbyImageData.height,
+  width: image.childImageSharp.gatsbyImageData.width,
+});
+
 export const getRgba = (palette, alpha) =>
   `rgba(${palette[0]}, ${palette[1]}, ${palette[2]}, ${alpha || 1})`;
 
