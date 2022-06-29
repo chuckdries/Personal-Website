@@ -1,5 +1,17 @@
 import React, { useState } from "react";
 import { graphql, navigate, Link } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { Helmet } from "react-helmet";
+import classnames from "classnames";
+
+import Calendar from "@spectrum-icons/workflow/Calendar";
+import Stopwatch from "@spectrum-icons/workflow/Stopwatch";
+import Exposure from "@spectrum-icons/workflow/Exposure";
+import Filmroll from "@spectrum-icons/workflow/Filmroll";
+import Camera from "@spectrum-icons/workflow/Camera";
+import Circle from "@spectrum-icons/workflow/Circle";
+import Location from "@spectrum-icons/workflow/Location";
+
 import {
   getAspectRatio,
   getMeta,
@@ -9,9 +21,6 @@ import {
   getHelmetSafeBodyStyle,
   hasName,
 } from "../../utils";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { Helmet } from "react-helmet";
-import classnames from "classnames";
 import MetadataItem from "./MetadataItem";
 
 const logKeyShortcut = (keyCode) => {
@@ -197,33 +206,33 @@ const GalleryImage = ({ data, pageContext }) => {
             <div className="flex flex-col items-end">
               <MetadataItem
                 data={dateTaken.toLocaleDateString()}
-                icon="calendar-outline"
+                icon={<Calendar />}
                 title="date taken"
               />
               <div className="flex justify-end gap-2 border border-vibrant-light pl-2 rounded">
                 <MetadataItem
                   data={shutterSpeed}
-                  icon="stopwatch-outline"
+                  icon={<Stopwatch />}
                   title="shutter speed"
                 />
                 {meta.FNumber && (
                   <MetadataItem
                     data={`f/${meta.FNumber}`}
-                    icon="aperture-outline"
+                    icon={<Exposure />}
                     title="aperture"
                   />
                 )}
-                <MetadataItem data={meta.ISO} icon="film-outline" title="ISO" />
+                <MetadataItem data={meta.ISO} icon={<Filmroll />} title="ISO" />
               </div>
               <MetadataItem
                 data={locationString}
-                icon="map-outline"
+                icon={<Location />}
                 title="location"
               />
               {(meta.Make || meta.Model) && (
                 <MetadataItem
                   data={[meta.Make, meta.Model].join(" ")}
-                  icon="camera-outline"
+                  icon={<Camera />}
                   title="camera"
                 />
               )}
@@ -235,7 +244,7 @@ const GalleryImage = ({ data, pageContext }) => {
                   ]
                     .filter(Boolean)
                     .join(" @")}
-                  icon="ellipse"
+                  icon={<Circle />}
                   title="lens"
                 />
               )}
