@@ -40,10 +40,6 @@ export default function HTML(props) {
           key={"body"}
         />
         {props.postBodyComponents}
-        <script
-          src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-          type="module"
-        ></script>
       </body>
     </html>
   );

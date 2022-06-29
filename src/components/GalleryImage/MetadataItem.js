@@ -7,8 +7,8 @@ const MetadataItem = ({ icon, data, title }) =>
         <span className="text-sm opacity-60 m-0 ">{title}</span>
         <span className="text-lg leading-4">{data}</span>
       </div>
-      <span className="icon-offset ml-2 mt-1 text-2xl">
-        <ion-icon name={icon} title={title}></ion-icon>
+      <span className="ml-2 pb-2 text-2xl">
+        {icon}
       </span>
     </div>
   ) : null;
