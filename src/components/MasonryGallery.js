@@ -43,49 +43,44 @@ const MasonryGallery = ({
     [images]
   );
 
-  const rowsByBreakpoint = React.useMemo(
+  const targetAspect = aspectTargetsByBreakpoint[breakpoint];
+  const rows = React.useMemo(
     () =>
-      R.map(
-        R.pipe(
-          (targetAspect) =>
-            R.reduce(
-              (acc, currentAspect) => {
-                const currentRow = acc.pop();
-                const currentDiff = Math.abs(targetAspect - currentRow.aspect);
-                const diffIfImageIsAddedToCurrentRow = Math.abs(
-                  targetAspect - (currentRow.aspect + currentAspect)
-                );
-                // add image to current row if it gets us closer to our target aspect ratio
-                if (currentDiff > diffIfImageIsAddedToCurrentRow) {
-                  return [
-                    ...acc,
-                    {
-                      aspect: currentRow.aspect + currentAspect,
-                      images: currentRow.images + 1,
-                      startIndex: currentRow.startIndex,
-                    },
-                  ];
-                }
-                return [
-                  ...acc,
-                  currentRow,
-                  {
-                    aspect: currentAspect,
-                    images: 1,
-                    startIndex: currentRow.startIndex + currentRow.images,
-                  },
-                ];
+      R.pipe(
+        R.reduce(
+          (acc, currentAspect) => {
+            const currentRow = acc.pop();
+            const currentDiff = Math.abs(targetAspect - currentRow.aspect);
+            const diffIfImageIsAddedToCurrentRow = Math.abs(
+              targetAspect - (currentRow.aspect + currentAspect)
+            );
+            // add image to current row if it gets us closer to our target aspect ratio
+            if (currentDiff > diffIfImageIsAddedToCurrentRow) {
+              return [
+                ...acc,
+                {
+                  aspect: currentRow.aspect + currentAspect,
+                  images: currentRow.images + 1,
+                  startIndex: currentRow.startIndex,
+                },
+              ];
+            }
+            return [
+              ...acc,
+              currentRow,
+              {
+                aspect: currentAspect,
+                images: 1,
+                startIndex: currentRow.startIndex + currentRow.images,
               },
-              [{ aspect: 0, startIndex: 0, images: 0 }],
-              aspectRatios
-            ),
-          R.indexBy(R.prop("startIndex"))
-        )
-      )(aspectTargetsByBreakpoint),
-    [aspectRatios, aspectTargetsByBreakpoint]
+            ];
+          },
+          [{ aspect: 0, startIndex: 0, images: 0 }]
+        ),
+        R.indexBy(R.prop("startIndex"))
+      )(aspectRatios),
+    [aspectRatios, targetAspect]
   );
-
-  const rows = rowsByBreakpoint[breakpoint];
 
   let cursor = 0;
   return (
@@ -104,10 +99,11 @@ const MasonryGallery = ({
         const rowAspectRatioSum = currentRow.aspect;
         const ar = getAspectRatio(image);
         let width;
-        let height = `calc(100vw / ${rowAspectRatioSum} - 10px)`
-        if (ar === rowAspectRatioSum) {
-          width = `calc(300px * ${ar})`;
-          height = 'unset'
+        let height = `calc(100vw / ${rowAspectRatioSum} - 10px)`;
+        if (rowAspectRatioSum < targetAspect / 2) {
+          // incomplete row, render stuff at "ideal" sizes instead of filling width
+          width = `calc(100vw / ${targetAspect / ar})`;
+          height = "unset";
         } else {
           const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
           width = `${widthNumber}%`;
