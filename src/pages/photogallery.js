@@ -19,8 +19,8 @@ const GalleryPage = ({ data }) => {
     (key) => {
       try {
         window.plausible("Sort Gallery", {
-          props: { key }
-        })
+          props: { key },
+        });
       } catch (e) {
         // do nothing
       }
@@ -33,9 +33,9 @@ const GalleryPage = ({ data }) => {
   React.useEffect(() => {
     const _sortKey = localStorage.getItem("photogallery.sortkey");
     if (_sortKey) {
-      setSortKey(_sortKey)
+      setSortKey(_sortKey);
     }
-  }, [setSortKey])
+  }, [setSortKey]);
 
   const images = React.useMemo(
     () =>
@@ -66,30 +66,30 @@ const GalleryPage = ({ data }) => {
         <title>Photo Gallery | Chuck Dries</title>
         <body className="bg-black text-white" />
       </Helmet>
-      <nav className="mt-1 ml-1 text-lg mb-4">
-        <button
-          className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before  mr-1"
-          onClick={() => navigate(-1)}
-          type="button"
-        >
-          back
-        </button>
-        <Link
-          className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-          to="/"
-        >
-          home
-        </Link>
-        <Link
-          className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-          to="/photogallery/"
-        >
-          gallery
-        </Link>
-      </nav>
-      <div className="bg-black min-h-screen mx-auto">
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-end">
-          <h1 className="text-5xl mt-0 ml-5 font-serif font-black z-10 flex-auto">
+      <div className="sticky top-0 z-10 bg-black">
+        <nav className="mt-1 ml-1 text-lg mb-4">
+          <button
+            className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before  mr-1"
+            onClick={() => navigate(-1)}
+            type="button"
+          >
+            back
+          </button>
+          <Link
+            className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
+            to="/"
+          >
+            home
+          </Link>
+          <Link
+            className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
+            to="/photogallery/"
+          >
+            gallery
+          </Link>
+        </nav>
+        <div className="flex flex-row items-end">
+          <h1 className="text-3xl sm:text-5xl mt-0 ml-5 font-serif font-black z-10 flex-auto">
             Photo Gallery
           </h1>
           <div className="m-2 ml-5 self-end">
@@ -104,29 +104,25 @@ const GalleryPage = ({ data }) => {
             </Picker>
           </div>
         </div>
-        <div className="mx-auto">
-          <MasonryGallery
-            aspectsByBreakpoint={{
-              sm: 3,
-              md: 4,
-              lg: 4,
-              xl: 5,
-              // '2xl': 6.1,
-            }}
-            debug={sortKey === "hue_debug"}
-            images={images}
-          />
-        </div>
       </div>
+      <MasonryGallery
+        aspectsByBreakpoint={{
+          sm: 3,
+          md: 4,
+          lg: 4,
+          xl: 5,
+          // '2xl': 6.1,
+        }}
+        debug={sortKey === "hue_debug"}
+        images={images}
+      />
     </>
   );
 };
 
 export const query = graphql`
   query GalleryPageQuery {
-    allFile(
-      filter: { sourceInstanceName: { eq: "gallery" } }
-    ) {
+    allFile(filter: { sourceInstanceName: { eq: "gallery" } }) {
       edges {
         node {
           relativePath

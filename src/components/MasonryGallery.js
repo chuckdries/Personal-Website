@@ -28,7 +28,9 @@ const MasonryGallery = ({
     if (!el) {
       return;
     }
-    el.scrollIntoView();
+    el.scrollIntoView({
+      block: "center",
+    });
   }, []);
 
   React.useEffect(() => {
