@@ -241,7 +241,7 @@ export const query = graphql`
             "DSC01800.jpg" # cherry blossom landscape sunny sky
             "DSC01772.jpg" # cherry blossom portrait sunny sky
             # "DSC06201.jpg" # Wheatland snowy hills
-            # "DSC01924.jpg" # cherry blossom sea
+            "DSC01924.jpg" # cherry blossom sea
             # "DSC03157.jpg" # constellation of flowers
             "DSC02610.jpg" # peter iredale portrait
             "DSC02615.jpg" # rori iredale beach field camera
@@ -249,6 +249,7 @@ export const query = graphql`
             "DSC06687.jpg" # Multnomah Falls long exposure
             "DSC09932.jpg" # milky way
             "DSC09944.jpg" # milky way rori
+            "DSC03725.jpg" # oregon coast lighthouse
           ]
         }
       }
