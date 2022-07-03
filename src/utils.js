@@ -49,6 +49,9 @@ const gcd = (a, b) => {
 };
 
 export const getShutterFractionFromExposureTime = (exposureTime) => {
+  if (exposureTime === 0.03333333333333333) {
+    return "1/30";
+  }
   if (exposureTime === 0.016666666666666666) {
     return "1/60";
   }
