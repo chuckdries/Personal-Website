@@ -6,15 +6,30 @@ import { Helmet } from "react-helmet";
 import { Picker, Item } from "@adobe/react-spectrum";
 
 import MasonryGallery from "../components/MasonryGallery";
+import KeywordsPicker from "../components/KeywordsPicker";
 
 const SORT_KEYS = {
   hue: ["fields", "imageMeta", "vibrantHue"],
+  rating: ["fields", "imageMeta", "meta", "Rating"],
   hue_debug: ["fields", "imageMeta", "dominantHue", 0],
   date: [],
 };
 
 const GalleryPage = ({ data }) => {
-  const [sortKey, _setSortKey] = React.useState("date");
+  const [keyword, _setKeyword] = React.useState(null);
+  const [sortKey, _setSortKey] = React.useState("rating");
+
+  const setKeyword = React.useCallback((keyword) => {
+    try {
+      window.plausible("Filter Keyword", {
+        props: { keyword },
+      });
+    } catch (e) {
+      // do nothing
+    }
+    _setKeyword(keyword);
+  }, [_setKeyword]);
+
   const setSortKey = React.useCallback(
     (key) => {
       try {
@@ -24,14 +39,14 @@ const GalleryPage = ({ data }) => {
       } catch (e) {
         // do nothing
       }
-      localStorage?.setItem("photogallery.sortkey", key);
+      localStorage?.setItem("photogallery.sortkey2", key);
       _setSortKey(key);
     },
     [_setSortKey]
   );
 
   React.useEffect(() => {
-    const _sortKey = localStorage.getItem("photogallery.sortkey");
+    const _sortKey = localStorage.getItem("photogallery.sortkey2");
     if (_sortKey) {
       setSortKey(_sortKey);
     }
@@ -51,9 +66,17 @@ const GalleryPage = ({ data }) => {
               );
               return -1 * (date1.getTime() - date2.getTime());
             })
-          : R.sortBy(R.path(SORT_KEYS[sortKey]))
+          : R.sort(R.descend(R.path(SORT_KEYS[sortKey]))),
+        keyword
+          ? R.filter((image) =>
+              R.includes(
+                keyword,
+                R.path(["fields", "imageMeta", "meta", "Keywords"], image)
+              )
+            )
+          : R.identity
       )(data.allFile.edges),
-    [data, sortKey]
+    [data, sortKey, keyword]
   );
 
   const showDebug =
@@ -92,15 +115,32 @@ const GalleryPage = ({ data }) => {
           <h1 className="text-3xl sm:text-5xl mt-0 ml-5 font-serif font-black z-10 flex-auto">
             Photo Gallery
           </h1>
+          <KeywordsPicker
+            keywords={[
+              "night",
+              "coast",
+              "city",
+              "landscape",
+              "flowers",
+              "product",
+              "waterfall",
+              "fireworks",
+              "panoramic",
+              // "sunset",
+            ]}
+            onChange={setKeyword}
+            value={keyword}
+          />
           <div className="m-2 ml-5 self-end">
             <Picker
               label="Sort by..."
               onSelectionChange={setSortKey}
               selectedKey={sortKey}
             >
+              <Item key="rating">Default</Item>
+              <Item key="date">Date</Item>
               <Item key="hue">Hue</Item>
               {showDebug && <Item key="hue_debug">Dominant hue[debug]</Item>}
-              <Item key="date">Date</Item>
             </Picker>
           </div>
         </div>
@@ -113,7 +153,8 @@ const GalleryPage = ({ data }) => {
           xl: 5,
           // '2xl': 6.1,
         }}
-        debug={sortKey === "hue_debug"}
+        debugHue={sortKey === "hue_debug"}
+        debugRating={sortKey === "rating" && showDebug}
         images={images}
       />
     </>
@@ -122,7 +163,10 @@ const GalleryPage = ({ data }) => {
 
 export const query = graphql`
   query GalleryPageQuery {
-    allFile(filter: { sourceInstanceName: { eq: "gallery" } }) {
+    allFile(
+      filter: { sourceInstanceName: { eq: "gallery" } }
+      sort: { fields: fields___imageMeta___dateTaken, order: DESC }
+    ) {
       edges {
         node {
           relativePath
@@ -143,6 +187,8 @@ export const query = graphql`
               dominantHue
               dateTaken
               meta {
+                Keywords
+                Rating
                 ObjectName
               }
               vibrant {
