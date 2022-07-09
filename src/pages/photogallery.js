@@ -19,16 +19,26 @@ const GalleryPage = ({ data }) => {
   const [keyword, _setKeyword] = React.useState(null);
   const [sortKey, _setSortKey] = React.useState("rating");
 
-  const setKeyword = React.useCallback((keyword) => {
-    try {
-      window.plausible("Filter Keyword", {
-        props: { keyword },
-      });
-    } catch (e) {
-      // do nothing
-    }
-    _setKeyword(keyword);
-  }, [_setKeyword]);
+  const setKeyword = React.useCallback(
+    (keyword) => {
+      try {
+        window.plausible("Filter Keyword", {
+          props: { keyword },
+        });
+      } catch (e) {
+        // do nothing
+      }
+      const currentUrl = new URL(window.location.toString());
+      if (keyword) {
+        currentUrl.searchParams.set("filter", keyword);
+      } else {
+        currentUrl.searchParams.delete("filter");
+      }
+      history.pushState(null, '', currentUrl.toString())
+      _setKeyword(keyword);
+    },
+    [_setKeyword]
+  );
 
   const setSortKey = React.useCallback(
     (key) => {
@@ -44,6 +54,19 @@ const GalleryPage = ({ data }) => {
     },
     [_setSortKey]
   );
+
+  const scrollIntoView = React.useCallback(() => {
+    if (typeof window === undefined || !window.location.hash) {
+      return;
+    }
+    const el = document.getElementById(window.location.hash.split("#")[1]);
+    if (!el) {
+      return;
+    }
+    el.scrollIntoView({
+      block: "center",
+    });
+  }, []);
 
   React.useEffect(() => {
     const _sortKey = localStorage.getItem("photogallery.sortkey2");
@@ -78,6 +101,21 @@ const GalleryPage = ({ data }) => {
       )(data.allFile.edges),
     [data, sortKey, keyword]
   );
+
+  React.useEffect(() => {
+    // hacky but it works for now
+    setTimeout(() => {
+      scrollIntoView();
+    }, 100);
+  }, [scrollIntoView]);
+
+  React.useEffect(() => {
+    const currentUrl = new URL(window.location.toString());
+    const filter = currentUrl.searchParams.get('filter')
+    if (filter) {
+      _setKeyword(filter);
+    }
+  }, [])
 
   const showDebug =
     typeof window !== "undefined" &&

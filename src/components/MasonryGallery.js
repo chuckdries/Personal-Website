@@ -21,26 +21,6 @@ const MasonryGallery = ({
 
   const { breakpoint } = useBreakpoint(breakpoints, "sm");
 
-  const scrollIntoView = React.useCallback(() => {
-    if (!window.location.hash) {
-      return;
-    }
-    const el = document.getElementById(window.location.hash.split("#")[1]);
-    if (!el) {
-      return;
-    }
-    el.scrollIntoView({
-      block: "center",
-    });
-  }, []);
-
-  React.useEffect(() => {
-    // hacky but it works for now
-    setTimeout(() => {
-      scrollIntoView();
-    }, 100);
-  }, [scrollIntoView]);
-
   const aspectRatios = React.useMemo(
     () => R.map(getAspectRatio, images),
     [images]
