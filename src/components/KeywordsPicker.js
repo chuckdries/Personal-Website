@@ -3,7 +3,7 @@ import * as React from "react";
 
 const KeywordsPicker = ({ keywords, value, onChange }) => {
   return (
-    <div>
+    <div className="mx-2">
       <span className="text-xs text-[#A2A2A2]">Filter by...</span>
       <ul className="flex gap-1 flex-wrap mt-1 mb-2">
         {keywords.map((keyword) => {
