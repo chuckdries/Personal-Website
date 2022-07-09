@@ -103,7 +103,7 @@ const MasonryGallery = ({
         const ar = getAspectRatio(image);
         let width;
         let height = `calc(100vw / ${rowAspectRatioSum} - 10px)`;
-        if (rowAspectRatioSum < targetAspect / 2) {
+        if (rowAspectRatioSum < targetAspect * 0.66) {
           // incomplete row, render stuff at "ideal" sizes instead of filling width
           width = `calc(100vw / ${targetAspect / ar})`;
           height = "unset";
