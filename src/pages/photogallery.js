@@ -139,6 +139,7 @@ export const query = graphql`
           }
           fields {
             imageMeta {
+              vibrantHue
               dominantHue
               dateTaken
               meta {
