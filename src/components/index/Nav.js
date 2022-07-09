@@ -20,17 +20,17 @@ const Nav = ({ imageIsLandscape, isClient }) => (
     )}
     style={{ zIndex: 100 }}
   >
-    <ul className="inline-flex flex-wrap justify-center">
+    {/* <ul className="inline-flex flex-wrap justify-center">
       <li>
         <Link className={getNavClasses(isClient)} to="/photogallery">Photography Gallery</Link>
       </li>
       <li>
         <Link className={getNavClasses(isClient)} to="/blog">Blog</Link>
       </li>
-    </ul>
-    <span className='text-gray-400 mx-2'>|</span>
+    </ul> */}
+    {/* <span className='text-gray-400 mx-2'>|</span> */}
     <ul className="inline-flex flex-wrap justify-center">
-      {/* <li>
+      <li>
         <a
           className={getNavClasses(isClient)}
           href="/CharlesDriesResumeCurrent.pdf"
@@ -44,7 +44,7 @@ const Nav = ({ imageIsLandscape, isClient }) => (
         >
           Resume
         </a>
-      </li> */}
+      </li>
       <li>
         <a
           className={getNavClasses(isClient)}
@@ -77,14 +77,14 @@ const Nav = ({ imageIsLandscape, isClient }) => (
           LinkedIn
         </a>
       </li> */}
-      {/* <li>
+      <li>
         <a
           className={getNavClasses(isClient)}
           href="https://medium.com/@chuckdries"
         >
           Medium
         </a>
-      </li> */}
+      </li>
       <li>
         <a
           className={getNavClasses(isClient)}
@@ -93,14 +93,14 @@ const Nav = ({ imageIsLandscape, isClient }) => (
           YouTube
         </a>
       </li>
-      {/* <li>
+      <li>
         <a
           className={getNavClasses(isClient)}
           href="mailto:chuck@chuckdries.com"
         >
           chuck@chuckdries.com
         </a>
-      </li> */}
+      </li>
     </ul>
   </nav>
 );

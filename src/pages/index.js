@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import { take } from "ramda";
 import classnames from "classnames";
 
-import '../styles/index.css';
+import "../styles/index.css";
 
 import { getHelmetSafeBodyStyle, getVibrant, getAspectRatio } from "../utils";
 import Nav from "../components/index/Nav";
@@ -136,29 +136,35 @@ const IndexPage = ({
           style={{ gridArea: "1/1" }}
         >
           <Nav imageIsLandscape={imageIsLandscape} isClient={isClient} />
-          <div
-            className={classnames(
-              "rounded-[50px] p-3 md:p-5 flex flex-col items-center z-10 border-r-[20px] border-b-[20px] mb-3 mx-2 md:mb-[-90px]",
-              isClient ? "cool-border-big" : "bg-gray-50",
-              !imageIsLandscape && "landscape:mr-4" // text is on left side of image, make some room for drop shadow
-            )}
-          >
-            <h1
+          <div className="z-10 flex flex-col md:mb-[-60px]">
+            <div
               className={classnames(
-                "mb-0 mt-0 text-center font-black z-20 text-7xl md:text-8xl lg:text-9xl"
+                "rounded-[50px] p-3 md:p-5 flex flex-col items-center border-r-[20px] border-b-[20px] mb-3 mx-2",
+                isClient ? "cool-border-big" : "bg-gray-50",
+                !imageIsLandscape && "landscape:mr-4" // text is on left side of image, make some room for drop shadow
               )}
-              style={{ lineHeight: "85%" }}
             >
-              Chuck Dries
-            </h1>
-            <h2
-              className={classnames(
-                "p-3 text-center z-20 font-bold text-lg md:text-2xl lg:text-3xl"
-              )}
-              style={{ lineHeight: "110%" }}
-            >
-              Full Stack Software Engineer &amp; Photographer
-            </h2>
+              <h1
+                className={classnames(
+                  "mb-0 mt-0 text-center font-black z-20 text-7xl md:text-8xl lg:text-9xl"
+                )}
+                style={{ lineHeight: "85%" }}
+              >
+                Chuck Dries
+              </h1>
+              <h2
+                className={classnames(
+                  "p-3 text-center z-20 font-bold text-lg md:text-2xl lg:text-3xl"
+                )}
+                style={{ lineHeight: "110%" }}
+              >
+                Full Stack Software Engineer &amp; Photographer
+              </h2>
+            </div>
+            <div>
+              <a> &gt; Photography Gallery </a>
+              <a> &gt; Blog </a>
+            </div>
           </div>
 
           <div
@@ -218,7 +224,7 @@ export const query = graphql`
             "DSC06616.jpg" # B&W abstract ## KEEP ON TOP
             # "20160530-DSC09108.jpg" # portrait red flowers
             # # "DSC00201.jpg" # duck
-            # "DSC04905.jpg" # purple layers
+            "DSC04905.jpg" # purple layers
             "DSC05761.jpg" # monument valley
             "DSC05851.jpg" # utahn highway sunset
             # "DSC06245.jpg" # snowy milky way
