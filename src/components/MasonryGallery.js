@@ -17,9 +17,9 @@ const MasonryGallery = ({
   const breakpoints = React.useMemo(
     () => R.pick(R.keys(aspectTargetsByBreakpoint), themeBreakpoints),
     [aspectTargetsByBreakpoint]
-  );
+    );
 
-  const { breakpoint } = useBreakpoint(breakpoints, "sm");
+  const { breakpoint } = useBreakpoint(breakpoints, "md");
 
   const scrollIntoView = React.useCallback(() => {
     if (!window.location.hash) {

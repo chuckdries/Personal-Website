@@ -89,7 +89,7 @@ const GalleryPage = ({ data }) => {
         <title>Photo Gallery | Chuck Dries</title>
         <body className="bg-black text-white" />
       </Helmet>
-      <div className="sticky top-0 z-10 bg-black">
+      <div className="sm:sticky top-0 z-10 bg-black">
         <nav className="mt-1 ml-1 text-lg mb-4">
           <button
             className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before  mr-1"
@@ -111,8 +111,8 @@ const GalleryPage = ({ data }) => {
             gallery
           </Link>
         </nav>
-        <div className="flex flex-row items-end">
-          <h1 className="text-3xl sm:text-5xl mt-0 ml-5 font-serif font-black z-10 flex-auto">
+        <div className="flex flex-col md:flex-row md:items-end">
+          <h1 className="text-5xl mt-0 ml-5 mr-5 font-serif font-black z-10 flex-auto">
             Photo Gallery
           </h1>
           <KeywordsPicker
@@ -126,12 +126,13 @@ const GalleryPage = ({ data }) => {
               "waterfall",
               "fireworks",
               "panoramic",
+              "Portland Japanese Garden",
               // "sunset",
             ]}
             onChange={setKeyword}
             value={keyword}
           />
-          <div className="m-2 ml-5 self-end">
+          <div className="m-2">
             <Picker
               label="Sort by..."
               onSelectionChange={setSortKey}
