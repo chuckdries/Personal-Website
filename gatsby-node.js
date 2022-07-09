@@ -5,6 +5,7 @@ const chalk = require("chalk");
 const R = require("ramda");
 const exifr = require("exifr");
 const sharp = require("sharp");
+// const { graphql } = require("gatsby");
 
 const badContrast = (color1, color2) => chroma.contrast(color1, color2) < 4.5;
 
@@ -100,24 +101,49 @@ function processColors(vibrantData, imagePath) {
 //   }
 // }
 
-function transformMetaToNodeData(metaData, vibrantData, imagePath, { r, g, b }) {
+function transformMetaToNodeData(
+  metaData,
+  vibrantData,
+  imagePath,
+  { r, g, b }
+) {
   const vibrant = vibrantData ? processColors(vibrantData, imagePath) : null;
   const vibrantHue = vibrantData.Vibrant.getHsl()[0] * 360;
-  let dominantHue = chroma(r,g,b).hsl();
+  let dominantHue = chroma(r, g, b).hsl();
   if (isNaN(dominantHue[0])) {
-    dominantHue[0] = 0
+    dominantHue[0] = 0;
+  }
+  let Keywords = metaData.Keywords;
+  if (!Keywords) {
+    Keywords = []
+  }
+  if (!Array.isArray(Keywords)) {
+    Keywords = [Keywords]
   }
   return {
     dateTaken: metaData.DateTimeOriginal,
-    meta: metaData,
+    meta: {
+      ...metaData,
+      Keywords,
+    },
     vibrant,
     vibrantHue,
-    dominantHue
+    dominantHue,
   };
 }
 
+// exports.createSchemaCustomization = function ({ actions }) {
+//   const { createTypes } = actions;
+//   const typedefs = `
+//   type FileFieldsImageMetaMeta{
+//     Keywords: [String]
+//   }`;
+//   createTypes(typedefs);
+// };
+
 exports.onCreateNode = async function ({ node, actions }) {
   const { createNodeField } = actions;
+
   if (node.internal.type === "File" && node.sourceInstanceName === "gallery") {
     const metaData = await exifr.parse(node.absolutePath, {
       iptc: true,
