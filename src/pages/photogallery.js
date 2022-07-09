@@ -9,12 +9,13 @@ import MasonryGallery from "../components/MasonryGallery";
 
 const SORT_KEYS = {
   hue: ["fields", "imageMeta", "vibrantHue"],
+  rating: ["fields", "imageMeta", "meta", "Rating"],
   hue_debug: ["fields", "imageMeta", "dominantHue", 0],
   date: [],
 };
 
 const GalleryPage = ({ data }) => {
-  const [sortKey, _setSortKey] = React.useState("date");
+  const [sortKey, _setSortKey] = React.useState("rating");
   const setSortKey = React.useCallback(
     (key) => {
       try {
@@ -51,7 +52,7 @@ const GalleryPage = ({ data }) => {
               );
               return -1 * (date1.getTime() - date2.getTime());
             })
-          : R.sortBy(R.path(SORT_KEYS[sortKey]))
+          : R.sort(R.descend(R.path(SORT_KEYS[sortKey])))
       )(data.allFile.edges),
     [data, sortKey]
   );
@@ -98,9 +99,10 @@ const GalleryPage = ({ data }) => {
               onSelectionChange={setSortKey}
               selectedKey={sortKey}
             >
+              <Item key="rating">Default</Item>
+              <Item key="date">Date</Item>
               <Item key="hue">Hue</Item>
               {showDebug && <Item key="hue_debug">Dominant hue[debug]</Item>}
-              <Item key="date">Date</Item>
             </Picker>
           </div>
         </div>
@@ -113,7 +115,8 @@ const GalleryPage = ({ data }) => {
           xl: 5,
           // '2xl': 6.1,
         }}
-        debug={sortKey === "hue_debug"}
+        debugHue={sortKey === "hue_debug"}
+        debugRating={sortKey === "rating" && showDebug}
         images={images}
       />
     </>
@@ -122,7 +125,10 @@ const GalleryPage = ({ data }) => {
 
 export const query = graphql`
   query GalleryPageQuery {
-    allFile(filter: { sourceInstanceName: { eq: "gallery" } }) {
+    allFile(
+      filter: { sourceInstanceName: { eq: "gallery" } }
+      sort: { fields: fields___imageMeta___dateTaken, order: DESC }
+    ) {
       edges {
         node {
           relativePath
@@ -143,6 +149,7 @@ export const query = graphql`
               dominantHue
               dateTaken
               meta {
+                Rating
                 ObjectName
               }
               vibrant {

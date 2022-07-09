@@ -11,7 +11,8 @@ import classNames from "classnames";
 const MasonryGallery = ({
   images,
   aspectsByBreakpoint: aspectTargetsByBreakpoint,
-  debug,
+  debugHue,
+  debugRating,
 }) => {
   const breakpoints = React.useMemo(
     () => R.pick(R.keys(aspectTargetsByBreakpoint), themeBreakpoints),
@@ -114,7 +115,7 @@ const MasonryGallery = ({
           <Link
             className={classNames(
               "border-4 overflow-hidden",
-              debug && "border-8"
+              debugHue && "border-8"
             )}
             id={image.base}
             key={`${image.base}`}
@@ -124,7 +125,7 @@ const MasonryGallery = ({
               width,
               // borderColor: `hsl(${image.fields.imageMeta.dominantHue}, 100%, 50%)`
               // borderColor: `rgb(${image.fields.imageMeta.vibrant.Vibrant.join(',')})`
-              borderColor: debug
+              borderColor: debugHue
                 ? `hsl(
                     ${image.fields.imageMeta.dominantHue[0]},
                     ${image.fields.imageMeta.dominantHue[1] * 100}%,
@@ -134,12 +135,17 @@ const MasonryGallery = ({
             }}
             to={`/photogallery/${image.base}`}
           >
-            {debug && (
+            {debugHue && (
               <span className="text-white z-20 absolute bg-black">
                 hsl(
                 {image.fields.imageMeta.dominantHue[0]},{" "}
                 {(image.fields.imageMeta.dominantHue[1] * 100).toFixed(2)}%,{" "}
                 {(image.fields.imageMeta.dominantHue[2] * 100).toFixed(2)}% )
+              </span>
+            )}
+            {debugRating && (
+              <span className="text-white z-20 absolute bg-black">
+                rating: {image.fields.imageMeta.meta.Rating}
               </span>
             )}
             <GatsbyImage
