@@ -10,14 +10,14 @@ trigger:
 steps:
   - name: build
     image: node
-    # volumes:
-    #   - name: cache
-    #     path: /tmp/cache
+    volumes:
+      - name: cache
+        path: /tmp/cache
     commands:
       - yarn install
       # - yarn build
 
-# volumes:
-#   - name: cache
-#     host:
-#       path: /mnt/user/dronecache
+volumes:
+  - name: cache
+    host:
+      path: /mnt/user/dronecache
