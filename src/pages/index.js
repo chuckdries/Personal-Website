@@ -26,12 +26,11 @@ const getDifferentRand = (range, lastNs, iterations = 0) => {
 
 const IndexPage = ({
   data: {
-    allFile: { edges },
+    allFile: { nodes: images },
   },
 }) => {
   const [isClient, setIsClient] = React.useState(false);
   const [imageIndex, setImageIndex] = React.useState(0);
-  const images = React.useMemo(() => edges.map((edge) => edge.node), [edges]);
   const image = React.useMemo(() => {
     return images[imageIndex];
   }, [images, imageIndex]);
@@ -255,25 +254,23 @@ export const query = graphql`
       }
       sort: { order: DESC, fields: fields___imageMeta___dateTaken }
     ) {
-      edges {
-        node {
-          relativePath
-          base
-          childImageSharp {
-            fluid {
-              aspectRatio
-            }
-            gatsbyImageData(
-              layout: FULL_WIDTH
-              placeholder: NONE
-              breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
-            )
+      nodes {
+        relativePath
+        base
+        childImageSharp {
+          fluid {
+            aspectRatio
           }
-          fields {
-            imageMeta {
-              vibrant {
-                ...VibrantColors
-              }
+          gatsbyImageData(
+            layout: FULL_WIDTH
+            placeholder: NONE
+            breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
+          )
+        }
+        fields {
+          imageMeta {
+            vibrant {
+              ...VibrantColors
             }
           }
         }
