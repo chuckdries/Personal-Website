@@ -7,6 +7,7 @@ import { Picker, Item } from "@adobe/react-spectrum";
 
 import MasonryGallery from "../components/MasonryGallery";
 import KeywordsPicker from "../components/KeywordsPicker";
+import { useQueryParamString } from "react-use-query-param-string";
 
 const SORT_KEYS = {
   hue: ["fields", "imageMeta", "vibrantHue"],
@@ -16,8 +17,9 @@ const SORT_KEYS = {
 };
 
 const GalleryPage = ({ data }) => {
-  const [keyword, _setKeyword] = React.useState(null);
-  const [sortKey, _setSortKey] = React.useState("rating");
+  const [keyword, _setKeyword] = useQueryParamString("filter", null);
+  const [sortKey, _setSortKey] = useQueryParamString("sort", "rating");
+  const [showDebug, _setShowDebug] = useQueryParamString("debug", false);
 
   const setKeyword = React.useCallback(
     (keyword) => {
@@ -80,10 +82,6 @@ const GalleryPage = ({ data }) => {
       )(data.allFile.nodes),
     [data, sortKey, keyword]
   );
-
-  const showDebug =
-    typeof window !== "undefined" &&
-    window.location.search.includes("debug=true");
 
   return (
     <>
