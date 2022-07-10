@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "develop:backend": "yarn --cwd backend develop",
-    "develop:frontend": "wait-on http://localhost:1337/admin && yarn --cwd client develop",
+    "develop:client": "wait-on http://localhost:1337/admin && yarn --cwd client develop",
     "develop": "cross-env FORCE_COLOR=1 npm-run-all -l -p develop:*"
   },
   "devDependencies": {

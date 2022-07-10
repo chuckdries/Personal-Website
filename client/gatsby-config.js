@@ -1,11 +1,13 @@
+require('dotenv').config()
+
 module.exports = {
   siteMetadata: {
     title: "Chuck Dries",
     siteUrl: "https://chuckdries.com",
   },
   plugins: [
-    "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
+    "gatsby-plugin-image",
     "gatsby-plugin-mdx",
     {
       resolve: `gatsby-plugin-sharp`,
@@ -20,27 +22,20 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "images",
-        path: "./src/images/",
-      },
-      __key: "images",
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
         name: "gallery",
         path: "./data/gallery/",
       },
       __key: "gallery",
     },
-    // {
-    //   resolve: "gatsby-source-filesystem",
-    //   options: {
-    //     name: "pages",
-    //     path: "./src/pages/",
-    //   },
-    //   __key: "pages",
-    // },
+    {
+      resolve: `gatsby-source-strapi`,
+      options: {
+        apiURL: process.env.STRAPI_API_URL,
+        accessToken: process.env.STRAPI_TOKEN,
+        collectionTypes: ['article', 'category', 'author', 'user', 'gallery-image'],
+        singleTypes: ['about', 'global'],
+      },
+    },
     {
       resolve: "gatsby-plugin-eslint",
       options: {
