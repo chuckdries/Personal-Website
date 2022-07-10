@@ -1,0 +1,61 @@
+kind: pipeline
+type: docker
+name: default
+
+trigger:
+  branch:
+    - main
+
+steps:
+  - name: restore-cache
+    image: drillster/drone-volume-cache
+    settings:
+      restore: true
+      mount:
+        - ./node_modules
+        - ./.cache
+        - ./public
+    volumes:
+      - name: cache
+        path: /cache
+
+  - name: build
+    image: node
+    commands:
+      - yarn install
+      - yarn build
+      - du -sh public
+  
+  - name: rsync
+    image: drillster/drone-rsync
+    settings:
+      user: ci
+      key:
+        from_secret: rsync_key
+      hosts:
+        - droplet.chuckdries.com
+      exclude:
+        - node_modules
+        - .git*
+      args: -zr
+      source: ./public
+      target: ~/www/personal-website
+      delete: true
+      secrets: [ rsync_key ]
+
+  - name: rebuild-cache
+    image: drillster/drone-volume-cache
+    settings:
+      rebuild: true
+      mount:
+        - ./node_modules
+        - ./.cache
+        - ./public
+    volumes:
+      - name: cache
+        path: /cache
+
+volumes:
+  - name: cache
+    host:
+      path: /mnt/user/dronecache
