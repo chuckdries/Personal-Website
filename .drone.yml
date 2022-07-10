@@ -20,9 +20,6 @@ steps:
 
   - name: build
     image: node
-    volumes:
-      - name: cache
-        path: /tmp/cache
     commands:
       - yarn install
       # - yarn build
