@@ -5,9 +5,10 @@ import { navigate } from "gatsby";
 import { Helmet } from "react-helmet";
 import { Picker, Item } from "@adobe/react-spectrum";
 
-import MasonryGallery from "../components/MasonryGallery";
-import KeywordsPicker from "../components/KeywordsPicker";
+import MasonryGallery from "../../components/MasonryGallery";
+import KeywordsPicker from "../../components/KeywordsPicker";
 import { useQueryParamString } from "react-use-query-param-string";
+import { useState } from "react";
 
 const SORT_KEYS = {
   hue: ["fields", "imageMeta", "vibrantHue"],
@@ -18,8 +19,8 @@ const SORT_KEYS = {
 
 const GalleryPage = ({ data }) => {
   const [keyword, _setKeyword] = useQueryParamString("filter", null);
-  const [sortKey, _setSortKey] = useQueryParamString("sort", "rating");
   const [showDebug, _setShowDebug] = useQueryParamString("debug", false);
+  const [sortKey, _setSortKey] = useState("rating");
 
   const setKeyword = React.useCallback(
     (keyword) => {
