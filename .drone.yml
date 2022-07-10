@@ -8,8 +8,12 @@ trigger:
     - main
 
 steps:
-  - name: greeting
-    image: alpine
-    commands:
-      - echo hello
-      - echo world
+  - name: build
+      image: node
+      commands:
+        - yarn install
+        - yarn build
+      # environment:
+      #   GATSBY_GOOGLE_ANALYTICS_ID:
+      #     from_secret: staging_www_analytics_id
+      #   # ...
