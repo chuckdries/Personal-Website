@@ -2,7 +2,7 @@ kind: pipeline
 type: docker
 name: default
 
-when:
+trigger:
   branch:
     - drone
     - main
