@@ -4,20 +4,21 @@
   "info": {
     "singularName": "gallery-image",
     "pluralName": "gallery-images",
-    "displayName": "Gallery Image"
+    "displayName": "Gallery Image",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "file": {
-      "allowedTypes": [
-        "images"
-      ],
+    "contentimage": {
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }
