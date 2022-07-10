@@ -209,7 +209,7 @@ const GalleryImage = ({ data, pageContext }) => {
                 style={{ width: 30 }}
               ></div>
             }
-            <div className="">
+            <div className="flex flex-col items-end">
               <MetadataItem
                 data={dateTaken.toLocaleDateString()}
                 icon={<Calendar />}
