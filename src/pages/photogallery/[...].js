@@ -7,8 +7,6 @@ import { Picker, Item } from "@adobe/react-spectrum";
 
 import MasonryGallery from "../../components/MasonryGallery";
 import KeywordsPicker from "../../components/KeywordsPicker";
-import { useQueryParamString } from "react-use-query-param-string";
-import { useState } from "react";
 
 const SORT_KEYS = {
   hue: ["fields", "imageMeta", "vibrantHue"],
@@ -17,46 +15,100 @@ const SORT_KEYS = {
   date: [],
 };
 
+const getUrl = ({ keyword, sortKey }) => {
+  const url = new URL(window.location.toString());
+  if (keyword !== undefined) {
+    if (keyword === null) {
+      url.searchParams.delete("filter");
+    } else {
+      url.searchParams.set("filter", keyword);
+    }
+  }
+  if (sortKey !== undefined) {
+    if (sortKey === "rating") {
+      url.searchParams.delete("sort");
+    } else {
+      url.searchParams.set("sort", sortKey);
+    }
+  }
+  return url.toString();
+};
+
 const GalleryPage = ({ data }) => {
-  const [keyword, _setKeyword] = useQueryParamString("filter", null);
-  const [showDebug, _setShowDebug] = useQueryParamString("debug", false);
-  const [sortKey, _setSortKey] = useState("rating");
+  const [keyword, _setKeyword] = React.useState(null);
+  const [sortKey, _setSortKey] = React.useState("rating");
+  const showDebug =
+    typeof window !== "undefined" &&
+    window.location.search.includes("debug=true");
 
   const setKeyword = React.useCallback(
-    (keyword) => {
+    (newKeyword) => {
       try {
         window.plausible("Filter Keyword", {
-          props: { keyword },
+          props: { keyword: newKeyword },
         });
       } catch (e) {
         // do nothing
       }
-      _setKeyword(keyword);
+      _setKeyword(newKeyword);
+      localStorage?.setItem("photogallery.keyword", newKeyword);
+      window.history.replaceState(null, "", getUrl({ keyword: newKeyword }));
     },
     [_setKeyword]
   );
 
   const setSortKey = React.useCallback(
-    (key) => {
+    (newSortKey) => {
       try {
         window.plausible("Sort Gallery", {
-          props: { key },
+          props: { key: newSortKey },
         });
       } catch (e) {
         // do nothing
       }
-      localStorage?.setItem("photogallery.sortkey2", key);
-      _setSortKey(key);
+      _setSortKey(newSortKey);
+      localStorage?.setItem("photogallery.sortkey2", newSortKey);
+      window.history.replaceState(null, "", getUrl({ sortKey: newSortKey }));
     },
     [_setSortKey]
   );
 
   React.useEffect(() => {
-    const _sortKey = localStorage.getItem("photogallery.sortkey2");
-    if (_sortKey) {
-      setSortKey(_sortKey);
+    const url = new URL(window.location.toString());
+
+    const sortKeyFromUrl = url.searchParams.get("sort");
+    const sortKeyFromStorage = localStorage.getItem("photogallery.sortkey2");
+    if (sortKeyFromUrl || sortKeyFromStorage) {
+      setSortKey(sortKeyFromUrl || sortKeyFromStorage);
     }
-  }, [setSortKey]);
+
+    const filterKeyFromUrl = url.searchParams.get("filter");
+    const filterKeyFromStorage = localStorage.getItem("photogallery.keyword");
+    if (filterKeyFromUrl || filterKeyFromStorage !== "null") {
+      setKeyword(filterKeyFromUrl || filterKeyFromStorage);
+    }
+  }, [setSortKey, setKeyword]);
+
+  const scrollIntoView = React.useCallback(() => {
+    if (!window.location.hash) {
+      return;
+    }
+    const el = document.getElementById(window.location.hash.split("#")[1]);
+    if (!el) {
+      return;
+    }
+    el.scrollIntoView({
+      block: "center",
+    });
+  }, []);
+
+  React.useEffect(() => {
+    // hacky but it works for now
+    setTimeout(() => {
+      // don't scroll into view if user got here with back button
+      scrollIntoView();
+    }, 100);
+  }, [scrollIntoView]);
 
   const images = React.useMemo(
     () =>
