@@ -175,7 +175,7 @@ const GalleryImage = ({ data, pageContext }) => {
               "px-2 flex flex-row portrait:items-end mx-auto",
               ar <= 1
                 ? "pt-5 flex-col flex-auto text-right"
-                : "container portrait:pt-5 portrait:flex-col portrait:text-right"
+                : "landscape:container portrait:pt-5 portrait:flex-col portrait:text-right"
             )}
           >
             <div className="flex-auto mr-2">
@@ -209,7 +209,7 @@ const GalleryImage = ({ data, pageContext }) => {
                 style={{ width: 30 }}
               ></div>
             }
-            <div className="flex flex-col items-end">
+            <div className="">
               <MetadataItem
                 data={dateTaken.toLocaleDateString()}
                 icon={<Calendar />}
