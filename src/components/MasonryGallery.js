@@ -19,7 +19,7 @@ const MasonryGallery = ({
     [aspectTargetsByBreakpoint]
     );
 
-  const { breakpoint } = useBreakpoint(breakpoints, "md");
+  const { breakpoint } = useBreakpoint(breakpoints, "sm");
 
   const scrollIntoView = React.useCallback(() => {
     if (!window.location.hash) {
@@ -87,6 +87,8 @@ const MasonryGallery = ({
 
   let cursor = 0;
   return (
+    <>
+    {/* {breakpoint} */}
     <div
       className="w-full flex items-center flex-wrap"
       style={{
@@ -158,8 +160,8 @@ const MasonryGallery = ({
         );
       })}
     </div>
+    </>
   );
-  // return null;
 };
 
 export default MasonryGallery;

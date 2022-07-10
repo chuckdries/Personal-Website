@@ -148,6 +148,7 @@ const GalleryPage = ({ data }) => {
       </div>
       <MasonryGallery
         aspectsByBreakpoint={{
+          xs: 2,
           sm: 3,
           md: 4,
           lg: 4,
