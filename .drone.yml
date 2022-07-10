@@ -25,6 +25,23 @@ steps:
     commands:
       - yarn install
       - yarn build
+  
+  - name: rsync
+    image: drillster/drone-rsync
+    settings:
+      user: ci
+      key:
+        from_secret: rsync_key
+      hosts:
+        - droplet.chuckdries.com
+      exclude:
+        - node_modules
+        - .git*
+      args: -zr
+      source: ./public
+      target: www/personal-website
+      delete: true
+      secrets: [ rsync_key ]
 
   - name: rebuild-cache
     image: drillster/drone-volume-cache
