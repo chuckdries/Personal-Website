@@ -1,0 +1,25 @@
+{
+  "kind": "singleType",
+  "collectionName": "portfolio_galleries",
+  "info": {
+    "singularName": "portfolio-gallery",
+    "pluralName": "portfolio-galleries",
+    "displayName": "Portfolio Gallery"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "images": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

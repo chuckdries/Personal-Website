@@ -144,7 +144,7 @@ function transformMetaToNodeData(
 exports.onCreateNode = async function ({ node, actions }) {
   const { createNodeField } = actions;
 
-  if (node.internal.type === "File" && node.ext === ".jpg") {
+  if ((node.internal.type === "File" || node.internal.type === 'STRAPI__MEDIA') && node.ext === ".jpg") {
     const metaData = await exifr.parse(node.absolutePath, {
       iptc: true,
       xmp: true,

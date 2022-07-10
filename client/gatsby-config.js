@@ -32,8 +32,8 @@ module.exports = {
       options: {
         apiURL: process.env.STRAPI_API_URL,
         accessToken: process.env.STRAPI_TOKEN,
-        collectionTypes: ['article', 'category', 'author', 'user', 'gallery-image'],
-        singleTypes: ['about', 'global'],
+        collectionTypes: ['article', 'category', 'author', 'user'],
+        singleTypes: ['about', 'global', 'portfolio-gallery'],
       },
     },
     {
