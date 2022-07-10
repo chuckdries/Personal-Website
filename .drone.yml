@@ -2,9 +2,14 @@ kind: pipeline
 type: docker
 name: default
 
+when:
+  branch:
+    - drone
+    - main
+
 steps:
-- name: greeting
-  image: alpine
-  commands:
-  - echo hello
-  - echo world
+  - name: greeting
+    image: alpine
+    commands:
+      - echo hello
+      - echo world
