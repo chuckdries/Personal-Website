@@ -3,3 +3,5 @@
 - [ ] tags
 - [ ] photo stories/collection pages
 - [ ] typescript (w/ graphql codegen)
+- [ ] gallery sort and filter preserved in url (use-query or whatever?)
+- [ ] nav next/prev buttons use saved gallery sort and filter
