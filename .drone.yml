@@ -4,7 +4,6 @@ name: default
 
 trigger:
   branch:
-    - drone
     - main
 
 steps:
