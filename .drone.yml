@@ -14,6 +14,8 @@ steps:
       restore: true
       mount:
         - ./node_modules
+        - ./.cache
+        - ./public
     volumes:
       - name: cache
         path: /cache
@@ -22,7 +24,7 @@ steps:
     image: node
     commands:
       - yarn install
-      # - yarn build
+      - yarn build
 
   - name: rebuild-cache
     image: drillster/drone-volume-cache
@@ -30,6 +32,8 @@ steps:
       rebuild: true
       mount:
         - ./node_modules
+        - ./.cache
+        - ./public
     volumes:
       - name: cache
         path: /cache
