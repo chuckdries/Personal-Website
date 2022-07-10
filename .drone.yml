@@ -9,11 +9,7 @@ trigger:
 
 steps:
   - name: build
-      image: node
-      commands:
-        - yarn install
-        - yarn build
-      # environment:
-      #   GATSBY_GOOGLE_ANALYTICS_ID:
-      #     from_secret: staging_www_analytics_id
-      #   # ...
+    image: node
+    commands:
+      - yarn install
+      - yarn build
