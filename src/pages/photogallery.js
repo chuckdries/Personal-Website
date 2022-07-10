@@ -19,16 +19,19 @@ const GalleryPage = ({ data }) => {
   const [keyword, _setKeyword] = React.useState(null);
   const [sortKey, _setSortKey] = React.useState("rating");
 
-  const setKeyword = React.useCallback((keyword) => {
-    try {
-      window.plausible("Filter Keyword", {
-        props: { keyword },
-      });
-    } catch (e) {
-      // do nothing
-    }
-    _setKeyword(keyword);
-  }, [_setKeyword]);
+  const setKeyword = React.useCallback(
+    (keyword) => {
+      try {
+        window.plausible("Filter Keyword", {
+          props: { keyword },
+        });
+      } catch (e) {
+        // do nothing
+      }
+      _setKeyword(keyword);
+    },
+    [_setKeyword]
+  );
 
   const setSortKey = React.useCallback(
     (key) => {
@@ -55,7 +58,6 @@ const GalleryPage = ({ data }) => {
   const images = React.useMemo(
     () =>
       R.pipe(
-        R.map((edge) => edge.node),
         sortKey === "date"
           ? R.sort((node1, node2) => {
               const date1 = new Date(
@@ -75,7 +77,7 @@ const GalleryPage = ({ data }) => {
               )
             )
           : R.identity
-      )(data.allFile.edges),
+      )(data.allFile.nodes),
     [data, sortKey, keyword]
   );
 
@@ -169,33 +171,31 @@ export const query = graphql`
       filter: { sourceInstanceName: { eq: "gallery" } }
       sort: { fields: fields___imageMeta___dateTaken, order: DESC }
     ) {
-      edges {
-        node {
-          relativePath
-          base
-          childImageSharp {
-            fluid {
-              aspectRatio
-            }
-            gatsbyImageData(
-              layout: CONSTRAINED
-              height: 550
-              placeholder: DOMINANT_COLOR
-            )
+      nodes {
+        relativePath
+        base
+        childImageSharp {
+          fluid {
+            aspectRatio
           }
-          fields {
-            imageMeta {
-              vibrantHue
-              dominantHue
-              dateTaken
-              meta {
-                Keywords
-                Rating
-                ObjectName
-              }
-              vibrant {
-                Vibrant
-              }
+          gatsbyImageData(
+            layout: CONSTRAINED
+            height: 550
+            placeholder: DOMINANT_COLOR
+          )
+        }
+        fields {
+          imageMeta {
+            vibrantHue
+            dominantHue
+            dateTaken
+            meta {
+              Keywords
+              Rating
+              ObjectName
+            }
+            vibrant {
+              Vibrant
             }
           }
         }
