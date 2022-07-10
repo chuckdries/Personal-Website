@@ -37,8 +37,8 @@ steps:
       exclude:
         - node_modules
         - .git*
-      args: -zr
-      source: ./public
+      args: -r
+      source: ./public/
       target: ~/www/personal-website
       delete: true
       secrets: [ rsync_key ]
