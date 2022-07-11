@@ -80,11 +80,14 @@ export const getShutterFractionFromExposureTime = (exposureTime) => {
   return `${numerator}/${denominator}`;
 };
 
-export const getGalleryPageUrl = (
-  { keyword, sortKey },
-  hash
-) => {
-  const url = new URL(`${window?.location.origin ?? 'https://chuckdries.com'}/photogallery/`);
+export const getGalleryPageUrl = ({ keyword, sortKey }, hash) => {
+  const url = new URL(
+    `${
+      typeof window !== "undefined"
+        ? window.location.origin
+        : "https://chuckdries.com"
+    }/photogallery/`
+  );
   if (keyword !== undefined) {
     if (keyword === null) {
       url.searchParams.delete("filter");
@@ -102,5 +105,5 @@ export const getGalleryPageUrl = (
   if (hash) {
     url.hash = hash;
   }
-  return url.href.toString().replace(url.origin, '');
+  return url.href.toString().replace(url.origin, "");
 };
