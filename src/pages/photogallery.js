@@ -88,6 +88,7 @@ const GalleryPage = ({ data }) => {
     if (!el) {
       return;
     }
+    console.log('scrolling into view', el);
     el.scrollIntoView({
       block: "center",
     });
