@@ -5,9 +5,9 @@ import { navigate } from "gatsby";
 import { Helmet } from "react-helmet";
 import { Picker, Item } from "@adobe/react-spectrum";
 
-import MasonryGallery from "../../components/MasonryGallery";
-import KeywordsPicker from "../../components/KeywordsPicker";
-import { getGalleryPageUrl } from "../../utils";
+import MasonryGallery from "../components/MasonryGallery";
+import KeywordsPicker from "../components/KeywordsPicker";
+import { getGalleryPageUrl } from "../utils";
 
 const SORT_KEYS = {
   hue: ["fields", "imageMeta", "vibrantHue"],
