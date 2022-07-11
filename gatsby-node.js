@@ -220,16 +220,16 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   );
 
   edges.forEach(({ node }, index) => {
-    const nextImage =
-      index === edges.length - 1 ? null : edges[index + 1].node.base;
-    const prevImage = index === 0 ? null : edges[index - 1].node.base;
+    // const nextImage =
+    //   index === edges.length - 1 ? null : edges[index + 1].node.base;
+    // const prevImage = index === 0 ? null : edges[index - 1].node.base;
     const page = {
       path: `photogallery/${node.base}`,
       component: galleryImageTemplate,
       context: {
         imageFilename: node.base,
-        nextImage,
-        prevImage,
+        // nextImage,
+        // prevImage,
       },
     };
     createPage(page);

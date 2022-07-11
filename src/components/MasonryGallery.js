@@ -13,11 +13,12 @@ const MasonryGallery = ({
   aspectsByBreakpoint: aspectTargetsByBreakpoint,
   debugHue,
   debugRating,
+  linkState,
 }) => {
   const breakpoints = React.useMemo(
     () => R.pick(R.keys(aspectTargetsByBreakpoint), themeBreakpoints),
     [aspectTargetsByBreakpoint]
-    );
+  );
 
   const { breakpoint } = useBreakpoint(breakpoints, "sm");
 
@@ -65,81 +66,89 @@ const MasonryGallery = ({
     [aspectRatios, targetAspect]
   );
 
+  const sortedImageList = React.useMemo(
+    () => images.map((image) => image.base),
+    [images]
+  );
+
   let cursor = 0;
   return (
     <>
-    {/* {breakpoint} */}
-    <div
-      className="w-full flex items-center flex-wrap"
-      style={{
-        position: "relative",
-      }}
-    >
-      {images.map((image, i) => {
-        let currentRow = rows[cursor];
-        if (rows[i]) {
-          cursor = i;
-          currentRow = rows[i];
-        }
-        const rowAspectRatioSum = currentRow.aspect;
-        const ar = getAspectRatio(image);
-        let width;
-        let height = `calc(100vw / ${rowAspectRatioSum} - 10px)`;
-        if (rowAspectRatioSum < targetAspect * 0.66) {
-          // incomplete row, render stuff at "ideal" sizes instead of filling width
-          width = `calc(100vw / ${targetAspect / ar})`;
-          height = "unset";
-        } else {
-          const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
-          width = `${widthNumber}%`;
-        }
-        return (
-          <Link
-            className={classNames(
-              "border-4 overflow-hidden",
-              debugHue && "border-8"
-            )}
-            id={image.base}
-            key={`${image.base}`}
-            state={{ modal: true }}
-            style={{
-              height,
-              width,
-              // borderColor: `hsl(${image.fields.imageMeta.dominantHue}, 100%, 50%)`
-              // borderColor: `rgb(${image.fields.imageMeta.vibrant.Vibrant.join(',')})`
-              borderColor: debugHue
-                ? `hsl(
+      <div
+        className="w-full flex items-center flex-wrap"
+        style={{
+          position: "relative",
+        }}
+      >
+        {images.map((image, i) => {
+          let currentRow = rows[cursor];
+          if (rows[i]) {
+            cursor = i;
+            currentRow = rows[i];
+          }
+          const rowAspectRatioSum = currentRow.aspect;
+          const ar = getAspectRatio(image);
+          let width;
+          let height = `calc(100vw / ${rowAspectRatioSum} - 10px)`;
+          if (rowAspectRatioSum < targetAspect * 0.66) {
+            // incomplete row, render stuff at "ideal" sizes instead of filling width
+            width = `calc(100vw / ${targetAspect / ar})`;
+            height = "unset";
+          } else {
+            const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
+            width = `${widthNumber}%`;
+          }
+          return (
+            <Link
+              className={classNames(
+                "border-4 overflow-hidden",
+                debugHue && "border-8"
+              )}
+              id={image.base}
+              key={`${image.base}`}
+              state={{
+                ...linkState,
+                sortedImageList,
+                currentIndex: i,
+              }}
+              style={{
+                height,
+                width,
+                // borderColor: `hsl(${image.fields.imageMeta.dominantHue}, 100%, 50%)`
+                // borderColor: `rgb(${image.fields.imageMeta.vibrant.Vibrant.join(',')})`
+                borderColor: debugHue
+                  ? `hsl(
                     ${image.fields.imageMeta.dominantHue[0]},
                     ${image.fields.imageMeta.dominantHue[1] * 100}%,
                     ${image.fields.imageMeta.dominantHue[2] * 100}%
                   )`
-                : "black",
-            }}
-            to={`/photogallery/${image.base}`}
-          >
-            {debugHue && (
-              <span className="text-white z-20 absolute bg-black">
-                hsl(
-                {image.fields.imageMeta.dominantHue[0]},{" "}
-                {(image.fields.imageMeta.dominantHue[1] * 100).toFixed(2)}%,{" "}
-                {(image.fields.imageMeta.dominantHue[2] * 100).toFixed(2)}% )
-              </span>
-            )}
-            {debugRating && (
-              <span className="text-white z-20 absolute bg-black">
-                rating: {image.fields.imageMeta.meta.Rating}
-              </span>
-            )}
-            <GatsbyImage
-              alt={getName(image)}
-              className="w-full h-full"
-              image={getImage(image)}
-              objectFit="cover"
-            />
-          </Link>
-        );
-      })}
-    </div>
+                  : "black",
+              }}
+              to={`/photogallery/${image.base}`}
+            >
+              {debugHue && (
+                <span className="text-white z-20 absolute bg-black">
+                  hsl(
+                  {image.fields.imageMeta.dominantHue[0]},{" "}
+                  {(image.fields.imageMeta.dominantHue[1] * 100).toFixed(2)}%,{" "}
+                  {(image.fields.imageMeta.dominantHue[2] * 100).toFixed(2)}% )
+                </span>
+              )}
+              {debugRating && (
+                <span className="text-white z-20 absolute bg-black">
+                  rating: {image.fields.imageMeta.meta.Rating}
+                </span>
+              )}
+              <GatsbyImage
+                alt={getName(image)}
+                className="w-full h-full"
+                image={getImage(image)}
+                objectFit="cover"
+              />
+            </Link>
+          );
+        })}
+      </div>
     </>
   );
 };
