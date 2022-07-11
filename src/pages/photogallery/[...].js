@@ -16,22 +16,12 @@ const SORT_KEYS = {
   date: [],
 };
 
-function removeHash() {
-  const url = new URL(
-    typeof window !== "undefined"
-      ? window.location.href.toString()
-      : "https://chuckdries.com/photogallery/"
-  );
-
-  url.hash = "";
-  window.history.replaceState(null, "", url.href.toString());
-  window.removeEventListener('wheel', removeHash);
-}
-
 const GalleryPage = ({ data }) => {
   const hash =
     typeof window !== "undefined" ? window.location.hash.replace("#", "") : "";
 
+  const [hashCleared, setHashCleared] = React.useState(false); 
+  //     ^ used just to force a re-render with the cleared hash value (I know, it's a smell for sure)
   const [filterKeyword, _setKeyword] = React.useState(null);
   const [sortKey, _setSortKey] = React.useState("rating");
   const showDebug =
@@ -76,6 +66,20 @@ const GalleryPage = ({ data }) => {
     [_setSortKey, filterKeyword, hash]
   );
 
+  const removeHash = React.useCallback(() => {
+    console.log('rh')
+    const url = new URL(
+      typeof window !== "undefined"
+        ? window.location.href.toString()
+        : "https://chuckdries.com/photogallery/"
+    );
+
+    url.hash = "";
+    window.history.replaceState(null, "", url.href.toString());
+    window.removeEventListener("wheel", removeHash);
+    setHashCleared(true);
+  }, []);
+
   const scrollIntoView = React.useCallback(() => {
     if (!hash) {
       return;
@@ -88,7 +92,7 @@ const GalleryPage = ({ data }) => {
       block: "center",
     });
     window.addEventListener("wheel", removeHash);
-  }, [hash]);
+  }, [hash, removeHash]);
 
   React.useEffect(() => {
     const url = new URL(window.location.toString());
