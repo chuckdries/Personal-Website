@@ -4,7 +4,7 @@ import classNames from "classnames";
 const KeywordsPicker = ({ keywords, value, onChange }) => {
   return (
     <div className="mx-2">
-      <span className="text-xs text-[#A2A2A2]">Filter...</span>
+      <span className="text-xs text-[#A2A2A2]">Collections</span>
       <ul className="flex gap-1 flex-wrap mt-1 mb-2">
         {keywords.map((keyword) => {
           const selected = value === keyword;
