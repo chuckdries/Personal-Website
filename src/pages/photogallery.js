@@ -30,12 +30,14 @@ const GalleryPage = ({ data }) => {
 
   const setKeyword = React.useCallback(
     (newKeyword) => {
-      try {
-        window.plausible("Filter Keyword", {
-          props: { keyword: newKeyword },
-        });
-      } catch (e) {
-        // do nothing
+      if (newKeyword) {
+        try {
+          window.plausible("Filter Keyword", {
+            props: { keyword: newKeyword },
+          });
+        } catch (e) {
+          // do nothing
+        }
       }
       _setKeyword(newKeyword);
       window.history.replaceState(
