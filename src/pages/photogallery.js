@@ -171,8 +171,8 @@ const GalleryPage = ({ data }) => {
             gallery
           </Link>
         </nav>
-        <div className="flex flex-col md:flex-row md:items-end">
-          <h1 className="text-5xl mt-0 ml-5 mr-5 font-serif font-black z-10 flex-auto">
+        <div className="flex flex-col md:flex-row md:items-end justify-between">
+          <h1 className="text-5xl mt-0 ml-5 mr-5 font-serif font-black z-10">
             Photo Gallery
           </h1>
           <KeywordsPicker
