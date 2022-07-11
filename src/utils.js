@@ -79,3 +79,28 @@ export const getShutterFractionFromExposureTime = (exposureTime) => {
   }
   return `${numerator}/${denominator}`;
 };
+
+export const getGalleryPageUrl = (
+  { keyword, sortKey },
+  hash
+) => {
+  const url = new URL(`${window.location.origin}/photogallery/`);
+  if (keyword !== undefined) {
+    if (keyword === null) {
+      url.searchParams.delete("filter");
+    } else {
+      url.searchParams.set("filter", keyword);
+    }
+  }
+  if (sortKey !== undefined) {
+    if (sortKey === "rating") {
+      url.searchParams.delete("sort");
+    } else {
+      url.searchParams.set("sort", sortKey);
+    }
+  }
+  if (hash) {
+    url.hash = hash;
+  }
+  return url.href.toString().replace(url.origin, '');
+};

@@ -7,6 +7,7 @@ import { Picker, Item } from "@adobe/react-spectrum";
 
 import MasonryGallery from "../../components/MasonryGallery";
 import KeywordsPicker from "../../components/KeywordsPicker";
+import { getGalleryPageUrl } from "../../utils";
 
 const SORT_KEYS = {
   hue: ["fields", "imageMeta", "vibrantHue"],
@@ -15,27 +16,10 @@ const SORT_KEYS = {
   date: [],
 };
 
-const getUrl = ({ keyword, sortKey }) => {
-  const url = new URL(window.location.toString());
-  if (keyword !== undefined) {
-    if (keyword === null) {
-      url.searchParams.delete("filter");
-    } else {
-      url.searchParams.set("filter", keyword);
-    }
-  }
-  if (sortKey !== undefined) {
-    if (sortKey === "rating") {
-      url.searchParams.delete("sort");
-    } else {
-      url.searchParams.set("sort", sortKey);
-    }
-  }
-  return url.toString();
-};
-
 const GalleryPage = ({ data }) => {
-  const [keyword, _setKeyword] = React.useState(null);
+  const hash = window.location.hash.replace("#", "");
+
+  const [filterKeyword, _setKeyword] = React.useState(null);
   const [sortKey, _setSortKey] = React.useState("rating");
   const showDebug =
     typeof window !== "undefined" &&
@@ -51,10 +35,13 @@ const GalleryPage = ({ data }) => {
         // do nothing
       }
       _setKeyword(newKeyword);
-      localStorage?.setItem("photogallery.keyword", newKeyword);
-      window.history.replaceState(null, "", getUrl({ keyword: newKeyword }));
+      window.history.replaceState(
+        null,
+        "",
+        getGalleryPageUrl({ keyword: newKeyword, sortKey }, hash)
+      );
     },
-    [_setKeyword]
+    [_setKeyword, sortKey, hash]
   );
 
   const setSortKey = React.useCallback(
@@ -67,48 +54,47 @@ const GalleryPage = ({ data }) => {
         // do nothing
       }
       _setSortKey(newSortKey);
-      localStorage?.setItem("photogallery.sortkey2", newSortKey);
-      window.history.replaceState(null, "", getUrl({ sortKey: newSortKey }));
+      window.history.replaceState(
+        null,
+        "",
+        getGalleryPageUrl({ sortKey: newSortKey, keyword: filterKeyword }, hash)
+      );
     },
-    [_setSortKey]
+    [_setSortKey, filterKeyword, hash]
   );
 
-  React.useEffect(() => {
-    const url = new URL(window.location.toString());
-
-    const sortKeyFromUrl = url.searchParams.get("sort");
-    const sortKeyFromStorage = localStorage.getItem("photogallery.sortkey2");
-    if (sortKeyFromUrl || sortKeyFromStorage) {
-      setSortKey(sortKeyFromUrl || sortKeyFromStorage);
-    }
-
-    const filterKeyFromUrl = url.searchParams.get("filter");
-    const filterKeyFromStorage = localStorage.getItem("photogallery.keyword");
-    if (filterKeyFromUrl || filterKeyFromStorage !== "null") {
-      setKeyword(filterKeyFromUrl || filterKeyFromStorage);
-    }
-  }, [setSortKey, setKeyword]);
-
   const scrollIntoView = React.useCallback(() => {
-    if (!window.location.hash) {
+    if (!hash) {
       return;
     }
-    const el = document.getElementById(window.location.hash.split("#")[1]);
+    const el = document.getElementById(hash);
     if (!el) {
       return;
     }
     el.scrollIntoView({
       block: "center",
     });
-  }, []);
+  }, [hash]);
 
   React.useEffect(() => {
+    const url = new URL(window.location.toString());
+
+    const sortKeyFromUrl = url.searchParams.get("sort");
+    if (sortKeyFromUrl) {
+      _setSortKey(sortKeyFromUrl, false);
+    }
+
+    const filterKeyFromUrl = url.searchParams.get("filter");
+    if (filterKeyFromUrl) {
+      _setKeyword(filterKeyFromUrl, false);
+    }
+
     // hacky but it works for now
     setTimeout(() => {
       // don't scroll into view if user got here with back button
       scrollIntoView();
     }, 100);
-  }, [scrollIntoView]);
+  }, [setSortKey, setKeyword, scrollIntoView]);
 
   const images = React.useMemo(
     () =>
@@ -124,16 +110,16 @@ const GalleryPage = ({ data }) => {
               return -1 * (date1.getTime() - date2.getTime());
             })
           : R.sort(R.descend(R.path(SORT_KEYS[sortKey]))),
-        keyword
+        filterKeyword
           ? R.filter((image) =>
               R.includes(
-                keyword,
+                filterKeyword,
                 R.path(["fields", "imageMeta", "meta", "Keywords"], image)
               )
             )
           : R.identity
       )(data.allFile.nodes),
-    [data, sortKey, keyword]
+    [data, sortKey, filterKeyword]
   );
 
   return (
@@ -183,7 +169,7 @@ const GalleryPage = ({ data }) => {
               // "sunset",
             ]}
             onChange={setKeyword}
-            value={keyword}
+            value={filterKeyword}
           />
           <div className="m-2">
             <Picker
@@ -211,6 +197,10 @@ const GalleryPage = ({ data }) => {
         debugHue={sortKey === "hue_debug"}
         debugRating={sortKey === "rating" && showDebug}
         images={images}
+        linkState={{
+          sortKey,
+          filterKeyword,
+        }}
       />
     </>
   );

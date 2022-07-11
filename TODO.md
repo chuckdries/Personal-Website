@@ -1,7 +1,9 @@
 - [ ] Resume/Projects portfolio
 - [ ] Blog
-- [ ] tags
+- [x] tags
 - [ ] photo stories/collection pages
 - [ ] typescript (w/ graphql codegen)
+- [ ] CMS
 - [x] gallery sort and filter preserved in url (use-query or whatever?)
-- [ ] nav next/prev buttons use saved gallery sort and filter
+- [x] nav next/prev buttons use saved gallery sort and filter
+- [ ] bug: "gallery" buttin in nav should reset filter and sort selections

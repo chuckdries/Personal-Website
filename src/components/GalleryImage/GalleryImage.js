@@ -21,6 +21,7 @@ import {
   getHelmetSafeBodyStyle,
   hasName,
   getCanonicalSize,
+  getGalleryPageUrl,
 } from "../../utils";
 import MetadataItem from "./MetadataItem";
 
@@ -35,33 +36,64 @@ const logKeyShortcut = (keyCode) => {
   }
 };
 
-const GalleryImage = ({ data, pageContext }) => {
+const GalleryImage = ({
+  data,
+  location: {
+    state: { sortedImageList, currentIndex, filterKeyword, sortKey },
+  },
+}) => {
   const image = data.file;
   const ar = getAspectRatio(image);
 
   const [zoom, setZoom] = useState(false);
+
+  const nextIndex =
+    sortedImageList && currentIndex < sortedImageList.length
+      ? currentIndex + 1
+      : null;
+  const prevIndex =
+    sortedImageList && currentIndex > 0 ? currentIndex - 1 : null;
+
+  const nextImage = sortedImageList && sortedImageList[nextIndex];
+  const prevImage = sortedImageList && sortedImageList[prevIndex];
 
   React.useEffect(() => {
     const keyListener = (e) => {
       switch (e.code) {
         case "ArrowRight": {
           logKeyShortcut(e.code);
-          if (pageContext.nextImage) {
-            navigate(`/photogallery/${pageContext.nextImage}/`);
+          if (nextImage) {
+            navigate(`/photogallery/${nextImage}/`, {
+              state: {
+                currentIndex: currentIndex + 1,
+                sortedImageList,
+                filterKeyword,
+                sortKey,
+              },
+            });
           }
           return;
         }
         case "ArrowLeft": {
           logKeyShortcut(e.code);
-          if (pageContext.prevImage) {
-            navigate(`/photogallery/${pageContext.prevImage}/`);
+          if (prevImage) {
+            navigate(`/photogallery/${prevImage}/`, {
+              state: {
+                currentIndex: currentIndex - 1,
+                sortedImageList,
+                filterKeyword,
+                sortKey,
+              },
+            });
           }
           return;
         }
         case "Escape":
         case "KeyG": {
           logKeyShortcut(e.code);
-          navigate(`/photogallery/#${image.base}`);
+          navigate(
+            getGalleryPageUrl({ keyword: filterKeyword, sortKey }, image.base)
+          );
         }
       }
     };
@@ -69,7 +101,15 @@ const GalleryImage = ({ data, pageContext }) => {
     return () => {
       document.removeEventListener("keydown", keyListener);
     };
-  }, [pageContext, image.base]);
+  }, [
+    nextImage,
+    prevImage,
+    image.base,
+    currentIndex,
+    sortedImageList,
+    filterKeyword,
+    sortKey,
+  ]);
 
   const name = getName(image);
   const { meta, dateTaken: dt } = getMeta(image);
@@ -118,22 +158,37 @@ const GalleryImage = ({ data, pageContext }) => {
           </Link>
           <Link
             className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-            to={`/photogallery/#${image.base}`}
+            to={getGalleryPageUrl(
+              { keyword: filterKeyword, sortKey },
+              image.base
+            )}
           >
             gallery <span className="bg-gray-300 text-black">esc</span>
           </Link>
-          {pageContext.prevImage && (
+          {prevImage && (
             <Link
               className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-              to={`/photogallery/${pageContext.prevImage}/`}
+              state={{
+                currentIndex: currentIndex - 1,
+                sortedImageList,
+                filterKeyword,
+                sortKey,
+              }}
+              to={`/photogallery/${prevImage}/`}
             >
               previous <span className="bg-gray-300 text-black">&#11104;</span>
             </Link>
           )}
-          {pageContext.nextImage && (
+          {nextImage && (
             <Link
               className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-              to={`/photogallery/${pageContext.nextImage}/`}
+              state={{
+                currentIndex: currentIndex + 1,
+                sortedImageList,
+                filterKeyword,
+                sortKey,
+              }}
+              to={`/photogallery/${nextImage}/`}
             >
               next <span className="bg-gray-300 text-black">&#11106;</span>
             </Link>
