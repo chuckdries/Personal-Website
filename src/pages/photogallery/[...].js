@@ -17,7 +17,7 @@ const SORT_KEYS = {
 };
 
 const GalleryPage = ({ data }) => {
-  const hash = window.location.hash.replace("#", "");
+  const hash = typeof window !== "undefined" ? window.location.hash.replace("#", "") : "";
 
   const [filterKeyword, _setKeyword] = React.useState(null);
   const [sortKey, _setSortKey] = React.useState("rating");
