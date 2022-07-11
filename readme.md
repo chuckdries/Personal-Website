@@ -1,12 +1,14 @@
 # chuckdries.com
 
-![screenshot of website](static/screenshot-1.png)
+[![Build Status](https://drone.chuckdries.com/api/badges/chuckdries/Personal-Website/status.svg)](https://drone.chuckdries.com/chuckdries/Personal-Website)
 
-My personal website.  
+My personal website. Built with 
 - gatsby
 - tailwind
 - node-vibrant
 - react-helmet
+
+and a totally from-scratch masonry gallery component that I will write a blog post about some day.
 
 ![screenshot of website](static/screenshot-2.png)
 
