@@ -84,7 +84,7 @@ export const getGalleryPageUrl = (
   { keyword, sortKey },
   hash
 ) => {
-  const url = new URL(`${window.location.origin}/photogallery/`);
+  const url = new URL(`${window?.location.origin ?? 'https://chuckdries.com'}/photogallery/`);
   if (keyword !== undefined) {
     if (keyword === null) {
       url.searchParams.delete("filter");
