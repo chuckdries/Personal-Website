@@ -20,7 +20,7 @@ const GalleryPage = ({ data }) => {
   const hash =
     typeof window !== "undefined" ? window.location.hash.replace("#", "") : "";
 
-  const [hashCleared, setHashCleared] = React.useState(false); 
+  const [hashCleared, setHashCleared] = React.useState(false); // eslint-disable-line no-unused-vars
   //     ^ used just to force a re-render with the cleared hash value (I know, it's a smell for sure)
   const [filterKeyword, _setKeyword] = React.useState(null);
   const [sortKey, _setSortKey] = React.useState("rating");
