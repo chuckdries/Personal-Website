@@ -16,8 +16,21 @@ const SORT_KEYS = {
   date: [],
 };
 
+function removeHash() {
+  const url = new URL(
+    typeof window !== "undefined"
+      ? window.location.href.toString()
+      : "https://chuckdries.com/photogallery/"
+  );
+
+  url.hash = "";
+  window.history.replaceState(null, "", url.href.toString());
+  window.removeEventListener('wheel', removeHash);
+}
+
 const GalleryPage = ({ data }) => {
-  const hash = typeof window !== "undefined" ? window.location.hash.replace("#", "") : "";
+  const hash =
+    typeof window !== "undefined" ? window.location.hash.replace("#", "") : "";
 
   const [filterKeyword, _setKeyword] = React.useState(null);
   const [sortKey, _setSortKey] = React.useState("rating");
@@ -74,6 +87,7 @@ const GalleryPage = ({ data }) => {
     el.scrollIntoView({
       block: "center",
     });
+    window.addEventListener("wheel", removeHash);
   }, [hash]);
 
   React.useEffect(() => {
