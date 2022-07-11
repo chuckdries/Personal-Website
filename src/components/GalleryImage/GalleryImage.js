@@ -39,9 +39,10 @@ const logKeyShortcut = (keyCode) => {
 const GalleryImage = ({
   data,
   location: {
-    state: { sortedImageList, currentIndex, filterKeyword, sortKey },
+    state
   },
 }) => {
+  const { sortedImageList, currentIndex, filterKeyword, sortKey } = state ?? {};
   const image = data.file;
   const ar = getAspectRatio(image);
 
