@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import { take } from "ramda";
 import classnames from "classnames";
 
-import '../styles/index.css';
+import "../styles/index.css";
 
 import { getHelmetSafeBodyStyle, getVibrant, getAspectRatio } from "../utils";
 import Nav from "../components/Nav";
@@ -134,7 +134,13 @@ const IndexPage = ({
           )}
           style={{ gridArea: "1/1" }}
         >
-          <Nav isClient={isClient} />
+          <Nav
+            internalLinks={[
+              { href: "/", label: "Home" },
+              { href: "/photogallery/", label: "Gallery" },
+            ]}
+            isClient={isClient}
+          />
           <div
             className={classnames(
               "rounded-[50px] p-3 md:p-5 flex flex-col items-center z-10 border-r-[20px] border-b-[20px] mb-3 mx-2 md:mb-[-90px]",
