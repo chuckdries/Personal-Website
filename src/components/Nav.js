@@ -68,7 +68,7 @@ const Nav = ({ isClient, internalLinks, className }) => (
             className={getNavClasses(isClient)}
             href="https://github.com/chuckdries"
           >
-            Github
+            GitHub
           </a>
         </li>
         <li>
