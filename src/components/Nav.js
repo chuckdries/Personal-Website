@@ -10,7 +10,11 @@ const getNavClasses = (isClient) =>
 
 const Nav = ({ isClient, internalLinks, className }) => (
   <nav
-    className={classnames("m-2 flex justify-center", className)}
+    className={classnames(
+      "m-2 flex justify-center",
+      isClient ? "text-vibrant-light" : "text-gray-200",
+      className
+    )}
     style={{ zIndex: 100 }}
   >
     <div
@@ -25,7 +29,11 @@ const Nav = ({ isClient, internalLinks, className }) => (
         {internalLinks &&
           internalLinks.map(({ href, label }) => (
             <li key={href}>
-              <Link className={getNavClasses(isClient)} to={href}>
+              <Link
+                activeClassName="font-bold underline"
+                className={getNavClasses(isClient)}
+                to={href}
+              >
                 {label}
               </Link>
             </li>

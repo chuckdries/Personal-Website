@@ -2,12 +2,11 @@ import React from "react";
 import classnames from "classnames";
 import { Link } from "gatsby";
 
-import Image from "@spectrum-icons/workflow/Image";
 import Shuffle from "@spectrum-icons/workflow/Shuffle";
 
 const getButtonClasses = (isClient) =>
   classnames(
-    "z-20 rounded-md text-md inline-block px-2 py-1 mt-1 md:py-2 md:px-3 md:my-1 mr-2 text-md hover:underline text-black",
+    "z-20 rounded-md text-md inline-block px-2 py-1 mt-1 mr-2 text-md hover:underline text-black",
     isClient ? "cool-border-small hover:bg-vibrant" : "text-gray-200"
   );
 
@@ -26,10 +25,9 @@ const ActionButtons = ({ isClient, image, shuffleImage }) => (
       <Link
         className={getButtonClasses(isClient, "muted")}
         id="image-link"
-          title="view image details"
           to={`/photogallery/${image.base}/`}
         >
-          <Image aria-label="view image details" />
+          view image
         </Link>
       <button
         className={getButtonClasses(isClient, "muted")}
@@ -37,18 +35,11 @@ const ActionButtons = ({ isClient, image, shuffleImage }) => (
         onClick={() => {
           shuffleImage(image);
         }}
-        title="shuffle image"
         type="button"
       >
-        <Shuffle aria-label="shuffle image" size="S" />
+        shuffle background
+        <Shuffle UNSAFE_className="ml-1" aria-label="shuffle image" size="XS" />
       </button>
-      <Link
-        className={getButtonClasses(isClient, "muted")}
-        id="photogallery-link"
-        to="/photogallery/"
-      >
-        Photography Gallery
-      </Link>
     </div>
   </div>
 );
