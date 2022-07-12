@@ -88,7 +88,7 @@ steps:
     image: node
     commands:
       - yarn install
-      - yarn build
+      - PATH_PREFIX=/PR/${DRONE_PULL_REQUEST} yarn build --prefix-paths
       - du -sh public
 
   - name: rsync
