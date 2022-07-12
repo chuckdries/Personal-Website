@@ -58,33 +58,17 @@ const Nav = ({ isClient, internalLinks, className }) => (
         <li>
           <a
             className={getNavClasses(isClient)}
-            href="https://github.com/chuckdries"
-          >
-            Github
-          </a>
-        </li>
-        <li>
-          <a
-            className={getNavClasses(isClient)}
-            href="https://www.linkedin.com/in/chuckdries/"
-          >
-            LinkedIn
-          </a>
-        </li>
-        <li>
-          <a
-            className={getNavClasses(isClient)}
-            href="https://medium.com/@chuckdries"
-          >
-            Medium
-          </a>
-        </li>
-        <li>
-          <a
-            className={getNavClasses(isClient)}
             href="https://www.youtube.com/channel/UCknR_DdytuOgzus--b2gZhg"
           >
             YouTube
+          </a>
+        </li>
+        <li>
+          <a
+            className={getNavClasses(isClient)}
+            href="https://github.com/chuckdries"
+          >
+            Github
           </a>
         </li>
         <li>

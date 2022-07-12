@@ -137,7 +137,7 @@ const IndexPage = ({
           <Nav
             internalLinks={[
               { href: "/", label: "Home" },
-              { href: "/photogallery/", label: "Gallery" },
+              { href: "/photogallery/", label: "Photography Gallery" },
             ]}
             isClient={isClient}
           />
