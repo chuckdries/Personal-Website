@@ -4,6 +4,8 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
 import classnames from "classnames";
 
+import ChevronLeft from '@spectrum-icons/workflow/ChevronLeft';
+import ChevronRight from '@spectrum-icons/workflow/ChevronRight';
 import Calendar from "@spectrum-icons/workflow/Calendar";
 import Stopwatch from "@spectrum-icons/workflow/Stopwatch";
 import Exposure from "@spectrum-icons/workflow/Exposure";
@@ -35,6 +37,10 @@ const logKeyShortcut = (keyCode) => {
     /* do nothing */
   }
 };
+
+const ArrowLinkClasses = `hover:underline text-vibrant-light hover:text-muted-light 
+lg:px-4 self-stretch flex items-center hover:bg-black/50 max-h-screen sticky top-0
+`;
 
 const GalleryImage = ({
   data,
@@ -166,39 +172,11 @@ const GalleryImage = ({
           >
             gallery <span className="bg-gray-300 text-black">esc</span>
           </Link>
-          {/* {prevImage && (
-            <Link
-              className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-              state={{
-                currentIndex: currentIndex - 1,
-                sortedImageList,
-                filterKeyword,
-                sortKey,
-              }}
-              to={`/photogallery/${prevImage}/`}
-            >
-              previous <span className="bg-gray-300 text-black">&#11104;</span>
-            </Link>
-          )} */}
-          {/* {nextImage && (
-            <Link
-              className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-              state={{
-                currentIndex: currentIndex + 1,
-                sortedImageList,
-                filterKeyword,
-                sortKey,
-              }}
-              to={`/photogallery/${nextImage}/`}
-            >
-              next <span className="bg-gray-300 text-black">&#11106;</span>
-            </Link>
-          )} */}
         </nav>
-        <div className="flex justify-between flex-auto items-center">
+        <div className="flex justify-between flex-auto items-center lg:gap-2">
           {prevImage && (
             <Link
-              className="hover:underline text-vibrant-light hover:text-muted-light mx-1 self-stretch flex items-center bg-opacity-5 hover:bg-black"
+              className={ArrowLinkClasses}
               state={{
                 currentIndex: currentIndex - 1,
                 sortedImageList,
@@ -207,7 +185,7 @@ const GalleryImage = ({
               }}
               to={`/photogallery/${prevImage}/`}
             >
-              previous <span className="bg-gray-300 text-black">&#11104;</span>
+              <span className="p-2 lg:p-4 bg-muted-light/25 rounded-full"><ChevronLeft /></span>
             </Link>
           )}
           <div className={classnames("pb-2 flex", orientationClasses)}>
@@ -330,7 +308,7 @@ const GalleryImage = ({
           </div>
           {nextImage && (
             <Link
-              className="hover:underline text-vibrant-light hover:text-muted-light mx-1 self-stretch flex items-center bg-opacity-5 hover:bg-black"
+              className={ArrowLinkClasses}
               state={{
                 currentIndex: currentIndex + 1,
                 sortedImageList,
@@ -339,7 +317,7 @@ const GalleryImage = ({
               }}
               to={`/photogallery/${nextImage}/`}
             >
-              next <span className="bg-gray-300 text-black">&#11106;</span>
+              <span className="p-2 lg:p-4 bg-muted-light/25 rounded-full"><ChevronRight /></span>
             </Link>
           )}
         </div>
