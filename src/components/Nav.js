@@ -7,7 +7,7 @@ import Menu from "@spectrum-icons/workflow/Menu";
 
 const Nav = ({ isClient, internalLinks, className }) => {
   const { observe, currentBreakpoint } = useDimensions({
-    breakpoints: { XS: 0, LG: 730 },
+    breakpoints: { XS: 0, LG: 690 },
     updateOnBreakpointChange: true,
   });
   const [linksMenu, setLinksMenu] = useState(false);
