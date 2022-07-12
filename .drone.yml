@@ -39,10 +39,10 @@ steps:
       exclude:
         - node_modules
         - .git*
-      args: -r
       source: ./public/
       target: ~/www/personal-website
       delete: true
+      recursive: true
       secrets: [rsync_key]
 
   - name: rebuild-cache
@@ -72,9 +72,48 @@ trigger:
     - pull_request
 
 steps:
+  - name: restore-cache
+    image: drillster/drone-volume-cache
+    settings:
+      restore: true
+      mount:
+        - ./node_modules
+        - ./.cache
+        - ./public
+    volumes:
+      - name: cache
+        path: /cache
+
+  - name: build
+    image: node
+    commands:
+      - yarn install
+      - yarn build
+      - du -sh public
+
+  - name: rsync
+    image: drillster/drone-rsync
+    settings:
+      user: ci
+      key:
+        from_secret: rsync_key
+      hosts:
+        - droplet.chuckdries.com
+      exclude:
+        - node_modules
+        - .git*
+      source: ./public/
+      target: ~/www/personal-website-preview/${DRONE_PULL_REQUEST}
+      prescript: cp -r ~/www/personal-website ~/www/personal-website-preview/${DRONE_PULL_REQUEST}
+      delete: true
+      recursive: true
+      secrets: [rsync_key]
+
   - name: comment
     image: jmccann/drone-github-comment:1
     settings:
-      message: Hello ${DRONE_PULL_REQUEST}
+      message: preview of ${DRONE_COMMIT} deployed to https://preview.chuckdries.com/PR/${DRONE_PULL_REQUEST}
+      update: true
       api_key:
         from_secret: github_key
+# note: we intentionally do not rebuild-cache for PRs
