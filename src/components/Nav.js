@@ -3,21 +3,19 @@ import classnames from "classnames";
 import { Link } from "gatsby";
 import useDimensions from "react-cool-dimensions";
 
-import ShowMenu from "@spectrum-icons/workflow/ShowMenu";
-
-const getNavClasses = (isClient) =>
-  classnames(
-    "hover:underline mx-2 md:mx-3",
-    isClient ? "text-vibrant-light" : "text-gray-200"
-  );
+import Menu from "@spectrum-icons/workflow/Menu";
 
 const Nav = ({ isClient, internalLinks, className }) => {
   const { observe, currentBreakpoint } = useDimensions({
-    breakpoints: { XS: 0, LG: 670 },
+    breakpoints: { XS: 0, LG: 730 },
     updateOnBreakpointChange: true,
   });
   const [linksMenu, setLinksMenu] = useState(false);
 
+  const navClasses = classnames(
+    "hover:underline mx-2 md:mx-3",
+    isClient ? "text-vibrant-light" : "text-gray-200"
+  );
   return (
     <nav
       className={classnames(
@@ -42,7 +40,7 @@ const Nav = ({ isClient, internalLinks, className }) => {
               <li key={href}>
                 <Link
                   activeClassName="font-bold underline"
-                  className={getNavClasses(isClient)}
+                  className={navClasses}
                   to={href}
                 >
                   {label}
@@ -53,35 +51,38 @@ const Nav = ({ isClient, internalLinks, className }) => {
         {internalLinks && currentBreakpoint === "LG" && <>|</>}
         {currentBreakpoint === "XS" && (
           <button
-            className="ml-2 hover:underline inline-flex align-middle"
+            className="mx-2 hover:underline inline-flex align-middle"
             onClick={() => setLinksMenu(!linksMenu)}
           >
-            <ShowMenu
-              UNSAFE_className="mr-2"
+            <Menu
+              UNSAFE_className="mr-1"
               aria-label="show external links"
               size="S"
             />
+            Links
           </button>
         )}
         {(currentBreakpoint === "LG" || linksMenu) && (
           <ul
             className={classnames(
+              "z-30",
               currentBreakpoint === "LG"
                 ? "inline-flex flex-wrap justify-center"
-                : "fixed bg-vibrant-dark p-2 rounded-md cool-border-small-light right-4"
+                : "absolute p-2 rounded-md mt-2",
+              currentBreakpoint === "XS" &&
+                (isClient
+                  ? "bg-vibrant-dark cool-border-small-light"
+                  : "bg-black border border-white")
             )}
           >
             <li>
-              <a
-                className={getNavClasses(isClient)}
-                href="https://twitter.com/chuckletmilk"
-              >
+              <a className={navClasses} href="https://twitter.com/chuckletmilk">
                 Twitter
               </a>
             </li>
             <li>
               <a
-                className={getNavClasses(isClient)}
+                className={navClasses}
                 href="https://www.instagram.com/asubtlebutdeliciouscoffeecake/"
               >
                 Instagram
@@ -89,25 +90,19 @@ const Nav = ({ isClient, internalLinks, className }) => {
             </li>
             <li>
               <a
-                className={getNavClasses(isClient)}
+                className={navClasses}
                 href="https://www.youtube.com/channel/UCknR_DdytuOgzus--b2gZhg"
               >
                 YouTube
               </a>
             </li>
             <li>
-              <a
-                className={getNavClasses(isClient)}
-                href="https://github.com/chuckdries"
-              >
+              <a className={navClasses} href="https://github.com/chuckdries">
                 GitHub
               </a>
             </li>
             <li>
-              <a
-                className={getNavClasses(isClient)}
-                href="mailto:chuck@chuckdries.com"
-              >
+              <a className={navClasses} href="mailto:chuck@chuckdries.com">
                 chuck@chuckdries.com
               </a>
             </li>
