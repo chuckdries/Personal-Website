@@ -4,6 +4,8 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
 import classnames from "classnames";
 
+import ChevronLeft from '@spectrum-icons/workflow/ChevronLeft';
+import ChevronRight from '@spectrum-icons/workflow/ChevronRight';
 import Calendar from "@spectrum-icons/workflow/Calendar";
 import Stopwatch from "@spectrum-icons/workflow/Stopwatch";
 import Exposure from "@spectrum-icons/workflow/Exposure";
@@ -35,6 +37,10 @@ const logKeyShortcut = (keyCode) => {
     /* do nothing */
   }
 };
+
+const ArrowLinkClasses = `hover:underline text-vibrant-light hover:text-muted-light 
+lg:px-4 self-stretch flex items-center hover:bg-black/50 max-h-screen sticky top-0
+`;
 
 const GalleryImage = ({
   data,
@@ -166,9 +172,11 @@ const GalleryImage = ({
           >
             gallery <span className="bg-gray-300 text-black">esc</span>
           </Link>
+        </nav>
+        <div className="flex justify-between flex-auto items-center lg:gap-2">
           {prevImage && (
             <Link
-              className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
+              className={ArrowLinkClasses}
               state={{
                 currentIndex: currentIndex - 1,
                 sortedImageList,
@@ -177,12 +185,130 @@ const GalleryImage = ({
               }}
               to={`/photogallery/${prevImage}/`}
             >
-              previous <span className="bg-gray-300 text-black">&#11104;</span>
+              <span className="p-1 lg:p-4 bg-muted-light/25 rounded-full"><ChevronLeft /></span>
             </Link>
           )}
+          <div className={classnames("pb-2 flex", orientationClasses)}>
+            <div
+              className={classnames(
+                zoom ? "cursor-zoom-out" : "cursor-zoom-in",
+                "mb-2 self-center"
+              )}
+              onClick={() => setZoom((_zoom) => !_zoom)}
+              style={{
+                maxWidth: `calc(max(calc(100vh - ${verticalPad}), 500px) * ${ar})`,
+              }}
+            >
+              {zoom ? (
+                <img
+                  alt={name}
+                  src={image.publicURL}
+                  style={{
+                    width: canonicalSize.width / window.devicePixelRatio,
+                    maxWidth: "unset",
+                  }}
+                />
+              ) : (
+                <GatsbyImage
+                  alt={name}
+                  className="border-4 border-vibrant"
+                  image={getImage(image)}
+                  key={image.base}
+                  loading="eager"
+                  objectFit="contain"
+                />
+              )}
+            </div>
+            <div
+              className={classnames(
+                "px-2 flex flex-row portrait:items-end mx-auto",
+                ar <= 1
+                  ? "pt-5 flex-col flex-auto text-right"
+                  : "landscape:container portrait:pt-5 portrait:flex-col portrait:text-right"
+              )}
+            >
+              <div className="flex-auto mr-2">
+                <p className="text-muted-light font-mono text-sm m-0 mt-1">
+                  {image.base}
+                </p>
+                {hasName(image) && (
+                  <h1 className="text-4xl mt-0 font-serif">{name}</h1>
+                )}
+                <p className="landscape:mr-2">{meta.Caption}</p>
+                <a
+                  className="cursor-pointer inline-block bg-muted-light text-vibrant-dark font-serif p-1 my-1 rounded"
+                  download
+                  href={image.publicURL}
+                  onClick={() => {
+                    try {
+                      window.plausible("Download Wallpaper", {
+                        props: { image: image.base },
+                      });
+                    } catch {
+                      // do nothing
+                    }
+                  }}
+                >
+                  Download wallpaper
+                </a>
+              </div>
+              {
+                <div
+                  className="portrait:border-t-2 border-muted-light portrait:mt-2 mr-2 portrait:mb-1"
+                  style={{ width: 30 }}
+                ></div>
+              }
+              <div className="flex flex-col items-end">
+                <MetadataItem
+                  data={dateTaken.toLocaleDateString()}
+                  icon={<Calendar />}
+                  title="date taken"
+                />
+                <div className="sm:flex justify-end gap-2 border border-vibrant-light pl-2 rounded">
+                  <MetadataItem
+                    data={shutterSpeed}
+                    icon={<Stopwatch />}
+                    title="shutter speed"
+                  />
+                  {meta.FNumber && (
+                    <MetadataItem
+                      data={`f/${meta.FNumber}`}
+                      icon={<Exposure />}
+                      title="aperture"
+                    />
+                  )}
+                  <MetadataItem data={meta.ISO} icon={<Filmroll />} title="ISO" />
+                </div>
+                <MetadataItem
+                  data={locationString}
+                  icon={<Location />}
+                  title="location"
+                />
+                {(meta.Make || meta.Model) && (
+                  <MetadataItem
+                    data={[meta.Make, meta.Model].join(" ")}
+                    icon={<Camera />}
+                    title="camera"
+                  />
+                )}
+                {(meta.LensModel || meta.FocalLength) && (
+                  <MetadataItem
+                    data={[
+                      meta.LensModel === "----" ? null : meta.LensModel,
+                      meta.FocalLength && `${meta.FocalLength}mm`,
+                    ]
+                      .filter(Boolean)
+                      .join(" @")}
+                    icon={<Circle />}
+                    title="lens"
+                  />
+                )}
+              </div>
+            </div>
+          </div>
           {nextImage && (
             <Link
-              className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
+              className={ArrowLinkClasses}
               state={{
                 currentIndex: currentIndex + 1,
                 sortedImageList,
@@ -191,129 +317,10 @@ const GalleryImage = ({
               }}
               to={`/photogallery/${nextImage}/`}
             >
-              next <span className="bg-gray-300 text-black">&#11106;</span>
+              <span className="p-1 lg:p-4 bg-muted-light/25 rounded-full"><ChevronRight /></span>
             </Link>
           )}
-        </nav>
-        <div className={classnames("flex", orientationClasses)}>
-          <div
-            className={classnames(
-              zoom ? "cursor-zoom-out" : "cursor-zoom-in",
-              "mb-2"
-            )}
-            onClick={() => setZoom((_zoom) => !_zoom)}
-            style={{
-              maxWidth: `calc(max(calc(100vh - ${verticalPad}), 500px) * ${ar})`,
-            }}
-          >
-            {zoom ? (
-              <img
-                alt={name}
-                src={image.publicURL}
-                style={{
-                  width: canonicalSize.width / window.devicePixelRatio,
-                  maxWidth: "unset",
-                }}
-              />
-            ) : (
-              <GatsbyImage
-                alt={name}
-                className="border-4 border-vibrant"
-                image={getImage(image)}
-                key={image.base}
-                loading="eager"
-                objectFit="contain"
-              />
-            )}
-          </div>
-          <div
-            className={classnames(
-              "px-2 flex flex-row portrait:items-end mx-auto",
-              ar <= 1
-                ? "pt-5 flex-col flex-auto text-right"
-                : "landscape:container portrait:pt-5 portrait:flex-col portrait:text-right"
-            )}
-          >
-            <div className="flex-auto mr-2">
-              <p className="text-muted-light font-mono text-sm m-0 mt-1">
-                {image.base}
-              </p>
-              {hasName(image) && (
-                <h1 className="text-4xl mt-0 font-serif">{name}</h1>
-              )}
-              <p className="landscape:mr-2">{meta.Caption}</p>
-              <a
-                className="cursor-pointer inline-block bg-muted-light text-vibrant-dark font-serif p-1 my-1 rounded"
-                download
-                href={image.publicURL}
-                onClick={() => {
-                  try {
-                    window.plausible("Download Wallpaper", {
-                      props: { image: image.base },
-                    });
-                  } catch {
-                    // do nothing
-                  }
-                }}
-              >
-                Download wallpaper
-              </a>
-            </div>
-            {
-              <div
-                className="portrait:border-t-2 border-muted-light portrait:mt-2 mr-2 portrait:mb-1"
-                style={{ width: 30 }}
-              ></div>
-            }
-            <div className="flex flex-col items-end">
-              <MetadataItem
-                data={dateTaken.toLocaleDateString()}
-                icon={<Calendar />}
-                title="date taken"
-              />
-              <div className="flex justify-end gap-2 border border-vibrant-light pl-2 rounded">
-                <MetadataItem
-                  data={shutterSpeed}
-                  icon={<Stopwatch />}
-                  title="shutter speed"
-                />
-                {meta.FNumber && (
-                  <MetadataItem
-                    data={`f/${meta.FNumber}`}
-                    icon={<Exposure />}
-                    title="aperture"
-                  />
-                )}
-                <MetadataItem data={meta.ISO} icon={<Filmroll />} title="ISO" />
-              </div>
-              <MetadataItem
-                data={locationString}
-                icon={<Location />}
-                title="location"
-              />
-              {(meta.Make || meta.Model) && (
-                <MetadataItem
-                  data={[meta.Make, meta.Model].join(" ")}
-                  icon={<Camera />}
-                  title="camera"
-                />
-              )}
-              {(meta.LensModel || meta.FocalLength) && (
-                <MetadataItem
-                  data={[
-                    meta.LensModel === "----" ? null : meta.LensModel,
-                    meta.FocalLength && `${meta.FocalLength}mm`,
-                  ]
-                    .filter(Boolean)
-                    .join(" @")}
-                  icon={<Circle />}
-                  title="lens"
-                />
-              )}
-            </div>
-          </div>
         </div>
-        <div></div>
       </div>
     </>
   );
