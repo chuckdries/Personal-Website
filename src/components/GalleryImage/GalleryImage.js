@@ -185,7 +185,7 @@ const GalleryImage = ({
               }}
               to={`/photogallery/${prevImage}/`}
             >
-              <span className="p-2 lg:p-4 bg-muted-light/25 rounded-full"><ChevronLeft /></span>
+              <span className="p-1 lg:p-4 bg-muted-light/25 rounded-full"><ChevronLeft /></span>
             </Link>
           )}
           <div className={classnames("pb-2 flex", orientationClasses)}>
@@ -264,7 +264,7 @@ const GalleryImage = ({
                   icon={<Calendar />}
                   title="date taken"
                 />
-                <div className="flex justify-end gap-2 border border-vibrant-light pl-2 rounded">
+                <div className="sm:flex justify-end gap-2 border border-vibrant-light pl-2 rounded">
                   <MetadataItem
                     data={shutterSpeed}
                     icon={<Stopwatch />}
@@ -317,7 +317,7 @@ const GalleryImage = ({
               }}
               to={`/photogallery/${nextImage}/`}
             >
-              <span className="p-2 lg:p-4 bg-muted-light/25 rounded-full"><ChevronRight /></span>
+              <span className="p-1 lg:p-4 bg-muted-light/25 rounded-full"><ChevronRight /></span>
             </Link>
           )}
         </div>
