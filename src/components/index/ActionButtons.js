@@ -6,8 +6,8 @@ import Shuffle from "@spectrum-icons/workflow/Shuffle";
 
 const getButtonClasses = (isClient) =>
   classnames(
-    "z-20 rounded-md text-md inline-block px-2 py-1 mt-1 mr-2 text-md hover:underline text-black",
-    isClient ? "cool-border-small hover:bg-vibrant" : "text-gray-200"
+    "z-20 rounded-md text-md inline-block px-2 py-1 mt-1 mr-2 text-md hover:underline",
+    isClient ? "cool-border-small hover:bg-vibrant" : "text-gray-300 bg-gray-700"
   );
 
 const ActionButtons = ({ isClient, image, shuffleImage }) => (
