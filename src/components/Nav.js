@@ -48,7 +48,7 @@ const Nav = ({ isClient, internalLinks, className }) => {
               </li>
             ))}
         </ul>
-        {internalLinks && currentBreakpoint === "LG" && <>|</>}
+        {internalLinks && currentBreakpoint !== "XS" && <>|</>}
         {currentBreakpoint === "XS" && (
           <button
             className="mx-2 hover:underline inline-flex align-middle"
@@ -62,11 +62,11 @@ const Nav = ({ isClient, internalLinks, className }) => {
             Links
           </button>
         )}
-        {(currentBreakpoint === "LG" || linksMenu) && (
+        {(currentBreakpoint !== "XS" || linksMenu) && (
           <ul
             className={classnames(
               "z-30",
-              currentBreakpoint === "LG"
+              currentBreakpoint !== "XS"
                 ? "inline-flex flex-wrap justify-center"
                 : "absolute p-2 rounded-md mt-2",
               currentBreakpoint === "XS" &&
