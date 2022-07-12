@@ -4,8 +4,8 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
 import classnames from "classnames";
 
-import ChevronLeft from '@spectrum-icons/workflow/ChevronLeft';
-import ChevronRight from '@spectrum-icons/workflow/ChevronRight';
+import ChevronLeft from "@spectrum-icons/workflow/ChevronLeft";
+import ChevronRight from "@spectrum-icons/workflow/ChevronRight";
 import Calendar from "@spectrum-icons/workflow/Calendar";
 import Stopwatch from "@spectrum-icons/workflow/Stopwatch";
 import Exposure from "@spectrum-icons/workflow/Exposure";
@@ -43,12 +43,7 @@ const ArrowLinkClasses = `hover:underline text-vibrant-light hover:text-muted-li
 lg:px-4 self-stretch flex items-center hover:bg-black/50 max-h-screen sticky top-0
 `;
 
-const GalleryImage = ({
-  data,
-  location: {
-    state
-  },
-}) => {
+const GalleryImage = ({ data, location: { state } }) => {
   const { sortedImageList, currentIndex, filterKeyword, sortKey } = state ?? {};
   const image = data.file;
   const ar = getAspectRatio(image);
@@ -56,7 +51,9 @@ const GalleryImage = ({
   const [zoom, setZoom] = useState(false);
   const [isClient, setIsClient] = useState(true);
 
-  useEffect(() => {setIsClient(true)}, [])
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const nextIndex =
     sortedImageList && currentIndex < sortedImageList.length
@@ -153,15 +150,26 @@ const GalleryImage = ({
         />
       </Helmet>
       <div className="min-h-screen flex flex-col justify-between">
-        <Nav className="mb-4" internalLinks={[
-          { href: '/', label: "Home"},
-          { href: getGalleryPageUrl(
-            { keyword: filterKeyword, sortKey },
-            image.base
-          ), label: <>Gallery <kbd>esc</kbd></>}
-        ]} isClient={isClient} />
-        <div className="flex justify-between flex-auto items-center lg:gap-2">
-          {prevImage && (
+        <Nav
+          className="mb-4"
+          internalLinks={[
+            { href: "/", label: "Home" },
+            {
+              href: getGalleryPageUrl(
+                { keyword: filterKeyword, sortKey },
+                image.base
+              ),
+              label: (
+                <>
+                  Gallery <kbd>esc</kbd>
+                </>
+              ),
+            },
+          ]}
+          isClient={isClient}
+        />
+        <div className="flex flex-auto items-center lg:gap-2 justify-between">
+          {prevImage ? (
             <Link
               className={ArrowLinkClasses}
               state={{
@@ -172,8 +180,12 @@ const GalleryImage = ({
               }}
               to={`/photogallery/${prevImage}/`}
             >
-              <span className="p-1 lg:p-4 bg-muted-light/25 rounded-full"><ChevronLeft /></span>
+              <span className="p-1 lg:p-4 bg-muted-light/25 rounded-full">
+                <ChevronLeft />
+              </span>
             </Link>
+          ) : (
+            <div></div>
           )}
           <div className={classnames("pb-2 flex", orientationClasses)}>
             <div
@@ -264,7 +276,11 @@ const GalleryImage = ({
                       title="aperture"
                     />
                   )}
-                  <MetadataItem data={meta.ISO} icon={<Filmroll />} title="ISO" />
+                  <MetadataItem
+                    data={meta.ISO}
+                    icon={<Filmroll />}
+                    title="ISO"
+                  />
                 </div>
                 <MetadataItem
                   data={locationString}
@@ -293,7 +309,7 @@ const GalleryImage = ({
               </div>
             </div>
           </div>
-          {nextImage && (
+          {nextImage ? (
             <Link
               className={ArrowLinkClasses}
               state={{
@@ -304,8 +320,12 @@ const GalleryImage = ({
               }}
               to={`/photogallery/${nextImage}/`}
             >
-              <span className="p-1 lg:p-4 bg-muted-light/25 rounded-full"><ChevronRight /></span>
+              <span className="p-1 lg:p-4 bg-muted-light/25 rounded-full">
+                <ChevronRight />
+              </span>
             </Link>
+          ) : (
+            <div></div>
           )}
         </div>
       </div>
