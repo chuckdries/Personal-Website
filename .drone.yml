@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: default
+name: Build Main
 
 trigger:
   branch:
@@ -59,3 +59,18 @@ volumes:
   - name: cache
     host:
       path: /mnt/user/dronecache
+
+---
+kind: pipeline
+type: docker
+name: Preview PR
+
+trigger:
+  event:
+  - pull_request
+
+steps:
+  - name: comment
+    image: jmccann/drone-github-comment:1
+    settings:
+      message: Hello ${DRONE_PULL_REQUEST}
