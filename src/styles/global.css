@@ -78,18 +78,6 @@ a {
   @apply text-blue-600;
 }
 
-.arrow-right-after:after {
-  content: "\279C";
-  margin-left: 3px;
-  transform: translate(0px);
-  display: inline-block;
-  transition: all 0.2s;
-}
-
-.arrow-left-before:before {
-  content: "\21AB";
-  margin-left: 3px;
-  transform: translate(0px);
-  display: inline-block;
-  /* transition: all .2s; */
+kbd {
+    @apply bg-gray-300 text-black border border-gray-700 rounded p-1;
 }
