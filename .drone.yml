@@ -43,7 +43,7 @@ steps:
       target: ~/www/personal-website
       delete: true
       recursive: true
-      # secrets: [rsync_key]
+      secrets: [rsync_key]
 
   - name: rebuild-cache
     image: drillster/drone-volume-cache
@@ -107,6 +107,7 @@ steps:
       prescript: cp -r ~/www/personal-website ~/www/personal-website-preview/${DRONE_PULL_REQUEST}
       delete: true
       recursive: true
+      secrets: [rsync_key]
 
   - name: comment
     image: jmccann/drone-github-comment:1
