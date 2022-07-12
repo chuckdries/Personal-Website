@@ -150,7 +150,7 @@ const IndexPage = ({
           >
             <h1
               className={classnames(
-                "mb-0 mt-0 text-center font-black z-20 text-7xl md:text-8xl lg:text-9xl"
+                "mb-0 mt-0 text-center font-black z-20 text-5xl sm:text-7xl md:text-8xl lg:text-9xl"
               )}
               style={{ lineHeight: "85%" }}
             >
@@ -200,7 +200,7 @@ const IndexPage = ({
           ></div>
         )}
         {imageIsLandscape && (
-          <div className="hidden portrait:flex justify-center my-2">
+          <div className="hidden portrait:flex justify-center sm:my-2">
             <ActionButtons
               image={image}
               isClient={isClient}
