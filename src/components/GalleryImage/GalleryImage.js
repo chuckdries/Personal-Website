@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { graphql, navigate, Link } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
@@ -26,6 +26,7 @@ import {
   getGalleryPageUrl,
 } from "../../utils";
 import MetadataItem from "./MetadataItem";
+import Nav from "../Nav";
 
 const logKeyShortcut = (keyCode) => {
   try {
@@ -53,6 +54,9 @@ const GalleryImage = ({
   const ar = getAspectRatio(image);
 
   const [zoom, setZoom] = useState(false);
+  const [isClient, setIsClient] = useState(true);
+
+  useEffect(() => {setIsClient(true)}, [])
 
   const nextIndex =
     sortedImageList && currentIndex < sortedImageList.length
@@ -149,30 +153,13 @@ const GalleryImage = ({
         />
       </Helmet>
       <div className="min-h-screen flex flex-col justify-between">
-        <nav className="mt-1 ml-1 text-lg mb-4">
-          <button
-            className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before  mr-1"
-            onClick={() => navigate(-1)}
-            type="button"
-          >
-            back
-          </button>
-          <Link
-            className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-            to="/"
-          >
-            home
-          </Link>
-          <Link
-            className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-            to={getGalleryPageUrl(
-              { keyword: filterKeyword, sortKey },
-              image.base
-            )}
-          >
-            gallery <span className="bg-gray-300 text-black">esc</span>
-          </Link>
-        </nav>
+        <Nav className="mb-4" internalLinks={[
+          { href: '/', label: "Home"},
+          { href: getGalleryPageUrl(
+            { keyword: filterKeyword, sortKey },
+            image.base
+          ), label: <>Gallery <kbd>esc</kbd></>}
+        ]} isClient={isClient} />
         <div className="flex justify-between flex-auto items-center lg:gap-2">
           {prevImage && (
             <Link
