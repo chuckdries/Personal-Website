@@ -11,7 +11,7 @@ const getNavClasses = (isClient) =>
 const Nav = ({ isClient, internalLinks, className }) => (
   <nav
     className={classnames(
-      "m-2 flex justify-center font-serif",
+      "m-2 flex justify-center font-sans",
       isClient ? "text-vibrant-light" : "text-gray-200",
       className
     )}
