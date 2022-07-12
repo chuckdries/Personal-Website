@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as R from "ramda";
-import { graphql, Link } from "gatsby";
-import { navigate } from "gatsby";
+import { graphql } from "gatsby";
 import { Helmet } from "react-helmet";
 import { Picker, Item } from "@adobe/react-spectrum";
 
