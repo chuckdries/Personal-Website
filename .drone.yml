@@ -76,3 +76,5 @@ steps:
     image: jmccann/drone-github-comment:1
     settings:
       message: Hello ${DRONE_PULL_REQUEST}
+      api_key:
+        from_secret: github_key
