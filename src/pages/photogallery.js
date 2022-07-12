@@ -149,7 +149,7 @@ const GalleryPage = ({ data }) => {
         <title>Photo Gallery | Chuck Dries</title>
         <body className="bg-black text-white" />
       </Helmet>
-      <div className="sm:sticky top-0 z-10 bg-black">
+      <div className="sm:sticky top-0 pt-1 z-10 bg-black">
         <Nav
           className="mb-4"
           internalLinks={[
