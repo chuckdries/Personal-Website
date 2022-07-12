@@ -1,13 +1,13 @@
 import * as React from "react";
 import * as R from "ramda";
-import { graphql, Link } from "gatsby";
-import { navigate } from "gatsby";
+import { graphql } from "gatsby";
 import { Helmet } from "react-helmet";
 import { Picker, Item } from "@adobe/react-spectrum";
 
 import MasonryGallery from "../components/MasonryGallery";
 import KeywordsPicker from "../components/KeywordsPicker";
 import { getGalleryPageUrl } from "../utils";
+import Nav from "../components/Nav";
 
 const SORT_KEYS = {
   hue: ["fields", "imageMeta", "vibrantHue"],
@@ -69,7 +69,7 @@ const GalleryPage = ({ data }) => {
   );
 
   const removeHash = React.useCallback(() => {
-    console.log('rh')
+    console.log("rh");
     const url = new URL(
       typeof window !== "undefined"
         ? window.location.href.toString()
@@ -90,7 +90,7 @@ const GalleryPage = ({ data }) => {
     if (!el) {
       return;
     }
-    console.log('scrolling into view', el);
+    console.log("scrolling into view", el);
     el.scrollIntoView({
       block: "center",
     });
@@ -149,28 +149,15 @@ const GalleryPage = ({ data }) => {
         <title>Photo Gallery | Chuck Dries</title>
         <body className="bg-black text-white" />
       </Helmet>
-      <div className="sm:sticky top-0 z-10 bg-black">
-        <nav className="mt-1 ml-1 text-lg mb-4">
-          <button
-            className="hover:underline text-vibrant-light hover:text-muted-light arrow-left-before  mr-1"
-            onClick={() => navigate(-1)}
-            type="button"
-          >
-            back
-          </button>
-          <Link
-            className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-            to="/"
-          >
-            home
-          </Link>
-          <Link
-            className="hover:underline text-vibrant-light hover:text-muted-light mx-1"
-            to="/photogallery/"
-          >
-            gallery
-          </Link>
-        </nav>
+      <div className="sm:sticky top-0 pt-1 z-10 bg-black">
+        <Nav
+          className="mb-4"
+          internalLinks={[
+            { href: "/", label: "Home" },
+            { href: "/photogallery/", label: "Gallery" },
+          ]}
+        >
+        </Nav>
         <div className="flex flex-col md:flex-row md:items-end justify-between">
           <h1 className="text-5xl mt-0 ml-5 mr-5 font-serif font-black z-10">
             Photo Gallery
