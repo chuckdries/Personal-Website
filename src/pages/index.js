@@ -142,13 +142,15 @@ const IndexPage = ({
             isClient={isClient}
           />
           <div
-            className={classnames("flex flex-col", !imageIsLandscape && "portrait:flex-auto ")}
+            className={classnames(
+              "flex flex-col",
+              !imageIsLandscape && "portrait:flex-auto "
+            )}
           >
             <div
               className={classnames(
-                "rounded-[50px] p-3 md:p-5 flex flex-col items-center z-10 border-r-[20px] border-b-[20px] mb-3 mx-2",
-                isClient ? "cool-border-big" : "bg-gray-50",
-                !imageIsLandscape && "landscape:mr-4" // text is on left side of image, make some room for drop shadow
+                "rounded-[50px] p-3 md:p-5 ml-2 mr-4 md:ml-3 md:mr-5 flex flex-col items-center z-10 border-r-[20px] border-b-[20px] mb-3",
+                isClient ? "cool-border-big" : "bg-gray-50"
               )}
             >
               <h1
