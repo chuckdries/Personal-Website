@@ -127,9 +127,9 @@ const IndexPage = ({
       >
         <div
           className={classnames(
-            "landscape:flex-auto flex flex-col items-center justify-between",
+            "landscape:flex-auto flex flex-col items-center",
             imageIsLandscape
-              ? "portrait:items-center landscape:w-screen"
+              ? "portrait:items-center landscape:w-screen justify-between"
               : "landscape:justify-center portrait:w-screen"
           )}
           style={{ gridArea: "1/1" }}
@@ -142,34 +142,36 @@ const IndexPage = ({
             isClient={isClient}
           />
           <div
-            className={classnames(
-              "rounded-[50px] p-3 md:p-5 flex flex-col items-center z-10 border-r-[20px] border-b-[20px] mb-3 mx-2 md:mb-[-90px]",
-              isClient ? "cool-border-big" : "bg-gray-50",
-              !imageIsLandscape && "landscape:mr-4" // text is on left side of image, make some room for drop shadow
-            )}
+            className={classnames("flex flex-col", !imageIsLandscape && "portrait:flex-auto ")}
           >
-            <h1
+            <div
               className={classnames(
-                "mb-0 mt-0 text-center font-black z-20 text-5xl sm:text-7xl md:text-8xl lg:text-9xl"
+                "rounded-[50px] p-3 md:p-5 flex flex-col items-center z-10 border-r-[20px] border-b-[20px] mb-3 mx-2",
+                isClient ? "cool-border-big" : "bg-gray-50",
+                !imageIsLandscape && "landscape:mr-4" // text is on left side of image, make some room for drop shadow
               )}
-              style={{ lineHeight: "85%" }}
             >
-              Chuck Dries
-            </h1>
-            <h2
-              className={classnames(
-                "p-3 text-center z-20 font-bold text-lg md:text-2xl lg:text-3xl"
-              )}
-              style={{ lineHeight: "110%" }}
-            >
-              Full Stack Software Engineer &amp; Photographer
-            </h2>
+              <h1
+                className={classnames(
+                  "mb-0 mt-0 text-center font-black z-20 text-5xl sm:text-7xl md:text-8xl lg:text-9xl"
+                )}
+                style={{ lineHeight: "85%" }}
+              >
+                Chuck Dries
+              </h1>
+              <h2
+                className={classnames(
+                  "p-3 text-center z-20 font-bold text-lg md:text-2xl lg:text-3xl"
+                )}
+                style={{ lineHeight: "110%" }}
+              >
+                Full Stack Software Engineer &amp; Photographer
+              </h2>
+            </div>
           </div>
-
           <div
             className={classnames(
-              "mt-[100px]",
-              imageIsLandscape ? "block portrait:hidden" : "block"
+              imageIsLandscape ? "block portrait:hidden" : ""
             )}
           >
             <ActionButtons
