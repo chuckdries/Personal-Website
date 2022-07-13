@@ -121,7 +121,7 @@ const IndexPage = ({
         className={classnames(
           "font-serif",
           imageIsLandscape
-            ? "landscape:grid portrait:h-actual-screen portrait:flex flex-col justify-center"
+            ? "landscape:grid portrait:h-actual-screen portrait:flex flex-col justify-around"
             : "portrait:grid landscape:flex flex-row"
         )}
       >
