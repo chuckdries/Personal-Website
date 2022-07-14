@@ -131,9 +131,9 @@ const GalleryImage = ({ data, location: { state } }) => {
 
   const orientationClasses =
     ar > 1
-      ? "flex-col mx-auto"
+      ? "flex-col"
       : "portrait:mx-auto landscape:mx-5 landscape:flex-row-reverse portrait:flex-col";
-  const verticalPad = ar > 1 ? "170px" : "70px";
+  const verticalPad = ar > 1 ? "250px" : "100px";
 
   const shutterSpeed = React.useMemo(
     () => getShutterFractionFromExposureTime(meta.ExposureTime || 0),
@@ -149,7 +149,7 @@ const GalleryImage = ({ data, location: { state } }) => {
           style={getHelmetSafeBodyStyle(vibrant)}
         />
       </Helmet>
-      <div className="min-h-screen flex flex-col justify-between">
+      <div className="min-h-screen flex flex-col justify-between overflow-x-hidden">
         <Nav
           className="mb-4"
           internalLinks={[
@@ -220,7 +220,7 @@ const GalleryImage = ({ data, location: { state } }) => {
             </div>
             <div
               className={classnames(
-                "px-2 flex flex-row portrait:items-end mx-auto",
+                "px-2 flex flex-row portrait:items-end",
                 ar <= 1
                   ? "pt-5 flex-col flex-auto text-right"
                   : "landscape:container portrait:pt-5 portrait:flex-col portrait:text-right"
