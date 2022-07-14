@@ -75,7 +75,7 @@ const MasonryGallery = ({
   return (
     <>
       <div
-        className="w-full flex items-center flex-wrap"
+        className="flex items-center flex-wrap"
         style={{
           position: "relative",
         }}
