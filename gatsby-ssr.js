@@ -10,6 +10,7 @@ export const wrapRootElement = ({ element }) => (
         background: "unset",
         color: "unset",
       }}
+      UNSAFE_className="overflow-x-hidden"
       colorScheme="dark"
       scale="medium"
       theme={darkTheme}
