@@ -220,7 +220,7 @@ const GalleryImage = ({ data, location: { state } }) => {
             </div>
             <div
               className={classnames(
-                "px-2 flex flex-row portrait:items-end",
+                "px-2 flex flex-row portrait:items-end mx-auto",
                 ar <= 1
                   ? "pt-5 flex-col flex-auto text-right"
                   : "landscape:container portrait:pt-5 portrait:flex-col portrait:text-right"
