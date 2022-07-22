@@ -1,5 +1,5 @@
 import * as React from "react";
-import { darkTheme, Provider } from "@adobe/react-spectrum";
+import { darkTheme, defaultTheme, Provider } from "@adobe/react-spectrum";
 import "./src/styles/global.css";
 import { SSRProvider } from "@react-aria/ssr";
 
@@ -10,9 +10,9 @@ export const wrapRootElement = ({ element }) => (
         background: "unset",
         color: "unset",
       }}
-      colorScheme="dark"
-      scale="medium"
-      theme={darkTheme}
+      colorScheme="light"
+      // scale="medium"
+      theme={defaultTheme}
     >
       {element}
     </Provider>

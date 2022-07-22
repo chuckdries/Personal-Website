@@ -16,7 +16,7 @@ const KeywordsPicker = ({ keywords, value, onChange }) => {
             <li key={keyword}>
               <button
                 className={classNames(
-                  "py-[5px] px-2 rounded-full text-[#C8C8C8] hover:bg-gray-700 bg-[#1A1A1A] border border-[#494949]                  ",
+                  "py-[5px] px-2 rounded-full text-[#1A1A1A] hover:bg-gray-700 bg-[#fbfbfb] border border-[#c3c3c3]                  ",
                   selected && "bg-blue-600 hover:bg-blue-800",
                   disabled && "text-[#777777] cursor-default hover:bg-[#1A1A1A]"
                 )}

@@ -14,13 +14,13 @@ const Nav = ({ isClient, internalLinks, className }) => {
 
   const navClasses = classnames(
     "hover:underline mx-2 md:mx-3",
-    isClient ? "text-vibrant-light" : "text-gray-200"
+    isClient ? "text-vibrant-light" : "text-gray-800"
   );
   return (
     <nav
       className={classnames(
         "m-2 flex justify-center font-sans w-full",
-        isClient ? "text-vibrant-light" : "text-gray-200",
+        isClient ? "text-vibrant-light" : "text-gray-800",
         className
       )}
       ref={observe}
@@ -31,7 +31,7 @@ const Nav = ({ isClient, internalLinks, className }) => {
           "rounded-full p-2",
           isClient
             ? "bg-vibrant-dark cool-border-small-light"
-            : "border border-white"
+            : "border border-black"
         )}
       >
         <ul className="inline-flex flex-wrap justify-center">

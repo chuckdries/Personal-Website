@@ -20,6 +20,7 @@ const GalleryPage = ({ data }) => {
   const hash =
     typeof window !== "undefined" ? window.location.hash.replace("#", "") : "";
 
+  const [isPurchasingPrints, setIsPurchasingPrints] = React.useState(false);
   const [hashCleared, setHashCleared] = React.useState(false); // eslint-disable-line no-unused-vars
   //     ^ used just to force a re-render with the cleared hash value (I know, it's a smell for sure)
   const [filterKeyword, _setKeyword] = React.useState(null);
@@ -147,69 +148,70 @@ const GalleryPage = ({ data }) => {
     <>
       <Helmet>
         <title>Photo Gallery | Chuck Dries</title>
-        <body className="bg-black text-white" />
+        <body className="bg-white text-black box-content border-[16px] border-blue-700" />
       </Helmet>
-      <div className="sm:sticky top-0 pt-1 z-10 bg-black">
-        <Nav
-          className="mb-4"
-          internalLinks={[
-            { href: "/", label: "Home" },
-            { href: "/photogallery/", label: "Gallery" },
-          ]}
-        >
-        </Nav>
-        <div className="flex flex-col md:flex-row md:items-end justify-between">
-          <h1 className="text-5xl mt-0 ml-5 mr-5 font-serif font-black z-10">
-            Photo Gallery
-          </h1>
-          <KeywordsPicker
-            keywords={[
-              "night",
-              "coast",
-              "city",
-              "landscape",
-              "flowers",
-              "product",
-              "waterfall",
-              "fireworks",
-              "panoramic",
-              "Portland Japanese Garden",
-              // "sunset",
+      <div className="h-[calc(100vh-32px)] overflow-y-auto">
+        <div className="sm:sticky top-0 pt-1 z-10 bg-white">
+          <Nav
+            className="mb-4"
+            internalLinks={[
+              { href: "/", label: "Home" },
+              { href: "/photogallery/", label: "Gallery" },
             ]}
-            onChange={setKeyword}
-            value={filterKeyword}
-          />
-          <div className="m-2">
-            <Picker
-              label="Sort by..."
-              onSelectionChange={setSortKey}
-              selectedKey={sortKey}
-            >
-              <Item key="rating">Default</Item>
-              <Item key="date">Date</Item>
-              <Item key="hue">Hue</Item>
-              {showDebug && <Item key="hue_debug">Dominant hue[debug]</Item>}
-            </Picker>
+          ></Nav>
+          <div className="flex flex-col md:flex-row md:items-end justify-between">
+            <h1 className="text-5xl mt-0 ml-5 mr-5 font-serif font-black z-10">
+              Purchase Prints
+            </h1>
+            <KeywordsPicker
+              keywords={[
+                "night",
+                "coast",
+                "city",
+                "landscape",
+                "flowers",
+                "product",
+                "waterfall",
+                "fireworks",
+                "panoramic",
+                "Portland Japanese Garden",
+                // "sunset",
+              ]}
+              onChange={setKeyword}
+              value={filterKeyword}
+            />
+            <div className="m-2">
+              <Picker
+                label="Sort by..."
+                onSelectionChange={setSortKey}
+                selectedKey={sortKey}
+              >
+                <Item key="rating">Default</Item>
+                <Item key="date">Date</Item>
+                <Item key="hue">Hue</Item>
+                {showDebug && <Item key="hue_debug">Dominant hue[debug]</Item>}
+              </Picker>
+            </div>
           </div>
         </div>
+        <MasonryGallery
+          aspectsByBreakpoint={{
+            xs: 2,
+            sm: 3,
+            md: 4,
+            lg: 4,
+            xl: 5,
+            // '2xl': 6.1,
+          }}
+          debugHue={sortKey === "hue_debug"}
+          debugRating={sortKey === "rating" && showDebug}
+          images={images}
+          linkState={{
+            sortKey,
+            filterKeyword,
+          }}
+        />
       </div>
-      <MasonryGallery
-        aspectsByBreakpoint={{
-          xs: 2,
-          sm: 3,
-          md: 4,
-          lg: 4,
-          xl: 5,
-          // '2xl': 6.1,
-        }}
-        debugHue={sortKey === "hue_debug"}
-        debugRating={sortKey === "rating" && showDebug}
-        images={images}
-        linkState={{
-          sortKey,
-          filterKeyword,
-        }}
-      />
     </>
   );
 };

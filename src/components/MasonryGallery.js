@@ -101,7 +101,7 @@ const MasonryGallery = ({
           return (
             <Link
               className={classNames(
-                "border-4 overflow-hidden",
+                "border-8 overflow-hidden",
                 debugHue && "border-8"
               )}
               id={image.base}
@@ -122,7 +122,7 @@ const MasonryGallery = ({
                     ${image.fields.imageMeta.dominantHue[1] * 100}%,
                     ${image.fields.imageMeta.dominantHue[2] * 100}%
                   )`
-                  : "black",
+                  : "white",
               }}
               to={`/photogallery/${image.base}`}
             >
