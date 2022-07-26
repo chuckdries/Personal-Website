@@ -190,10 +190,10 @@ const GalleryImage = ({ data, location: { state } }) => {
           <div className={classnames("pb-2 flex", orientationClasses)}>
             <div
               className={classnames(
-                zoom ? "cursor-zoom-out" : "cursor-zoom-in",
+                // zoom ? "cursor-zoom-out" : "cursor-zoom-in",
                 "mb-2 self-center"
               )}
-              onClick={() => setZoom((_zoom) => !_zoom)}
+              // onClick={() => setZoom((_zoom) => !_zoom)}
               style={{
                 maxWidth: `calc(max(calc(100vh - ${verticalPad}), 500px) * ${ar})`,
               }}
