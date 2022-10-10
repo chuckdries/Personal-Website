@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Link, Node } from "gatsby";
-import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
+import { Link } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import * as R from "ramda";
 import { getAspectRatio, getName } from "../utils";
 import useBreakpoint from "use-breakpoint";
@@ -8,6 +8,7 @@ import useBreakpoint from "use-breakpoint";
 // @ts-ignore
 import themeBreakpoints from "../breakpoints";
 import classNames from "classnames";
+import { GalleryImage } from "../pages/photogallery";
 
 interface Row {
   aspect: number;
@@ -16,7 +17,7 @@ interface Row {
 }
 
 interface MasonryGalleryProps {
-  images: (ImageDataLike & Node)[];
+  images: (GalleryImage)[];
   aspectsByBreakpoint: {
     [breakpoint: string]: number;
   }
@@ -40,9 +41,9 @@ const MasonryGallery = ({
   const { breakpoint } = useBreakpoint(breakpoints, "sm");
 
   const aspectRatios = React.useMemo(
-    () => R.map(getAspectRatio, images),
+    () => R.map(getAspectRatio, images).filter(Boolean),
     [images]
-  );
+  ) as number[];
 
   const targetAspect = aspectTargetsByBreakpoint[breakpoint];
   const rows = React.useMemo(
@@ -115,6 +116,7 @@ const MasonryGallery = ({
             const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
             width = `${widthNumber}%`;
           }
+          // @ts-ignore
           const img = getImage(image);
           return (
             <Link
@@ -136,9 +138,9 @@ const MasonryGallery = ({
                 // borderColor: `rgb(${image.fields.imageMeta.vibrant.Vibrant.join(',')})`
                 borderColor: debugHue
                   ? `hsl(
-                    ${image.fields.imageMeta.dominantHue[0]},
-                    ${image.fields.imageMeta.dominantHue[1] * 100}%,
-                    ${image.fields.imageMeta.dominantHue[2] * 100}%
+                    ${image.fields?.imageMeta?.dominantHue?.[0]},
+                    ${image.fields?.imageMeta?.dominantHue?.[1] ?? 0 * 100}%,
+                    ${image.fields?.imageMeta?.dominantHue?.[2] ?? 0 * 100}%
                   )`
                   : "black",
               }}
@@ -147,14 +149,14 @@ const MasonryGallery = ({
               {debugHue && (
                 <span className="text-white z-20 absolute bg-black">
                   hsl(
-                  {image.fields.imageMeta.dominantHue[0]},{" "}
-                  {(image.fields.imageMeta.dominantHue[1] * 100).toFixed(2)}%,{" "}
-                  {(image.fields.imageMeta.dominantHue[2] * 100).toFixed(2)}% )
+                  {image.fields?.imageMeta?.dominantHue?.[0]},{" "}
+                  {(image.fields?.imageMeta?.dominantHue?.[1] ?? 0 * 100).toFixed(2)}%,{" "}
+                  {(image.fields?.imageMeta?.dominantHue?.[2] ?? 0 * 100).toFixed(2)}% )
                 </span>
               )}
               {debugRating && (
                 <span className="text-white z-20 absolute bg-black">
-                  rating: {image.fields.imageMeta.meta.Rating}
+                  rating: {image.fields?.imageMeta?.meta?.Rating}
                 </span>
               )}
               {img && (
