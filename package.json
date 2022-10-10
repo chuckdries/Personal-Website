@@ -70,6 +70,7 @@
     "use-breakpoint": "^2.0.1"
   },
   "devDependencies": {
+    "@types/chroma-js": "^2.1.4",
     "@types/node": "^18.8.3",
     "@types/ramda": "^0.28.15",
     "@types/react": "^18.0.21",
