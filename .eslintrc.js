@@ -2,7 +2,8 @@ module.exports = {
   globals: {
     __PATH_PREFIX__: true,
   },
-  parser: "babel-eslint", // uses babel-eslint transforms
+  parser: "@typescript-eslint/parser",
+  plugins: ['@typescript-eslint'],
   settings: {
     react: {
       version: "detect", // detect react version

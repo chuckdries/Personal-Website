@@ -1,12 +1,29 @@
 import * as React from "react";
-import { Link } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { Link, Node } from "gatsby";
+import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
 import * as R from "ramda";
 import { getAspectRatio, getName } from "../utils";
 import useBreakpoint from "use-breakpoint";
 
+// @ts-ignore
 import themeBreakpoints from "../breakpoints";
 import classNames from "classnames";
+
+interface Row {
+  aspect: number;
+  images: number;
+  startIndex: number;
+}
+
+interface MasonryGalleryProps {
+  images: (ImageDataLike & Node)[];
+  aspectsByBreakpoint: {
+    [breakpoint: string]: number;
+  }
+  debugHue?: boolean;
+  debugRating?: boolean;
+  linkState?: object;
+}
 
 const MasonryGallery = ({
   images,
@@ -14,7 +31,7 @@ const MasonryGallery = ({
   debugHue,
   debugRating,
   linkState,
-}) => {
+}: MasonryGalleryProps) => {
   const breakpoints = React.useMemo(
     () => R.pick(R.keys(aspectTargetsByBreakpoint), themeBreakpoints),
     [aspectTargetsByBreakpoint]
@@ -32,8 +49,8 @@ const MasonryGallery = ({
     () =>
       R.pipe(
         R.reduce(
-          (acc, currentAspect) => {
-            const currentRow = acc.pop();
+          (acc, currentAspect: number): Row[] => {
+            const currentRow = acc.pop()!;
             const currentDiff = Math.abs(targetAspect - currentRow.aspect);
             const diffIfImageIsAddedToCurrentRow = Math.abs(
               targetAspect - (currentRow.aspect + currentAspect)
@@ -56,10 +73,10 @@ const MasonryGallery = ({
                 aspect: currentAspect,
                 images: 1,
                 startIndex: currentRow.startIndex + currentRow.images,
-              },
+              } as Row,
             ];
           },
-          [{ aspect: 0, startIndex: 0, images: 0 }]
+          [{ aspect: 0, startIndex: 0, images: 0 }] as Row[]
         ),
         R.indexBy(R.prop("startIndex"))
       )(aspectRatios),
@@ -98,6 +115,7 @@ const MasonryGallery = ({
             const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
             width = `${widthNumber}%`;
           }
+          const img = getImage(image);
           return (
             <Link
               className={classNames(
@@ -139,12 +157,14 @@ const MasonryGallery = ({
                   rating: {image.fields.imageMeta.meta.Rating}
                 </span>
               )}
-              <GatsbyImage
-                alt={getName(image)}
-                className="w-full h-full"
-                image={getImage(image)}
-                objectFit="cover"
-              />
+              {img && (
+                <GatsbyImage
+                  alt={getName(image)}
+                  className="w-full h-full"
+                  image={img}
+                  objectFit="cover"
+                />
+              )}
             </Link>
           );
         })}

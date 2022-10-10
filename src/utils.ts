@@ -22,7 +22,7 @@ export const getRgba = (palette, alpha) =>
   `rgba(${palette[0]}, ${palette[1]}, ${palette[2]}, ${alpha || 1})`;
 
 // work around SSR bug in react-helmet
-export const getHelmetSafeBodyStyle = (vibrant, screenHeight) => {
+export const getHelmetSafeBodyStyle = (vibrant, screenHeight?: number) => {
   const style = {
     "--muted": vibrant.Muted,
     "--dark-muted": vibrant.DarkMuted,
