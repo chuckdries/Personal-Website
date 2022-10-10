@@ -1,18 +1,19 @@
 // import kebabCase from 'lodash/kebabCase';
 
+import { HomepageImage } from "./pages";
 import { GalleryImage } from "./pages/photogallery";
 
-export const getMeta = (image: GalleryImage) => image.fields?.imageMeta;
+export const getMeta = <T extends GalleryImage | HomepageImage>(image: T) => image.fields?.imageMeta;
 
 export const getName = (image: GalleryImage) =>
-  getMeta(image)?.meta?.ObjectName || image.base;
+image.fields?.imageMeta?.meta?.ObjectName || image.base;
 
 // some pleasing default colors for SSR and initial hydration
-export const getVibrant = (image: GalleryImage) => getMeta(image)?.vibrant;
+export const getVibrant = (image: GalleryImage | HomepageImage) => getMeta(image)?.vibrant;
 
-export const hasName = (image: GalleryImage) => Boolean(getMeta(image)?.meta?.ObjectName);
+export const hasName = (image: GalleryImage) => Boolean(image.fields?.imageMeta?.meta?.ObjectName);
 
-export const getAspectRatio = (image: GalleryImage): number =>
+export const getAspectRatio = (image: GalleryImage | HomepageImage): number =>
   image.childImageSharp?.fluid?.aspectRatio ?? 1;
 
 export const getCanonicalSize = (image: GalleryImage) => ({
