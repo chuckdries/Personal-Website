@@ -1,15 +1,27 @@
-const path = require("path");
-const Vibrant = require("node-vibrant");
-const chroma = require("chroma-js");
-const chalk = require("chalk");
-const R = require("ramda");
-const exifr = require("exifr");
-const sharp = require("sharp");
+import type { GatsbyNode } from "gatsby";
+
+import path from "path";
+import Vibrant from "node-vibrant";
+import chroma, { Color } from "chroma-js";
+import chalk from "chalk";
+import * as R from "ramda";
+import exifr from "exifr";
+import sharp from "sharp";
+import { Palette } from "node-vibrant/lib/color";
+
+// const path = require("path");
+// const Vibrant = require("node-vibrant");
+// const chroma = require("chroma-js");
+// const chalk = require("chalk");
+// const R = require("ramda");
+// const exifr = require("exifr");
+// const sharp = require("sharp");
 // const { graphql } = require("gatsby");
 
-const badContrast = (color1, color2) => chroma.contrast(color1, color2) < 4.5;
+const badContrast = (color1: Color, color2: Color) =>
+  chroma.contrast(color1, color2) < 4.5;
 
-const logColorsWithContrast = (color1, color2, text) => {
+const logColorsWithContrast = (color1: Color, color2: Color, text: string) => {
   const c1hex = color1.hex();
   const c2hex = color2.hex();
   console.log(
@@ -19,13 +31,13 @@ const logColorsWithContrast = (color1, color2, text) => {
   );
 };
 
-function processColors(vibrantData, imagePath) {
-  let Vibrant = chroma(vibrantData.Vibrant.getRgb());
-  let DarkVibrant = chroma(vibrantData.DarkVibrant.getRgb());
-  let LightVibrant = chroma(vibrantData.LightVibrant.getRgb());
-  let Muted = chroma(vibrantData.Muted.getRgb());
-  let DarkMuted = chroma(vibrantData.DarkMuted.getRgb());
-  let LightMuted = chroma(vibrantData.LightMuted.getRgb());
+function processColors(vibrantData: Palette, imagePath: string) {
+  let Vibrant = chroma(vibrantData.Vibrant!.getRgb());
+  let DarkVibrant = chroma(vibrantData.DarkVibrant!.getRgb());
+  let LightVibrant = chroma(vibrantData.LightVibrant!.getRgb());
+  let Muted = chroma(vibrantData.Muted!.getRgb());
+  let DarkMuted = chroma(vibrantData.DarkMuted!.getRgb());
+  let LightMuted = chroma(vibrantData.LightMuted!.getRgb());
 
   // first pass - darken bg and lighten relevant fg colors
   if (
@@ -102,23 +114,23 @@ function processColors(vibrantData, imagePath) {
 // }
 
 function transformMetaToNodeData(
-  metaData,
-  vibrantData,
-  imagePath,
-  { r, g, b }
+  metaData: Record<string, unknown>,
+  vibrantData: Palette,
+  imagePath: string,
+  { r, g, b }: { r: number; b: number; g: number }
 ) {
   const vibrant = vibrantData ? processColors(vibrantData, imagePath) : null;
-  const vibrantHue = vibrantData.Vibrant.getHsl()[0] * 360;
+  const vibrantHue = vibrantData.Vibrant!.getHsl()[0] * 360;
   let dominantHue = chroma(r, g, b).hsl();
   if (isNaN(dominantHue[0])) {
     dominantHue[0] = 0;
   }
   let Keywords = metaData.Keywords;
   if (!Keywords) {
-    Keywords = []
+    Keywords = [];
   }
   if (!Array.isArray(Keywords)) {
-    Keywords = [Keywords]
+    Keywords = [Keywords];
   }
   return {
     dateTaken: metaData.DateTimeOriginal,
@@ -141,17 +153,20 @@ function transformMetaToNodeData(
 //   createTypes(typedefs);
 // };
 
-exports.onCreateNode = async function ({ node, actions }) {
+export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
+  node,
+  actions,
+}) {
   const { createNodeField } = actions;
 
   if (node.internal.type === "File" && node.sourceInstanceName === "gallery") {
-    const metaData = await exifr.parse(node.absolutePath, {
+    const metaData = await exifr.parse(node.absolutePath as string, {
       iptc: true,
       xmp: true,
       // icc: true
     });
 
-    const sharpImage = sharp(node.absolutePath);
+    const sharpImage = sharp(node.absolutePath as string);
     const { dominant } = await sharpImage.stats();
     const resizedImage = await sharpImage
       .resize({
@@ -171,7 +186,7 @@ exports.onCreateNode = async function ({ node, actions }) {
       value: transformMetaToNodeData(
         metaData,
         vibrantData,
-        node.absolutePath,
+        node.absolutePath as string,
         dominant
       ),
     });
@@ -180,10 +195,14 @@ exports.onCreateNode = async function ({ node, actions }) {
 
 // Implement the Gatsby API “createPages”. This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
-exports.createPages = async ({ graphql, actions, reporter }) => {
+export const createPages: GatsbyNode["createPages"] = async ({
+  graphql,
+  actions,
+  reporter,
+}) => {
   const { createPage } = actions;
-  const galleryImages = await graphql(`
-    {
+  const galleryImages = await graphql<Queries.GalleryImagesNodeQuery>(`
+    query GalleryImagesNode {
       allFile(filter: { sourceInstanceName: { eq: "gallery" } }) {
         edges {
           node {
@@ -214,9 +233,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const edges = R.sort(
     R.descend(
       (edge) =>
-        new Date(R.path(["node", "fields", "imageMeta", "dateTaken"], edge))
+        new Date(R.path(["node", "fields", "imageMeta", "dateTaken"], edge)!)
     ),
-    galleryImages.data.allFile.edges
+    galleryImages.data?.allFile.edges!
   );
 
   edges.forEach(({ node }, index) => {
