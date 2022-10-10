@@ -15,7 +15,9 @@ import { use100vh } from "react-div-100vh";
 const env =
   process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
 
-const getDifferentRand = (range, lastNs, iterations = 0) => {
+export type HomepageImage = Queries.IndexPageQuery["allFile"]["nodes"][number];
+
+const getDifferentRand = (range: number, lastNs: number[], iterations = 0): number => {
   const n = Math.floor(Math.random() * range);
   if (lastNs.findIndex((x) => x === n) > -1 && iterations < 5) {
     console.log("got dupe, trying again", n);
@@ -68,7 +70,7 @@ const IndexPage = ({
   }, [isClient, imageIndex, image, shuffleImage]);
 
   React.useEffect(() => {
-    const keyListener = (e) => {
+    const keyListener = (e: KeyboardEvent) => {
       switch (e.code) {
         case "Space": {
           shuffleImage(image);
@@ -106,9 +108,11 @@ const IndexPage = ({
 
   const imageIsLandscape = isClient ? ar > 1 : true;
 
+  // @ts-ignore
+  const img = getImage(image);
   return (
     <>
-    {/* @ts-ignore */}
+      {/* @ts-ignore */}
       <Helmet>
         <title>Chuck Dries</title>
         <body
@@ -183,7 +187,7 @@ const IndexPage = ({
             />
           </div>
         </div>
-        {isClient ? (
+        {isClient && img ? (
           <GatsbyImage
             alt=""
             className={classnames(
@@ -191,7 +195,7 @@ const IndexPage = ({
                 ? "landscape:h-actual-screen portrait:h-two-thirds-vw"
                 : "h-actual-screen portrait:w-full landscape:w-1/2"
             )}
-            image={getImage(image)}
+            image={img}
             loading="eager"
             style={{
               gridArea: "1/1",

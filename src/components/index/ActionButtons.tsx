@@ -3,8 +3,9 @@ import classnames from "classnames";
 import { Link } from "gatsby";
 
 import Shuffle from "@spectrum-icons/workflow/Shuffle";
+import { HomepageImage } from "../../pages";
 
-const getButtonClasses = (isClient) =>
+const getButtonClasses = (isClient?: boolean) =>
   classnames(
     "z-20 rounded-md text-md inline-block px-2 py-1 mt-1 mr-2 text-md hover:underline",
     isClient
@@ -12,7 +13,16 @@ const getButtonClasses = (isClient) =>
       : "text-gray-300 bg-gray-700"
   );
 
-const ActionButtons = ({ isClient, image, shuffleImage }) => (
+interface ActionButtonsProps {
+  isClient?: boolean;
+  image: HomepageImage;
+  shuffleImage: (image: HomepageImage) => void;
+}
+const ActionButtons = ({
+  isClient,
+  image,
+  shuffleImage,
+}: ActionButtonsProps) => (
   <div className="flex flex-col mb-2">
     <div className="text-muted-light p-2 sm:p-4 m-1 sm:m-4 bg-muted-dark rounded-xl flex flex-col text-center z-10 cool-border-small-light">
       <h3 className="sm:mb-2 drop-shadow">Try my word game!</h3>
@@ -25,14 +35,14 @@ const ActionButtons = ({ isClient, image, shuffleImage }) => (
     </div>
     <div className="flex sm:mx-6 mb-2 sm:mb-6">
       <Link
-        className={getButtonClasses(isClient, "muted")}
+        className={getButtonClasses(isClient)}
         id="image-link"
         to={`/photogallery/${image.base}/`}
       >
         view image
       </Link>
       <button
-        className={getButtonClasses(isClient, "muted")}
+        className={getButtonClasses(isClient)}
         id="shuffle-button"
         onClick={() => {
           shuffleImage(image);
