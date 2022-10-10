@@ -1,7 +1,12 @@
 import * as React from "react";
 import classNames from "classnames";
 
-const KeywordsPicker = ({ keywords, value, onChange }) => {
+interface KeywordsPickerProps {
+  keywords: string[];
+  value: string | null;
+  onChange: (val: string | null) => void;
+}
+const KeywordsPicker = ({ keywords, value, onChange }: KeywordsPickerProps) => {
   return (
     <div className="mx-2">
       <span className="text-xs text-[#A2A2A2]">Collections</span>
