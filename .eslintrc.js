@@ -19,6 +19,7 @@ module.exports = {
     "plugin:react-hooks/recommended",
   ],
   rules: {
+    "no-undef": 0,
     "react/prop-types": 0,
     "no-unused-vars": 1,
     "react/jsx-sort-props": 1,
