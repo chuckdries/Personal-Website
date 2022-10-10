@@ -1,4 +1,5 @@
 module.exports = {
+  graphqlTypegen: true,
   pathPrefix: process.env.PATH_PREFIX,
   siteMetadata: {
     title: "Chuck Dries",
