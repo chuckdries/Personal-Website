@@ -4418,6 +4418,11 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = { readonly tracedSVG: st
 
 type GatsbyImageSharpFluidLimitPresentationSizeFragment = { readonly maxHeight: number, readonly maxWidth: number };
 
+type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type IndexPageQuery = { readonly allFile: { readonly nodes: ReadonlyArray<{ readonly relativePath: string, readonly base: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null, readonly fields: { readonly imageMeta: { readonly vibrant: { readonly DarkMuted: ReadonlyArray<number | null> | null, readonly DarkVibrant: ReadonlyArray<number | null> | null, readonly LightMuted: ReadonlyArray<number | null> | null, readonly LightVibrant: ReadonlyArray<number | null> | null, readonly Vibrant: ReadonlyArray<number | null> | null, readonly Muted: ReadonlyArray<number | null> | null } | null } | null } | null }> } };
+
 type VibrantColorsFragment = { readonly DarkMuted: ReadonlyArray<number | null> | null, readonly DarkVibrant: ReadonlyArray<number | null> | null, readonly LightMuted: ReadonlyArray<number | null> | null, readonly LightVibrant: ReadonlyArray<number | null> | null, readonly Vibrant: ReadonlyArray<number | null> | null, readonly Muted: ReadonlyArray<number | null> | null };
 
 
