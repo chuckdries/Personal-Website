@@ -198,10 +198,6 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
               <Item key="rating">Default</Item>
               <Item key="date">Date</Item>
               <Item key="hue">Hue</Item>
-              <>{/* @ts-ignore */}</>
-              {showDebug ? (
-                <Item key="hue_debug">Dominant hue[debug]</Item>
-              ) : undefined}
             </Picker>
           </div>
         </div>
