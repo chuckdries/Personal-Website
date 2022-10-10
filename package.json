@@ -67,7 +67,12 @@
     "use-breakpoint": "^2.0.1"
   },
   "devDependencies": {
+    "@types/node": "^18.8.3",
+    "@types/ramda": "^0.28.15",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
     "cross-env": "^7.0.3",
-    "prettier": "2.3.2"
+    "prettier": "2.3.2",
+    "typescript": "^4.8.4"
   }
 }
