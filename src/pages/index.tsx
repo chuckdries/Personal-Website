@@ -1,5 +1,5 @@
 import * as React from "react";
-import { graphql } from "gatsby";
+import { graphql, PageProps } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
 import { take } from "ramda";
@@ -28,7 +28,7 @@ const IndexPage = ({
   data: {
     allFile: { nodes: images },
   },
-}) => {
+}: PageProps<Queries.IndexPageQuery>) => {
   const [isClient, setIsClient] = React.useState(false);
   const [imageIndex, setImageIndex] = React.useState(0);
   const image = React.useMemo(() => {
@@ -37,16 +37,14 @@ const IndexPage = ({
   console.log(image);
 
   const shuffleImage = React.useCallback(
-    (currentImage) => {
+    (currentImage?: typeof images[number]) => {
       const lastThreeImages =
-        JSON.parse(localStorage.getItem("lastHeros")) || [];
+        JSON.parse(localStorage.getItem("lastHeros") ?? "[]") || [];
       if (env === "production") {
         try {
           window.plausible("Shuffle", {
             props: { currentImage: currentImage?.base },
           });
-          // eslint-disable-next-line
-          _paq.push(["trackEvent", "Index", "Shuffle", currentImage?.base]);
         } catch (e) {
           /* do nothing */
         }
@@ -110,11 +108,13 @@ const IndexPage = ({
 
   return (
     <>
+    {/* @ts-ignore */}
       <Helmet>
         <title>Chuck Dries</title>
         <body
           className={classnames(isClient ? "bg-muted-dark" : "bg-gray-800")}
-          style={getHelmetSafeBodyStyle(vibrant, screenHeight)}
+          // @ts-ignore
+          style={getHelmetSafeBodyStyle(vibrant!, screenHeight)}
         />
       </Helmet>
       <main
@@ -218,7 +218,7 @@ const IndexPage = ({
 };
 
 export const query = graphql`
-  {
+  query IndexPage {
     allFile(
       filter: {
         sourceInstanceName: { eq: "gallery" }
