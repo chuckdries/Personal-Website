@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as R from "ramda";
-import { graphql } from "gatsby";
+import { graphql, PageProps } from "gatsby";
 import { Helmet } from "react-helmet";
 import { Picker, Item } from "@adobe/react-spectrum";
 
@@ -14,22 +14,25 @@ const SORT_KEYS = {
   rating: ["fields", "imageMeta", "meta", "Rating"],
   hue_debug: ["fields", "imageMeta", "dominantHue", 0],
   date: [],
-};
+} as const;
 
-const GalleryPage = ({ data }) => {
+export type GalleryImage =
+  Queries.GalleryPageQueryQuery["allFile"]["nodes"][number];
+
+const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
   const hash =
     typeof window !== "undefined" ? window.location.hash.replace("#", "") : "";
 
   const [hashCleared, setHashCleared] = React.useState(false); // eslint-disable-line no-unused-vars
   //     ^ used just to force a re-render with the cleared hash value (I know, it's a smell for sure)
-  const [filterKeyword, _setKeyword] = React.useState(null);
-  const [sortKey, _setSortKey] = React.useState("rating");
+  const [filterKeyword, _setKeyword] = React.useState(null as string | null);
+  const [sortKey, _setSortKey] = React.useState("rating" as string);
   const showDebug =
     typeof window !== "undefined" &&
     window.location.search.includes("debug=true");
 
   const setKeyword = React.useCallback(
-    (newKeyword) => {
+    (newKeyword: string | null) => {
       if (newKeyword) {
         try {
           window.plausible("Filter Keyword", {
@@ -50,7 +53,7 @@ const GalleryPage = ({ data }) => {
   );
 
   const setSortKey = React.useCallback(
-    (newSortKey) => {
+    (newSortKey: string) => {
       try {
         window.plausible("Sort Gallery", {
           props: { key: newSortKey },
@@ -102,12 +105,12 @@ const GalleryPage = ({ data }) => {
 
     const sortKeyFromUrl = url.searchParams.get("sort");
     if (sortKeyFromUrl) {
-      _setSortKey(sortKeyFromUrl, false);
+      _setSortKey(sortKeyFromUrl);
     }
 
     const filterKeyFromUrl = url.searchParams.get("filter");
     if (filterKeyFromUrl) {
-      _setKeyword(filterKeyFromUrl, false);
+      _setKeyword(filterKeyFromUrl);
     }
 
     // hacky but it works for now
@@ -117,34 +120,41 @@ const GalleryPage = ({ data }) => {
     }, 100);
   }, [setSortKey, setKeyword, scrollIntoView]);
 
-  const images = React.useMemo(
+  const images: GalleryImage[] = React.useMemo(
     () =>
       R.pipe(
+        // @ts-ignore
         sortKey === "date"
-          ? R.sort((node1, node2) => {
+          ? R.sort((node1: typeof data["allFile"]["nodes"][number], node2) => {
               const date1 = new Date(
+                // @ts-ignore
                 R.path(["fields", "imageMeta", "dateTaken"], node1)
               );
               const date2 = new Date(
+                // @ts-ignore
                 R.path(["fields", "imageMeta", "dateTaken"], node2)
               );
               return -1 * (date1.getTime() - date2.getTime());
             })
-          : R.sort(R.descend(R.path(SORT_KEYS[sortKey]))),
+          : // @ts-ignore
+            R.sort(R.descend(R.path(SORT_KEYS[sortKey]))),
         filterKeyword
           ? R.filter((image) =>
+              // @ts-ignore
               R.includes(
                 filterKeyword,
+                // @ts-ignore
                 R.path(["fields", "imageMeta", "meta", "Keywords"], image)
               )
             )
           : R.identity
-      )(data.allFile.nodes),
+      )(data.allFile.nodes) as any,
     [data, sortKey, filterKeyword]
   );
 
   return (
     <>
+      {/* @ts-ignore */}
       <Helmet>
         <title>Photo Gallery | Chuck Dries</title>
         <body className="bg-black text-white" />
@@ -156,8 +166,7 @@ const GalleryPage = ({ data }) => {
             { href: "/", label: "Home" },
             { href: "/photogallery/", label: "Gallery" },
           ]}
-        >
-        </Nav>
+        ></Nav>
         <div className="flex flex-col md:flex-row md:items-end justify-between">
           <h1 className="text-5xl mt-0 ml-5 mr-5 font-serif font-black z-10">
             Photo Gallery
@@ -182,13 +191,17 @@ const GalleryPage = ({ data }) => {
           <div className="m-2">
             <Picker
               label="Sort by..."
+              // @ts-ignore
               onSelectionChange={setSortKey}
               selectedKey={sortKey}
             >
               <Item key="rating">Default</Item>
               <Item key="date">Date</Item>
               <Item key="hue">Hue</Item>
-              {showDebug && <Item key="hue_debug">Dominant hue[debug]</Item>}
+              <>{/* @ts-ignore */}</>
+              {showDebug ? (
+                <Item key="hue_debug">Dominant hue[debug]</Item>
+              ) : undefined}
             </Picker>
           </div>
         </div>

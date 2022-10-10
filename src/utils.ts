@@ -1,28 +1,30 @@
 // import kebabCase from 'lodash/kebabCase';
 
-export const getMeta = (image) => image.fields.imageMeta;
+import { GalleryImage } from "./pages/photogallery";
 
-export const getName = (image) =>
+export const getMeta = (image: GalleryImage) => image.fields?.imageMeta;
+
+export const getName = (image: GalleryImage) =>
   getMeta(image)?.meta?.ObjectName || image.base;
 
 // some pleasing default colors for SSR and initial hydration
-export const getVibrant = (image) => getMeta(image)?.vibrant;
+export const getVibrant = (image: GalleryImage) => getMeta(image)?.vibrant;
 
-export const hasName = (image) => Boolean(getMeta(image)?.meta?.ObjectName);
+export const hasName = (image: GalleryImage) => Boolean(getMeta(image)?.meta?.ObjectName);
 
-export const getAspectRatio = (image) =>
-  image.childImageSharp.fluid.aspectRatio;
+export const getAspectRatio = (image: GalleryImage): number =>
+  image.childImageSharp?.fluid?.aspectRatio ?? 1;
 
-export const getCanonicalSize = (image) => ({
-  height: image.childImageSharp.gatsbyImageData.height,
-  width: image.childImageSharp.gatsbyImageData.width,
+export const getCanonicalSize = (image: GalleryImage) => ({
+  height: image.childImageSharp?.gatsbyImageData.height,
+  width: image.childImageSharp?.gatsbyImageData.width,
 });
 
-export const getRgba = (palette, alpha) =>
+export const getRgba = (palette: string[], alpha: number) =>
   `rgba(${palette[0]}, ${palette[1]}, ${palette[2]}, ${alpha || 1})`;
 
 // work around SSR bug in react-helmet
-export const getHelmetSafeBodyStyle = (vibrant, screenHeight?: number) => {
+export const getHelmetSafeBodyStyle = (vibrant: Queries.FileFieldsImageMetaVibrant, screenHeight?: number) => {
   const style = {
     "--muted": vibrant.Muted,
     "--dark-muted": vibrant.DarkMuted,
@@ -36,11 +38,12 @@ export const getHelmetSafeBodyStyle = (vibrant, screenHeight?: number) => {
     return style;
   }
   return Object.keys(style)
+  // @ts-ignore
     .map((key) => `${key}: ${style[key]};`)
     .join("");
 };
 
-const gcd = (a, b) => {
+const gcd = (a: number, b: number): number => {
   if (b < 0.0000001) {
     return a; // Since there is a limited precision we need to limit the value.
   }
@@ -48,7 +51,7 @@ const gcd = (a, b) => {
   return gcd(b, Math.floor(a % b)); // Discard any fractions due to limitations in precision.
 };
 
-export const getShutterFractionFromExposureTime = (exposureTime) => {
+export const getShutterFractionFromExposureTime = (exposureTime: number) => {
   if (exposureTime === 0.03333333333333333) {
     return "1/30";
   }
@@ -80,7 +83,12 @@ export const getShutterFractionFromExposureTime = (exposureTime) => {
   return `${numerator}/${denominator}`;
 };
 
-export const getGalleryPageUrl = ({ keyword, sortKey }, hash) => {
+interface galleryPageUrlProps {
+  keyword: string | null;
+  sortKey: string;
+}
+
+export const getGalleryPageUrl = ({ keyword, sortKey }: galleryPageUrlProps, hash: string) => {
   const url = new URL(
     `${
       typeof window !== "undefined"

@@ -5,7 +5,16 @@ import useDimensions from "react-cool-dimensions";
 
 import Menu from "@spectrum-icons/workflow/Menu";
 
-const Nav = ({ isClient, internalLinks, className }) => {
+interface NavProps {
+  isClient?: boolean;
+  className?: string;
+  internalLinks: {
+    href: string;
+    label: string;
+  }[]
+}
+
+const Nav = ({ isClient, internalLinks, className }: NavProps) => {
   const { observe, currentBreakpoint } = useDimensions({
     breakpoints: { XS: 0, LG: 690 },
     updateOnBreakpointChange: true,
