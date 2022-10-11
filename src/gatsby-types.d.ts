@@ -770,6 +770,7 @@ type FileFieldsEnum =
   | 'fields.imageMeta.meta.AutoLateralCA'
   | 'fields.imageMeta.meta.AutoToneDigest'
   | 'fields.imageMeta.meta.AutoToneDigestNoSat'
+  | 'fields.imageMeta.meta.AutoWhiteVersion'
   | 'fields.imageMeta.meta.Blacks2012'
   | 'fields.imageMeta.meta.BlueHue'
   | 'fields.imageMeta.meta.BlueSaturation'
@@ -795,6 +796,8 @@ type FileFieldsEnum =
   | 'fields.imageMeta.meta.ColorSpace'
   | 'fields.imageMeta.meta.Contrast'
   | 'fields.imageMeta.meta.Contrast2012'
+  | 'fields.imageMeta.meta.ConvertToGrayscale'
+  | 'fields.imageMeta.meta.Country'
   | 'fields.imageMeta.meta.CreateDate'
   | 'fields.imageMeta.meta.CreatorTool'
   | 'fields.imageMeta.meta.CropAngle'
@@ -818,6 +821,11 @@ type FileFieldsEnum =
   | 'fields.imageMeta.meta.DigitalZoomRatio'
   | 'fields.imageMeta.meta.DistortionCorrectionAlreadyApplied'
   | 'fields.imageMeta.meta.DocumentID'
+  | 'fields.imageMeta.meta.EnhanceDetailsAlreadyApplied'
+  | 'fields.imageMeta.meta.EnhanceDetailsVersion'
+  | 'fields.imageMeta.meta.EnhanceSuperResolutionAlreadyApplied'
+  | 'fields.imageMeta.meta.EnhanceSuperResolutionScale'
+  | 'fields.imageMeta.meta.EnhanceSuperResolutionVersion'
   | 'fields.imageMeta.meta.ExifVersion'
   | 'fields.imageMeta.meta.Exposure2012'
   | 'fields.imageMeta.meta.ExposureCompensation'
@@ -832,10 +840,36 @@ type FileFieldsEnum =
   | 'fields.imageMeta.meta.FocalPlaneResolutionUnit'
   | 'fields.imageMeta.meta.FocalPlaneXResolution'
   | 'fields.imageMeta.meta.FocalPlaneYResolution'
+  | 'fields.imageMeta.meta.GPSAltitude'
+  | 'fields.imageMeta.meta.GPSDOP'
+  | 'fields.imageMeta.meta.GPSDateStamp'
   | 'fields.imageMeta.meta.GPSDifferential'
+  | 'fields.imageMeta.meta.GPSHPositioningError'
+  | 'fields.imageMeta.meta.GPSLatitude'
+  | 'fields.imageMeta.meta.GPSLatitudeRef'
+  | 'fields.imageMeta.meta.GPSLongitude'
+  | 'fields.imageMeta.meta.GPSLongitudeRef'
   | 'fields.imageMeta.meta.GPSMapDatum'
+  | 'fields.imageMeta.meta.GPSMeasureMode'
+  | 'fields.imageMeta.meta.GPSSpeed'
+  | 'fields.imageMeta.meta.GPSSpeedRef'
   | 'fields.imageMeta.meta.GPSStatus'
+  | 'fields.imageMeta.meta.GPSTimeStamp'
+  | 'fields.imageMeta.meta.GPSTrack'
+  | 'fields.imageMeta.meta.GPSTrackRef'
+  | 'fields.imageMeta.meta.GPSVersionID'
   | 'fields.imageMeta.meta.GrainAmount'
+  | 'fields.imageMeta.meta.GrainFrequency'
+  | 'fields.imageMeta.meta.GrainSeed'
+  | 'fields.imageMeta.meta.GrainSize'
+  | 'fields.imageMeta.meta.GrayMixerAqua'
+  | 'fields.imageMeta.meta.GrayMixerBlue'
+  | 'fields.imageMeta.meta.GrayMixerGreen'
+  | 'fields.imageMeta.meta.GrayMixerMagenta'
+  | 'fields.imageMeta.meta.GrayMixerOrange'
+  | 'fields.imageMeta.meta.GrayMixerPurple'
+  | 'fields.imageMeta.meta.GrayMixerRed'
+  | 'fields.imageMeta.meta.GrayMixerYellow'
   | 'fields.imageMeta.meta.GreenHue'
   | 'fields.imageMeta.meta.GreenSaturation'
   | 'fields.imageMeta.meta.HasCrop'
@@ -852,12 +886,16 @@ type FileFieldsEnum =
   | 'fields.imageMeta.meta.HueAdjustmentYellow'
   | 'fields.imageMeta.meta.ISO'
   | 'fields.imageMeta.meta.ImageDescription'
+  | 'fields.imageMeta.meta.IncrementalTemperature'
+  | 'fields.imageMeta.meta.IncrementalTint'
   | 'fields.imageMeta.meta.InstanceID'
   | 'fields.imageMeta.meta.Keywords'
   | 'fields.imageMeta.meta.LateralChromaticAberrationCorrectionAlreadyApplied'
   | 'fields.imageMeta.meta.Lens'
   | 'fields.imageMeta.meta.LensDistortInfo'
+  | 'fields.imageMeta.meta.LensID'
   | 'fields.imageMeta.meta.LensInfo'
+  | 'fields.imageMeta.meta.LensMake'
   | 'fields.imageMeta.meta.LensManualDistortionAmount'
   | 'fields.imageMeta.meta.LensModel'
   | 'fields.imageMeta.meta.LensProfileDigest'
@@ -869,6 +907,7 @@ type FileFieldsEnum =
   | 'fields.imageMeta.meta.LensProfileSetup'
   | 'fields.imageMeta.meta.LensProfileVignettingScale'
   | 'fields.imageMeta.meta.LightSource'
+  | 'fields.imageMeta.meta.Location'
   | 'fields.imageMeta.meta.LuminanceAdjustmentAqua'
   | 'fields.imageMeta.meta.LuminanceAdjustmentBlue'
   | 'fields.imageMeta.meta.LuminanceAdjustmentGreen'
@@ -890,6 +929,7 @@ type FileFieldsEnum =
   | 'fields.imageMeta.meta.OffsetTime'
   | 'fields.imageMeta.meta.OffsetTimeDigitized'
   | 'fields.imageMeta.meta.OffsetTimeOriginal'
+  | 'fields.imageMeta.meta.Orientation'
   | 'fields.imageMeta.meta.OriginalDocumentID'
   | 'fields.imageMeta.meta.OverrideLookVignette'
   | 'fields.imageMeta.meta.ParametricDarks'
@@ -908,6 +948,12 @@ type FileFieldsEnum =
   | 'fields.imageMeta.meta.PerspectiveX'
   | 'fields.imageMeta.meta.PerspectiveY'
   | 'fields.imageMeta.meta.PostCropVignetteAmount'
+  | 'fields.imageMeta.meta.PostCropVignetteFeather'
+  | 'fields.imageMeta.meta.PostCropVignetteHighlightContrast'
+  | 'fields.imageMeta.meta.PostCropVignetteMidpoint'
+  | 'fields.imageMeta.meta.PostCropVignetteRoundness'
+  | 'fields.imageMeta.meta.PostCropVignetteStyle'
+  | 'fields.imageMeta.meta.PreservedFileName'
   | 'fields.imageMeta.meta.ProcessVersion'
   | 'fields.imageMeta.meta.Rating'
   | 'fields.imageMeta.meta.RawFileName'
@@ -915,7 +961,6 @@ type FileFieldsEnum =
   | 'fields.imageMeta.meta.RedHue'
   | 'fields.imageMeta.meta.RedSaturation'
   | 'fields.imageMeta.meta.ResolutionUnit'
-  | 'fields.imageMeta.meta.Saturation'
   | 'fields.imageMeta.meta.SaturationAdjustmentAqua'
   | 'fields.imageMeta.meta.SaturationAdjustmentBlue'
   | 'fields.imageMeta.meta.SaturationAdjustmentGreen'
@@ -926,13 +971,13 @@ type FileFieldsEnum =
   | 'fields.imageMeta.meta.SaturationAdjustmentYellow'
   | 'fields.imageMeta.meta.SceneCaptureType'
   | 'fields.imageMeta.meta.SceneType'
+  | 'fields.imageMeta.meta.SensingMethod'
   | 'fields.imageMeta.meta.SensitivityType'
   | 'fields.imageMeta.meta.ShadowTint'
   | 'fields.imageMeta.meta.Shadows2012'
   | 'fields.imageMeta.meta.SharpenDetail'
   | 'fields.imageMeta.meta.SharpenEdgeMasking'
   | 'fields.imageMeta.meta.SharpenRadius'
-  | 'fields.imageMeta.meta.Sharpness'
   | 'fields.imageMeta.meta.ShutterSpeedValue'
   | 'fields.imageMeta.meta.Software'
   | 'fields.imageMeta.meta.SplitToningBalance'
@@ -943,6 +988,7 @@ type FileFieldsEnum =
   | 'fields.imageMeta.meta.State'
   | 'fields.imageMeta.meta.SubSecTimeDigitized'
   | 'fields.imageMeta.meta.SubSecTimeOriginal'
+  | 'fields.imageMeta.meta.Sublocation'
   | 'fields.imageMeta.meta.Temperature'
   | 'fields.imageMeta.meta.Texture'
   | 'fields.imageMeta.meta.TimeCreated'
@@ -952,6 +998,15 @@ type FileFieldsEnum =
   | 'fields.imageMeta.meta.ToneCurvePV2012Blue'
   | 'fields.imageMeta.meta.ToneCurvePV2012Green'
   | 'fields.imageMeta.meta.ToneCurvePV2012Red'
+  | 'fields.imageMeta.meta.UprightCenterMode'
+  | 'fields.imageMeta.meta.UprightCenterNormX'
+  | 'fields.imageMeta.meta.UprightCenterNormY'
+  | 'fields.imageMeta.meta.UprightDependentDigest'
+  | 'fields.imageMeta.meta.UprightFocalLength35mm'
+  | 'fields.imageMeta.meta.UprightFocalMode'
+  | 'fields.imageMeta.meta.UprightPreview'
+  | 'fields.imageMeta.meta.UprightTransformCount'
+  | 'fields.imageMeta.meta.UprightVersion'
   | 'fields.imageMeta.meta.Version'
   | 'fields.imageMeta.meta.Vibrance'
   | 'fields.imageMeta.meta.VignetteAmount'
@@ -963,7 +1018,8 @@ type FileFieldsEnum =
   | 'fields.imageMeta.meta.creator'
   | 'fields.imageMeta.meta.format'
   | 'fields.imageMeta.meta.good'
-  | 'fields.imageMeta.meta.subject'
+  | 'fields.imageMeta.meta.latitude'
+  | 'fields.imageMeta.meta.longitude'
   | 'fields.imageMeta.vibrantHue'
   | 'fields.imageMeta.vibrant.DarkMuted'
   | 'fields.imageMeta.vibrant.DarkVibrant'
@@ -1072,6 +1128,7 @@ type FileFieldsImageMetaMeta = {
   readonly AutoLateralCA: Maybe<Scalars['Int']>;
   readonly AutoToneDigest: Maybe<Scalars['String']>;
   readonly AutoToneDigestNoSat: Maybe<Scalars['String']>;
+  readonly AutoWhiteVersion: Maybe<Scalars['Int']>;
   readonly Blacks2012: Maybe<Scalars['Int']>;
   readonly BlueHue: Maybe<Scalars['Int']>;
   readonly BlueSaturation: Maybe<Scalars['Int']>;
@@ -1097,14 +1154,16 @@ type FileFieldsImageMetaMeta = {
   readonly ColorSpace: Maybe<Scalars['Int']>;
   readonly Contrast: Maybe<Scalars['String']>;
   readonly Contrast2012: Maybe<Scalars['Int']>;
+  readonly ConvertToGrayscale: Maybe<Scalars['Boolean']>;
+  readonly Country: Maybe<Scalars['String']>;
   readonly CreateDate: Maybe<Scalars['Date']>;
   readonly CreatorTool: Maybe<Scalars['String']>;
-  readonly CropAngle: Maybe<Scalars['Int']>;
-  readonly CropBottom: Maybe<Scalars['Int']>;
+  readonly CropAngle: Maybe<Scalars['Float']>;
+  readonly CropBottom: Maybe<Scalars['Float']>;
   readonly CropConstrainToWarp: Maybe<Scalars['Int']>;
-  readonly CropLeft: Maybe<Scalars['Int']>;
-  readonly CropRight: Maybe<Scalars['Int']>;
-  readonly CropTop: Maybe<Scalars['Int']>;
+  readonly CropLeft: Maybe<Scalars['Float']>;
+  readonly CropRight: Maybe<Scalars['Float']>;
+  readonly CropTop: Maybe<Scalars['Float']>;
   readonly CustomRendered: Maybe<Scalars['String']>;
   readonly DateCreated: Maybe<Scalars['Date']>;
   readonly DateTimeOriginal: Maybe<Scalars['Date']>;
@@ -1121,24 +1180,55 @@ type FileFieldsImageMetaMeta = {
   readonly DigitalZoomRatio: Maybe<Scalars['Int']>;
   readonly DistortionCorrectionAlreadyApplied: Maybe<Scalars['Boolean']>;
   readonly DocumentID: Maybe<Scalars['String']>;
+  readonly EnhanceDetailsAlreadyApplied: Maybe<Scalars['Boolean']>;
+  readonly EnhanceDetailsVersion: Maybe<Scalars['Int']>;
+  readonly EnhanceSuperResolutionAlreadyApplied: Maybe<Scalars['Boolean']>;
+  readonly EnhanceSuperResolutionScale: Maybe<Scalars['String']>;
+  readonly EnhanceSuperResolutionVersion: Maybe<Scalars['Int']>;
   readonly ExifVersion: Maybe<Scalars['String']>;
   readonly Exposure2012: Maybe<Scalars['Float']>;
-  readonly ExposureCompensation: Maybe<Scalars['Int']>;
+  readonly ExposureCompensation: Maybe<Scalars['Float']>;
   readonly ExposureMode: Maybe<Scalars['String']>;
   readonly ExposureProgram: Maybe<Scalars['String']>;
   readonly ExposureTime: Maybe<Scalars['Float']>;
   readonly FNumber: Maybe<Scalars['Float']>;
   readonly FileSource: Maybe<Scalars['String']>;
   readonly Flash: Maybe<Scalars['String']>;
-  readonly FocalLength: Maybe<Scalars['Int']>;
+  readonly FocalLength: Maybe<Scalars['Float']>;
   readonly FocalLengthIn35mmFormat: Maybe<Scalars['Int']>;
   readonly FocalPlaneResolutionUnit: Maybe<Scalars['String']>;
   readonly FocalPlaneXResolution: Maybe<Scalars['Float']>;
   readonly FocalPlaneYResolution: Maybe<Scalars['Float']>;
+  readonly GPSAltitude: Maybe<Scalars['Float']>;
+  readonly GPSDOP: Maybe<Scalars['Float']>;
+  readonly GPSDateStamp: Maybe<Scalars['String']>;
   readonly GPSDifferential: Maybe<Scalars['Int']>;
+  readonly GPSHPositioningError: Maybe<Scalars['Float']>;
+  readonly GPSLatitude: Maybe<ReadonlyArray<Maybe<Scalars['Float']>>>;
+  readonly GPSLatitudeRef: Maybe<Scalars['String']>;
+  readonly GPSLongitude: Maybe<ReadonlyArray<Maybe<Scalars['Float']>>>;
+  readonly GPSLongitudeRef: Maybe<Scalars['String']>;
   readonly GPSMapDatum: Maybe<Scalars['String']>;
+  readonly GPSMeasureMode: Maybe<Scalars['String']>;
+  readonly GPSSpeed: Maybe<Scalars['Float']>;
+  readonly GPSSpeedRef: Maybe<Scalars['String']>;
   readonly GPSStatus: Maybe<Scalars['String']>;
+  readonly GPSTimeStamp: Maybe<Scalars['String']>;
+  readonly GPSTrack: Maybe<Scalars['Float']>;
+  readonly GPSTrackRef: Maybe<Scalars['String']>;
+  readonly GPSVersionID: Maybe<Scalars['String']>;
   readonly GrainAmount: Maybe<Scalars['Int']>;
+  readonly GrainFrequency: Maybe<Scalars['Int']>;
+  readonly GrainSeed: Maybe<Scalars['Int']>;
+  readonly GrainSize: Maybe<Scalars['Int']>;
+  readonly GrayMixerAqua: Maybe<Scalars['Int']>;
+  readonly GrayMixerBlue: Maybe<Scalars['Int']>;
+  readonly GrayMixerGreen: Maybe<Scalars['Int']>;
+  readonly GrayMixerMagenta: Maybe<Scalars['Int']>;
+  readonly GrayMixerOrange: Maybe<Scalars['Int']>;
+  readonly GrayMixerPurple: Maybe<Scalars['Int']>;
+  readonly GrayMixerRed: Maybe<Scalars['Int']>;
+  readonly GrayMixerYellow: Maybe<Scalars['Int']>;
   readonly GreenHue: Maybe<Scalars['Int']>;
   readonly GreenSaturation: Maybe<Scalars['Int']>;
   readonly HasCrop: Maybe<Scalars['Boolean']>;
@@ -1155,12 +1245,16 @@ type FileFieldsImageMetaMeta = {
   readonly HueAdjustmentYellow: Maybe<Scalars['Int']>;
   readonly ISO: Maybe<Scalars['Int']>;
   readonly ImageDescription: Maybe<Scalars['String']>;
+  readonly IncrementalTemperature: Maybe<Scalars['Int']>;
+  readonly IncrementalTint: Maybe<Scalars['Int']>;
   readonly InstanceID: Maybe<Scalars['String']>;
   readonly Keywords: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly LateralChromaticAberrationCorrectionAlreadyApplied: Maybe<Scalars['Boolean']>;
   readonly Lens: Maybe<Scalars['String']>;
   readonly LensDistortInfo: Maybe<Scalars['String']>;
+  readonly LensID: Maybe<Scalars['Int']>;
   readonly LensInfo: Maybe<ReadonlyArray<Maybe<Scalars['Float']>>>;
+  readonly LensMake: Maybe<Scalars['String']>;
   readonly LensManualDistortionAmount: Maybe<Scalars['Int']>;
   readonly LensModel: Maybe<Scalars['String']>;
   readonly LensProfileDigest: Maybe<Scalars['String']>;
@@ -1172,6 +1266,7 @@ type FileFieldsImageMetaMeta = {
   readonly LensProfileSetup: Maybe<Scalars['String']>;
   readonly LensProfileVignettingScale: Maybe<Scalars['Int']>;
   readonly LightSource: Maybe<Scalars['String']>;
+  readonly Location: Maybe<Scalars['String']>;
   readonly Look: Maybe<FileFieldsImageMetaMetaLook>;
   readonly LuminanceAdjustmentAqua: Maybe<Scalars['Int']>;
   readonly LuminanceAdjustmentBlue: Maybe<Scalars['Int']>;
@@ -1194,6 +1289,7 @@ type FileFieldsImageMetaMeta = {
   readonly OffsetTime: Maybe<Scalars['String']>;
   readonly OffsetTimeDigitized: Maybe<Scalars['String']>;
   readonly OffsetTimeOriginal: Maybe<Scalars['String']>;
+  readonly Orientation: Maybe<Scalars['String']>;
   readonly OriginalDocumentID: Maybe<Scalars['String']>;
   readonly OverrideLookVignette: Maybe<Scalars['Boolean']>;
   readonly ParametricDarks: Maybe<Scalars['Int']>;
@@ -1212,14 +1308,19 @@ type FileFieldsImageMetaMeta = {
   readonly PerspectiveX: Maybe<Scalars['Int']>;
   readonly PerspectiveY: Maybe<Scalars['Int']>;
   readonly PostCropVignetteAmount: Maybe<Scalars['Int']>;
-  readonly ProcessVersion: Maybe<Scalars['Int']>;
+  readonly PostCropVignetteFeather: Maybe<Scalars['Int']>;
+  readonly PostCropVignetteHighlightContrast: Maybe<Scalars['Int']>;
+  readonly PostCropVignetteMidpoint: Maybe<Scalars['Int']>;
+  readonly PostCropVignetteRoundness: Maybe<Scalars['Int']>;
+  readonly PostCropVignetteStyle: Maybe<Scalars['Int']>;
+  readonly PreservedFileName: Maybe<Scalars['String']>;
+  readonly ProcessVersion: Maybe<Scalars['Float']>;
   readonly Rating: Maybe<Scalars['Int']>;
   readonly RawFileName: Maybe<Scalars['String']>;
   readonly RecommendedExposureIndex: Maybe<Scalars['Int']>;
   readonly RedHue: Maybe<Scalars['Int']>;
   readonly RedSaturation: Maybe<Scalars['Int']>;
   readonly ResolutionUnit: Maybe<Scalars['String']>;
-  readonly Saturation: Maybe<Scalars['String']>;
   readonly SaturationAdjustmentAqua: Maybe<Scalars['Int']>;
   readonly SaturationAdjustmentBlue: Maybe<Scalars['Int']>;
   readonly SaturationAdjustmentGreen: Maybe<Scalars['Int']>;
@@ -1230,13 +1331,13 @@ type FileFieldsImageMetaMeta = {
   readonly SaturationAdjustmentYellow: Maybe<Scalars['Int']>;
   readonly SceneCaptureType: Maybe<Scalars['String']>;
   readonly SceneType: Maybe<Scalars['String']>;
+  readonly SensingMethod: Maybe<Scalars['String']>;
   readonly SensitivityType: Maybe<Scalars['Int']>;
   readonly ShadowTint: Maybe<Scalars['Int']>;
   readonly Shadows2012: Maybe<Scalars['Int']>;
   readonly SharpenDetail: Maybe<Scalars['Int']>;
   readonly SharpenEdgeMasking: Maybe<Scalars['Int']>;
-  readonly SharpenRadius: Maybe<Scalars['Int']>;
-  readonly Sharpness: Maybe<Scalars['String']>;
+  readonly SharpenRadius: Maybe<Scalars['Float']>;
   readonly ShutterSpeedValue: Maybe<Scalars['Float']>;
   readonly Software: Maybe<Scalars['String']>;
   readonly SplitToningBalance: Maybe<Scalars['Int']>;
@@ -1247,6 +1348,7 @@ type FileFieldsImageMetaMeta = {
   readonly State: Maybe<Scalars['String']>;
   readonly SubSecTimeDigitized: Maybe<Scalars['String']>;
   readonly SubSecTimeOriginal: Maybe<Scalars['String']>;
+  readonly Sublocation: Maybe<Scalars['String']>;
   readonly Temperature: Maybe<Scalars['Int']>;
   readonly Texture: Maybe<Scalars['Int']>;
   readonly TimeCreated: Maybe<Scalars['String']>;
@@ -1256,6 +1358,15 @@ type FileFieldsImageMetaMeta = {
   readonly ToneCurvePV2012Blue: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly ToneCurvePV2012Green: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly ToneCurvePV2012Red: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly UprightCenterMode: Maybe<Scalars['Int']>;
+  readonly UprightCenterNormX: Maybe<Scalars['Float']>;
+  readonly UprightCenterNormY: Maybe<Scalars['Float']>;
+  readonly UprightDependentDigest: Maybe<Scalars['String']>;
+  readonly UprightFocalLength35mm: Maybe<Scalars['Float']>;
+  readonly UprightFocalMode: Maybe<Scalars['Int']>;
+  readonly UprightPreview: Maybe<Scalars['Boolean']>;
+  readonly UprightTransformCount: Maybe<Scalars['Int']>;
+  readonly UprightVersion: Maybe<Scalars['Int']>;
   readonly Version: Maybe<Scalars['Float']>;
   readonly Vibrance: Maybe<Scalars['Int']>;
   readonly VignetteAmount: Maybe<Scalars['Int']>;
@@ -1268,7 +1379,8 @@ type FileFieldsImageMetaMeta = {
   readonly description: Maybe<FileFieldsImageMetaMetaDescription>;
   readonly format: Maybe<Scalars['String']>;
   readonly good: Maybe<Scalars['Boolean']>;
-  readonly subject: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly latitude: Maybe<Scalars['Float']>;
+  readonly longitude: Maybe<Scalars['Float']>;
   readonly title: Maybe<FileFieldsImageMetaMetaTitle>;
 };
 
@@ -1322,11 +1434,13 @@ type FileFieldsImageMetaMeta_ModifyDateArgs = {
 
 type FileFieldsImageMetaMetaDerivedFrom = {
   readonly documentID: Maybe<Scalars['String']>;
+  readonly instanceID: Maybe<Scalars['String']>;
   readonly originalDocumentID: Maybe<Scalars['String']>;
 };
 
 type FileFieldsImageMetaMetaDerivedFromFilterInput = {
   readonly documentID: InputMaybe<StringQueryOperatorInput>;
+  readonly instanceID: InputMaybe<StringQueryOperatorInput>;
   readonly originalDocumentID: InputMaybe<StringQueryOperatorInput>;
 };
 
@@ -1348,6 +1462,7 @@ type FileFieldsImageMetaMetaFilterInput = {
   readonly AutoLateralCA: InputMaybe<IntQueryOperatorInput>;
   readonly AutoToneDigest: InputMaybe<StringQueryOperatorInput>;
   readonly AutoToneDigestNoSat: InputMaybe<StringQueryOperatorInput>;
+  readonly AutoWhiteVersion: InputMaybe<IntQueryOperatorInput>;
   readonly Blacks2012: InputMaybe<IntQueryOperatorInput>;
   readonly BlueHue: InputMaybe<IntQueryOperatorInput>;
   readonly BlueSaturation: InputMaybe<IntQueryOperatorInput>;
@@ -1373,14 +1488,16 @@ type FileFieldsImageMetaMetaFilterInput = {
   readonly ColorSpace: InputMaybe<IntQueryOperatorInput>;
   readonly Contrast: InputMaybe<StringQueryOperatorInput>;
   readonly Contrast2012: InputMaybe<IntQueryOperatorInput>;
+  readonly ConvertToGrayscale: InputMaybe<BooleanQueryOperatorInput>;
+  readonly Country: InputMaybe<StringQueryOperatorInput>;
   readonly CreateDate: InputMaybe<DateQueryOperatorInput>;
   readonly CreatorTool: InputMaybe<StringQueryOperatorInput>;
-  readonly CropAngle: InputMaybe<IntQueryOperatorInput>;
-  readonly CropBottom: InputMaybe<IntQueryOperatorInput>;
+  readonly CropAngle: InputMaybe<FloatQueryOperatorInput>;
+  readonly CropBottom: InputMaybe<FloatQueryOperatorInput>;
   readonly CropConstrainToWarp: InputMaybe<IntQueryOperatorInput>;
-  readonly CropLeft: InputMaybe<IntQueryOperatorInput>;
-  readonly CropRight: InputMaybe<IntQueryOperatorInput>;
-  readonly CropTop: InputMaybe<IntQueryOperatorInput>;
+  readonly CropLeft: InputMaybe<FloatQueryOperatorInput>;
+  readonly CropRight: InputMaybe<FloatQueryOperatorInput>;
+  readonly CropTop: InputMaybe<FloatQueryOperatorInput>;
   readonly CustomRendered: InputMaybe<StringQueryOperatorInput>;
   readonly DateCreated: InputMaybe<DateQueryOperatorInput>;
   readonly DateTimeOriginal: InputMaybe<DateQueryOperatorInput>;
@@ -1397,24 +1514,55 @@ type FileFieldsImageMetaMetaFilterInput = {
   readonly DigitalZoomRatio: InputMaybe<IntQueryOperatorInput>;
   readonly DistortionCorrectionAlreadyApplied: InputMaybe<BooleanQueryOperatorInput>;
   readonly DocumentID: InputMaybe<StringQueryOperatorInput>;
+  readonly EnhanceDetailsAlreadyApplied: InputMaybe<BooleanQueryOperatorInput>;
+  readonly EnhanceDetailsVersion: InputMaybe<IntQueryOperatorInput>;
+  readonly EnhanceSuperResolutionAlreadyApplied: InputMaybe<BooleanQueryOperatorInput>;
+  readonly EnhanceSuperResolutionScale: InputMaybe<StringQueryOperatorInput>;
+  readonly EnhanceSuperResolutionVersion: InputMaybe<IntQueryOperatorInput>;
   readonly ExifVersion: InputMaybe<StringQueryOperatorInput>;
   readonly Exposure2012: InputMaybe<FloatQueryOperatorInput>;
-  readonly ExposureCompensation: InputMaybe<IntQueryOperatorInput>;
+  readonly ExposureCompensation: InputMaybe<FloatQueryOperatorInput>;
   readonly ExposureMode: InputMaybe<StringQueryOperatorInput>;
   readonly ExposureProgram: InputMaybe<StringQueryOperatorInput>;
   readonly ExposureTime: InputMaybe<FloatQueryOperatorInput>;
   readonly FNumber: InputMaybe<FloatQueryOperatorInput>;
   readonly FileSource: InputMaybe<StringQueryOperatorInput>;
   readonly Flash: InputMaybe<StringQueryOperatorInput>;
-  readonly FocalLength: InputMaybe<IntQueryOperatorInput>;
+  readonly FocalLength: InputMaybe<FloatQueryOperatorInput>;
   readonly FocalLengthIn35mmFormat: InputMaybe<IntQueryOperatorInput>;
   readonly FocalPlaneResolutionUnit: InputMaybe<StringQueryOperatorInput>;
   readonly FocalPlaneXResolution: InputMaybe<FloatQueryOperatorInput>;
   readonly FocalPlaneYResolution: InputMaybe<FloatQueryOperatorInput>;
+  readonly GPSAltitude: InputMaybe<FloatQueryOperatorInput>;
+  readonly GPSDOP: InputMaybe<FloatQueryOperatorInput>;
+  readonly GPSDateStamp: InputMaybe<StringQueryOperatorInput>;
   readonly GPSDifferential: InputMaybe<IntQueryOperatorInput>;
+  readonly GPSHPositioningError: InputMaybe<FloatQueryOperatorInput>;
+  readonly GPSLatitude: InputMaybe<FloatQueryOperatorInput>;
+  readonly GPSLatitudeRef: InputMaybe<StringQueryOperatorInput>;
+  readonly GPSLongitude: InputMaybe<FloatQueryOperatorInput>;
+  readonly GPSLongitudeRef: InputMaybe<StringQueryOperatorInput>;
   readonly GPSMapDatum: InputMaybe<StringQueryOperatorInput>;
+  readonly GPSMeasureMode: InputMaybe<StringQueryOperatorInput>;
+  readonly GPSSpeed: InputMaybe<FloatQueryOperatorInput>;
+  readonly GPSSpeedRef: InputMaybe<StringQueryOperatorInput>;
   readonly GPSStatus: InputMaybe<StringQueryOperatorInput>;
+  readonly GPSTimeStamp: InputMaybe<StringQueryOperatorInput>;
+  readonly GPSTrack: InputMaybe<FloatQueryOperatorInput>;
+  readonly GPSTrackRef: InputMaybe<StringQueryOperatorInput>;
+  readonly GPSVersionID: InputMaybe<StringQueryOperatorInput>;
   readonly GrainAmount: InputMaybe<IntQueryOperatorInput>;
+  readonly GrainFrequency: InputMaybe<IntQueryOperatorInput>;
+  readonly GrainSeed: InputMaybe<IntQueryOperatorInput>;
+  readonly GrainSize: InputMaybe<IntQueryOperatorInput>;
+  readonly GrayMixerAqua: InputMaybe<IntQueryOperatorInput>;
+  readonly GrayMixerBlue: InputMaybe<IntQueryOperatorInput>;
+  readonly GrayMixerGreen: InputMaybe<IntQueryOperatorInput>;
+  readonly GrayMixerMagenta: InputMaybe<IntQueryOperatorInput>;
+  readonly GrayMixerOrange: InputMaybe<IntQueryOperatorInput>;
+  readonly GrayMixerPurple: InputMaybe<IntQueryOperatorInput>;
+  readonly GrayMixerRed: InputMaybe<IntQueryOperatorInput>;
+  readonly GrayMixerYellow: InputMaybe<IntQueryOperatorInput>;
   readonly GreenHue: InputMaybe<IntQueryOperatorInput>;
   readonly GreenSaturation: InputMaybe<IntQueryOperatorInput>;
   readonly HasCrop: InputMaybe<BooleanQueryOperatorInput>;
@@ -1431,12 +1579,16 @@ type FileFieldsImageMetaMetaFilterInput = {
   readonly HueAdjustmentYellow: InputMaybe<IntQueryOperatorInput>;
   readonly ISO: InputMaybe<IntQueryOperatorInput>;
   readonly ImageDescription: InputMaybe<StringQueryOperatorInput>;
+  readonly IncrementalTemperature: InputMaybe<IntQueryOperatorInput>;
+  readonly IncrementalTint: InputMaybe<IntQueryOperatorInput>;
   readonly InstanceID: InputMaybe<StringQueryOperatorInput>;
   readonly Keywords: InputMaybe<StringQueryOperatorInput>;
   readonly LateralChromaticAberrationCorrectionAlreadyApplied: InputMaybe<BooleanQueryOperatorInput>;
   readonly Lens: InputMaybe<StringQueryOperatorInput>;
   readonly LensDistortInfo: InputMaybe<StringQueryOperatorInput>;
+  readonly LensID: InputMaybe<IntQueryOperatorInput>;
   readonly LensInfo: InputMaybe<FloatQueryOperatorInput>;
+  readonly LensMake: InputMaybe<StringQueryOperatorInput>;
   readonly LensManualDistortionAmount: InputMaybe<IntQueryOperatorInput>;
   readonly LensModel: InputMaybe<StringQueryOperatorInput>;
   readonly LensProfileDigest: InputMaybe<StringQueryOperatorInput>;
@@ -1448,6 +1600,7 @@ type FileFieldsImageMetaMetaFilterInput = {
   readonly LensProfileSetup: InputMaybe<StringQueryOperatorInput>;
   readonly LensProfileVignettingScale: InputMaybe<IntQueryOperatorInput>;
   readonly LightSource: InputMaybe<StringQueryOperatorInput>;
+  readonly Location: InputMaybe<StringQueryOperatorInput>;
   readonly Look: InputMaybe<FileFieldsImageMetaMetaLookFilterInput>;
   readonly LuminanceAdjustmentAqua: InputMaybe<IntQueryOperatorInput>;
   readonly LuminanceAdjustmentBlue: InputMaybe<IntQueryOperatorInput>;
@@ -1470,6 +1623,7 @@ type FileFieldsImageMetaMetaFilterInput = {
   readonly OffsetTime: InputMaybe<StringQueryOperatorInput>;
   readonly OffsetTimeDigitized: InputMaybe<StringQueryOperatorInput>;
   readonly OffsetTimeOriginal: InputMaybe<StringQueryOperatorInput>;
+  readonly Orientation: InputMaybe<StringQueryOperatorInput>;
   readonly OriginalDocumentID: InputMaybe<StringQueryOperatorInput>;
   readonly OverrideLookVignette: InputMaybe<BooleanQueryOperatorInput>;
   readonly ParametricDarks: InputMaybe<IntQueryOperatorInput>;
@@ -1488,14 +1642,19 @@ type FileFieldsImageMetaMetaFilterInput = {
   readonly PerspectiveX: InputMaybe<IntQueryOperatorInput>;
   readonly PerspectiveY: InputMaybe<IntQueryOperatorInput>;
   readonly PostCropVignetteAmount: InputMaybe<IntQueryOperatorInput>;
-  readonly ProcessVersion: InputMaybe<IntQueryOperatorInput>;
+  readonly PostCropVignetteFeather: InputMaybe<IntQueryOperatorInput>;
+  readonly PostCropVignetteHighlightContrast: InputMaybe<IntQueryOperatorInput>;
+  readonly PostCropVignetteMidpoint: InputMaybe<IntQueryOperatorInput>;
+  readonly PostCropVignetteRoundness: InputMaybe<IntQueryOperatorInput>;
+  readonly PostCropVignetteStyle: InputMaybe<IntQueryOperatorInput>;
+  readonly PreservedFileName: InputMaybe<StringQueryOperatorInput>;
+  readonly ProcessVersion: InputMaybe<FloatQueryOperatorInput>;
   readonly Rating: InputMaybe<IntQueryOperatorInput>;
   readonly RawFileName: InputMaybe<StringQueryOperatorInput>;
   readonly RecommendedExposureIndex: InputMaybe<IntQueryOperatorInput>;
   readonly RedHue: InputMaybe<IntQueryOperatorInput>;
   readonly RedSaturation: InputMaybe<IntQueryOperatorInput>;
   readonly ResolutionUnit: InputMaybe<StringQueryOperatorInput>;
-  readonly Saturation: InputMaybe<StringQueryOperatorInput>;
   readonly SaturationAdjustmentAqua: InputMaybe<IntQueryOperatorInput>;
   readonly SaturationAdjustmentBlue: InputMaybe<IntQueryOperatorInput>;
   readonly SaturationAdjustmentGreen: InputMaybe<IntQueryOperatorInput>;
@@ -1506,13 +1665,13 @@ type FileFieldsImageMetaMetaFilterInput = {
   readonly SaturationAdjustmentYellow: InputMaybe<IntQueryOperatorInput>;
   readonly SceneCaptureType: InputMaybe<StringQueryOperatorInput>;
   readonly SceneType: InputMaybe<StringQueryOperatorInput>;
+  readonly SensingMethod: InputMaybe<StringQueryOperatorInput>;
   readonly SensitivityType: InputMaybe<IntQueryOperatorInput>;
   readonly ShadowTint: InputMaybe<IntQueryOperatorInput>;
   readonly Shadows2012: InputMaybe<IntQueryOperatorInput>;
   readonly SharpenDetail: InputMaybe<IntQueryOperatorInput>;
   readonly SharpenEdgeMasking: InputMaybe<IntQueryOperatorInput>;
-  readonly SharpenRadius: InputMaybe<IntQueryOperatorInput>;
-  readonly Sharpness: InputMaybe<StringQueryOperatorInput>;
+  readonly SharpenRadius: InputMaybe<FloatQueryOperatorInput>;
   readonly ShutterSpeedValue: InputMaybe<FloatQueryOperatorInput>;
   readonly Software: InputMaybe<StringQueryOperatorInput>;
   readonly SplitToningBalance: InputMaybe<IntQueryOperatorInput>;
@@ -1523,6 +1682,7 @@ type FileFieldsImageMetaMetaFilterInput = {
   readonly State: InputMaybe<StringQueryOperatorInput>;
   readonly SubSecTimeDigitized: InputMaybe<StringQueryOperatorInput>;
   readonly SubSecTimeOriginal: InputMaybe<StringQueryOperatorInput>;
+  readonly Sublocation: InputMaybe<StringQueryOperatorInput>;
   readonly Temperature: InputMaybe<IntQueryOperatorInput>;
   readonly Texture: InputMaybe<IntQueryOperatorInput>;
   readonly TimeCreated: InputMaybe<StringQueryOperatorInput>;
@@ -1532,6 +1692,15 @@ type FileFieldsImageMetaMetaFilterInput = {
   readonly ToneCurvePV2012Blue: InputMaybe<StringQueryOperatorInput>;
   readonly ToneCurvePV2012Green: InputMaybe<StringQueryOperatorInput>;
   readonly ToneCurvePV2012Red: InputMaybe<StringQueryOperatorInput>;
+  readonly UprightCenterMode: InputMaybe<IntQueryOperatorInput>;
+  readonly UprightCenterNormX: InputMaybe<FloatQueryOperatorInput>;
+  readonly UprightCenterNormY: InputMaybe<FloatQueryOperatorInput>;
+  readonly UprightDependentDigest: InputMaybe<StringQueryOperatorInput>;
+  readonly UprightFocalLength35mm: InputMaybe<FloatQueryOperatorInput>;
+  readonly UprightFocalMode: InputMaybe<IntQueryOperatorInput>;
+  readonly UprightPreview: InputMaybe<BooleanQueryOperatorInput>;
+  readonly UprightTransformCount: InputMaybe<IntQueryOperatorInput>;
+  readonly UprightVersion: InputMaybe<IntQueryOperatorInput>;
   readonly Version: InputMaybe<FloatQueryOperatorInput>;
   readonly Vibrance: InputMaybe<IntQueryOperatorInput>;
   readonly VignetteAmount: InputMaybe<IntQueryOperatorInput>;
@@ -1544,7 +1713,8 @@ type FileFieldsImageMetaMetaFilterInput = {
   readonly description: InputMaybe<FileFieldsImageMetaMetaDescriptionFilterInput>;
   readonly format: InputMaybe<StringQueryOperatorInput>;
   readonly good: InputMaybe<BooleanQueryOperatorInput>;
-  readonly subject: InputMaybe<StringQueryOperatorInput>;
+  readonly latitude: InputMaybe<FloatQueryOperatorInput>;
+  readonly longitude: InputMaybe<FloatQueryOperatorInput>;
   readonly title: InputMaybe<FileFieldsImageMetaMetaTitleFilterInput>;
 };
 
@@ -1585,6 +1755,7 @@ type FileFieldsImageMetaMetaLook = {
 type FileFieldsImageMetaMetaLookDescription = {
   readonly Amount: Maybe<Scalars['Float']>;
   readonly Cluster: Maybe<Scalars['String']>;
+  readonly Copyright: Maybe<Scalars['String']>;
   readonly Group: Maybe<FileFieldsImageMetaMetaLookDescriptionGroup>;
   readonly Name: Maybe<Scalars['String']>;
   readonly Parameters: Maybe<FileFieldsImageMetaMetaLookDescriptionParameters>;
@@ -1597,6 +1768,7 @@ type FileFieldsImageMetaMetaLookDescription = {
 type FileFieldsImageMetaMetaLookDescriptionFilterInput = {
   readonly Amount: InputMaybe<FloatQueryOperatorInput>;
   readonly Cluster: InputMaybe<StringQueryOperatorInput>;
+  readonly Copyright: InputMaybe<StringQueryOperatorInput>;
   readonly Group: InputMaybe<FileFieldsImageMetaMetaLookDescriptionGroupFilterInput>;
   readonly Name: InputMaybe<StringQueryOperatorInput>;
   readonly Parameters: InputMaybe<FileFieldsImageMetaMetaLookDescriptionParametersFilterInput>;
@@ -1617,39 +1789,141 @@ type FileFieldsImageMetaMetaLookDescriptionGroupFilterInput = {
 };
 
 type FileFieldsImageMetaMetaLookDescriptionParameters = {
-  readonly Description: Maybe<FileFieldsImageMetaMetaLookDescriptionParametersDescription>;
-};
-
-type FileFieldsImageMetaMetaLookDescriptionParametersDescription = {
-  readonly CameraProfile: Maybe<Scalars['String']>;
   readonly ConvertToGrayscale: Maybe<Scalars['Boolean']>;
+  readonly Description: Maybe<FileFieldsImageMetaMetaLookDescriptionParametersDescription>;
   readonly LookTable: Maybe<Scalars['String']>;
   readonly ProcessVersion: Maybe<Scalars['Int']>;
   readonly RGBTable: Maybe<Scalars['String']>;
   readonly RGBTableAmount: Maybe<Scalars['Float']>;
+  readonly Version: Maybe<Scalars['Float']>;
+};
+
+type FileFieldsImageMetaMetaLookDescriptionParametersDescription = {
+  readonly Blacks2012: Maybe<Scalars['Int']>;
+  readonly CameraProfile: Maybe<Scalars['String']>;
+  readonly Clarity2012: Maybe<Scalars['Int']>;
+  readonly ColorGradeBlending: Maybe<Scalars['Int']>;
+  readonly ColorGradeGlobalHue: Maybe<Scalars['Int']>;
+  readonly ColorGradeGlobalLum: Maybe<Scalars['Int']>;
+  readonly ColorGradeGlobalSat: Maybe<Scalars['Int']>;
+  readonly ColorGradeHighlightLum: Maybe<Scalars['Int']>;
+  readonly ColorGradeMidtoneHue: Maybe<Scalars['Int']>;
+  readonly ColorGradeMidtoneLum: Maybe<Scalars['Int']>;
+  readonly ColorGradeMidtoneSat: Maybe<Scalars['Int']>;
+  readonly ColorGradeShadowLum: Maybe<Scalars['Int']>;
+  readonly Contrast2012: Maybe<Scalars['Int']>;
+  readonly ConvertToGrayscale: Maybe<Scalars['Boolean']>;
+  readonly Exposure2012: Maybe<Scalars['Float']>;
+  readonly Highlights2012: Maybe<Scalars['Int']>;
+  readonly HueAdjustmentBlue: Maybe<Scalars['Int']>;
+  readonly HueAdjustmentGreen: Maybe<Scalars['Int']>;
+  readonly HueAdjustmentOrange: Maybe<Scalars['Int']>;
+  readonly HueAdjustmentRed: Maybe<Scalars['Int']>;
+  readonly HueAdjustmentYellow: Maybe<Scalars['Int']>;
+  readonly LookTable: Maybe<Scalars['String']>;
+  readonly LuminanceAdjustmentBlue: Maybe<Scalars['Int']>;
+  readonly LuminanceAdjustmentGreen: Maybe<Scalars['Int']>;
+  readonly LuminanceAdjustmentOrange: Maybe<Scalars['Int']>;
+  readonly LuminanceAdjustmentRed: Maybe<Scalars['Int']>;
+  readonly LuminanceAdjustmentYellow: Maybe<Scalars['Int']>;
+  readonly ParametricDarks: Maybe<Scalars['Int']>;
+  readonly ParametricHighlightSplit: Maybe<Scalars['Int']>;
+  readonly ParametricHighlights: Maybe<Scalars['Int']>;
+  readonly ParametricLights: Maybe<Scalars['Int']>;
+  readonly ParametricMidtoneSplit: Maybe<Scalars['Int']>;
+  readonly ParametricShadowSplit: Maybe<Scalars['Int']>;
+  readonly ParametricShadows: Maybe<Scalars['Int']>;
+  readonly ProcessVersion: Maybe<Scalars['Int']>;
+  readonly RGBTable: Maybe<Scalars['String']>;
+  readonly RGBTableAmount: Maybe<Scalars['Float']>;
+  readonly SaturationAdjustmentBlue: Maybe<Scalars['Int']>;
+  readonly SaturationAdjustmentGreen: Maybe<Scalars['Int']>;
+  readonly SaturationAdjustmentOrange: Maybe<Scalars['Int']>;
+  readonly SaturationAdjustmentPurple: Maybe<Scalars['Int']>;
+  readonly SaturationAdjustmentRed: Maybe<Scalars['Int']>;
+  readonly SaturationAdjustmentYellow: Maybe<Scalars['Int']>;
+  readonly Shadows2012: Maybe<Scalars['Int']>;
+  readonly SplitToningBalance: Maybe<Scalars['Int']>;
+  readonly SplitToningHighlightHue: Maybe<Scalars['Int']>;
+  readonly SplitToningHighlightSaturation: Maybe<Scalars['Int']>;
+  readonly SplitToningShadowHue: Maybe<Scalars['Int']>;
+  readonly SplitToningShadowSaturation: Maybe<Scalars['Int']>;
+  readonly Texture: Maybe<Scalars['Int']>;
   readonly ToneCurvePV2012: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly ToneCurvePV2012Blue: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly ToneCurvePV2012Green: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly ToneCurvePV2012Red: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly Version: Maybe<Scalars['Float']>;
+  readonly Whites2012: Maybe<Scalars['Int']>;
 };
 
 type FileFieldsImageMetaMetaLookDescriptionParametersDescriptionFilterInput = {
+  readonly Blacks2012: InputMaybe<IntQueryOperatorInput>;
   readonly CameraProfile: InputMaybe<StringQueryOperatorInput>;
+  readonly Clarity2012: InputMaybe<IntQueryOperatorInput>;
+  readonly ColorGradeBlending: InputMaybe<IntQueryOperatorInput>;
+  readonly ColorGradeGlobalHue: InputMaybe<IntQueryOperatorInput>;
+  readonly ColorGradeGlobalLum: InputMaybe<IntQueryOperatorInput>;
+  readonly ColorGradeGlobalSat: InputMaybe<IntQueryOperatorInput>;
+  readonly ColorGradeHighlightLum: InputMaybe<IntQueryOperatorInput>;
+  readonly ColorGradeMidtoneHue: InputMaybe<IntQueryOperatorInput>;
+  readonly ColorGradeMidtoneLum: InputMaybe<IntQueryOperatorInput>;
+  readonly ColorGradeMidtoneSat: InputMaybe<IntQueryOperatorInput>;
+  readonly ColorGradeShadowLum: InputMaybe<IntQueryOperatorInput>;
+  readonly Contrast2012: InputMaybe<IntQueryOperatorInput>;
   readonly ConvertToGrayscale: InputMaybe<BooleanQueryOperatorInput>;
+  readonly Exposure2012: InputMaybe<FloatQueryOperatorInput>;
+  readonly Highlights2012: InputMaybe<IntQueryOperatorInput>;
+  readonly HueAdjustmentBlue: InputMaybe<IntQueryOperatorInput>;
+  readonly HueAdjustmentGreen: InputMaybe<IntQueryOperatorInput>;
+  readonly HueAdjustmentOrange: InputMaybe<IntQueryOperatorInput>;
+  readonly HueAdjustmentRed: InputMaybe<IntQueryOperatorInput>;
+  readonly HueAdjustmentYellow: InputMaybe<IntQueryOperatorInput>;
   readonly LookTable: InputMaybe<StringQueryOperatorInput>;
+  readonly LuminanceAdjustmentBlue: InputMaybe<IntQueryOperatorInput>;
+  readonly LuminanceAdjustmentGreen: InputMaybe<IntQueryOperatorInput>;
+  readonly LuminanceAdjustmentOrange: InputMaybe<IntQueryOperatorInput>;
+  readonly LuminanceAdjustmentRed: InputMaybe<IntQueryOperatorInput>;
+  readonly LuminanceAdjustmentYellow: InputMaybe<IntQueryOperatorInput>;
+  readonly ParametricDarks: InputMaybe<IntQueryOperatorInput>;
+  readonly ParametricHighlightSplit: InputMaybe<IntQueryOperatorInput>;
+  readonly ParametricHighlights: InputMaybe<IntQueryOperatorInput>;
+  readonly ParametricLights: InputMaybe<IntQueryOperatorInput>;
+  readonly ParametricMidtoneSplit: InputMaybe<IntQueryOperatorInput>;
+  readonly ParametricShadowSplit: InputMaybe<IntQueryOperatorInput>;
+  readonly ParametricShadows: InputMaybe<IntQueryOperatorInput>;
   readonly ProcessVersion: InputMaybe<IntQueryOperatorInput>;
   readonly RGBTable: InputMaybe<StringQueryOperatorInput>;
   readonly RGBTableAmount: InputMaybe<FloatQueryOperatorInput>;
+  readonly SaturationAdjustmentBlue: InputMaybe<IntQueryOperatorInput>;
+  readonly SaturationAdjustmentGreen: InputMaybe<IntQueryOperatorInput>;
+  readonly SaturationAdjustmentOrange: InputMaybe<IntQueryOperatorInput>;
+  readonly SaturationAdjustmentPurple: InputMaybe<IntQueryOperatorInput>;
+  readonly SaturationAdjustmentRed: InputMaybe<IntQueryOperatorInput>;
+  readonly SaturationAdjustmentYellow: InputMaybe<IntQueryOperatorInput>;
+  readonly Shadows2012: InputMaybe<IntQueryOperatorInput>;
+  readonly SplitToningBalance: InputMaybe<IntQueryOperatorInput>;
+  readonly SplitToningHighlightHue: InputMaybe<IntQueryOperatorInput>;
+  readonly SplitToningHighlightSaturation: InputMaybe<IntQueryOperatorInput>;
+  readonly SplitToningShadowHue: InputMaybe<IntQueryOperatorInput>;
+  readonly SplitToningShadowSaturation: InputMaybe<IntQueryOperatorInput>;
+  readonly Texture: InputMaybe<IntQueryOperatorInput>;
   readonly ToneCurvePV2012: InputMaybe<StringQueryOperatorInput>;
   readonly ToneCurvePV2012Blue: InputMaybe<StringQueryOperatorInput>;
   readonly ToneCurvePV2012Green: InputMaybe<StringQueryOperatorInput>;
   readonly ToneCurvePV2012Red: InputMaybe<StringQueryOperatorInput>;
   readonly Version: InputMaybe<FloatQueryOperatorInput>;
+  readonly Whites2012: InputMaybe<IntQueryOperatorInput>;
 };
 
 type FileFieldsImageMetaMetaLookDescriptionParametersFilterInput = {
+  readonly ConvertToGrayscale: InputMaybe<BooleanQueryOperatorInput>;
   readonly Description: InputMaybe<FileFieldsImageMetaMetaLookDescriptionParametersDescriptionFilterInput>;
+  readonly LookTable: InputMaybe<StringQueryOperatorInput>;
+  readonly ProcessVersion: InputMaybe<IntQueryOperatorInput>;
+  readonly RGBTable: InputMaybe<StringQueryOperatorInput>;
+  readonly RGBTableAmount: InputMaybe<FloatQueryOperatorInput>;
+  readonly Version: InputMaybe<FloatQueryOperatorInput>;
 };
 
 type FileFieldsImageMetaMetaLookFilterInput = {

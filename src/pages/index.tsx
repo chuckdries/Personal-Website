@@ -263,6 +263,8 @@ export const query = graphql`
             "DSC09932.jpg" # milky way
             "DSC09944.jpg" # milky way rori
             "DSC03725.jpg" # oregon coast lighthouse
+            "DSC03750.jpg"
+            "DSC03804.jpg"
           ]
         }
       }
