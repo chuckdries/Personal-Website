@@ -153,15 +153,11 @@ const GalleryImage = ({ data, location: { state } }) => {
         <Nav
           className="mb-4"
           internalLinks={[
-            { href: "/", label: "Home" },
             {
-              href: getGalleryPageUrl(
-                { keyword: filterKeyword, sortKey },
-                image.base
-              ),
+              href: "/",
               label: (
                 <>
-                  Gallery <kbd>esc</kbd>
+                  Home <kbd>esc</kbd>
                 </>
               ),
             },
