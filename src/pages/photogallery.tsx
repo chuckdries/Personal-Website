@@ -19,16 +19,6 @@ const SORT_KEYS = {
 export type GalleryImage =
   Queries.GalleryPageQueryQuery["allFile"]["nodes"][number];
 
-const debugWrap =
-  (name: string, fn: Function) =>
-  (...asdf: any) => {
-    try {
-      return fn(...asdf);
-    } catch (e) {
-      console.log("threw in " + name, e);
-    }
-  };
-
 const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
   const hash =
     typeof window !== "undefined" ? window.location.hash.replace("#", "") : "";
@@ -82,7 +72,6 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
   );
 
   const removeHash = React.useCallback(() => {
-    console.log("rh");
     const url = new URL(
       typeof window !== "undefined"
         ? window.location.href.toString()
@@ -103,7 +92,6 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
     if (!el) {
       return;
     }
-    console.log("scrolling into view", el);
     el.scrollIntoView({
       block: "center",
     });
@@ -168,7 +156,6 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
       return [];
     }
   }, [data, sortKey, filterKeyword]);
-  console.log("🚀 ~ file: photogallery.tsx ~ line 175 ~ GalleryPage ~ filterKeyword", filterKeyword)
 
   return (
     <>

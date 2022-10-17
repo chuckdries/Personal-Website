@@ -11,13 +11,18 @@ import { getHelmetSafeBodyStyle, getVibrant, getAspectRatio } from "../utils";
 import Nav from "../components/Nav";
 import ActionButtons from "../components/index/ActionButtons";
 import { use100vh } from "react-div-100vh";
+import { useMediaQuery } from "../useMediaQuery";
 
 const env =
   process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
 
 export type HomepageImage = Queries.IndexPageQuery["allFile"]["nodes"][number];
 
-const getDifferentRand = (range: number, lastNs: number[], iterations = 0): number => {
+const getDifferentRand = (
+  range: number,
+  lastNs: number[],
+  iterations = 0
+): number => {
   const n = Math.floor(Math.random() * range);
   if (lastNs.findIndex((x) => x === n) > -1 && iterations < 5) {
     console.log("got dupe, trying again", n);
@@ -36,7 +41,6 @@ const IndexPage = ({
   const image = React.useMemo(() => {
     return images[imageIndex];
   }, [images, imageIndex]);
-  console.log(image);
 
   const shuffleImage = React.useCallback(
     (currentImage?: typeof images[number]) => {
@@ -100,6 +104,8 @@ const IndexPage = ({
       document.removeEventListener("keydown", keyListener);
     };
   }, [imageIndex, images.length, image, shuffleImage]);
+
+  const browserIsLandscape = useMediaQuery("(orientation: landscape)");
 
   const vibrant = getVibrant(image);
   const ar = getAspectRatio(image);
@@ -193,12 +199,13 @@ const IndexPage = ({
             className={classnames(
               imageIsLandscape
                 ? "landscape:h-actual-screen portrait:h-two-thirds-vw"
-                : "h-actual-screen portrait:w-full landscape:w-1/2"
+                : "h-actual-screen portrait:w-full"
             )}
             image={img}
             loading="eager"
             style={{
               gridArea: "1/1",
+              width: browserIsLandscape && !imageIsLandscape ? `${ar * 100}vh` : "100%",
             }}
           />
         ) : (
