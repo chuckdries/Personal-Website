@@ -167,17 +167,12 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
       <div className="sm:sticky top-0 pt-1 z-10 bg-black">
         <Nav
           className="mb-4"
-          internalLinks={[
-            { href: "/", label: "Home" },
-          ]}
+          internalLinks={[{ href: "/", label: "Home" }]}
         ></Nav>
         <div className="flex flex-col lg:flex-row lg:items-end justify-between">
-          <div className="flex flex-col mx-5 font-serif">
-
-          <h1 className="text-5xl mt-0 font-black z-10">
-            Chuck Dries
-          </h1>
-          <h2 className="">Full Stack Software Engineer & Photographer</h2>
+          <div className="flex flex-col mr-5 ml-2 font-serif">
+            <h1 className="text-5xl mt-0 font-black z-10">Chuck Dries</h1>
+            <h2 className="">Full Stack Software Engineer & Photographer</h2>
           </div>
           <KeywordsPicker
             keywords={[

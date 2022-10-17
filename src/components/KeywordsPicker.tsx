@@ -8,7 +8,7 @@ interface KeywordsPickerProps {
 }
 const KeywordsPicker = ({ keywords, value, onChange }: KeywordsPickerProps) => {
   return (
-    <div className="mx-2">
+    <div className="mx-2 mt-2">
       <span className="text-xs text-[#A2A2A2]">Collections</span>
       <ul className="flex gap-1 flex-wrap mt-1 mb-2">
         {keywords.map((keyword) => {
