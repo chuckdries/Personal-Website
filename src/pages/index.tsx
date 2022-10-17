@@ -265,6 +265,7 @@ export const query = graphql`
             "DSC03725.jpg" # oregon coast lighthouse
             "DSC03750.jpg"
             "DSC03804.jpg"
+            "DSC04122.jpg" # shoot the light wheel hallway
           ]
         }
       }
