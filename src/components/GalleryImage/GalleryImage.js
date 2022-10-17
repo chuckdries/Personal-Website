@@ -154,7 +154,7 @@ const GalleryImage = ({ data, location: { state } }) => {
           className="mb-4"
           internalLinks={[
             {
-              href: "/",
+              href: getGalleryPageUrl({ keyword: filterKeyword, sortKey }, image.base),
               label: (
                 <>
                   Home <kbd>esc</kbd>
