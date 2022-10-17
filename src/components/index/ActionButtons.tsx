@@ -24,7 +24,7 @@ const ActionButtons = ({
   shuffleImage,
 }: ActionButtonsProps) => (
   <div className="flex flex-col mb-2">
-    <div className="text-muted-light p-2 sm:p-4 m-1 sm:m-4 bg-muted-dark rounded-xl flex flex-col text-center z-10 cool-border-small-light">
+    <div className="text-muted-light p-3 pt-0 mt-0 m-1 bg-muted-dark rounded-xl flex flex-col text-center z-10">
       <h3 className="sm:mb-2 drop-shadow">Try my word game!</h3>
       <a
         className="rounded-full bg-muted-light hover:bg-vibrant text-muted-dark p-1 sm:p-2"

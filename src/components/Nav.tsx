@@ -84,6 +84,11 @@ const Nav = ({ isClient, internalLinks, className }: NavProps) => {
                   : "bg-black border border-white")
             )}
           >
+            {/* <li>
+              <a className={navClasses} href="https://buzzwords.gg">
+                Buzzwords
+              </a>
+            </li> */}
             <li>
               <a className={navClasses} href="https://twitter.com/chuckletmilk">
                 Twitter
