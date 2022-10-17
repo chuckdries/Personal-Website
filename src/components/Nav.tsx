@@ -43,7 +43,7 @@ const Nav = ({ isClient, internalLinks, className }: NavProps) => {
             : "border border-white"
         )}
       >
-        <ul className="inline-flex flex-wrap justify-center">
+        {/* <ul className="inline-flex flex-wrap justify-center">
           {internalLinks &&
             internalLinks.map(({ href, label }) => (
               <li key={href}>
@@ -57,7 +57,7 @@ const Nav = ({ isClient, internalLinks, className }: NavProps) => {
               </li>
             ))}
         </ul>
-        {internalLinks && currentBreakpoint !== "XS" && <>|</>}
+        {internalLinks && currentBreakpoint !== "XS" && <>|</>} */}
         {currentBreakpoint === "XS" && (
           <button
             className="mx-2 hover:underline inline-flex align-middle"
@@ -84,11 +84,11 @@ const Nav = ({ isClient, internalLinks, className }: NavProps) => {
                   : "bg-black border border-white")
             )}
           >
-            {/* <li>
+            <li>
               <a className={navClasses} href="https://buzzwords.gg">
                 Buzzwords
               </a>
-            </li> */}
+            </li>
             <li>
               <a className={navClasses} href="https://twitter.com/chuckletmilk">
                 Twitter
