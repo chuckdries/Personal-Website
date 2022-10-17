@@ -169,7 +169,6 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
           className="mb-4"
           internalLinks={[
             { href: "/", label: "Home" },
-            { href: "/photogallery/", label: "Gallery" },
           ]}
         ></Nav>
         <div className="flex flex-col lg:flex-row lg:items-end justify-between">
