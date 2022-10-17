@@ -159,8 +159,13 @@ const IndexPage = ({
           >
             <div
               className={classnames(
-                "rounded-[50px] p-3 md:p-5 ml-2 mr-4 md:ml-3 md:mr-5 flex flex-col items-center z-10 border-r-[20px] border-b-[20px] mb-3",
-                isClient ? "cool-border-big" : "bg-gray-50"
+                "rounded-[50px] p-3 md:p-5 ml-2 mr-4 md:ml-3 md:mr-5 flex flex-col items-center z-10  mb-3",
+                isClient
+                  ? imageIsLandscape
+                    ? "text-vibrant-light landscape:text-vibrant-dark landscape:cool-border-big landscape:border-r-[20px] landscape:border-b-[20px]"
+                    : "text-vibrant-light portrait:text-vibrant-dark portrait:cool-border-big portrait:border-r-[20px] portrait:border-b-[20px]"
+                  : "bg-gray-50 border-r-[20px] border-b-[20px]",
+                isClient && ""
               )}
             >
               <h1
@@ -205,7 +210,10 @@ const IndexPage = ({
             loading="eager"
             style={{
               gridArea: "1/1",
-              width: browserIsLandscape && !imageIsLandscape ? `${ar * 100}vh` : "100%",
+              width:
+                browserIsLandscape && !imageIsLandscape
+                  ? `${ar * 100}vh`
+                  : "100%",
             }}
           />
         ) : (
