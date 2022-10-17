@@ -16,7 +16,7 @@ interface NavProps {
 
 const Nav = ({ isClient, internalLinks, className }: NavProps) => {
   const { observe, currentBreakpoint } = useDimensions({
-    breakpoints: { XS: 0, LG: 750 },
+    breakpoints: { XS: 0, LG: 690 },
     updateOnBreakpointChange: true,
   });
   const [linksMenu, setLinksMenu] = useState(false);
@@ -84,11 +84,11 @@ const Nav = ({ isClient, internalLinks, className }: NavProps) => {
                   : "bg-black border border-white")
             )}
           >
-            <li>
+            {/* <li>
               <a className={navClasses} href="https://buzzwords.gg">
                 Buzzwords
               </a>
-            </li>
+            </li> */}
             <li>
               <a className={navClasses} href="https://twitter.com/chuckletmilk">
                 Twitter
