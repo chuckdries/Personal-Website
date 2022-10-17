@@ -19,6 +19,16 @@ const SORT_KEYS = {
 export type GalleryImage =
   Queries.GalleryPageQueryQuery["allFile"]["nodes"][number];
 
+const debugWrap =
+  (name: string, fn: Function) =>
+  (...asdf: any) => {
+    try {
+      return fn(...asdf);
+    } catch (e) {
+      console.log("threw in " + name, e);
+    }
+  };
+
 const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
   const hash =
     typeof window !== "undefined" ? window.location.hash.replace("#", "") : "";
@@ -120,37 +130,45 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
     }, 100);
   }, [setSortKey, setKeyword, scrollIntoView]);
 
-  const images: GalleryImage[] = React.useMemo(
-    () =>
-      R.pipe(
+  const images: GalleryImage[] = React.useMemo(() => {
+    const sort =
+      sortKey === "date"
+        ? R.sort((node1: typeof data["allFile"]["nodes"][number], node2) => {
+            const date1 = new Date(
+              R.pathOr("", ["fields", "imageMeta", "dateTaken"], node1)
+            );
+            const date2 = new Date(
+              R.pathOr("", ["fields", "imageMeta", "dateTaken"], node2)
+            );
+            return -1 * (date1.getTime() - date2.getTime());
+          })
+        : R.sort(
+            // @ts-ignore
+            R.descend(R.path<GalleryImage>(SORT_KEYS[sortKey]))
+          );
+
+    const filter = filterKeyword
+      ? R.filter((image) =>
+          R.includes(
+            filterKeyword,
+            R.pathOr([], ["fields", "imageMeta", "meta", "Keywords"], image)
+          )
+        )
+      : R.identity;
+
+    try {
+      const ret = R.pipe(
         // @ts-ignore
-        sortKey === "date"
-          ? R.sort((node1: typeof data["allFile"]["nodes"][number], node2) => {
-              const date1 = new Date(
-                // @ts-ignore
-                R.path(["fields", "imageMeta", "dateTaken"], node1)
-              );
-              const date2 = new Date(
-                // @ts-ignore
-                R.path(["fields", "imageMeta", "dateTaken"], node2)
-              );
-              return -1 * (date1.getTime() - date2.getTime());
-            })
-          : // @ts-ignore
-            R.sort(R.descend(R.path(SORT_KEYS[sortKey]))),
-        filterKeyword
-          ? R.filter((image) =>
-              // @ts-ignore
-              R.includes(
-                filterKeyword,
-                // @ts-ignore
-                R.path(["fields", "imageMeta", "meta", "Keywords"], image)
-              )
-            )
-          : R.identity
-      )(data.allFile.nodes) as any,
-    [data, sortKey, filterKeyword]
-  );
+        sort,
+        filter
+      )(data.allFile.nodes) as any;
+      return ret;
+    } catch (e) {
+      console.log("caught images!", e);
+      return [];
+    }
+  }, [data, sortKey, filterKeyword]);
+  console.log("🚀 ~ file: photogallery.tsx ~ line 175 ~ GalleryPage ~ filterKeyword", filterKeyword)
 
   return (
     <>
@@ -210,8 +228,8 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
           md: 4,
           lg: 4,
           xl: 5,
-          '2xl': 6.1,
-          '3xl': 7.5,
+          "2xl": 6.1,
+          "3xl": 7.5,
         }}
         debugHue={sortKey === "hue_debug"}
         debugRating={sortKey === "rating" && showDebug}
