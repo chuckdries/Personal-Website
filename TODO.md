@@ -1,5 +1,6 @@
 - [ ] Resume/Projects portfolio
 - [ ] Blog
+- [ ] stop committing entire exif object to gatsby node structure. pick out only fields we need
 - [x] tags
 - [ ] photo stories/collection pages (kinda done? still need to figure out stories)
 - [x] typescript (w/ graphql codegen)
