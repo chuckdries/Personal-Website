@@ -11,7 +11,7 @@ interface NavProps {
   internalLinks: {
     href: string;
     label: string;
-  }[]
+  }[];
 }
 
 const Nav = ({ isClient, internalLinks, className }: NavProps) => {
@@ -35,14 +35,7 @@ const Nav = ({ isClient, internalLinks, className }: NavProps) => {
       ref={observe}
       style={{ zIndex: 100 }}
     >
-      <div
-        className={classnames(
-          "rounded-full p-2",
-          isClient
-            ? "bg-vibrant-dark cool-border-small-light"
-            : "border border-white"
-        )}
-      >
+      <div className="p-2">
         <ul className="inline-flex flex-wrap justify-center">
           {internalLinks &&
             internalLinks.map(({ href, label }) => (
@@ -85,12 +78,22 @@ const Nav = ({ isClient, internalLinks, className }: NavProps) => {
             )}
           >
             <li>
-              <a className={navClasses} href="https://buzzwords.gg">
+              {/* eslint-disable-next-line */}
+              <a
+                className={navClasses}
+                href="https://buzzwords.gg"
+                target="_blank"
+              >
                 Buzzwords
               </a>
             </li>
             <li>
-              <a className={navClasses} href="https://twitter.com/chuckletmilk">
+              <a
+                className={navClasses}
+                href="https://twitter.com/chuckletmilk"
+                rel="noreferrer"
+                target="_blank"
+              >
                 Twitter
               </a>
             </li>
@@ -98,6 +101,8 @@ const Nav = ({ isClient, internalLinks, className }: NavProps) => {
               <a
                 className={navClasses}
                 href="https://www.instagram.com/asubtlebutdeliciouscoffeecake/"
+                rel="noreferrer"
+                target="_blank"
               >
                 Instagram
               </a>
@@ -106,12 +111,19 @@ const Nav = ({ isClient, internalLinks, className }: NavProps) => {
               <a
                 className={navClasses}
                 href="https://www.youtube.com/channel/UCknR_DdytuOgzus--b2gZhg"
+                rel="noreferrer"
+                target="_blank"
               >
                 YouTube
               </a>
             </li>
             <li>
-              <a className={navClasses} href="https://github.com/chuckdries">
+              <a
+                className={navClasses}
+                href="https://github.com/chuckdries"
+                rel="noreferrer"
+                target="_blank"
+              >
                 GitHub
               </a>
             </li>
