@@ -33,12 +33,14 @@ const MasonryGallery = ({
   debugRating,
   linkState,
 }: MasonryGalleryProps) => {
+  console.log("🚀 ~ file: MasonryGallery.tsx ~ line 38 ~ themeBreakpoints", themeBreakpoints)
   const breakpoints = React.useMemo(
     () => R.pick(R.keys(aspectTargetsByBreakpoint), themeBreakpoints),
     [aspectTargetsByBreakpoint]
   );
 
   const { breakpoint } = useBreakpoint(breakpoints, "sm");
+  console.log("🚀 ~ file: MasonryGallery.tsx ~ line 43 ~ breakpoint", breakpoint)
 
   const aspectRatios = React.useMemo(
     () => R.map(getAspectRatio, images).filter(Boolean),

@@ -183,6 +183,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
               "fireworks",
               "panoramic",
               "Portland Japanese Garden",
+              "shoot the light",
               // "sunset",
             ]}
             onChange={setKeyword}
@@ -195,7 +196,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
               onSelectionChange={setSortKey}
               selectedKey={sortKey}
             >
-              <Item key="rating">Default</Item>
+              <Item key="rating">Curated</Item>
               <Item key="date">Date</Item>
               <Item key="hue">Hue</Item>
             </Picker>
@@ -209,7 +210,8 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
           md: 4,
           lg: 4,
           xl: 5,
-          // '2xl': 6.1,
+          '2xl': 6.1,
+          '3xl': 7.5,
         }}
         debugHue={sortKey === "hue_debug"}
         debugRating={sortKey === "rating" && showDebug}
