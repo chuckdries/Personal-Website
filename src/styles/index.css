@@ -2,3 +2,23 @@
 text-vibrant-dark border-vibrant bg-vibrant-light
   
 } */
+.gradient {
+  background-image: linear-gradient(
+    90deg,
+    hsl(240deg 100% 0%) 0%,
+    hsl(240deg 100% 20%) 10%,
+    hsl(288deg 100% 21%) 26%,
+    hsl(314deg 100% 27%) 41%,
+    hsl(328deg 100% 35%) 53%,
+    hsl(337deg 100% 42%) 63%,
+    hsl(354deg 85% 57%) 71%,
+    hsl(14deg 100% 60%) 79%,
+    hsl(30deg 100% 55%) 86%,
+    hsl(43deg 100% 50%) 93%,
+    hsl(52deg 100% 50%) 100%
+  );
+}
+h1 {
+  font-size: 4em;
+  @apply mb-4;
+}

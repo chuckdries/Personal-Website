@@ -9,6 +9,8 @@ import KeywordsPicker from "../components/KeywordsPicker";
 import { getGalleryPageUrl } from "../utils";
 import Nav from "../components/Nav";
 
+import "../styles/index.css";
+
 const SORT_KEYS = {
   hue: ["fields", "imageMeta", "vibrantHue"],
   rating: ["fields", "imageMeta", "meta", "Rating"],
@@ -169,9 +171,12 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
           className="mb-4"
           internalLinks={[{ href: "/", label: "Home" }]}
         ></Nav>
-        <div className="flex flex-col mr-5 md:ml-4 ml-2 mt-4 md:mt-6 font-serif">
-          <h1 className="text-5xl mt-0 font-black z-10">Chuck Dries</h1>
-          <h2 className="">Full Stack Software Engineer & Photographer</h2>
+        <div className="flex flex-col md:flex-row items-stretch">
+          <div className="flex flex-col justify-center mr-5 md:ml-4 ml-2 my-4 md:mt-6 font-serif">
+            <h1 className="mt-0 font-black z-10">Chuck Dries</h1>
+            <h2 className="">Full Stack Software Engineer & Photographer</h2>
+          </div>
+          <div className="gradient flex-auto min-h-[20px]"></div>
         </div>
         <div className="flex flex-col md:flex-row md:items-end justify-between">
           <KeywordsPicker
