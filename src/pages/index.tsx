@@ -168,8 +168,8 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
         <Nav
           className="mb-4"
           internalLinks={[{ href: "/", label: "Home" }]}
-        ></Nav>
-        <div className="flex flex-col mr-5 md:ml-4 ml-2 mt-4 md:mt-6 font-serif">
+        />
+        <div className="flex flex-col text-center mr-5 md:ml-4 ml-2 my-4 md:my-7 font-serif">
           <h1 className="text-5xl mt-0 font-black z-10">Chuck Dries</h1>
           <h2 className="">Full Stack Software Engineer & Photographer</h2>
         </div>
