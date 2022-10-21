@@ -8,6 +8,7 @@ import * as R from "ramda";
 import exifr from "exifr";
 import sharp from "sharp";
 import { Palette } from "node-vibrant/lib/color";
+import { performance } from "perf_hooks";
 
 // const path = require("path");
 // const Vibrant = require("node-vibrant");
@@ -45,24 +46,20 @@ function processColors(vibrantData: Palette, imagePath: string) {
     badContrast(DarkVibrant, LightMuted)
   ) {
     DarkVibrant = DarkVibrant.darken();
-    if (badContrast(DarkVibrant, Vibrant)) {
-      Vibrant = Vibrant.brighten();
-    }
-    if (badContrast(DarkVibrant, Vibrant)) {
-      Vibrant = Vibrant.brighten();
-    }
   }
+  if (badContrast(DarkVibrant, Vibrant)) {
+    Vibrant = Vibrant.brighten();
+  }
+  if (badContrast(DarkVibrant, Vibrant)) {
+    Vibrant = Vibrant.brighten();
+  }
+
   // second pass - first doesn't always do enough
-  if (
-    badContrast(DarkVibrant, Vibrant) ||
-    badContrast(DarkVibrant, LightMuted)
-  ) {
-    if (badContrast(DarkVibrant, Vibrant)) {
-      Vibrant = Vibrant.brighten(2);
-    }
-    if (badContrast(DarkVibrant, LightMuted)) {
-      LightMuted = LightMuted.brighten(2);
-    }
+  if (badContrast(DarkVibrant, Vibrant)) {
+    Vibrant = Vibrant.brighten(2);
+  }
+  if (badContrast(DarkVibrant, LightMuted)) {
+    LightMuted = LightMuted.brighten(2);
   }
 
   // only used for hover styles, so we should give it a shot but it's not a huge deal if it's not very legible
@@ -177,7 +174,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
       .toBuffer();
 
     const vibrantData = await Vibrant.from(resizedImage)
-      .quality(1)
+      // .quality(1)
       .getPalette();
 
     createNodeField({
