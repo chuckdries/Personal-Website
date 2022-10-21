@@ -52,11 +52,6 @@
       @apply bg-opacity-70;
     }
   }
-  @variants responsive {
-    .h-two-thirds-vw {
-      height: 67vw;
-    }
-  }
   .cool-border-big {
     border: 1px solid rgb(var(--dark-vibrant));
     background: rgb(var(--light-vibrant));
