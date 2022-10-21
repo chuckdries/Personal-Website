@@ -22,14 +22,13 @@ const Nav = ({ isClient, internalLinks, className }: NavProps) => {
   const [linksMenu, setLinksMenu] = useState(false);
 
   const navClasses = classnames(
-    "hover:underline mx-2 md:mx-3",
-    isClient ? "text-vibrant-light" : "text-gray-200"
+    "hover:underline mx-2 md:mx-3 text-gray-200"
   );
   return (
     <nav
       className={classnames(
-        "m-2 flex justify-center font-sans w-full",
-        isClient ? "text-vibrant-light" : "text-gray-200",
+        "p-2 mt-0 flex justify-center w-full font-serif",
+        "text-gray-200 bg-black border-b border-b-white",
         className
       )}
       ref={observe}
@@ -50,7 +49,7 @@ const Nav = ({ isClient, internalLinks, className }: NavProps) => {
               </li>
             ))}
         </ul>
-        {internalLinks && currentBreakpoint !== "XS" && <>|</>}
+        {internalLinks && currentBreakpoint !== "XS" && <span className={navClasses}>|</span>}
         {currentBreakpoint === "XS" && (
           <button
             className="mx-2 hover:underline inline-flex align-middle"

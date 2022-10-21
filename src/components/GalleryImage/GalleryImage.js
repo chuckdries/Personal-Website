@@ -157,7 +157,7 @@ const GalleryImage = ({ data, location: { state } }) => {
               href: getGalleryPageUrl({ keyword: filterKeyword, sortKey }, image.base),
               label: (
                 <>
-                  Home <kbd>esc</kbd>
+                  Home <kbd className="font-normal">esc</kbd>
                 </>
               ),
             },
