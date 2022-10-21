@@ -89,7 +89,7 @@ const Nav = ({ internalLinks, className }: NavProps) => {
     <nav
       className={classnames(
         "mt-0 flex justify-center w-full font-serif",
-        "text-gray-200 bg-black border-b border-b-white",
+        "text-gray-200 bg-black shadow-lg",
         className
       )}
       ref={observe}
