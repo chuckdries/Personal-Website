@@ -6,7 +6,7 @@ import { Picker, Item } from "@adobe/react-spectrum";
 
 import MasonryGallery from "../components/MasonryGallery";
 import KeywordsPicker from "../components/KeywordsPicker";
-import { getGalleryPageUrl } from "../utils";
+import { getGalleryPageUrl, getHelmetSafeBodyStyle } from "../utils";
 import Nav from "../components/Nav";
 
 const SORT_KEYS = {
@@ -162,7 +162,18 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
       {/* @ts-ignore */}
       <Helmet>
         <title>Photo Gallery | Chuck Dries</title>
-        <body className="bg-black text-white" />
+        <body
+          className="bg-black text-white"
+          // @ts-ignore
+          style={getHelmetSafeBodyStyle({
+            Muted: [255, 255, 255],
+            DarkMuted: [0, 0, 0],
+            LightMuted: [255, 255, 255],
+            Vibrant: [255, 255, 255],
+            LightVibrant: [255, 255, 255],
+            DarkVibrant: [0, 0, 0],
+          })}
+        />
       </Helmet>
       <div className="top-0 z-10 bg-black">
         <Nav className="mb-4" internalLinks={[{ href: "/", label: "Home" }]} />

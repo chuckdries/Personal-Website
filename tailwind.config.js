@@ -46,6 +46,7 @@ module.exports = {
       },
       colors: {
         buzzwordsPrimary: "#F6C54B",
+        transparentblack: "rgba(0,0,0,0.3)",
         vibrant: {
           DEFAULT: ({ opacityVariable, opacityValue }) => {
             if (opacityValue !== undefined) {
