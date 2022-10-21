@@ -5,8 +5,72 @@ import useDimensions from "react-cool-dimensions";
 
 import Menu from "@spectrum-icons/workflow/Menu";
 
+const navClasses = "hover:underline hover:bg-gray-900 block p-3 text-gray-200";
+
+const ExternalLinks = ({ isVertical }: { isVertical: boolean }) => (
+  <ul
+    className={classnames(
+      "z-30 bg-black rounded overflow-hidden",
+      isVertical
+        ? "inline-flex flex-wrap justify-center"
+        : "absolute rounded-md top-[40px] border border-white"
+    )}
+  >
+    <li>
+      {/* eslint-disable-next-line */}
+      <a className={navClasses} href="https://buzzwords.gg" target="_blank">
+        Buzzwords
+      </a>
+    </li>
+    <li>
+      <a
+        className={navClasses}
+        href="https://twitter.com/chuckletmilk"
+        rel="noreferrer"
+        target="_blank"
+      >
+        Twitter
+      </a>
+    </li>
+    <li>
+      <a
+        className={navClasses}
+        href="https://www.instagram.com/asubtlebutdeliciouscoffeecake/"
+        rel="noreferrer"
+        target="_blank"
+      >
+        Instagram
+      </a>
+    </li>
+    <li>
+      <a
+        className={navClasses}
+        href="https://www.youtube.com/channel/UCknR_DdytuOgzus--b2gZhg"
+        rel="noreferrer"
+        target="_blank"
+      >
+        YouTube
+      </a>
+    </li>
+    <li>
+      <a
+        className={navClasses}
+        href="https://github.com/chuckdries"
+        rel="noreferrer"
+        target="_blank"
+      >
+        GitHub
+      </a>
+    </li>
+    <li>
+      <a className={navClasses} href="mailto:chuck@chuckdries.com">
+        chuck@chuckdries.com
+      </a>
+    </li>
+  </ul>
+);
+
 interface NavProps {
-  isClient?: boolean;
   className?: string;
   internalLinks: {
     href: string;
@@ -14,27 +78,24 @@ interface NavProps {
   }[];
 }
 
-const Nav = ({ isClient, internalLinks, className }: NavProps) => {
+const Nav = ({ internalLinks, className }: NavProps) => {
   const { observe, currentBreakpoint } = useDimensions({
     breakpoints: { XS: 0, LG: 690 },
     updateOnBreakpointChange: true,
   });
   const [linksMenu, setLinksMenu] = useState(false);
 
-  const navClasses = classnames(
-    "hover:underline mx-2 md:mx-3 text-gray-200"
-  );
   return (
     <nav
       className={classnames(
-        "p-2 mt-0 flex justify-center w-full font-serif",
+        "mt-0 flex justify-center w-full font-serif",
         "text-gray-200 bg-black border-b border-b-white",
         className
       )}
       ref={observe}
       style={{ zIndex: 100 }}
     >
-      <div className="p-2">
+      <div className="flex">
         <ul className="inline-flex flex-wrap justify-center">
           {internalLinks &&
             internalLinks.map(({ href, label }) => (
@@ -49,10 +110,15 @@ const Nav = ({ isClient, internalLinks, className }: NavProps) => {
               </li>
             ))}
         </ul>
-        {internalLinks && currentBreakpoint !== "XS" && <span className={navClasses}>|</span>}
+        {internalLinks && currentBreakpoint !== "XS" && (
+          <span className="block p-3 text-gray-200">|</span>
+        )}
         {currentBreakpoint === "XS" && (
           <button
-            className="mx-2 hover:underline inline-flex align-middle"
+            className={classnames(
+              "mx-2 hover:underline inline-flex align-middle items-center",
+              navClasses
+            )}
             onClick={() => setLinksMenu(!linksMenu)}
           >
             <Menu
@@ -64,74 +130,7 @@ const Nav = ({ isClient, internalLinks, className }: NavProps) => {
           </button>
         )}
         {(currentBreakpoint !== "XS" || linksMenu) && (
-          <ul
-            className={classnames(
-              "z-30",
-              currentBreakpoint !== "XS"
-                ? "inline-flex flex-wrap justify-center"
-                : "absolute p-2 rounded-md mt-2",
-              currentBreakpoint === "XS" &&
-                (isClient
-                  ? "bg-vibrant-dark cool-border-small-light"
-                  : "bg-black border border-white")
-            )}
-          >
-            <li>
-              {/* eslint-disable-next-line */}
-              <a
-                className={navClasses}
-                href="https://buzzwords.gg"
-                target="_blank"
-              >
-                Buzzwords
-              </a>
-            </li>
-            <li>
-              <a
-                className={navClasses}
-                href="https://twitter.com/chuckletmilk"
-                rel="noreferrer"
-                target="_blank"
-              >
-                Twitter
-              </a>
-            </li>
-            <li>
-              <a
-                className={navClasses}
-                href="https://www.instagram.com/asubtlebutdeliciouscoffeecake/"
-                rel="noreferrer"
-                target="_blank"
-              >
-                Instagram
-              </a>
-            </li>
-            <li>
-              <a
-                className={navClasses}
-                href="https://www.youtube.com/channel/UCknR_DdytuOgzus--b2gZhg"
-                rel="noreferrer"
-                target="_blank"
-              >
-                YouTube
-              </a>
-            </li>
-            <li>
-              <a
-                className={navClasses}
-                href="https://github.com/chuckdries"
-                rel="noreferrer"
-                target="_blank"
-              >
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a className={navClasses} href="mailto:chuck@chuckdries.com">
-                chuck@chuckdries.com
-              </a>
-            </li>
-          </ul>
+          <ExternalLinks isVertical={currentBreakpoint !== "XS"} />
         )}
       </div>
     </nav>
