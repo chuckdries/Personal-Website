@@ -5,12 +5,12 @@ import useDimensions from "react-cool-dimensions";
 
 import Menu from "@spectrum-icons/workflow/Menu";
 
-const navClasses = "hover:underline hover:bg-gray-900 block p-3 text-gray-200";
+const navClasses = "hover:underline hover:bg-transparentblack block p-3 text-vibrant-light";
 
 const ExternalLinks = ({ isVertical }: { isVertical: boolean }) => (
   <ul
     className={classnames(
-      "z-30 bg-black rounded overflow-hidden",
+      "z-30 bg-vibrant-dark rounded overflow-hidden",
       isVertical
         ? "inline-flex flex-wrap justify-center"
         : "absolute rounded-md top-[40px] border border-white"
@@ -89,7 +89,7 @@ const Nav = ({ internalLinks, className }: NavProps) => {
     <nav
       className={classnames(
         "mt-0 flex justify-center w-full font-serif",
-        "text-gray-200 bg-black shadow-lg",
+        "bg-vibrant-dark",
         className
       )}
       ref={observe}
