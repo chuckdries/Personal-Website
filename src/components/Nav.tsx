@@ -5,7 +5,8 @@ import useDimensions from "react-cool-dimensions";
 
 import Menu from "@spectrum-icons/workflow/Menu";
 
-const navClasses = "hover:underline hover:bg-transparentblack block p-3 text-vibrant-light";
+const navClasses =
+  "hover:underline hover:bg-transparentblack block p-3 text-vibrant-light";
 
 const ExternalLinks = ({ isVertical }: { isVertical: boolean }) => (
   <ul
@@ -13,7 +14,7 @@ const ExternalLinks = ({ isVertical }: { isVertical: boolean }) => (
       "z-30 bg-vibrant-dark rounded overflow-hidden",
       isVertical
         ? "inline-flex flex-wrap justify-center"
-        : "absolute rounded-md top-[40px] border border-white"
+        : "absolute rounded-md top-[40px] border border-vibrant-light"
     )}
   >
     <li>
@@ -80,7 +81,7 @@ interface NavProps {
 
 const Nav = ({ internalLinks, className }: NavProps) => {
   const { observe, currentBreakpoint } = useDimensions({
-    breakpoints: { XS: 0, LG: 690 },
+    breakpoints: { XS: 0, LG: 750 },
     updateOnBreakpointChange: true,
   });
   const [linksMenu, setLinksMenu] = useState(false);
@@ -89,7 +90,6 @@ const Nav = ({ internalLinks, className }: NavProps) => {
     <nav
       className={classnames(
         "mt-0 flex justify-center w-full font-serif",
-        "bg-vibrant-dark",
         className
       )}
       ref={observe}
@@ -111,7 +111,7 @@ const Nav = ({ internalLinks, className }: NavProps) => {
             ))}
         </ul>
         {internalLinks && currentBreakpoint !== "XS" && (
-          <span className="block p-3 text-gray-200">|</span>
+          <span className="block p-3 text-vibrant-light opacity-75">|</span>
         )}
         {currentBreakpoint === "XS" && (
           <button

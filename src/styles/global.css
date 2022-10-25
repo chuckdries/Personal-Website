@@ -82,17 +82,22 @@
   }
   .gradient {
     background-image: linear-gradient(
-      45deg,
-      hsl(226deg 100% 20%) 0%,
-      hsl(279deg 68% 26%) 24%,
-      hsl(309deg 85% 28%) 39%,
-      hsl(324deg 92% 37%) 51%,
-      hsl(339deg 72% 50%) 60%,
-      hsl(356deg 91% 62%) 68%,
-      hsl(15deg 100% 62%) 76%,
-      hsl(32deg 100% 57%) 83%,
-      hsl(45deg 100% 50%) 91%,
-      hsl(55deg 100% 50%) 100%
+      180deg,
+      hsl(31deg 24% 44%) 0%,
+      hsl(27deg 25% 42%) 7%,
+      hsl(22deg 26% 40%) 14%,
+      hsl(18deg 27% 37%) 21%,
+      hsl(12deg 28% 35%) 29%,
+      hsl(9deg 29% 32%) 36%,
+      hsl(4deg 30% 30%) 43%,
+      hsl(0deg 31% 27%) 50%,
+      hsl(0deg 31% 23%) 57%,
+      hsl(0deg 31% 19%) 64%,
+      hsl(0deg 32% 15%) 71%,
+      hsl(0deg 30% 12%) 79%,
+      hsl(0deg 30% 8%) 86%,
+      hsl(0deg 30% 4%) 93%,
+      hsl(0deg 0% 0%) 100%
     );
   }
 }

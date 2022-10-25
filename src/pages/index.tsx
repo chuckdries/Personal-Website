@@ -170,18 +170,22 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
             DarkMuted: [0, 0, 0],
             LightMuted: [255, 255, 255],
             Vibrant: [255, 255, 255],
-            LightVibrant: [255, 255, 255],
-            DarkVibrant: [0, 0, 0],
+            LightVibrant: [0, 0, 0],
+            DarkVibrant: [231, 229, 228],
           })}
         />
       </Helmet>
-      <div className="top-0 z-10 bg-black">
-        <Nav className="mb-4" internalLinks={[{ href: "/", label: "Home" }]} />
-        <div className="flex flex-col text-center mr-5 md:ml-4 ml-2 my-4 md:my-7 font-serif">
-          <h1 className="text-5xl mt-0 font-black z-10">Chuck Dries</h1>
-          <h2 className="">Full Stack Software Engineer & Photographer</h2>
+      <div className="top-0 z-10">
+        <div className="bg-vibrant-dark text-black pb-1">
+          <Nav
+            className="mb-4"
+            internalLinks={[{ href: "/", label: "Home" }]}
+          />
+          <div className="flex flex-col text-center mr-5 md:ml-4 ml-2 my-4 md:my-7 font-serif">
+            <h1 className="text-5xl mt-0 font-black z-10">Chuck Dries</h1>
+            <h2 className="">Full Stack Software Engineer & Photographer</h2>
+          </div>
         </div>
-        {/* <div className="w-full gradient h-[10px]"></div> */}
         <div className="flex flex-col md:flex-row md:items-end justify-between">
           <KeywordsPicker
             keywords={[
