@@ -8,7 +8,8 @@ import useBreakpoint from "use-breakpoint";
 // @ts-ignore
 import themeBreakpoints from "../breakpoints";
 import classNames from "classnames";
-import { GalleryImage } from "../pages/photogallery";
+import useDimensions from "react-cool-dimensions";
+import { GalleryImage } from "../pages";
 
 interface Row {
   aspect: number;
@@ -17,10 +18,10 @@ interface Row {
 }
 
 interface MasonryGalleryProps {
-  images: (GalleryImage)[];
+  images: GalleryImage[];
   aspectsByBreakpoint: {
     [breakpoint: string]: number;
-  }
+  };
   debugHue?: boolean;
   debugRating?: boolean;
   linkState?: object;
@@ -37,8 +38,25 @@ const MasonryGallery = ({
     () => R.pick(R.keys(aspectTargetsByBreakpoint), themeBreakpoints),
     [aspectTargetsByBreakpoint]
   );
+  console.log(
+    "🚀 ~ file: MasonryGallery.tsx ~ line 41 ~ breakpoints",
+    breakpoints
+  );
 
-  const { breakpoint } = useBreakpoint(breakpoints, "sm");
+  const {
+    observe,
+    width: containerWidth,
+    currentBreakpoint: breakpoint,
+  } = useDimensions({
+    breakpoints,
+  });
+  // console.log(
+  //   "🚀 ~ file: MasonryGallery.tsx ~ line 47 ~ currentBreakpoint",
+  //   currentBreakpoint
+  // );
+
+  // const { breakpoint } = useBreakpoint(breakpoints, "sm");
+  console.log("🚀 ~ file: MasonryGallery.tsx ~ line 46 ~ breakpoint", breakpoint)
 
   const aspectRatios = React.useMemo(
     () => R.map(getAspectRatio, images).filter(Boolean),
@@ -93,7 +111,8 @@ const MasonryGallery = ({
   return (
     <>
       <div
-        className="flex items-center flex-wrap"
+        className="flex items-center flex-wrap sm:container mx-auto"
+        ref={observe}
         style={{
           position: "relative",
         }}
@@ -107,10 +126,10 @@ const MasonryGallery = ({
           const rowAspectRatioSum = currentRow.aspect;
           const ar = getAspectRatio(image);
           let width;
-          let height = `calc(100vw / ${rowAspectRatioSum} - 10px)`;
+          let height = `calc(${containerWidth}px / ${rowAspectRatioSum} - 10px)`;
           if (rowAspectRatioSum < targetAspect * 0.66) {
             // incomplete row, render stuff at "ideal" sizes instead of filling width
-            width = `calc(100vw / ${targetAspect / ar})`;
+            width = `calc(${containerWidth}px / ${targetAspect / ar})`;
             height = "unset";
           } else {
             const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
@@ -150,8 +169,14 @@ const MasonryGallery = ({
                 <span className="text-white z-20 absolute bg-black">
                   hsl(
                   {image.fields?.imageMeta?.dominantHue?.[0]},{" "}
-                  {(image.fields?.imageMeta?.dominantHue?.[1] ?? 0 * 100).toFixed(2)}%,{" "}
-                  {(image.fields?.imageMeta?.dominantHue?.[2] ?? 0 * 100).toFixed(2)}% )
+                  {(
+                    image.fields?.imageMeta?.dominantHue?.[1] ?? 0 * 100
+                  ).toFixed(2)}
+                  %,{" "}
+                  {(
+                    image.fields?.imageMeta?.dominantHue?.[2] ?? 0 * 100
+                  ).toFixed(2)}
+                  % )
                 </span>
               )}
               {debugRating && (
