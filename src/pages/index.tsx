@@ -186,7 +186,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
             <h2 className="">Full Stack Software Engineer & Photographer</h2>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row md:items-end justify-between">
+        <div className="flex flex-col md:flex-row md:items-end justify-between sm:container sm:mx-auto">
           <KeywordsPicker
             keywords={[
               "night",
@@ -226,7 +226,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
           md: 4,
           lg: 4,
           xl: 5,
-          "2xl": 6.1,
+          "2xl": 5.1,
           "3xl": 7.5,
         }}
         debugHue={sortKey === "hue_debug"}
