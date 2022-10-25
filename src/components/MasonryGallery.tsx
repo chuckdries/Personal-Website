@@ -56,7 +56,10 @@ const MasonryGallery = ({
   // );
 
   // const { breakpoint } = useBreakpoint(breakpoints, "sm");
-  console.log("🚀 ~ file: MasonryGallery.tsx ~ line 46 ~ breakpoint", breakpoint)
+  console.log(
+    "🚀 ~ file: MasonryGallery.tsx ~ line 46 ~ breakpoint",
+    breakpoint
+  );
 
   const aspectRatios = React.useMemo(
     () => R.map(getAspectRatio, images).filter(Boolean),
@@ -109,94 +112,92 @@ const MasonryGallery = ({
 
   let cursor = 0;
   return (
-    <>
-      <div
-        className="flex items-center flex-wrap sm:container mx-auto"
-        ref={observe}
-        style={{
-          position: "relative",
-        }}
-      >
-        {images.map((image, i) => {
-          let currentRow = rows[cursor];
-          if (rows[i]) {
-            cursor = i;
-            currentRow = rows[i];
-          }
-          const rowAspectRatioSum = currentRow.aspect;
-          const ar = getAspectRatio(image);
-          let width;
-          let height = `calc(${containerWidth}px / ${rowAspectRatioSum} - 10px)`;
-          if (rowAspectRatioSum < targetAspect * 0.66) {
-            // incomplete row, render stuff at "ideal" sizes instead of filling width
-            width = `calc(${containerWidth}px / ${targetAspect / ar})`;
-            height = "unset";
-          } else {
-            const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
-            width = `${widthNumber}%`;
-          }
-          // @ts-ignore
-          const img = getImage(image);
-          return (
-            <Link
-              className={classNames(
-                "border-4 overflow-hidden",
-                debugHue && "border-8"
-              )}
-              id={image.base}
-              key={`${image.base}`}
-              state={{
-                ...linkState,
-                sortedImageList,
-                currentIndex: i,
-              }}
-              style={{
-                height,
-                width,
-                // borderColor: `hsl(${image.fields.imageMeta.dominantHue}, 100%, 50%)`
-                // borderColor: `rgb(${image.fields.imageMeta.vibrant.Vibrant.join(',')})`
-                borderColor: debugHue
-                  ? `hsl(
+    <div
+      className="flex items-center flex-wrap sm:container mx-auto"
+      ref={observe}
+      style={{
+        position: "relative",
+      }}
+    >
+      {images.map((image, i) => {
+        let currentRow = rows[cursor];
+        if (rows[i]) {
+          cursor = i;
+          currentRow = rows[i];
+        }
+        const rowAspectRatioSum = currentRow.aspect;
+        const ar = getAspectRatio(image);
+        let width;
+        let height = `calc(${containerWidth}px / ${rowAspectRatioSum} - 10px)`;
+        if (rowAspectRatioSum < targetAspect * 0.66) {
+          // incomplete row, render stuff at "ideal" sizes instead of filling width
+          width = `calc(${containerWidth}px / ${targetAspect / ar})`;
+          height = "unset";
+        } else {
+          const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
+          width = `${widthNumber}%`;
+        }
+        // @ts-ignore
+        const img = getImage(image);
+        return (
+          <Link
+            className={classNames(
+              "border-4 overflow-hidden",
+              debugHue && "border-8"
+            )}
+            id={image.base}
+            key={`${image.base}`}
+            state={{
+              ...linkState,
+              sortedImageList,
+              currentIndex: i,
+            }}
+            style={{
+              height,
+              width,
+              // borderColor: `hsl(${image.fields.imageMeta.dominantHue}, 100%, 50%)`
+              // borderColor: `rgb(${image.fields.imageMeta.vibrant.Vibrant.join(',')})`
+              borderColor: debugHue
+                ? `hsl(
                     ${image.fields?.imageMeta?.dominantHue?.[0]},
                     ${image.fields?.imageMeta?.dominantHue?.[1] ?? 0 * 100}%,
                     ${image.fields?.imageMeta?.dominantHue?.[2] ?? 0 * 100}%
                   )`
-                  : "black",
-              }}
-              to={`/photogallery/${image.base}`}
-            >
-              {debugHue && (
-                <span className="text-white z-20 absolute bg-black">
-                  hsl(
-                  {image.fields?.imageMeta?.dominantHue?.[0]},{" "}
-                  {(
-                    image.fields?.imageMeta?.dominantHue?.[1] ?? 0 * 100
-                  ).toFixed(2)}
-                  %,{" "}
-                  {(
-                    image.fields?.imageMeta?.dominantHue?.[2] ?? 0 * 100
-                  ).toFixed(2)}
-                  % )
-                </span>
-              )}
-              {debugRating && (
-                <span className="text-white z-20 absolute bg-black">
-                  rating: {image.fields?.imageMeta?.meta?.Rating}
-                </span>
-              )}
-              {img && (
-                <GatsbyImage
-                  alt={getName(image)}
-                  className="w-full h-full"
-                  image={img}
-                  objectFit="cover"
-                />
-              )}
-            </Link>
-          );
-        })}
-      </div>
-    </>
+                : "black",
+            }}
+            to={`/photogallery/${image.base}`}
+          >
+            {debugHue && (
+              <span className="text-white z-20 absolute bg-black">
+                hsl(
+                {image.fields?.imageMeta?.dominantHue?.[0]},{" "}
+                {(image.fields?.imageMeta?.dominantHue?.[1] ?? 0 * 100).toFixed(
+                  2
+                )}
+                %,{" "}
+                {(image.fields?.imageMeta?.dominantHue?.[2] ?? 0 * 100).toFixed(
+                  2
+                )}
+                % )
+              </span>
+            )}
+            {debugRating && (
+              <span className="text-white z-20 absolute bg-black">
+                rating: {image.fields?.imageMeta?.meta?.Rating}
+              </span>
+            )}
+            {img && (
+              <GatsbyImage
+                alt={getName(image)}
+                className="w-full h-full"
+                image={img}
+                objectFit="cover"
+              />
+            )}
+          </Link>
+        );
+      })}
+    </div>
   );
 };
 
