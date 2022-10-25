@@ -170,13 +170,13 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
             DarkMuted: [0, 0, 0],
             LightMuted: [255, 255, 255],
             Vibrant: [255, 255, 255],
-            LightVibrant: [0, 0, 0],
-            DarkVibrant: [231, 229, 228],
+            LightVibrant: [231, 229, 228],
+            DarkVibrant: [0, 0, 0],
           })}
         />
       </Helmet>
       <div className="top-0 z-10">
-        <div className="bg-vibrant-dark text-black pb-1">
+        <div className="bg-vibrant-dark text-light-vibrant pb-1">
           <Nav
             className="mb-4"
             internalLinks={[{ href: "/", label: "Home" }]}
@@ -222,12 +222,12 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
       <MasonryGallery
         aspectsByBreakpoint={{
           xs: 2,
-          sm: 3,
-          md: 4,
+          sm: 2,
+          md: 3,
           lg: 4,
           xl: 5,
-          "2xl": 5.1,
-          "3xl": 7.5,
+          "2xl": 6.1,
+          "3xl": 8,
         }}
         debugHue={sortKey === "hue_debug"}
         debugRating={sortKey === "rating" && showDebug}
