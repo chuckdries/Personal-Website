@@ -34,6 +34,10 @@ const MasonryGallery = ({
   debugRating,
   linkState,
 }: MasonryGalleryProps) => {
+  const [isClient, setIsClient] = React.useState(false);
+  React.useEffect(() => {
+    setIsClient(true)
+  }, [])
   const breakpoints = React.useMemo(
     () => R.pick(R.keys(aspectTargetsByBreakpoint), themeBreakpoints),
     [aspectTargetsByBreakpoint]
@@ -43,13 +47,12 @@ const MasonryGallery = ({
     breakpoints
   );
 
-  const {
-    observe,
-    width: containerWidth,
-    currentBreakpoint: breakpoint,
-  } = useDimensions({
+  const { observe, width, currentBreakpoint } = useDimensions({
     breakpoints,
   });
+
+  const breakpoint = currentBreakpoint.length ? currentBreakpoint : "xs";
+  const containerWidth = width ? width : 320;
   // console.log(
   //   "🚀 ~ file: MasonryGallery.tsx ~ line 47 ~ currentBreakpoint",
   //   currentBreakpoint
@@ -113,7 +116,10 @@ const MasonryGallery = ({
   let cursor = 0;
   return (
     <div
-      className="flex items-center flex-wrap sm:container mx-auto"
+      className={classNames(
+        "flex items-center flex-wrap mx-auto",
+        isClient ? "sm:container" : "max-w-[320px]"
+      )}
       ref={observe}
       style={{
         position: "relative",
