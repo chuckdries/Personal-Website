@@ -1,251 +1,288 @@
 import * as React from "react";
-import * as R from "ramda";
 import { graphql, PageProps } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
-import { Picker, Item } from "@adobe/react-spectrum";
+import { take } from "ramda";
+import classnames from "classnames";
 
-import MasonryGallery from "../components/MasonryGallery";
-import KeywordsPicker from "../components/KeywordsPicker";
-import { getGalleryPageUrl, getHelmetSafeBodyStyle } from "../utils";
+import { getHelmetSafeBodyStyle, getVibrant, getAspectRatio } from "../utils";
 import Nav from "../components/Nav";
+import ActionButtons from "../components/index/ActionButtons";
+import { use100vh } from "react-div-100vh";
+import { useMediaQuery } from "../useMediaQuery";
 
-const SORT_KEYS = {
-  hue: ["fields", "imageMeta", "vibrantHue"],
-  rating: ["fields", "imageMeta", "meta", "Rating"],
-  hue_debug: ["fields", "imageMeta", "dominantHue", 0],
-  date: [],
-} as const;
+const env =
+  process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
 
-export type GalleryImage =
-  Queries.GalleryPageQueryQuery["allFile"]["nodes"][number];
+export type HomepageImage = Queries.IndexPageQuery["allFile"]["nodes"][number];
 
-const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
-  const hash =
-    typeof window !== "undefined" ? window.location.hash.replace("#", "") : "";
+const getDifferentRand = (
+  range: number,
+  lastNs: number[],
+  iterations = 0
+): number => {
+  const n = Math.floor(Math.random() * range);
+  if (lastNs.findIndex((x) => x === n) > -1 && iterations < 5) {
+    console.log("got dupe, trying again", n);
+    return getDifferentRand(range, lastNs, iterations + 1);
+  }
+  return n;
+};
 
-  const [hashCleared, setHashCleared] = React.useState(false); // eslint-disable-line no-unused-vars
-  //     ^ used just to force a re-render with the cleared hash value (I know, it's a smell for sure)
-  const [filterKeyword, _setKeyword] = React.useState(null as string | null);
-  const [sortKey, _setSortKey] = React.useState("rating" as string);
-  const showDebug =
-    typeof window !== "undefined" &&
-    window.location.search.includes("debug=true");
+const IndexPage = ({
+  data: {
+    allFile: { nodes: images },
+  },
+}: PageProps<Queries.IndexPageQuery>) => {
+  const [isClient, setIsClient] = React.useState(false);
+  const [imageIndex, setImageIndex] = React.useState(0);
+  const image = React.useMemo(() => {
+    return images[imageIndex];
+  }, [images, imageIndex]);
 
-  const setKeyword = React.useCallback(
-    (newKeyword: string | null) => {
-      if (newKeyword) {
+  const shuffleImage = React.useCallback(
+    (currentImage?: typeof images[number]) => {
+      const lastThreeImages =
+        JSON.parse(localStorage.getItem("lastHeros") ?? "[]") || [];
+      if (env === "production") {
         try {
-          window.plausible("Filter Keyword", {
-            props: { keyword: newKeyword },
+          window.plausible("Shuffle", {
+            props: { currentImage: currentImage?.base },
           });
         } catch (e) {
-          // do nothing
+          /* do nothing */
         }
       }
-      _setKeyword(newKeyword);
-      window.history.replaceState(
-        null,
-        "",
-        getGalleryPageUrl({ keyword: newKeyword, sortKey }, hash)
+      const index = getDifferentRand(images.length, lastThreeImages);
+      localStorage.setItem(
+        "lastHeros",
+        JSON.stringify(take(3, [index, ...lastThreeImages]))
       );
+      setImageIndex(index);
     },
-    [_setKeyword, sortKey, hash]
+    [images.length]
   );
 
-  const setSortKey = React.useCallback(
-    (newSortKey: string) => {
-      try {
-        window.plausible("Sort Gallery", {
-          props: { key: newSortKey },
-        });
-      } catch (e) {
-        // do nothing
-      }
-      _setSortKey(newSortKey);
-      window.history.replaceState(
-        null,
-        "",
-        getGalleryPageUrl({ sortKey: newSortKey, keyword: filterKeyword }, hash)
-      );
-    },
-    [_setSortKey, filterKeyword, hash]
-  );
-
-  const removeHash = React.useCallback(() => {
-    const url = new URL(
-      typeof window !== "undefined"
-        ? window.location.href.toString()
-        : "https://chuckdries.com/photogallery/"
-    );
-
-    url.hash = "";
-    window.history.replaceState(null, "", url.href.toString());
-    window.removeEventListener("wheel", removeHash);
-    setHashCleared(true);
-  }, []);
-
-  const scrollIntoView = React.useCallback(() => {
-    if (!hash) {
-      return;
-    }
-    const el = document.getElementById(hash);
-    if (!el) {
-      return;
-    }
-    el.scrollIntoView({
-      block: "center",
-    });
-    window.addEventListener("wheel", removeHash);
-  }, [hash, removeHash]);
-
+  // pick random image on page hydration
   React.useEffect(() => {
-    const url = new URL(window.location.toString());
-
-    const sortKeyFromUrl = url.searchParams.get("sort");
-    if (sortKeyFromUrl) {
-      _setSortKey(sortKeyFromUrl);
+    if (!isClient) {
+      setIsClient(true);
+      shuffleImage(image);
     }
+  }, [isClient, imageIndex, image, shuffleImage]);
 
-    const filterKeyFromUrl = url.searchParams.get("filter");
-    if (filterKeyFromUrl) {
-      _setKeyword(filterKeyFromUrl);
-    }
+  // React.useEffect(() => {
+  //   const keyListener = (e: KeyboardEvent) => {
+  //     switch (e.code) {
+  //       case "Space": {
+  //         shuffleImage(image);
+  //         return;
+  //       }
+  //       case "ArrowRight": {
+  //         if (imageIndex === images.length - 1) {
+  //           setImageIndex(0);
+  //           return;
+  //         }
+  //         setImageIndex(imageIndex + 1);
+  //         return;
+  //       }
 
-    // hacky but it works for now
-    setTimeout(() => {
-      // don't scroll into view if user got here with back button
-      scrollIntoView();
-    }, 100);
-  }, [setSortKey, setKeyword, scrollIntoView]);
+  //       case "ArrowLeft": {
+  //         if (imageIndex === 0) {
+  //           setImageIndex(images.length - 1);
+  //           return;
+  //         }
+  //         setImageIndex(imageIndex - 1);
+  //         return;
+  //       }
+  //     }
+  //   };
+  //   document.addEventListener("keydown", keyListener);
+  //   return () => {
+  //     document.removeEventListener("keydown", keyListener);
+  //   };
+  // }, [imageIndex, images.length, image, shuffleImage]);
 
-  const images: GalleryImage[] = React.useMemo(() => {
-    const sort =
-      sortKey === "date"
-        ? R.sort((node1: typeof data["allFile"]["nodes"][number], node2) => {
-            const date1 = new Date(
-              R.pathOr("", ["fields", "imageMeta", "dateTaken"], node1)
-            );
-            const date2 = new Date(
-              R.pathOr("", ["fields", "imageMeta", "dateTaken"], node2)
-            );
-            return -1 * (date1.getTime() - date2.getTime());
-          })
-        : R.sort(
-            // @ts-ignore
-            R.descend(R.path<GalleryImage>(SORT_KEYS[sortKey]))
-          );
+  const browserIsLandscape = useMediaQuery("(orientation: landscape)");
 
-    const filter = filterKeyword
-      ? R.filter((image) =>
-          R.includes(
-            filterKeyword,
-            R.pathOr([], ["fields", "imageMeta", "meta", "Keywords"], image)
-          )
-        )
-      : R.identity;
+  const vibrant = getVibrant(image);
+  const ar = getAspectRatio(image);
 
-    try {
-      const ret = R.pipe(
-        // @ts-ignore
-        sort,
-        filter
-      )(data.allFile.nodes) as any;
-      return ret;
-    } catch (e) {
-      console.log("caught images!", e);
-      return [];
-    }
-  }, [data, sortKey, filterKeyword]);
+  const screenHeight = use100vh();
 
+  const imageIsLandscape = isClient ? ar > 1 : true;
+
+  // @ts-ignore
+  const img = getImage(image);
   return (
     <>
       {/* @ts-ignore */}
       <Helmet>
-        <title>Photo Gallery | Chuck Dries</title>
+        <title>Chuck Dries</title>
         <body
-          className="bg-black text-white"
+          className={classnames(isClient ? "bg-muted-dark" : "bg-gray-800")}
           // @ts-ignore
-          style={getHelmetSafeBodyStyle({
-            Muted: [255, 255, 255],
-            DarkMuted: [0, 0, 0],
-            LightMuted: [255, 255, 255],
-            Vibrant: [255, 255, 255],
-            LightVibrant: [231, 229, 228],
-            DarkVibrant: [0, 0, 0],
-          })}
+          style={getHelmetSafeBodyStyle(vibrant!, screenHeight)}
         />
       </Helmet>
-      <div className="top-0 z-10">
-        <div className="bg-vibrant-dark text-light-vibrant pb-1">
+      <main
+        className={classnames(
+          "font-serif",
+          imageIsLandscape
+            ? "landscape:grid portrait:h-actual-screen portrait:flex flex-col justify-around"
+            : "portrait:grid landscape:flex flex-row"
+        )}
+      >
+        <div
+          className={classnames(
+            "landscape:flex-auto flex flex-col items-center",
+            imageIsLandscape
+              ? "portrait:items-center landscape:w-screen justify-between"
+              : "landscape:justify-center portrait:w-screen"
+          )}
+          style={{ gridArea: "1/1" }}
+        >
           <Nav
-            className="mb-4"
-            internalLinks={[{ href: "/", label: "Home" }]}
-          />
-          <div className="flex flex-col text-center mr-5 md:ml-4 ml-2 my-4 md:my-7 font-serif">
-            <h1 className="text-5xl mt-0 font-black z-10">Chuck Dries</h1>
-            <h2 className="">Full Stack Software Engineer & Photographer</h2>
-          </div>
-        </div>
-        <div className="flex flex-col md:flex-row md:items-end justify-between sm:container sm:mx-auto">
-          <KeywordsPicker
-            keywords={[
-              "night",
-              "coast",
-              // "city",
-              "landscape",
-              "flowers",
-              "product",
-              "waterfall",
-              "fireworks",
-              "panoramic",
-              "Portland Japanese Garden",
-              "shoot the light",
-              // "sunset",
+            internalLinks={[
+              { href: "/", label: "Home" },
+              { href: "/photogallery/", label: "Gallery" },
             ]}
-            onChange={setKeyword}
-            value={filterKeyword}
           />
-          <div className="m-2">
-            <Picker
-              label="Sort by..."
-              // @ts-ignore
-              onSelectionChange={setSortKey}
-              selectedKey={sortKey}
+          <div
+            className={classnames(
+              "flex flex-col",
+              !imageIsLandscape && "portrait:flex-auto "
+            )}
+          >
+            <div
+              className={classnames(
+                "rounded-[50px] p-3 md:p-5 ml-2 mr-4 md:ml-3 md:mr-5 flex flex-col items-center z-10  mb-3",
+                isClient
+                  ? imageIsLandscape
+                    ? "text-vibrant-light landscape:text-vibrant-dark landscape:cool-border-big landscape:border-r-[20px] landscape:border-b-[20px]"
+                    : "text-vibrant-light portrait:text-vibrant-dark portrait:cool-border-big portrait:border-r-[20px] portrait:border-b-[20px]"
+                  : "bg-gray-50 border-r-[20px] border-b-[20px]",
+                isClient && ""
+              )}
             >
-              <Item key="rating">Curated</Item>
-              <Item key="date">Date</Item>
-              <Item key="hue">Hue</Item>
-            </Picker>
+              <h1
+                className={classnames(
+                  "mb-0 mt-0 text-center font-black z-20 text-5xl sm:text-7xl md:text-8xl lg:text-9xl"
+                )}
+                style={{ lineHeight: "85%" }}
+              >
+                Chuck Dries
+              </h1>
+              <h2
+                className={classnames(
+                  "p-3 text-center z-20 font-bold text-lg md:text-2xl lg:text-3xl"
+                )}
+                style={{ lineHeight: "110%" }}
+              >
+                Full Stack Software Engineer &amp; Photographer
+              </h2>
+            </div>
+          </div>
+          <div
+            className={classnames(
+              imageIsLandscape ? "block portrait:hidden" : ""
+            )}
+          >
+            <ActionButtons
+              image={image}
+              isClient={isClient}
+              shuffleImage={shuffleImage}
+            />
           </div>
         </div>
-      </div>
-      <MasonryGallery
-        aspectsByBreakpoint={{
-          xs: 2,
-          sm: 2,
-          md: 3,
-          lg: 4,
-          xl: 5,
-          "2xl": 6.1,
-          "3xl": 8,
-        }}
-        debugHue={sortKey === "hue_debug"}
-        debugRating={sortKey === "rating" && showDebug}
-        images={images}
-        linkState={{
-          sortKey,
-          filterKeyword,
-        }}
-      />
+        {isClient && img ? (
+          <GatsbyImage
+            alt=""
+            className={classnames(
+              imageIsLandscape
+                ? "landscape:h-actual-screen portrait:h-two-thirds-vw"
+                : "h-actual-screen portrait:w-full"
+            )}
+            image={img}
+            loading="eager"
+            style={{
+              gridArea: "1/1",
+              width:
+                browserIsLandscape && !imageIsLandscape
+                  ? `${ar * 100}vh`
+                  : "100%",
+            }}
+          />
+        ) : (
+          <div
+            className="landscape:h-actual-screen portrait:h-two-thirds-vw w-full"
+            style={{ gridArea: "1/1" }}
+          ></div>
+        )}
+        {imageIsLandscape && (
+          <div className="hidden portrait:flex justify-center sm:my-2">
+            <ActionButtons
+              image={image}
+              isClient={isClient}
+              shuffleImage={shuffleImage}
+            />
+          </div>
+        )}
+      </main>
     </>
   );
 };
 
 export const query = graphql`
-  query GalleryPageQuery {
+  query IndexPage {
     allFile(
-      filter: { sourceInstanceName: { eq: "gallery" } }
-      sort: { fields: fields___imageMeta___dateTaken, order: DESC }
+      filter: {
+        sourceInstanceName: { eq: "gallery" }
+        base: {
+          in: [
+            # "DSC06616.jpg" # B&W abstract ## KEEP ON TOP
+            # "20160530-DSC09108.jpg" # portrait red flowers
+            # # "DSC00201.jpg" # duck
+            # "DSC04905.jpg" # purple layers
+            # "DSC05761.jpg" # monument valley
+            # "DSC05851.jpg" # utahn highway sunset
+            # # "DSC06245.jpg" # snowy milky way
+            # # # "DSC08521.jpg" # firepit bloom j&e
+            # # "DSC07490.jpg" # house on prairie
+            # # "DSC02538.jpg" # portrait pink cactus bloom
+            # # "20190624-DSC00771.jpg" # glacier forest fog
+            # # # "DSC00237.jpg" # cotton candy clouds
+            # "_DSC6062.jpg" # field of wildflowers
+            # # "_DSC6060.jpg" # edge of the world
+            # "_DSC6219.jpg" # whihte/yellow rosebush
+            # # "_DSC6243.jpg" # bright rose in darkness
+            # # "_DSC6400-2.jpg" # Horsetail falls
+            # # "_DSC6798.jpg" # Japanese zen garden
+            # # "_DSC6481.jpg" # Mt Hood from Powell Butte
+            # # "_DSC5916.jpg" # blue dart stinger
+            # # "_DSC0286.jpg" # god rays
+            # # "_DSC8998.jpg" # forest road
+            # # "DSC01169.jpg" # ferris wheel reflection
+            # "DSC01800.jpg" # cherry blossom landscape sunny sky
+            # "DSC01772.jpg" # cherry blossom portrait sunny sky
+            # # "DSC06201.jpg" # Wheatland snowy hills
+            # "DSC01924.jpg" # cherry blossom sea
+            # # "DSC03157.jpg" # constellation of flowers
+            # "DSC02610.jpg" # peter iredale portrait
+            # "DSC02615.jpg" # rori iredale beach field camera
+            "DSC02615-2.jpg" # same but red
+            # "DSC06490.jpg" # Japanese garden steps
+            # "DSC06687.jpg" # Multnomah Falls long exposure
+            # "DSC09932.jpg" # milky way
+            # "DSC09944.jpg" # milky way rori
+            # "DSC03725.jpg" # oregon coast lighthouse
+            # "DSC03750.jpg"
+            # "DSC03804.jpg"
+            # "DSC04122.jpg" # shoot the light wheel hallway
+          ]
+        }
+      }
+      sort: { order: DESC, fields: fields___imageMeta___dateTaken }
     ) {
       nodes {
         relativePath
@@ -255,23 +292,15 @@ export const query = graphql`
             aspectRatio
           }
           gatsbyImageData(
-            layout: CONSTRAINED
-            height: 550
-            placeholder: DOMINANT_COLOR
+            layout: FULL_WIDTH
+            placeholder: NONE
+            breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
           )
         }
         fields {
           imageMeta {
-            vibrantHue
-            dominantHue
-            dateTaken
-            meta {
-              Keywords
-              Rating
-              ObjectName
-            }
             vibrant {
-              Vibrant
+              ...VibrantColors
             }
           }
         }
@@ -280,4 +309,4 @@ export const query = graphql`
   }
 `;
 
-export default GalleryPage;
+export default IndexPage;

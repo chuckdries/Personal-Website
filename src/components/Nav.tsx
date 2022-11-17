@@ -13,7 +13,7 @@ const ExternalLinks = ({ isVertical }: { isVertical: boolean }) => (
     className={classnames(
       "z-30 bg-vibrant-dark rounded-xl overflow-hidden",
       isVertical
-        ? "inline-flex flex-wrap justify-center"
+        ? "inline-flex flex-wrap justify-center bg-vibrant-dark rounded-xl"
         : "absolute rounded-md top-[40px] border border-vibrant-light"
     )}
   >
