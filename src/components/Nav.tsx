@@ -81,7 +81,7 @@ const Nav = ({ internalLinks, className }: NavProps) => {
   return (
     <nav
       className={classnames(
-        "mt-0 flex flex-col md:flex-row items-center w-full font-sans px-6",
+        "mt-0 flex flex-col-reverse md:flex-row items-center w-full font-sans px-6",
         className
       )}
       style={{ zIndex: 100 }}
