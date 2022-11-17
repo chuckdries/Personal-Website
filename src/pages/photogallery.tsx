@@ -163,15 +163,15 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
       <Helmet>
         <title>Photo Gallery | Chuck Dries</title>
         <body
-          className="bg-black text-white"
+          className="bg-white"
           // @ts-ignore
           style={getHelmetSafeBodyStyle({
-            Muted: [255, 255, 255],
-            DarkMuted: [0, 0, 0],
-            LightMuted: [255, 255, 255],
-            Vibrant: [255, 255, 255],
-            LightVibrant: [231, 229, 228],
-            DarkVibrant: [0, 0, 0],
+            Muted: [0, 0, 0],
+            LightMuted: [0, 0, 0],
+            Vibrant: [0, 0, 0],
+            LightVibrant: [0, 0, 0],
+            DarkMuted: [255, 255, 255],
+            DarkVibrant: [255, 255, 255],
           })}
         />
       </Helmet>
@@ -179,14 +179,13 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
         <div className="bg-vibrant-dark text-light-vibrant pb-1">
           <Nav
             className="mb-4"
-            internalLinks={[{ href: "/", label: "Home" }]}
+            internalLinks={[
+              { href: "/", label: "Home" },
+              { href: "/photogallery/", label: "Gallery" },
+            ]}
           />
-          <div className="flex flex-col text-center mr-5 md:ml-4 ml-2 my-4 md:my-7 font-serif">
-            <h1 className="text-5xl mt-0 font-black z-10">Chuck Dries</h1>
-            <h2 className="">Full Stack Software Engineer & Photographer</h2>
-          </div>
         </div>
-        <div className="flex flex-col md:flex-row md:items-end justify-between sm:container sm:mx-auto">
+        <div className="flex flex-col md:flex-row md:items-end justify-between px-6 sm:mx-auto">
           <KeywordsPicker
             keywords={[
               "night",

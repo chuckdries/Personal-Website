@@ -8,12 +8,11 @@ module.exports = {
   plugins: [
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
-    "gatsby-plugin-mdx",
     {
       resolve: `gatsby-plugin-sharp`,
       options: {
         defaults: {
-          quality: 75
+          quality: 90
         }
       }
     },
@@ -43,15 +42,6 @@ module.exports = {
     //   },
     //   __key: "pages",
     // },
-    {
-      resolve: "gatsby-plugin-eslint",
-      options: {
-        stages: ["develop"],
-        extensions: ["js", "jsx"],
-        exclude: ["node_modules", ".cache", "public"],
-        // Any eslint-webpack-plugin options below
-      },
-    },
     "gatsby-plugin-preval",
     "gatsby-plugin-robots-txt",
     {

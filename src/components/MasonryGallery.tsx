@@ -42,27 +42,12 @@ const MasonryGallery = ({
     () => R.pick(R.keys(aspectTargetsByBreakpoint), themeBreakpoints),
     [aspectTargetsByBreakpoint]
   );
-  console.log(
-    "🚀 ~ file: MasonryGallery.tsx ~ line 41 ~ breakpoints",
-    breakpoints
-  );
 
-  const { observe, width, currentBreakpoint } = useDimensions({
+  const { observe, currentBreakpoint } = useDimensions({
     breakpoints,
   });
 
   const breakpoint = currentBreakpoint.length ? currentBreakpoint : "xs";
-  const containerWidth = width ? width : 320;
-  // console.log(
-  //   "🚀 ~ file: MasonryGallery.tsx ~ line 47 ~ currentBreakpoint",
-  //   currentBreakpoint
-  // );
-
-  // const { breakpoint } = useBreakpoint(breakpoints, "sm");
-  console.log(
-    "🚀 ~ file: MasonryGallery.tsx ~ line 46 ~ breakpoint",
-    breakpoint
-  );
 
   const aspectRatios = React.useMemo(
     () => R.map(getAspectRatio, images).filter(Boolean),
@@ -118,7 +103,7 @@ const MasonryGallery = ({
     <div
       className={classNames(
         "flex items-center flex-wrap mx-auto",
-        isClient ? "sm:container" : "max-w-[320px]"
+        isClient ? "" : "max-w-[320px]"
       )}
       ref={observe}
       style={{
@@ -134,10 +119,10 @@ const MasonryGallery = ({
         const rowAspectRatioSum = currentRow.aspect;
         const ar = getAspectRatio(image);
         let width;
-        let height = `calc(${containerWidth}px / ${rowAspectRatioSum} - 10px)`;
+        let height = `calc(100vw / ${rowAspectRatioSum} - 10px)`;
         if (rowAspectRatioSum < targetAspect * 0.66) {
           // incomplete row, render stuff at "ideal" sizes instead of filling width
-          width = `calc(${containerWidth}px / ${targetAspect / ar})`;
+          width = `calc(100vw / ${targetAspect / ar})`;
           height = "unset";
         } else {
           const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
@@ -169,7 +154,7 @@ const MasonryGallery = ({
                     ${image.fields?.imageMeta?.dominantHue?.[1] ?? 0 * 100}%,
                     ${image.fields?.imageMeta?.dominantHue?.[2] ?? 0 * 100}%
                   )`
-                : "black",
+                : "white",
             }}
             to={`/photogallery/${image.base}`}
           >

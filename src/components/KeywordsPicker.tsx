@@ -9,7 +9,9 @@ interface KeywordsPickerProps {
 const KeywordsPicker = ({ keywords, value, onChange }: KeywordsPickerProps) => {
   return (
     <div className="mx-2 mt-2">
-      <span className="text-xs text-[#A2A2A2]">Collections</span>
+      <span className="text-xs text-[var(--spectrum-fieldlabel-text-color,var(--spectrum-alias-label-text-color))]">
+        Collections
+      </span>
       <ul className="flex gap-1 flex-wrap mt-1 mb-2">
         {keywords.map((keyword) => {
           const selected = value === keyword;
@@ -18,8 +20,14 @@ const KeywordsPicker = ({ keywords, value, onChange }: KeywordsPickerProps) => {
               <button
                 className={classNames(
                   "transition",
-                  "py-[5px] px-3 rounded-full text-[#C8C8C8] hover:bg-black bg-[#1A1A1A] border border-[#494949]",
-                  selected && "bg-blue-600 hover:bg-blue-800"
+                  `py-[5px] px-3 rounded-full`,
+                  `text-[var(--spectrum-fieldbutton-text-color,var(--spectrum-alias-text-color))]
+
+                   border border-[var(--spectrum-fieldbutton-border-color,var(--spectrum-alias-border-color))]`,
+                  selected
+                    ? "bg-blue-500 hover:bg-blue-300"
+                    : `bg-[var(--spectrum-fieldbutton-background-color,var(--spectrum-global-color-gray-75))]
+                    hover:bg-[var(--spectrum-fieldbutton-background-color-down,var(--spectrum-global-color-gray-200))]`
                 )}
                 onClick={() => (selected ? onChange(null) : onChange(keyword))}
                 type="button"
