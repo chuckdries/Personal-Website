@@ -71,38 +71,6 @@ const IndexPage = ({
     }
   }, [isClient, imageIndex, image, shuffleImage]);
 
-  // React.useEffect(() => {
-  //   const keyListener = (e: KeyboardEvent) => {
-  //     switch (e.code) {
-  //       case "Space": {
-  //         shuffleImage(image);
-  //         return;
-  //       }
-  //       case "ArrowRight": {
-  //         if (imageIndex === images.length - 1) {
-  //           setImageIndex(0);
-  //           return;
-  //         }
-  //         setImageIndex(imageIndex + 1);
-  //         return;
-  //       }
-
-  //       case "ArrowLeft": {
-  //         if (imageIndex === 0) {
-  //           setImageIndex(images.length - 1);
-  //           return;
-  //         }
-  //         setImageIndex(imageIndex - 1);
-  //         return;
-  //       }
-  //     }
-  //   };
-  //   document.addEventListener("keydown", keyListener);
-  //   return () => {
-  //     document.removeEventListener("keydown", keyListener);
-  //   };
-  // }, [imageIndex, images.length, image, shuffleImage]);
-
   const browserIsLandscape = useMediaQuery("(orientation: landscape)");
 
   const vibrant = getVibrant(image);
@@ -120,137 +88,82 @@ const IndexPage = ({
       <Helmet>
         <title>Chuck Dries</title>
         <body
-          className={classnames(isClient ? "bg-muted-dark" : "bg-gray-800")}
+          className="bg-white"
           // @ts-ignore
-          style={getHelmetSafeBodyStyle(vibrant!, screenHeight)}
+          style={getHelmetSafeBodyStyle({
+            Muted: [0, 0, 0],
+            LightMuted: [0, 0, 0],
+            Vibrant: [0, 0, 0],
+            LightVibrant: [0, 0, 0],
+            DarkMuted: [255, 255, 255],
+            DarkVibrant: [255, 255, 255],
+          })}
         />
       </Helmet>
-      <main
-        className={classnames(
-          "font-serif",
-          imageIsLandscape
-            ? "landscape:grid portrait:h-actual-screen portrait:flex flex-col justify-around"
-            : "portrait:grid landscape:flex flex-row"
-        )}
-      >
-        <div
-          className={classnames(
-            "landscape:flex-auto flex flex-col items-center",
-            imageIsLandscape
-              ? "portrait:items-center landscape:w-screen justify-between"
-              : "landscape:justify-center portrait:w-screen"
-          )}
-          style={{ gridArea: "1/1" }}
-        >
-          <Nav
-            internalLinks={[
-              { href: "/", label: "Home" },
-              { href: "/photogallery/", label: "Gallery" },
-            ]}
-          />
-          <div
-            className={classnames(
-              "flex flex-col",
-              !imageIsLandscape && "portrait:flex-auto "
-            )}
-          >
-            <div
-              className={classnames(
-                "rounded-[50px] p-3 md:p-5 ml-2 mr-4 md:ml-3 md:mr-5 flex flex-col items-center z-10  mb-3",
-                isClient
-                  ? imageIsLandscape
-                    ? "text-vibrant-light landscape:text-vibrant-dark landscape:cool-border-big landscape:border-r-[20px] landscape:border-b-[20px]"
-                    : "text-vibrant-light portrait:text-vibrant-dark portrait:cool-border-big portrait:border-r-[20px] portrait:border-b-[20px]"
-                  : "bg-gray-50 border-r-[20px] border-b-[20px]",
-                isClient && ""
-              )}
-            >
-              <h1
-                className={classnames(
-                  "mb-0 mt-0 text-center font-black z-20 text-5xl sm:text-7xl md:text-8xl lg:text-9xl"
-                )}
-                style={{ lineHeight: "85%" }}
-              >
-                Chuck Dries
-              </h1>
-              <h2
-                className={classnames(
-                  "p-3 text-center z-20 font-bold text-lg md:text-2xl lg:text-3xl"
-                )}
-                style={{ lineHeight: "110%" }}
-              >
-                Full Stack Software Engineer &amp; Photographer
-              </h2>
-            </div>
-          </div>
-          <div
-            className={classnames(
-              imageIsLandscape ? "block portrait:hidden" : ""
-            )}
-          >
-            <ActionButtons
-              image={image}
-              isClient={isClient}
-              shuffleImage={shuffleImage}
-            />
-          </div>
-        </div>
-        {isClient && img ? (
-          <GatsbyImage
-            alt=""
-            className={classnames(
-              imageIsLandscape
-                ? "landscape:h-actual-screen portrait:h-two-thirds-vw"
-                : "h-actual-screen portrait:w-full"
-            )}
-            image={img}
-            loading="eager"
-            style={{
-              gridArea: "1/1",
-              width:
-                browserIsLandscape && !imageIsLandscape
-                  ? `${ar * 100}vh`
-                  : "100%",
-            }}
-          />
-        ) : (
-          <div
-            className="landscape:h-actual-screen portrait:h-two-thirds-vw w-full"
-            style={{ gridArea: "1/1" }}
-          ></div>
-        )}
+      <main className="font-sans">
+        <Nav
+          internalLinks={[
+            { href: "/", label: "Home" },
+            { href: "/photogallery/", label: "Gallery" },
+          ]}
+        />
+        <GatsbyImage
+          alt=""
+          className="m-6 mt-0 max-h-[calc(100vh-77px)]"
+          // className={classnames(
+          //   imageIsLandscape
+          //     ? "landscape:h-actual-screen portrait:h-two-thirds-vw"
+          //     : "h-actual-screen portrait:w-full"
+          // )}
+          image={img!}
+          loading="eager"
+          style={
+            {
+              // gridArea: "1/1",
+              // width:
+              //   browserIsLandscape && !imageIsLandscape
+              //     ? `${ar * 100}vh`
+              //     : "100%",
+            }
+          }
+        />
       </main>
     </>
   );
 };
 
-export const query = graphql`query IndexPage {
-  allFile(
-    filter: {sourceInstanceName: {eq: "gallery"}, base: {in: ["DSC02615-2.jpg"]}}
-    sort: {fields: {imageMeta: {dateTaken: DESC}}}
-  ) {
-    nodes {
-      relativePath
-      base
-      childImageSharp {
-        fluid {
-          aspectRatio
-        }
-        gatsbyImageData(
-          layout: FULL_WIDTH
-          placeholder: NONE
-          breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
-        )
+export const query = graphql`
+  query IndexPage {
+    allFile(
+      filter: {
+        sourceInstanceName: { eq: "gallery" }
+        base: { in: ["DSC02615-2.jpg"] }
       }
-      fields {
-        imageMeta {
-          vibrant {
-            ...VibrantColors
+      sort: { fields: { imageMeta: { dateTaken: DESC } } }
+    ) {
+      nodes {
+        relativePath
+        base
+        childImageSharp {
+          fluid {
+            aspectRatio
+          }
+          gatsbyImageData(
+            # layout: FULL_WIDTH
+            placeholder: NONE
+            breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
+          )
+        }
+        fields {
+          imageMeta {
+            vibrant {
+              ...VibrantColors
+            }
           }
         }
       }
     }
   }
-}`;
+`;
 
 export default IndexPage;
