@@ -241,43 +241,37 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
   );
 };
 
-export const query = graphql`
-  query GalleryPageQuery {
-    allFile(
-      filter: { sourceInstanceName: { eq: "gallery" } }
-      sort: { fields: fields___imageMeta___dateTaken, order: DESC }
-    ) {
-      nodes {
-        relativePath
-        base
-        childImageSharp {
-          fluid {
-            aspectRatio
-          }
-          gatsbyImageData(
-            layout: CONSTRAINED
-            height: 550
-            placeholder: DOMINANT_COLOR
-          )
+export const query = graphql`query GalleryPageQuery {
+  allFile(
+    filter: {sourceInstanceName: {eq: "gallery"}}
+    sort: {fields: {imageMeta: {dateTaken: DESC}}}
+  ) {
+    nodes {
+      relativePath
+      base
+      childImageSharp {
+        fluid {
+          aspectRatio
         }
-        fields {
-          imageMeta {
-            vibrantHue
-            dominantHue
-            dateTaken
-            meta {
-              Keywords
-              Rating
-              ObjectName
-            }
-            vibrant {
-              Vibrant
-            }
+        gatsbyImageData(layout: CONSTRAINED, height: 550, placeholder: DOMINANT_COLOR)
+      }
+      fields {
+        imageMeta {
+          vibrantHue
+          dominantHue
+          dateTaken
+          meta {
+            Keywords
+            Rating
+            ObjectName
+          }
+          vibrant {
+            Vibrant
           }
         }
       }
     }
   }
-`;
+}`;
 
 export default GalleryPage;

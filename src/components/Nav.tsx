@@ -11,7 +11,7 @@ const navClasses =
 const ExternalLinks = ({ isVertical }: { isVertical: boolean }) => (
   <ul
     className={classnames(
-      "z-30 bg-vibrant-dark rounded-xl overflow-hidden",
+      "z-30 overflow-hidden",
       isVertical
         ? "inline-flex flex-wrap justify-center bg-vibrant-dark rounded-xl"
         : "absolute rounded-md top-[40px] border border-vibrant-light"
