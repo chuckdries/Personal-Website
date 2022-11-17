@@ -219,94 +219,38 @@ const IndexPage = ({
             style={{ gridArea: "1/1" }}
           ></div>
         )}
-        {imageIsLandscape && (
-          <div className="hidden portrait:flex justify-center sm:my-2">
-            <ActionButtons
-              image={image}
-              isClient={isClient}
-              shuffleImage={shuffleImage}
-            />
-          </div>
-        )}
       </main>
     </>
   );
 };
 
-export const query = graphql`
-  query IndexPage {
-    allFile(
-      filter: {
-        sourceInstanceName: { eq: "gallery" }
-        base: {
-          in: [
-            # "DSC06616.jpg" # B&W abstract ## KEEP ON TOP
-            # "20160530-DSC09108.jpg" # portrait red flowers
-            # # "DSC00201.jpg" # duck
-            # "DSC04905.jpg" # purple layers
-            # "DSC05761.jpg" # monument valley
-            # "DSC05851.jpg" # utahn highway sunset
-            # # "DSC06245.jpg" # snowy milky way
-            # # # "DSC08521.jpg" # firepit bloom j&e
-            # # "DSC07490.jpg" # house on prairie
-            # # "DSC02538.jpg" # portrait pink cactus bloom
-            # # "20190624-DSC00771.jpg" # glacier forest fog
-            # # # "DSC00237.jpg" # cotton candy clouds
-            # "_DSC6062.jpg" # field of wildflowers
-            # # "_DSC6060.jpg" # edge of the world
-            # "_DSC6219.jpg" # whihte/yellow rosebush
-            # # "_DSC6243.jpg" # bright rose in darkness
-            # # "_DSC6400-2.jpg" # Horsetail falls
-            # # "_DSC6798.jpg" # Japanese zen garden
-            # # "_DSC6481.jpg" # Mt Hood from Powell Butte
-            # # "_DSC5916.jpg" # blue dart stinger
-            # # "_DSC0286.jpg" # god rays
-            # # "_DSC8998.jpg" # forest road
-            # # "DSC01169.jpg" # ferris wheel reflection
-            # "DSC01800.jpg" # cherry blossom landscape sunny sky
-            # "DSC01772.jpg" # cherry blossom portrait sunny sky
-            # # "DSC06201.jpg" # Wheatland snowy hills
-            # "DSC01924.jpg" # cherry blossom sea
-            # # "DSC03157.jpg" # constellation of flowers
-            # "DSC02610.jpg" # peter iredale portrait
-            # "DSC02615.jpg" # rori iredale beach field camera
-            "DSC02615-2.jpg" # same but red
-            # "DSC06490.jpg" # Japanese garden steps
-            # "DSC06687.jpg" # Multnomah Falls long exposure
-            # "DSC09932.jpg" # milky way
-            # "DSC09944.jpg" # milky way rori
-            # "DSC03725.jpg" # oregon coast lighthouse
-            # "DSC03750.jpg"
-            # "DSC03804.jpg"
-            # "DSC04122.jpg" # shoot the light wheel hallway
-          ]
+export const query = graphql`query IndexPage {
+  allFile(
+    filter: {sourceInstanceName: {eq: "gallery"}, base: {in: ["DSC02615-2.jpg"]}}
+    sort: {fields: {imageMeta: {dateTaken: DESC}}}
+  ) {
+    nodes {
+      relativePath
+      base
+      childImageSharp {
+        fluid {
+          aspectRatio
         }
+        gatsbyImageData(
+          layout: FULL_WIDTH
+          placeholder: NONE
+          breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
+        )
       }
-      sort: { order: DESC, fields: fields___imageMeta___dateTaken }
-    ) {
-      nodes {
-        relativePath
-        base
-        childImageSharp {
-          fluid {
-            aspectRatio
-          }
-          gatsbyImageData(
-            layout: FULL_WIDTH
-            placeholder: NONE
-            breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
-          )
-        }
-        fields {
-          imageMeta {
-            vibrant {
-              ...VibrantColors
-            }
+      fields {
+        imageMeta {
+          vibrant {
+            ...VibrantColors
           }
         }
       }
     }
   }
-`;
+}`;
 
 export default IndexPage;

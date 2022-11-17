@@ -95,7 +95,7 @@ export const getGalleryPageUrl = ({ keyword, sortKey }: galleryPageUrlProps, has
       typeof window !== "undefined"
         ? window.location.origin
         : "https://chuckdries.com"
-    }/`
+    }/photogallery/`
   );
   if (keyword !== undefined) {
     if (keyword === null) {
