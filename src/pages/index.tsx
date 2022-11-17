@@ -9,7 +9,7 @@ import { getHelmetSafeBodyStyle, getVibrant, getAspectRatio } from "../utils";
 import Nav from "../components/Nav";
 import ActionButtons from "../components/index/ActionButtons";
 // import { use100vh } from "react-div-100vh";
-// import { useMediaQuery } from "../useMediaQuery";
+import { useMediaQuery } from "../useMediaQuery";
 
 const env =
   process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
@@ -40,70 +40,21 @@ const IndexPage = ({
     return images[imageIndex];
   }, [images, imageIndex]);
 
-  const shuffleImage = React.useCallback(
-    (currentImage?: typeof images[number]) => {
-      const lastThreeImages =
-        JSON.parse(localStorage.getItem("lastHeros") ?? "[]") || [];
-      if (env === "production") {
-        try {
-          window.plausible("Shuffle", {
-            props: { currentImage: currentImage?.base },
-          });
-        } catch (e) {
-          /* do nothing */
-        }
-      }
-      const index = getDifferentRand(images.length, lastThreeImages);
-      localStorage.setItem(
-        "lastHeros",
-        JSON.stringify(take(3, [index, ...lastThreeImages]))
-      );
-      setImageIndex(index);
-    },
-    [images.length]
-  );
-
-  // pick random image on page hydration
   React.useEffect(() => {
     if (!isClient) {
       setIsClient(true);
-      shuffleImage(image);
     }
-  }, [isClient, imageIndex, image, shuffleImage]);
+  }, [isClient]);
 
-  React.useEffect(() => {
-    const keyListener = (e: KeyboardEvent) => {
-      switch (e.code) {
-        case "Space": {
-          shuffleImage(image);
-          return;
-        }
-        case "ArrowRight": {
-          if (imageIndex === images.length - 1) {
-            setImageIndex(0);
-            return;
-          }
-          setImageIndex(imageIndex + 1);
-          return;
-        }
+  const browserIsLandscape = useMediaQuery("(orientation: landscape)");
 
-        case "ArrowLeft": {
-          if (imageIndex === 0) {
-            setImageIndex(images.length - 1);
-            return;
-          }
-          setImageIndex(imageIndex - 1);
-          return;
-        }
-      }
-    };
-    document.addEventListener("keydown", keyListener);
-    return () => {
-      document.removeEventListener("keydown", keyListener);
-    };
-  }, [imageIndex, images.length, image, shuffleImage]);
-
-  // const browserIsLandscape = useMediaQuery("(orientation: landscape)");
+  React.useLayoutEffect(() => {
+    if (browserIsLandscape) {
+      setImageIndex(1);
+    } else {
+      setImageIndex(0);
+    }
+  }, [browserIsLandscape]);
 
   // const vibrant = getVibrant(image);
   const ar = getAspectRatio(image);
@@ -169,12 +120,9 @@ export const query = graphql`
     allFile(
       filter: {
         sourceInstanceName: { eq: "gallery" }
-        base: { in: [
-          "DSC02615-2.jpg"
-          "DSC02615.jpg"
-        ] }
+        base: { in: ["DSC02610-2.jpg", "DSC02615-2.jpg"] }
       }
-      sort: { fields: { imageMeta: { dateTaken: DESC } } }
+      sort: { base: ASC }
     ) {
       nodes {
         relativePath
@@ -184,8 +132,8 @@ export const query = graphql`
             aspectRatio
           }
           gatsbyImageData(
-            # layout: FULL_WIDTH
-            placeholder: NONE
+            layout: CONSTRAINED
+            # placeholder: NONE
             breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
           )
         }
