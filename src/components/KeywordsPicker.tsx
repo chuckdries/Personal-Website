@@ -25,7 +25,7 @@ const KeywordsPicker = ({ keywords, value, onChange }: KeywordsPickerProps) => {
 
                    border border-[var(--spectrum-fieldbutton-border-color,var(--spectrum-alias-border-color))]`,
                   selected
-                    ? "bg-blue-500 hover:bg-blue-300"
+                    ? "bg-green-500 hover:bg-green-300"
                     : `bg-[var(--spectrum-fieldbutton-background-color,var(--spectrum-global-color-gray-75))]
                     hover:bg-[var(--spectrum-fieldbutton-background-color-down,var(--spectrum-global-color-gray-200))]`
                 )}

@@ -57,7 +57,7 @@ const IndexPage = ({
   }, [browserIsLandscape]);
 
   // const vibrant = getVibrant(image);
-  const ar = getAspectRatio(image);
+  // const ar = getAspectRatio(image);
 
   // const screenHeight = use100vh();
 
@@ -92,10 +92,10 @@ const IndexPage = ({
         />
         <GatsbyImage
           alt=""
-          className="flex-auto m-6 mt-0"
+          className="flex-auto m-8 mt-0"
           image={img!}
           loading="eager"
-          objectFit="contain"
+          objectFit={browserIsLandscape ? "cover" : "contain"}
         />
       </main>
     </>
