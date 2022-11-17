@@ -8,8 +8,8 @@ import classnames from "classnames";
 import { getHelmetSafeBodyStyle, getVibrant, getAspectRatio } from "../utils";
 import Nav from "../components/Nav";
 import ActionButtons from "../components/index/ActionButtons";
-import { use100vh } from "react-div-100vh";
-import { useMediaQuery } from "../useMediaQuery";
+// import { use100vh } from "react-div-100vh";
+// import { useMediaQuery } from "../useMediaQuery";
 
 const env =
   process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
@@ -71,14 +71,46 @@ const IndexPage = ({
     }
   }, [isClient, imageIndex, image, shuffleImage]);
 
-  const browserIsLandscape = useMediaQuery("(orientation: landscape)");
+  React.useEffect(() => {
+    const keyListener = (e: KeyboardEvent) => {
+      switch (e.code) {
+        case "Space": {
+          shuffleImage(image);
+          return;
+        }
+        case "ArrowRight": {
+          if (imageIndex === images.length - 1) {
+            setImageIndex(0);
+            return;
+          }
+          setImageIndex(imageIndex + 1);
+          return;
+        }
 
-  const vibrant = getVibrant(image);
+        case "ArrowLeft": {
+          if (imageIndex === 0) {
+            setImageIndex(images.length - 1);
+            return;
+          }
+          setImageIndex(imageIndex - 1);
+          return;
+        }
+      }
+    };
+    document.addEventListener("keydown", keyListener);
+    return () => {
+      document.removeEventListener("keydown", keyListener);
+    };
+  }, [imageIndex, images.length, image, shuffleImage]);
+
+  // const browserIsLandscape = useMediaQuery("(orientation: landscape)");
+
+  // const vibrant = getVibrant(image);
   const ar = getAspectRatio(image);
 
-  const screenHeight = use100vh();
+  // const screenHeight = use100vh();
 
-  const imageIsLandscape = isClient ? ar > 1 : true;
+  // const imageIsLandscape = isClient ? ar > 1 : true;
 
   // @ts-ignore
   const img = getImage(image);
@@ -137,7 +169,10 @@ export const query = graphql`
     allFile(
       filter: {
         sourceInstanceName: { eq: "gallery" }
-        base: { in: ["DSC02615-2.jpg"] }
+        base: { in: [
+          "DSC02615-2.jpg"
+          "DSC02615.jpg"
+        ] }
       }
       sort: { fields: { imageMeta: { dateTaken: DESC } } }
     ) {
