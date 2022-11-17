@@ -2,12 +2,12 @@ import * as React from "react";
 import { graphql, PageProps } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
-import { take } from "ramda";
+// import { take } from "ramda";
 import classnames from "classnames";
 
-import { getHelmetSafeBodyStyle, getVibrant, getAspectRatio } from "../utils";
+import { getHelmetSafeBodyStyle, getAspectRatio } from "../utils";
 import Nav from "../components/Nav";
-import ActionButtons from "../components/index/ActionButtons";
+// import ActionButtons from "../components/index/ActionButtons";
 // import { use100vh } from "react-div-100vh";
 import { useMediaQuery } from "../useMediaQuery";
 
@@ -83,7 +83,7 @@ const IndexPage = ({
           })}
         />
       </Helmet>
-      <main className="font-sans">
+      <main className="font-sans flex flex-col h-screen">
         <Nav
           internalLinks={[
             { href: "/", label: "Home" },
@@ -92,23 +92,10 @@ const IndexPage = ({
         />
         <GatsbyImage
           alt=""
-          className="m-6 mt-0 max-h-[calc(100vh-77px)]"
-          // className={classnames(
-          //   imageIsLandscape
-          //     ? "landscape:h-actual-screen portrait:h-two-thirds-vw"
-          //     : "h-actual-screen portrait:w-full"
-          // )}
+          className="flex-auto m-6 mt-0"
           image={img!}
           loading="eager"
-          style={
-            {
-              // gridArea: "1/1",
-              // width:
-              //   browserIsLandscape && !imageIsLandscape
-              //     ? `${ar * 100}vh`
-              //     : "100%",
-            }
-          }
+          objectFit="contain"
         />
       </main>
     </>
@@ -133,7 +120,7 @@ export const query = graphql`
           }
           gatsbyImageData(
             layout: CONSTRAINED
-            # placeholder: NONE
+            placeholder: NONE
             breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
           )
         }
