@@ -8,8 +8,8 @@ import useBreakpoint from "use-breakpoint";
 // @ts-ignore
 import themeBreakpoints from "../breakpoints";
 import classNames from "classnames";
-import useDimensions from "react-cool-dimensions";
-import { GalleryImage } from "../pages";
+// import useDimensions from "react-cool-dimensions";
+import { GalleryImage } from "../pages/photogallery";
 
 interface Row {
   aspect: number;
@@ -36,33 +36,21 @@ const MasonryGallery = ({
 }: MasonryGalleryProps) => {
   const [isClient, setIsClient] = React.useState(false);
   React.useEffect(() => {
-    setIsClient(true)
-  }, [])
+    setIsClient(true);
+  }, []);
   const breakpoints = React.useMemo(
     () => R.pick(R.keys(aspectTargetsByBreakpoint), themeBreakpoints),
     [aspectTargetsByBreakpoint]
   );
-  console.log(
-    "🚀 ~ file: MasonryGallery.tsx ~ line 41 ~ breakpoints",
-    breakpoints
-  );
 
-  const { observe, width, currentBreakpoint } = useDimensions({
-    breakpoints,
-  });
+  // const { observe, currentBreakpoint } = useDimensions({
+  //   breakpoints,
+  // });
 
-  const breakpoint = currentBreakpoint.length ? currentBreakpoint : "xs";
-  const containerWidth = width ? width : 320;
-  // console.log(
-  //   "🚀 ~ file: MasonryGallery.tsx ~ line 47 ~ currentBreakpoint",
-  //   currentBreakpoint
-  // );
+  const { breakpoint } = useBreakpoint(breakpoints, 'xs')
 
-  // const { breakpoint } = useBreakpoint(breakpoints, "sm");
-  console.log(
-    "🚀 ~ file: MasonryGallery.tsx ~ line 46 ~ breakpoint",
-    breakpoint
-  );
+  // const breakpoint = currentBreakpoint.length ? currentBreakpoint : "xs";
+  const galleryWidth = `calc(100vw - ${ breakpoint === "xs" || breakpoint === "sm" ? "32" : "160" }px)`;
 
   const aspectRatios = React.useMemo(
     () => R.map(getAspectRatio, images).filter(Boolean),
@@ -117,10 +105,10 @@ const MasonryGallery = ({
   return (
     <div
       className={classNames(
-        "flex items-center flex-wrap mx-auto",
-        isClient ? "sm:container" : "max-w-[320px]"
+        "flex items-center flex-wrap mx-auto px-4 md:px-8",
+        isClient ? "" : ""
       )}
-      ref={observe}
+      // ref={observe}
       style={{
         position: "relative",
       }}
@@ -134,10 +122,10 @@ const MasonryGallery = ({
         const rowAspectRatioSum = currentRow.aspect;
         const ar = getAspectRatio(image);
         let width;
-        let height = `calc(${containerWidth}px / ${rowAspectRatioSum} - 10px)`;
+        let height = `calc(${galleryWidth} / ${rowAspectRatioSum} - 10px)`;
         if (rowAspectRatioSum < targetAspect * 0.66) {
           // incomplete row, render stuff at "ideal" sizes instead of filling width
-          width = `calc(${containerWidth}px / ${targetAspect / ar})`;
+          width = `calc(calc(100vw - 160px) / ${targetAspect / ar})`;
           height = "unset";
         } else {
           const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
@@ -148,7 +136,7 @@ const MasonryGallery = ({
         return (
           <Link
             className={classNames(
-              "border-4 overflow-hidden",
+              "border-4 border-white overflow-hidden",
               debugHue && "border-8"
             )}
             id={image.base}
@@ -169,9 +157,9 @@ const MasonryGallery = ({
                     ${image.fields?.imageMeta?.dominantHue?.[1] ?? 0 * 100}%,
                     ${image.fields?.imageMeta?.dominantHue?.[2] ?? 0 * 100}%
                   )`
-                : "black",
+                : "",
             }}
-            to={`/photogallery/${image.base}`}
+            to={`/photogallery/${image.base}/`}
           >
             {debugHue && (
               <span className="text-white z-20 absolute bg-black">

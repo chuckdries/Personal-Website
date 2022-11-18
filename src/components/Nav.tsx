@@ -1,20 +1,16 @@
 import React, { useState } from "react";
 import classnames from "classnames";
 import { Link } from "gatsby";
-import useDimensions from "react-cool-dimensions";
-
-import Menu from "@spectrum-icons/workflow/Menu";
+import { Popover } from "react-tiny-popover";
 
 const navClasses =
   "hover:underline hover:bg-transparentblack block p-3 text-vibrant-light";
 
-const ExternalLinks = ({ isVertical }: { isVertical: boolean }) => (
+const ExternalLinks = () => (
   <ul
     className={classnames(
-      "z-30 bg-vibrant-dark rounded-xl overflow-hidden",
-      isVertical
-        ? "inline-flex flex-wrap justify-center"
-        : "absolute rounded-md top-[40px] border border-vibrant-light"
+      "z-30 overflow-hidden bg-vibrant-dark",
+      "rounded shadow border border-vibrant-light"
     )}
   >
     <li>
@@ -80,23 +76,22 @@ interface NavProps {
 }
 
 const Nav = ({ internalLinks, className }: NavProps) => {
-  const { observe, currentBreakpoint } = useDimensions({
-    breakpoints: { XS: 0, LG: 750 },
-    updateOnBreakpointChange: true,
-  });
   const [linksMenu, setLinksMenu] = useState(false);
 
   return (
     <nav
       className={classnames(
-        "mt-0 flex justify-center w-full font-serif",
+        "my-4 flex flex-col-reverse md:flex-row items-center w-full font-sans px-4 md:px-8",
         className
       )}
-      ref={observe}
-      style={{ zIndex: 100 }}
     >
+      <div className="md:flex items-baseline flex-auto">
+        <h1 className="font-bold mr-2">Chuck Dries</h1>
+        <h2 className="text-md">Software Engineer & Photographer</h2>
+      </div>
+
       <div className="flex">
-        <ul className="inline-flex flex-wrap justify-center">
+        <ul className="flex">
           {internalLinks &&
             internalLinks.map(({ href, label }) => (
               <li key={href}>
@@ -110,29 +105,25 @@ const Nav = ({ internalLinks, className }: NavProps) => {
               </li>
             ))}
         </ul>
-        {internalLinks && currentBreakpoint !== "XS" && (
-          <span className="block p-3 text-vibrant-light opacity-75">|</span>
-        )}
-        {currentBreakpoint === "XS" && (
+        <Popover
+          containerClassName="z-30 p-1"
+          content={<ExternalLinks />}
+          isOpen={linksMenu}
+          onClickOutside={() => setLinksMenu(false)}
+          positions={["bottom"]} // preferred positions by priority
+        >
           <button
             className={classnames(
-              "mx-2 hover:underline inline-flex align-middle items-center",
+              "hover:underline inline-flex align-middle items-center",
               navClasses
             )}
             onClick={() => setLinksMenu(!linksMenu)}
           >
-            <Menu
-              UNSAFE_className="mr-1"
-              aria-label="show external links"
-              size="S"
-            />
             Links
           </button>
-        )}
-        {(currentBreakpoint !== "XS" || linksMenu) && (
-          <ExternalLinks isVertical={currentBreakpoint !== "XS"} />
-        )}
+        </Popover>
       </div>
+      {/* {linksMenu && } */}
     </nav>
   );
 };
