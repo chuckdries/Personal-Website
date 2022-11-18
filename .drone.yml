@@ -22,7 +22,7 @@ steps:
         path: /cache
 
   - name: build
-    image: node
+    image: node:18
     commands:
       - yarn install
       - yarn build
