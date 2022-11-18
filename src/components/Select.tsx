@@ -8,7 +8,6 @@ import {
   mergeProps,
   useFocusRing,
 } from "react-aria";
-// import { SelectorIcon } from "@heroicons/react/solid";
 import ChevronDown from "@spectrum-icons/workflow/ChevronDown";
 
 import { ListBox } from "./ListBox";
@@ -49,7 +48,7 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
       />
       <button
         {...mergeProps(buttonProps, focusProps)}
-        className={`py-[5px] px-3 w-[150px] flex flex-row items-center justify-between overflow-hidden cursor-default rounded border ${
+        className={`py-[5px] px-3 w-[150px] flex flex-row items-center justify-between overflow-hidden cursor-default rounded border hover:bg-transparentblack ${
           isFocusVisible ? "border-green-500" : "border-black"
         } ${state.isOpen ? "bg-gray-100" : "bg-white"}`}
         ref={ref}
@@ -57,9 +56,6 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
         <span
           {...valueProps}
           className="text-sm"
-          // className={`text-md flex-auto ${
-          //   state.selectedItem ? "text-gray-800" : "text-gray-500"
-          // }`}
         >
           {state.selectedItem
             ? state.selectedItem.rendered
@@ -70,9 +66,6 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
           UNSAFE_style={{
             width: "15px",
           }}
-          // UNSAFE_className={`w-[20px] h-5 ${
-          //   isFocusVisible ? "text-pink-500" : "text-gray-500"
-          // }`}
         />
       </button>
       {state.isOpen && (
