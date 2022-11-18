@@ -231,11 +231,11 @@ const GalleryImage = ({ data, location: { state } }) => {
                   {image.base}
                 </p>
                 {hasName(image) && (
-                  <h1 className="text-4xl mt-0 font-serif">{name}</h1>
+                  <h1 className="text-4xl mt-0 font-sans">{name}</h1>
                 )}
                 <p className="landscape:mr-2">{meta.Caption}</p>
                 <a
-                  className="cursor-pointer inline-block bg-muted-light text-vibrant-dark font-serif p-1 my-1 rounded"
+                  className="cursor-pointer inline-block bg-muted-light text-vibrant-dark font-sans p-1 my-1 rounded"
                   download
                   href={image.publicURL}
                   onClick={() => {
