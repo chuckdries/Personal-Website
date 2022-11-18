@@ -76,5 +76,6 @@
     "eslint-webpack-plugin": "^2.5.4",
     "prettier": "2.3.2",
     "typescript": "^4.8.4"
-  }
+  },
+  "packageManager": "yarn@3.3.0"
 }
