@@ -50,9 +50,7 @@ const MasonryGallery = ({
   const { breakpoint } = useBreakpoint(breakpoints, 'xs')
 
   // const breakpoint = currentBreakpoint.length ? currentBreakpoint : "xs";
-  console.log("🚀 ~ file: MasonryGallery.tsx ~ line 51 ~ breakpoint", breakpoint)
   const galleryWidth = `calc(100vw - ${ breakpoint === "xs" || breakpoint === "sm" ? "32" : "160" }px)`;
-  console.log("🚀 ~ file: MasonryGallery.tsx ~ line 55 ~ galleryWidth", galleryWidth)
 
   const aspectRatios = React.useMemo(
     () => R.map(getAspectRatio, images).filter(Boolean),
@@ -161,7 +159,7 @@ const MasonryGallery = ({
                   )`
                 : "",
             }}
-            to={`/photogallery/${image.base}`}
+            to={`/photogallery/${image.base}/`}
           >
             {debugHue && (
               <span className="text-white z-20 absolute bg-black">

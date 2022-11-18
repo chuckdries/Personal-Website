@@ -84,7 +84,6 @@ const Nav = ({ internalLinks, className }: NavProps) => {
         "my-4 flex flex-col-reverse md:flex-row items-center w-full font-sans px-4 md:px-8",
         className
       )}
-      style={{ zIndex: 100 }}
     >
       <div className="md:flex items-baseline flex-auto">
         <h1 className="font-bold mr-2">Chuck Dries</h1>
@@ -107,6 +106,7 @@ const Nav = ({ internalLinks, className }: NavProps) => {
             ))}
         </ul>
         <Popover
+          containerClassName="z-30 p-1"
           content={<ExternalLinks />}
           isOpen={linksMenu}
           onClickOutside={() => setLinksMenu(false)}
