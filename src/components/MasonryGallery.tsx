@@ -8,8 +8,8 @@ import useBreakpoint from "use-breakpoint";
 // @ts-ignore
 import themeBreakpoints from "../breakpoints";
 import classNames from "classnames";
-import useDimensions from "react-cool-dimensions";
-import { GalleryImage } from "../pages";
+// import useDimensions from "react-cool-dimensions";
+import { GalleryImage } from "../pages/photogallery";
 
 interface Row {
   aspect: number;
@@ -36,18 +36,25 @@ const MasonryGallery = ({
 }: MasonryGalleryProps) => {
   const [isClient, setIsClient] = React.useState(false);
   React.useEffect(() => {
-    setIsClient(true)
-  }, [])
+    setIsClient(true);
+  }, []);
   const breakpoints = React.useMemo(
     () => R.pick(R.keys(aspectTargetsByBreakpoint), themeBreakpoints),
     [aspectTargetsByBreakpoint]
   );
 
-  const { observe, currentBreakpoint } = useDimensions({
-    breakpoints,
-  });
+  // const { observe, currentBreakpoint } = useDimensions({
+  //   breakpoints,
+  // });
 
-  const breakpoint = currentBreakpoint.length ? currentBreakpoint : "xs";
+  const { breakpoint } = useBreakpoint(breakpoints, 'xs')
+
+  // const breakpoint = currentBreakpoint.length ? currentBreakpoint : "xs";
+  console.log("🚀 ~ file: MasonryGallery.tsx ~ line 51 ~ breakpoint", breakpoint)
+  const galleryWidth = `calc(100vw - ${
+    breakpoint === "xs" || breakpoint === "sm" ? "32" : "160"
+  }px)`;
+  console.log("🚀 ~ file: MasonryGallery.tsx ~ line 55 ~ galleryWidth", galleryWidth)
 
   const aspectRatios = React.useMemo(
     () => R.map(getAspectRatio, images).filter(Boolean),
@@ -102,10 +109,10 @@ const MasonryGallery = ({
   return (
     <div
       className={classNames(
-        "flex items-center flex-wrap mx-auto",
+        "flex items-center flex-wrap mx-auto px-4 md:px-8",
         isClient ? "" : "max-w-[320px]"
       )}
-      ref={observe}
+      // ref={observe}
       style={{
         position: "relative",
       }}
@@ -119,10 +126,10 @@ const MasonryGallery = ({
         const rowAspectRatioSum = currentRow.aspect;
         const ar = getAspectRatio(image);
         let width;
-        let height = `calc(100vw / ${rowAspectRatioSum} - 10px)`;
+        let height = `calc(${galleryWidth} / ${rowAspectRatioSum} - 10px)`;
         if (rowAspectRatioSum < targetAspect * 0.66) {
           // incomplete row, render stuff at "ideal" sizes instead of filling width
-          width = `calc(100vw / ${targetAspect / ar})`;
+          width = `calc(calc(100vw - 160px) / ${targetAspect / ar})`;
           height = "unset";
         } else {
           const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
