@@ -14,7 +14,7 @@ steps:
     settings:
       restore: true
       mount:
-        - ./node_modules
+        # - ./node_modules
         - ./.cache
         - ./public
     volumes:
@@ -50,7 +50,7 @@ steps:
     settings:
       rebuild: true
       mount:
-        - ./node_modules
+        # - ./node_modules
         - ./.cache
         - ./public
     volumes:
@@ -62,58 +62,58 @@ volumes:
     host:
       path: /mnt/user/dronecache
 
----
-kind: pipeline
-type: docker
-name: Preview PR
+# ---
+# kind: pipeline
+# type: docker
+# name: Preview PR
 
-trigger:
-  event:
-    - pull_request
+# trigger:
+#   event:
+#     - pull_request
 
-steps:
-  - name: restore-cache
-    image: drillster/drone-volume-cache
-    settings:
-      restore: true
-      mount:
-        - ./node_modules
-        - ./.cache
-        - ./public
-    volumes:
-      - name: cache
-        path: /cache
+# steps:
+#   - name: restore-cache
+#     image: drillster/drone-volume-cache
+#     settings:
+#       restore: true
+#       mount:
+#         - ./node_modules
+#         - ./.cache
+#         - ./public
+#     volumes:
+#       - name: cache
+#         path: /cache
 
-  - name: build
-    image: node
-    commands:
-      - yarn install
-      - PATH_PREFIX=/${DRONE_PULL_REQUEST} yarn build --prefix-paths
-      - du -sh public
+#   - name: build
+#     image: node
+#     commands:
+#       - yarn install
+#       - PATH_PREFIX=/${DRONE_PULL_REQUEST} yarn build --prefix-paths
+#       - du -sh public
 
-  - name: rsync
-    image: drillster/drone-rsync
-    settings:
-      user: ci
-      key:
-        from_secret: rsync_key
-      hosts:
-        - droplet.chuckdries.com
-      exclude:
-        - node_modules
-        - .git*
-      source: ./public/
-      target: ~/www/personal-website-preview/${DRONE_PULL_REQUEST}
-      prescript: cp -r ~/www/personal-website ~/www/personal-website-preview/${DRONE_PULL_REQUEST}
-      delete: true
-      recursive: true
-      secrets: [rsync_key]
+#   - name: rsync
+#     image: drillster/drone-rsync
+#     settings:
+#       user: ci
+#       key:
+#         from_secret: rsync_key
+#       hosts:
+#         - droplet.chuckdries.com
+#       exclude:
+#         - node_modules
+#         - .git*
+#       source: ./public/
+#       target: ~/www/personal-website-preview/${DRONE_PULL_REQUEST}
+#       prescript: cp -r ~/www/personal-website ~/www/personal-website-preview/${DRONE_PULL_REQUEST}
+#       delete: true
+#       recursive: true
+#       secrets: [rsync_key]
 
-  - name: comment
-    image: jmccann/drone-github-comment:1
-    settings:
-      message: preview of ${DRONE_COMMIT} deployed to https://preview.chuckdries.com/${DRONE_PULL_REQUEST}
-      update: true
-      api_key:
-        from_secret: github_key
-# note: we intentionally do not rebuild-cache for PRs
+#   - name: comment
+#     image: jmccann/drone-github-comment:1
+#     settings:
+#       message: preview of ${DRONE_COMMIT} deployed to https://preview.chuckdries.com/${DRONE_PULL_REQUEST}
+#       update: true
+#       api_key:
+#         from_secret: github_key
+# # note: we intentionally do not rebuild-cache for PRs
