@@ -36,7 +36,7 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
     <div className="inline-flex flex-col relative">
       <div
         {...labelProps}
-        className="block text-sm text-left cursor-default mb-1"
+        className="block text-xs text-left cursor-default mb-1"
       >
         {props.label}
       </div>
