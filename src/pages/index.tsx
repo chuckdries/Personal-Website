@@ -92,7 +92,7 @@ const IndexPage = ({
         />
         <GatsbyImage
           alt=""
-          className="flex-auto m-8 mt-0"
+          className="flex-auto m-4 md:m-8 mt-0 md:mt-0"
           image={img!}
           loading="eager"
           objectFit={browserIsLandscape ? "cover" : "contain"}
