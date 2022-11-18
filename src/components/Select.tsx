@@ -6,7 +6,7 @@ import {
   HiddenSelect,
   useButton,
   mergeProps,
-  useFocusRing
+  useFocusRing,
 } from "react-aria";
 // import { SelectorIcon } from "@heroicons/react/solid";
 import ChevronDown from "@spectrum-icons/workflow/ChevronDown";
@@ -56,6 +56,7 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
       >
         <span
           {...valueProps}
+          className="text-sm"
           // className={`text-md flex-auto ${
           //   state.selectedItem ? "text-gray-800" : "text-gray-500"
           // }`}
@@ -65,9 +66,9 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
             : "Select an option"}
         </span>
         <ChevronDown
-        UNSAFE_className="mx-1"
+          UNSAFE_className="mx-1"
           UNSAFE_style={{
-            width: '15px'
+            width: "15px",
           }}
           // UNSAFE_className={`w-[20px] h-5 ${
           //   isFocusVisible ? "text-pink-500" : "text-gray-500"
