@@ -51,9 +51,7 @@ const MasonryGallery = ({
 
   // const breakpoint = currentBreakpoint.length ? currentBreakpoint : "xs";
   console.log("🚀 ~ file: MasonryGallery.tsx ~ line 51 ~ breakpoint", breakpoint)
-  const galleryWidth = `calc(100vw - ${
-    breakpoint === "xs" || breakpoint === "sm" ? "32" : "160"
-  }px)`;
+  const galleryWidth = `calc(100vw - ${ breakpoint === "xs" || breakpoint === "sm" ? "32" : "160" }px)`;
   console.log("🚀 ~ file: MasonryGallery.tsx ~ line 55 ~ galleryWidth", galleryWidth)
 
   const aspectRatios = React.useMemo(
@@ -110,7 +108,7 @@ const MasonryGallery = ({
     <div
       className={classNames(
         "flex items-center flex-wrap mx-auto px-4 md:px-8",
-        isClient ? "" : "max-w-[320px]"
+        isClient ? "" : ""
       )}
       // ref={observe}
       style={{
