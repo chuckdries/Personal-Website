@@ -1,21 +1,21 @@
 import * as React from "react";
-import { darkTheme, Provider } from "@adobe/react-spectrum";
+// import { lightTheme, Provider } from "@adobe/react-spectrum";
 import "./src/styles/global.css";
 import { SSRProvider } from "@react-aria/ssr";
 
 export const wrapRootElement = ({ element }) => (
   <SSRProvider>
-    <Provider
+    {/* <Provider
       UNSAFE_style={{
         background: "unset",
         color: "unset",
       }}
       UNSAFE_className="overflow-x-hidden"
-      colorScheme="dark"
-      scale="medium"
-      theme={darkTheme}
-    >
+      colorScheme="light"
+      // scale="medium"
+      theme={lightTheme}
+    > */}
       {element}
-    </Provider>
+    {/* </Provider> */}
   </SSRProvider>
 );

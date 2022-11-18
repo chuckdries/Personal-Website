@@ -1,5 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
+import Checkmark from "@spectrum-icons/workflow/Checkmark";
 
 interface KeywordsPickerProps {
   keywords: string[];
@@ -9,7 +10,9 @@ interface KeywordsPickerProps {
 const KeywordsPicker = ({ keywords, value, onChange }: KeywordsPickerProps) => {
   return (
     <div className="mx-2 mt-2">
-      <span className="text-xs text-[#A2A2A2]">Collections</span>
+      <span className="text-xs text-black">
+        Collections
+      </span>
       <ul className="flex gap-1 flex-wrap mt-1 mb-2">
         {keywords.map((keyword) => {
           const selected = value === keyword;
@@ -17,14 +20,24 @@ const KeywordsPicker = ({ keywords, value, onChange }: KeywordsPickerProps) => {
             <li key={keyword}>
               <button
                 className={classNames(
-                  "transition",
-                  "py-[5px] px-3 rounded-full text-[#C8C8C8] hover:bg-black bg-[#1A1A1A] border border-[#494949]",
-                  selected && "bg-blue-600 hover:bg-blue-800"
+                  `py-[5px] px-3 rounded-full`,
+                  `text-black border border-black`,
+                  selected
+                    ? "bg-transparentblack font-bold"
+                    : `bg-white
+                    hover:bg-transparentblack`
                 )}
                 onClick={() => (selected ? onChange(null) : onChange(keyword))}
                 type="button"
               >
-                {keyword}
+                {keyword}{" "}
+                {selected && (
+                  <Checkmark
+                    UNSAFE_className="mx-1"
+                    UNSAFE_style={{ width: "15px" }}
+                    aria-hidden="true"
+                  />
+                )}
               </button>
             </li>
           );

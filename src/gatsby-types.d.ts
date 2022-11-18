@@ -169,29 +169,29 @@ type DirectoryConnection = {
 
 
 type DirectoryConnection_distinctArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
 };
 
 
 type DirectoryConnection_groupArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
 };
 
 
 type DirectoryConnection_maxArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
 };
 
 
 type DirectoryConnection_minArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
 };
 
 
 type DirectoryConnection_sumArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
 };
 
 type DirectoryEdge = {
@@ -200,131 +200,43 @@ type DirectoryEdge = {
   readonly previous: Maybe<Directory>;
 };
 
-type DirectoryFieldsEnum =
-  | 'absolutePath'
-  | 'accessTime'
-  | 'atime'
-  | 'atimeMs'
-  | 'base'
-  | 'birthTime'
-  | 'birthtime'
-  | 'birthtimeMs'
-  | 'changeTime'
-  | 'children'
-  | 'children.children'
-  | 'children.children.children'
-  | 'children.children.children.children'
-  | 'children.children.children.id'
-  | 'children.children.id'
-  | 'children.children.internal.content'
-  | 'children.children.internal.contentDigest'
-  | 'children.children.internal.contentFilePath'
-  | 'children.children.internal.description'
-  | 'children.children.internal.fieldOwners'
-  | 'children.children.internal.ignoreType'
-  | 'children.children.internal.mediaType'
-  | 'children.children.internal.owner'
-  | 'children.children.internal.type'
-  | 'children.children.parent.children'
-  | 'children.children.parent.id'
-  | 'children.id'
-  | 'children.internal.content'
-  | 'children.internal.contentDigest'
-  | 'children.internal.contentFilePath'
-  | 'children.internal.description'
-  | 'children.internal.fieldOwners'
-  | 'children.internal.ignoreType'
-  | 'children.internal.mediaType'
-  | 'children.internal.owner'
-  | 'children.internal.type'
-  | 'children.parent.children'
-  | 'children.parent.children.children'
-  | 'children.parent.children.id'
-  | 'children.parent.id'
-  | 'children.parent.internal.content'
-  | 'children.parent.internal.contentDigest'
-  | 'children.parent.internal.contentFilePath'
-  | 'children.parent.internal.description'
-  | 'children.parent.internal.fieldOwners'
-  | 'children.parent.internal.ignoreType'
-  | 'children.parent.internal.mediaType'
-  | 'children.parent.internal.owner'
-  | 'children.parent.internal.type'
-  | 'children.parent.parent.children'
-  | 'children.parent.parent.id'
-  | 'ctime'
-  | 'ctimeMs'
-  | 'dev'
-  | 'dir'
-  | 'ext'
-  | 'extension'
-  | 'gid'
-  | 'id'
-  | 'ino'
-  | 'internal.content'
-  | 'internal.contentDigest'
-  | 'internal.contentFilePath'
-  | 'internal.description'
-  | 'internal.fieldOwners'
-  | 'internal.ignoreType'
-  | 'internal.mediaType'
-  | 'internal.owner'
-  | 'internal.type'
-  | 'mode'
-  | 'modifiedTime'
-  | 'mtime'
-  | 'mtimeMs'
-  | 'name'
-  | 'nlink'
-  | 'parent.children'
-  | 'parent.children.children'
-  | 'parent.children.children.children'
-  | 'parent.children.children.id'
-  | 'parent.children.id'
-  | 'parent.children.internal.content'
-  | 'parent.children.internal.contentDigest'
-  | 'parent.children.internal.contentFilePath'
-  | 'parent.children.internal.description'
-  | 'parent.children.internal.fieldOwners'
-  | 'parent.children.internal.ignoreType'
-  | 'parent.children.internal.mediaType'
-  | 'parent.children.internal.owner'
-  | 'parent.children.internal.type'
-  | 'parent.children.parent.children'
-  | 'parent.children.parent.id'
-  | 'parent.id'
-  | 'parent.internal.content'
-  | 'parent.internal.contentDigest'
-  | 'parent.internal.contentFilePath'
-  | 'parent.internal.description'
-  | 'parent.internal.fieldOwners'
-  | 'parent.internal.ignoreType'
-  | 'parent.internal.mediaType'
-  | 'parent.internal.owner'
-  | 'parent.internal.type'
-  | 'parent.parent.children'
-  | 'parent.parent.children.children'
-  | 'parent.parent.children.id'
-  | 'parent.parent.id'
-  | 'parent.parent.internal.content'
-  | 'parent.parent.internal.contentDigest'
-  | 'parent.parent.internal.contentFilePath'
-  | 'parent.parent.internal.description'
-  | 'parent.parent.internal.fieldOwners'
-  | 'parent.parent.internal.ignoreType'
-  | 'parent.parent.internal.mediaType'
-  | 'parent.parent.internal.owner'
-  | 'parent.parent.internal.type'
-  | 'parent.parent.parent.children'
-  | 'parent.parent.parent.id'
-  | 'prettySize'
-  | 'rdev'
-  | 'relativeDirectory'
-  | 'relativePath'
-  | 'root'
-  | 'size'
-  | 'sourceInstanceName'
-  | 'uid';
+type DirectoryFieldSelector = {
+  readonly absolutePath: InputMaybe<FieldSelectorEnum>;
+  readonly accessTime: InputMaybe<FieldSelectorEnum>;
+  readonly atime: InputMaybe<FieldSelectorEnum>;
+  readonly atimeMs: InputMaybe<FieldSelectorEnum>;
+  readonly base: InputMaybe<FieldSelectorEnum>;
+  readonly birthTime: InputMaybe<FieldSelectorEnum>;
+  readonly birthtime: InputMaybe<FieldSelectorEnum>;
+  readonly birthtimeMs: InputMaybe<FieldSelectorEnum>;
+  readonly changeTime: InputMaybe<FieldSelectorEnum>;
+  readonly children: InputMaybe<NodeFieldSelector>;
+  readonly ctime: InputMaybe<FieldSelectorEnum>;
+  readonly ctimeMs: InputMaybe<FieldSelectorEnum>;
+  readonly dev: InputMaybe<FieldSelectorEnum>;
+  readonly dir: InputMaybe<FieldSelectorEnum>;
+  readonly ext: InputMaybe<FieldSelectorEnum>;
+  readonly extension: InputMaybe<FieldSelectorEnum>;
+  readonly gid: InputMaybe<FieldSelectorEnum>;
+  readonly id: InputMaybe<FieldSelectorEnum>;
+  readonly ino: InputMaybe<FieldSelectorEnum>;
+  readonly internal: InputMaybe<InternalFieldSelector>;
+  readonly mode: InputMaybe<FieldSelectorEnum>;
+  readonly modifiedTime: InputMaybe<FieldSelectorEnum>;
+  readonly mtime: InputMaybe<FieldSelectorEnum>;
+  readonly mtimeMs: InputMaybe<FieldSelectorEnum>;
+  readonly name: InputMaybe<FieldSelectorEnum>;
+  readonly nlink: InputMaybe<FieldSelectorEnum>;
+  readonly parent: InputMaybe<NodeFieldSelector>;
+  readonly prettySize: InputMaybe<FieldSelectorEnum>;
+  readonly rdev: InputMaybe<FieldSelectorEnum>;
+  readonly relativeDirectory: InputMaybe<FieldSelectorEnum>;
+  readonly relativePath: InputMaybe<FieldSelectorEnum>;
+  readonly root: InputMaybe<FieldSelectorEnum>;
+  readonly size: InputMaybe<FieldSelectorEnum>;
+  readonly sourceInstanceName: InputMaybe<FieldSelectorEnum>;
+  readonly uid: InputMaybe<FieldSelectorEnum>;
+};
 
 type DirectoryFilterInput = {
   readonly absolutePath: InputMaybe<StringQueryOperatorInput>;
@@ -380,34 +292,67 @@ type DirectoryGroupConnection = {
 
 
 type DirectoryGroupConnection_distinctArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
 };
 
 
 type DirectoryGroupConnection_groupArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
 };
 
 
 type DirectoryGroupConnection_maxArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
 };
 
 
 type DirectoryGroupConnection_minArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
 };
 
 
 type DirectoryGroupConnection_sumArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
 };
 
 type DirectorySortInput = {
-  readonly fields: InputMaybe<ReadonlyArray<InputMaybe<DirectoryFieldsEnum>>>;
-  readonly order: InputMaybe<ReadonlyArray<InputMaybe<SortOrderEnum>>>;
+  readonly absolutePath: InputMaybe<SortOrderEnum>;
+  readonly accessTime: InputMaybe<SortOrderEnum>;
+  readonly atime: InputMaybe<SortOrderEnum>;
+  readonly atimeMs: InputMaybe<SortOrderEnum>;
+  readonly base: InputMaybe<SortOrderEnum>;
+  readonly birthTime: InputMaybe<SortOrderEnum>;
+  readonly birthtime: InputMaybe<SortOrderEnum>;
+  readonly birthtimeMs: InputMaybe<SortOrderEnum>;
+  readonly changeTime: InputMaybe<SortOrderEnum>;
+  readonly children: InputMaybe<NodeSortInput>;
+  readonly ctime: InputMaybe<SortOrderEnum>;
+  readonly ctimeMs: InputMaybe<SortOrderEnum>;
+  readonly dev: InputMaybe<SortOrderEnum>;
+  readonly dir: InputMaybe<SortOrderEnum>;
+  readonly ext: InputMaybe<SortOrderEnum>;
+  readonly extension: InputMaybe<SortOrderEnum>;
+  readonly gid: InputMaybe<SortOrderEnum>;
+  readonly id: InputMaybe<SortOrderEnum>;
+  readonly ino: InputMaybe<SortOrderEnum>;
+  readonly internal: InputMaybe<InternalSortInput>;
+  readonly mode: InputMaybe<SortOrderEnum>;
+  readonly modifiedTime: InputMaybe<SortOrderEnum>;
+  readonly mtime: InputMaybe<SortOrderEnum>;
+  readonly mtimeMs: InputMaybe<SortOrderEnum>;
+  readonly name: InputMaybe<SortOrderEnum>;
+  readonly nlink: InputMaybe<SortOrderEnum>;
+  readonly parent: InputMaybe<NodeSortInput>;
+  readonly prettySize: InputMaybe<SortOrderEnum>;
+  readonly rdev: InputMaybe<SortOrderEnum>;
+  readonly relativeDirectory: InputMaybe<SortOrderEnum>;
+  readonly relativePath: InputMaybe<SortOrderEnum>;
+  readonly root: InputMaybe<SortOrderEnum>;
+  readonly size: InputMaybe<SortOrderEnum>;
+  readonly sourceInstanceName: InputMaybe<SortOrderEnum>;
+  readonly uid: InputMaybe<SortOrderEnum>;
 };
 
 type DuotoneGradient = {
@@ -415,6 +360,9 @@ type DuotoneGradient = {
   readonly opacity: InputMaybe<Scalars['Int']>;
   readonly shadow: Scalars['String'];
 };
+
+type FieldSelectorEnum =
+  | 'SELECT';
 
 type File = Node & {
   readonly absolutePath: Scalars['String'];
@@ -535,29 +483,29 @@ type FileConnection = {
 
 
 type FileConnection_distinctArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
 };
 
 
 type FileConnection_groupArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
 };
 
 
 type FileConnection_maxArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
 };
 
 
 type FileConnection_minArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
 };
 
 
 type FileConnection_sumArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
 };
 
 type FileEdge = {
@@ -566,555 +514,57 @@ type FileEdge = {
   readonly previous: Maybe<File>;
 };
 
+type FileFieldSelector = {
+  readonly absolutePath: InputMaybe<FieldSelectorEnum>;
+  readonly accessTime: InputMaybe<FieldSelectorEnum>;
+  readonly atime: InputMaybe<FieldSelectorEnum>;
+  readonly atimeMs: InputMaybe<FieldSelectorEnum>;
+  readonly base: InputMaybe<FieldSelectorEnum>;
+  readonly birthTime: InputMaybe<FieldSelectorEnum>;
+  readonly birthtime: InputMaybe<FieldSelectorEnum>;
+  readonly birthtimeMs: InputMaybe<FieldSelectorEnum>;
+  readonly blksize: InputMaybe<FieldSelectorEnum>;
+  readonly blocks: InputMaybe<FieldSelectorEnum>;
+  readonly changeTime: InputMaybe<FieldSelectorEnum>;
+  readonly childImageSharp: InputMaybe<ImageSharpFieldSelector>;
+  readonly children: InputMaybe<NodeFieldSelector>;
+  readonly childrenImageSharp: InputMaybe<ImageSharpFieldSelector>;
+  readonly ctime: InputMaybe<FieldSelectorEnum>;
+  readonly ctimeMs: InputMaybe<FieldSelectorEnum>;
+  readonly dev: InputMaybe<FieldSelectorEnum>;
+  readonly dir: InputMaybe<FieldSelectorEnum>;
+  readonly ext: InputMaybe<FieldSelectorEnum>;
+  readonly extension: InputMaybe<FieldSelectorEnum>;
+  readonly fields: InputMaybe<FileFieldsFieldSelector>;
+  readonly gid: InputMaybe<FieldSelectorEnum>;
+  readonly id: InputMaybe<FieldSelectorEnum>;
+  readonly ino: InputMaybe<FieldSelectorEnum>;
+  readonly internal: InputMaybe<InternalFieldSelector>;
+  readonly mode: InputMaybe<FieldSelectorEnum>;
+  readonly modifiedTime: InputMaybe<FieldSelectorEnum>;
+  readonly mtime: InputMaybe<FieldSelectorEnum>;
+  readonly mtimeMs: InputMaybe<FieldSelectorEnum>;
+  readonly name: InputMaybe<FieldSelectorEnum>;
+  readonly nlink: InputMaybe<FieldSelectorEnum>;
+  readonly parent: InputMaybe<NodeFieldSelector>;
+  readonly prettySize: InputMaybe<FieldSelectorEnum>;
+  readonly publicURL: InputMaybe<FieldSelectorEnum>;
+  readonly rdev: InputMaybe<FieldSelectorEnum>;
+  readonly relativeDirectory: InputMaybe<FieldSelectorEnum>;
+  readonly relativePath: InputMaybe<FieldSelectorEnum>;
+  readonly root: InputMaybe<FieldSelectorEnum>;
+  readonly size: InputMaybe<FieldSelectorEnum>;
+  readonly sourceInstanceName: InputMaybe<FieldSelectorEnum>;
+  readonly uid: InputMaybe<FieldSelectorEnum>;
+};
+
 type FileFields = {
   readonly imageMeta: Maybe<FileFieldsImageMeta>;
 };
 
-type FileFieldsEnum =
-  | 'absolutePath'
-  | 'accessTime'
-  | 'atime'
-  | 'atimeMs'
-  | 'base'
-  | 'birthTime'
-  | 'birthtime'
-  | 'birthtimeMs'
-  | 'blksize'
-  | 'blocks'
-  | 'changeTime'
-  | 'childImageSharp.children'
-  | 'childImageSharp.children.children'
-  | 'childImageSharp.children.children.children'
-  | 'childImageSharp.children.children.id'
-  | 'childImageSharp.children.id'
-  | 'childImageSharp.children.internal.content'
-  | 'childImageSharp.children.internal.contentDigest'
-  | 'childImageSharp.children.internal.contentFilePath'
-  | 'childImageSharp.children.internal.description'
-  | 'childImageSharp.children.internal.fieldOwners'
-  | 'childImageSharp.children.internal.ignoreType'
-  | 'childImageSharp.children.internal.mediaType'
-  | 'childImageSharp.children.internal.owner'
-  | 'childImageSharp.children.internal.type'
-  | 'childImageSharp.children.parent.children'
-  | 'childImageSharp.children.parent.id'
-  | 'childImageSharp.fixed.aspectRatio'
-  | 'childImageSharp.fixed.base64'
-  | 'childImageSharp.fixed.height'
-  | 'childImageSharp.fixed.originalName'
-  | 'childImageSharp.fixed.src'
-  | 'childImageSharp.fixed.srcSet'
-  | 'childImageSharp.fixed.srcSetWebp'
-  | 'childImageSharp.fixed.srcWebp'
-  | 'childImageSharp.fixed.tracedSVG'
-  | 'childImageSharp.fixed.width'
-  | 'childImageSharp.fluid.aspectRatio'
-  | 'childImageSharp.fluid.base64'
-  | 'childImageSharp.fluid.originalImg'
-  | 'childImageSharp.fluid.originalName'
-  | 'childImageSharp.fluid.presentationHeight'
-  | 'childImageSharp.fluid.presentationWidth'
-  | 'childImageSharp.fluid.sizes'
-  | 'childImageSharp.fluid.src'
-  | 'childImageSharp.fluid.srcSet'
-  | 'childImageSharp.fluid.srcSetWebp'
-  | 'childImageSharp.fluid.srcWebp'
-  | 'childImageSharp.fluid.tracedSVG'
-  | 'childImageSharp.gatsbyImageData'
-  | 'childImageSharp.id'
-  | 'childImageSharp.internal.content'
-  | 'childImageSharp.internal.contentDigest'
-  | 'childImageSharp.internal.contentFilePath'
-  | 'childImageSharp.internal.description'
-  | 'childImageSharp.internal.fieldOwners'
-  | 'childImageSharp.internal.ignoreType'
-  | 'childImageSharp.internal.mediaType'
-  | 'childImageSharp.internal.owner'
-  | 'childImageSharp.internal.type'
-  | 'childImageSharp.original.height'
-  | 'childImageSharp.original.src'
-  | 'childImageSharp.original.width'
-  | 'childImageSharp.parent.children'
-  | 'childImageSharp.parent.children.children'
-  | 'childImageSharp.parent.children.id'
-  | 'childImageSharp.parent.id'
-  | 'childImageSharp.parent.internal.content'
-  | 'childImageSharp.parent.internal.contentDigest'
-  | 'childImageSharp.parent.internal.contentFilePath'
-  | 'childImageSharp.parent.internal.description'
-  | 'childImageSharp.parent.internal.fieldOwners'
-  | 'childImageSharp.parent.internal.ignoreType'
-  | 'childImageSharp.parent.internal.mediaType'
-  | 'childImageSharp.parent.internal.owner'
-  | 'childImageSharp.parent.internal.type'
-  | 'childImageSharp.parent.parent.children'
-  | 'childImageSharp.parent.parent.id'
-  | 'childImageSharp.resize.aspectRatio'
-  | 'childImageSharp.resize.height'
-  | 'childImageSharp.resize.originalName'
-  | 'childImageSharp.resize.src'
-  | 'childImageSharp.resize.tracedSVG'
-  | 'childImageSharp.resize.width'
-  | 'children'
-  | 'childrenImageSharp'
-  | 'childrenImageSharp.children'
-  | 'childrenImageSharp.children.children'
-  | 'childrenImageSharp.children.children.children'
-  | 'childrenImageSharp.children.children.id'
-  | 'childrenImageSharp.children.id'
-  | 'childrenImageSharp.children.internal.content'
-  | 'childrenImageSharp.children.internal.contentDigest'
-  | 'childrenImageSharp.children.internal.contentFilePath'
-  | 'childrenImageSharp.children.internal.description'
-  | 'childrenImageSharp.children.internal.fieldOwners'
-  | 'childrenImageSharp.children.internal.ignoreType'
-  | 'childrenImageSharp.children.internal.mediaType'
-  | 'childrenImageSharp.children.internal.owner'
-  | 'childrenImageSharp.children.internal.type'
-  | 'childrenImageSharp.children.parent.children'
-  | 'childrenImageSharp.children.parent.id'
-  | 'childrenImageSharp.fixed.aspectRatio'
-  | 'childrenImageSharp.fixed.base64'
-  | 'childrenImageSharp.fixed.height'
-  | 'childrenImageSharp.fixed.originalName'
-  | 'childrenImageSharp.fixed.src'
-  | 'childrenImageSharp.fixed.srcSet'
-  | 'childrenImageSharp.fixed.srcSetWebp'
-  | 'childrenImageSharp.fixed.srcWebp'
-  | 'childrenImageSharp.fixed.tracedSVG'
-  | 'childrenImageSharp.fixed.width'
-  | 'childrenImageSharp.fluid.aspectRatio'
-  | 'childrenImageSharp.fluid.base64'
-  | 'childrenImageSharp.fluid.originalImg'
-  | 'childrenImageSharp.fluid.originalName'
-  | 'childrenImageSharp.fluid.presentationHeight'
-  | 'childrenImageSharp.fluid.presentationWidth'
-  | 'childrenImageSharp.fluid.sizes'
-  | 'childrenImageSharp.fluid.src'
-  | 'childrenImageSharp.fluid.srcSet'
-  | 'childrenImageSharp.fluid.srcSetWebp'
-  | 'childrenImageSharp.fluid.srcWebp'
-  | 'childrenImageSharp.fluid.tracedSVG'
-  | 'childrenImageSharp.gatsbyImageData'
-  | 'childrenImageSharp.id'
-  | 'childrenImageSharp.internal.content'
-  | 'childrenImageSharp.internal.contentDigest'
-  | 'childrenImageSharp.internal.contentFilePath'
-  | 'childrenImageSharp.internal.description'
-  | 'childrenImageSharp.internal.fieldOwners'
-  | 'childrenImageSharp.internal.ignoreType'
-  | 'childrenImageSharp.internal.mediaType'
-  | 'childrenImageSharp.internal.owner'
-  | 'childrenImageSharp.internal.type'
-  | 'childrenImageSharp.original.height'
-  | 'childrenImageSharp.original.src'
-  | 'childrenImageSharp.original.width'
-  | 'childrenImageSharp.parent.children'
-  | 'childrenImageSharp.parent.children.children'
-  | 'childrenImageSharp.parent.children.id'
-  | 'childrenImageSharp.parent.id'
-  | 'childrenImageSharp.parent.internal.content'
-  | 'childrenImageSharp.parent.internal.contentDigest'
-  | 'childrenImageSharp.parent.internal.contentFilePath'
-  | 'childrenImageSharp.parent.internal.description'
-  | 'childrenImageSharp.parent.internal.fieldOwners'
-  | 'childrenImageSharp.parent.internal.ignoreType'
-  | 'childrenImageSharp.parent.internal.mediaType'
-  | 'childrenImageSharp.parent.internal.owner'
-  | 'childrenImageSharp.parent.internal.type'
-  | 'childrenImageSharp.parent.parent.children'
-  | 'childrenImageSharp.parent.parent.id'
-  | 'childrenImageSharp.resize.aspectRatio'
-  | 'childrenImageSharp.resize.height'
-  | 'childrenImageSharp.resize.originalName'
-  | 'childrenImageSharp.resize.src'
-  | 'childrenImageSharp.resize.tracedSVG'
-  | 'childrenImageSharp.resize.width'
-  | 'children.children'
-  | 'children.children.children'
-  | 'children.children.children.children'
-  | 'children.children.children.id'
-  | 'children.children.id'
-  | 'children.children.internal.content'
-  | 'children.children.internal.contentDigest'
-  | 'children.children.internal.contentFilePath'
-  | 'children.children.internal.description'
-  | 'children.children.internal.fieldOwners'
-  | 'children.children.internal.ignoreType'
-  | 'children.children.internal.mediaType'
-  | 'children.children.internal.owner'
-  | 'children.children.internal.type'
-  | 'children.children.parent.children'
-  | 'children.children.parent.id'
-  | 'children.id'
-  | 'children.internal.content'
-  | 'children.internal.contentDigest'
-  | 'children.internal.contentFilePath'
-  | 'children.internal.description'
-  | 'children.internal.fieldOwners'
-  | 'children.internal.ignoreType'
-  | 'children.internal.mediaType'
-  | 'children.internal.owner'
-  | 'children.internal.type'
-  | 'children.parent.children'
-  | 'children.parent.children.children'
-  | 'children.parent.children.id'
-  | 'children.parent.id'
-  | 'children.parent.internal.content'
-  | 'children.parent.internal.contentDigest'
-  | 'children.parent.internal.contentFilePath'
-  | 'children.parent.internal.description'
-  | 'children.parent.internal.fieldOwners'
-  | 'children.parent.internal.ignoreType'
-  | 'children.parent.internal.mediaType'
-  | 'children.parent.internal.owner'
-  | 'children.parent.internal.type'
-  | 'children.parent.parent.children'
-  | 'children.parent.parent.id'
-  | 'ctime'
-  | 'ctimeMs'
-  | 'dev'
-  | 'dir'
-  | 'ext'
-  | 'extension'
-  | 'fields.imageMeta.dateTaken'
-  | 'fields.imageMeta.dominantHue'
-  | 'fields.imageMeta.meta.AlreadyApplied'
-  | 'fields.imageMeta.meta.ApertureValue'
-  | 'fields.imageMeta.meta.ApplicationRecordVersion'
-  | 'fields.imageMeta.meta.Artist'
-  | 'fields.imageMeta.meta.AutoLateralCA'
-  | 'fields.imageMeta.meta.AutoToneDigest'
-  | 'fields.imageMeta.meta.AutoToneDigestNoSat'
-  | 'fields.imageMeta.meta.AutoWhiteVersion'
-  | 'fields.imageMeta.meta.Blacks2012'
-  | 'fields.imageMeta.meta.BlueHue'
-  | 'fields.imageMeta.meta.BlueSaturation'
-  | 'fields.imageMeta.meta.BrightnessValue'
-  | 'fields.imageMeta.meta.Byline'
-  | 'fields.imageMeta.meta.CameraProfile'
-  | 'fields.imageMeta.meta.CameraProfileDigest'
-  | 'fields.imageMeta.meta.Caption'
-  | 'fields.imageMeta.meta.City'
-  | 'fields.imageMeta.meta.Clarity2012'
-  | 'fields.imageMeta.meta.ColorGradeBlending'
-  | 'fields.imageMeta.meta.ColorGradeGlobalHue'
-  | 'fields.imageMeta.meta.ColorGradeGlobalLum'
-  | 'fields.imageMeta.meta.ColorGradeGlobalSat'
-  | 'fields.imageMeta.meta.ColorGradeHighlightLum'
-  | 'fields.imageMeta.meta.ColorGradeMidtoneHue'
-  | 'fields.imageMeta.meta.ColorGradeMidtoneLum'
-  | 'fields.imageMeta.meta.ColorGradeMidtoneSat'
-  | 'fields.imageMeta.meta.ColorGradeShadowLum'
-  | 'fields.imageMeta.meta.ColorNoiseReduction'
-  | 'fields.imageMeta.meta.ColorNoiseReductionDetail'
-  | 'fields.imageMeta.meta.ColorNoiseReductionSmoothness'
-  | 'fields.imageMeta.meta.ColorSpace'
-  | 'fields.imageMeta.meta.Contrast'
-  | 'fields.imageMeta.meta.Contrast2012'
-  | 'fields.imageMeta.meta.ConvertToGrayscale'
-  | 'fields.imageMeta.meta.Country'
-  | 'fields.imageMeta.meta.CreateDate'
-  | 'fields.imageMeta.meta.CreatorTool'
-  | 'fields.imageMeta.meta.CropAngle'
-  | 'fields.imageMeta.meta.CropBottom'
-  | 'fields.imageMeta.meta.CropConstrainToWarp'
-  | 'fields.imageMeta.meta.CropLeft'
-  | 'fields.imageMeta.meta.CropRight'
-  | 'fields.imageMeta.meta.CropTop'
-  | 'fields.imageMeta.meta.CustomRendered'
-  | 'fields.imageMeta.meta.DateCreated'
-  | 'fields.imageMeta.meta.DateTimeOriginal'
-  | 'fields.imageMeta.meta.DefringeGreenAmount'
-  | 'fields.imageMeta.meta.DefringeGreenHueHi'
-  | 'fields.imageMeta.meta.DefringeGreenHueLo'
-  | 'fields.imageMeta.meta.DefringePurpleAmount'
-  | 'fields.imageMeta.meta.DefringePurpleHueHi'
-  | 'fields.imageMeta.meta.DefringePurpleHueLo'
-  | 'fields.imageMeta.meta.Dehaze'
-  | 'fields.imageMeta.meta.DigitalCreationDate'
-  | 'fields.imageMeta.meta.DigitalCreationTime'
-  | 'fields.imageMeta.meta.DigitalZoomRatio'
-  | 'fields.imageMeta.meta.DistortionCorrectionAlreadyApplied'
-  | 'fields.imageMeta.meta.DocumentID'
-  | 'fields.imageMeta.meta.EnhanceDetailsAlreadyApplied'
-  | 'fields.imageMeta.meta.EnhanceDetailsVersion'
-  | 'fields.imageMeta.meta.EnhanceSuperResolutionAlreadyApplied'
-  | 'fields.imageMeta.meta.EnhanceSuperResolutionScale'
-  | 'fields.imageMeta.meta.EnhanceSuperResolutionVersion'
-  | 'fields.imageMeta.meta.ExifImageHeight'
-  | 'fields.imageMeta.meta.ExifImageWidth'
-  | 'fields.imageMeta.meta.ExifVersion'
-  | 'fields.imageMeta.meta.Exposure2012'
-  | 'fields.imageMeta.meta.ExposureCompensation'
-  | 'fields.imageMeta.meta.ExposureMode'
-  | 'fields.imageMeta.meta.ExposureProgram'
-  | 'fields.imageMeta.meta.ExposureTime'
-  | 'fields.imageMeta.meta.FNumber'
-  | 'fields.imageMeta.meta.FileSource'
-  | 'fields.imageMeta.meta.Flash'
-  | 'fields.imageMeta.meta.FlashpixVersion'
-  | 'fields.imageMeta.meta.FocalLength'
-  | 'fields.imageMeta.meta.FocalLengthIn35mmFormat'
-  | 'fields.imageMeta.meta.FocalPlaneResolutionUnit'
-  | 'fields.imageMeta.meta.FocalPlaneXResolution'
-  | 'fields.imageMeta.meta.FocalPlaneYResolution'
-  | 'fields.imageMeta.meta.GPSAltitude'
-  | 'fields.imageMeta.meta.GPSDOP'
-  | 'fields.imageMeta.meta.GPSDateStamp'
-  | 'fields.imageMeta.meta.GPSDifferential'
-  | 'fields.imageMeta.meta.GPSHPositioningError'
-  | 'fields.imageMeta.meta.GPSLatitude'
-  | 'fields.imageMeta.meta.GPSLatitudeRef'
-  | 'fields.imageMeta.meta.GPSLongitude'
-  | 'fields.imageMeta.meta.GPSLongitudeRef'
-  | 'fields.imageMeta.meta.GPSMapDatum'
-  | 'fields.imageMeta.meta.GPSMeasureMode'
-  | 'fields.imageMeta.meta.GPSSpeed'
-  | 'fields.imageMeta.meta.GPSSpeedRef'
-  | 'fields.imageMeta.meta.GPSStatus'
-  | 'fields.imageMeta.meta.GPSTimeStamp'
-  | 'fields.imageMeta.meta.GPSTrack'
-  | 'fields.imageMeta.meta.GPSTrackRef'
-  | 'fields.imageMeta.meta.GPSVersionID'
-  | 'fields.imageMeta.meta.GrainAmount'
-  | 'fields.imageMeta.meta.GrainFrequency'
-  | 'fields.imageMeta.meta.GrainSeed'
-  | 'fields.imageMeta.meta.GrainSize'
-  | 'fields.imageMeta.meta.GrayMixerAqua'
-  | 'fields.imageMeta.meta.GrayMixerBlue'
-  | 'fields.imageMeta.meta.GrayMixerGreen'
-  | 'fields.imageMeta.meta.GrayMixerMagenta'
-  | 'fields.imageMeta.meta.GrayMixerOrange'
-  | 'fields.imageMeta.meta.GrayMixerPurple'
-  | 'fields.imageMeta.meta.GrayMixerRed'
-  | 'fields.imageMeta.meta.GrayMixerYellow'
-  | 'fields.imageMeta.meta.GreenHue'
-  | 'fields.imageMeta.meta.GreenSaturation'
-  | 'fields.imageMeta.meta.HasCrop'
-  | 'fields.imageMeta.meta.HasSettings'
-  | 'fields.imageMeta.meta.Highlights2012'
-  | 'fields.imageMeta.meta.History'
-  | 'fields.imageMeta.meta.HueAdjustmentAqua'
-  | 'fields.imageMeta.meta.HueAdjustmentBlue'
-  | 'fields.imageMeta.meta.HueAdjustmentGreen'
-  | 'fields.imageMeta.meta.HueAdjustmentMagenta'
-  | 'fields.imageMeta.meta.HueAdjustmentOrange'
-  | 'fields.imageMeta.meta.HueAdjustmentPurple'
-  | 'fields.imageMeta.meta.HueAdjustmentRed'
-  | 'fields.imageMeta.meta.HueAdjustmentYellow'
-  | 'fields.imageMeta.meta.ISO'
-  | 'fields.imageMeta.meta.ImageDescription'
-  | 'fields.imageMeta.meta.IncrementalTemperature'
-  | 'fields.imageMeta.meta.IncrementalTint'
-  | 'fields.imageMeta.meta.InstanceID'
-  | 'fields.imageMeta.meta.Keywords'
-  | 'fields.imageMeta.meta.LateralChromaticAberrationCorrectionAlreadyApplied'
-  | 'fields.imageMeta.meta.Lens'
-  | 'fields.imageMeta.meta.LensDistortInfo'
-  | 'fields.imageMeta.meta.LensID'
-  | 'fields.imageMeta.meta.LensInfo'
-  | 'fields.imageMeta.meta.LensMake'
-  | 'fields.imageMeta.meta.LensManualDistortionAmount'
-  | 'fields.imageMeta.meta.LensModel'
-  | 'fields.imageMeta.meta.LensProfileDigest'
-  | 'fields.imageMeta.meta.LensProfileDistortionScale'
-  | 'fields.imageMeta.meta.LensProfileEnable'
-  | 'fields.imageMeta.meta.LensProfileFilename'
-  | 'fields.imageMeta.meta.LensProfileIsEmbedded'
-  | 'fields.imageMeta.meta.LensProfileName'
-  | 'fields.imageMeta.meta.LensProfileSetup'
-  | 'fields.imageMeta.meta.LensProfileVignettingScale'
-  | 'fields.imageMeta.meta.LightSource'
-  | 'fields.imageMeta.meta.Location'
-  | 'fields.imageMeta.meta.LuminanceAdjustmentAqua'
-  | 'fields.imageMeta.meta.LuminanceAdjustmentBlue'
-  | 'fields.imageMeta.meta.LuminanceAdjustmentGreen'
-  | 'fields.imageMeta.meta.LuminanceAdjustmentMagenta'
-  | 'fields.imageMeta.meta.LuminanceAdjustmentOrange'
-  | 'fields.imageMeta.meta.LuminanceAdjustmentPurple'
-  | 'fields.imageMeta.meta.LuminanceAdjustmentRed'
-  | 'fields.imageMeta.meta.LuminanceAdjustmentYellow'
-  | 'fields.imageMeta.meta.LuminanceNoiseReductionContrast'
-  | 'fields.imageMeta.meta.LuminanceNoiseReductionDetail'
-  | 'fields.imageMeta.meta.LuminanceSmoothing'
-  | 'fields.imageMeta.meta.Make'
-  | 'fields.imageMeta.meta.MaxApertureValue'
-  | 'fields.imageMeta.meta.MetadataDate'
-  | 'fields.imageMeta.meta.MeteringMode'
-  | 'fields.imageMeta.meta.Model'
-  | 'fields.imageMeta.meta.ModifyDate'
-  | 'fields.imageMeta.meta.ObjectName'
-  | 'fields.imageMeta.meta.OffsetTime'
-  | 'fields.imageMeta.meta.OffsetTimeDigitized'
-  | 'fields.imageMeta.meta.OffsetTimeOriginal'
-  | 'fields.imageMeta.meta.Orientation'
-  | 'fields.imageMeta.meta.OriginalDocumentID'
-  | 'fields.imageMeta.meta.OverrideLookVignette'
-  | 'fields.imageMeta.meta.ParametricDarks'
-  | 'fields.imageMeta.meta.ParametricHighlightSplit'
-  | 'fields.imageMeta.meta.ParametricHighlights'
-  | 'fields.imageMeta.meta.ParametricLights'
-  | 'fields.imageMeta.meta.ParametricMidtoneSplit'
-  | 'fields.imageMeta.meta.ParametricShadowSplit'
-  | 'fields.imageMeta.meta.ParametricShadows'
-  | 'fields.imageMeta.meta.PerspectiveAspect'
-  | 'fields.imageMeta.meta.PerspectiveHorizontal'
-  | 'fields.imageMeta.meta.PerspectiveRotate'
-  | 'fields.imageMeta.meta.PerspectiveScale'
-  | 'fields.imageMeta.meta.PerspectiveUpright'
-  | 'fields.imageMeta.meta.PerspectiveVertical'
-  | 'fields.imageMeta.meta.PerspectiveX'
-  | 'fields.imageMeta.meta.PerspectiveY'
-  | 'fields.imageMeta.meta.PostCropVignetteAmount'
-  | 'fields.imageMeta.meta.PostCropVignetteFeather'
-  | 'fields.imageMeta.meta.PostCropVignetteHighlightContrast'
-  | 'fields.imageMeta.meta.PostCropVignetteMidpoint'
-  | 'fields.imageMeta.meta.PostCropVignetteRoundness'
-  | 'fields.imageMeta.meta.PostCropVignetteStyle'
-  | 'fields.imageMeta.meta.PreservedFileName'
-  | 'fields.imageMeta.meta.ProcessVersion'
-  | 'fields.imageMeta.meta.Rating'
-  | 'fields.imageMeta.meta.RawFileName'
-  | 'fields.imageMeta.meta.RecommendedExposureIndex'
-  | 'fields.imageMeta.meta.RedHue'
-  | 'fields.imageMeta.meta.RedSaturation'
-  | 'fields.imageMeta.meta.ResolutionUnit'
-  | 'fields.imageMeta.meta.SaturationAdjustmentAqua'
-  | 'fields.imageMeta.meta.SaturationAdjustmentBlue'
-  | 'fields.imageMeta.meta.SaturationAdjustmentGreen'
-  | 'fields.imageMeta.meta.SaturationAdjustmentMagenta'
-  | 'fields.imageMeta.meta.SaturationAdjustmentOrange'
-  | 'fields.imageMeta.meta.SaturationAdjustmentPurple'
-  | 'fields.imageMeta.meta.SaturationAdjustmentRed'
-  | 'fields.imageMeta.meta.SaturationAdjustmentYellow'
-  | 'fields.imageMeta.meta.SceneCaptureType'
-  | 'fields.imageMeta.meta.SceneType'
-  | 'fields.imageMeta.meta.SensingMethod'
-  | 'fields.imageMeta.meta.SensitivityType'
-  | 'fields.imageMeta.meta.ShadowTint'
-  | 'fields.imageMeta.meta.Shadows2012'
-  | 'fields.imageMeta.meta.SharpenDetail'
-  | 'fields.imageMeta.meta.SharpenEdgeMasking'
-  | 'fields.imageMeta.meta.SharpenRadius'
-  | 'fields.imageMeta.meta.ShutterSpeedValue'
-  | 'fields.imageMeta.meta.Software'
-  | 'fields.imageMeta.meta.SplitToningBalance'
-  | 'fields.imageMeta.meta.SplitToningHighlightHue'
-  | 'fields.imageMeta.meta.SplitToningHighlightSaturation'
-  | 'fields.imageMeta.meta.SplitToningShadowHue'
-  | 'fields.imageMeta.meta.SplitToningShadowSaturation'
-  | 'fields.imageMeta.meta.State'
-  | 'fields.imageMeta.meta.SubSecTimeDigitized'
-  | 'fields.imageMeta.meta.SubSecTimeOriginal'
-  | 'fields.imageMeta.meta.Sublocation'
-  | 'fields.imageMeta.meta.Temperature'
-  | 'fields.imageMeta.meta.Texture'
-  | 'fields.imageMeta.meta.TimeCreated'
-  | 'fields.imageMeta.meta.Tint'
-  | 'fields.imageMeta.meta.ToneCurveName2012'
-  | 'fields.imageMeta.meta.ToneCurvePV2012'
-  | 'fields.imageMeta.meta.ToneCurvePV2012Blue'
-  | 'fields.imageMeta.meta.ToneCurvePV2012Green'
-  | 'fields.imageMeta.meta.ToneCurvePV2012Red'
-  | 'fields.imageMeta.meta.UprightCenterMode'
-  | 'fields.imageMeta.meta.UprightCenterNormX'
-  | 'fields.imageMeta.meta.UprightCenterNormY'
-  | 'fields.imageMeta.meta.UprightDependentDigest'
-  | 'fields.imageMeta.meta.UprightFocalLength35mm'
-  | 'fields.imageMeta.meta.UprightFocalMode'
-  | 'fields.imageMeta.meta.UprightPreview'
-  | 'fields.imageMeta.meta.UprightTransformCount'
-  | 'fields.imageMeta.meta.UprightVersion'
-  | 'fields.imageMeta.meta.Version'
-  | 'fields.imageMeta.meta.Vibrance'
-  | 'fields.imageMeta.meta.VignetteAmount'
-  | 'fields.imageMeta.meta.VignetteCorrectionAlreadyApplied'
-  | 'fields.imageMeta.meta.WhiteBalance'
-  | 'fields.imageMeta.meta.Whites2012'
-  | 'fields.imageMeta.meta.XResolution'
-  | 'fields.imageMeta.meta.YCbCrPositioning'
-  | 'fields.imageMeta.meta.YResolution'
-  | 'fields.imageMeta.meta.creator'
-  | 'fields.imageMeta.meta.format'
-  | 'fields.imageMeta.meta.good'
-  | 'fields.imageMeta.meta.latitude'
-  | 'fields.imageMeta.meta.longitude'
-  | 'fields.imageMeta.vibrantHue'
-  | 'fields.imageMeta.vibrant.DarkMuted'
-  | 'fields.imageMeta.vibrant.DarkVibrant'
-  | 'fields.imageMeta.vibrant.LightMuted'
-  | 'fields.imageMeta.vibrant.LightVibrant'
-  | 'fields.imageMeta.vibrant.Muted'
-  | 'fields.imageMeta.vibrant.Vibrant'
-  | 'gid'
-  | 'id'
-  | 'ino'
-  | 'internal.content'
-  | 'internal.contentDigest'
-  | 'internal.contentFilePath'
-  | 'internal.description'
-  | 'internal.fieldOwners'
-  | 'internal.ignoreType'
-  | 'internal.mediaType'
-  | 'internal.owner'
-  | 'internal.type'
-  | 'mode'
-  | 'modifiedTime'
-  | 'mtime'
-  | 'mtimeMs'
-  | 'name'
-  | 'nlink'
-  | 'parent.children'
-  | 'parent.children.children'
-  | 'parent.children.children.children'
-  | 'parent.children.children.id'
-  | 'parent.children.id'
-  | 'parent.children.internal.content'
-  | 'parent.children.internal.contentDigest'
-  | 'parent.children.internal.contentFilePath'
-  | 'parent.children.internal.description'
-  | 'parent.children.internal.fieldOwners'
-  | 'parent.children.internal.ignoreType'
-  | 'parent.children.internal.mediaType'
-  | 'parent.children.internal.owner'
-  | 'parent.children.internal.type'
-  | 'parent.children.parent.children'
-  | 'parent.children.parent.id'
-  | 'parent.id'
-  | 'parent.internal.content'
-  | 'parent.internal.contentDigest'
-  | 'parent.internal.contentFilePath'
-  | 'parent.internal.description'
-  | 'parent.internal.fieldOwners'
-  | 'parent.internal.ignoreType'
-  | 'parent.internal.mediaType'
-  | 'parent.internal.owner'
-  | 'parent.internal.type'
-  | 'parent.parent.children'
-  | 'parent.parent.children.children'
-  | 'parent.parent.children.id'
-  | 'parent.parent.id'
-  | 'parent.parent.internal.content'
-  | 'parent.parent.internal.contentDigest'
-  | 'parent.parent.internal.contentFilePath'
-  | 'parent.parent.internal.description'
-  | 'parent.parent.internal.fieldOwners'
-  | 'parent.parent.internal.ignoreType'
-  | 'parent.parent.internal.mediaType'
-  | 'parent.parent.internal.owner'
-  | 'parent.parent.internal.type'
-  | 'parent.parent.parent.children'
-  | 'parent.parent.parent.id'
-  | 'prettySize'
-  | 'publicURL'
-  | 'rdev'
-  | 'relativeDirectory'
-  | 'relativePath'
-  | 'root'
-  | 'size'
-  | 'sourceInstanceName'
-  | 'uid';
+type FileFieldsFieldSelector = {
+  readonly imageMeta: InputMaybe<FileFieldsImageMetaFieldSelector>;
+};
 
 type FileFieldsFilterInput = {
   readonly imageMeta: InputMaybe<FileFieldsImageMetaFilterInput>;
@@ -1136,6 +586,14 @@ type FileFieldsImageMeta_dateTakenArgs = {
   locale: InputMaybe<Scalars['String']>;
 };
 
+type FileFieldsImageMetaFieldSelector = {
+  readonly dateTaken: InputMaybe<FieldSelectorEnum>;
+  readonly dominantHue: InputMaybe<FieldSelectorEnum>;
+  readonly meta: InputMaybe<FileFieldsImageMetaMetaFieldSelector>;
+  readonly vibrant: InputMaybe<FileFieldsImageMetaVibrantFieldSelector>;
+  readonly vibrantHue: InputMaybe<FieldSelectorEnum>;
+};
+
 type FileFieldsImageMetaFilterInput = {
   readonly dateTaken: InputMaybe<DateQueryOperatorInput>;
   readonly dominantHue: InputMaybe<FloatQueryOperatorInput>;
@@ -1145,283 +603,27 @@ type FileFieldsImageMetaFilterInput = {
 };
 
 type FileFieldsImageMetaMeta = {
-  readonly AlreadyApplied: Maybe<Scalars['Boolean']>;
   readonly ApertureValue: Maybe<Scalars['Float']>;
-  readonly ApplicationRecordVersion: Maybe<Scalars['String']>;
-  readonly Artist: Maybe<Scalars['String']>;
-  readonly AutoLateralCA: Maybe<Scalars['Int']>;
-  readonly AutoToneDigest: Maybe<Scalars['String']>;
-  readonly AutoToneDigestNoSat: Maybe<Scalars['String']>;
-  readonly AutoWhiteVersion: Maybe<Scalars['Int']>;
-  readonly Blacks2012: Maybe<Scalars['Int']>;
-  readonly BlueHue: Maybe<Scalars['Int']>;
-  readonly BlueSaturation: Maybe<Scalars['Int']>;
-  readonly BrightnessValue: Maybe<Scalars['Float']>;
-  readonly Byline: Maybe<Scalars['String']>;
-  readonly CameraProfile: Maybe<Scalars['String']>;
-  readonly CameraProfileDigest: Maybe<Scalars['String']>;
   readonly Caption: Maybe<Scalars['String']>;
   readonly City: Maybe<Scalars['String']>;
-  readonly Clarity2012: Maybe<Scalars['Int']>;
-  readonly ColorGradeBlending: Maybe<Scalars['Int']>;
-  readonly ColorGradeGlobalHue: Maybe<Scalars['Int']>;
-  readonly ColorGradeGlobalLum: Maybe<Scalars['Int']>;
-  readonly ColorGradeGlobalSat: Maybe<Scalars['Int']>;
-  readonly ColorGradeHighlightLum: Maybe<Scalars['Int']>;
-  readonly ColorGradeMidtoneHue: Maybe<Scalars['Int']>;
-  readonly ColorGradeMidtoneLum: Maybe<Scalars['Int']>;
-  readonly ColorGradeMidtoneSat: Maybe<Scalars['Int']>;
-  readonly ColorGradeShadowLum: Maybe<Scalars['Int']>;
-  readonly ColorNoiseReduction: Maybe<Scalars['Int']>;
-  readonly ColorNoiseReductionDetail: Maybe<Scalars['Int']>;
-  readonly ColorNoiseReductionSmoothness: Maybe<Scalars['Int']>;
-  readonly ColorSpace: Maybe<Scalars['Int']>;
-  readonly Contrast: Maybe<Scalars['String']>;
-  readonly Contrast2012: Maybe<Scalars['Int']>;
-  readonly ConvertToGrayscale: Maybe<Scalars['Boolean']>;
-  readonly Country: Maybe<Scalars['String']>;
   readonly CreateDate: Maybe<Scalars['Date']>;
-  readonly CreatorTool: Maybe<Scalars['String']>;
-  readonly CropAngle: Maybe<Scalars['Float']>;
-  readonly CropBottom: Maybe<Scalars['Float']>;
-  readonly CropConstrainToWarp: Maybe<Scalars['Int']>;
-  readonly CropLeft: Maybe<Scalars['Float']>;
-  readonly CropRight: Maybe<Scalars['Float']>;
-  readonly CropTop: Maybe<Scalars['Float']>;
-  readonly CustomRendered: Maybe<Scalars['String']>;
-  readonly DateCreated: Maybe<Scalars['Date']>;
   readonly DateTimeOriginal: Maybe<Scalars['Date']>;
-  readonly DefringeGreenAmount: Maybe<Scalars['Int']>;
-  readonly DefringeGreenHueHi: Maybe<Scalars['Int']>;
-  readonly DefringeGreenHueLo: Maybe<Scalars['Int']>;
-  readonly DefringePurpleAmount: Maybe<Scalars['Int']>;
-  readonly DefringePurpleHueHi: Maybe<Scalars['Int']>;
-  readonly DefringePurpleHueLo: Maybe<Scalars['Int']>;
-  readonly Dehaze: Maybe<Scalars['Int']>;
-  readonly DerivedFrom: Maybe<FileFieldsImageMetaMetaDerivedFrom>;
-  readonly DigitalCreationDate: Maybe<Scalars['Date']>;
-  readonly DigitalCreationTime: Maybe<Scalars['String']>;
-  readonly DigitalZoomRatio: Maybe<Scalars['Int']>;
-  readonly DistortionCorrectionAlreadyApplied: Maybe<Scalars['Boolean']>;
-  readonly DocumentID: Maybe<Scalars['String']>;
-  readonly EnhanceDetailsAlreadyApplied: Maybe<Scalars['Boolean']>;
-  readonly EnhanceDetailsVersion: Maybe<Scalars['Int']>;
-  readonly EnhanceSuperResolutionAlreadyApplied: Maybe<Scalars['Boolean']>;
-  readonly EnhanceSuperResolutionScale: Maybe<Scalars['String']>;
-  readonly EnhanceSuperResolutionVersion: Maybe<Scalars['Int']>;
-  readonly ExifImageHeight: Maybe<Scalars['Int']>;
-  readonly ExifImageWidth: Maybe<Scalars['Int']>;
-  readonly ExifVersion: Maybe<Scalars['String']>;
-  readonly Exposure2012: Maybe<Scalars['Float']>;
-  readonly ExposureCompensation: Maybe<Scalars['Float']>;
-  readonly ExposureMode: Maybe<Scalars['String']>;
-  readonly ExposureProgram: Maybe<Scalars['String']>;
   readonly ExposureTime: Maybe<Scalars['Float']>;
   readonly FNumber: Maybe<Scalars['Float']>;
-  readonly FileSource: Maybe<Scalars['String']>;
-  readonly Flash: Maybe<Scalars['String']>;
-  readonly FlashpixVersion: Maybe<Scalars['String']>;
   readonly FocalLength: Maybe<Scalars['Float']>;
-  readonly FocalLengthIn35mmFormat: Maybe<Scalars['Int']>;
-  readonly FocalPlaneResolutionUnit: Maybe<Scalars['String']>;
-  readonly FocalPlaneXResolution: Maybe<Scalars['Float']>;
-  readonly FocalPlaneYResolution: Maybe<Scalars['Float']>;
-  readonly GPSAltitude: Maybe<Scalars['Float']>;
-  readonly GPSDOP: Maybe<Scalars['Float']>;
-  readonly GPSDateStamp: Maybe<Scalars['String']>;
-  readonly GPSDifferential: Maybe<Scalars['Int']>;
-  readonly GPSHPositioningError: Maybe<Scalars['Float']>;
-  readonly GPSLatitude: Maybe<ReadonlyArray<Maybe<Scalars['Float']>>>;
-  readonly GPSLatitudeRef: Maybe<Scalars['String']>;
-  readonly GPSLongitude: Maybe<ReadonlyArray<Maybe<Scalars['Float']>>>;
-  readonly GPSLongitudeRef: Maybe<Scalars['String']>;
-  readonly GPSMapDatum: Maybe<Scalars['String']>;
-  readonly GPSMeasureMode: Maybe<Scalars['String']>;
-  readonly GPSSpeed: Maybe<Scalars['Float']>;
-  readonly GPSSpeedRef: Maybe<Scalars['String']>;
-  readonly GPSStatus: Maybe<Scalars['String']>;
-  readonly GPSTimeStamp: Maybe<Scalars['String']>;
-  readonly GPSTrack: Maybe<Scalars['Float']>;
-  readonly GPSTrackRef: Maybe<Scalars['String']>;
-  readonly GPSVersionID: Maybe<Scalars['String']>;
-  readonly GrainAmount: Maybe<Scalars['Int']>;
-  readonly GrainFrequency: Maybe<Scalars['Int']>;
-  readonly GrainSeed: Maybe<Scalars['Int']>;
-  readonly GrainSize: Maybe<Scalars['Int']>;
-  readonly GrayMixerAqua: Maybe<Scalars['Int']>;
-  readonly GrayMixerBlue: Maybe<Scalars['Int']>;
-  readonly GrayMixerGreen: Maybe<Scalars['Int']>;
-  readonly GrayMixerMagenta: Maybe<Scalars['Int']>;
-  readonly GrayMixerOrange: Maybe<Scalars['Int']>;
-  readonly GrayMixerPurple: Maybe<Scalars['Int']>;
-  readonly GrayMixerRed: Maybe<Scalars['Int']>;
-  readonly GrayMixerYellow: Maybe<Scalars['Int']>;
-  readonly GreenHue: Maybe<Scalars['Int']>;
-  readonly GreenSaturation: Maybe<Scalars['Int']>;
-  readonly HasCrop: Maybe<Scalars['Boolean']>;
-  readonly HasSettings: Maybe<Scalars['Boolean']>;
-  readonly Highlights2012: Maybe<Scalars['Int']>;
-  readonly History: Maybe<ReadonlyArray<Maybe<FileFieldsImageMetaMetaHistory>>>;
-  readonly HueAdjustmentAqua: Maybe<Scalars['Int']>;
-  readonly HueAdjustmentBlue: Maybe<Scalars['Int']>;
-  readonly HueAdjustmentGreen: Maybe<Scalars['Int']>;
-  readonly HueAdjustmentMagenta: Maybe<Scalars['Int']>;
-  readonly HueAdjustmentOrange: Maybe<Scalars['Int']>;
-  readonly HueAdjustmentPurple: Maybe<Scalars['Int']>;
-  readonly HueAdjustmentRed: Maybe<Scalars['Int']>;
-  readonly HueAdjustmentYellow: Maybe<Scalars['Int']>;
   readonly ISO: Maybe<Scalars['Int']>;
-  readonly ImageDescription: Maybe<Scalars['String']>;
-  readonly IncrementalTemperature: Maybe<Scalars['Int']>;
-  readonly IncrementalTint: Maybe<Scalars['Int']>;
-  readonly InstanceID: Maybe<Scalars['String']>;
   readonly Keywords: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-  readonly LateralChromaticAberrationCorrectionAlreadyApplied: Maybe<Scalars['Boolean']>;
-  readonly Lens: Maybe<Scalars['String']>;
-  readonly LensDistortInfo: Maybe<Scalars['String']>;
-  readonly LensID: Maybe<Scalars['Int']>;
-  readonly LensInfo: Maybe<ReadonlyArray<Maybe<Scalars['Float']>>>;
-  readonly LensMake: Maybe<Scalars['String']>;
-  readonly LensManualDistortionAmount: Maybe<Scalars['Int']>;
   readonly LensModel: Maybe<Scalars['String']>;
-  readonly LensProfileDigest: Maybe<Scalars['String']>;
-  readonly LensProfileDistortionScale: Maybe<Scalars['Int']>;
-  readonly LensProfileEnable: Maybe<Scalars['Int']>;
-  readonly LensProfileFilename: Maybe<Scalars['String']>;
-  readonly LensProfileIsEmbedded: Maybe<Scalars['Boolean']>;
-  readonly LensProfileName: Maybe<Scalars['String']>;
-  readonly LensProfileSetup: Maybe<Scalars['String']>;
-  readonly LensProfileVignettingScale: Maybe<Scalars['Int']>;
-  readonly LightSource: Maybe<Scalars['String']>;
-  readonly Location: Maybe<Scalars['String']>;
-  readonly Look: Maybe<FileFieldsImageMetaMetaLook>;
-  readonly LuminanceAdjustmentAqua: Maybe<Scalars['Int']>;
-  readonly LuminanceAdjustmentBlue: Maybe<Scalars['Int']>;
-  readonly LuminanceAdjustmentGreen: Maybe<Scalars['Int']>;
-  readonly LuminanceAdjustmentMagenta: Maybe<Scalars['Int']>;
-  readonly LuminanceAdjustmentOrange: Maybe<Scalars['Int']>;
-  readonly LuminanceAdjustmentPurple: Maybe<Scalars['Int']>;
-  readonly LuminanceAdjustmentRed: Maybe<Scalars['Int']>;
-  readonly LuminanceAdjustmentYellow: Maybe<Scalars['Int']>;
-  readonly LuminanceNoiseReductionContrast: Maybe<Scalars['Int']>;
-  readonly LuminanceNoiseReductionDetail: Maybe<Scalars['Int']>;
-  readonly LuminanceSmoothing: Maybe<Scalars['Int']>;
   readonly Make: Maybe<Scalars['String']>;
-  readonly MaxApertureValue: Maybe<Scalars['Float']>;
-  readonly MetadataDate: Maybe<Scalars['Date']>;
-  readonly MeteringMode: Maybe<Scalars['String']>;
   readonly Model: Maybe<Scalars['String']>;
-  readonly ModifyDate: Maybe<Scalars['Date']>;
   readonly ObjectName: Maybe<Scalars['String']>;
-  readonly OffsetTime: Maybe<Scalars['String']>;
-  readonly OffsetTimeDigitized: Maybe<Scalars['String']>;
-  readonly OffsetTimeOriginal: Maybe<Scalars['String']>;
-  readonly Orientation: Maybe<Scalars['String']>;
-  readonly OriginalDocumentID: Maybe<Scalars['String']>;
-  readonly OverrideLookVignette: Maybe<Scalars['Boolean']>;
-  readonly ParametricDarks: Maybe<Scalars['Int']>;
-  readonly ParametricHighlightSplit: Maybe<Scalars['Int']>;
-  readonly ParametricHighlights: Maybe<Scalars['Int']>;
-  readonly ParametricLights: Maybe<Scalars['Int']>;
-  readonly ParametricMidtoneSplit: Maybe<Scalars['Int']>;
-  readonly ParametricShadowSplit: Maybe<Scalars['Int']>;
-  readonly ParametricShadows: Maybe<Scalars['Int']>;
-  readonly PerspectiveAspect: Maybe<Scalars['Int']>;
-  readonly PerspectiveHorizontal: Maybe<Scalars['Int']>;
-  readonly PerspectiveRotate: Maybe<Scalars['Int']>;
-  readonly PerspectiveScale: Maybe<Scalars['Int']>;
-  readonly PerspectiveUpright: Maybe<Scalars['Int']>;
-  readonly PerspectiveVertical: Maybe<Scalars['Int']>;
-  readonly PerspectiveX: Maybe<Scalars['Int']>;
-  readonly PerspectiveY: Maybe<Scalars['Int']>;
-  readonly PostCropVignetteAmount: Maybe<Scalars['Int']>;
-  readonly PostCropVignetteFeather: Maybe<Scalars['Int']>;
-  readonly PostCropVignetteHighlightContrast: Maybe<Scalars['Int']>;
-  readonly PostCropVignetteMidpoint: Maybe<Scalars['Int']>;
-  readonly PostCropVignetteRoundness: Maybe<Scalars['Int']>;
-  readonly PostCropVignetteStyle: Maybe<Scalars['Int']>;
-  readonly PreservedFileName: Maybe<Scalars['String']>;
-  readonly ProcessVersion: Maybe<Scalars['Float']>;
   readonly Rating: Maybe<Scalars['Int']>;
-  readonly RawFileName: Maybe<Scalars['String']>;
-  readonly RecommendedExposureIndex: Maybe<Scalars['Int']>;
-  readonly RedHue: Maybe<Scalars['Int']>;
-  readonly RedSaturation: Maybe<Scalars['Int']>;
-  readonly ResolutionUnit: Maybe<Scalars['String']>;
-  readonly SaturationAdjustmentAqua: Maybe<Scalars['Int']>;
-  readonly SaturationAdjustmentBlue: Maybe<Scalars['Int']>;
-  readonly SaturationAdjustmentGreen: Maybe<Scalars['Int']>;
-  readonly SaturationAdjustmentMagenta: Maybe<Scalars['Int']>;
-  readonly SaturationAdjustmentOrange: Maybe<Scalars['Int']>;
-  readonly SaturationAdjustmentPurple: Maybe<Scalars['Int']>;
-  readonly SaturationAdjustmentRed: Maybe<Scalars['Int']>;
-  readonly SaturationAdjustmentYellow: Maybe<Scalars['Int']>;
-  readonly SceneCaptureType: Maybe<Scalars['String']>;
-  readonly SceneType: Maybe<Scalars['String']>;
-  readonly SensingMethod: Maybe<Scalars['String']>;
-  readonly SensitivityType: Maybe<Scalars['Int']>;
-  readonly ShadowTint: Maybe<Scalars['Int']>;
-  readonly Shadows2012: Maybe<Scalars['Int']>;
-  readonly SharpenDetail: Maybe<Scalars['Int']>;
-  readonly SharpenEdgeMasking: Maybe<Scalars['Int']>;
-  readonly SharpenRadius: Maybe<Scalars['Float']>;
   readonly ShutterSpeedValue: Maybe<Scalars['Float']>;
-  readonly Software: Maybe<Scalars['String']>;
-  readonly SplitToningBalance: Maybe<Scalars['Int']>;
-  readonly SplitToningHighlightHue: Maybe<Scalars['Int']>;
-  readonly SplitToningHighlightSaturation: Maybe<Scalars['Int']>;
-  readonly SplitToningShadowHue: Maybe<Scalars['Int']>;
-  readonly SplitToningShadowSaturation: Maybe<Scalars['Int']>;
   readonly State: Maybe<Scalars['String']>;
-  readonly SubSecTimeDigitized: Maybe<Scalars['String']>;
-  readonly SubSecTimeOriginal: Maybe<Scalars['String']>;
-  readonly Sublocation: Maybe<Scalars['String']>;
-  readonly Temperature: Maybe<Scalars['Int']>;
-  readonly Texture: Maybe<Scalars['Int']>;
-  readonly TimeCreated: Maybe<Scalars['String']>;
-  readonly Tint: Maybe<Scalars['Int']>;
-  readonly ToneCurveName2012: Maybe<Scalars['String']>;
-  readonly ToneCurvePV2012: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-  readonly ToneCurvePV2012Blue: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-  readonly ToneCurvePV2012Green: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-  readonly ToneCurvePV2012Red: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-  readonly UprightCenterMode: Maybe<Scalars['Int']>;
-  readonly UprightCenterNormX: Maybe<Scalars['Float']>;
-  readonly UprightCenterNormY: Maybe<Scalars['Float']>;
-  readonly UprightDependentDigest: Maybe<Scalars['String']>;
-  readonly UprightFocalLength35mm: Maybe<Scalars['Float']>;
-  readonly UprightFocalMode: Maybe<Scalars['Int']>;
-  readonly UprightPreview: Maybe<Scalars['Boolean']>;
-  readonly UprightTransformCount: Maybe<Scalars['Int']>;
-  readonly UprightVersion: Maybe<Scalars['Int']>;
-  readonly Version: Maybe<Scalars['Float']>;
-  readonly Vibrance: Maybe<Scalars['Int']>;
-  readonly VignetteAmount: Maybe<Scalars['Int']>;
-  readonly VignetteCorrectionAlreadyApplied: Maybe<Scalars['Boolean']>;
-  readonly WhiteBalance: Maybe<Scalars['String']>;
-  readonly Whites2012: Maybe<Scalars['Int']>;
-  readonly XResolution: Maybe<Scalars['Int']>;
-  readonly YCbCrPositioning: Maybe<Scalars['Int']>;
-  readonly YResolution: Maybe<Scalars['Int']>;
-  readonly creator: Maybe<Scalars['String']>;
-  readonly description: Maybe<FileFieldsImageMetaMetaDescription>;
-  readonly format: Maybe<Scalars['String']>;
-  readonly good: Maybe<Scalars['Boolean']>;
-  readonly latitude: Maybe<Scalars['Float']>;
-  readonly longitude: Maybe<Scalars['Float']>;
-  readonly title: Maybe<FileFieldsImageMetaMetaTitle>;
 };
 
 
 type FileFieldsImageMetaMeta_CreateDateArgs = {
-  difference: InputMaybe<Scalars['String']>;
-  formatString: InputMaybe<Scalars['String']>;
-  fromNow: InputMaybe<Scalars['Boolean']>;
-  locale: InputMaybe<Scalars['String']>;
-};
-
-
-type FileFieldsImageMetaMeta_DateCreatedArgs = {
   difference: InputMaybe<Scalars['String']>;
   formatString: InputMaybe<Scalars['String']>;
   fromNow: InputMaybe<Scalars['Boolean']>;
@@ -1436,540 +638,72 @@ type FileFieldsImageMetaMeta_DateTimeOriginalArgs = {
   locale: InputMaybe<Scalars['String']>;
 };
 
-
-type FileFieldsImageMetaMeta_DigitalCreationDateArgs = {
-  difference: InputMaybe<Scalars['String']>;
-  formatString: InputMaybe<Scalars['String']>;
-  fromNow: InputMaybe<Scalars['Boolean']>;
-  locale: InputMaybe<Scalars['String']>;
-};
-
-
-type FileFieldsImageMetaMeta_MetadataDateArgs = {
-  difference: InputMaybe<Scalars['String']>;
-  formatString: InputMaybe<Scalars['String']>;
-  fromNow: InputMaybe<Scalars['Boolean']>;
-  locale: InputMaybe<Scalars['String']>;
-};
-
-
-type FileFieldsImageMetaMeta_ModifyDateArgs = {
-  difference: InputMaybe<Scalars['String']>;
-  formatString: InputMaybe<Scalars['String']>;
-  fromNow: InputMaybe<Scalars['Boolean']>;
-  locale: InputMaybe<Scalars['String']>;
-};
-
-type FileFieldsImageMetaMetaDerivedFrom = {
-  readonly documentID: Maybe<Scalars['String']>;
-  readonly instanceID: Maybe<Scalars['String']>;
-  readonly originalDocumentID: Maybe<Scalars['String']>;
-};
-
-type FileFieldsImageMetaMetaDerivedFromFilterInput = {
-  readonly documentID: InputMaybe<StringQueryOperatorInput>;
-  readonly instanceID: InputMaybe<StringQueryOperatorInput>;
-  readonly originalDocumentID: InputMaybe<StringQueryOperatorInput>;
-};
-
-type FileFieldsImageMetaMetaDescription = {
-  readonly lang: Maybe<Scalars['String']>;
-  readonly value: Maybe<Scalars['String']>;
-};
-
-type FileFieldsImageMetaMetaDescriptionFilterInput = {
-  readonly lang: InputMaybe<StringQueryOperatorInput>;
-  readonly value: InputMaybe<StringQueryOperatorInput>;
+type FileFieldsImageMetaMetaFieldSelector = {
+  readonly ApertureValue: InputMaybe<FieldSelectorEnum>;
+  readonly Caption: InputMaybe<FieldSelectorEnum>;
+  readonly City: InputMaybe<FieldSelectorEnum>;
+  readonly CreateDate: InputMaybe<FieldSelectorEnum>;
+  readonly DateTimeOriginal: InputMaybe<FieldSelectorEnum>;
+  readonly ExposureTime: InputMaybe<FieldSelectorEnum>;
+  readonly FNumber: InputMaybe<FieldSelectorEnum>;
+  readonly FocalLength: InputMaybe<FieldSelectorEnum>;
+  readonly ISO: InputMaybe<FieldSelectorEnum>;
+  readonly Keywords: InputMaybe<FieldSelectorEnum>;
+  readonly LensModel: InputMaybe<FieldSelectorEnum>;
+  readonly Make: InputMaybe<FieldSelectorEnum>;
+  readonly Model: InputMaybe<FieldSelectorEnum>;
+  readonly ObjectName: InputMaybe<FieldSelectorEnum>;
+  readonly Rating: InputMaybe<FieldSelectorEnum>;
+  readonly ShutterSpeedValue: InputMaybe<FieldSelectorEnum>;
+  readonly State: InputMaybe<FieldSelectorEnum>;
 };
 
 type FileFieldsImageMetaMetaFilterInput = {
-  readonly AlreadyApplied: InputMaybe<BooleanQueryOperatorInput>;
   readonly ApertureValue: InputMaybe<FloatQueryOperatorInput>;
-  readonly ApplicationRecordVersion: InputMaybe<StringQueryOperatorInput>;
-  readonly Artist: InputMaybe<StringQueryOperatorInput>;
-  readonly AutoLateralCA: InputMaybe<IntQueryOperatorInput>;
-  readonly AutoToneDigest: InputMaybe<StringQueryOperatorInput>;
-  readonly AutoToneDigestNoSat: InputMaybe<StringQueryOperatorInput>;
-  readonly AutoWhiteVersion: InputMaybe<IntQueryOperatorInput>;
-  readonly Blacks2012: InputMaybe<IntQueryOperatorInput>;
-  readonly BlueHue: InputMaybe<IntQueryOperatorInput>;
-  readonly BlueSaturation: InputMaybe<IntQueryOperatorInput>;
-  readonly BrightnessValue: InputMaybe<FloatQueryOperatorInput>;
-  readonly Byline: InputMaybe<StringQueryOperatorInput>;
-  readonly CameraProfile: InputMaybe<StringQueryOperatorInput>;
-  readonly CameraProfileDigest: InputMaybe<StringQueryOperatorInput>;
   readonly Caption: InputMaybe<StringQueryOperatorInput>;
   readonly City: InputMaybe<StringQueryOperatorInput>;
-  readonly Clarity2012: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeBlending: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeGlobalHue: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeGlobalLum: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeGlobalSat: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeHighlightLum: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeMidtoneHue: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeMidtoneLum: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeMidtoneSat: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeShadowLum: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorNoiseReduction: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorNoiseReductionDetail: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorNoiseReductionSmoothness: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorSpace: InputMaybe<IntQueryOperatorInput>;
-  readonly Contrast: InputMaybe<StringQueryOperatorInput>;
-  readonly Contrast2012: InputMaybe<IntQueryOperatorInput>;
-  readonly ConvertToGrayscale: InputMaybe<BooleanQueryOperatorInput>;
-  readonly Country: InputMaybe<StringQueryOperatorInput>;
   readonly CreateDate: InputMaybe<DateQueryOperatorInput>;
-  readonly CreatorTool: InputMaybe<StringQueryOperatorInput>;
-  readonly CropAngle: InputMaybe<FloatQueryOperatorInput>;
-  readonly CropBottom: InputMaybe<FloatQueryOperatorInput>;
-  readonly CropConstrainToWarp: InputMaybe<IntQueryOperatorInput>;
-  readonly CropLeft: InputMaybe<FloatQueryOperatorInput>;
-  readonly CropRight: InputMaybe<FloatQueryOperatorInput>;
-  readonly CropTop: InputMaybe<FloatQueryOperatorInput>;
-  readonly CustomRendered: InputMaybe<StringQueryOperatorInput>;
-  readonly DateCreated: InputMaybe<DateQueryOperatorInput>;
   readonly DateTimeOriginal: InputMaybe<DateQueryOperatorInput>;
-  readonly DefringeGreenAmount: InputMaybe<IntQueryOperatorInput>;
-  readonly DefringeGreenHueHi: InputMaybe<IntQueryOperatorInput>;
-  readonly DefringeGreenHueLo: InputMaybe<IntQueryOperatorInput>;
-  readonly DefringePurpleAmount: InputMaybe<IntQueryOperatorInput>;
-  readonly DefringePurpleHueHi: InputMaybe<IntQueryOperatorInput>;
-  readonly DefringePurpleHueLo: InputMaybe<IntQueryOperatorInput>;
-  readonly Dehaze: InputMaybe<IntQueryOperatorInput>;
-  readonly DerivedFrom: InputMaybe<FileFieldsImageMetaMetaDerivedFromFilterInput>;
-  readonly DigitalCreationDate: InputMaybe<DateQueryOperatorInput>;
-  readonly DigitalCreationTime: InputMaybe<StringQueryOperatorInput>;
-  readonly DigitalZoomRatio: InputMaybe<IntQueryOperatorInput>;
-  readonly DistortionCorrectionAlreadyApplied: InputMaybe<BooleanQueryOperatorInput>;
-  readonly DocumentID: InputMaybe<StringQueryOperatorInput>;
-  readonly EnhanceDetailsAlreadyApplied: InputMaybe<BooleanQueryOperatorInput>;
-  readonly EnhanceDetailsVersion: InputMaybe<IntQueryOperatorInput>;
-  readonly EnhanceSuperResolutionAlreadyApplied: InputMaybe<BooleanQueryOperatorInput>;
-  readonly EnhanceSuperResolutionScale: InputMaybe<StringQueryOperatorInput>;
-  readonly EnhanceSuperResolutionVersion: InputMaybe<IntQueryOperatorInput>;
-  readonly ExifImageHeight: InputMaybe<IntQueryOperatorInput>;
-  readonly ExifImageWidth: InputMaybe<IntQueryOperatorInput>;
-  readonly ExifVersion: InputMaybe<StringQueryOperatorInput>;
-  readonly Exposure2012: InputMaybe<FloatQueryOperatorInput>;
-  readonly ExposureCompensation: InputMaybe<FloatQueryOperatorInput>;
-  readonly ExposureMode: InputMaybe<StringQueryOperatorInput>;
-  readonly ExposureProgram: InputMaybe<StringQueryOperatorInput>;
   readonly ExposureTime: InputMaybe<FloatQueryOperatorInput>;
   readonly FNumber: InputMaybe<FloatQueryOperatorInput>;
-  readonly FileSource: InputMaybe<StringQueryOperatorInput>;
-  readonly Flash: InputMaybe<StringQueryOperatorInput>;
-  readonly FlashpixVersion: InputMaybe<StringQueryOperatorInput>;
   readonly FocalLength: InputMaybe<FloatQueryOperatorInput>;
-  readonly FocalLengthIn35mmFormat: InputMaybe<IntQueryOperatorInput>;
-  readonly FocalPlaneResolutionUnit: InputMaybe<StringQueryOperatorInput>;
-  readonly FocalPlaneXResolution: InputMaybe<FloatQueryOperatorInput>;
-  readonly FocalPlaneYResolution: InputMaybe<FloatQueryOperatorInput>;
-  readonly GPSAltitude: InputMaybe<FloatQueryOperatorInput>;
-  readonly GPSDOP: InputMaybe<FloatQueryOperatorInput>;
-  readonly GPSDateStamp: InputMaybe<StringQueryOperatorInput>;
-  readonly GPSDifferential: InputMaybe<IntQueryOperatorInput>;
-  readonly GPSHPositioningError: InputMaybe<FloatQueryOperatorInput>;
-  readonly GPSLatitude: InputMaybe<FloatQueryOperatorInput>;
-  readonly GPSLatitudeRef: InputMaybe<StringQueryOperatorInput>;
-  readonly GPSLongitude: InputMaybe<FloatQueryOperatorInput>;
-  readonly GPSLongitudeRef: InputMaybe<StringQueryOperatorInput>;
-  readonly GPSMapDatum: InputMaybe<StringQueryOperatorInput>;
-  readonly GPSMeasureMode: InputMaybe<StringQueryOperatorInput>;
-  readonly GPSSpeed: InputMaybe<FloatQueryOperatorInput>;
-  readonly GPSSpeedRef: InputMaybe<StringQueryOperatorInput>;
-  readonly GPSStatus: InputMaybe<StringQueryOperatorInput>;
-  readonly GPSTimeStamp: InputMaybe<StringQueryOperatorInput>;
-  readonly GPSTrack: InputMaybe<FloatQueryOperatorInput>;
-  readonly GPSTrackRef: InputMaybe<StringQueryOperatorInput>;
-  readonly GPSVersionID: InputMaybe<StringQueryOperatorInput>;
-  readonly GrainAmount: InputMaybe<IntQueryOperatorInput>;
-  readonly GrainFrequency: InputMaybe<IntQueryOperatorInput>;
-  readonly GrainSeed: InputMaybe<IntQueryOperatorInput>;
-  readonly GrainSize: InputMaybe<IntQueryOperatorInput>;
-  readonly GrayMixerAqua: InputMaybe<IntQueryOperatorInput>;
-  readonly GrayMixerBlue: InputMaybe<IntQueryOperatorInput>;
-  readonly GrayMixerGreen: InputMaybe<IntQueryOperatorInput>;
-  readonly GrayMixerMagenta: InputMaybe<IntQueryOperatorInput>;
-  readonly GrayMixerOrange: InputMaybe<IntQueryOperatorInput>;
-  readonly GrayMixerPurple: InputMaybe<IntQueryOperatorInput>;
-  readonly GrayMixerRed: InputMaybe<IntQueryOperatorInput>;
-  readonly GrayMixerYellow: InputMaybe<IntQueryOperatorInput>;
-  readonly GreenHue: InputMaybe<IntQueryOperatorInput>;
-  readonly GreenSaturation: InputMaybe<IntQueryOperatorInput>;
-  readonly HasCrop: InputMaybe<BooleanQueryOperatorInput>;
-  readonly HasSettings: InputMaybe<BooleanQueryOperatorInput>;
-  readonly Highlights2012: InputMaybe<IntQueryOperatorInput>;
-  readonly History: InputMaybe<FileFieldsImageMetaMetaHistoryFilterListInput>;
-  readonly HueAdjustmentAqua: InputMaybe<IntQueryOperatorInput>;
-  readonly HueAdjustmentBlue: InputMaybe<IntQueryOperatorInput>;
-  readonly HueAdjustmentGreen: InputMaybe<IntQueryOperatorInput>;
-  readonly HueAdjustmentMagenta: InputMaybe<IntQueryOperatorInput>;
-  readonly HueAdjustmentOrange: InputMaybe<IntQueryOperatorInput>;
-  readonly HueAdjustmentPurple: InputMaybe<IntQueryOperatorInput>;
-  readonly HueAdjustmentRed: InputMaybe<IntQueryOperatorInput>;
-  readonly HueAdjustmentYellow: InputMaybe<IntQueryOperatorInput>;
   readonly ISO: InputMaybe<IntQueryOperatorInput>;
-  readonly ImageDescription: InputMaybe<StringQueryOperatorInput>;
-  readonly IncrementalTemperature: InputMaybe<IntQueryOperatorInput>;
-  readonly IncrementalTint: InputMaybe<IntQueryOperatorInput>;
-  readonly InstanceID: InputMaybe<StringQueryOperatorInput>;
   readonly Keywords: InputMaybe<StringQueryOperatorInput>;
-  readonly LateralChromaticAberrationCorrectionAlreadyApplied: InputMaybe<BooleanQueryOperatorInput>;
-  readonly Lens: InputMaybe<StringQueryOperatorInput>;
-  readonly LensDistortInfo: InputMaybe<StringQueryOperatorInput>;
-  readonly LensID: InputMaybe<IntQueryOperatorInput>;
-  readonly LensInfo: InputMaybe<FloatQueryOperatorInput>;
-  readonly LensMake: InputMaybe<StringQueryOperatorInput>;
-  readonly LensManualDistortionAmount: InputMaybe<IntQueryOperatorInput>;
   readonly LensModel: InputMaybe<StringQueryOperatorInput>;
-  readonly LensProfileDigest: InputMaybe<StringQueryOperatorInput>;
-  readonly LensProfileDistortionScale: InputMaybe<IntQueryOperatorInput>;
-  readonly LensProfileEnable: InputMaybe<IntQueryOperatorInput>;
-  readonly LensProfileFilename: InputMaybe<StringQueryOperatorInput>;
-  readonly LensProfileIsEmbedded: InputMaybe<BooleanQueryOperatorInput>;
-  readonly LensProfileName: InputMaybe<StringQueryOperatorInput>;
-  readonly LensProfileSetup: InputMaybe<StringQueryOperatorInput>;
-  readonly LensProfileVignettingScale: InputMaybe<IntQueryOperatorInput>;
-  readonly LightSource: InputMaybe<StringQueryOperatorInput>;
-  readonly Location: InputMaybe<StringQueryOperatorInput>;
-  readonly Look: InputMaybe<FileFieldsImageMetaMetaLookFilterInput>;
-  readonly LuminanceAdjustmentAqua: InputMaybe<IntQueryOperatorInput>;
-  readonly LuminanceAdjustmentBlue: InputMaybe<IntQueryOperatorInput>;
-  readonly LuminanceAdjustmentGreen: InputMaybe<IntQueryOperatorInput>;
-  readonly LuminanceAdjustmentMagenta: InputMaybe<IntQueryOperatorInput>;
-  readonly LuminanceAdjustmentOrange: InputMaybe<IntQueryOperatorInput>;
-  readonly LuminanceAdjustmentPurple: InputMaybe<IntQueryOperatorInput>;
-  readonly LuminanceAdjustmentRed: InputMaybe<IntQueryOperatorInput>;
-  readonly LuminanceAdjustmentYellow: InputMaybe<IntQueryOperatorInput>;
-  readonly LuminanceNoiseReductionContrast: InputMaybe<IntQueryOperatorInput>;
-  readonly LuminanceNoiseReductionDetail: InputMaybe<IntQueryOperatorInput>;
-  readonly LuminanceSmoothing: InputMaybe<IntQueryOperatorInput>;
   readonly Make: InputMaybe<StringQueryOperatorInput>;
-  readonly MaxApertureValue: InputMaybe<FloatQueryOperatorInput>;
-  readonly MetadataDate: InputMaybe<DateQueryOperatorInput>;
-  readonly MeteringMode: InputMaybe<StringQueryOperatorInput>;
   readonly Model: InputMaybe<StringQueryOperatorInput>;
-  readonly ModifyDate: InputMaybe<DateQueryOperatorInput>;
   readonly ObjectName: InputMaybe<StringQueryOperatorInput>;
-  readonly OffsetTime: InputMaybe<StringQueryOperatorInput>;
-  readonly OffsetTimeDigitized: InputMaybe<StringQueryOperatorInput>;
-  readonly OffsetTimeOriginal: InputMaybe<StringQueryOperatorInput>;
-  readonly Orientation: InputMaybe<StringQueryOperatorInput>;
-  readonly OriginalDocumentID: InputMaybe<StringQueryOperatorInput>;
-  readonly OverrideLookVignette: InputMaybe<BooleanQueryOperatorInput>;
-  readonly ParametricDarks: InputMaybe<IntQueryOperatorInput>;
-  readonly ParametricHighlightSplit: InputMaybe<IntQueryOperatorInput>;
-  readonly ParametricHighlights: InputMaybe<IntQueryOperatorInput>;
-  readonly ParametricLights: InputMaybe<IntQueryOperatorInput>;
-  readonly ParametricMidtoneSplit: InputMaybe<IntQueryOperatorInput>;
-  readonly ParametricShadowSplit: InputMaybe<IntQueryOperatorInput>;
-  readonly ParametricShadows: InputMaybe<IntQueryOperatorInput>;
-  readonly PerspectiveAspect: InputMaybe<IntQueryOperatorInput>;
-  readonly PerspectiveHorizontal: InputMaybe<IntQueryOperatorInput>;
-  readonly PerspectiveRotate: InputMaybe<IntQueryOperatorInput>;
-  readonly PerspectiveScale: InputMaybe<IntQueryOperatorInput>;
-  readonly PerspectiveUpright: InputMaybe<IntQueryOperatorInput>;
-  readonly PerspectiveVertical: InputMaybe<IntQueryOperatorInput>;
-  readonly PerspectiveX: InputMaybe<IntQueryOperatorInput>;
-  readonly PerspectiveY: InputMaybe<IntQueryOperatorInput>;
-  readonly PostCropVignetteAmount: InputMaybe<IntQueryOperatorInput>;
-  readonly PostCropVignetteFeather: InputMaybe<IntQueryOperatorInput>;
-  readonly PostCropVignetteHighlightContrast: InputMaybe<IntQueryOperatorInput>;
-  readonly PostCropVignetteMidpoint: InputMaybe<IntQueryOperatorInput>;
-  readonly PostCropVignetteRoundness: InputMaybe<IntQueryOperatorInput>;
-  readonly PostCropVignetteStyle: InputMaybe<IntQueryOperatorInput>;
-  readonly PreservedFileName: InputMaybe<StringQueryOperatorInput>;
-  readonly ProcessVersion: InputMaybe<FloatQueryOperatorInput>;
   readonly Rating: InputMaybe<IntQueryOperatorInput>;
-  readonly RawFileName: InputMaybe<StringQueryOperatorInput>;
-  readonly RecommendedExposureIndex: InputMaybe<IntQueryOperatorInput>;
-  readonly RedHue: InputMaybe<IntQueryOperatorInput>;
-  readonly RedSaturation: InputMaybe<IntQueryOperatorInput>;
-  readonly ResolutionUnit: InputMaybe<StringQueryOperatorInput>;
-  readonly SaturationAdjustmentAqua: InputMaybe<IntQueryOperatorInput>;
-  readonly SaturationAdjustmentBlue: InputMaybe<IntQueryOperatorInput>;
-  readonly SaturationAdjustmentGreen: InputMaybe<IntQueryOperatorInput>;
-  readonly SaturationAdjustmentMagenta: InputMaybe<IntQueryOperatorInput>;
-  readonly SaturationAdjustmentOrange: InputMaybe<IntQueryOperatorInput>;
-  readonly SaturationAdjustmentPurple: InputMaybe<IntQueryOperatorInput>;
-  readonly SaturationAdjustmentRed: InputMaybe<IntQueryOperatorInput>;
-  readonly SaturationAdjustmentYellow: InputMaybe<IntQueryOperatorInput>;
-  readonly SceneCaptureType: InputMaybe<StringQueryOperatorInput>;
-  readonly SceneType: InputMaybe<StringQueryOperatorInput>;
-  readonly SensingMethod: InputMaybe<StringQueryOperatorInput>;
-  readonly SensitivityType: InputMaybe<IntQueryOperatorInput>;
-  readonly ShadowTint: InputMaybe<IntQueryOperatorInput>;
-  readonly Shadows2012: InputMaybe<IntQueryOperatorInput>;
-  readonly SharpenDetail: InputMaybe<IntQueryOperatorInput>;
-  readonly SharpenEdgeMasking: InputMaybe<IntQueryOperatorInput>;
-  readonly SharpenRadius: InputMaybe<FloatQueryOperatorInput>;
   readonly ShutterSpeedValue: InputMaybe<FloatQueryOperatorInput>;
-  readonly Software: InputMaybe<StringQueryOperatorInput>;
-  readonly SplitToningBalance: InputMaybe<IntQueryOperatorInput>;
-  readonly SplitToningHighlightHue: InputMaybe<IntQueryOperatorInput>;
-  readonly SplitToningHighlightSaturation: InputMaybe<IntQueryOperatorInput>;
-  readonly SplitToningShadowHue: InputMaybe<IntQueryOperatorInput>;
-  readonly SplitToningShadowSaturation: InputMaybe<IntQueryOperatorInput>;
   readonly State: InputMaybe<StringQueryOperatorInput>;
-  readonly SubSecTimeDigitized: InputMaybe<StringQueryOperatorInput>;
-  readonly SubSecTimeOriginal: InputMaybe<StringQueryOperatorInput>;
-  readonly Sublocation: InputMaybe<StringQueryOperatorInput>;
-  readonly Temperature: InputMaybe<IntQueryOperatorInput>;
-  readonly Texture: InputMaybe<IntQueryOperatorInput>;
-  readonly TimeCreated: InputMaybe<StringQueryOperatorInput>;
-  readonly Tint: InputMaybe<IntQueryOperatorInput>;
-  readonly ToneCurveName2012: InputMaybe<StringQueryOperatorInput>;
-  readonly ToneCurvePV2012: InputMaybe<StringQueryOperatorInput>;
-  readonly ToneCurvePV2012Blue: InputMaybe<StringQueryOperatorInput>;
-  readonly ToneCurvePV2012Green: InputMaybe<StringQueryOperatorInput>;
-  readonly ToneCurvePV2012Red: InputMaybe<StringQueryOperatorInput>;
-  readonly UprightCenterMode: InputMaybe<IntQueryOperatorInput>;
-  readonly UprightCenterNormX: InputMaybe<FloatQueryOperatorInput>;
-  readonly UprightCenterNormY: InputMaybe<FloatQueryOperatorInput>;
-  readonly UprightDependentDigest: InputMaybe<StringQueryOperatorInput>;
-  readonly UprightFocalLength35mm: InputMaybe<FloatQueryOperatorInput>;
-  readonly UprightFocalMode: InputMaybe<IntQueryOperatorInput>;
-  readonly UprightPreview: InputMaybe<BooleanQueryOperatorInput>;
-  readonly UprightTransformCount: InputMaybe<IntQueryOperatorInput>;
-  readonly UprightVersion: InputMaybe<IntQueryOperatorInput>;
-  readonly Version: InputMaybe<FloatQueryOperatorInput>;
-  readonly Vibrance: InputMaybe<IntQueryOperatorInput>;
-  readonly VignetteAmount: InputMaybe<IntQueryOperatorInput>;
-  readonly VignetteCorrectionAlreadyApplied: InputMaybe<BooleanQueryOperatorInput>;
-  readonly WhiteBalance: InputMaybe<StringQueryOperatorInput>;
-  readonly Whites2012: InputMaybe<IntQueryOperatorInput>;
-  readonly XResolution: InputMaybe<IntQueryOperatorInput>;
-  readonly YCbCrPositioning: InputMaybe<IntQueryOperatorInput>;
-  readonly YResolution: InputMaybe<IntQueryOperatorInput>;
-  readonly creator: InputMaybe<StringQueryOperatorInput>;
-  readonly description: InputMaybe<FileFieldsImageMetaMetaDescriptionFilterInput>;
-  readonly format: InputMaybe<StringQueryOperatorInput>;
-  readonly good: InputMaybe<BooleanQueryOperatorInput>;
-  readonly latitude: InputMaybe<FloatQueryOperatorInput>;
-  readonly longitude: InputMaybe<FloatQueryOperatorInput>;
-  readonly title: InputMaybe<FileFieldsImageMetaMetaTitleFilterInput>;
 };
 
-type FileFieldsImageMetaMetaHistory = {
-  readonly action: Maybe<Scalars['String']>;
-  readonly changed: Maybe<Scalars['String']>;
-  readonly instanceID: Maybe<Scalars['String']>;
-  readonly parameters: Maybe<Scalars['String']>;
-  readonly softwareAgent: Maybe<Scalars['String']>;
-  readonly when: Maybe<Scalars['Date']>;
+type FileFieldsImageMetaMetaSortInput = {
+  readonly ApertureValue: InputMaybe<SortOrderEnum>;
+  readonly Caption: InputMaybe<SortOrderEnum>;
+  readonly City: InputMaybe<SortOrderEnum>;
+  readonly CreateDate: InputMaybe<SortOrderEnum>;
+  readonly DateTimeOriginal: InputMaybe<SortOrderEnum>;
+  readonly ExposureTime: InputMaybe<SortOrderEnum>;
+  readonly FNumber: InputMaybe<SortOrderEnum>;
+  readonly FocalLength: InputMaybe<SortOrderEnum>;
+  readonly ISO: InputMaybe<SortOrderEnum>;
+  readonly Keywords: InputMaybe<SortOrderEnum>;
+  readonly LensModel: InputMaybe<SortOrderEnum>;
+  readonly Make: InputMaybe<SortOrderEnum>;
+  readonly Model: InputMaybe<SortOrderEnum>;
+  readonly ObjectName: InputMaybe<SortOrderEnum>;
+  readonly Rating: InputMaybe<SortOrderEnum>;
+  readonly ShutterSpeedValue: InputMaybe<SortOrderEnum>;
+  readonly State: InputMaybe<SortOrderEnum>;
 };
 
-
-type FileFieldsImageMetaMetaHistory_whenArgs = {
-  difference: InputMaybe<Scalars['String']>;
-  formatString: InputMaybe<Scalars['String']>;
-  fromNow: InputMaybe<Scalars['Boolean']>;
-  locale: InputMaybe<Scalars['String']>;
-};
-
-type FileFieldsImageMetaMetaHistoryFilterInput = {
-  readonly action: InputMaybe<StringQueryOperatorInput>;
-  readonly changed: InputMaybe<StringQueryOperatorInput>;
-  readonly instanceID: InputMaybe<StringQueryOperatorInput>;
-  readonly parameters: InputMaybe<StringQueryOperatorInput>;
-  readonly softwareAgent: InputMaybe<StringQueryOperatorInput>;
-  readonly when: InputMaybe<DateQueryOperatorInput>;
-};
-
-type FileFieldsImageMetaMetaHistoryFilterListInput = {
-  readonly elemMatch: InputMaybe<FileFieldsImageMetaMetaHistoryFilterInput>;
-};
-
-type FileFieldsImageMetaMetaLook = {
-  readonly Description: Maybe<FileFieldsImageMetaMetaLookDescription>;
-};
-
-type FileFieldsImageMetaMetaLookDescription = {
-  readonly Amount: Maybe<Scalars['Float']>;
-  readonly Cluster: Maybe<Scalars['String']>;
-  readonly Copyright: Maybe<Scalars['String']>;
-  readonly Group: Maybe<FileFieldsImageMetaMetaLookDescriptionGroup>;
-  readonly Name: Maybe<Scalars['String']>;
-  readonly Parameters: Maybe<FileFieldsImageMetaMetaLookDescriptionParameters>;
-  readonly SupportsAmount: Maybe<Scalars['Boolean']>;
-  readonly SupportsMonochrome: Maybe<Scalars['Boolean']>;
-  readonly SupportsOutputReferred: Maybe<Scalars['Boolean']>;
-  readonly UUID: Maybe<Scalars['String']>;
-};
-
-type FileFieldsImageMetaMetaLookDescriptionFilterInput = {
-  readonly Amount: InputMaybe<FloatQueryOperatorInput>;
-  readonly Cluster: InputMaybe<StringQueryOperatorInput>;
-  readonly Copyright: InputMaybe<StringQueryOperatorInput>;
-  readonly Group: InputMaybe<FileFieldsImageMetaMetaLookDescriptionGroupFilterInput>;
-  readonly Name: InputMaybe<StringQueryOperatorInput>;
-  readonly Parameters: InputMaybe<FileFieldsImageMetaMetaLookDescriptionParametersFilterInput>;
-  readonly SupportsAmount: InputMaybe<BooleanQueryOperatorInput>;
-  readonly SupportsMonochrome: InputMaybe<BooleanQueryOperatorInput>;
-  readonly SupportsOutputReferred: InputMaybe<BooleanQueryOperatorInput>;
-  readonly UUID: InputMaybe<StringQueryOperatorInput>;
-};
-
-type FileFieldsImageMetaMetaLookDescriptionGroup = {
-  readonly lang: Maybe<Scalars['String']>;
-  readonly value: Maybe<Scalars['String']>;
-};
-
-type FileFieldsImageMetaMetaLookDescriptionGroupFilterInput = {
-  readonly lang: InputMaybe<StringQueryOperatorInput>;
-  readonly value: InputMaybe<StringQueryOperatorInput>;
-};
-
-type FileFieldsImageMetaMetaLookDescriptionParameters = {
-  readonly ConvertToGrayscale: Maybe<Scalars['Boolean']>;
-  readonly Description: Maybe<FileFieldsImageMetaMetaLookDescriptionParametersDescription>;
-  readonly LookTable: Maybe<Scalars['String']>;
-  readonly ProcessVersion: Maybe<Scalars['Int']>;
-  readonly RGBTable: Maybe<Scalars['String']>;
-  readonly RGBTableAmount: Maybe<Scalars['Float']>;
-  readonly Version: Maybe<Scalars['Float']>;
-};
-
-type FileFieldsImageMetaMetaLookDescriptionParametersDescription = {
-  readonly Blacks2012: Maybe<Scalars['Int']>;
-  readonly CameraProfile: Maybe<Scalars['String']>;
-  readonly Clarity2012: Maybe<Scalars['Int']>;
-  readonly ColorGradeBlending: Maybe<Scalars['Int']>;
-  readonly ColorGradeGlobalHue: Maybe<Scalars['Int']>;
-  readonly ColorGradeGlobalLum: Maybe<Scalars['Int']>;
-  readonly ColorGradeGlobalSat: Maybe<Scalars['Int']>;
-  readonly ColorGradeHighlightLum: Maybe<Scalars['Int']>;
-  readonly ColorGradeMidtoneHue: Maybe<Scalars['Int']>;
-  readonly ColorGradeMidtoneLum: Maybe<Scalars['Int']>;
-  readonly ColorGradeMidtoneSat: Maybe<Scalars['Int']>;
-  readonly ColorGradeShadowLum: Maybe<Scalars['Int']>;
-  readonly Contrast2012: Maybe<Scalars['Int']>;
-  readonly ConvertToGrayscale: Maybe<Scalars['Boolean']>;
-  readonly Exposure2012: Maybe<Scalars['Float']>;
-  readonly Highlights2012: Maybe<Scalars['Int']>;
-  readonly HueAdjustmentBlue: Maybe<Scalars['Int']>;
-  readonly HueAdjustmentGreen: Maybe<Scalars['Int']>;
-  readonly HueAdjustmentOrange: Maybe<Scalars['Int']>;
-  readonly HueAdjustmentRed: Maybe<Scalars['Int']>;
-  readonly HueAdjustmentYellow: Maybe<Scalars['Int']>;
-  readonly LookTable: Maybe<Scalars['String']>;
-  readonly LuminanceAdjustmentBlue: Maybe<Scalars['Int']>;
-  readonly LuminanceAdjustmentGreen: Maybe<Scalars['Int']>;
-  readonly LuminanceAdjustmentOrange: Maybe<Scalars['Int']>;
-  readonly LuminanceAdjustmentRed: Maybe<Scalars['Int']>;
-  readonly LuminanceAdjustmentYellow: Maybe<Scalars['Int']>;
-  readonly ParametricDarks: Maybe<Scalars['Int']>;
-  readonly ParametricHighlightSplit: Maybe<Scalars['Int']>;
-  readonly ParametricHighlights: Maybe<Scalars['Int']>;
-  readonly ParametricLights: Maybe<Scalars['Int']>;
-  readonly ParametricMidtoneSplit: Maybe<Scalars['Int']>;
-  readonly ParametricShadowSplit: Maybe<Scalars['Int']>;
-  readonly ParametricShadows: Maybe<Scalars['Int']>;
-  readonly ProcessVersion: Maybe<Scalars['Int']>;
-  readonly RGBTable: Maybe<Scalars['String']>;
-  readonly RGBTableAmount: Maybe<Scalars['Float']>;
-  readonly SaturationAdjustmentBlue: Maybe<Scalars['Int']>;
-  readonly SaturationAdjustmentGreen: Maybe<Scalars['Int']>;
-  readonly SaturationAdjustmentOrange: Maybe<Scalars['Int']>;
-  readonly SaturationAdjustmentPurple: Maybe<Scalars['Int']>;
-  readonly SaturationAdjustmentRed: Maybe<Scalars['Int']>;
-  readonly SaturationAdjustmentYellow: Maybe<Scalars['Int']>;
-  readonly Shadows2012: Maybe<Scalars['Int']>;
-  readonly SplitToningBalance: Maybe<Scalars['Int']>;
-  readonly SplitToningHighlightHue: Maybe<Scalars['Int']>;
-  readonly SplitToningHighlightSaturation: Maybe<Scalars['Int']>;
-  readonly SplitToningShadowHue: Maybe<Scalars['Int']>;
-  readonly SplitToningShadowSaturation: Maybe<Scalars['Int']>;
-  readonly Texture: Maybe<Scalars['Int']>;
-  readonly ToneCurvePV2012: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-  readonly ToneCurvePV2012Blue: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-  readonly ToneCurvePV2012Green: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-  readonly ToneCurvePV2012Red: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-  readonly Version: Maybe<Scalars['Float']>;
-  readonly Whites2012: Maybe<Scalars['Int']>;
-};
-
-type FileFieldsImageMetaMetaLookDescriptionParametersDescriptionFilterInput = {
-  readonly Blacks2012: InputMaybe<IntQueryOperatorInput>;
-  readonly CameraProfile: InputMaybe<StringQueryOperatorInput>;
-  readonly Clarity2012: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeBlending: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeGlobalHue: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeGlobalLum: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeGlobalSat: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeHighlightLum: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeMidtoneHue: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeMidtoneLum: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeMidtoneSat: InputMaybe<IntQueryOperatorInput>;
-  readonly ColorGradeShadowLum: InputMaybe<IntQueryOperatorInput>;
-  readonly Contrast2012: InputMaybe<IntQueryOperatorInput>;
-  readonly ConvertToGrayscale: InputMaybe<BooleanQueryOperatorInput>;
-  readonly Exposure2012: InputMaybe<FloatQueryOperatorInput>;
-  readonly Highlights2012: InputMaybe<IntQueryOperatorInput>;
-  readonly HueAdjustmentBlue: InputMaybe<IntQueryOperatorInput>;
-  readonly HueAdjustmentGreen: InputMaybe<IntQueryOperatorInput>;
-  readonly HueAdjustmentOrange: InputMaybe<IntQueryOperatorInput>;
-  readonly HueAdjustmentRed: InputMaybe<IntQueryOperatorInput>;
-  readonly HueAdjustmentYellow: InputMaybe<IntQueryOperatorInput>;
-  readonly LookTable: InputMaybe<StringQueryOperatorInput>;
-  readonly LuminanceAdjustmentBlue: InputMaybe<IntQueryOperatorInput>;
-  readonly LuminanceAdjustmentGreen: InputMaybe<IntQueryOperatorInput>;
-  readonly LuminanceAdjustmentOrange: InputMaybe<IntQueryOperatorInput>;
-  readonly LuminanceAdjustmentRed: InputMaybe<IntQueryOperatorInput>;
-  readonly LuminanceAdjustmentYellow: InputMaybe<IntQueryOperatorInput>;
-  readonly ParametricDarks: InputMaybe<IntQueryOperatorInput>;
-  readonly ParametricHighlightSplit: InputMaybe<IntQueryOperatorInput>;
-  readonly ParametricHighlights: InputMaybe<IntQueryOperatorInput>;
-  readonly ParametricLights: InputMaybe<IntQueryOperatorInput>;
-  readonly ParametricMidtoneSplit: InputMaybe<IntQueryOperatorInput>;
-  readonly ParametricShadowSplit: InputMaybe<IntQueryOperatorInput>;
-  readonly ParametricShadows: InputMaybe<IntQueryOperatorInput>;
-  readonly ProcessVersion: InputMaybe<IntQueryOperatorInput>;
-  readonly RGBTable: InputMaybe<StringQueryOperatorInput>;
-  readonly RGBTableAmount: InputMaybe<FloatQueryOperatorInput>;
-  readonly SaturationAdjustmentBlue: InputMaybe<IntQueryOperatorInput>;
-  readonly SaturationAdjustmentGreen: InputMaybe<IntQueryOperatorInput>;
-  readonly SaturationAdjustmentOrange: InputMaybe<IntQueryOperatorInput>;
-  readonly SaturationAdjustmentPurple: InputMaybe<IntQueryOperatorInput>;
-  readonly SaturationAdjustmentRed: InputMaybe<IntQueryOperatorInput>;
-  readonly SaturationAdjustmentYellow: InputMaybe<IntQueryOperatorInput>;
-  readonly Shadows2012: InputMaybe<IntQueryOperatorInput>;
-  readonly SplitToningBalance: InputMaybe<IntQueryOperatorInput>;
-  readonly SplitToningHighlightHue: InputMaybe<IntQueryOperatorInput>;
-  readonly SplitToningHighlightSaturation: InputMaybe<IntQueryOperatorInput>;
-  readonly SplitToningShadowHue: InputMaybe<IntQueryOperatorInput>;
-  readonly SplitToningShadowSaturation: InputMaybe<IntQueryOperatorInput>;
-  readonly Texture: InputMaybe<IntQueryOperatorInput>;
-  readonly ToneCurvePV2012: InputMaybe<StringQueryOperatorInput>;
-  readonly ToneCurvePV2012Blue: InputMaybe<StringQueryOperatorInput>;
-  readonly ToneCurvePV2012Green: InputMaybe<StringQueryOperatorInput>;
-  readonly ToneCurvePV2012Red: InputMaybe<StringQueryOperatorInput>;
-  readonly Version: InputMaybe<FloatQueryOperatorInput>;
-  readonly Whites2012: InputMaybe<IntQueryOperatorInput>;
-};
-
-type FileFieldsImageMetaMetaLookDescriptionParametersFilterInput = {
-  readonly ConvertToGrayscale: InputMaybe<BooleanQueryOperatorInput>;
-  readonly Description: InputMaybe<FileFieldsImageMetaMetaLookDescriptionParametersDescriptionFilterInput>;
-  readonly LookTable: InputMaybe<StringQueryOperatorInput>;
-  readonly ProcessVersion: InputMaybe<IntQueryOperatorInput>;
-  readonly RGBTable: InputMaybe<StringQueryOperatorInput>;
-  readonly RGBTableAmount: InputMaybe<FloatQueryOperatorInput>;
-  readonly Version: InputMaybe<FloatQueryOperatorInput>;
-};
-
-type FileFieldsImageMetaMetaLookFilterInput = {
-  readonly Description: InputMaybe<FileFieldsImageMetaMetaLookDescriptionFilterInput>;
-};
-
-type FileFieldsImageMetaMetaTitle = {
-  readonly lang: Maybe<Scalars['String']>;
-  readonly value: Maybe<Scalars['String']>;
-};
-
-type FileFieldsImageMetaMetaTitleFilterInput = {
-  readonly lang: InputMaybe<StringQueryOperatorInput>;
-  readonly value: InputMaybe<StringQueryOperatorInput>;
+type FileFieldsImageMetaSortInput = {
+  readonly dateTaken: InputMaybe<SortOrderEnum>;
+  readonly dominantHue: InputMaybe<SortOrderEnum>;
+  readonly meta: InputMaybe<FileFieldsImageMetaMetaSortInput>;
+  readonly vibrant: InputMaybe<FileFieldsImageMetaVibrantSortInput>;
+  readonly vibrantHue: InputMaybe<SortOrderEnum>;
 };
 
 type FileFieldsImageMetaVibrant = {
@@ -1981,6 +715,15 @@ type FileFieldsImageMetaVibrant = {
   readonly Vibrant: Maybe<ReadonlyArray<Maybe<Scalars['Int']>>>;
 };
 
+type FileFieldsImageMetaVibrantFieldSelector = {
+  readonly DarkMuted: InputMaybe<FieldSelectorEnum>;
+  readonly DarkVibrant: InputMaybe<FieldSelectorEnum>;
+  readonly LightMuted: InputMaybe<FieldSelectorEnum>;
+  readonly LightVibrant: InputMaybe<FieldSelectorEnum>;
+  readonly Muted: InputMaybe<FieldSelectorEnum>;
+  readonly Vibrant: InputMaybe<FieldSelectorEnum>;
+};
+
 type FileFieldsImageMetaVibrantFilterInput = {
   readonly DarkMuted: InputMaybe<IntQueryOperatorInput>;
   readonly DarkVibrant: InputMaybe<IntQueryOperatorInput>;
@@ -1988,6 +731,19 @@ type FileFieldsImageMetaVibrantFilterInput = {
   readonly LightVibrant: InputMaybe<IntQueryOperatorInput>;
   readonly Muted: InputMaybe<IntQueryOperatorInput>;
   readonly Vibrant: InputMaybe<IntQueryOperatorInput>;
+};
+
+type FileFieldsImageMetaVibrantSortInput = {
+  readonly DarkMuted: InputMaybe<SortOrderEnum>;
+  readonly DarkVibrant: InputMaybe<SortOrderEnum>;
+  readonly LightMuted: InputMaybe<SortOrderEnum>;
+  readonly LightVibrant: InputMaybe<SortOrderEnum>;
+  readonly Muted: InputMaybe<SortOrderEnum>;
+  readonly Vibrant: InputMaybe<SortOrderEnum>;
+};
+
+type FileFieldsSortInput = {
+  readonly imageMeta: InputMaybe<FileFieldsImageMetaSortInput>;
 };
 
 type FileFilterInput = {
@@ -2050,34 +806,73 @@ type FileGroupConnection = {
 
 
 type FileGroupConnection_distinctArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
 };
 
 
 type FileGroupConnection_groupArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
 };
 
 
 type FileGroupConnection_maxArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
 };
 
 
 type FileGroupConnection_minArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
 };
 
 
 type FileGroupConnection_sumArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
 };
 
 type FileSortInput = {
-  readonly fields: InputMaybe<ReadonlyArray<InputMaybe<FileFieldsEnum>>>;
-  readonly order: InputMaybe<ReadonlyArray<InputMaybe<SortOrderEnum>>>;
+  readonly absolutePath: InputMaybe<SortOrderEnum>;
+  readonly accessTime: InputMaybe<SortOrderEnum>;
+  readonly atime: InputMaybe<SortOrderEnum>;
+  readonly atimeMs: InputMaybe<SortOrderEnum>;
+  readonly base: InputMaybe<SortOrderEnum>;
+  readonly birthTime: InputMaybe<SortOrderEnum>;
+  readonly birthtime: InputMaybe<SortOrderEnum>;
+  readonly birthtimeMs: InputMaybe<SortOrderEnum>;
+  readonly blksize: InputMaybe<SortOrderEnum>;
+  readonly blocks: InputMaybe<SortOrderEnum>;
+  readonly changeTime: InputMaybe<SortOrderEnum>;
+  readonly childImageSharp: InputMaybe<ImageSharpSortInput>;
+  readonly children: InputMaybe<NodeSortInput>;
+  readonly childrenImageSharp: InputMaybe<ImageSharpSortInput>;
+  readonly ctime: InputMaybe<SortOrderEnum>;
+  readonly ctimeMs: InputMaybe<SortOrderEnum>;
+  readonly dev: InputMaybe<SortOrderEnum>;
+  readonly dir: InputMaybe<SortOrderEnum>;
+  readonly ext: InputMaybe<SortOrderEnum>;
+  readonly extension: InputMaybe<SortOrderEnum>;
+  readonly fields: InputMaybe<FileFieldsSortInput>;
+  readonly gid: InputMaybe<SortOrderEnum>;
+  readonly id: InputMaybe<SortOrderEnum>;
+  readonly ino: InputMaybe<SortOrderEnum>;
+  readonly internal: InputMaybe<InternalSortInput>;
+  readonly mode: InputMaybe<SortOrderEnum>;
+  readonly modifiedTime: InputMaybe<SortOrderEnum>;
+  readonly mtime: InputMaybe<SortOrderEnum>;
+  readonly mtimeMs: InputMaybe<SortOrderEnum>;
+  readonly name: InputMaybe<SortOrderEnum>;
+  readonly nlink: InputMaybe<SortOrderEnum>;
+  readonly parent: InputMaybe<NodeSortInput>;
+  readonly prettySize: InputMaybe<SortOrderEnum>;
+  readonly publicURL: InputMaybe<SortOrderEnum>;
+  readonly rdev: InputMaybe<SortOrderEnum>;
+  readonly relativeDirectory: InputMaybe<SortOrderEnum>;
+  readonly relativePath: InputMaybe<SortOrderEnum>;
+  readonly root: InputMaybe<SortOrderEnum>;
+  readonly size: InputMaybe<SortOrderEnum>;
+  readonly sourceInstanceName: InputMaybe<SortOrderEnum>;
+  readonly uid: InputMaybe<SortOrderEnum>;
 };
 
 type FloatQueryOperatorInput = {
@@ -2102,7 +897,7 @@ type GatsbyImageFormat =
   | 'auto'
   | 'avif'
   | 'jpg'
-  | 'NO_CHANGE'
+  | ''
   | 'png'
   | 'webp';
 
@@ -2117,17 +912,9 @@ type GatsbyImagePlaceholder =
   | 'none'
   | 'tracedSVG';
 
-type HeadingsMdx =
-  | 'h1'
-  | 'h2'
-  | 'h3'
-  | 'h4'
-  | 'h5'
-  | 'h6';
-
 type ImageCropFocus =
   | 17
-  | 'CENTER'
+  | 0
   | 2
   | 16
   | 1
@@ -2146,10 +933,10 @@ type ImageFit =
   | 'outside';
 
 type ImageFormat =
-  | 'AUTO'
+  | ''
   | 'avif'
   | 'jpg'
-  | 'NO_CHANGE'
+  | ''
   | 'png'
   | 'webp';
 
@@ -2283,29 +1070,29 @@ type ImageSharpConnection = {
 
 
 type ImageSharpConnection_distinctArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
 };
 
 
 type ImageSharpConnection_groupArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
 };
 
 
 type ImageSharpConnection_maxArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
 };
 
 
 type ImageSharpConnection_minArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
 };
 
 
 type ImageSharpConnection_sumArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
 };
 
 type ImageSharpEdge = {
@@ -2314,132 +1101,17 @@ type ImageSharpEdge = {
   readonly previous: Maybe<ImageSharp>;
 };
 
-type ImageSharpFieldsEnum =
-  | 'children'
-  | 'children.children'
-  | 'children.children.children'
-  | 'children.children.children.children'
-  | 'children.children.children.id'
-  | 'children.children.id'
-  | 'children.children.internal.content'
-  | 'children.children.internal.contentDigest'
-  | 'children.children.internal.contentFilePath'
-  | 'children.children.internal.description'
-  | 'children.children.internal.fieldOwners'
-  | 'children.children.internal.ignoreType'
-  | 'children.children.internal.mediaType'
-  | 'children.children.internal.owner'
-  | 'children.children.internal.type'
-  | 'children.children.parent.children'
-  | 'children.children.parent.id'
-  | 'children.id'
-  | 'children.internal.content'
-  | 'children.internal.contentDigest'
-  | 'children.internal.contentFilePath'
-  | 'children.internal.description'
-  | 'children.internal.fieldOwners'
-  | 'children.internal.ignoreType'
-  | 'children.internal.mediaType'
-  | 'children.internal.owner'
-  | 'children.internal.type'
-  | 'children.parent.children'
-  | 'children.parent.children.children'
-  | 'children.parent.children.id'
-  | 'children.parent.id'
-  | 'children.parent.internal.content'
-  | 'children.parent.internal.contentDigest'
-  | 'children.parent.internal.contentFilePath'
-  | 'children.parent.internal.description'
-  | 'children.parent.internal.fieldOwners'
-  | 'children.parent.internal.ignoreType'
-  | 'children.parent.internal.mediaType'
-  | 'children.parent.internal.owner'
-  | 'children.parent.internal.type'
-  | 'children.parent.parent.children'
-  | 'children.parent.parent.id'
-  | 'fixed.aspectRatio'
-  | 'fixed.base64'
-  | 'fixed.height'
-  | 'fixed.originalName'
-  | 'fixed.src'
-  | 'fixed.srcSet'
-  | 'fixed.srcSetWebp'
-  | 'fixed.srcWebp'
-  | 'fixed.tracedSVG'
-  | 'fixed.width'
-  | 'fluid.aspectRatio'
-  | 'fluid.base64'
-  | 'fluid.originalImg'
-  | 'fluid.originalName'
-  | 'fluid.presentationHeight'
-  | 'fluid.presentationWidth'
-  | 'fluid.sizes'
-  | 'fluid.src'
-  | 'fluid.srcSet'
-  | 'fluid.srcSetWebp'
-  | 'fluid.srcWebp'
-  | 'fluid.tracedSVG'
-  | 'gatsbyImageData'
-  | 'id'
-  | 'internal.content'
-  | 'internal.contentDigest'
-  | 'internal.contentFilePath'
-  | 'internal.description'
-  | 'internal.fieldOwners'
-  | 'internal.ignoreType'
-  | 'internal.mediaType'
-  | 'internal.owner'
-  | 'internal.type'
-  | 'original.height'
-  | 'original.src'
-  | 'original.width'
-  | 'parent.children'
-  | 'parent.children.children'
-  | 'parent.children.children.children'
-  | 'parent.children.children.id'
-  | 'parent.children.id'
-  | 'parent.children.internal.content'
-  | 'parent.children.internal.contentDigest'
-  | 'parent.children.internal.contentFilePath'
-  | 'parent.children.internal.description'
-  | 'parent.children.internal.fieldOwners'
-  | 'parent.children.internal.ignoreType'
-  | 'parent.children.internal.mediaType'
-  | 'parent.children.internal.owner'
-  | 'parent.children.internal.type'
-  | 'parent.children.parent.children'
-  | 'parent.children.parent.id'
-  | 'parent.id'
-  | 'parent.internal.content'
-  | 'parent.internal.contentDigest'
-  | 'parent.internal.contentFilePath'
-  | 'parent.internal.description'
-  | 'parent.internal.fieldOwners'
-  | 'parent.internal.ignoreType'
-  | 'parent.internal.mediaType'
-  | 'parent.internal.owner'
-  | 'parent.internal.type'
-  | 'parent.parent.children'
-  | 'parent.parent.children.children'
-  | 'parent.parent.children.id'
-  | 'parent.parent.id'
-  | 'parent.parent.internal.content'
-  | 'parent.parent.internal.contentDigest'
-  | 'parent.parent.internal.contentFilePath'
-  | 'parent.parent.internal.description'
-  | 'parent.parent.internal.fieldOwners'
-  | 'parent.parent.internal.ignoreType'
-  | 'parent.parent.internal.mediaType'
-  | 'parent.parent.internal.owner'
-  | 'parent.parent.internal.type'
-  | 'parent.parent.parent.children'
-  | 'parent.parent.parent.id'
-  | 'resize.aspectRatio'
-  | 'resize.height'
-  | 'resize.originalName'
-  | 'resize.src'
-  | 'resize.tracedSVG'
-  | 'resize.width';
+type ImageSharpFieldSelector = {
+  readonly children: InputMaybe<NodeFieldSelector>;
+  readonly fixed: InputMaybe<ImageSharpFixedFieldSelector>;
+  readonly fluid: InputMaybe<ImageSharpFluidFieldSelector>;
+  readonly gatsbyImageData: InputMaybe<FieldSelectorEnum>;
+  readonly id: InputMaybe<FieldSelectorEnum>;
+  readonly internal: InputMaybe<InternalFieldSelector>;
+  readonly original: InputMaybe<ImageSharpOriginalFieldSelector>;
+  readonly parent: InputMaybe<NodeFieldSelector>;
+  readonly resize: InputMaybe<ImageSharpResizeFieldSelector>;
+};
 
 type ImageSharpFilterInput = {
   readonly children: InputMaybe<NodeFilterListInput>;
@@ -2470,6 +1142,19 @@ type ImageSharpFixed = {
   readonly width: Scalars['Float'];
 };
 
+type ImageSharpFixedFieldSelector = {
+  readonly aspectRatio: InputMaybe<FieldSelectorEnum>;
+  readonly base64: InputMaybe<FieldSelectorEnum>;
+  readonly height: InputMaybe<FieldSelectorEnum>;
+  readonly originalName: InputMaybe<FieldSelectorEnum>;
+  readonly src: InputMaybe<FieldSelectorEnum>;
+  readonly srcSet: InputMaybe<FieldSelectorEnum>;
+  readonly srcSetWebp: InputMaybe<FieldSelectorEnum>;
+  readonly srcWebp: InputMaybe<FieldSelectorEnum>;
+  readonly tracedSVG: InputMaybe<FieldSelectorEnum>;
+  readonly width: InputMaybe<FieldSelectorEnum>;
+};
+
 type ImageSharpFixedFilterInput = {
   readonly aspectRatio: InputMaybe<FloatQueryOperatorInput>;
   readonly base64: InputMaybe<StringQueryOperatorInput>;
@@ -2481,6 +1166,19 @@ type ImageSharpFixedFilterInput = {
   readonly srcWebp: InputMaybe<StringQueryOperatorInput>;
   readonly tracedSVG: InputMaybe<StringQueryOperatorInput>;
   readonly width: InputMaybe<FloatQueryOperatorInput>;
+};
+
+type ImageSharpFixedSortInput = {
+  readonly aspectRatio: InputMaybe<SortOrderEnum>;
+  readonly base64: InputMaybe<SortOrderEnum>;
+  readonly height: InputMaybe<SortOrderEnum>;
+  readonly originalName: InputMaybe<SortOrderEnum>;
+  readonly src: InputMaybe<SortOrderEnum>;
+  readonly srcSet: InputMaybe<SortOrderEnum>;
+  readonly srcSetWebp: InputMaybe<SortOrderEnum>;
+  readonly srcWebp: InputMaybe<SortOrderEnum>;
+  readonly tracedSVG: InputMaybe<SortOrderEnum>;
+  readonly width: InputMaybe<SortOrderEnum>;
 };
 
 type ImageSharpFluid = {
@@ -2498,6 +1196,21 @@ type ImageSharpFluid = {
   readonly tracedSVG: Maybe<Scalars['String']>;
 };
 
+type ImageSharpFluidFieldSelector = {
+  readonly aspectRatio: InputMaybe<FieldSelectorEnum>;
+  readonly base64: InputMaybe<FieldSelectorEnum>;
+  readonly originalImg: InputMaybe<FieldSelectorEnum>;
+  readonly originalName: InputMaybe<FieldSelectorEnum>;
+  readonly presentationHeight: InputMaybe<FieldSelectorEnum>;
+  readonly presentationWidth: InputMaybe<FieldSelectorEnum>;
+  readonly sizes: InputMaybe<FieldSelectorEnum>;
+  readonly src: InputMaybe<FieldSelectorEnum>;
+  readonly srcSet: InputMaybe<FieldSelectorEnum>;
+  readonly srcSetWebp: InputMaybe<FieldSelectorEnum>;
+  readonly srcWebp: InputMaybe<FieldSelectorEnum>;
+  readonly tracedSVG: InputMaybe<FieldSelectorEnum>;
+};
+
 type ImageSharpFluidFilterInput = {
   readonly aspectRatio: InputMaybe<FloatQueryOperatorInput>;
   readonly base64: InputMaybe<StringQueryOperatorInput>;
@@ -2511,6 +1224,21 @@ type ImageSharpFluidFilterInput = {
   readonly srcSetWebp: InputMaybe<StringQueryOperatorInput>;
   readonly srcWebp: InputMaybe<StringQueryOperatorInput>;
   readonly tracedSVG: InputMaybe<StringQueryOperatorInput>;
+};
+
+type ImageSharpFluidSortInput = {
+  readonly aspectRatio: InputMaybe<SortOrderEnum>;
+  readonly base64: InputMaybe<SortOrderEnum>;
+  readonly originalImg: InputMaybe<SortOrderEnum>;
+  readonly originalName: InputMaybe<SortOrderEnum>;
+  readonly presentationHeight: InputMaybe<SortOrderEnum>;
+  readonly presentationWidth: InputMaybe<SortOrderEnum>;
+  readonly sizes: InputMaybe<SortOrderEnum>;
+  readonly src: InputMaybe<SortOrderEnum>;
+  readonly srcSet: InputMaybe<SortOrderEnum>;
+  readonly srcSetWebp: InputMaybe<SortOrderEnum>;
+  readonly srcWebp: InputMaybe<SortOrderEnum>;
+  readonly tracedSVG: InputMaybe<SortOrderEnum>;
 };
 
 type ImageSharpGroupConnection = {
@@ -2529,29 +1257,29 @@ type ImageSharpGroupConnection = {
 
 
 type ImageSharpGroupConnection_distinctArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
 };
 
 
 type ImageSharpGroupConnection_groupArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
 };
 
 
 type ImageSharpGroupConnection_maxArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
 };
 
 
 type ImageSharpGroupConnection_minArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
 };
 
 
 type ImageSharpGroupConnection_sumArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
 };
 
 type ImageSharpOriginal = {
@@ -2560,10 +1288,22 @@ type ImageSharpOriginal = {
   readonly width: Maybe<Scalars['Float']>;
 };
 
+type ImageSharpOriginalFieldSelector = {
+  readonly height: InputMaybe<FieldSelectorEnum>;
+  readonly src: InputMaybe<FieldSelectorEnum>;
+  readonly width: InputMaybe<FieldSelectorEnum>;
+};
+
 type ImageSharpOriginalFilterInput = {
   readonly height: InputMaybe<FloatQueryOperatorInput>;
   readonly src: InputMaybe<StringQueryOperatorInput>;
   readonly width: InputMaybe<FloatQueryOperatorInput>;
+};
+
+type ImageSharpOriginalSortInput = {
+  readonly height: InputMaybe<SortOrderEnum>;
+  readonly src: InputMaybe<SortOrderEnum>;
+  readonly width: InputMaybe<SortOrderEnum>;
 };
 
 type ImageSharpResize = {
@@ -2575,6 +1315,15 @@ type ImageSharpResize = {
   readonly width: Maybe<Scalars['Int']>;
 };
 
+type ImageSharpResizeFieldSelector = {
+  readonly aspectRatio: InputMaybe<FieldSelectorEnum>;
+  readonly height: InputMaybe<FieldSelectorEnum>;
+  readonly originalName: InputMaybe<FieldSelectorEnum>;
+  readonly src: InputMaybe<FieldSelectorEnum>;
+  readonly tracedSVG: InputMaybe<FieldSelectorEnum>;
+  readonly width: InputMaybe<FieldSelectorEnum>;
+};
+
 type ImageSharpResizeFilterInput = {
   readonly aspectRatio: InputMaybe<FloatQueryOperatorInput>;
   readonly height: InputMaybe<IntQueryOperatorInput>;
@@ -2584,9 +1333,25 @@ type ImageSharpResizeFilterInput = {
   readonly width: InputMaybe<IntQueryOperatorInput>;
 };
 
+type ImageSharpResizeSortInput = {
+  readonly aspectRatio: InputMaybe<SortOrderEnum>;
+  readonly height: InputMaybe<SortOrderEnum>;
+  readonly originalName: InputMaybe<SortOrderEnum>;
+  readonly src: InputMaybe<SortOrderEnum>;
+  readonly tracedSVG: InputMaybe<SortOrderEnum>;
+  readonly width: InputMaybe<SortOrderEnum>;
+};
+
 type ImageSharpSortInput = {
-  readonly fields: InputMaybe<ReadonlyArray<InputMaybe<ImageSharpFieldsEnum>>>;
-  readonly order: InputMaybe<ReadonlyArray<InputMaybe<SortOrderEnum>>>;
+  readonly children: InputMaybe<NodeSortInput>;
+  readonly fixed: InputMaybe<ImageSharpFixedSortInput>;
+  readonly fluid: InputMaybe<ImageSharpFluidSortInput>;
+  readonly gatsbyImageData: InputMaybe<SortOrderEnum>;
+  readonly id: InputMaybe<SortOrderEnum>;
+  readonly internal: InputMaybe<InternalSortInput>;
+  readonly original: InputMaybe<ImageSharpOriginalSortInput>;
+  readonly parent: InputMaybe<NodeSortInput>;
+  readonly resize: InputMaybe<ImageSharpResizeSortInput>;
 };
 
 type IntQueryOperatorInput = {
@@ -2612,6 +1377,18 @@ type Internal = {
   readonly type: Scalars['String'];
 };
 
+type InternalFieldSelector = {
+  readonly content: InputMaybe<FieldSelectorEnum>;
+  readonly contentDigest: InputMaybe<FieldSelectorEnum>;
+  readonly contentFilePath: InputMaybe<FieldSelectorEnum>;
+  readonly description: InputMaybe<FieldSelectorEnum>;
+  readonly fieldOwners: InputMaybe<FieldSelectorEnum>;
+  readonly ignoreType: InputMaybe<FieldSelectorEnum>;
+  readonly mediaType: InputMaybe<FieldSelectorEnum>;
+  readonly owner: InputMaybe<FieldSelectorEnum>;
+  readonly type: InputMaybe<FieldSelectorEnum>;
+};
+
 type InternalFilterInput = {
   readonly content: InputMaybe<StringQueryOperatorInput>;
   readonly contentDigest: InputMaybe<StringQueryOperatorInput>;
@@ -2622,6 +1399,18 @@ type InternalFilterInput = {
   readonly mediaType: InputMaybe<StringQueryOperatorInput>;
   readonly owner: InputMaybe<StringQueryOperatorInput>;
   readonly type: InputMaybe<StringQueryOperatorInput>;
+};
+
+type InternalSortInput = {
+  readonly content: InputMaybe<SortOrderEnum>;
+  readonly contentDigest: InputMaybe<SortOrderEnum>;
+  readonly contentFilePath: InputMaybe<SortOrderEnum>;
+  readonly description: InputMaybe<SortOrderEnum>;
+  readonly fieldOwners: InputMaybe<SortOrderEnum>;
+  readonly ignoreType: InputMaybe<SortOrderEnum>;
+  readonly mediaType: InputMaybe<SortOrderEnum>;
+  readonly owner: InputMaybe<SortOrderEnum>;
+  readonly type: InputMaybe<SortOrderEnum>;
 };
 
 type JPGOptions = {
@@ -2638,302 +1427,19 @@ type JSONQueryOperatorInput = {
   readonly regex: InputMaybe<Scalars['JSON']>;
 };
 
-type Mdx = Node & {
-  readonly body: Scalars['String'];
-  readonly children: ReadonlyArray<Node>;
-  readonly excerpt: Scalars['String'];
-  readonly fileAbsolutePath: Scalars['String'];
-  readonly frontmatter: Maybe<MdxFrontmatter>;
-  readonly headings: Maybe<ReadonlyArray<Maybe<MdxHeadingMdx>>>;
-  readonly html: Maybe<Scalars['String']>;
-  readonly id: Scalars['ID'];
-  readonly internal: Internal;
-  readonly mdxAST: Maybe<Scalars['JSON']>;
-  readonly parent: Maybe<Node>;
-  readonly rawBody: Scalars['String'];
-  readonly slug: Maybe<Scalars['String']>;
-  readonly tableOfContents: Maybe<Scalars['JSON']>;
-  readonly timeToRead: Maybe<Scalars['Int']>;
-  readonly wordCount: Maybe<MdxWordCount>;
-};
-
-
-type Mdx_excerptArgs = {
-  pruneLength?: InputMaybe<Scalars['Int']>;
-  truncate?: InputMaybe<Scalars['Boolean']>;
-};
-
-
-type Mdx_headingsArgs = {
-  depth: InputMaybe<HeadingsMdx>;
-};
-
-
-type Mdx_tableOfContentsArgs = {
-  maxDepth: InputMaybe<Scalars['Int']>;
-};
-
-type MdxConnection = {
-  readonly distinct: ReadonlyArray<Scalars['String']>;
-  readonly edges: ReadonlyArray<MdxEdge>;
-  readonly group: ReadonlyArray<MdxGroupConnection>;
-  readonly max: Maybe<Scalars['Float']>;
-  readonly min: Maybe<Scalars['Float']>;
-  readonly nodes: ReadonlyArray<Mdx>;
-  readonly pageInfo: PageInfo;
-  readonly sum: Maybe<Scalars['Float']>;
-  readonly totalCount: Scalars['Int'];
-};
-
-
-type MdxConnection_distinctArgs = {
-  field: MdxFieldsEnum;
-};
-
-
-type MdxConnection_groupArgs = {
-  field: MdxFieldsEnum;
-  limit: InputMaybe<Scalars['Int']>;
-  skip: InputMaybe<Scalars['Int']>;
-};
-
-
-type MdxConnection_maxArgs = {
-  field: MdxFieldsEnum;
-};
-
-
-type MdxConnection_minArgs = {
-  field: MdxFieldsEnum;
-};
-
-
-type MdxConnection_sumArgs = {
-  field: MdxFieldsEnum;
-};
-
-type MdxEdge = {
-  readonly next: Maybe<Mdx>;
-  readonly node: Mdx;
-  readonly previous: Maybe<Mdx>;
-};
-
-type MdxFieldsEnum =
-  | 'body'
-  | 'children'
-  | 'children.children'
-  | 'children.children.children'
-  | 'children.children.children.children'
-  | 'children.children.children.id'
-  | 'children.children.id'
-  | 'children.children.internal.content'
-  | 'children.children.internal.contentDigest'
-  | 'children.children.internal.contentFilePath'
-  | 'children.children.internal.description'
-  | 'children.children.internal.fieldOwners'
-  | 'children.children.internal.ignoreType'
-  | 'children.children.internal.mediaType'
-  | 'children.children.internal.owner'
-  | 'children.children.internal.type'
-  | 'children.children.parent.children'
-  | 'children.children.parent.id'
-  | 'children.id'
-  | 'children.internal.content'
-  | 'children.internal.contentDigest'
-  | 'children.internal.contentFilePath'
-  | 'children.internal.description'
-  | 'children.internal.fieldOwners'
-  | 'children.internal.ignoreType'
-  | 'children.internal.mediaType'
-  | 'children.internal.owner'
-  | 'children.internal.type'
-  | 'children.parent.children'
-  | 'children.parent.children.children'
-  | 'children.parent.children.id'
-  | 'children.parent.id'
-  | 'children.parent.internal.content'
-  | 'children.parent.internal.contentDigest'
-  | 'children.parent.internal.contentFilePath'
-  | 'children.parent.internal.description'
-  | 'children.parent.internal.fieldOwners'
-  | 'children.parent.internal.ignoreType'
-  | 'children.parent.internal.mediaType'
-  | 'children.parent.internal.owner'
-  | 'children.parent.internal.type'
-  | 'children.parent.parent.children'
-  | 'children.parent.parent.id'
-  | 'excerpt'
-  | 'fileAbsolutePath'
-  | 'frontmatter.title'
-  | 'headings'
-  | 'headings.depth'
-  | 'headings.value'
-  | 'html'
-  | 'id'
-  | 'internal.content'
-  | 'internal.contentDigest'
-  | 'internal.contentFilePath'
-  | 'internal.description'
-  | 'internal.fieldOwners'
-  | 'internal.ignoreType'
-  | 'internal.mediaType'
-  | 'internal.owner'
-  | 'internal.type'
-  | 'mdxAST'
-  | 'parent.children'
-  | 'parent.children.children'
-  | 'parent.children.children.children'
-  | 'parent.children.children.id'
-  | 'parent.children.id'
-  | 'parent.children.internal.content'
-  | 'parent.children.internal.contentDigest'
-  | 'parent.children.internal.contentFilePath'
-  | 'parent.children.internal.description'
-  | 'parent.children.internal.fieldOwners'
-  | 'parent.children.internal.ignoreType'
-  | 'parent.children.internal.mediaType'
-  | 'parent.children.internal.owner'
-  | 'parent.children.internal.type'
-  | 'parent.children.parent.children'
-  | 'parent.children.parent.id'
-  | 'parent.id'
-  | 'parent.internal.content'
-  | 'parent.internal.contentDigest'
-  | 'parent.internal.contentFilePath'
-  | 'parent.internal.description'
-  | 'parent.internal.fieldOwners'
-  | 'parent.internal.ignoreType'
-  | 'parent.internal.mediaType'
-  | 'parent.internal.owner'
-  | 'parent.internal.type'
-  | 'parent.parent.children'
-  | 'parent.parent.children.children'
-  | 'parent.parent.children.id'
-  | 'parent.parent.id'
-  | 'parent.parent.internal.content'
-  | 'parent.parent.internal.contentDigest'
-  | 'parent.parent.internal.contentFilePath'
-  | 'parent.parent.internal.description'
-  | 'parent.parent.internal.fieldOwners'
-  | 'parent.parent.internal.ignoreType'
-  | 'parent.parent.internal.mediaType'
-  | 'parent.parent.internal.owner'
-  | 'parent.parent.internal.type'
-  | 'parent.parent.parent.children'
-  | 'parent.parent.parent.id'
-  | 'rawBody'
-  | 'slug'
-  | 'tableOfContents'
-  | 'timeToRead'
-  | 'wordCount.paragraphs'
-  | 'wordCount.sentences'
-  | 'wordCount.words';
-
-type MdxFilterInput = {
-  readonly body: InputMaybe<StringQueryOperatorInput>;
-  readonly children: InputMaybe<NodeFilterListInput>;
-  readonly excerpt: InputMaybe<StringQueryOperatorInput>;
-  readonly fileAbsolutePath: InputMaybe<StringQueryOperatorInput>;
-  readonly frontmatter: InputMaybe<MdxFrontmatterFilterInput>;
-  readonly headings: InputMaybe<MdxHeadingMdxFilterListInput>;
-  readonly html: InputMaybe<StringQueryOperatorInput>;
-  readonly id: InputMaybe<StringQueryOperatorInput>;
-  readonly internal: InputMaybe<InternalFilterInput>;
-  readonly mdxAST: InputMaybe<JSONQueryOperatorInput>;
-  readonly parent: InputMaybe<NodeFilterInput>;
-  readonly rawBody: InputMaybe<StringQueryOperatorInput>;
-  readonly slug: InputMaybe<StringQueryOperatorInput>;
-  readonly tableOfContents: InputMaybe<JSONQueryOperatorInput>;
-  readonly timeToRead: InputMaybe<IntQueryOperatorInput>;
-  readonly wordCount: InputMaybe<MdxWordCountFilterInput>;
-};
-
-type MdxFrontmatter = {
-  readonly title: Scalars['String'];
-};
-
-type MdxFrontmatterFilterInput = {
-  readonly title: InputMaybe<StringQueryOperatorInput>;
-};
-
-type MdxGroupConnection = {
-  readonly distinct: ReadonlyArray<Scalars['String']>;
-  readonly edges: ReadonlyArray<MdxEdge>;
-  readonly field: Scalars['String'];
-  readonly fieldValue: Maybe<Scalars['String']>;
-  readonly group: ReadonlyArray<MdxGroupConnection>;
-  readonly max: Maybe<Scalars['Float']>;
-  readonly min: Maybe<Scalars['Float']>;
-  readonly nodes: ReadonlyArray<Mdx>;
-  readonly pageInfo: PageInfo;
-  readonly sum: Maybe<Scalars['Float']>;
-  readonly totalCount: Scalars['Int'];
-};
-
-
-type MdxGroupConnection_distinctArgs = {
-  field: MdxFieldsEnum;
-};
-
-
-type MdxGroupConnection_groupArgs = {
-  field: MdxFieldsEnum;
-  limit: InputMaybe<Scalars['Int']>;
-  skip: InputMaybe<Scalars['Int']>;
-};
-
-
-type MdxGroupConnection_maxArgs = {
-  field: MdxFieldsEnum;
-};
-
-
-type MdxGroupConnection_minArgs = {
-  field: MdxFieldsEnum;
-};
-
-
-type MdxGroupConnection_sumArgs = {
-  field: MdxFieldsEnum;
-};
-
-type MdxHeadingMdx = {
-  readonly depth: Maybe<Scalars['Int']>;
-  readonly value: Maybe<Scalars['String']>;
-};
-
-type MdxHeadingMdxFilterInput = {
-  readonly depth: InputMaybe<IntQueryOperatorInput>;
-  readonly value: InputMaybe<StringQueryOperatorInput>;
-};
-
-type MdxHeadingMdxFilterListInput = {
-  readonly elemMatch: InputMaybe<MdxHeadingMdxFilterInput>;
-};
-
-type MdxSortInput = {
-  readonly fields: InputMaybe<ReadonlyArray<InputMaybe<MdxFieldsEnum>>>;
-  readonly order: InputMaybe<ReadonlyArray<InputMaybe<SortOrderEnum>>>;
-};
-
-type MdxWordCount = {
-  readonly paragraphs: Maybe<Scalars['Int']>;
-  readonly sentences: Maybe<Scalars['Int']>;
-  readonly words: Maybe<Scalars['Int']>;
-};
-
-type MdxWordCountFilterInput = {
-  readonly paragraphs: InputMaybe<IntQueryOperatorInput>;
-  readonly sentences: InputMaybe<IntQueryOperatorInput>;
-  readonly words: InputMaybe<IntQueryOperatorInput>;
-};
-
 /** Node Interface */
 type Node = {
   readonly children: ReadonlyArray<Node>;
   readonly id: Scalars['ID'];
   readonly internal: Internal;
   readonly parent: Maybe<Node>;
+};
+
+type NodeFieldSelector = {
+  readonly children: InputMaybe<NodeFieldSelector>;
+  readonly id: InputMaybe<FieldSelectorEnum>;
+  readonly internal: InputMaybe<InternalFieldSelector>;
+  readonly parent: InputMaybe<NodeFieldSelector>;
 };
 
 type NodeFilterInput = {
@@ -2945,6 +1451,13 @@ type NodeFilterInput = {
 
 type NodeFilterListInput = {
   readonly elemMatch: InputMaybe<NodeFilterInput>;
+};
+
+type NodeSortInput = {
+  readonly children: InputMaybe<NodeSortInput>;
+  readonly id: InputMaybe<SortOrderEnum>;
+  readonly internal: InputMaybe<InternalSortInput>;
+  readonly parent: InputMaybe<NodeSortInput>;
 };
 
 type PNGOptions = {
@@ -2986,7 +1499,6 @@ type Query = {
   readonly allDirectory: DirectoryConnection;
   readonly allFile: FileConnection;
   readonly allImageSharp: ImageSharpConnection;
-  readonly allMdx: MdxConnection;
   readonly allSite: SiteConnection;
   readonly allSiteBuildMetadata: SiteBuildMetadataConnection;
   readonly allSiteFunction: SiteFunctionConnection;
@@ -2995,7 +1507,6 @@ type Query = {
   readonly directory: Maybe<Directory>;
   readonly file: Maybe<File>;
   readonly imageSharp: Maybe<ImageSharp>;
-  readonly mdx: Maybe<Mdx>;
   readonly site: Maybe<Site>;
   readonly siteBuildMetadata: Maybe<SiteBuildMetadata>;
   readonly siteFunction: Maybe<SiteFunction>;
@@ -3008,7 +1519,7 @@ type Query_allDirectoryArgs = {
   filter: InputMaybe<DirectoryFilterInput>;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
-  sort: InputMaybe<DirectorySortInput>;
+  sort: InputMaybe<ReadonlyArray<InputMaybe<DirectorySortInput>>>;
 };
 
 
@@ -3016,7 +1527,7 @@ type Query_allFileArgs = {
   filter: InputMaybe<FileFilterInput>;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
-  sort: InputMaybe<FileSortInput>;
+  sort: InputMaybe<ReadonlyArray<InputMaybe<FileSortInput>>>;
 };
 
 
@@ -3024,15 +1535,7 @@ type Query_allImageSharpArgs = {
   filter: InputMaybe<ImageSharpFilterInput>;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
-  sort: InputMaybe<ImageSharpSortInput>;
-};
-
-
-type Query_allMdxArgs = {
-  filter: InputMaybe<MdxFilterInput>;
-  limit: InputMaybe<Scalars['Int']>;
-  skip: InputMaybe<Scalars['Int']>;
-  sort: InputMaybe<MdxSortInput>;
+  sort: InputMaybe<ReadonlyArray<InputMaybe<ImageSharpSortInput>>>;
 };
 
 
@@ -3040,7 +1543,7 @@ type Query_allSiteArgs = {
   filter: InputMaybe<SiteFilterInput>;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
-  sort: InputMaybe<SiteSortInput>;
+  sort: InputMaybe<ReadonlyArray<InputMaybe<SiteSortInput>>>;
 };
 
 
@@ -3048,7 +1551,7 @@ type Query_allSiteBuildMetadataArgs = {
   filter: InputMaybe<SiteBuildMetadataFilterInput>;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
-  sort: InputMaybe<SiteBuildMetadataSortInput>;
+  sort: InputMaybe<ReadonlyArray<InputMaybe<SiteBuildMetadataSortInput>>>;
 };
 
 
@@ -3056,7 +1559,7 @@ type Query_allSiteFunctionArgs = {
   filter: InputMaybe<SiteFunctionFilterInput>;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
-  sort: InputMaybe<SiteFunctionSortInput>;
+  sort: InputMaybe<ReadonlyArray<InputMaybe<SiteFunctionSortInput>>>;
 };
 
 
@@ -3064,7 +1567,7 @@ type Query_allSitePageArgs = {
   filter: InputMaybe<SitePageFilterInput>;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
-  sort: InputMaybe<SitePageSortInput>;
+  sort: InputMaybe<ReadonlyArray<InputMaybe<SitePageSortInput>>>;
 };
 
 
@@ -3072,7 +1575,7 @@ type Query_allSitePluginArgs = {
   filter: InputMaybe<SitePluginFilterInput>;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
-  sort: InputMaybe<SitePluginSortInput>;
+  sort: InputMaybe<ReadonlyArray<InputMaybe<SitePluginSortInput>>>;
 };
 
 
@@ -3170,26 +1673,6 @@ type Query_imageSharpArgs = {
   original: InputMaybe<ImageSharpOriginalFilterInput>;
   parent: InputMaybe<NodeFilterInput>;
   resize: InputMaybe<ImageSharpResizeFilterInput>;
-};
-
-
-type Query_mdxArgs = {
-  body: InputMaybe<StringQueryOperatorInput>;
-  children: InputMaybe<NodeFilterListInput>;
-  excerpt: InputMaybe<StringQueryOperatorInput>;
-  fileAbsolutePath: InputMaybe<StringQueryOperatorInput>;
-  frontmatter: InputMaybe<MdxFrontmatterFilterInput>;
-  headings: InputMaybe<MdxHeadingMdxFilterListInput>;
-  html: InputMaybe<StringQueryOperatorInput>;
-  id: InputMaybe<StringQueryOperatorInput>;
-  internal: InputMaybe<InternalFilterInput>;
-  mdxAST: InputMaybe<JSONQueryOperatorInput>;
-  parent: InputMaybe<NodeFilterInput>;
-  rawBody: InputMaybe<StringQueryOperatorInput>;
-  slug: InputMaybe<StringQueryOperatorInput>;
-  tableOfContents: InputMaybe<JSONQueryOperatorInput>;
-  timeToRead: InputMaybe<IntQueryOperatorInput>;
-  wordCount: InputMaybe<MdxWordCountFilterInput>;
 };
 
 
@@ -3319,29 +1802,29 @@ type SiteBuildMetadataConnection = {
 
 
 type SiteBuildMetadataConnection_distinctArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
 };
 
 
 type SiteBuildMetadataConnection_groupArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
 };
 
 
 type SiteBuildMetadataConnection_maxArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
 };
 
 
 type SiteBuildMetadataConnection_minArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
 };
 
 
 type SiteBuildMetadataConnection_sumArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
 };
 
 type SiteBuildMetadataEdge = {
@@ -3350,101 +1833,13 @@ type SiteBuildMetadataEdge = {
   readonly previous: Maybe<SiteBuildMetadata>;
 };
 
-type SiteBuildMetadataFieldsEnum =
-  | 'buildTime'
-  | 'children'
-  | 'children.children'
-  | 'children.children.children'
-  | 'children.children.children.children'
-  | 'children.children.children.id'
-  | 'children.children.id'
-  | 'children.children.internal.content'
-  | 'children.children.internal.contentDigest'
-  | 'children.children.internal.contentFilePath'
-  | 'children.children.internal.description'
-  | 'children.children.internal.fieldOwners'
-  | 'children.children.internal.ignoreType'
-  | 'children.children.internal.mediaType'
-  | 'children.children.internal.owner'
-  | 'children.children.internal.type'
-  | 'children.children.parent.children'
-  | 'children.children.parent.id'
-  | 'children.id'
-  | 'children.internal.content'
-  | 'children.internal.contentDigest'
-  | 'children.internal.contentFilePath'
-  | 'children.internal.description'
-  | 'children.internal.fieldOwners'
-  | 'children.internal.ignoreType'
-  | 'children.internal.mediaType'
-  | 'children.internal.owner'
-  | 'children.internal.type'
-  | 'children.parent.children'
-  | 'children.parent.children.children'
-  | 'children.parent.children.id'
-  | 'children.parent.id'
-  | 'children.parent.internal.content'
-  | 'children.parent.internal.contentDigest'
-  | 'children.parent.internal.contentFilePath'
-  | 'children.parent.internal.description'
-  | 'children.parent.internal.fieldOwners'
-  | 'children.parent.internal.ignoreType'
-  | 'children.parent.internal.mediaType'
-  | 'children.parent.internal.owner'
-  | 'children.parent.internal.type'
-  | 'children.parent.parent.children'
-  | 'children.parent.parent.id'
-  | 'id'
-  | 'internal.content'
-  | 'internal.contentDigest'
-  | 'internal.contentFilePath'
-  | 'internal.description'
-  | 'internal.fieldOwners'
-  | 'internal.ignoreType'
-  | 'internal.mediaType'
-  | 'internal.owner'
-  | 'internal.type'
-  | 'parent.children'
-  | 'parent.children.children'
-  | 'parent.children.children.children'
-  | 'parent.children.children.id'
-  | 'parent.children.id'
-  | 'parent.children.internal.content'
-  | 'parent.children.internal.contentDigest'
-  | 'parent.children.internal.contentFilePath'
-  | 'parent.children.internal.description'
-  | 'parent.children.internal.fieldOwners'
-  | 'parent.children.internal.ignoreType'
-  | 'parent.children.internal.mediaType'
-  | 'parent.children.internal.owner'
-  | 'parent.children.internal.type'
-  | 'parent.children.parent.children'
-  | 'parent.children.parent.id'
-  | 'parent.id'
-  | 'parent.internal.content'
-  | 'parent.internal.contentDigest'
-  | 'parent.internal.contentFilePath'
-  | 'parent.internal.description'
-  | 'parent.internal.fieldOwners'
-  | 'parent.internal.ignoreType'
-  | 'parent.internal.mediaType'
-  | 'parent.internal.owner'
-  | 'parent.internal.type'
-  | 'parent.parent.children'
-  | 'parent.parent.children.children'
-  | 'parent.parent.children.id'
-  | 'parent.parent.id'
-  | 'parent.parent.internal.content'
-  | 'parent.parent.internal.contentDigest'
-  | 'parent.parent.internal.contentFilePath'
-  | 'parent.parent.internal.description'
-  | 'parent.parent.internal.fieldOwners'
-  | 'parent.parent.internal.ignoreType'
-  | 'parent.parent.internal.mediaType'
-  | 'parent.parent.internal.owner'
-  | 'parent.parent.internal.type'
-  | 'parent.parent.parent.children'
-  | 'parent.parent.parent.id';
+type SiteBuildMetadataFieldSelector = {
+  readonly buildTime: InputMaybe<FieldSelectorEnum>;
+  readonly children: InputMaybe<NodeFieldSelector>;
+  readonly id: InputMaybe<FieldSelectorEnum>;
+  readonly internal: InputMaybe<InternalFieldSelector>;
+  readonly parent: InputMaybe<NodeFieldSelector>;
+};
 
 type SiteBuildMetadataFilterInput = {
   readonly buildTime: InputMaybe<DateQueryOperatorInput>;
@@ -3470,34 +1865,37 @@ type SiteBuildMetadataGroupConnection = {
 
 
 type SiteBuildMetadataGroupConnection_distinctArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
 };
 
 
 type SiteBuildMetadataGroupConnection_groupArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
 };
 
 
 type SiteBuildMetadataGroupConnection_maxArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
 };
 
 
 type SiteBuildMetadataGroupConnection_minArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
 };
 
 
 type SiteBuildMetadataGroupConnection_sumArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
 };
 
 type SiteBuildMetadataSortInput = {
-  readonly fields: InputMaybe<ReadonlyArray<InputMaybe<SiteBuildMetadataFieldsEnum>>>;
-  readonly order: InputMaybe<ReadonlyArray<InputMaybe<SortOrderEnum>>>;
+  readonly buildTime: InputMaybe<SortOrderEnum>;
+  readonly children: InputMaybe<NodeSortInput>;
+  readonly id: InputMaybe<SortOrderEnum>;
+  readonly internal: InputMaybe<InternalSortInput>;
+  readonly parent: InputMaybe<NodeSortInput>;
 };
 
 type SiteConnection = {
@@ -3514,29 +1912,29 @@ type SiteConnection = {
 
 
 type SiteConnection_distinctArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
 };
 
 
 type SiteConnection_groupArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
 };
 
 
 type SiteConnection_maxArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
 };
 
 
 type SiteConnection_minArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
 };
 
 
 type SiteConnection_sumArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
 };
 
 type SiteEdge = {
@@ -3545,112 +1943,21 @@ type SiteEdge = {
   readonly previous: Maybe<Site>;
 };
 
-type SiteFieldsEnum =
-  | 'buildTime'
-  | 'children'
-  | 'children.children'
-  | 'children.children.children'
-  | 'children.children.children.children'
-  | 'children.children.children.id'
-  | 'children.children.id'
-  | 'children.children.internal.content'
-  | 'children.children.internal.contentDigest'
-  | 'children.children.internal.contentFilePath'
-  | 'children.children.internal.description'
-  | 'children.children.internal.fieldOwners'
-  | 'children.children.internal.ignoreType'
-  | 'children.children.internal.mediaType'
-  | 'children.children.internal.owner'
-  | 'children.children.internal.type'
-  | 'children.children.parent.children'
-  | 'children.children.parent.id'
-  | 'children.id'
-  | 'children.internal.content'
-  | 'children.internal.contentDigest'
-  | 'children.internal.contentFilePath'
-  | 'children.internal.description'
-  | 'children.internal.fieldOwners'
-  | 'children.internal.ignoreType'
-  | 'children.internal.mediaType'
-  | 'children.internal.owner'
-  | 'children.internal.type'
-  | 'children.parent.children'
-  | 'children.parent.children.children'
-  | 'children.parent.children.id'
-  | 'children.parent.id'
-  | 'children.parent.internal.content'
-  | 'children.parent.internal.contentDigest'
-  | 'children.parent.internal.contentFilePath'
-  | 'children.parent.internal.description'
-  | 'children.parent.internal.fieldOwners'
-  | 'children.parent.internal.ignoreType'
-  | 'children.parent.internal.mediaType'
-  | 'children.parent.internal.owner'
-  | 'children.parent.internal.type'
-  | 'children.parent.parent.children'
-  | 'children.parent.parent.id'
-  | 'graphqlTypegen.generateOnBuild'
-  | 'graphqlTypegen.typesOutputPath'
-  | 'host'
-  | 'id'
-  | 'internal.content'
-  | 'internal.contentDigest'
-  | 'internal.contentFilePath'
-  | 'internal.description'
-  | 'internal.fieldOwners'
-  | 'internal.ignoreType'
-  | 'internal.mediaType'
-  | 'internal.owner'
-  | 'internal.type'
-  | 'jsxRuntime'
-  | 'parent.children'
-  | 'parent.children.children'
-  | 'parent.children.children.children'
-  | 'parent.children.children.id'
-  | 'parent.children.id'
-  | 'parent.children.internal.content'
-  | 'parent.children.internal.contentDigest'
-  | 'parent.children.internal.contentFilePath'
-  | 'parent.children.internal.description'
-  | 'parent.children.internal.fieldOwners'
-  | 'parent.children.internal.ignoreType'
-  | 'parent.children.internal.mediaType'
-  | 'parent.children.internal.owner'
-  | 'parent.children.internal.type'
-  | 'parent.children.parent.children'
-  | 'parent.children.parent.id'
-  | 'parent.id'
-  | 'parent.internal.content'
-  | 'parent.internal.contentDigest'
-  | 'parent.internal.contentFilePath'
-  | 'parent.internal.description'
-  | 'parent.internal.fieldOwners'
-  | 'parent.internal.ignoreType'
-  | 'parent.internal.mediaType'
-  | 'parent.internal.owner'
-  | 'parent.internal.type'
-  | 'parent.parent.children'
-  | 'parent.parent.children.children'
-  | 'parent.parent.children.id'
-  | 'parent.parent.id'
-  | 'parent.parent.internal.content'
-  | 'parent.parent.internal.contentDigest'
-  | 'parent.parent.internal.contentFilePath'
-  | 'parent.parent.internal.description'
-  | 'parent.parent.internal.fieldOwners'
-  | 'parent.parent.internal.ignoreType'
-  | 'parent.parent.internal.mediaType'
-  | 'parent.parent.internal.owner'
-  | 'parent.parent.internal.type'
-  | 'parent.parent.parent.children'
-  | 'parent.parent.parent.id'
-  | 'pathPrefix'
-  | 'polyfill'
-  | 'port'
-  | 'siteMetadata.description'
-  | 'siteMetadata.siteUrl'
-  | 'siteMetadata.title'
-  | 'trailingSlash';
+type SiteFieldSelector = {
+  readonly buildTime: InputMaybe<FieldSelectorEnum>;
+  readonly children: InputMaybe<NodeFieldSelector>;
+  readonly graphqlTypegen: InputMaybe<SiteGraphqlTypegenFieldSelector>;
+  readonly host: InputMaybe<FieldSelectorEnum>;
+  readonly id: InputMaybe<FieldSelectorEnum>;
+  readonly internal: InputMaybe<InternalFieldSelector>;
+  readonly jsxRuntime: InputMaybe<FieldSelectorEnum>;
+  readonly parent: InputMaybe<NodeFieldSelector>;
+  readonly pathPrefix: InputMaybe<FieldSelectorEnum>;
+  readonly polyfill: InputMaybe<FieldSelectorEnum>;
+  readonly port: InputMaybe<FieldSelectorEnum>;
+  readonly siteMetadata: InputMaybe<SiteSiteMetadataFieldSelector>;
+  readonly trailingSlash: InputMaybe<FieldSelectorEnum>;
+};
 
 type SiteFilterInput = {
   readonly buildTime: InputMaybe<DateQueryOperatorInput>;
@@ -3696,29 +2003,29 @@ type SiteFunctionConnection = {
 
 
 type SiteFunctionConnection_distinctArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
 };
 
 
 type SiteFunctionConnection_groupArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
 };
 
 
 type SiteFunctionConnection_maxArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
 };
 
 
 type SiteFunctionConnection_minArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
 };
 
 
 type SiteFunctionConnection_sumArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
 };
 
 type SiteFunctionEdge = {
@@ -3727,107 +2034,19 @@ type SiteFunctionEdge = {
   readonly previous: Maybe<SiteFunction>;
 };
 
-type SiteFunctionFieldsEnum =
-  | 'absoluteCompiledFilePath'
-  | 'children'
-  | 'children.children'
-  | 'children.children.children'
-  | 'children.children.children.children'
-  | 'children.children.children.id'
-  | 'children.children.id'
-  | 'children.children.internal.content'
-  | 'children.children.internal.contentDigest'
-  | 'children.children.internal.contentFilePath'
-  | 'children.children.internal.description'
-  | 'children.children.internal.fieldOwners'
-  | 'children.children.internal.ignoreType'
-  | 'children.children.internal.mediaType'
-  | 'children.children.internal.owner'
-  | 'children.children.internal.type'
-  | 'children.children.parent.children'
-  | 'children.children.parent.id'
-  | 'children.id'
-  | 'children.internal.content'
-  | 'children.internal.contentDigest'
-  | 'children.internal.contentFilePath'
-  | 'children.internal.description'
-  | 'children.internal.fieldOwners'
-  | 'children.internal.ignoreType'
-  | 'children.internal.mediaType'
-  | 'children.internal.owner'
-  | 'children.internal.type'
-  | 'children.parent.children'
-  | 'children.parent.children.children'
-  | 'children.parent.children.id'
-  | 'children.parent.id'
-  | 'children.parent.internal.content'
-  | 'children.parent.internal.contentDigest'
-  | 'children.parent.internal.contentFilePath'
-  | 'children.parent.internal.description'
-  | 'children.parent.internal.fieldOwners'
-  | 'children.parent.internal.ignoreType'
-  | 'children.parent.internal.mediaType'
-  | 'children.parent.internal.owner'
-  | 'children.parent.internal.type'
-  | 'children.parent.parent.children'
-  | 'children.parent.parent.id'
-  | 'functionRoute'
-  | 'id'
-  | 'internal.content'
-  | 'internal.contentDigest'
-  | 'internal.contentFilePath'
-  | 'internal.description'
-  | 'internal.fieldOwners'
-  | 'internal.ignoreType'
-  | 'internal.mediaType'
-  | 'internal.owner'
-  | 'internal.type'
-  | 'matchPath'
-  | 'originalAbsoluteFilePath'
-  | 'originalRelativeFilePath'
-  | 'parent.children'
-  | 'parent.children.children'
-  | 'parent.children.children.children'
-  | 'parent.children.children.id'
-  | 'parent.children.id'
-  | 'parent.children.internal.content'
-  | 'parent.children.internal.contentDigest'
-  | 'parent.children.internal.contentFilePath'
-  | 'parent.children.internal.description'
-  | 'parent.children.internal.fieldOwners'
-  | 'parent.children.internal.ignoreType'
-  | 'parent.children.internal.mediaType'
-  | 'parent.children.internal.owner'
-  | 'parent.children.internal.type'
-  | 'parent.children.parent.children'
-  | 'parent.children.parent.id'
-  | 'parent.id'
-  | 'parent.internal.content'
-  | 'parent.internal.contentDigest'
-  | 'parent.internal.contentFilePath'
-  | 'parent.internal.description'
-  | 'parent.internal.fieldOwners'
-  | 'parent.internal.ignoreType'
-  | 'parent.internal.mediaType'
-  | 'parent.internal.owner'
-  | 'parent.internal.type'
-  | 'parent.parent.children'
-  | 'parent.parent.children.children'
-  | 'parent.parent.children.id'
-  | 'parent.parent.id'
-  | 'parent.parent.internal.content'
-  | 'parent.parent.internal.contentDigest'
-  | 'parent.parent.internal.contentFilePath'
-  | 'parent.parent.internal.description'
-  | 'parent.parent.internal.fieldOwners'
-  | 'parent.parent.internal.ignoreType'
-  | 'parent.parent.internal.mediaType'
-  | 'parent.parent.internal.owner'
-  | 'parent.parent.internal.type'
-  | 'parent.parent.parent.children'
-  | 'parent.parent.parent.id'
-  | 'pluginName'
-  | 'relativeCompiledFilePath';
+type SiteFunctionFieldSelector = {
+  readonly absoluteCompiledFilePath: InputMaybe<FieldSelectorEnum>;
+  readonly children: InputMaybe<NodeFieldSelector>;
+  readonly functionRoute: InputMaybe<FieldSelectorEnum>;
+  readonly id: InputMaybe<FieldSelectorEnum>;
+  readonly internal: InputMaybe<InternalFieldSelector>;
+  readonly matchPath: InputMaybe<FieldSelectorEnum>;
+  readonly originalAbsoluteFilePath: InputMaybe<FieldSelectorEnum>;
+  readonly originalRelativeFilePath: InputMaybe<FieldSelectorEnum>;
+  readonly parent: InputMaybe<NodeFieldSelector>;
+  readonly pluginName: InputMaybe<FieldSelectorEnum>;
+  readonly relativeCompiledFilePath: InputMaybe<FieldSelectorEnum>;
+};
 
 type SiteFunctionFilterInput = {
   readonly absoluteCompiledFilePath: InputMaybe<StringQueryOperatorInput>;
@@ -3859,34 +2078,43 @@ type SiteFunctionGroupConnection = {
 
 
 type SiteFunctionGroupConnection_distinctArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
 };
 
 
 type SiteFunctionGroupConnection_groupArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
 };
 
 
 type SiteFunctionGroupConnection_maxArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
 };
 
 
 type SiteFunctionGroupConnection_minArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
 };
 
 
 type SiteFunctionGroupConnection_sumArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
 };
 
 type SiteFunctionSortInput = {
-  readonly fields: InputMaybe<ReadonlyArray<InputMaybe<SiteFunctionFieldsEnum>>>;
-  readonly order: InputMaybe<ReadonlyArray<InputMaybe<SortOrderEnum>>>;
+  readonly absoluteCompiledFilePath: InputMaybe<SortOrderEnum>;
+  readonly children: InputMaybe<NodeSortInput>;
+  readonly functionRoute: InputMaybe<SortOrderEnum>;
+  readonly id: InputMaybe<SortOrderEnum>;
+  readonly internal: InputMaybe<InternalSortInput>;
+  readonly matchPath: InputMaybe<SortOrderEnum>;
+  readonly originalAbsoluteFilePath: InputMaybe<SortOrderEnum>;
+  readonly originalRelativeFilePath: InputMaybe<SortOrderEnum>;
+  readonly parent: InputMaybe<NodeSortInput>;
+  readonly pluginName: InputMaybe<SortOrderEnum>;
+  readonly relativeCompiledFilePath: InputMaybe<SortOrderEnum>;
 };
 
 type SiteGraphqlTypegen = {
@@ -3894,9 +2122,19 @@ type SiteGraphqlTypegen = {
   readonly typesOutputPath: Maybe<Scalars['String']>;
 };
 
+type SiteGraphqlTypegenFieldSelector = {
+  readonly generateOnBuild: InputMaybe<FieldSelectorEnum>;
+  readonly typesOutputPath: InputMaybe<FieldSelectorEnum>;
+};
+
 type SiteGraphqlTypegenFilterInput = {
   readonly generateOnBuild: InputMaybe<BooleanQueryOperatorInput>;
   readonly typesOutputPath: InputMaybe<StringQueryOperatorInput>;
+};
+
+type SiteGraphqlTypegenSortInput = {
+  readonly generateOnBuild: InputMaybe<SortOrderEnum>;
+  readonly typesOutputPath: InputMaybe<SortOrderEnum>;
 };
 
 type SiteGroupConnection = {
@@ -3915,29 +2153,29 @@ type SiteGroupConnection = {
 
 
 type SiteGroupConnection_distinctArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
 };
 
 
 type SiteGroupConnection_groupArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
 };
 
 
 type SiteGroupConnection_maxArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
 };
 
 
 type SiteGroupConnection_minArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
 };
 
 
 type SiteGroupConnection_sumArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
 };
 
 type SitePage = Node & {
@@ -3968,29 +2206,29 @@ type SitePageConnection = {
 
 
 type SitePageConnection_distinctArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
 };
 
 
 type SitePageConnection_groupArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
 };
 
 
 type SitePageConnection_maxArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
 };
 
 
 type SitePageConnection_minArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
 };
 
 
 type SitePageConnection_sumArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
 };
 
 type SitePageEdge = {
@@ -3999,156 +2237,19 @@ type SitePageEdge = {
   readonly previous: Maybe<SitePage>;
 };
 
-type SitePageFieldsEnum =
-  | 'children'
-  | 'children.children'
-  | 'children.children.children'
-  | 'children.children.children.children'
-  | 'children.children.children.id'
-  | 'children.children.id'
-  | 'children.children.internal.content'
-  | 'children.children.internal.contentDigest'
-  | 'children.children.internal.contentFilePath'
-  | 'children.children.internal.description'
-  | 'children.children.internal.fieldOwners'
-  | 'children.children.internal.ignoreType'
-  | 'children.children.internal.mediaType'
-  | 'children.children.internal.owner'
-  | 'children.children.internal.type'
-  | 'children.children.parent.children'
-  | 'children.children.parent.id'
-  | 'children.id'
-  | 'children.internal.content'
-  | 'children.internal.contentDigest'
-  | 'children.internal.contentFilePath'
-  | 'children.internal.description'
-  | 'children.internal.fieldOwners'
-  | 'children.internal.ignoreType'
-  | 'children.internal.mediaType'
-  | 'children.internal.owner'
-  | 'children.internal.type'
-  | 'children.parent.children'
-  | 'children.parent.children.children'
-  | 'children.parent.children.id'
-  | 'children.parent.id'
-  | 'children.parent.internal.content'
-  | 'children.parent.internal.contentDigest'
-  | 'children.parent.internal.contentFilePath'
-  | 'children.parent.internal.description'
-  | 'children.parent.internal.fieldOwners'
-  | 'children.parent.internal.ignoreType'
-  | 'children.parent.internal.mediaType'
-  | 'children.parent.internal.owner'
-  | 'children.parent.internal.type'
-  | 'children.parent.parent.children'
-  | 'children.parent.parent.id'
-  | 'component'
-  | 'componentChunkName'
-  | 'id'
-  | 'internalComponentName'
-  | 'internal.content'
-  | 'internal.contentDigest'
-  | 'internal.contentFilePath'
-  | 'internal.description'
-  | 'internal.fieldOwners'
-  | 'internal.ignoreType'
-  | 'internal.mediaType'
-  | 'internal.owner'
-  | 'internal.type'
-  | 'matchPath'
-  | 'pageContext'
-  | 'parent.children'
-  | 'parent.children.children'
-  | 'parent.children.children.children'
-  | 'parent.children.children.id'
-  | 'parent.children.id'
-  | 'parent.children.internal.content'
-  | 'parent.children.internal.contentDigest'
-  | 'parent.children.internal.contentFilePath'
-  | 'parent.children.internal.description'
-  | 'parent.children.internal.fieldOwners'
-  | 'parent.children.internal.ignoreType'
-  | 'parent.children.internal.mediaType'
-  | 'parent.children.internal.owner'
-  | 'parent.children.internal.type'
-  | 'parent.children.parent.children'
-  | 'parent.children.parent.id'
-  | 'parent.id'
-  | 'parent.internal.content'
-  | 'parent.internal.contentDigest'
-  | 'parent.internal.contentFilePath'
-  | 'parent.internal.description'
-  | 'parent.internal.fieldOwners'
-  | 'parent.internal.ignoreType'
-  | 'parent.internal.mediaType'
-  | 'parent.internal.owner'
-  | 'parent.internal.type'
-  | 'parent.parent.children'
-  | 'parent.parent.children.children'
-  | 'parent.parent.children.id'
-  | 'parent.parent.id'
-  | 'parent.parent.internal.content'
-  | 'parent.parent.internal.contentDigest'
-  | 'parent.parent.internal.contentFilePath'
-  | 'parent.parent.internal.description'
-  | 'parent.parent.internal.fieldOwners'
-  | 'parent.parent.internal.ignoreType'
-  | 'parent.parent.internal.mediaType'
-  | 'parent.parent.internal.owner'
-  | 'parent.parent.internal.type'
-  | 'parent.parent.parent.children'
-  | 'parent.parent.parent.id'
-  | 'path'
-  | 'pluginCreator.browserAPIs'
-  | 'pluginCreator.children'
-  | 'pluginCreator.children.children'
-  | 'pluginCreator.children.children.children'
-  | 'pluginCreator.children.children.id'
-  | 'pluginCreator.children.id'
-  | 'pluginCreator.children.internal.content'
-  | 'pluginCreator.children.internal.contentDigest'
-  | 'pluginCreator.children.internal.contentFilePath'
-  | 'pluginCreator.children.internal.description'
-  | 'pluginCreator.children.internal.fieldOwners'
-  | 'pluginCreator.children.internal.ignoreType'
-  | 'pluginCreator.children.internal.mediaType'
-  | 'pluginCreator.children.internal.owner'
-  | 'pluginCreator.children.internal.type'
-  | 'pluginCreator.children.parent.children'
-  | 'pluginCreator.children.parent.id'
-  | 'pluginCreator.id'
-  | 'pluginCreator.internal.content'
-  | 'pluginCreator.internal.contentDigest'
-  | 'pluginCreator.internal.contentFilePath'
-  | 'pluginCreator.internal.description'
-  | 'pluginCreator.internal.fieldOwners'
-  | 'pluginCreator.internal.ignoreType'
-  | 'pluginCreator.internal.mediaType'
-  | 'pluginCreator.internal.owner'
-  | 'pluginCreator.internal.type'
-  | 'pluginCreator.name'
-  | 'pluginCreator.nodeAPIs'
-  | 'pluginCreator.packageJson'
-  | 'pluginCreator.parent.children'
-  | 'pluginCreator.parent.children.children'
-  | 'pluginCreator.parent.children.id'
-  | 'pluginCreator.parent.id'
-  | 'pluginCreator.parent.internal.content'
-  | 'pluginCreator.parent.internal.contentDigest'
-  | 'pluginCreator.parent.internal.contentFilePath'
-  | 'pluginCreator.parent.internal.description'
-  | 'pluginCreator.parent.internal.fieldOwners'
-  | 'pluginCreator.parent.internal.ignoreType'
-  | 'pluginCreator.parent.internal.mediaType'
-  | 'pluginCreator.parent.internal.owner'
-  | 'pluginCreator.parent.internal.type'
-  | 'pluginCreator.parent.parent.children'
-  | 'pluginCreator.parent.parent.id'
-  | 'pluginCreator.pluginFilepath'
-  | 'pluginCreator.pluginOptions'
-  | 'pluginCreator.resolve'
-  | 'pluginCreator.ssrAPIs'
-  | 'pluginCreator.version';
+type SitePageFieldSelector = {
+  readonly children: InputMaybe<NodeFieldSelector>;
+  readonly component: InputMaybe<FieldSelectorEnum>;
+  readonly componentChunkName: InputMaybe<FieldSelectorEnum>;
+  readonly id: InputMaybe<FieldSelectorEnum>;
+  readonly internal: InputMaybe<InternalFieldSelector>;
+  readonly internalComponentName: InputMaybe<FieldSelectorEnum>;
+  readonly matchPath: InputMaybe<FieldSelectorEnum>;
+  readonly pageContext: InputMaybe<FieldSelectorEnum>;
+  readonly parent: InputMaybe<NodeFieldSelector>;
+  readonly path: InputMaybe<FieldSelectorEnum>;
+  readonly pluginCreator: InputMaybe<SitePluginFieldSelector>;
+};
 
 type SitePageFilterInput = {
   readonly children: InputMaybe<NodeFilterListInput>;
@@ -4180,34 +2281,43 @@ type SitePageGroupConnection = {
 
 
 type SitePageGroupConnection_distinctArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
 };
 
 
 type SitePageGroupConnection_groupArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
 };
 
 
 type SitePageGroupConnection_maxArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
 };
 
 
 type SitePageGroupConnection_minArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
 };
 
 
 type SitePageGroupConnection_sumArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
 };
 
 type SitePageSortInput = {
-  readonly fields: InputMaybe<ReadonlyArray<InputMaybe<SitePageFieldsEnum>>>;
-  readonly order: InputMaybe<ReadonlyArray<InputMaybe<SortOrderEnum>>>;
+  readonly children: InputMaybe<NodeSortInput>;
+  readonly component: InputMaybe<SortOrderEnum>;
+  readonly componentChunkName: InputMaybe<SortOrderEnum>;
+  readonly id: InputMaybe<SortOrderEnum>;
+  readonly internal: InputMaybe<InternalSortInput>;
+  readonly internalComponentName: InputMaybe<SortOrderEnum>;
+  readonly matchPath: InputMaybe<SortOrderEnum>;
+  readonly pageContext: InputMaybe<SortOrderEnum>;
+  readonly parent: InputMaybe<NodeSortInput>;
+  readonly path: InputMaybe<SortOrderEnum>;
+  readonly pluginCreator: InputMaybe<SitePluginSortInput>;
 };
 
 type SitePlugin = Node & {
@@ -4240,29 +2350,29 @@ type SitePluginConnection = {
 
 
 type SitePluginConnection_distinctArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
 };
 
 
 type SitePluginConnection_groupArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
 };
 
 
 type SitePluginConnection_maxArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
 };
 
 
 type SitePluginConnection_minArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
 };
 
 
 type SitePluginConnection_sumArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
 };
 
 type SitePluginEdge = {
@@ -4271,109 +2381,21 @@ type SitePluginEdge = {
   readonly previous: Maybe<SitePlugin>;
 };
 
-type SitePluginFieldsEnum =
-  | 'browserAPIs'
-  | 'children'
-  | 'children.children'
-  | 'children.children.children'
-  | 'children.children.children.children'
-  | 'children.children.children.id'
-  | 'children.children.id'
-  | 'children.children.internal.content'
-  | 'children.children.internal.contentDigest'
-  | 'children.children.internal.contentFilePath'
-  | 'children.children.internal.description'
-  | 'children.children.internal.fieldOwners'
-  | 'children.children.internal.ignoreType'
-  | 'children.children.internal.mediaType'
-  | 'children.children.internal.owner'
-  | 'children.children.internal.type'
-  | 'children.children.parent.children'
-  | 'children.children.parent.id'
-  | 'children.id'
-  | 'children.internal.content'
-  | 'children.internal.contentDigest'
-  | 'children.internal.contentFilePath'
-  | 'children.internal.description'
-  | 'children.internal.fieldOwners'
-  | 'children.internal.ignoreType'
-  | 'children.internal.mediaType'
-  | 'children.internal.owner'
-  | 'children.internal.type'
-  | 'children.parent.children'
-  | 'children.parent.children.children'
-  | 'children.parent.children.id'
-  | 'children.parent.id'
-  | 'children.parent.internal.content'
-  | 'children.parent.internal.contentDigest'
-  | 'children.parent.internal.contentFilePath'
-  | 'children.parent.internal.description'
-  | 'children.parent.internal.fieldOwners'
-  | 'children.parent.internal.ignoreType'
-  | 'children.parent.internal.mediaType'
-  | 'children.parent.internal.owner'
-  | 'children.parent.internal.type'
-  | 'children.parent.parent.children'
-  | 'children.parent.parent.id'
-  | 'id'
-  | 'internal.content'
-  | 'internal.contentDigest'
-  | 'internal.contentFilePath'
-  | 'internal.description'
-  | 'internal.fieldOwners'
-  | 'internal.ignoreType'
-  | 'internal.mediaType'
-  | 'internal.owner'
-  | 'internal.type'
-  | 'name'
-  | 'nodeAPIs'
-  | 'packageJson'
-  | 'parent.children'
-  | 'parent.children.children'
-  | 'parent.children.children.children'
-  | 'parent.children.children.id'
-  | 'parent.children.id'
-  | 'parent.children.internal.content'
-  | 'parent.children.internal.contentDigest'
-  | 'parent.children.internal.contentFilePath'
-  | 'parent.children.internal.description'
-  | 'parent.children.internal.fieldOwners'
-  | 'parent.children.internal.ignoreType'
-  | 'parent.children.internal.mediaType'
-  | 'parent.children.internal.owner'
-  | 'parent.children.internal.type'
-  | 'parent.children.parent.children'
-  | 'parent.children.parent.id'
-  | 'parent.id'
-  | 'parent.internal.content'
-  | 'parent.internal.contentDigest'
-  | 'parent.internal.contentFilePath'
-  | 'parent.internal.description'
-  | 'parent.internal.fieldOwners'
-  | 'parent.internal.ignoreType'
-  | 'parent.internal.mediaType'
-  | 'parent.internal.owner'
-  | 'parent.internal.type'
-  | 'parent.parent.children'
-  | 'parent.parent.children.children'
-  | 'parent.parent.children.id'
-  | 'parent.parent.id'
-  | 'parent.parent.internal.content'
-  | 'parent.parent.internal.contentDigest'
-  | 'parent.parent.internal.contentFilePath'
-  | 'parent.parent.internal.description'
-  | 'parent.parent.internal.fieldOwners'
-  | 'parent.parent.internal.ignoreType'
-  | 'parent.parent.internal.mediaType'
-  | 'parent.parent.internal.owner'
-  | 'parent.parent.internal.type'
-  | 'parent.parent.parent.children'
-  | 'parent.parent.parent.id'
-  | 'pluginFilepath'
-  | 'pluginOptions'
-  | 'resolve'
-  | 'ssrAPIs'
-  | 'version';
+type SitePluginFieldSelector = {
+  readonly browserAPIs: InputMaybe<FieldSelectorEnum>;
+  readonly children: InputMaybe<NodeFieldSelector>;
+  readonly id: InputMaybe<FieldSelectorEnum>;
+  readonly internal: InputMaybe<InternalFieldSelector>;
+  readonly name: InputMaybe<FieldSelectorEnum>;
+  readonly nodeAPIs: InputMaybe<FieldSelectorEnum>;
+  readonly packageJson: InputMaybe<FieldSelectorEnum>;
+  readonly parent: InputMaybe<NodeFieldSelector>;
+  readonly pluginFilepath: InputMaybe<FieldSelectorEnum>;
+  readonly pluginOptions: InputMaybe<FieldSelectorEnum>;
+  readonly resolve: InputMaybe<FieldSelectorEnum>;
+  readonly ssrAPIs: InputMaybe<FieldSelectorEnum>;
+  readonly version: InputMaybe<FieldSelectorEnum>;
+};
 
 type SitePluginFilterInput = {
   readonly browserAPIs: InputMaybe<StringQueryOperatorInput>;
@@ -4407,34 +2429,45 @@ type SitePluginGroupConnection = {
 
 
 type SitePluginGroupConnection_distinctArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
 };
 
 
 type SitePluginGroupConnection_groupArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
 };
 
 
 type SitePluginGroupConnection_maxArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
 };
 
 
 type SitePluginGroupConnection_minArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
 };
 
 
 type SitePluginGroupConnection_sumArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
 };
 
 type SitePluginSortInput = {
-  readonly fields: InputMaybe<ReadonlyArray<InputMaybe<SitePluginFieldsEnum>>>;
-  readonly order: InputMaybe<ReadonlyArray<InputMaybe<SortOrderEnum>>>;
+  readonly browserAPIs: InputMaybe<SortOrderEnum>;
+  readonly children: InputMaybe<NodeSortInput>;
+  readonly id: InputMaybe<SortOrderEnum>;
+  readonly internal: InputMaybe<InternalSortInput>;
+  readonly name: InputMaybe<SortOrderEnum>;
+  readonly nodeAPIs: InputMaybe<SortOrderEnum>;
+  readonly packageJson: InputMaybe<SortOrderEnum>;
+  readonly parent: InputMaybe<NodeSortInput>;
+  readonly pluginFilepath: InputMaybe<SortOrderEnum>;
+  readonly pluginOptions: InputMaybe<SortOrderEnum>;
+  readonly resolve: InputMaybe<SortOrderEnum>;
+  readonly ssrAPIs: InputMaybe<SortOrderEnum>;
+  readonly version: InputMaybe<SortOrderEnum>;
 };
 
 type SiteSiteMetadata = {
@@ -4443,15 +2476,38 @@ type SiteSiteMetadata = {
   readonly title: Maybe<Scalars['String']>;
 };
 
+type SiteSiteMetadataFieldSelector = {
+  readonly description: InputMaybe<FieldSelectorEnum>;
+  readonly siteUrl: InputMaybe<FieldSelectorEnum>;
+  readonly title: InputMaybe<FieldSelectorEnum>;
+};
+
 type SiteSiteMetadataFilterInput = {
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly siteUrl: InputMaybe<StringQueryOperatorInput>;
   readonly title: InputMaybe<StringQueryOperatorInput>;
 };
 
+type SiteSiteMetadataSortInput = {
+  readonly description: InputMaybe<SortOrderEnum>;
+  readonly siteUrl: InputMaybe<SortOrderEnum>;
+  readonly title: InputMaybe<SortOrderEnum>;
+};
+
 type SiteSortInput = {
-  readonly fields: InputMaybe<ReadonlyArray<InputMaybe<SiteFieldsEnum>>>;
-  readonly order: InputMaybe<ReadonlyArray<InputMaybe<SortOrderEnum>>>;
+  readonly buildTime: InputMaybe<SortOrderEnum>;
+  readonly children: InputMaybe<NodeSortInput>;
+  readonly graphqlTypegen: InputMaybe<SiteGraphqlTypegenSortInput>;
+  readonly host: InputMaybe<SortOrderEnum>;
+  readonly id: InputMaybe<SortOrderEnum>;
+  readonly internal: InputMaybe<InternalSortInput>;
+  readonly jsxRuntime: InputMaybe<SortOrderEnum>;
+  readonly parent: InputMaybe<NodeSortInput>;
+  readonly pathPrefix: InputMaybe<SortOrderEnum>;
+  readonly polyfill: InputMaybe<SortOrderEnum>;
+  readonly port: InputMaybe<SortOrderEnum>;
+  readonly siteMetadata: InputMaybe<SiteSiteMetadataSortInput>;
+  readonly trailingSlash: InputMaybe<SortOrderEnum>;
 };
 
 type SortOrderEnum =
@@ -4517,6 +2573,11 @@ type GatsbyImageSharpFluid_withWebp_noBase64Fragment = { readonly aspectRatio: n
 type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = { readonly tracedSVG: string | null, readonly aspectRatio: number, readonly src: string, readonly srcSet: string, readonly srcWebp: string | null, readonly srcSetWebp: string | null, readonly sizes: string };
 
 type GatsbyImageSharpFluidLimitPresentationSizeFragment = { readonly maxHeight: number, readonly maxWidth: number };
+
+type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type IndexPageQuery = { readonly allFile: { readonly nodes: ReadonlyArray<{ readonly relativePath: string, readonly base: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null, readonly fields: { readonly imageMeta: { readonly vibrant: { readonly DarkMuted: ReadonlyArray<number | null> | null, readonly DarkVibrant: ReadonlyArray<number | null> | null, readonly LightMuted: ReadonlyArray<number | null> | null, readonly LightVibrant: ReadonlyArray<number | null> | null, readonly Vibrant: ReadonlyArray<number | null> | null, readonly Muted: ReadonlyArray<number | null> | null } | null } | null } | null }> } };
 
 type VibrantColorsFragment = { readonly DarkMuted: ReadonlyArray<number | null> | null, readonly DarkVibrant: ReadonlyArray<number | null> | null, readonly LightMuted: ReadonlyArray<number | null> | null, readonly LightVibrant: ReadonlyArray<number | null> | null, readonly Vibrant: ReadonlyArray<number | null> | null, readonly Muted: ReadonlyArray<number | null> | null };
 

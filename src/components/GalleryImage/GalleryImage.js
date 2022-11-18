@@ -39,6 +39,11 @@ const logKeyShortcut = (keyCode) => {
   }
 };
 
+const IconStyle = {
+  width: '24px',
+  margin: '0 4px'
+}
+
 const ArrowLinkClasses = `hover:underline text-vibrant-light hover:text-muted-light 
 lg:px-4 self-stretch flex items-center hover:bg-black/50 max-h-screen sticky top-0
 `;
@@ -153,11 +158,15 @@ const GalleryImage = ({ data, location: { state } }) => {
         <Nav
           className="mb-4"
           internalLinks={[
+            { href: "/", label: "Home" },
             {
-              href: getGalleryPageUrl({ keyword: filterKeyword, sortKey }, image.base),
+              href: getGalleryPageUrl(
+                { keyword: filterKeyword, sortKey },
+                image.base
+              ),
               label: (
                 <>
-                  Home <kbd className="font-normal">esc</kbd>
+                  Gallery <kbd className="font-normal">esc</kbd>
                 </>
               ),
             },
@@ -227,11 +236,11 @@ const GalleryImage = ({ data, location: { state } }) => {
                   {image.base}
                 </p>
                 {hasName(image) && (
-                  <h1 className="text-4xl mt-0 font-serif">{name}</h1>
+                  <h1 className="text-4xl mt-0 font-sans">{name}</h1>
                 )}
                 <p className="landscape:mr-2">{meta.Caption}</p>
                 <a
-                  className="cursor-pointer inline-block bg-muted-light text-vibrant-dark font-serif p-1 my-1 rounded"
+                  className="cursor-pointer inline-block bg-muted-light text-vibrant-dark font-sans p-1 my-1 rounded"
                   download
                   href={image.publicURL}
                   onClick={() => {
@@ -256,37 +265,37 @@ const GalleryImage = ({ data, location: { state } }) => {
               <div className="flex flex-col items-end">
                 <MetadataItem
                   data={dateTaken.toLocaleDateString()}
-                  icon={<Calendar />}
+                  icon={<Calendar UNSAFE_style={IconStyle} />}
                   title="date taken"
                 />
                 <div className="sm:flex justify-end gap-2 border border-vibrant-light pl-2 rounded">
                   <MetadataItem
                     data={shutterSpeed}
-                    icon={<Stopwatch />}
+                    icon={<Stopwatch UNSAFE_style={IconStyle} />}
                     title="shutter speed"
                   />
                   {meta.FNumber && (
                     <MetadataItem
                       data={`f/${meta.FNumber}`}
-                      icon={<Exposure />}
+                      icon={<Exposure UNSAFE_style={IconStyle} />}
                       title="aperture"
                     />
                   )}
                   <MetadataItem
                     data={meta.ISO}
-                    icon={<Filmroll />}
+                    icon={<Filmroll UNSAFE_style={IconStyle} />}
                     title="ISO"
                   />
                 </div>
                 <MetadataItem
                   data={locationString}
-                  icon={<Location />}
+                  icon={<Location UNSAFE_style={IconStyle} />}
                   title="location"
                 />
                 {(meta.Make || meta.Model) && (
                   <MetadataItem
                     data={[meta.Make, meta.Model].join(" ")}
-                    icon={<Camera />}
+                    icon={<Camera UNSAFE_style={IconStyle} />}
                     title="camera"
                   />
                 )}
@@ -298,7 +307,7 @@ const GalleryImage = ({ data, location: { state } }) => {
                     ]
                       .filter(Boolean)
                       .join(" @")}
-                    icon={<Circle />}
+                    icon={<Circle UNSAFE_style={IconStyle} />}
                     title="lens"
                   />
                 )}
