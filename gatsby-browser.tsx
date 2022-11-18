@@ -1,6 +1,11 @@
-import * as React from "react";
-import { lightTheme, Provider, SSRProvider } from "@adobe/react-spectrum";
+// import * as React from "react";
 import "./src/styles/global.css";
+
+declare global {
+  interface Window {
+    plausible: any;
+  }
+}
 
 const env =
   process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
@@ -22,21 +27,21 @@ export const onRouteUpdate = function () {
 //   p: MyParagraph,
 // };
 
-export const wrapRootElement = ({ element }) => (
-  <SSRProvider>
-    <Provider
-      UNSAFE_className="overflow-x-hidden"
-      UNSAFE_style={{
-        background: "unset",
-        color: "unset",
-      }}
-      colorScheme="light"
-      // scale="medium"
-      theme={lightTheme}
-    >
-      {element}
-    </Provider>
-  </SSRProvider>
-);
+// export const wrapRootElement = ({ element }) => (
+//   <SSRProvider>
+//     <Provider
+//       UNSAFE_className="overflow-x-hidden"
+//       UNSAFE_style={{
+//         background: "unset",
+//         color: "unset",
+//       }}
+//       colorScheme="light"
+//       // scale="medium"
+//       theme={{light: {}, ...lightTheme}}
+//     >
+//       {element}
+//     </Provider>
+//   </SSRProvider>
+// );
 
 // {/* // <MDXProvider components={components}>{element}</MDXProvider> */}

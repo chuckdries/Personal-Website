@@ -2,12 +2,13 @@ import * as React from "react";
 import * as R from "ramda";
 import { graphql, PageProps } from "gatsby";
 import { Helmet } from "react-helmet";
-import { Picker, Item } from "@adobe/react-spectrum";
+// import { Picker, Item } from "@adobe/react-spectrum";
 
 import MasonryGallery from "../components/MasonryGallery";
 import KeywordsPicker from "../components/KeywordsPicker";
 import { getGalleryPageUrl, getHelmetSafeBodyStyle } from "../utils";
 import Nav from "../components/Nav";
+import { Item, Select } from "../components/Select";
 
 const SORT_KEYS = {
   hue: ["fields", "imageMeta", "vibrantHue"],
@@ -170,8 +171,8 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
             LightMuted: [0, 0, 0],
             Vibrant: [0, 0, 0],
             LightVibrant: [0, 0, 0],
-            DarkMuted: [255, 255, 255],
-            DarkVibrant: [255, 255, 255],
+            DarkMuted: [238, 238, 238],
+            DarkVibrant: [238, 238, 238],
           })}
         />
       </Helmet>
@@ -205,7 +206,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
             value={filterKeyword}
           />
           <div className="m-2">
-            <Picker
+            <Select
               label="Sort by..."
               // @ts-ignore
               onSelectionChange={setSortKey}
@@ -214,7 +215,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
               <Item key="rating">Curated</Item>
               <Item key="date">Date</Item>
               <Item key="hue">Hue</Item>
-            </Picker>
+            </Select>
           </div>
         </div>
       </div>
