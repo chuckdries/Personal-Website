@@ -5,16 +5,6 @@ __metadata:
   version: 6
   cacheKey: 8
 
-"@adobe/react-spectrum-ui@npm:1.2.0":
-  version: 1.2.0
-  resolution: "@adobe/react-spectrum-ui@npm:1.2.0"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 18ad87c76e2019f22fa9f18df22fc06cb99e27d46fc82ed6974a4cab1d04c6a223ded51fae95d0890069cb7c9a10add468e5e9c62b9b33ac9b5ab9de25ff12e5
-  languageName: node
-  linkType: hard
-
 "@adobe/react-spectrum-workflow@npm:2.3.3":
   version: 2.3.3
   resolution: "@adobe/react-spectrum-workflow@npm:2.3.3"
@@ -22,66 +12,6 @@ __metadata:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
   checksum: f0007bc8886ec5b7947c9e149047982fa3df83065ff7085fe771502dfca233125e52bafe1cc7f56bf5ecee766e1a3cc148dd22f4cdb8a34370e2d50466225d2c
-  languageName: node
-  linkType: hard
-
-"@adobe/react-spectrum@npm:^3.19.0":
-  version: 3.23.0
-  resolution: "@adobe/react-spectrum@npm:3.23.0"
-  dependencies:
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/ssr": ^3.4.0
-    "@react-aria/visually-hidden": ^3.6.0
-    "@react-spectrum/actiongroup": ^3.7.1
-    "@react-spectrum/badge": ^3.0.1
-    "@react-spectrum/breadcrumbs": ^3.6.0
-    "@react-spectrum/button": ^3.11.0
-    "@react-spectrum/buttongroup": ^3.5.0
-    "@react-spectrum/calendar": ^3.1.3
-    "@react-spectrum/checkbox": ^3.6.1
-    "@react-spectrum/combobox": ^3.7.0
-    "@react-spectrum/contextualhelp": ^3.4.0
-    "@react-spectrum/datepicker": ^3.3.0
-    "@react-spectrum/dialog": ^3.6.0
-    "@react-spectrum/divider": ^3.4.3
-    "@react-spectrum/dnd": ^3.0.0
-    "@react-spectrum/form": ^3.5.1
-    "@react-spectrum/icon": ^3.6.2
-    "@react-spectrum/illustratedmessage": ^3.3.3
-    "@react-spectrum/image": ^3.3.3
-    "@react-spectrum/labeledvalue": ^3.0.1
-    "@react-spectrum/layout": ^3.4.3
-    "@react-spectrum/link": ^3.4.3
-    "@react-spectrum/list": ^3.2.0
-    "@react-spectrum/listbox": ^3.8.1
-    "@react-spectrum/menu": ^3.9.0
-    "@react-spectrum/meter": ^3.3.3
-    "@react-spectrum/numberfield": ^3.5.0
-    "@react-spectrum/overlays": ^4.0.0
-    "@react-spectrum/picker": ^3.9.0
-    "@react-spectrum/progress": ^3.3.3
-    "@react-spectrum/provider": ^3.6.0
-    "@react-spectrum/radio": ^3.4.1
-    "@react-spectrum/searchfield": ^3.6.0
-    "@react-spectrum/slider": ^3.4.0
-    "@react-spectrum/statuslight": ^3.4.3
-    "@react-spectrum/switch": ^3.3.3
-    "@react-spectrum/table": ^3.5.0
-    "@react-spectrum/tabs": ^3.3.3
-    "@react-spectrum/text": ^3.3.3
-    "@react-spectrum/textfield": ^3.9.0
-    "@react-spectrum/theme-dark": ^3.4.0
-    "@react-spectrum/theme-default": ^3.4.0
-    "@react-spectrum/theme-light": ^3.3.0
-    "@react-spectrum/tooltip": ^3.3.3
-    "@react-spectrum/view": ^3.4.0
-    "@react-spectrum/well": ^3.3.3
-    "@react-stately/collections": ^3.5.0
-    "@react-stately/data": ^3.8.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 7a2e7d38f08b3626b4dafb921ed8667dd9bf3238fb291912291b140cf00ed8e49b8321ea668f8aafe4bd807f8324a422dbaf488d5394d40839422c449f44d4df
   languageName: node
   linkType: hard
 
@@ -1522,7 +1452,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.9, @babel/runtime@npm:^7.18.0, @babel/runtime@npm:^7.18.9, @babel/runtime@npm:^7.6.2, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.9, @babel/runtime@npm:^7.18.0, @babel/runtime@npm:^7.18.9, @babel/runtime@npm:^7.6.2, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
   version: 7.20.1
   resolution: "@babel/runtime@npm:7.20.1"
   dependencies:
@@ -2859,26 +2789,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-aria/actiongroup@npm:^3.4.3":
-  version: 3.4.3
-  resolution: "@react-aria/actiongroup@npm:3.4.3"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/selection": ^3.12.0
-    "@react-aria/utils": ^3.14.1
-    "@react-stately/collections": ^3.5.0
-    "@react-stately/list": ^3.6.0
-    "@react-types/actiongroup": ^3.3.5
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: ad1ec0488bd9fa7f7054960801fca8543a707f2376ef45d4fbf6ead2fef61dad936d18ae5385e8f61c9acdfb5c23fda7ad07c7dd37ccb4705c75ca7ff1b38451
-  languageName: node
-  linkType: hard
-
 "@react-aria/breadcrumbs@npm:^3.4.0":
   version: 3.4.0
   resolution: "@react-aria/breadcrumbs@npm:3.4.0"
@@ -3559,24 +3469,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-aria/virtualizer@npm:^3.6.0":
-  version: 3.6.0
-  resolution: "@react-aria/virtualizer@npm:3.6.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/utils": ^3.14.1
-    "@react-stately/virtualizer": ^3.4.0
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: bf221003f7a98aeb3f3ce94f6d9242633ee56dfeab72f217d13f463eeffbc96cf5eeea4526f44dff5c451f2cf118f1c10e5caca191fa5a63b01c02ee1bc96fbf
-  languageName: node
-  linkType: hard
-
 "@react-aria/visually-hidden@npm:^3.6.0":
   version: 3.6.0
   resolution: "@react-aria/visually-hidden@npm:3.6.0"
@@ -3592,340 +3484,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-spectrum/actiongroup@npm:^3.7.1":
-  version: 3.7.1
-  resolution: "@react-spectrum/actiongroup@npm:3.7.1"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/actiongroup": ^3.4.3
-    "@react-aria/button": ^3.6.3
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/selection": ^3.12.0
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/button": ^3.11.0
-    "@react-spectrum/form": ^3.5.1
-    "@react-spectrum/menu": ^3.9.0
-    "@react-spectrum/text": ^3.3.3
-    "@react-spectrum/tooltip": ^3.3.3
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/collections": ^3.5.0
-    "@react-stately/list": ^3.6.0
-    "@react-types/actiongroup": ^3.3.5
-    "@react-types/button": ^3.7.0
-    "@react-types/shared": ^3.16.0
-    "@spectrum-icons/ui": ^3.4.0
-    "@spectrum-icons/workflow": ^4.0.4
-  peerDependencies:
-    "@react-spectrum/provider": ^3.2.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: a81f8985c42d746987c3d667c9c58801925a87daac4f58f361b4f9d68eba6f098c5b20784c1f41f4a0631d4b61a7841afcf9b0b833a26a7d2301a0414cdd0fc2
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/badge@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "@react-spectrum/badge@npm:3.0.1"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/text": ^3.3.3
-    "@react-spectrum/utils": ^3.8.0
-    "@react-types/badge": ^3.0.1
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 87892d668698ba18069934634d8a9ac0ba87efd0628f986a972e976265423c50922386bcf47adfcd64337d98a96bd12aff49c06c5f8a108c4fefe8ee9fc7570e
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/breadcrumbs@npm:^3.6.0":
-  version: 3.6.0
-  resolution: "@react-spectrum/breadcrumbs@npm:3.6.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/breadcrumbs": ^3.4.0
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/button": ^3.11.0
-    "@react-spectrum/menu": ^3.9.0
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/collections": ^3.5.0
-    "@react-types/breadcrumbs": ^3.4.5
-    "@react-types/shared": ^3.16.0
-    "@spectrum-icons/ui": ^3.4.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 4eff608b3312b8633bd0830524b70e1911d7e76bd2db045dde9ac59c40e8ce60cdbf3eb9c1cc511a0f9ff0d3698af2b8ed934212b87321d445825b42c5f35323
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/button@npm:^3.11.0":
-  version: 3.11.0
-  resolution: "@react-spectrum/button@npm:3.11.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/button": ^3.6.3
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/text": ^3.3.3
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/toggle": ^3.4.3
-    "@react-types/button": ^3.7.0
-    "@react-types/shared": ^3.16.0
-    "@spectrum-icons/ui": ^3.4.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 271d84a554cc5eb9c02a34f93d9f89a56f91a3a69443493852ee8b2056b539c1effd9a080d4e55e4044aef22afd225f2605bb1374a71e446cc5e79b7d40e7b91
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/buttongroup@npm:^3.5.0":
-  version: 3.5.0
-  resolution: "@react-spectrum/buttongroup@npm:3.5.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/button": ^3.11.0
-    "@react-spectrum/text": ^3.3.3
-    "@react-spectrum/utils": ^3.8.0
-    "@react-types/buttongroup": ^3.2.5
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 8717dd2196a9709c70e9cff8fa260fa075d2e917159f78146efa18e31a053a7dc78c479ac34e1aeed869898ccfcb64051af7160642f193fda3e79aba6b8a492e
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/calendar@npm:^3.1.3":
-  version: 3.1.3
-  resolution: "@react-spectrum/calendar@npm:3.1.3"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@internationalized/date": ^3.0.1
-    "@react-aria/calendar": ^3.0.4
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/utils": ^3.14.1
-    "@react-aria/visually-hidden": ^3.6.0
-    "@react-spectrum/button": ^3.11.0
-    "@react-spectrum/label": ^3.9.0
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/calendar": ^3.0.4
-    "@react-types/button": ^3.7.0
-    "@react-types/calendar": ^3.0.4
-    "@react-types/shared": ^3.16.0
-    "@spectrum-icons/ui": ^3.4.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 542b672191b903f8decd20b2ffa7f6e79fbfabc2f43be637536f4ad9e83bb40e44bcc658b7201e88c9516b928b9ed02b1a870fd840d6dc80f08c7aaadf9971db
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/checkbox@npm:^3.6.1":
-  version: 3.6.1
-  resolution: "@react-spectrum/checkbox@npm:3.6.1"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/checkbox": ^3.7.0
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/interactions": ^3.13.0
-    "@react-spectrum/form": ^3.5.1
-    "@react-spectrum/label": ^3.9.0
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/checkbox": ^3.3.1
-    "@react-stately/toggle": ^3.4.3
-    "@react-types/checkbox": ^3.4.1
-    "@react-types/shared": ^3.16.0
-    "@spectrum-icons/ui": ^3.4.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 0b94417e9a92a09a53fa11a8db450787a19b04d5f1bb804462630ca6ee040246fb67949d1a0d3311f2dd32d4996faf719dc9ad73d2784ca2bc6bb8c8b53ced43
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/combobox@npm:^3.7.0":
-  version: 3.7.0
-  resolution: "@react-spectrum/combobox@npm:3.7.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/button": ^3.6.3
-    "@react-aria/combobox": ^3.4.3
-    "@react-aria/dialog": ^3.4.1
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/label": ^3.4.3
-    "@react-aria/overlays": ^3.12.0
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/button": ^3.11.0
-    "@react-spectrum/label": ^3.9.0
-    "@react-spectrum/listbox": ^3.8.1
-    "@react-spectrum/overlays": ^4.0.0
-    "@react-spectrum/progress": ^3.3.3
-    "@react-spectrum/textfield": ^3.9.0
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/collections": ^3.5.0
-    "@react-stately/combobox": ^3.3.0
-    "@react-types/button": ^3.7.0
-    "@react-types/combobox": ^3.5.5
-    "@react-types/overlays": ^3.6.5
-    "@react-types/shared": ^3.16.0
-    "@react-types/textfield": ^3.6.1
-    "@spectrum-icons/ui": ^3.4.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 8327e33f75d1564fb91e17172d8bfd450ffdf7b78cc2b58178081cca22d12561215e62e6195bb55066edc503c0f8eb3fdcc366ab3170e48fe36b616fef5feb27
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/contextualhelp@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "@react-spectrum/contextualhelp@npm:3.4.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/button": ^3.11.0
-    "@react-spectrum/dialog": ^3.6.0
-    "@react-spectrum/utils": ^3.8.0
-    "@react-types/contextualhelp": ^3.1.5
-    "@react-types/shared": ^3.16.0
-    "@spectrum-icons/workflow": ^4.0.4
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: aa718929aa13b28008aeeaf7b0e7b0791c2a750fc8c256bc9b054b92574e17593fe9137fcd3ec2dcdce722fa34500ef5ff105cde9d94999814eff53730daceee
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/datepicker@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@react-spectrum/datepicker@npm:3.3.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@internationalized/date": ^3.0.1
-    "@internationalized/number": ^3.1.1
-    "@react-aria/datepicker": ^3.2.0
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/button": ^3.11.0
-    "@react-spectrum/calendar": ^3.1.3
-    "@react-spectrum/dialog": ^3.6.0
-    "@react-spectrum/label": ^3.9.0
-    "@react-spectrum/layout": ^3.4.3
-    "@react-spectrum/utils": ^3.8.0
-    "@react-spectrum/view": ^3.4.0
-    "@react-stately/datepicker": ^3.2.0
-    "@react-stately/utils": ^3.5.1
-    "@react-types/datepicker": ^3.1.3
-    "@react-types/shared": ^3.16.0
-    "@spectrum-icons/ui": ^3.4.0
-    "@spectrum-icons/workflow": ^4.0.4
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 74a5a344d77ffca9d6d8456b00587675d3993bb769304f3e9adac1ca3a1a8a4fb466287e0aae060104f152065f6224b19a924706169c07959ac523971990f585
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/dialog@npm:^3.6.0":
-  version: 3.6.0
-  resolution: "@react-spectrum/dialog@npm:3.6.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/dialog": ^3.4.1
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/overlays": ^3.12.0
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/button": ^3.11.0
-    "@react-spectrum/buttongroup": ^3.5.0
-    "@react-spectrum/divider": ^3.4.3
-    "@react-spectrum/layout": ^3.4.3
-    "@react-spectrum/overlays": ^4.0.0
-    "@react-spectrum/text": ^3.3.3
-    "@react-spectrum/utils": ^3.8.0
-    "@react-spectrum/view": ^3.4.0
-    "@react-stately/overlays": ^3.4.3
-    "@react-stately/utils": ^3.5.1
-    "@react-types/button": ^3.7.0
-    "@react-types/dialog": ^3.4.5
-    "@react-types/shared": ^3.16.0
-    "@spectrum-icons/ui": ^3.4.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: a008c1f84a885cfaf651d5a1d2bd61a8531fc330acb8d03d6728878929340a9fc581fb40a6ae7cca6e1ec905ae56e7a1f103054cbabb5d99dfcf7d2460e8c12a
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/divider@npm:^3.4.3":
-  version: 3.4.3
-  resolution: "@react-spectrum/divider@npm:3.4.3"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/separator": ^3.2.5
-    "@react-spectrum/utils": ^3.8.0
-    "@react-types/divider": ^3.2.5
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: bb70d44009937b5b969ac5fd11ff05899d77c429f0bba2dadc6d8932dd679b9b98b8236ee8258f448a63fe771e65d7caa98bcaaa17c7f33724cf5aae10c12fd8
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/dnd@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "@react-spectrum/dnd@npm:3.0.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/dnd": ^3.0.0
-    "@react-stately/dnd": ^3.0.0
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: e5bdecb4f2bf63f0300253b7eaa0f06cd49834bd4a0ba4e61829bc764bb13c0faf2dbe63f7f12859e6ac07d1f964ceae41e52027e660bd4f35a7963e009fd617
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/form@npm:^3.5.1":
-  version: 3.5.1
-  resolution: "@react-spectrum/form@npm:3.5.1"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/utils": ^3.8.0
-    "@react-types/form": ^3.4.1
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: bfb8c56a9b8f0b952563aed6163df5f343a576783a3ad3f753e9f11e85fc6f0a9f91506371d5f66f961acad0a5e83c602454bf7dc60e1549ccabd2806c1fe9c0
-  languageName: node
-  linkType: hard
-
 "@react-spectrum/icon@npm:^3.6.2":
   version: 3.6.2
   resolution: "@react-spectrum/icon@npm:3.6.2"
@@ -3938,332 +3496,6 @@ __metadata:
     "@react-spectrum/provider": ^3.0.0
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
   checksum: 3a0995732c605edae55f2ca1277d3bd49ce845109b48b1f87573395db91c7e763da77af7ae69596a4533949ef790314522dec2d405cc97f14fd0ba15714ee490
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/illustratedmessage@npm:^3.3.3":
-  version: 3.3.3
-  resolution: "@react-spectrum/illustratedmessage@npm:3.3.3"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/layout": ^3.4.3
-    "@react-spectrum/utils": ^3.8.0
-    "@react-types/illustratedmessage": ^3.2.5
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 2cfdcfe80632dda5597e938ab55b6942f57f3d4a29546aba2388aa2bdb5b8304f350b855b7f5c1e4e3c9e2045b4c4fbf265abccb1d4450b509005251e3d39a9b
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/image@npm:^3.3.3":
-  version: 3.3.3
-  resolution: "@react-spectrum/image@npm:3.3.3"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/utils": ^3.8.0
-    "@react-types/image": ^3.2.5
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: fb0ab0e17f895992c4db6a8ac5ad92cf8954290ab3f37878efc674fe843c6ad333354af9b5a7532afe03889f2959551940e1eccc939b0f02916185f64f1e686d
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/label@npm:^3.9.0":
-  version: 3.9.0
-  resolution: "@react-spectrum/label@npm:3.9.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/label": ^3.4.3
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/form": ^3.5.1
-    "@react-spectrum/layout": ^3.4.3
-    "@react-spectrum/utils": ^3.8.0
-    "@react-types/label": ^3.7.1
-    "@react-types/shared": ^3.16.0
-    "@spectrum-icons/ui": ^3.4.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 7eef7c1f10135a63f2b18dac3fd52e9fe2aef86e785307c3f6658632d24c7bf3a78cb7eef40e7f9b6e74d992c67fdc00d5b96e01d32955cfffb8b4671cb5bd55
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/labeledvalue@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "@react-spectrum/labeledvalue@npm:3.0.1"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@internationalized/date": ^3.0.1
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/label": ^3.9.0
-    "@react-spectrum/utils": ^3.8.0
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 8871cecec17cb3a1a067d81106d93f8a7d1762cd7a673806c93a2edd5684b54e2211cda77e2eeaddad9384f5cabab8e379e22e592864bbb4e976b17d64e244b2
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/layout@npm:^3.4.3":
-  version: 3.4.3
-  resolution: "@react-spectrum/layout@npm:3.4.3"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/ssr": ^3.4.0
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/utils": ^3.8.0
-    "@react-types/layout": ^3.3.5
-    "@react-types/shared": ^3.16.0
-    clsx: ^1.1.1
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: e9d6defccc36fd8d6708214c8d7d270426a34db98445542e4f18568d879fa80f6c81df9b9e7a0c909add815f155f2edf9599bc4d1f3dadb30c0f5ab294b3fd3b
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/link@npm:^3.4.3":
-  version: 3.4.3
-  resolution: "@react-spectrum/link@npm:3.4.3"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/link": ^3.3.5
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/utils": ^3.8.0
-    "@react-types/link": ^3.3.5
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 84d7c5b62828e463cb57676211dce5c7dc635587a47b3a527c112c6f1b5396c418de856131f97b88fa0d768790d5422db30d0dc0735b63d4d05f1ed62aed82e9
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/list@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "@react-spectrum/list@npm:3.2.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/button": ^3.6.3
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/gridlist": ^3.1.1
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/utils": ^3.14.1
-    "@react-aria/virtualizer": ^3.6.0
-    "@react-aria/visually-hidden": ^3.6.0
-    "@react-spectrum/checkbox": ^3.6.1
-    "@react-spectrum/layout": ^3.4.3
-    "@react-spectrum/progress": ^3.3.3
-    "@react-spectrum/text": ^3.3.3
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/collections": ^3.5.0
-    "@react-stately/layout": ^3.9.0
-    "@react-stately/list": ^3.6.0
-    "@react-stately/virtualizer": ^3.4.0
-    "@react-types/grid": ^3.1.5
-    "@react-types/shared": ^3.16.0
-    "@spectrum-icons/ui": ^3.4.0
-    react-transition-group: ^2.2.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.2.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: ab0ab11b3be6b6e698938f973c69f376c1a299417e70c4f86e5d3b3526582d40b1369a8dbec916e2629e85ab329853eda864e627ae41848d0f9196339393bfbf
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/listbox@npm:^3.8.1":
-  version: 3.8.1
-  resolution: "@react-spectrum/listbox@npm:3.8.1"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/listbox": ^3.7.1
-    "@react-aria/separator": ^3.2.5
-    "@react-aria/utils": ^3.14.1
-    "@react-aria/virtualizer": ^3.6.0
-    "@react-spectrum/layout": ^3.4.3
-    "@react-spectrum/progress": ^3.3.3
-    "@react-spectrum/text": ^3.3.3
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/collections": ^3.5.0
-    "@react-stately/layout": ^3.9.0
-    "@react-stately/list": ^3.6.0
-    "@react-stately/virtualizer": ^3.4.0
-    "@react-types/listbox": ^3.3.5
-    "@react-types/shared": ^3.16.0
-    "@spectrum-icons/ui": ^3.4.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.2.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 4b1081c88c9bc26f115518c3f0445ad987139a4454ac2e027d133b4ff1e0928288255284f82eaae054974e53a5843b28235453d748151c2e3e4b56f59f4374cf
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/menu@npm:^3.9.0":
-  version: 3.9.0
-  resolution: "@react-spectrum/menu@npm:3.9.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/menu": ^3.7.0
-    "@react-aria/overlays": ^3.12.0
-    "@react-aria/selection": ^3.12.0
-    "@react-aria/separator": ^3.2.5
-    "@react-aria/utils": ^3.14.1
-    "@react-aria/virtualizer": ^3.6.0
-    "@react-spectrum/button": ^3.11.0
-    "@react-spectrum/checkbox": ^3.6.1
-    "@react-spectrum/divider": ^3.4.3
-    "@react-spectrum/layout": ^3.4.3
-    "@react-spectrum/overlays": ^4.0.0
-    "@react-spectrum/text": ^3.3.3
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/collections": ^3.5.0
-    "@react-stately/menu": ^3.4.3
-    "@react-stately/tree": ^3.4.0
-    "@react-stately/utils": ^3.5.1
-    "@react-types/menu": ^3.7.3
-    "@react-types/overlays": ^3.6.5
-    "@react-types/shared": ^3.16.0
-    "@spectrum-icons/ui": ^3.4.0
-    "@spectrum-icons/workflow": ^4.0.4
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: b50f6aa9208157f13b8bb980dd5a5e8d044a107e106604c569c5f6a24c0c063ede32265e5c9fd9f727dec3e138005d28adad358f0e4d33be0a8fd5a876e72840
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/meter@npm:^3.3.3":
-  version: 3.3.3
-  resolution: "@react-spectrum/meter@npm:3.3.3"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/meter": ^3.3.3
-    "@react-spectrum/progress": ^3.3.3
-    "@react-spectrum/utils": ^3.8.0
-    "@react-types/meter": ^3.2.5
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: d88a7a509aba76cb20a91c9d327afaa40230cbebdcc541a2c648afaa5b2e36d8fbd9e41a62b17ca09f51e27ec86a3f607eceaf95d73d4cf75e35ebc4956321ba
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/numberfield@npm:^3.5.0":
-  version: 3.5.0
-  resolution: "@react-spectrum/numberfield@npm:3.5.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/button": ^3.6.3
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/numberfield": ^3.3.3
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/button": ^3.11.0
-    "@react-spectrum/label": ^3.9.0
-    "@react-spectrum/textfield": ^3.9.0
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/numberfield": ^3.3.0
-    "@react-types/button": ^3.7.0
-    "@react-types/numberfield": ^3.3.5
-    "@react-types/shared": ^3.16.0
-    "@spectrum-icons/ui": ^3.4.0
-    "@spectrum-icons/workflow": ^4.0.4
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: f297669a8a0c0fdd7a3c00d310e3f9311e1b9ed137735eefffe32a3985b9996066cef37a2b04238440210ef66c1da4676560d1da91169da6891c7fe3c7ec0def
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/overlays@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "@react-spectrum/overlays@npm:4.0.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/overlays": ^3.12.0
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/overlays": ^3.4.3
-    "@react-types/overlays": ^3.6.5
-    "@react-types/shared": ^3.16.0
-    react-transition-group: ^2.2.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 9d401837ee9578c475ab4519e89ebfb00194c74b3d465b401c776145d8ac1a0525c5d5a2c1c1ea8eb554a95737ed6c9e6e3c52f2d2410707664022fc4f22bb28
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/picker@npm:^3.9.0":
-  version: 3.9.0
-  resolution: "@react-spectrum/picker@npm:3.9.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/overlays": ^3.12.0
-    "@react-aria/select": ^3.8.3
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/button": ^3.11.0
-    "@react-spectrum/label": ^3.9.0
-    "@react-spectrum/listbox": ^3.8.1
-    "@react-spectrum/overlays": ^4.0.0
-    "@react-spectrum/progress": ^3.3.3
-    "@react-spectrum/text": ^3.3.3
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/collections": ^3.5.0
-    "@react-stately/select": ^3.3.3
-    "@react-types/overlays": ^3.6.5
-    "@react-types/select": ^3.6.5
-    "@react-types/shared": ^3.16.0
-    "@spectrum-icons/ui": ^3.4.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.1.4
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 2d0d33b86b9a5b12cafb43c11ca0f18678b9499ba78ac2818b736b6a6342fd9789028836dfe500818e3918dc59826c31689e31a1135f6fb2edff3945715dbbd1
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/progress@npm:^3.3.3":
-  version: 3.3.3
-  resolution: "@react-spectrum/progress@npm:3.3.3"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/progress": ^3.3.3
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/utils": ^3.8.0
-    "@react-types/progress": ^3.2.5
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: bddf8ee8d98effe8807abc8f278a05f47dc60f05212835d035bf77c116e957cf94337b93fcf624521b023d9986d206aa925070f4879aab06b56cf46205a828c4
   languageName: node
   linkType: hard
 
@@ -4286,274 +3518,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-spectrum/radio@npm:^3.4.1":
-  version: 3.4.1
-  resolution: "@react-spectrum/radio@npm:3.4.1"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/radio": ^3.4.1
-    "@react-spectrum/form": ^3.5.1
-    "@react-spectrum/label": ^3.9.0
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/radio": ^3.6.1
-    "@react-types/radio": ^3.3.1
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 83cb928f5f0889377c4bea935eed2c9a247665f86de011fe194f875cb189f55f7d1f7e1beb6a422a272b68273008a9e9772d63632ea21e758fd02e74040eb50b
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/searchfield@npm:^3.6.0":
-  version: 3.6.0
-  resolution: "@react-spectrum/searchfield@npm:3.6.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/searchfield": ^3.4.3
-    "@react-spectrum/button": ^3.11.0
-    "@react-spectrum/textfield": ^3.9.0
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/searchfield": ^3.3.3
-    "@react-types/searchfield": ^3.3.5
-    "@react-types/textfield": ^3.6.1
-    "@spectrum-icons/ui": ^3.4.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 0019a356078bc6b57de7b0fb5b4f2e299658ebfcba3d5b411057c008e40d0d4c7832f91b2dcbc19ec79ee28e5f2f42c7776df43c1a876b725faf17aa4685f837
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/slider@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "@react-spectrum/slider@npm:3.4.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/slider": ^3.2.3
-    "@react-aria/utils": ^3.14.1
-    "@react-aria/visually-hidden": ^3.6.0
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/slider": ^3.2.3
-    "@react-types/shared": ^3.16.0
-    "@react-types/slider": ^3.3.1
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 31067c5acd7465831ba7937ab1517a776e1bc9abfbe192ce233a0f66081dec8aad26d0da1135ff8f3816723f2a984b7741569175014262871968c056268a8ace
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/statuslight@npm:^3.4.3":
-  version: 3.4.3
-  resolution: "@react-spectrum/statuslight@npm:3.4.3"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/utils": ^3.8.0
-    "@react-types/shared": ^3.16.0
-    "@react-types/statuslight": ^3.2.5
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: fc09977880a3bf6d10a914f58bc36d83c2d9954d9eca513ea049b5a6aee7608fe1bf4115b59449fb76444c5f51fa5ee5c06e74b3c8bc0e8b3bb49bc5134ad090
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/switch@npm:^3.3.3":
-  version: 3.3.3
-  resolution: "@react-spectrum/switch@npm:3.3.3"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/switch": ^3.3.0
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/toggle": ^3.4.3
-    "@react-types/shared": ^3.16.0
-    "@react-types/switch": ^3.2.5
-    "@spectrum-icons/ui": ^3.4.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 0cd313096f069c52f52ab5daabb22b8944b89ec4f354364e3c42fb5216b5d9155d440e8453b4edb08d0b1989768cc7ab3d6f03ca357c59712649bbeb051dd89d
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/table@npm:^3.5.0":
-  version: 3.5.0
-  resolution: "@react-spectrum/table@npm:3.5.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/button": ^3.6.3
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/grid": ^3.5.1
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/table": ^3.6.0
-    "@react-aria/utils": ^3.14.1
-    "@react-aria/virtualizer": ^3.6.0
-    "@react-aria/visually-hidden": ^3.6.0
-    "@react-spectrum/button": ^3.11.0
-    "@react-spectrum/checkbox": ^3.6.1
-    "@react-spectrum/menu": ^3.9.0
-    "@react-spectrum/progress": ^3.3.3
-    "@react-spectrum/tooltip": ^3.3.3
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/collections": ^3.5.0
-    "@react-stately/grid": ^3.4.1
-    "@react-stately/layout": ^3.9.0
-    "@react-stately/table": ^3.6.0
-    "@react-stately/virtualizer": ^3.4.0
-    "@react-types/grid": ^3.1.5
-    "@react-types/shared": ^3.16.0
-    "@react-types/table": ^3.3.3
-    "@spectrum-icons/ui": ^3.4.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: b0f736cb86e65df399b96a0c5384f786e507b0789d1b04ea99688ea09caed97d9aca41a8a0c0b161e4e4ae07007ef62d327568ab19181f4d1ee63e5976683239
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/tabs@npm:^3.3.3":
-  version: 3.3.3
-  resolution: "@react-spectrum/tabs@npm:3.3.3"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/tabs": ^3.3.3
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/button": ^3.11.0
-    "@react-spectrum/menu": ^3.9.0
-    "@react-spectrum/picker": ^3.9.0
-    "@react-spectrum/text": ^3.3.3
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/collections": ^3.5.0
-    "@react-stately/list": ^3.6.0
-    "@react-stately/tabs": ^3.2.3
-    "@react-types/select": ^3.6.5
-    "@react-types/shared": ^3.16.0
-    "@react-types/tabs": ^3.1.5
-    "@spectrum-icons/workflow": ^4.0.4
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: fe01af816300b1c573f84097ac261715d7d7ab592d489515bab8594bb1ba0a03040cd15ad627df3c9439cce6bbc595391447f6675a8c40cb36e5a1d02798219a
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/text@npm:^3.3.3":
-  version: 3.3.3
-  resolution: "@react-spectrum/text@npm:3.3.3"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/utils": ^3.8.0
-    "@react-types/shared": ^3.16.0
-    "@react-types/text": ^3.2.5
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: b61efb86b78789c56dc31af372c420dff3c29b1794af45a6622ef5d2fcf68ca256f12a3b4a01feccabdf29fa877bb071339e6907aabd9545bcdd0f361e9c34c8
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/textfield@npm:^3.9.0":
-  version: 3.9.0
-  resolution: "@react-spectrum/textfield@npm:3.9.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/textfield": ^3.8.0
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/label": ^3.9.0
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/utils": ^3.5.1
-    "@react-types/shared": ^3.16.0
-    "@react-types/textfield": ^3.6.1
-    "@spectrum-icons/ui": ^3.4.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 748020662eb50177cdae4acbd3ad0a963c5ead861ae4396c81ee1649d8a4121ad31363745daee6c57b8e14d7d0beb5aaed523f518760ae33a998d2b6568743a1
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/theme-dark@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "@react-spectrum/theme-dark@npm:3.4.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-types/provider": ^3.5.5
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: b155316a37ba7daec0d80dc4bbc55d00976e36b9a13d35a16246f38b10aa16960287ebafa03efc2856f963918cd76e868a680406f3147a128900421f65ad0e0d
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/theme-default@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "@react-spectrum/theme-default@npm:3.4.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-types/provider": ^3.5.5
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 71627f47cdebfe8062c00445abb4519492be06f67a780c3e48f4ee9fde79d9b2521ce5c106825d8ad39b8bf47b19adc613ed44a7eae68119a45da6f603b0f7a5
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/theme-light@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@react-spectrum/theme-light@npm:3.3.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-types/provider": ^3.5.5
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 876f5bdec62c2e80c7eb2812844143d127d7cd39e644dc85e9a9cc05421bcc7326a257cf3a5af4f97047ffeb6196165f756f01cf0b77370c2d36f2948ddad7ac
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/tooltip@npm:^3.3.3":
-  version: 3.3.3
-  resolution: "@react-spectrum/tooltip@npm:3.3.3"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/focus": ^3.10.0
-    "@react-aria/interactions": ^3.13.0
-    "@react-aria/overlays": ^3.12.0
-    "@react-aria/tooltip": ^3.3.3
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/overlays": ^4.0.0
-    "@react-spectrum/utils": ^3.8.0
-    "@react-stately/tooltip": ^3.2.3
-    "@react-stately/utils": ^3.5.1
-    "@react-types/overlays": ^3.6.5
-    "@react-types/shared": ^3.16.0
-    "@react-types/tooltip": ^3.2.5
-    "@spectrum-icons/ui": ^3.4.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 3abef617ce72c9a80d0951becdd0037c95c8bb17cadc4dfbdaed66b81a89b66f33b5fa9472e2c0697ca19a3c6e1f93a3301fb72f19bf47016ab6391f8d7bd93a
-  languageName: node
-  linkType: hard
-
 "@react-spectrum/utils@npm:^3.8.0":
   version: 3.8.0
   resolution: "@react-spectrum/utils@npm:3.8.0"
@@ -4567,38 +3531,6 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
   checksum: d4bb54976f788887186be16d2c9c2d2668fb75099ae7ec78ef0aa86b41de49477a46e7e55baaa4719c989e02d4a940f4952e76a7d758f8c63236c38de65636ae
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/view@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "@react-spectrum/view@npm:3.4.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/i18n": ^3.6.2
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/utils": ^3.8.0
-    "@react-types/shared": ^3.16.0
-    "@react-types/view": ^3.3.0
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 0d998189afda70e7a2dbfe27fac37677a98d81b69b4de1645a8013ec1d114cdfe6db7925e16ab2e96b8c2ace2ce7a25eac9992f7fcd64e9c0b086c1cef8ab498
-  languageName: node
-  linkType: hard
-
-"@react-spectrum/well@npm:^3.3.3":
-  version: 3.3.3
-  resolution: "@react-spectrum/well@npm:3.3.3"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-aria/utils": ^3.14.1
-    "@react-spectrum/utils": ^3.8.0
-    "@react-types/shared": ^3.16.0
-    "@react-types/well": ^3.2.5
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 87493de85bef097b6909fdfe4bf7ed5fed0ea29bc20b9023a8e43b2cf0f7e62c6167aea49f3be0bc835b71fa0f8dc4c8ba3efc488bfa443ea0bbcf6aee720ee6
   languageName: node
   linkType: hard
 
@@ -4965,29 +3897,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-types/actiongroup@npm:^3.3.5":
-  version: 3.3.5
-  resolution: "@react-types/actiongroup@npm:3.3.5"
-  dependencies:
-    "@react-types/button": ^3.7.0
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: d749903f2295b9a02d092dd24d06e8d0e8a6b38407adc314ad3e5a64c939baa29707f8dceb7b425fa2e2747756917f7b55bf7597bb1d10fcf137b9cd2f62a793
-  languageName: node
-  linkType: hard
-
-"@react-types/badge@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "@react-types/badge@npm:3.0.1"
-  dependencies:
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: bdd75c3241a2c79edddf8fbcc13ccec5447f6a072d9fafee029d386bb0f9c4dc64dc6efc7800158f9e899d48b815e026e81d09976c25ae12a85f930e0351f261
-  languageName: node
-  linkType: hard
-
 "@react-types/breadcrumbs@npm:^3.4.5":
   version: 3.4.5
   resolution: "@react-types/breadcrumbs@npm:3.4.5"
@@ -5008,17 +3917,6 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
   checksum: e5c1bc38b20d2e123492ea59b9c1637671b83d1b5081b3ac414bc20858ff3300465c7b4bc9b714f3e062bf471eebfe7a68210e23a8731bba1ae1b0ae7a2cd16d
-  languageName: node
-  linkType: hard
-
-"@react-types/buttongroup@npm:^3.2.5":
-  version: 3.2.5
-  resolution: "@react-types/buttongroup@npm:3.2.5"
-  dependencies:
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 6b809dc0bfbf91efb64bc66a7819550bb72070ccee1239c057fd77d96a83c0400ec363aa2191fbac00b816efe3db2bb09ef18cc9bf5264deb6607bd32e371983
   languageName: node
   linkType: hard
 
@@ -5056,18 +3954,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-types/contextualhelp@npm:^3.1.5":
-  version: 3.1.5
-  resolution: "@react-types/contextualhelp@npm:3.1.5"
-  dependencies:
-    "@react-types/overlays": ^3.6.5
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 1f42145cd8730b75e6bc9a299ff2f9f21ea12d10f2519fefd912a8c3fc2fac357e870a79d1da33cfe8fc8d63260654fb6f29cefd82553426883664b5fd8b9ea0
-  languageName: node
-  linkType: hard
-
 "@react-types/datepicker@npm:^3.1.3":
   version: 3.1.3
   resolution: "@react-types/datepicker@npm:3.1.3"
@@ -5093,28 +3979,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-types/divider@npm:^3.2.5":
-  version: 3.2.5
-  resolution: "@react-types/divider@npm:3.2.5"
-  dependencies:
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: d728e6988e2f75da4f7e9fbb8a6b97782c30f06cc59a946f03f57ee6fdd59706bf034be69baca1f44b174d990a09963a93a3f960e8cd63d4ea3c456725117502
-  languageName: node
-  linkType: hard
-
-"@react-types/form@npm:^3.4.1":
-  version: 3.4.1
-  resolution: "@react-types/form@npm:3.4.1"
-  dependencies:
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: cc06233b045922fc5cc51d12b280d1979cad68f9b33de795cd1145ea4fa367dabdd3e32b7c2aaf6050a95eb2dac698fff992c9cb0cac694b3db0ee7eea49704a
-  languageName: node
-  linkType: hard
-
 "@react-types/grid@npm:^3.1.5":
   version: 3.1.5
   resolution: "@react-types/grid@npm:3.1.5"
@@ -5126,28 +3990,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-types/illustratedmessage@npm:^3.2.5":
-  version: 3.2.5
-  resolution: "@react-types/illustratedmessage@npm:3.2.5"
-  dependencies:
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 367a3e6d9b947efb6a10efcf00893738564206ee3328d884636c17faeab120db71fec6f9b778e8ceb2220d299b8e0ea1652f997264653262dc440153125c5d4d
-  languageName: node
-  linkType: hard
-
-"@react-types/image@npm:^3.2.5":
-  version: 3.2.5
-  resolution: "@react-types/image@npm:3.2.5"
-  dependencies:
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 1315f83d176893d1757f2be6ed4918675ee078177f6d3a48e29b168b9202a8fab84657090c0824bde4950dfe4d91c69772c17ffe647376560a9c298d9eed3232
-  languageName: node
-  linkType: hard
-
 "@react-types/label@npm:^3.7.1":
   version: 3.7.1
   resolution: "@react-types/label@npm:3.7.1"
@@ -5156,17 +3998,6 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
   checksum: d747536ab065adb32417d9d0ffc95eb3f563d583133de392442ccfb898ff93f38a6cc746389d8b8a753cf7eb476be908e85cd275422fbecf1158c28c9b20ea9e
-  languageName: node
-  linkType: hard
-
-"@react-types/layout@npm:^3.3.5":
-  version: 3.3.5
-  resolution: "@react-types/layout@npm:3.3.5"
-  dependencies:
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 169db4819053ebe0443a9e7bd850e9fb20660b4e38fca87f5f26bb2fc38ab79246e7949b5359c20e86f441ef49d9d7777f680e9cfb3a7876b38f729ce64e27b4
   languageName: node
   linkType: hard
 
@@ -5315,17 +4146,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-types/statuslight@npm:^3.2.5":
-  version: 3.2.5
-  resolution: "@react-types/statuslight@npm:3.2.5"
-  dependencies:
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: c75a8c94d8bbfa3fb03d61f41330cae509c5ae9843194f7dc09471e562bf1b3df3cc827949e9d6d802b193e0f35fa035f73ff651e246281492019def8698dd96
-  languageName: node
-  linkType: hard
-
 "@react-types/switch@npm:^3.2.5":
   version: 3.2.5
   resolution: "@react-types/switch@npm:3.2.5"
@@ -5361,17 +4181,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-types/text@npm:^3.2.5":
-  version: 3.2.5
-  resolution: "@react-types/text@npm:3.2.5"
-  dependencies:
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 0bd16b87730a6fe2a5cefe7f1f73164e0467d78d6ead4f2683975ca64c7e494e0dd456d0df274f25f817bdd1159a3e3b3cb53cdb32277829dc4016a89f3ced3d
-  languageName: node
-  linkType: hard
-
 "@react-types/textfield@npm:^3.6.1":
   version: 3.6.1
   resolution: "@react-types/textfield@npm:3.6.1"
@@ -5392,28 +4201,6 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
   checksum: b988833a7625f3fdc6f695318d91229b2b03878e951937aa2d7a5d011e2d75c4407b21b3dd33cc793f94eed239f6496e4cab3cddafaa68fe53ad26a4244d311f
-  languageName: node
-  linkType: hard
-
-"@react-types/view@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@react-types/view@npm:3.3.0"
-  dependencies:
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: ab698cbb9ccd234e08c48edc438d47df53fd466741597d90e57f79e805607d6f0f0e8ca31a9d6c782c75c212488ff9a1f8523b7155c0cca79e0fd3aeb7407cc2
-  languageName: node
-  linkType: hard
-
-"@react-types/well@npm:^3.2.5":
-  version: 3.2.5
-  resolution: "@react-types/well@npm:3.2.5"
-  dependencies:
-    "@react-types/shared": ^3.16.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: e5ff2023504cc812788383faee6f1b5ae19963fa4fecd17578190f885d6b3db224964573d561b13e62189114639a89dd30ce632c36b7fd41fbf41faf8891d0d4
   languageName: node
   linkType: hard
 
@@ -5481,21 +4268,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@spectrum-icons/ui@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "@spectrum-icons/ui@npm:3.4.0"
-  dependencies:
-    "@adobe/react-spectrum-ui": 1.2.0
-    "@babel/runtime": ^7.6.2
-    "@react-spectrum/icon": ^3.6.2
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 51eab4803a120822e70b880edeada4313310963973e9057f7a618cd96680fdecd674e2baa070e03e9471267b70b405d2b2a24c1ac440792a382dd936813adf76
-  languageName: node
-  linkType: hard
-
-"@spectrum-icons/workflow@npm:^4.0.0, @spectrum-icons/workflow@npm:^4.0.4":
+"@spectrum-icons/workflow@npm:^4.0.4":
   version: 4.0.4
   resolution: "@spectrum-icons/workflow@npm:4.0.4"
   dependencies:
@@ -7688,8 +6461,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "chuck-dries@workspace:."
   dependencies:
-    "@adobe/react-spectrum": ^3.19.0
-    "@spectrum-icons/workflow": ^4.0.0
+    "@react-spectrum/provider": ^3.6.0
+    "@spectrum-icons/workflow": ^4.0.4
     "@types/chroma-js": ^2.1.4
     "@types/node": ^18.8.3
     "@types/ramda": ^0.28.15
@@ -7729,10 +6502,12 @@ __metadata:
     prettier: 2.3.2
     ramda: ^0.27.1
     react: ^18.2.0
+    react-aria: ^3.21.0
     react-cool-dimensions: ^2.0.7
     react-div-100vh: ^0.7.0
     react-dom: ^18.2.0
     react-helmet: ^6.1.0
+    react-stately: ^3.19.0
     react-tiny-popover: ^7.2.0
     sass: ^1.34.0
     tailwindcss: ^3.2.4
@@ -8744,15 +7519,6 @@ __metadata:
   dependencies:
     utila: ~0.4
   checksum: ea52fe303f5392e48dea563abef0e6fb3a478b8dbe3c599e99bb5d53981c6c38fc4944e56bb92a8ead6bb989d10b7914722ae11febbd2fd0910e33b9fc4aaa77
-  languageName: node
-  linkType: hard
-
-"dom-helpers@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "dom-helpers@npm:3.4.0"
-  dependencies:
-    "@babel/runtime": ^7.1.2
-  checksum: 58d9f1c4a96daf77eddc63ae1236b826e1cddd6db66bbf39b18d7e21896d99365b376593352d52a60969d67fa4a8dbef26adc1439fa2c1b355efa37cacbaf637
   languageName: node
   linkType: hard
 
@@ -14720,7 +13486,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -14907,6 +13673,51 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-aria@npm:^3.21.0":
+  version: 3.21.0
+  resolution: "react-aria@npm:3.21.0"
+  dependencies:
+    "@react-aria/breadcrumbs": ^3.4.0
+    "@react-aria/button": ^3.6.3
+    "@react-aria/calendar": ^3.0.4
+    "@react-aria/checkbox": ^3.7.0
+    "@react-aria/combobox": ^3.4.3
+    "@react-aria/datepicker": ^3.2.0
+    "@react-aria/dialog": ^3.4.1
+    "@react-aria/dnd": ^3.0.0
+    "@react-aria/focus": ^3.10.0
+    "@react-aria/gridlist": ^3.1.1
+    "@react-aria/i18n": ^3.6.2
+    "@react-aria/interactions": ^3.13.0
+    "@react-aria/label": ^3.4.3
+    "@react-aria/link": ^3.3.5
+    "@react-aria/listbox": ^3.7.1
+    "@react-aria/menu": ^3.7.0
+    "@react-aria/meter": ^3.3.3
+    "@react-aria/numberfield": ^3.3.3
+    "@react-aria/overlays": ^3.12.0
+    "@react-aria/progress": ^3.3.3
+    "@react-aria/radio": ^3.4.1
+    "@react-aria/searchfield": ^3.4.3
+    "@react-aria/select": ^3.8.3
+    "@react-aria/selection": ^3.12.0
+    "@react-aria/separator": ^3.2.5
+    "@react-aria/slider": ^3.2.3
+    "@react-aria/ssr": ^3.4.0
+    "@react-aria/switch": ^3.3.0
+    "@react-aria/table": ^3.6.0
+    "@react-aria/tabs": ^3.3.3
+    "@react-aria/textfield": ^3.8.0
+    "@react-aria/tooltip": ^3.3.3
+    "@react-aria/utils": ^3.14.1
+    "@react-aria/visually-hidden": ^3.6.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+  checksum: d24c4f6cf0bee29b9cc5775575f6923902e4325fabc7751b8c04f0be9e008c8688aa2a0e53f9bfb553c0cdc546ace441e6a7dc323022657f1699dd5af8682c13
+  languageName: node
+  linkType: hard
+
 "react-cool-dimensions@npm:^2.0.7":
   version: 2.0.7
   resolution: "react-cool-dimensions@npm:2.0.7"
@@ -15004,13 +13815,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-lifecycles-compat@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "react-lifecycles-compat@npm:3.0.4"
-  checksum: a904b0fc0a8eeb15a148c9feb7bc17cec7ef96e71188280061fc340043fd6d8ee3ff233381f0e8f95c1cf926210b2c4a31f38182c8f35ac55057e453d6df204f
-  languageName: node
-  linkType: hard
-
 "react-refresh@npm:^0.14.0":
   version: 0.14.0
   resolution: "react-refresh@npm:0.14.0"
@@ -15041,6 +13845,38 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-stately@npm:^3.19.0":
+  version: 3.19.0
+  resolution: "react-stately@npm:3.19.0"
+  dependencies:
+    "@react-stately/calendar": ^3.0.4
+    "@react-stately/checkbox": ^3.3.1
+    "@react-stately/collections": ^3.5.0
+    "@react-stately/combobox": ^3.3.0
+    "@react-stately/data": ^3.8.0
+    "@react-stately/datepicker": ^3.2.0
+    "@react-stately/dnd": ^3.0.0
+    "@react-stately/list": ^3.6.0
+    "@react-stately/menu": ^3.4.3
+    "@react-stately/numberfield": ^3.3.0
+    "@react-stately/overlays": ^3.4.3
+    "@react-stately/radio": ^3.6.1
+    "@react-stately/searchfield": ^3.3.3
+    "@react-stately/select": ^3.3.3
+    "@react-stately/selection": ^3.11.1
+    "@react-stately/slider": ^3.2.3
+    "@react-stately/table": ^3.6.0
+    "@react-stately/tabs": ^3.2.3
+    "@react-stately/toggle": ^3.4.3
+    "@react-stately/tooltip": ^3.2.3
+    "@react-stately/tree": ^3.4.0
+    "@react-types/shared": ^3.16.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+  checksum: e6a1d84c359e2471c00c1d9320fcf76100ac8e99a0c1c48b6f67cbc2aad2dfcd83f073e82de50fdc4ada1a5cd81723a7442dc87bf6ae0560634e2a1b35cae6ff
+  languageName: node
+  linkType: hard
+
 "react-tiny-popover@npm:^7.2.0":
   version: 7.2.0
   resolution: "react-tiny-popover@npm:7.2.0"
@@ -15048,21 +13884,6 @@ __metadata:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: 0ca1ca4e392b6468a09c0b264e533339f22d486722bb1fb66ccb31e5d12b49db20ecc505f24df6db2b4997634d5c6955cfa6a20a3fe5779e07378aca7e703ed1
-  languageName: node
-  linkType: hard
-
-"react-transition-group@npm:^2.2.0":
-  version: 2.9.0
-  resolution: "react-transition-group@npm:2.9.0"
-  dependencies:
-    dom-helpers: ^3.4.0
-    loose-envify: ^1.4.0
-    prop-types: ^15.6.2
-    react-lifecycles-compat: ^3.0.4
-  peerDependencies:
-    react: ">=15.0.0"
-    react-dom: ">=15.0.0"
-  checksum: d8c9e50aabdc2cfc324e5cdb0ad1c6eecb02e1c0cd007b26d5b30ccf49015e900683dd489348c71fba4055858308d9ba7019e0d37d0e8d37bd46ed098788f670
   languageName: node
   linkType: hard
 

@@ -78,8 +78,8 @@ const IndexPage = ({
             LightMuted: [0, 0, 0],
             Vibrant: [0, 0, 0],
             LightVibrant: [0, 0, 0],
-            DarkMuted: [255, 255, 255],
-            DarkVibrant: [255, 255, 255],
+            DarkMuted: [238, 238, 238],
+            DarkVibrant: [238, 238, 238],
           })}
         />
       </Helmet>
