@@ -185,7 +185,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
             ]}
           />
         </div>
-        <div className="flex flex-col md:flex-row md:items-end justify-between px-6 sm:mx-auto">
+        <div className="flex flex-col md:flex-row md:items-end justify-between px-4 md:px-8 sm:mx-auto">
           <KeywordsPicker
             keywords={[
               "night",
