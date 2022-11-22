@@ -150,7 +150,7 @@ const GalleryImage = ({ data, location: { state } }) => {
       <Helmet>
         <title>{name} - Gallery | Chuck Dries</title>
         <body
-          className="text-vibrant-light bg-vibrant-dark"
+          className="text-vibrant-light bg-vibrant-dark transition-colors"
           style={getHelmetSafeBodyStyle(vibrant)}
         />
       </Helmet>
