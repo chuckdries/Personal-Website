@@ -71,7 +71,7 @@ const IndexPage = ({
       <Helmet>
         <title>Chuck Dries</title>
         <body
-          className="bg-white"
+          className="bg-white transition-colors"
           // @ts-ignore
           style={getHelmetSafeBodyStyle({
             Muted: [0, 0, 0],

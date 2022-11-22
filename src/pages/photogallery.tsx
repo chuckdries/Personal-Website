@@ -164,7 +164,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
       <Helmet>
         <title>Photo Gallery | Chuck Dries</title>
         <body
-          className="bg-white"
+          className="bg-white transition-color"
           // @ts-ignore
           style={getHelmetSafeBodyStyle({
             Muted: [0, 0, 0],
