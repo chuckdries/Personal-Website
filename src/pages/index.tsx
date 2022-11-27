@@ -92,7 +92,7 @@ const IndexPage = ({
         />
         {isClient && (
           <Link
-            className="flex-auto flex flex-col mx-4 md:mx-8 my-0"
+            className="flex flex-col mx-4 md:mx-8 my-0"
             to={`/photogallery/${image.base}/`}
           >
             <GatsbyImage
@@ -101,9 +101,6 @@ const IndexPage = ({
               image={img!}
               loading="eager"
               objectFit={browserIsLandscape ? "cover" : "contain"}
-              // style={{
-              //   height: "calc(100vh-160px)",
-              // }}
             />
           </Link>
         )}
