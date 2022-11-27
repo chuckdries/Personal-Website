@@ -83,7 +83,7 @@ const IndexPage = ({
           })}
         />
       </Helmet>
-      <main className="font-sans flex flex-col h-screen">
+      <main className="font-sans flex flex-col h-screen items-center">
         <Nav
           internalLinks={[
             { href: "/", label: "Home" },
@@ -92,21 +92,27 @@ const IndexPage = ({
         />
         {isClient && (
           <Link
-            className="flex-auto flex flex-col  m-4 md:m-8 mt-0 md:mt-0"
+            className="flex-auto flex flex-col mx-4 md:mx-8 my-0"
             to={`/photogallery/${image.base}/`}
           >
             <GatsbyImage
               alt=""
-              className="h-[calc(100vh-160px)]" // reeeeee
+              className="md:h-[calc(100vh-160px)]" // reeeeee
               image={img!}
               loading="eager"
               objectFit={browserIsLandscape ? "cover" : "contain"}
-              style={{
-                height: "calc(100vh-160px)",
-              }}
+              // style={{
+              //   height: "calc(100vh-160px)",
+              // }}
             />
           </Link>
         )}
+      <div className="p-3 mx-4 md:mx-8 my-4">
+          Try my game!{" "}
+          <a target="_blank" href="https://buzzwords.gg">
+            Buzzwords &rarr;
+          </a>
+        </div>
       </main>
     </>
   );
