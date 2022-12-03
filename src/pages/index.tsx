@@ -8,7 +8,7 @@ import classnames from "classnames";
 import { getHelmetSafeBodyStyle, getAspectRatio } from "../utils";
 import Nav from "../components/Nav";
 // import ActionButtons from "../components/index/ActionButtons";
-// import { use100vh } from "react-div-100vh";
+import { use100vh } from "react-div-100vh";
 import { useMediaQuery } from "../useMediaQuery";
 
 const env =
@@ -59,7 +59,7 @@ const IndexPage = ({
   // const vibrant = getVibrant(image);
   // const ar = getAspectRatio(image);
 
-  // const screenHeight = use100vh();
+  const screenHeight = use100vh();
 
   // const imageIsLandscape = isClient ? ar > 1 : true;
 
@@ -97,7 +97,7 @@ const IndexPage = ({
           >
             <GatsbyImage
               alt=""
-              className="h-[calc(100vh-160px)]" // reeeeee
+              className={screenHeight ? `${screenHeight - 160}px`: 'h-[calc(100vh-160px)]'}
               image={img!}
               loading="eager"
               objectFit={browserIsLandscape ? "cover" : "contain"}
