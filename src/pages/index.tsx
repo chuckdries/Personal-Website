@@ -97,12 +97,13 @@ const IndexPage = ({
           >
             <GatsbyImage
               alt=""
-              className={screenHeight ? `${screenHeight - 160}px`: 'h-[calc(100vh-160px)]'}
               image={img!}
               loading="eager"
               objectFit={browserIsLandscape ? "cover" : "contain"}
               style={{
-                height: "calc(100vh-160px)",
+                height: screenHeight
+                  ? `${screenHeight - 160}px`
+                  : "calc(100vh-160px)",
               }}
             />
           </Link>
