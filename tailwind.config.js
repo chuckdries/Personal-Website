@@ -45,7 +45,7 @@ module.exports = {
         "huge-2": "max(7.8vw, 120px)",
       },
       colors: {
-        "white": "#EEEEEE",
+        "white": "#e5eff6",
         buzzwordsPrimary: "#F6C54B",
         transparentblack: "rgba(0,0,0,0.24)",
         vibrant: {
