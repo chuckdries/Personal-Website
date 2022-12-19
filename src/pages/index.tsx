@@ -118,7 +118,12 @@ export const query = graphql`
     allFile(
       filter: {
         sourceInstanceName: { eq: "gallery" }
-        base: { in: ["DSC02610-2.jpg", "DSC02615-2.jpg"] }
+        base: { in: [
+          # "DSC02610-2.jpg",
+          "DSC05702.jpg",
+          # "DSC02615-2.jpg"
+          "DSC05538.jpg"
+        ] }
       }
       sort: { base: ASC }
     ) {

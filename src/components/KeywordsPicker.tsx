@@ -31,13 +31,13 @@ const KeywordsPicker = ({ keywords, value, onChange }: KeywordsPickerProps) => {
                 type="button"
               >
                 {keyword}{" "}
-                {selected && (
+                {/* {selected && (
                   <Checkmark
                     UNSAFE_className="mx-1"
                     UNSAFE_style={{ width: "15px" }}
                     aria-hidden="true"
                   />
-                )}
+                )} */}
               </button>
             </li>
           );

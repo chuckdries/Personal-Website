@@ -614,6 +614,7 @@ type FileFieldsImageMetaMeta = {
   readonly ISO: Maybe<Scalars['Int']>;
   readonly Keywords: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly LensModel: Maybe<Scalars['String']>;
+  readonly Location: Maybe<Scalars['String']>;
   readonly Make: Maybe<Scalars['String']>;
   readonly Model: Maybe<Scalars['String']>;
   readonly ObjectName: Maybe<Scalars['String']>;
@@ -650,6 +651,7 @@ type FileFieldsImageMetaMetaFieldSelector = {
   readonly ISO: InputMaybe<FieldSelectorEnum>;
   readonly Keywords: InputMaybe<FieldSelectorEnum>;
   readonly LensModel: InputMaybe<FieldSelectorEnum>;
+  readonly Location: InputMaybe<FieldSelectorEnum>;
   readonly Make: InputMaybe<FieldSelectorEnum>;
   readonly Model: InputMaybe<FieldSelectorEnum>;
   readonly ObjectName: InputMaybe<FieldSelectorEnum>;
@@ -670,6 +672,7 @@ type FileFieldsImageMetaMetaFilterInput = {
   readonly ISO: InputMaybe<IntQueryOperatorInput>;
   readonly Keywords: InputMaybe<StringQueryOperatorInput>;
   readonly LensModel: InputMaybe<StringQueryOperatorInput>;
+  readonly Location: InputMaybe<StringQueryOperatorInput>;
   readonly Make: InputMaybe<StringQueryOperatorInput>;
   readonly Model: InputMaybe<StringQueryOperatorInput>;
   readonly ObjectName: InputMaybe<StringQueryOperatorInput>;
@@ -690,6 +693,7 @@ type FileFieldsImageMetaMetaSortInput = {
   readonly ISO: InputMaybe<SortOrderEnum>;
   readonly Keywords: InputMaybe<SortOrderEnum>;
   readonly LensModel: InputMaybe<SortOrderEnum>;
+  readonly Location: InputMaybe<SortOrderEnum>;
   readonly Make: InputMaybe<SortOrderEnum>;
   readonly Model: InputMaybe<SortOrderEnum>;
   readonly ObjectName: InputMaybe<SortOrderEnum>;
@@ -2541,7 +2545,7 @@ type GalleryImageQueryVariables = Exact<{
 }>;
 
 
-type GalleryImageQuery = { readonly file: { readonly base: string, readonly publicURL: string | null, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null, readonly fields: { readonly imageMeta: { readonly dateTaken: string | null, readonly meta: { readonly Make: string | null, readonly Model: string | null, readonly ExposureTime: number | null, readonly FNumber: number | null, readonly ISO: number | null, readonly DateTimeOriginal: string | null, readonly CreateDate: string | null, readonly ShutterSpeedValue: number | null, readonly ApertureValue: number | null, readonly FocalLength: number | null, readonly LensModel: string | null, readonly ObjectName: string | null, readonly Caption: string | null, readonly City: string | null, readonly State: string | null } | null, readonly vibrant: { readonly DarkMuted: ReadonlyArray<number | null> | null, readonly DarkVibrant: ReadonlyArray<number | null> | null, readonly LightMuted: ReadonlyArray<number | null> | null, readonly LightVibrant: ReadonlyArray<number | null> | null, readonly Vibrant: ReadonlyArray<number | null> | null, readonly Muted: ReadonlyArray<number | null> | null } | null } | null } | null } | null };
+type GalleryImageQuery = { readonly file: { readonly base: string, readonly publicURL: string | null, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null, readonly fields: { readonly imageMeta: { readonly dateTaken: string | null, readonly meta: { readonly Make: string | null, readonly Model: string | null, readonly ExposureTime: number | null, readonly FNumber: number | null, readonly ISO: number | null, readonly DateTimeOriginal: string | null, readonly CreateDate: string | null, readonly ShutterSpeedValue: number | null, readonly ApertureValue: number | null, readonly FocalLength: number | null, readonly LensModel: string | null, readonly ObjectName: string | null, readonly Caption: string | null, readonly Location: string | null, readonly City: string | null, readonly State: string | null } | null, readonly vibrant: { readonly DarkMuted: ReadonlyArray<number | null> | null, readonly DarkVibrant: ReadonlyArray<number | null> | null, readonly LightMuted: ReadonlyArray<number | null> | null, readonly LightVibrant: ReadonlyArray<number | null> | null, readonly Vibrant: ReadonlyArray<number | null> | null, readonly Muted: ReadonlyArray<number | null> | null } | null } | null } | null } | null };
 
 type GalleryPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 

@@ -147,6 +147,7 @@ function transformMetaToNodeData(
       Caption: metaData.Caption,
       City: metaData.City,
       State: metaData.State,
+      Location: metaData.Location,
       Rating: metaData.Rating,
       Keywords,
     },

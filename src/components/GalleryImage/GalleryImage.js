@@ -370,7 +370,7 @@ export const query = graphql`
             LensModel
             ObjectName
             Caption
-            # Location
+            Location
             City
             State
           }

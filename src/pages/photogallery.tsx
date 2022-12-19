@@ -200,6 +200,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
               "panoramic",
               "Portland Japanese Garden",
               "shoot the light",
+              "winter"
               // "sunset",
             ]}
             onChange={setKeyword}
