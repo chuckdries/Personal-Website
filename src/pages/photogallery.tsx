@@ -171,8 +171,8 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
             LightMuted: [0, 0, 0],
             Vibrant: [0, 0, 0],
             LightVibrant: [0, 0, 0],
-            DarkMuted: [229, 239, 246],
-            DarkVibrant: [229, 239, 246],
+            DarkMuted: [238, 238, 238],
+            DarkVibrant: [238, 238, 238],
           })}
         />
       </Helmet>

@@ -142,7 +142,7 @@ const GalleryImage = ({ data, location: { state } }) => {
   const verticalPad = ar > 1 ? "250px" : "100px";
 
   const shutterSpeed = React.useMemo(
-    () => getShutterFractionFromExposureTime(meta.ExposureTime || 0),
+    () => meta.ExposureTime ? getShutterFractionFromExposureTime(meta.ExposureTime) : null,
     [meta]
   );
   const dateTaken = React.useMemo(() => new Date(dt), [dt]);
@@ -288,7 +288,7 @@ const GalleryImage = ({ data, location: { state } }) => {
                     title="ISO"
                   />
                   <MetadataItem
-                    data={meta.FocalLength + "mm"}
+                    data={meta.FocalLength ? meta.FocalLength + "mm" : null}
                     icon={<Dolly UNSAFE_style={IconStyle} />}
                     title="focal"
                   />

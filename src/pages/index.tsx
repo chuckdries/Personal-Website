@@ -78,8 +78,8 @@ const IndexPage = ({
             LightMuted: [0, 0, 0],
             Vibrant: [0, 0, 0],
             LightVibrant: [0, 0, 0],
-            DarkMuted: [229, 239, 246],
-            DarkVibrant: [229, 239, 246],
+            DarkMuted: [238, 238, 238],
+            DarkVibrant: [238, 238, 238],
           })}
         />
       </Helmet>
@@ -120,8 +120,8 @@ export const query = graphql`
         sourceInstanceName: { eq: "gallery" }
         base: { in: [
           # "DSC02610-2.jpg",
+          # "DSC02615-2.jpg",
           "DSC05702.jpg",
-          # "DSC02615-2.jpg"
           "DSC05538.jpg"
         ] }
       }
