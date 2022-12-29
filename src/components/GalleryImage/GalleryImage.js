@@ -10,6 +10,7 @@ import Calendar from "@spectrum-icons/workflow/Calendar";
 import Stopwatch from "@spectrum-icons/workflow/Stopwatch";
 import Exposure from "@spectrum-icons/workflow/Exposure";
 import Filmroll from "@spectrum-icons/workflow/Filmroll";
+import Dolly from "@spectrum-icons/workflow/Dolly";
 import Camera from "@spectrum-icons/workflow/Camera";
 import Circle from "@spectrum-icons/workflow/Circle";
 import Location from "@spectrum-icons/workflow/Location";
@@ -272,7 +273,7 @@ const GalleryImage = ({ data, location: { state } }) => {
                   <MetadataItem
                     data={shutterSpeed}
                     icon={<Stopwatch UNSAFE_style={IconStyle} />}
-                    title="shutter speed"
+                    title="shutter"
                   />
                   {meta.FNumber && (
                     <MetadataItem
@@ -285,6 +286,11 @@ const GalleryImage = ({ data, location: { state } }) => {
                     data={meta.ISO}
                     icon={<Filmroll UNSAFE_style={IconStyle} />}
                     title="ISO"
+                  />
+                  <MetadataItem
+                    data={meta.FocalLength + "mm"}
+                    icon={<Dolly UNSAFE_style={IconStyle} />}
+                    title="focal"
                   />
                 </div>
                 <MetadataItem
@@ -301,12 +307,7 @@ const GalleryImage = ({ data, location: { state } }) => {
                 )}
                 {(meta.LensModel || meta.FocalLength) && (
                   <MetadataItem
-                    data={[
-                      meta.LensModel === "----" ? null : meta.LensModel,
-                      meta.FocalLength && `${meta.FocalLength}mm`,
-                    ]
-                      .filter(Boolean)
-                      .join(" @")}
+                    data={ meta.LensModel === "----" ? null : meta.LensModel}
                     icon={<Circle UNSAFE_style={IconStyle} />}
                     title="lens"
                   />

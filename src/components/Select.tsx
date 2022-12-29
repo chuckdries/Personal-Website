@@ -53,10 +53,7 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
         } ${state.isOpen ? "bg-gray-100" : "bg-white"}`}
         ref={ref}
       >
-        <span
-          {...valueProps}
-          className="text-sm"
-        >
+        <span {...valueProps} className="text-sm">
           {state.selectedItem
             ? state.selectedItem.rendered
             : "Select an option"}

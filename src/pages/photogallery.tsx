@@ -189,6 +189,8 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
         <div className="flex flex-col md:flex-row md:items-end justify-between px-4 md:px-8 sm:mx-auto">
           <KeywordsPicker
             keywords={[
+              "Boyce Thompson Arboretum",
+              "winter",
               "night",
               "coast",
               // "city",
@@ -199,8 +201,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
               "fireworks",
               "panoramic",
               "Portland Japanese Garden",
-              "shoot the light",
-              "winter"
+              // "shoot the light",
               // "sunset",
             ]}
             onChange={setKeyword}

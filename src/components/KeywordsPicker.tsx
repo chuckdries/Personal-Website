@@ -20,7 +20,7 @@ const KeywordsPicker = ({ keywords, value, onChange }: KeywordsPickerProps) => {
             <li key={keyword}>
               <button
                 className={classNames(
-                  `py-[5px] px-3 rounded-full`,
+                  `py-[5px] px-3 rounded-full text-sm`,
                   `text-black border border-black`,
                   selected
                     ? "bg-transparentblack font-bold"
