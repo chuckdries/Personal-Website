@@ -226,13 +226,13 @@ const GalleryImage = ({ data, location: { state } }) => {
             </div>
             <div
               className={classnames(
-                "px-2 flex flex-row portrait:items-end mx-auto",
+                "px-2 flex  mx-auto",
                 ar <= 1
-                  ? "pt-5 flex-col flex-auto text-right"
-                  : "landscape:container portrait:pt-5 portrait:flex-col portrait:text-right"
+                  ? "pt-5 flex-col flex-auto text-right items-end"
+                  : "flex-row landscape:container portrait:pt-5 portrait:flex-col portrait:text-right portrait:items-end"
               )}
             >
-              <div className="flex-auto mr-2">
+              <div className="mr-2">
                 <p className="text-muted-light font-mono text-sm m-0 mt-1">
                   {image.base}
                 </p>
@@ -256,7 +256,15 @@ const GalleryImage = ({ data, location: { state } }) => {
                 >
                   Download wallpaper
                 </a>
-              </div>
+                <div className="grid grid-cols-6 w-full h-[30px]">
+                  <div className="bg-vibrant"></div>
+                  <div className="bg-vibrant-light"></div>
+                  <div className="bg-vibrant-dark"></div>
+                  <div className="bg-muted"></div>
+                  <div className="bg-muted-light"></div>
+                  <div className="bg-muted-dark"></div>
+                </div>
+              </div><div className="flex-auto"></div>
               {
                 <div
                   className="portrait:border-t-2 border-muted-light portrait:mt-2 mr-2 portrait:mb-1"

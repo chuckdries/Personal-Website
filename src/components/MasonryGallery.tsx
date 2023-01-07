@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import * as R from "ramda";
-import { getAspectRatio, getName } from "../utils";
+import { getAspectRatio, getVibrantStyle, getName, getVibrant } from "../utils";
 import useBreakpoint from "use-breakpoint";
 
 // @ts-ignore
@@ -47,10 +47,12 @@ const MasonryGallery = ({
   //   breakpoints,
   // });
 
-  const { breakpoint } = useBreakpoint(breakpoints, 'xs')
+  const { breakpoint } = useBreakpoint(breakpoints, "xs");
 
   // const breakpoint = currentBreakpoint.length ? currentBreakpoint : "xs";
-  const galleryWidth = `calc(100vw - ${ breakpoint === "xs" || breakpoint === "sm" ? "32" : "160" }px)`;
+  const galleryWidth = `calc(100vw - ${
+    breakpoint === "xs" || breakpoint === "sm" ? "32" : "160"
+  }px)`;
 
   const aspectRatios = React.useMemo(
     () => R.map(getAspectRatio, images).filter(Boolean),
@@ -122,7 +124,7 @@ const MasonryGallery = ({
         const rowAspectRatioSum = currentRow.aspect;
         const ar = getAspectRatio(image);
         let width;
-        let height = `calc(${galleryWidth} / ${rowAspectRatioSum} - 10px)`;
+        let height = `calc(${galleryWidth} / ${rowAspectRatioSum} + 10px)`;
         if (rowAspectRatioSum < targetAspect * 0.66) {
           // incomplete row, render stuff at "ideal" sizes instead of filling width
           width = `calc(calc(100vw - 160px) / ${targetAspect / ar})`;
@@ -136,8 +138,7 @@ const MasonryGallery = ({
         return (
           <Link
             className={classNames(
-              "border-4 border-white overflow-hidden",
-              debugHue && "border-8"
+              "border-8 border-white overflow-hidden"
             )}
             id={image.base}
             key={`${image.base}`}
@@ -149,8 +150,6 @@ const MasonryGallery = ({
             style={{
               height,
               width,
-              // borderColor: `hsl(${image.fields.imageMeta.dominantHue}, 100%, 50%)`
-              // borderColor: `rgb(${image.fields.imageMeta.vibrant.Vibrant.join(',')})`
               borderColor: debugHue
                 ? `hsl(
                     ${image.fields?.imageMeta?.dominantHue?.[0]},
@@ -161,32 +160,19 @@ const MasonryGallery = ({
             }}
             to={`/photogallery/${image.base}/`}
           >
-            {debugHue && (
-              <span className="text-white z-20 absolute bg-black">
-                hsl(
-                {image.fields?.imageMeta?.dominantHue?.[0]},{" "}
-                {(image.fields?.imageMeta?.dominantHue?.[1] ?? 0 * 100).toFixed(
-                  2
-                )}
-                %,{" "}
-                {(image.fields?.imageMeta?.dominantHue?.[2] ?? 0 * 100).toFixed(
-                  2
-                )}
-                % )
-              </span>
-            )}
             {debugRating && (
               <span className="text-white z-20 absolute bg-black">
                 rating: {image.fields?.imageMeta?.meta?.Rating}
               </span>
             )}
             {img && (
-              <GatsbyImage
-                alt={getName(image)}
-                className="w-full h-full"
-                image={img}
-                objectFit="cover"
-              />
+                <GatsbyImage
+                  alt={getName(image)}
+                  className="w-full h-full"
+                  image={img}
+                  objectFit="cover"
+                />
+                
             )}
           </Link>
         );

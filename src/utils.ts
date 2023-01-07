@@ -24,17 +24,19 @@ export const getCanonicalSize = (image: GalleryImage) => ({
 export const getRgba = (palette: string[], alpha: number) =>
   `rgba(${palette[0]}, ${palette[1]}, ${palette[2]}, ${alpha || 1})`;
 
+export const getVibrantStyle = (vibrant: Queries.FileFieldsImageMetaVibrant, screenHeight?: number) => ({
+  "--muted": vibrant.Muted,
+  "--dark-muted": vibrant.DarkMuted,
+  "--light-muted": vibrant.LightMuted,
+  "--vibrant": vibrant.Vibrant,
+  "--dark-vibrant": vibrant.DarkVibrant,
+  "--light-vibrant": vibrant.LightVibrant,
+  "--height-screen": screenHeight ? `${screenHeight}px` : "100vh",
+});
+
 // work around SSR bug in react-helmet
 export const getHelmetSafeBodyStyle = (vibrant: Queries.FileFieldsImageMetaVibrant, screenHeight?: number) => {
-  const style = {
-    "--muted": vibrant.Muted,
-    "--dark-muted": vibrant.DarkMuted,
-    "--light-muted": vibrant.LightMuted,
-    "--vibrant": vibrant.Vibrant,
-    "--dark-vibrant": vibrant.DarkVibrant,
-    "--light-vibrant": vibrant.LightVibrant,
-    "--height-screen": screenHeight ? `${screenHeight}px` : "100vh",
-  };
+  const style = getVibrantStyle(vibrant, screenHeight);
   if (typeof window === "undefined") {
     return style;
   }
