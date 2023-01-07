@@ -6,9 +6,10 @@ import { Helmet } from "react-helmet";
 
 import MasonryGallery from "../components/MasonryGallery";
 import KeywordsPicker from "../components/KeywordsPicker";
-import { getGalleryPageUrl, getHelmetSafeBodyStyle } from "../utils";
+import { getGalleryPageUrl, getHelmetSafeBodyStyle, getVibrantStyle } from "../utils";
 import Nav from "../components/Nav";
 import { Item, Select } from "../components/Select";
+import { Switch } from "../components/Switch";
 
 const SORT_KEYS = {
   hue: ["fields", "imageMeta", "vibrantHue"],
@@ -31,6 +32,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
   const showDebug =
     typeof window !== "undefined" &&
     window.location.search.includes("debug=true");
+  const [showPalette, setShowPalette] = React.useState(false);
 
   const setKeyword = React.useCallback(
     (newKeyword: string | null) => {
@@ -166,14 +168,14 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
         <body
           className="bg-white transition-color"
           // @ts-ignore
-          style={getHelmetSafeBodyStyle({
+          style={getHelmetSafeBodyStyle(getVibrantStyle({
             Muted: [0, 0, 0],
             LightMuted: [0, 0, 0],
             Vibrant: [0, 0, 0],
             LightVibrant: [0, 0, 0],
             DarkMuted: [238, 238, 238],
             DarkVibrant: [238, 238, 238],
-          })}
+          }))}
         />
       </Helmet>
       <div className="top-0 z-10">
@@ -186,7 +188,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
             ]}
           />
         </div>
-        <div className="flex flex-col md:flex-row md:items-end justify-between px-4 md:px-8 sm:mx-auto">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between px-4 md:px-8 sm:mx-auto">
           <KeywordsPicker
             keywords={[
               "Boyce Thompson Arboretum",
@@ -207,7 +209,13 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
             onChange={setKeyword}
             value={filterKeyword}
           />
-          <div className="m-2">
+          <div className="m-2 flex flex-row items-end">
+            <Switch
+              isSelected={showPalette}
+              onChange={(val) => setShowPalette(val)}
+            >
+              Show palettes
+            </Switch>
             <Select
               label="Sort by..."
               // @ts-ignore
@@ -238,42 +246,50 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
           sortKey,
           filterKeyword,
         }}
+        showPalette={showPalette}
       />
     </>
   );
 };
 
-export const query = graphql`query GalleryPageQuery {
-  allFile(
-    filter: {sourceInstanceName: {eq: "gallery"}}
-    sort: {fields: {imageMeta: {dateTaken: DESC}}}
-  ) {
-    nodes {
-      relativePath
-      base
-      childImageSharp {
-        fluid {
-          aspectRatio
-        }
-        gatsbyImageData(layout: CONSTRAINED, height: 550, placeholder: DOMINANT_COLOR)
-      }
-      fields {
-        imageMeta {
-          vibrantHue
-          dominantHue
-          dateTaken
-          meta {
-            Keywords
-            Rating
-            ObjectName
+export const query = graphql`
+  query GalleryPageQuery {
+    allFile(
+      filter: { sourceInstanceName: { eq: "gallery" } }
+      sort: { fields: { imageMeta: { dateTaken: DESC } } }
+    ) {
+      nodes {
+        relativePath
+        base
+        childImageSharp {
+          fluid {
+            aspectRatio
           }
-          vibrant {
-            Vibrant
+          gatsbyImageData(
+            layout: CONSTRAINED
+            height: 550
+            placeholder: DOMINANT_COLOR
+          )
+        }
+        fields {
+          imageMeta {
+            vibrantHue
+            dominantHue
+            dateTaken
+            meta {
+              Keywords
+              Rating
+              ObjectName
+            }
+            vibrant {
+              # Vibrant
+              ...VibrantColors
+            }
           }
         }
       }
     }
   }
-}`;
+`;
 
 export default GalleryPage;

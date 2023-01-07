@@ -51,7 +51,7 @@
     "react-cool-dimensions": "^2.0.7",
     "react-div-100vh": "^0.7.0",
     "react-dom": "^18.2.0",
-    "react-helmet": "^6.1.0",
+    "react-helmet": "latest",
     "react-stately": "^3.19.0",
     "react-tiny-popover": "^7.2.0",
     "sass": "^1.34.0",

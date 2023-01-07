@@ -1,5 +1,6 @@
 // import kebabCase from 'lodash/kebabCase';
 
+import React from "react";
 import { HomepageImage } from "./pages";
 import { GalleryImage } from "./pages/photogallery";
 
@@ -35,8 +36,7 @@ export const getVibrantStyle = (vibrant: Queries.FileFieldsImageMetaVibrant, scr
 });
 
 // work around SSR bug in react-helmet
-export const getHelmetSafeBodyStyle = (vibrant: Queries.FileFieldsImageMetaVibrant, screenHeight?: number) => {
-  const style = getVibrantStyle(vibrant, screenHeight);
+export const getHelmetSafeBodyStyle = (style: React.CSSProperties) => {
   if (typeof window === "undefined") {
     return style;
   }
