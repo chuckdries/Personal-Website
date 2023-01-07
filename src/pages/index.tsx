@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 // import { take } from "ramda";
 import classnames from "classnames";
 
-import { getHelmetSafeBodyStyle, getAspectRatio } from "../utils";
+import { getHelmetSafeBodyStyle, getAspectRatio, getVibrantStyle } from "../utils";
 import Nav from "../components/Nav";
 // import ActionButtons from "../components/index/ActionButtons";
 import { use100vh } from "react-div-100vh";
@@ -73,14 +73,14 @@ const IndexPage = ({
         <body
           className="bg-white transition-colors"
           // @ts-ignore
-          style={getHelmetSafeBodyStyle({
+          style={getHelmetSafeBodyStyle(getVibrantStyle({
             Muted: [0, 0, 0],
             LightMuted: [0, 0, 0],
             Vibrant: [0, 0, 0],
             LightVibrant: [0, 0, 0],
             DarkMuted: [238, 238, 238],
             DarkVibrant: [238, 238, 238],
-          })}
+          }))}
         />
       </Helmet>
       <main className="font-sans flex flex-col h-screen">

@@ -40,41 +40,41 @@ function processColors(vibrantData: Palette, imagePath: string) {
   let DarkMuted = chroma(vibrantData.DarkMuted!.getRgb());
   let LightMuted = chroma(vibrantData.LightMuted!.getRgb());
 
-  // first pass - darken bg and lighten relevant fg colors
-  if (
-    badContrast(DarkVibrant, Vibrant) ||
-    badContrast(DarkVibrant, LightMuted)
-  ) {
-    DarkVibrant = DarkVibrant.darken();
-  }
-  if (badContrast(DarkVibrant, Vibrant)) {
-    Vibrant = Vibrant.brighten();
-  }
-  if (badContrast(DarkVibrant, Vibrant)) {
-    Vibrant = Vibrant.brighten();
-  }
+  // // first pass - darken bg and lighten relevant fg colors
+  // if (
+  //   badContrast(DarkVibrant, Vibrant) ||
+  //   badContrast(DarkVibrant, LightMuted)
+  // ) {
+  //   DarkVibrant = DarkVibrant.darken();
+  // }
+  // if (badContrast(DarkVibrant, Vibrant)) {
+  //   Vibrant = Vibrant.brighten();
+  // }
+  // if (badContrast(DarkVibrant, Vibrant)) {
+  //   Vibrant = Vibrant.brighten();
+  // }
 
-  // second pass - first doesn't always do enough
-  if (badContrast(DarkVibrant, Vibrant)) {
-    Vibrant = Vibrant.brighten(2);
-  }
-  if (badContrast(DarkVibrant, LightMuted)) {
-    LightMuted = LightMuted.brighten(2);
-  }
+  // // second pass - first doesn't always do enough
+  // if (badContrast(DarkVibrant, Vibrant)) {
+  //   Vibrant = Vibrant.brighten(2);
+  // }
+  // if (badContrast(DarkVibrant, LightMuted)) {
+  //   LightMuted = LightMuted.brighten(2);
+  // }
 
-  // only used for hover styles, so we should give it a shot but it's not a huge deal if it's not very legible
-  if (badContrast(Muted, LightMuted)) {
-    Muted = Muted.darken();
-  }
+  // // only used for hover styles, so we should give it a shot but it's not a huge deal if it's not very legible
+  // if (badContrast(Muted, LightMuted)) {
+  //   Muted = Muted.darken();
+  // }
 
-  if (badContrast(DarkVibrant, Vibrant)) {
-    console.warn("contrast still too low", imagePath);
-    logColorsWithContrast(Vibrant, DarkVibrant, "V-DV");
-  }
-  if (badContrast(DarkVibrant, LightMuted)) {
-    console.warn("contrast still too low", imagePath);
-    logColorsWithContrast(LightMuted, DarkVibrant, "LM-DV");
-  }
+  // if (badContrast(DarkVibrant, Vibrant)) {
+  //   console.warn("contrast still too low", imagePath);
+  //   logColorsWithContrast(Vibrant, DarkVibrant, "V-DV");
+  // }
+  // if (badContrast(DarkVibrant, LightMuted)) {
+  //   console.warn("contrast still too low", imagePath);
+  //   logColorsWithContrast(LightMuted, DarkVibrant, "LM-DV");
+  // }
 
   return {
     Vibrant: Vibrant.rgb(),

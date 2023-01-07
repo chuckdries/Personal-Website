@@ -3,6 +3,7 @@ import { graphql, navigate, Link } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
 import classnames from "classnames";
+import chroma, { Color } from "chroma-js";
 
 import ChevronLeft from "@spectrum-icons/workflow/ChevronLeft";
 import ChevronRight from "@spectrum-icons/workflow/ChevronRight";
@@ -25,6 +26,7 @@ import {
   hasName,
   getCanonicalSize,
   getGalleryPageUrl,
+  getVibrantStyle,
 } from "../../utils";
 import MetadataItem from "./MetadataItem";
 import Nav from "../Nav";
@@ -41,11 +43,11 @@ const logKeyShortcut = (keyCode) => {
 };
 
 const IconStyle = {
-  width: '24px',
-  margin: '0 4px'
-}
+  width: "24px",
+  margin: "0 4px",
+};
 
-const ArrowLinkClasses = `hover:underline text-vibrant-light hover:text-muted-light 
+const ArrowLinkClasses = `hover:underline text-black 
 lg:px-4 self-stretch flex items-center hover:bg-black/50 max-h-screen sticky top-0
 `;
 
@@ -133,6 +135,10 @@ const GalleryImage = ({ data, location: { state } }) => {
     locationString = location.join(", ");
   }
   const vibrant = getVibrant(image, true);
+  const BLEND = 'hsl'
+  const darkAccent = chroma
+    .mix(vibrant.Vibrant, "hsla(216, 0%, 90%, 1)", 0.6, BLEND)
+    .hex();
   const canonicalSize = getCanonicalSize(image);
 
   const orientationClasses =
@@ -142,7 +148,10 @@ const GalleryImage = ({ data, location: { state } }) => {
   const verticalPad = ar > 1 ? "250px" : "100px";
 
   const shutterSpeed = React.useMemo(
-    () => meta.ExposureTime ? getShutterFractionFromExposureTime(meta.ExposureTime) : null,
+    () =>
+      meta.ExposureTime
+        ? getShutterFractionFromExposureTime(meta.ExposureTime)
+        : null,
     [meta]
   );
   const dateTaken = React.useMemo(() => new Date(dt), [dt]);
@@ -151,8 +160,11 @@ const GalleryImage = ({ data, location: { state } }) => {
       <Helmet>
         <title>{name} - Gallery | Chuck Dries</title>
         <body
-          className="text-vibrant-light bg-vibrant-dark transition-colors"
-          style={getHelmetSafeBodyStyle(vibrant)}
+          className="text-black transition-colors"
+          // style={getHelmetSafeBodyStyle(vibrant)}
+          style={getHelmetSafeBodyStyle({
+            background: chroma.mix(vibrant.Vibrant, "white", 0.7, BLEND).hex(),
+          })}
         />
       </Helmet>
       <div className="min-h-screen flex flex-col justify-between overflow-x-hidden">
@@ -167,7 +179,13 @@ const GalleryImage = ({ data, location: { state } }) => {
               ),
               label: (
                 <>
-                  Gallery <kbd className="font-normal">esc</kbd>
+                  Gallery{" "}
+                  <kbd
+                    className="font-normal"
+                    style={{ background: darkAccent }}
+                  >
+                    esc
+                  </kbd>
                 </>
               ),
             },
@@ -186,7 +204,12 @@ const GalleryImage = ({ data, location: { state } }) => {
               }}
               to={`/photogallery/${prevImage}/`}
             >
-              <span className="p-1 lg:p-4 bg-muted-light/25 rounded-full">
+              <span
+                className="p-1 lg:p-4 rounded-full"
+                style={{
+                  background: darkAccent,
+                }}
+              >
                 <ChevronLeft UNSAFE_style={IconStyle} />
               </span>
             </Link>
@@ -216,7 +239,7 @@ const GalleryImage = ({ data, location: { state } }) => {
               ) : (
                 <GatsbyImage
                   alt={name}
-                  className="border-4 border-vibrant"
+                  className="border-4 border-black"
                   image={getImage(image)}
                   key={image.base}
                   loading="eager"
@@ -232,39 +255,68 @@ const GalleryImage = ({ data, location: { state } }) => {
                   : "flex-row landscape:container portrait:pt-5 portrait:flex-col portrait:text-right portrait:items-end"
               )}
             >
-              <div className="mr-2">
-                <p className="text-muted-light font-mono text-sm m-0 mt-1">
-                  {image.base}
-                </p>
+              <div className="mr-2 flex flex-col">
+                <p className="font-mono text-sm m-0 mt-1">{image.base}</p>
                 {hasName(image) && (
                   <h1 className="text-4xl mt-0 font-sans">{name}</h1>
                 )}
                 <p className="landscape:mr-2">{meta.Caption}</p>
-                <a
-                  className="cursor-pointer inline-block bg-muted-light text-vibrant-dark font-sans p-1 my-1 rounded"
-                  download
-                  href={image.publicURL}
-                  onClick={() => {
-                    try {
-                      window.plausible("Download Wallpaper", {
-                        props: { image: image.base },
-                      });
-                    } catch {
-                      // do nothing
-                    }
-                  }}
+                <div
+                  className={classnames(
+                    "grid grid-cols-6 h-[40px] w-[240px]",
+                    ar <= 1 ? "self-end" : "portrait:self-end"
+                  )}
                 >
-                  Download wallpaper
-                </a>
-                <div className="grid grid-cols-6 w-full h-[30px]">
-                  <div className="bg-vibrant"></div>
-                  <div className="bg-vibrant-light"></div>
-                  <div className="bg-vibrant-dark"></div>
-                  <div className="bg-muted"></div>
-                  <div className="bg-muted-light"></div>
-                  <div className="bg-muted-dark"></div>
+                  <div
+                    style={{ background: `rgba(${vibrant.Vibrant.join(",")})` }}
+                  ></div>
+                  <div
+                    style={{
+                      background: `rgb(${vibrant.LightVibrant.join(",")})`,
+                    }}
+                  ></div>
+                  <div
+                    style={{
+                      background: `rgb(${vibrant.DarkVibrant.join(",")})`,
+                    }}
+                  ></div>
+                  <div
+                    style={{ background: `rgb(${vibrant.Muted.join(",")})` }}
+                  ></div>
+                  <div
+                    style={{
+                      background: `rgb(${vibrant.LightMuted.join(",")})`,
+                    }}
+                  ></div>
+                  <div
+                    style={{
+                      background: `rgb(${vibrant.DarkMuted.join(",")})`,
+                    }}
+                  ></div>
                 </div>
-              </div><div className="flex-auto"></div>
+                <div className="my-2">
+                  <a
+                    className="cursor-pointer text-black font-sans p-1 rounded"
+                    download
+                    href={image.publicURL}
+                    onClick={() => {
+                      try {
+                        window.plausible("Download Wallpaper", {
+                          props: { image: image.base },
+                        });
+                      } catch {
+                        // do nothing
+                      }
+                    }}
+                    style={{
+                      background: darkAccent,
+                    }}
+                  >
+                    Download wallpaper
+                  </a>
+                </div>
+              </div>
+              <div className="flex-auto"></div>
               {
                 <div
                   className="portrait:border-t-2 border-muted-light portrait:mt-2 mr-2 portrait:mb-1"
@@ -277,7 +329,7 @@ const GalleryImage = ({ data, location: { state } }) => {
                   icon={<Calendar UNSAFE_style={IconStyle} />}
                   title="date taken"
                 />
-                <div className="sm:flex justify-end gap-2 border border-vibrant-light pl-2 rounded">
+                <div className="sm:flex justify-end gap-2 border border-gray-500 pl-2 rounded">
                   <MetadataItem
                     data={shutterSpeed}
                     icon={<Stopwatch UNSAFE_style={IconStyle} />}
@@ -315,7 +367,7 @@ const GalleryImage = ({ data, location: { state } }) => {
                 )}
                 {(meta.LensModel || meta.FocalLength) && (
                   <MetadataItem
-                    data={ meta.LensModel === "----" ? null : meta.LensModel}
+                    data={meta.LensModel === "----" ? null : meta.LensModel}
                     icon={<Circle UNSAFE_style={IconStyle} />}
                     title="lens"
                   />
@@ -334,7 +386,12 @@ const GalleryImage = ({ data, location: { state } }) => {
               }}
               to={`/photogallery/${nextImage}/`}
             >
-              <span className="p-1 lg:p-4 bg-muted-light/25 rounded-full">
+              <span
+                className="p-1 lg:p-4 rounded-full"
+                style={{
+                  background: darkAccent,
+                }}
+              >
                 <ChevronRight UNSAFE_style={IconStyle} />
               </span>
             </Link>

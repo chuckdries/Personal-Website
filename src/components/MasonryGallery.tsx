@@ -25,6 +25,7 @@ interface MasonryGalleryProps {
   debugHue?: boolean;
   debugRating?: boolean;
   linkState?: object;
+  showPalette?: boolean;
 }
 
 const MasonryGallery = ({
@@ -33,6 +34,7 @@ const MasonryGallery = ({
   debugHue,
   debugRating,
   linkState,
+  showPalette,
 }: MasonryGalleryProps) => {
   const [isClient, setIsClient] = React.useState(false);
   React.useEffect(() => {
@@ -124,7 +126,7 @@ const MasonryGallery = ({
         const rowAspectRatioSum = currentRow.aspect;
         const ar = getAspectRatio(image);
         let width;
-        let height = `calc(${galleryWidth} / ${rowAspectRatioSum} + 10px)`;
+        let height = `calc(${galleryWidth} / ${rowAspectRatioSum} ${showPalette ? "+ 10px" : "- 10px"})`;
         if (rowAspectRatioSum < targetAspect * 0.66) {
           // incomplete row, render stuff at "ideal" sizes instead of filling width
           width = `calc(calc(100vw - 160px) / ${targetAspect / ar})`;
@@ -137,9 +139,7 @@ const MasonryGallery = ({
         const img = getImage(image);
         return (
           <Link
-            className={classNames(
-              "border-8 border-white overflow-hidden"
-            )}
+            className={classNames("border-8 border-white overflow-hidden")}
             id={image.base}
             key={`${image.base}`}
             state={{
@@ -166,13 +166,22 @@ const MasonryGallery = ({
               </span>
             )}
             {img && (
+              <div className={`h-full ${showPalette && "grid grid-rows-[1fr_20px]"}`}>
                 <GatsbyImage
                   alt={getName(image)}
-                  className="w-full h-full"
+                  className="w-full"
                   image={img}
                   objectFit="cover"
                 />
-                
+                { showPalette && <div className="grid grid-cols-6 flex-shrink-0 h-[20px] w-full" style={getVibrantStyle(getVibrant(image))}>
+                  <div className="bg-vibrant"></div>
+                  <div className="bg-vibrant-light"></div>
+                  <div className="bg-vibrant-dark"></div>
+                  <div className="bg-muted"></div>
+                  <div className="bg-muted-light"></div>
+                  <div className="bg-muted-dark"></div>
+                </div>}
+              </div>
             )}
           </Link>
         );
