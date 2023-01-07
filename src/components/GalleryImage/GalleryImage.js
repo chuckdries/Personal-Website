@@ -240,7 +240,7 @@ const GalleryImage = ({ data, location: { state } }) => {
                   <h1 className="text-4xl mt-0 font-sans">{name}</h1>
                 )}
                 <p className="landscape:mr-2">{meta.Caption}</p>
-                <div className="grid grid-cols-6 w-full h-[30px]">
+                <div className="grid grid-cols-6 h-[40px] w-[240px]">
                   <div className="bg-vibrant"></div>
                   <div className="bg-vibrant-light"></div>
                   <div className="bg-vibrant-dark"></div>
