@@ -135,6 +135,7 @@ const MasonryGallery = ({
           const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
           width = `${widthNumber}%`;
         }
+        const vibrant = getVibrant(image);
         // @ts-ignore
         const img = getImage(image);
         return (
@@ -173,13 +174,33 @@ const MasonryGallery = ({
                   image={img}
                   objectFit="cover"
                 />
-                { showPalette && <div className="grid grid-cols-6 flex-shrink-0 h-[20px] w-full" style={getVibrantStyle(getVibrant(image))}>
-                  <div className="bg-vibrant"></div>
-                  <div className="bg-vibrant-light"></div>
-                  <div className="bg-vibrant-dark"></div>
-                  <div className="bg-muted"></div>
-                  <div className="bg-muted-light"></div>
-                  <div className="bg-muted-dark"></div>
+                { showPalette && vibrant && <div className="grid grid-cols-6 flex-shrink-0 h-[20px] w-full">
+                <div
+                    style={{ background: `rgba(${vibrant.Vibrant?.join(",")})` }}
+                  ></div>
+                  <div
+                    style={{
+                      background: `rgb(${vibrant.LightVibrant?.join(",")})`,
+                    }}
+                  ></div>
+                  <div
+                    style={{
+                      background: `rgb(${vibrant.DarkVibrant?.join(",")})`,
+                    }}
+                  ></div>
+                  <div
+                    style={{ background: `rgb(${vibrant.Muted?.join(",")})` }}
+                  ></div>
+                  <div
+                    style={{
+                      background: `rgb(${vibrant.LightMuted?.join(",")})`,
+                    }}
+                  ></div>
+                  <div
+                    style={{
+                      background: `rgb(${vibrant.DarkMuted?.join(",")})`,
+                    }}
+                  ></div>
                 </div>}
               </div>
             )}
