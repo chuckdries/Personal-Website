@@ -6,10 +6,15 @@ import { Helmet } from "react-helmet";
 
 import MasonryGallery from "../components/MasonryGallery";
 import KeywordsPicker from "../components/KeywordsPicker";
-import { getGalleryPageUrl, getHelmetSafeBodyStyle, getVibrantStyle } from "../utils";
+import {
+  getGalleryPageUrl,
+  getHelmetSafeBodyStyle,
+  getVibrantStyle,
+} from "../utils";
 import Nav from "../components/Nav";
 import { Item, Select } from "../components/Select";
 import { Switch } from "../components/Switch";
+import ColorPalette from "@spectrum-icons/workflow/ColorPalette";
 
 const SORT_KEYS = {
   hue: ["fields", "imageMeta", "vibrantHue"],
@@ -168,14 +173,16 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
         <body
           className="bg-white transition-color"
           // @ts-ignore
-          style={getHelmetSafeBodyStyle(getVibrantStyle({
-            Muted: [0, 0, 0],
-            LightMuted: [0, 0, 0],
-            Vibrant: [0, 0, 0],
-            LightVibrant: [0, 0, 0],
-            DarkMuted: [238, 238, 238],
-            DarkVibrant: [238, 238, 238],
-          }))}
+          style={getHelmetSafeBodyStyle(
+            getVibrantStyle({
+              Muted: [0, 0, 0],
+              LightMuted: [0, 0, 0],
+              Vibrant: [0, 0, 0],
+              LightVibrant: [0, 0, 0],
+              DarkMuted: [238, 238, 238],
+              DarkVibrant: [238, 238, 238],
+            })
+          )}
         />
       </Helmet>
       <div className="top-0 z-10">
@@ -210,12 +217,19 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
             value={filterKeyword}
           />
           <div className="m-2 flex flex-row items-end">
+            <div className="border border-black rounded mr-2">
             <Switch
               isSelected={showPalette}
               onChange={(val) => setShowPalette(val)}
             >
-              Show palettes
+              <ColorPalette
+                UNSAFE_style={{
+                  width: "24px",
+                  margin: "0 4px",
+                }}
+              />
             </Switch>
+            </div>
             <Select
               label="Sort by..."
               // @ts-ignore

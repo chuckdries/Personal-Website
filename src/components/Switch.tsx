@@ -15,7 +15,7 @@ export function Switch(props: AriaSwitchProps) {
 
   return (
     <label
-      className="text-sm p-2"
+      className="text-sm p-[3px]"
       style={{
         display: "flex",
         alignItems: "center",
@@ -26,31 +26,31 @@ export function Switch(props: AriaSwitchProps) {
         <input {...inputProps} {...focusProps} ref={ref} />
       </VisuallyHidden>
       <svg
-        className="flex-shrink-0"
-        width={40}
-        height={24}
         aria-hidden="true"
+        className="flex-shrink-0"
+        height={24}
         style={{ marginRight: 4 }}
+        width={40}
       >
         <rect
-          x={4}
-          y={4}
-          width={32}
+          fill={state.isSelected ? "green" : "gray"}
           height={16}
           rx={8}
-          fill={state.isSelected ? "orange" : "gray"}
+          width={32}
+          x={4}
+          y={4}
         />
-        <circle cx={state.isSelected ? 28 : 12} cy={12} r={5} fill="white" />
+        <circle cx={state.isSelected ? 28 : 12} cy={12} fill="white" r={5} />
         {isFocusVisible && (
           <rect
-            x={1}
-            y={1}
-            width={38}
+            fill="none"
             height={22}
             rx={11}
-            fill="none"
-            stroke="orange"
+            stroke="green"
             strokeWidth={2}
+            width={38}
+            x={1}
+            y={1}
           />
         )}
       </svg>
