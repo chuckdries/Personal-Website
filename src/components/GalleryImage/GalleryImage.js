@@ -45,7 +45,7 @@ const IconStyle = {
   margin: '0 4px'
 }
 
-const ArrowLinkClasses = `hover:underline text-vibrant-light hover:text-muted-light 
+const ArrowLinkClasses = `hover:underline text-black 
 lg:px-4 self-stretch flex items-center hover:bg-black/50 max-h-screen sticky top-0
 `;
 
@@ -151,7 +151,7 @@ const GalleryImage = ({ data, location: { state } }) => {
       <Helmet>
         <title>{name} - Gallery | Chuck Dries</title>
         <body
-          className="text-vibrant-light bg-vibrant-dark transition-colors"
+          className="text-black bg-white transition-colors"
           style={getHelmetSafeBodyStyle(vibrant)}
         />
       </Helmet>
@@ -216,7 +216,7 @@ const GalleryImage = ({ data, location: { state } }) => {
               ) : (
                 <GatsbyImage
                   alt={name}
-                  className="border-4 border-vibrant"
+                  className="border-4 border-black"
                   image={getImage(image)}
                   key={image.base}
                   loading="eager"
@@ -233,15 +233,23 @@ const GalleryImage = ({ data, location: { state } }) => {
               )}
             >
               <div className="mr-2">
-                <p className="text-muted-light font-mono text-sm m-0 mt-1">
+                <p className="font-mono text-sm m-0 mt-1">
                   {image.base}
                 </p>
                 {hasName(image) && (
                   <h1 className="text-4xl mt-0 font-sans">{name}</h1>
                 )}
                 <p className="landscape:mr-2">{meta.Caption}</p>
+                <div className="grid grid-cols-6 w-full h-[30px]">
+                  <div className="bg-vibrant"></div>
+                  <div className="bg-vibrant-light"></div>
+                  <div className="bg-vibrant-dark"></div>
+                  <div className="bg-muted"></div>
+                  <div className="bg-muted-light"></div>
+                  <div className="bg-muted-dark"></div>
+                </div>
                 <a
-                  className="cursor-pointer inline-block bg-muted-light text-vibrant-dark font-sans p-1 my-1 rounded"
+                  className="cursor-pointer inline-block bg-gray-300 text-black font-sans p-1 my-1 rounded"
                   download
                   href={image.publicURL}
                   onClick={() => {
@@ -256,14 +264,6 @@ const GalleryImage = ({ data, location: { state } }) => {
                 >
                   Download wallpaper
                 </a>
-                <div className="grid grid-cols-6 w-full h-[30px]">
-                  <div className="bg-vibrant"></div>
-                  <div className="bg-vibrant-light"></div>
-                  <div className="bg-vibrant-dark"></div>
-                  <div className="bg-muted"></div>
-                  <div className="bg-muted-light"></div>
-                  <div className="bg-muted-dark"></div>
-                </div>
               </div><div className="flex-auto"></div>
               {
                 <div
@@ -277,7 +277,7 @@ const GalleryImage = ({ data, location: { state } }) => {
                   icon={<Calendar UNSAFE_style={IconStyle} />}
                   title="date taken"
                 />
-                <div className="sm:flex justify-end gap-2 border border-vibrant-light pl-2 rounded">
+                <div className="sm:flex justify-end gap-2 border border-gray-500 pl-2 rounded">
                   <MetadataItem
                     data={shutterSpeed}
                     icon={<Stopwatch UNSAFE_style={IconStyle} />}
@@ -334,7 +334,7 @@ const GalleryImage = ({ data, location: { state } }) => {
               }}
               to={`/photogallery/${nextImage}/`}
             >
-              <span className="p-1 lg:p-4 bg-muted-light/25 rounded-full">
+              <span className="p-1 lg:p-4 bg-gray-300 rounded-full">
                 <ChevronRight UNSAFE_style={IconStyle} />
               </span>
             </Link>
