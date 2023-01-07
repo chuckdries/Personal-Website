@@ -186,7 +186,7 @@ const GalleryImage = ({ data, location: { state } }) => {
               }}
               to={`/photogallery/${prevImage}/`}
             >
-              <span className="p-1 lg:p-4 bg-muted-light/25 rounded-full">
+              <span className="p-1 lg:p-4 bg-gray-300 rounded-full">
                 <ChevronLeft UNSAFE_style={IconStyle} />
               </span>
             </Link>
