@@ -135,8 +135,9 @@ const GalleryImage = ({ data, location: { state } }) => {
     locationString = location.join(", ");
   }
   const vibrant = getVibrant(image, true);
+  const BLEND = 'hsl'
   const darkAccent = chroma
-    .mix(vibrant.Vibrant, "hsla(216, 12%, 90%, 1)", 0.7)
+    .mix(vibrant.Vibrant, "hsla(216, 0%, 90%, 1)", 0.6, BLEND)
     .hex();
   const canonicalSize = getCanonicalSize(image);
 
@@ -162,7 +163,7 @@ const GalleryImage = ({ data, location: { state } }) => {
           className="text-black transition-colors"
           // style={getHelmetSafeBodyStyle(vibrant)}
           style={getHelmetSafeBodyStyle({
-            background: chroma.mix(vibrant.Vibrant, "white", 0.7).hex(),
+            background: chroma.mix(vibrant.Vibrant, "white", 0.7, BLEND).hex(),
           })}
         />
       </Helmet>
@@ -263,9 +264,8 @@ const GalleryImage = ({ data, location: { state } }) => {
                 <div
                   className={classnames(
                     "grid grid-cols-6 h-[40px] w-[240px]",
-                    ar <= 1 && "self-end"
+                    ar <= 1 ? "self-end" : "portrait:self-end"
                   )}
-                  style={getVibrantStyle(vibrant)}
                 >
                   <div
                     style={{ background: `rgba(${vibrant.Vibrant.join(",")})` }}
