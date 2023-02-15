@@ -60,6 +60,16 @@ const ExternalLinks = () => (
       </a>
     </li>
     <li>
+      <a
+        className={navClasses}
+        href="https://mastodon.chuckdries.com/@chuck"
+        rel="me noreferrer"
+        target="_blank"
+      >
+        Mastodon
+      </a>
+    </li>
+    <li>
       <a className={navClasses} href="mailto:chuck@chuckdries.com">
         chuck@chuckdries.com
       </a>
