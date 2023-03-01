@@ -109,6 +109,7 @@ const IndexPage = ({
           </Link>
         )}
       </main>
+      <a className="hidden" rel="me" href="https://hachyderm.io/@chuckletmilk">Mastodon</a>
     </>
   );
 };

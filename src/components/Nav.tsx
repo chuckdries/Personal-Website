@@ -62,7 +62,7 @@ const ExternalLinks = () => (
     <li>
       <a
         className={navClasses}
-        href="https://mastodon.chuckdries.com/@chuck"
+        href="https://hachyderm.io/@chuckletmilk"
         rel="me noreferrer"
         target="_blank"
       >
