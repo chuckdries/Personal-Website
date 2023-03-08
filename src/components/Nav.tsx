@@ -95,7 +95,7 @@ const Nav = ({ internalLinks, className }: NavProps) => {
         className
       )}
     >
-      <div className="md:flex items-baseline flex-auto">
+      <div className="md:flex items-baseline flex-auto ml-2">
         <h1 className="font-bold mr-2">Chuck Dries</h1>
         <h2 className="text-md">Software Engineer & Photographer</h2>
       </div>

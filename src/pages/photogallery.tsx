@@ -227,7 +227,7 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
         </div>
         <div className="gradient pb-6">
           <div className="px-4 md:px-8 flex items-baseline">
-            <h3 className="mr-2 font-bold" id="recently">
+            <h3 className="mx-2 font-bold" id="recently">
               Recently published
             </h3>
             {sortKey !== "datePublished" && (
@@ -258,7 +258,7 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
           />
         </div>
         <div className="px-4 md:px-8 mt-2 pt-2">
-          <h3 className="mr-2 font-bold" id="all">
+          <h3 className="mx-2 font-bold" id="all">
             All images
           </h3>
         </div>
@@ -283,7 +283,7 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
             onChange={setKeyword}
             value={filterKeyword}
           />
-          <div className="my-2 flex flex-row items-end">
+          <div className="my-2 mr-2 flex flex-row items-end">
             <div className="border border-gray-400 rounded mr-2">
               <Switch
                 isSelected={showPalette}

@@ -9,7 +9,7 @@ interface KeywordsPickerProps {
 }
 const KeywordsPicker = ({ keywords, value, onChange }: KeywordsPickerProps) => {
   return (
-    <div className="mr-2 mt-2">
+    <div className="mx-2 mt-2">
       <span className="text-xs text-black">
         Collections
       </span>
