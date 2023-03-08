@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as R from "ramda";
-import { graphql, Link, PageProps } from "gatsby";
+import { graphql, Link, navigate, PageProps } from "gatsby";
 import { Helmet } from "react-helmet";
 // import { Picker, Item } from "@adobe/react-spectrum";
 
@@ -47,10 +47,13 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
 
   const hash = location.hash ? location.hash.replace("#", "") : "";
 
+  const params = new URLSearchParams(location.search);
+  const filterKeyword = params.get('filter')
+  const sortKey = params.get('sort') ?? "rating"
+  console.log("🚀 ~ file: photogallery.tsx:51 ~ GalleryPage ~ params:", params)
+
   const [hashCleared, setHashCleared] = React.useState(false); // eslint-disable-line no-unused-vars
   //     ^ used just to force a re-render with the cleared hash value (I know, it's a smell for sure)
-  const [filterKeyword, _setKeyword] = React.useState(null as string | null);
-  const [sortKey, _setSortKey] = React.useState("rating" as string);
   const showDebug =
     typeof window !== "undefined" &&
     window.location.search.includes("debug=true");
@@ -67,14 +70,15 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
           // do nothing
         }
       }
-      _setKeyword(newKeyword);
-      window.history.replaceState(
-        null,
-        "",
-        getGalleryPageUrl({ keyword: newKeyword, sortKey }, hash)
-      );
+      // _setKeyword(newKeyword);
+      // window.history.replaceState(
+      //   null,
+      //   "",
+      //   getGalleryPageUrl({ keyword: newKeyword, sortKey }, hash)
+      // );
+      navigate(getGalleryPageUrl({ keyword: newKeyword, sortKey }, hash))
     },
-    [_setKeyword, sortKey, hash]
+    [sortKey, hash]
   );
 
   const setSortKey = React.useCallback(
@@ -86,14 +90,15 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
       } catch (e) {
         // do nothing
       }
-      _setSortKey(newSortKey);
-      window.history.pushState(
-        null,
-        "",
-        getGalleryPageUrl({ sortKey: newSortKey, keyword: filterKeyword }, hash)
-      );
+      // _setSortKey(newSortKey);
+      // window.history.pushState(
+      //   null,
+      //   "",
+      //   getGalleryPageUrl({ sortKey: newSortKey, keyword: filterKeyword }, hash)
+      // );
+      navigate(getGalleryPageUrl({ sortKey: newSortKey, keyword: filterKeyword }, hash), { replace: true })
     },
-    [_setSortKey, filterKeyword, hash]
+    [filterKeyword, hash]
   );
 
   const removeHash = React.useCallback(() => {
@@ -104,10 +109,15 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
     );
 
     url.hash = "";
-    window.history.pushState(null, "", url.href.toString());
+    // window.history.pushState(null, "", url.href.toString());
+    navigate(url.href.toString());
     window.removeEventListener("wheel", removeHash);
     setHashCleared(true);
   }, []);
+
+  React.useEffect(() => {
+    window.addEventListener("wheel", removeHash);
+  }, [removeHash]);
 
   const scrollIntoView = React.useCallback(() => {
     if (!hash) {
@@ -120,23 +130,22 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
     el.scrollIntoView({
       block: hash.startsWith('all') ? "start" : "center",
     });
-    window.addEventListener("wheel", removeHash);
   }, [hash, removeHash]);
 
   React.useEffect(() => {
-    const url = new URL(window.location.toString());
+    // const url = new URL(window.location.toString());
 
-    const sortKeyFromUrl = url.searchParams.get("sort");
-    if (sortKeyFromUrl) {
-      _setSortKey(sortKeyFromUrl);
-    } else {
-      _setSortKey('rating')
-    }
+    // const sortKeyFromUrl = url.searchParams.get("sort");
+    // if (sortKeyFromUrl) {
+    //   _setSortKey(sortKeyFromUrl);
+    // } else {
+    //   _setSortKey('rating')
+    // }
 
-    const filterKeyFromUrl = url.searchParams.get("filter");
-    if (filterKeyFromUrl) {
-      _setKeyword(filterKeyFromUrl);
-    }
+    // const filterKeyFromUrl = url.searchParams.get("filter");
+    // if (filterKeyFromUrl) {
+    //   // _setKeyword(filterKeyFromUrl);
+    // }
 
     // hacky but it works for now
     setTimeout(() => {

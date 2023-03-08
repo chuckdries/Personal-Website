@@ -101,7 +101,7 @@ export const getShutterFractionFromExposureTime = (exposureTime: number) => {
 
 interface galleryPageUrlProps {
   keyword: string | null;
-  sortKey: string;
+  sortKey: string | null;
 }
 
 export const getGalleryPageUrl = (
@@ -123,7 +123,7 @@ export const getGalleryPageUrl = (
     }
   }
   if (sortKey !== undefined) {
-    if (sortKey === "rating") {
+    if (sortKey === "rating" || sortKey === null) {
       url.searchParams.delete("sort");
     } else {
       url.searchParams.set("sort", sortKey);
