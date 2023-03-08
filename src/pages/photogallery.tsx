@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as R from "ramda";
-import { graphql, PageProps } from "gatsby";
+import { graphql, Link, PageProps } from "gatsby";
 import { Helmet } from "react-helmet";
 // import { Picker, Item } from "@adobe/react-spectrum";
 
@@ -23,19 +23,21 @@ const SORT_KEYS = {
   // hue_debug: ["fields", "imageMeta", "dominantHue", 0],
   hue_debug: ["fields", "imageMeta", "dominantHue", "0"],
   date: ["fields", "imageMeta", "dateTaken"],
-  modified: ["fields", "imageMeta", "datePublished"],
+  datePublished: ["fields", "imageMeta", "datePublished"],
 } as const;
 
 export type GalleryImage =
   Queries.GalleryPageQueryQuery["all"]["nodes"][number];
 
-function smartCompareDates(key: keyof typeof SORT_KEYS, left: GalleryImage, right: GalleryImage) {
+function smartCompareDates(
+  key: keyof typeof SORT_KEYS,
+  left: GalleryImage,
+  right: GalleryImage
+) {
   let diff = compareDates(SORT_KEYS[key], left, right);
-  console.log("🚀 ~ file: photogallery.tsx:34 ~ smartCompareDates ~ diff:", diff)
   if (diff !== 0) {
     return diff;
   }
-  console.log('falling back to date')
   return compareDates(SORT_KEYS.date, left, right);
 }
 
@@ -100,13 +102,13 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
     );
 
     url.hash = "";
-    window.history.replaceState(null, "", url.href.toString());
+    window.history.pushState(null, "", url.href.toString());
     window.removeEventListener("wheel", removeHash);
     setHashCleared(true);
   }, []);
 
   const scrollIntoView = React.useCallback(() => {
-    if (!hash) {
+    if (!hash || hash.startsWith('all')) {
       return;
     }
     const el = document.getElementById(hash);
@@ -125,6 +127,8 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
     const sortKeyFromUrl = url.searchParams.get("sort");
     if (sortKeyFromUrl) {
       _setSortKey(sortKeyFromUrl);
+    } else {
+      _setSortKey('rating')
     }
 
     const filterKeyFromUrl = url.searchParams.get("filter");
@@ -141,8 +145,10 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
 
   const images: GalleryImage[] = React.useMemo(() => {
     const sort =
-      sortKey === "date" || sortKey === "modified"
-        ? R.sort((node1: typeof data["all"]["nodes"][number], node2) => smartCompareDates(sortKey, node1, node2))
+      sortKey === "date" || sortKey === "datePublished"
+        ? R.sort((node1: typeof data["all"]["nodes"][number], node2) =>
+            smartCompareDates(sortKey, node1, node2)
+          )
         : R.sort(
             // @ts-ignore
             R.descend(R.path<GalleryImage>(SORT_KEYS[sortKey]))
@@ -171,8 +177,11 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
   }, [data, sortKey, filterKeyword]);
 
   const recents = React.useMemo(() => {
-    return R.sort((left, right) => smartCompareDates('modified', left, right), data.recents.nodes)
-  }, [data, 'hi'])
+    return R.sort(
+      (left, right) => smartCompareDates("datePublished", left, right),
+      data.recents.nodes
+    );
+  }, [data, "hi"]);
 
   return (
     <>
@@ -205,25 +214,39 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
             ]}
           />
         </div>
-        <div className="px-4 md:px-8">
-          <h3 id="recently" className="mx-2 font-bold">
-            Recently published
-          </h3>
+        <div className="gradient pb-6">
+          <div className="px-4 md:px-8 flex">
+            <h3 id="recently" className="mx-2 font-bold">
+              Recently published
+            </h3>
+            {sortKey !== "datePublished" && (
+              <Link
+                onClick={(e) => {
+                  // e.preventDefault();
+                  // setSortKey("datePublished")
+                }}
+                to="?sort=datePublished#all"
+                className="underline cursor-pointer"
+              >
+                show more
+              </Link>
+            )}
+          </div>
+          <MasonryGallery
+            aspectsByBreakpoint={{
+              xs: 2,
+              sm: 2,
+              md: 3,
+              lg: 4,
+              xl: 5,
+              "2xl": 6.1,
+              "3xl": 8,
+            }}
+            images={recents}
+            singleRow
+          />
         </div>
-        <MasonryGallery
-          aspectsByBreakpoint={{
-            xs: 2,
-            sm: 2,
-            md: 3,
-            lg: 4,
-            xl: 5,
-            "2xl": 6.1,
-            "3xl": 8,
-          }}
-          images={recents}
-          singleRow
-        />
-        <div className="px-4 md:px-8 mt-4 pt-2 border-t">
+        <div className="px-4 md:px-8 mt-2 pt-2">
           <h3 id="all" className="mx-2 font-bold">
             All images
           </h3>
@@ -270,7 +293,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
               selectedKey={sortKey}
             >
               <Item key="rating">Curated</Item>
-              <Item key="modified">Date published</Item>
+              <Item key="datePublished">Date published</Item>
               <Item key="date">Date taken</Item>
               <Item key="hue">Hue</Item>
             </Select>
