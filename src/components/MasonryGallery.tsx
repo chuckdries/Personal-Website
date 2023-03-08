@@ -18,7 +18,7 @@ interface Row {
 }
 
 interface MasonryGalleryProps {
-  images: GalleryImage[];
+  images: readonly GalleryImage[];
   aspectsByBreakpoint: {
     [breakpoint: string]: number;
   };

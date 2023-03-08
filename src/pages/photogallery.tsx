@@ -24,7 +24,7 @@ const SORT_KEYS = {
 } as const;
 
 export type GalleryImage =
-  Queries.GalleryPageQueryQuery["allFile"]["nodes"][number];
+  Queries.GalleryPageQueryQuery["all"]["nodes"][number];
 
 const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
   const hash =
@@ -129,7 +129,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
   const images: GalleryImage[] = React.useMemo(() => {
     const sort =
       sortKey === "date"
-        ? R.sort((node1: typeof data["allFile"]["nodes"][number], node2) => {
+        ? R.sort((node1: typeof data["all"]["nodes"][number], node2) => {
             const date1 = new Date(
               R.pathOr("", ["fields", "imageMeta", "dateTaken"], node1)
             );
@@ -157,7 +157,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
         // @ts-ignore
         sort,
         filter
-      )(data.allFile.nodes) as any;
+      )(data.all.nodes) as any;
       return ret;
     } catch (e) {
       console.log("caught images!", e);
@@ -174,6 +174,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
           className="bg-white transition-color"
           // @ts-ignore
           style={getHelmetSafeBodyStyle(
+            // @ts-ignore shrug
             getVibrantStyle({
               Muted: [0, 0, 0],
               LightMuted: [0, 0, 0],
@@ -194,6 +195,24 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
               { href: "/photogallery/", label: "Gallery" },
             ]}
           />
+        </div>
+        <div className="px-4 md:px-8">
+          <h3 id="recently" className="mx-2 font-bold">Recently updated</h3>
+        </div>
+        <MasonryGallery
+          aspectsByBreakpoint={{
+            xs: 2,
+            sm: 2,
+            md: 3,
+            lg: 4,
+            xl: 5,
+            "2xl": 6.1,
+            "3xl": 8,
+          }}
+          images={data.recents.nodes}
+        />
+        <div className="px-4 md:px-8 mt-4 pt-2 border-t">
+          <h3 id="all" className="mx-2 font-bold">All images</h3>
         </div>
         <div className="flex flex-col lg:flex-row lg:items-end justify-between px-4 md:px-8 sm:mx-auto">
           <KeywordsPicker
@@ -218,17 +237,17 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
           />
           <div className="m-2 flex flex-row items-end">
             <div className="border border-black rounded mr-2">
-            <Switch
-              isSelected={showPalette}
-              onChange={(val) => setShowPalette(val)}
-            >
-              <ColorPalette
-                UNSAFE_style={{
-                  width: "24px",
-                  margin: "0 4px",
-                }}
-              />
-            </Switch>
+              <Switch
+                isSelected={showPalette}
+                onChange={(val) => setShowPalette(val)}
+              >
+                <ColorPalette
+                  UNSAFE_style={{
+                    width: "24px",
+                    margin: "0 4px",
+                  }}
+                />
+              </Switch>
             </div>
             <Select
               label="Sort by..."
@@ -268,37 +287,49 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
 
 export const query = graphql`
   query GalleryPageQuery {
-    allFile(
+    recents: allFile(
+      filter: { sourceInstanceName: { eq: "gallery" } }
+      sort: { fields: { imageMeta: { meta: { ModifyDate: DESC } } } }
+      limit: 7
+    ) {
+      ...GalleryImageFile
+    }
+    all: allFile(
       filter: { sourceInstanceName: { eq: "gallery" } }
       sort: { fields: { imageMeta: { dateTaken: DESC } } }
     ) {
-      nodes {
-        relativePath
-        base
-        childImageSharp {
-          fluid {
-            aspectRatio
-          }
-          gatsbyImageData(
-            layout: CONSTRAINED
-            height: 550
-            placeholder: DOMINANT_COLOR
-          )
+      ...GalleryImageFile
+    }
+  }
+
+  fragment GalleryImageFile on FileConnection {
+    nodes {
+      relativePath
+      base
+      childImageSharp {
+        fluid {
+          aspectRatio
         }
-        fields {
-          imageMeta {
-            vibrantHue
-            dominantHue
-            dateTaken
-            meta {
-              Keywords
-              Rating
-              ObjectName
-            }
-            vibrant {
-              # Vibrant
-              ...VibrantColors
-            }
+        gatsbyImageData(
+          layout: CONSTRAINED
+          height: 550
+          placeholder: DOMINANT_COLOR
+        )
+      }
+      fields {
+        imageMeta {
+          vibrantHue
+          dominantHue
+          dateTaken
+          meta {
+            Keywords
+            Rating
+            ObjectName
+            CreateDate
+            ModifyDate
+          }
+          vibrant {
+            ...VibrantColors
           }
         }
       }

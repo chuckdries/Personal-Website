@@ -139,6 +139,7 @@ function transformMetaToNodeData(
       ISO: metaData.ISO,
       DateTimeOriginal: metaData.DateTimeOriginal,
       CreateDate: metaData.CreateDate,
+      ModifyDate: metaData.ModifyDate,
       ShutterSpeedValue: metaData.ShutterSpeedValue,
       ApertureValue: metaData.ApertureValue,
       FocalLength: metaData.FocalLength,
