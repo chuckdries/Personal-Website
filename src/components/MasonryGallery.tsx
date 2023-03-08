@@ -26,6 +26,7 @@ interface MasonryGalleryProps {
   debugRating?: boolean;
   linkState?: object;
   showPalette?: boolean;
+  singleRow?: boolean;
 }
 
 const MasonryGallery = ({
@@ -35,6 +36,7 @@ const MasonryGallery = ({
   debugRating,
   linkState,
   showPalette,
+  singleRow,
 }: MasonryGalleryProps) => {
   const [isClient, setIsClient] = React.useState(false);
   React.useEffect(() => {
@@ -83,6 +85,14 @@ const MasonryGallery = ({
                 },
               ];
             }
+            // no-op instead of starting a new row
+            if (singleRow) {
+              return [
+                ...acc,
+                currentRow,
+              ]
+            }
+            // start a new row
             return [
               ...acc,
               currentRow,

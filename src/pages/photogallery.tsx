@@ -20,7 +20,8 @@ const SORT_KEYS = {
   hue: ["fields", "imageMeta", "vibrantHue"],
   rating: ["fields", "imageMeta", "meta", "Rating"],
   hue_debug: ["fields", "imageMeta", "dominantHue", 0],
-  date: [],
+  date: ["fields", "imageMeta", "dateTaken"],
+  modified: ["fields", "imageMeta", "meta", "ModifyDate"]
 } as const;
 
 export type GalleryImage =
@@ -128,13 +129,13 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
 
   const images: GalleryImage[] = React.useMemo(() => {
     const sort =
-      sortKey === "date"
+      sortKey === "date" || sortKey === "modified"
         ? R.sort((node1: typeof data["all"]["nodes"][number], node2) => {
             const date1 = new Date(
-              R.pathOr("", ["fields", "imageMeta", "dateTaken"], node1)
+              R.pathOr("", SORT_KEYS[sortKey], node1)
             );
             const date2 = new Date(
-              R.pathOr("", ["fields", "imageMeta", "dateTaken"], node2)
+              R.pathOr("", SORT_KEYS[sortKey], node2)
             );
             return -1 * (date1.getTime() - date2.getTime());
           })
@@ -210,6 +211,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
             "3xl": 8,
           }}
           images={data.recents.nodes}
+          singleRow
         />
         <div className="px-4 md:px-8 mt-4 pt-2 border-t">
           <h3 id="all" className="mx-2 font-bold">All images</h3>
@@ -256,7 +258,8 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
               selectedKey={sortKey}
             >
               <Item key="rating">Curated</Item>
-              <Item key="date">Date</Item>
+              <Item key="modified">Date Updated</Item>
+              <Item key="date">Date taken</Item>
               <Item key="hue">Hue</Item>
             </Select>
           </div>

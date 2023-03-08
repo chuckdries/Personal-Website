@@ -55,6 +55,9 @@ const gcd = (a: number, b: number): number => {
 };
 
 export const getShutterFractionFromExposureTime = (exposureTime: number) => {
+  if (exposureTime === 0.3333333333333333) {
+    return "1/3";
+  }
   if (exposureTime === 0.03333333333333333) {
     return "1/30";
   }
