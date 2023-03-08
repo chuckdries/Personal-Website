@@ -41,9 +41,11 @@ function smartCompareDates(
   return compareDates(SORT_KEYS.date, left, right);
 }
 
-const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
-  const hash =
-    typeof window !== "undefined" ? window.location.hash.replace("#", "") : "";
+const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery>) => {
+  // const hash =
+    // typeof window !== "undefined" ? window.location.hash.replace("#", "") : "";
+
+  const hash = location.hash ? location.hash.replace("#", "") : "";
 
   const [hashCleared, setHashCleared] = React.useState(false); // eslint-disable-line no-unused-vars
   //     ^ used just to force a re-render with the cleared hash value (I know, it's a smell for sure)
@@ -141,7 +143,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
       // don't scroll into view if user got here with back button
       scrollIntoView();
     }, 100);
-  }, [setSortKey, setKeyword, scrollIntoView]);
+  }, [setSortKey, setKeyword, scrollIntoView, location]);
 
   const images: GalleryImage[] = React.useMemo(() => {
     const sort =
