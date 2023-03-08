@@ -118,7 +118,7 @@ const MasonryGallery = ({
   return (
     <div
       className={classNames(
-        "flex items-center flex-wrap mx-auto px-4 md:px-8",
+        "flex items-center flex-wrap mx-auto pr-4 pl-2 md:pr-8 md:pl-[72px]",
         isClient ? "" : ""
       )}
       // ref={observe}
