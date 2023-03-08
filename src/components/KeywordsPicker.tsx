@@ -1,6 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
 import Checkmark from "@spectrum-icons/workflow/Checkmark";
+import { Link } from "gatsby";
 
 interface KeywordsPickerProps {
   keywords: string[];
@@ -18,7 +19,7 @@ const KeywordsPicker = ({ keywords, value, onChange }: KeywordsPickerProps) => {
           const selected = value === keyword;
           return (
             <li key={keyword}>
-              <button
+              <Link
                 className={classNames(
                   `py-[5px] px-3 rounded-full text-sm`,
                   `text-black border border-gray-400`,
@@ -27,8 +28,8 @@ const KeywordsPicker = ({ keywords, value, onChange }: KeywordsPickerProps) => {
                     : `bg-white
                     hover:bg-black/10`
                 )}
-                onClick={() => (selected ? onChange(null) : onChange(keyword))}
-                type="button"
+                to="?filter=keyword"
+                // onClick={() => (selected ? onChange(null) : onChange(keyword))}
               >
                 {keyword}{" "}
                 {/* {selected && (
@@ -38,7 +39,7 @@ const KeywordsPicker = ({ keywords, value, onChange }: KeywordsPickerProps) => {
                     aria-hidden="true"
                   />
                 )} */}
-              </button>
+              </Link>
             </li>
           );
         })}
