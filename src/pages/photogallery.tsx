@@ -277,7 +277,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
           </div>
         </div>
       </div>
-      {/* <MasonryGallery
+      <MasonryGallery
         aspectsByBreakpoint={{
           xs: 2,
           sm: 2,
@@ -295,7 +295,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
           filterKeyword,
         }}
         showPalette={showPalette}
-      /> */}
+      />
     </>
   );
 };

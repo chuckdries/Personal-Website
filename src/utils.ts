@@ -140,12 +140,9 @@ export function compareDates<T>(
   left: T,
   right: T
 ): number {
-  const d1 = pathOr("", date_path, left);
-  console.log("🚀 ~ file: utils.ts:129 ~ d1:", d1);
-  const date1 = new Date(d1);
-  console.log("🚀 ~ file: utils.ts:146 ~ new Date(d1):", new Date(d1))
-  console.log("🚀 ~ file: utils.ts:133 ~ date1:", date1);
-  const date2 = new Date(pathOr("", date_path, right));
+  // why tf do my dates have newlines in them?!?!
+  const date1 = new Date(pathOr("", date_path, left).replace(/\s/g, ''));
+  const date2 = new Date(pathOr("", date_path, right).replace(/\s/g, ''));
   const diff = -1 * (date1.getTime() - date2.getTime());
   return diff;
 }
