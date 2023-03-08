@@ -10,6 +10,10 @@ import sharp from "sharp";
 import { Palette } from "node-vibrant/lib/color";
 import { performance } from "perf_hooks";
 
+import util from 'node:util';
+import { exec as _exec } from "child_process";
+const exec = util.promisify(_exec)
+
 // const path = require("path");
 // const Vibrant = require("node-vibrant");
 // const chroma = require("chroma-js");
@@ -114,7 +118,8 @@ function transformMetaToNodeData(
   metaData: Record<string, unknown>,
   vibrantData: Palette,
   imagePath: string,
-  { r, g, b }: { r: number; b: number; g: number }
+  { r, g, b }: { r: number; b: number; g: number },
+  datePublished: string,
 ) {
   const vibrant = vibrantData ? processColors(vibrantData, imagePath) : null;
   const vibrantHue = vibrantData.Vibrant!.getHsl()[0] * 360;
@@ -131,6 +136,7 @@ function transformMetaToNodeData(
   }
   return {
     dateTaken: metaData.DateTimeOriginal,
+    datePublished,
     meta: {
       Make: metaData.Make,
       Model: metaData.Model,
@@ -174,6 +180,11 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
   const { createNodeField } = actions;
 
   if (node.internal.type === "File" && node.sourceInstanceName === "gallery") {
+    const { stdout: datePublished, stderr } = await exec(`git log --diff-filter=A --follow --format=%aI -1 -- ${node.absolutePath}`)
+    if (stderr.length) {
+      console.error('something went wrong checking publish date: ', stderr);
+    }
+
     const metaData = await exifr.parse(node.absolutePath as string, {
       iptc: true,
       xmp: true,
@@ -201,7 +212,8 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
         metaData,
         vibrantData,
         node.absolutePath as string,
-        dominant
+        dominant,
+        datePublished
       ),
     });
   }

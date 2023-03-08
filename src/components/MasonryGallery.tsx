@@ -30,7 +30,7 @@ interface MasonryGalleryProps {
 }
 
 const MasonryGallery = ({
-  images,
+  images: _images,
   aspectsByBreakpoint: aspectTargetsByBreakpoint,
   debugHue,
   debugRating,
@@ -59,8 +59,8 @@ const MasonryGallery = ({
   }px)`;
 
   const aspectRatios = React.useMemo(
-    () => R.map(getAspectRatio, images).filter(Boolean),
-    [images]
+    () => R.map(getAspectRatio, _images).filter(Boolean),
+    [_images]
   ) as number[];
 
   const targetAspect = aspectTargetsByBreakpoint[breakpoint];
@@ -87,10 +87,7 @@ const MasonryGallery = ({
             }
             // no-op instead of starting a new row
             if (singleRow) {
-              return [
-                ...acc,
-                currentRow,
-              ]
+              return [currentRow];
             }
             // start a new row
             return [
@@ -107,14 +104,16 @@ const MasonryGallery = ({
         ),
         R.indexBy(R.prop("startIndex"))
       )(aspectRatios),
-    [aspectRatios, targetAspect]
+    [aspectRatios, targetAspect, singleRow]
   );
 
   const sortedImageList = React.useMemo(
-    () => images.map((image) => image.base),
-    [images]
+    () => _images.map((image) => image.base),
+    [_images]
   );
 
+  const images = singleRow ? _images.slice(0, rows[0].images) : _images;
+ 
   let cursor = 0;
   return (
     <div

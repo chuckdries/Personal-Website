@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 import MasonryGallery from "../components/MasonryGallery";
 import KeywordsPicker from "../components/KeywordsPicker";
 import {
+  compareDates,
   getGalleryPageUrl,
   getHelmetSafeBodyStyle,
   getVibrantStyle,
@@ -19,13 +20,24 @@ import ColorPalette from "@spectrum-icons/workflow/ColorPalette";
 const SORT_KEYS = {
   hue: ["fields", "imageMeta", "vibrantHue"],
   rating: ["fields", "imageMeta", "meta", "Rating"],
-  hue_debug: ["fields", "imageMeta", "dominantHue", 0],
+  // hue_debug: ["fields", "imageMeta", "dominantHue", 0],
+  hue_debug: ["fields", "imageMeta", "dominantHue", "0"],
   date: ["fields", "imageMeta", "dateTaken"],
-  modified: ["fields", "imageMeta", "meta", "ModifyDate"]
+  modified: ["fields", "imageMeta", "datePublished"],
 } as const;
 
 export type GalleryImage =
   Queries.GalleryPageQueryQuery["all"]["nodes"][number];
+
+function smartCompareDates(key: keyof typeof SORT_KEYS, left: GalleryImage, right: GalleryImage) {
+  let diff = compareDates(SORT_KEYS[key], left, right);
+  console.log("🚀 ~ file: photogallery.tsx:34 ~ smartCompareDates ~ diff:", diff)
+  if (diff !== 0) {
+    return diff;
+  }
+  console.log('falling back to date')
+  return compareDates(SORT_KEYS.date, left, right);
+}
 
 const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
   const hash =
@@ -130,15 +142,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
   const images: GalleryImage[] = React.useMemo(() => {
     const sort =
       sortKey === "date" || sortKey === "modified"
-        ? R.sort((node1: typeof data["all"]["nodes"][number], node2) => {
-            const date1 = new Date(
-              R.pathOr("", SORT_KEYS[sortKey], node1)
-            );
-            const date2 = new Date(
-              R.pathOr("", SORT_KEYS[sortKey], node2)
-            );
-            return -1 * (date1.getTime() - date2.getTime());
-          })
+        ? R.sort((node1: typeof data["all"]["nodes"][number], node2) => smartCompareDates(sortKey, node1, node2))
         : R.sort(
             // @ts-ignore
             R.descend(R.path<GalleryImage>(SORT_KEYS[sortKey]))
@@ -165,6 +169,10 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
       return [];
     }
   }, [data, sortKey, filterKeyword]);
+
+  const recents = React.useMemo(() => {
+    return R.sort((left, right) => smartCompareDates('modified', left, right), data.recents.nodes)
+  }, [data, 'hi'])
 
   return (
     <>
@@ -198,7 +206,9 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
           />
         </div>
         <div className="px-4 md:px-8">
-          <h3 id="recently" className="mx-2 font-bold">Recently updated</h3>
+          <h3 id="recently" className="mx-2 font-bold">
+            Recently published
+          </h3>
         </div>
         <MasonryGallery
           aspectsByBreakpoint={{
@@ -210,11 +220,13 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
             "2xl": 6.1,
             "3xl": 8,
           }}
-          images={data.recents.nodes}
+          images={recents}
           singleRow
         />
         <div className="px-4 md:px-8 mt-4 pt-2 border-t">
-          <h3 id="all" className="mx-2 font-bold">All images</h3>
+          <h3 id="all" className="mx-2 font-bold">
+            All images
+          </h3>
         </div>
         <div className="flex flex-col lg:flex-row lg:items-end justify-between px-4 md:px-8 sm:mx-auto">
           <KeywordsPicker
@@ -258,14 +270,14 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
               selectedKey={sortKey}
             >
               <Item key="rating">Curated</Item>
-              <Item key="modified">Date Updated</Item>
+              <Item key="modified">Date published</Item>
               <Item key="date">Date taken</Item>
               <Item key="hue">Hue</Item>
             </Select>
           </div>
         </div>
       </div>
-      <MasonryGallery
+      {/* <MasonryGallery
         aspectsByBreakpoint={{
           xs: 2,
           sm: 2,
@@ -283,7 +295,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
           filterKeyword,
         }}
         showPalette={showPalette}
-      />
+      /> */}
     </>
   );
 };
@@ -292,7 +304,7 @@ export const query = graphql`
   query GalleryPageQuery {
     recents: allFile(
       filter: { sourceInstanceName: { eq: "gallery" } }
-      sort: { fields: { imageMeta: { meta: { ModifyDate: DESC } } } }
+      sort: { fields: { imageMeta: { datePublished: DESC } } }
       limit: 7
     ) {
       ...GalleryImageFile
@@ -307,7 +319,6 @@ export const query = graphql`
 
   fragment GalleryImageFile on FileConnection {
     nodes {
-      relativePath
       base
       childImageSharp {
         fluid {
@@ -324,6 +335,7 @@ export const query = graphql`
           vibrantHue
           dominantHue
           dateTaken
+          datePublished
           meta {
             Keywords
             Rating
