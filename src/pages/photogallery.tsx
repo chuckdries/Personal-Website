@@ -217,18 +217,18 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
           />
         </div>
         <div className="gradient pb-6">
-          <div className="px-4 md:px-8 flex">
-            <h3 id="recently" className="mx-2 font-bold">
+          <div className="px-4 md:px-8 flex items-baseline">
+            <h3 className="mx-2 font-bold" id="recently">
               Recently published
             </h3>
             {sortKey !== "datePublished" && (
               <Link
+                className="underline cursor-pointer text-gray-500"
                 onClick={(e) => {
                   // e.preventDefault();
                   // setSortKey("datePublished")
                 }}
                 to="?sort=datePublished#all"
-                className="underline cursor-pointer"
               >
                 show more
               </Link>
@@ -249,7 +249,7 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
           />
         </div>
         <div className="px-4 md:px-8 mt-2 pt-2">
-          <h3 id="all" className="mx-2 font-bold">
+          <h3 className="mx-2 font-bold" id="all">
             All images
           </h3>
         </div>
