@@ -4,13 +4,13 @@ import { Link } from "gatsby";
 import { Popover } from "react-tiny-popover";
 
 const navClasses =
-  "hover:underline hover:bg-transparentblack block p-3 text-black";
+  "hover:underline hover:bg-black/10 block p-3 text-black";
 
 const ExternalLinks = () => (
   <ul
     className={classnames(
       "z-30 overflow-hidden bg-vibrant-dark",
-      "rounded shadow border border-vibrant-light"
+      "rounded shadow-lg border border-gray-400"
     )}
   >
     <li>

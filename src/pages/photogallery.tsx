@@ -275,7 +275,7 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
             value={filterKeyword}
           />
           <div className="m-2 flex flex-row items-end">
-            <div className="border border-black rounded mr-2">
+            <div className="border border-gray-400 rounded mr-2">
               <Switch
                 isSelected={showPalette}
                 onChange={(val) => setShowPalette(val)}

@@ -21,11 +21,11 @@ const KeywordsPicker = ({ keywords, value, onChange }: KeywordsPickerProps) => {
               <button
                 className={classNames(
                   `py-[5px] px-3 rounded-full text-sm`,
-                  `text-black border border-black`,
+                  `text-black border border-gray-400`,
                   selected
-                    ? "bg-transparentblack font-bold"
+                    ? "bg-black/10 font-bold"
                     : `bg-white
-                    hover:bg-transparentblack`
+                    hover:bg-black/10`
                 )}
                 onClick={() => (selected ? onChange(null) : onChange(keyword))}
                 type="button"
