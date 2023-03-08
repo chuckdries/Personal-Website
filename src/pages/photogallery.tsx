@@ -110,7 +110,7 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
   }, []);
 
   const scrollIntoView = React.useCallback(() => {
-    if (!hash || hash.startsWith('all')) {
+    if (!hash) {
       return;
     }
     const el = document.getElementById(hash);
@@ -118,7 +118,7 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
       return;
     }
     el.scrollIntoView({
-      block: "center",
+      block: hash.startsWith('all') ? "start" : "center",
     });
     window.addEventListener("wheel", removeHash);
   }, [hash, removeHash]);
@@ -142,7 +142,7 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
     setTimeout(() => {
       // don't scroll into view if user got here with back button
       scrollIntoView();
-    }, 100);
+    }, 0);
   }, [setSortKey, setKeyword, scrollIntoView, location]);
 
   const images: GalleryImage[] = React.useMemo(() => {
@@ -224,10 +224,10 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
             {sortKey !== "datePublished" && (
               <Link
                 className="underline cursor-pointer text-gray-500"
-                onClick={(e) => {
-                  // e.preventDefault();
-                  // setSortKey("datePublished")
-                }}
+                // onClick={(e) => {
+                //   // e.preventDefault();
+                //   // setSortKey("datePublished")
+                // }}
                 to="?sort=datePublished#all"
               >
                 show more
@@ -264,9 +264,9 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
               "landscape",
               "flowers",
               "product",
-              "waterfall",
-              "fireworks",
-              "panoramic",
+              // "waterfall",
+              // "fireworks",
+              // "panoramic",
               "Portland Japanese Garden",
               // "shoot the light",
               // "sunset",
