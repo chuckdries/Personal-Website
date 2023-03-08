@@ -181,6 +181,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
 
   if (node.internal.type === "File" && node.sourceInstanceName === "gallery") {
     const { stdout: datePublished, stderr } = await exec(`git log --diff-filter=A --follow --format=%aI -1 -- ${node.absolutePath}`)
+    
     if (stderr.length) {
       console.error('something went wrong checking publish date: ', stderr);
     }
@@ -213,7 +214,8 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
         vibrantData,
         node.absolutePath as string,
         dominant,
-        datePublished
+        // if datePublished is empty, image has not been committed to git yet and is thus brand new
+        datePublished.length ? datePublished : (new Date()).toISOString(),
       ),
     });
   }
