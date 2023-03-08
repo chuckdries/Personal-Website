@@ -85,7 +85,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
         // do nothing
       }
       _setSortKey(newSortKey);
-      window.history.replaceState(
+      window.history.pushState(
         null,
         "",
         getGalleryPageUrl({ sortKey: newSortKey, keyword: filterKeyword }, hash)
