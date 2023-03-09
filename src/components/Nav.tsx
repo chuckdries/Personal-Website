@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import classnames from "classnames";
 import { Link } from "gatsby";
 import { Popover } from "react-tiny-popover";
+import { StaticImage } from "gatsby-plugin-image";
 
-const navClasses =
-  "hover:underline hover:bg-black/10 block p-3 text-black";
+const navClasses = "hover:underline hover:bg-black/10 block p-3 text-black";
 
 const ExternalLinks = () => (
   <ul
@@ -91,13 +91,35 @@ const Nav = ({ internalLinks, className }: NavProps) => {
   return (
     <nav
       className={classnames(
-        "my-4 flex flex-col-reverse md:flex-row items-center w-full font-sans px-4 md:px-8",
+        "my-4 flex flex-col-reverse md:flex-row",
+        "justify-between",
+        "items-center w-full font-sans px-4 md:px-8",
         className
       )}
     >
-      <div className="md:flex items-baseline flex-auto ml-2">
-        <h1 className="font-bold mr-2">Chuck Dries</h1>
-        <h2 className="text-md">Software Engineer & Photographer</h2>
+      <div className="flex flex-auto items-center">
+        <div
+          className={classnames(
+            "h-[150px] w-[150px] mr-4 my-6",
+            // "ml-[-130px]",
+            // "rounded-full overflow-hidden relative"
+          )}
+        >
+          <StaticImage
+            alt="A picture of me"
+            className="relative"
+            src="../images/circle-profile.png"
+            style={{
+              // top: "-70%",
+              // left: "-50%",
+              // width: "200%",
+            }}
+          />
+        </div>
+        <div className="items-baseline">
+          <h1 className="font-bold mr-2">Chuck Dries</h1>
+          <h2 className="text-md">Software Engineer & Photographer</h2>
+        </div>
       </div>
 
       <div className="flex">
