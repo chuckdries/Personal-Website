@@ -48,8 +48,8 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
       />
       <button
         {...mergeProps(buttonProps, focusProps)}
-        className={`py-[5px] px-3 w-[150px] flex flex-row items-center justify-between overflow-hidden cursor-default rounded border hover:bg-transparentblack ${
-          isFocusVisible ? "border-green-500" : "border-black"
+        className={`py-[5px] px-3 w-[150px] flex flex-row items-center justify-between overflow-hidden cursor-default rounded border hover:bg-black/10 ${
+          isFocusVisible ? "border-green-700" : "border-gray-400"
         } ${state.isOpen ? "bg-gray-100" : "bg-white"}`}
         ref={ref}
       >

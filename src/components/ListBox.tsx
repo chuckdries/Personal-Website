@@ -91,8 +91,8 @@ function Option({ item, state }: OptionProps) {
   return (
     <li
       {...optionProps}
-      className={`p-3 outline-none cursor-default flex items-center justify-between ${text} text-sm ${
-        isFocused ? "bg-transparentblack" : ""
+      className={`p-2 outline-none cursor-default flex items-center justify-between ${text} text-sm ${
+        isFocused ? "bg-black/10" : ""
       } ${isSelected ? "font-bold" : ""}`}
       ref={ref}
     >

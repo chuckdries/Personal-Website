@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import classnames from "classnames";
 import { Link } from "gatsby";
 import { Popover } from "react-tiny-popover";
+import { StaticImage } from "gatsby-plugin-image";
 
-const navClasses =
-  "hover:underline hover:bg-transparentblack block p-3 text-black";
+const navClasses = "hover:underline hover:bg-black/10 block p-3 text-black flex-shrink-0 whitespace-nowrap";
 
 const ExternalLinks = () => (
   <ul
     className={classnames(
       "z-30 overflow-hidden bg-vibrant-dark",
-      "rounded shadow border border-vibrant-light"
+      "rounded shadow-lg border border-gray-400"
     )}
   >
     <li>
@@ -91,13 +91,36 @@ const Nav = ({ internalLinks, className }: NavProps) => {
   return (
     <nav
       className={classnames(
-        "my-4 flex flex-col-reverse md:flex-row items-center w-full font-sans px-4 md:px-8",
+        "my-4 flex flex-col-reverse md:flex-row",
+        "justify-between",
+        "items-center w-full font-sans px-4 md:px-8",
         className
       )}
     >
-      <div className="md:flex items-baseline flex-auto">
-        <h1 className="font-bold mr-2">Chuck Dries</h1>
-        <h2 className="text-md">Software Engineer & Photographer</h2>
+      <div className="flex flex-auto items-center">
+        <div
+          className={classnames(
+            "h-[120px] w-[120px] mr-4 my-5 flex-shrink-0",
+            // "ml-[-130px]",
+            // "rounded-full overflow-hidden relative"
+          )}
+        >
+          <StaticImage
+            alt="A picture of me"
+            className="relative"
+            placeholder="tracedSVG"
+            src="../images/circle-profile.png"
+            style={{
+              // top: "-70%",
+              // left: "-50%",
+              // width: "200%",
+            }}
+          />
+        </div>
+        <div className="items-baseline">
+          <h1 className="font-bold mr-2">Chuck Dries</h1>
+          <h2 className="text-md">Software Engineer & Photographer</h2>
+        </div>
       </div>
 
       <div className="flex">

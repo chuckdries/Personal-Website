@@ -1,18 +1,23 @@
+import React from "react";
+
+import { pathOr } from "ramda";
 // import kebabCase from 'lodash/kebabCase';
 
-import React from "react";
 import { HomepageImage } from "./pages";
 import { GalleryImage } from "./pages/photogallery";
 
-export const getMeta = <T extends GalleryImage | HomepageImage>(image: T) => image.fields?.imageMeta;
+export const getMeta = <T extends GalleryImage | HomepageImage>(image: T) =>
+  image.fields?.imageMeta;
 
 export const getName = (image: GalleryImage) =>
-image.fields?.imageMeta?.meta?.ObjectName || image.base;
+  image.fields?.imageMeta?.meta?.ObjectName || image.base;
 
 // some pleasing default colors for SSR and initial hydration
-export const getVibrant = (image: GalleryImage | HomepageImage) => getMeta(image)?.vibrant;
+export const getVibrant = (image: GalleryImage | HomepageImage) =>
+  getMeta(image)?.vibrant;
 
-export const hasName = (image: GalleryImage) => Boolean(image.fields?.imageMeta?.meta?.ObjectName);
+export const hasName = (image: GalleryImage) =>
+  Boolean(image.fields?.imageMeta?.meta?.ObjectName);
 
 export const getAspectRatio = (image: GalleryImage | HomepageImage): number =>
   image.childImageSharp?.fluid?.aspectRatio ?? 1;
@@ -25,7 +30,10 @@ export const getCanonicalSize = (image: GalleryImage) => ({
 export const getRgba = (palette: string[], alpha: number) =>
   `rgba(${palette[0]}, ${palette[1]}, ${palette[2]}, ${alpha || 1})`;
 
-export const getVibrantStyle = (vibrant: Queries.FileFieldsImageMetaVibrant, screenHeight?: number) => ({
+export const getVibrantStyle = (
+  vibrant: Queries.FileFieldsImageMetaVibrant,
+  screenHeight?: number
+) => ({
   "--muted": vibrant.Muted,
   "--dark-muted": vibrant.DarkMuted,
   "--light-muted": vibrant.LightMuted,
@@ -40,10 +48,12 @@ export const getHelmetSafeBodyStyle = (style: React.CSSProperties) => {
   if (typeof window === "undefined") {
     return style;
   }
-  return Object.keys(style)
-  // @ts-ignore
-    .map((key) => `${key}: ${style[key]};`)
-    .join("");
+  return (
+    Object.keys(style)
+      // @ts-ignore
+      .map((key) => `${key}: ${style[key]};`)
+      .join("")
+  );
 };
 
 const gcd = (a: number, b: number): number => {
@@ -55,6 +65,9 @@ const gcd = (a: number, b: number): number => {
 };
 
 export const getShutterFractionFromExposureTime = (exposureTime: number) => {
+  if (exposureTime === 0.3333333333333333) {
+    return "1/3";
+  }
   if (exposureTime === 0.03333333333333333) {
     return "1/30";
   }
@@ -88,10 +101,14 @@ export const getShutterFractionFromExposureTime = (exposureTime: number) => {
 
 interface galleryPageUrlProps {
   keyword: string | null;
-  sortKey: string;
+  sortKey: string | null;
+  showDebug: boolean;
 }
 
-export const getGalleryPageUrl = ({ keyword, sortKey }: galleryPageUrlProps, hash: string) => {
+export const getGalleryPageUrl = (
+  { keyword, sortKey, showDebug }: galleryPageUrlProps,
+  hash: string
+) => {
   const url = new URL(
     `${
       typeof window !== "undefined"
@@ -107,14 +124,29 @@ export const getGalleryPageUrl = ({ keyword, sortKey }: galleryPageUrlProps, has
     }
   }
   if (sortKey !== undefined) {
-    if (sortKey === "rating") {
+    if (sortKey === "rating" || sortKey === null) {
       url.searchParams.delete("sort");
     } else {
       url.searchParams.set("sort", sortKey);
     }
+  }
+  if (showDebug) {
+    url.searchParams.set("debug", "true");
   }
   if (hash) {
     url.hash = hash;
   }
   return url.href.toString().replace(url.origin, "");
 };
+
+export function compareDates<T>(
+  date_path: readonly string[],
+  left: T,
+  right: T
+): number {
+  // why tf do my dates have newlines in them?!?!
+  const date1 = new Date(pathOr("", date_path, left).replace(/\s/g, ""));
+  const date2 = new Date(pathOr("", date_path, right).replace(/\s/g, ""));
+  const diff = -1 * (date1.getTime() - date2.getTime());
+  return diff;
+}

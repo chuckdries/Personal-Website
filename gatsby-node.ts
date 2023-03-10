@@ -10,6 +10,10 @@ import sharp from "sharp";
 import { Palette } from "node-vibrant/lib/color";
 import { performance } from "perf_hooks";
 
+import util from "node:util";
+import { exec as _exec } from "child_process";
+const exec = util.promisify(_exec);
+
 // const path = require("path");
 // const Vibrant = require("node-vibrant");
 // const chroma = require("chroma-js");
@@ -114,7 +118,8 @@ function transformMetaToNodeData(
   metaData: Record<string, unknown>,
   vibrantData: Palette,
   imagePath: string,
-  { r, g, b }: { r: number; b: number; g: number }
+  { r, g, b }: { r: number; b: number; g: number },
+  datePublished: string
 ) {
   const vibrant = vibrantData ? processColors(vibrantData, imagePath) : null;
   const vibrantHue = vibrantData.Vibrant!.getHsl()[0] * 360;
@@ -131,6 +136,7 @@ function transformMetaToNodeData(
   }
   return {
     dateTaken: metaData.DateTimeOriginal,
+    datePublished,
     meta: {
       Make: metaData.Make,
       Model: metaData.Model,
@@ -139,6 +145,7 @@ function transformMetaToNodeData(
       ISO: metaData.ISO,
       DateTimeOriginal: metaData.DateTimeOriginal,
       CreateDate: metaData.CreateDate,
+      ModifyDate: metaData.ModifyDate,
       ShutterSpeedValue: metaData.ShutterSpeedValue,
       ApertureValue: metaData.ApertureValue,
       FocalLength: metaData.FocalLength,
@@ -173,13 +180,34 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
   const { createNodeField } = actions;
 
   if (node.internal.type === "File" && node.sourceInstanceName === "gallery") {
-    const metaData = await exifr.parse(node.absolutePath as string, {
-      iptc: true,
-      xmp: true,
-      // icc: true
-    });
+    const { stdout: datePublished, stderr } = await exec(
+      `git log --diff-filter=A --follow --format=%aI -1 -- ${node.absolutePath}`
+    );
 
-    const sharpImage = sharp(node.absolutePath as string);
+    if (stderr.length) {
+      console.error("something went wrong checking publish date: ", stderr);
+    }
+
+    let metaData;
+    try {
+      metaData = await exifr.parse(node.absolutePath as string, {
+        iptc: true,
+        xmp: true,
+        // icc: true
+      });
+    } catch (e) {
+      console.error(`something wen wrong with exifr on image ${node.base}`, e);
+      throw e;
+    }
+
+    let sharpImage: sharp.Sharp;
+
+    try {
+      sharpImage = sharp(node.absolutePath as string);
+    } catch (e) {
+      console.error(`something wen wrong with sharp on image ${node.base}`, e);
+      throw e;
+    }
     const { dominant } = await sharpImage.stats();
     const resizedImage = await sharpImage
       .resize({
@@ -200,7 +228,9 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
         metaData,
         vibrantData,
         node.absolutePath as string,
-        dominant
+        dominant,
+        // if datePublished is empty, image has not been committed to git yet and is thus brand new
+        datePublished.length ? datePublished.replace("\n", "") : new Date().toISOString()
       ),
     });
   }

@@ -18,23 +18,25 @@ interface Row {
 }
 
 interface MasonryGalleryProps {
-  images: GalleryImage[];
+  images: readonly GalleryImage[];
   aspectsByBreakpoint: {
     [breakpoint: string]: number;
   };
   debugHue?: boolean;
-  debugRating?: boolean;
+  dataFn?: (image: GalleryImage) => (string | null);
   linkState?: object;
   showPalette?: boolean;
+  singleRow?: boolean;
 }
 
 const MasonryGallery = ({
-  images,
+  images: _images,
   aspectsByBreakpoint: aspectTargetsByBreakpoint,
   debugHue,
-  debugRating,
+  dataFn,
   linkState,
   showPalette,
+  singleRow,
 }: MasonryGalleryProps) => {
   const [isClient, setIsClient] = React.useState(false);
   React.useEffect(() => {
@@ -50,6 +52,7 @@ const MasonryGallery = ({
   // });
 
   const { breakpoint } = useBreakpoint(breakpoints, "xs");
+  console.log("🚀 ~ file: MasonryGallery.tsx:55 ~ breakpoint:", breakpoint)
 
   // const breakpoint = currentBreakpoint.length ? currentBreakpoint : "xs";
   const galleryWidth = `calc(100vw - ${
@@ -57,53 +60,50 @@ const MasonryGallery = ({
   }px)`;
 
   const aspectRatios = React.useMemo(
-    () => R.map(getAspectRatio, images).filter(Boolean),
-    [images]
+    () => R.map(getAspectRatio, _images).filter(Boolean),
+    [_images]
   ) as number[];
 
   const targetAspect = aspectTargetsByBreakpoint[breakpoint];
-  const rows = React.useMemo(
-    () =>
-      R.pipe(
-        R.reduce(
-          (acc, currentAspect: number): Row[] => {
-            const currentRow = acc.pop()!;
-            const currentDiff = Math.abs(targetAspect - currentRow.aspect);
-            const diffIfImageIsAddedToCurrentRow = Math.abs(
-              targetAspect - (currentRow.aspect + currentAspect)
-            );
-            // add image to current row if it gets us closer to our target aspect ratio
-            if (currentDiff > diffIfImageIsAddedToCurrentRow) {
-              return [
-                ...acc,
-                {
-                  aspect: currentRow.aspect + currentAspect,
-                  images: currentRow.images + 1,
-                  startIndex: currentRow.startIndex,
-                },
-              ];
-            }
-            return [
-              ...acc,
-              currentRow,
-              {
-                aspect: currentAspect,
-                images: 1,
-                startIndex: currentRow.startIndex + currentRow.images,
-              } as Row,
-            ];
-          },
-          [{ aspect: 0, startIndex: 0, images: 0 }] as Row[]
-        ),
-        R.indexBy(R.prop("startIndex"))
-      )(aspectRatios),
-    [aspectRatios, targetAspect]
-  );
+  const rows = React.useMemo(() => {
+    const _rows: Row[] = [{ aspect: 0, startIndex: 0, images: 0 }];
+
+    for (const currentAspect of aspectRatios) {
+      const currentRow = _rows[_rows.length - 1];
+      const currentDiff = Math.abs(targetAspect - currentRow.aspect);
+      const diffIfImageIsAddedToCurrentRow = Math.abs(
+        targetAspect - (currentRow.aspect + currentAspect)
+      );
+
+      // does adding current image to our row get us closer to our target aspect ratio?
+      if (currentDiff > diffIfImageIsAddedToCurrentRow) {
+        currentRow.aspect += currentAspect;
+        currentRow.images += 1
+        // _rows.push(currentRow);
+        continue;
+      }
+
+      if (singleRow) {
+        break;
+      }
+
+      // start a new row
+      _rows.push({
+        aspect: currentAspect,
+        images: 1,
+        startIndex: currentRow.startIndex + currentRow.images
+      })
+    }
+
+    return R.indexBy(R.prop("startIndex"), _rows);
+  }, [aspectRatios, targetAspect, singleRow]);
 
   const sortedImageList = React.useMemo(
-    () => images.map((image) => image.base),
-    [images]
+    () => _images.map((image) => image.base),
+    [_images]
   );
+
+  const images = singleRow ? _images.slice(0, rows[0].images) : _images;
 
   let cursor = 0;
   return (
@@ -126,8 +126,10 @@ const MasonryGallery = ({
         const rowAspectRatioSum = currentRow.aspect;
         const ar = getAspectRatio(image);
         let width;
-        let height = `calc(${galleryWidth} / ${rowAspectRatioSum} ${showPalette ? "+ 10px" : "- 10px"})`;
-        if (rowAspectRatioSum < targetAspect * 0.66) {
+        let height = `calc(${galleryWidth} / ${rowAspectRatioSum} ${
+          showPalette ? "+ 10px" : "- 10px"
+        })`;
+        if (rowAspectRatioSum < targetAspect * 0.66 && !singleRow) {
           // incomplete row, render stuff at "ideal" sizes instead of filling width
           width = `calc(calc(100vw - 160px) / ${targetAspect / ar})`;
           height = "unset";
@@ -138,6 +140,8 @@ const MasonryGallery = ({
         const vibrant = getVibrant(image);
         // @ts-ignore
         const img = getImage(image);
+
+        const data = dataFn ? dataFn(image) : null;
         return (
           <Link
             className={classNames("border-8 border-white overflow-hidden")}
@@ -161,47 +165,53 @@ const MasonryGallery = ({
             }}
             to={`/photogallery/${image.base}/`}
           >
-            {debugRating && (
-              <span className="text-white z-20 absolute bg-black">
-                rating: {image.fields?.imageMeta?.meta?.Rating}
-              </span>
-            )}
+              {data && <span className="text-white z-20 absolute bg-black">
+                {data}
+              </span>}
             {img && (
-              <div className={`h-full ${showPalette && "grid grid-rows-[1fr_20px]"}`}>
+              <div
+                className={`h-full ${
+                  showPalette && "grid grid-rows-[1fr_20px]"
+                }`}
+              >
                 <GatsbyImage
                   alt={getName(image)}
                   className="w-full"
                   image={img}
                   objectFit="cover"
                 />
-                { showPalette && vibrant && <div className="grid grid-cols-6 flex-shrink-0 h-[20px] w-full">
-                <div
-                    style={{ background: `rgba(${vibrant.Vibrant?.join(",")})` }}
-                  ></div>
-                  <div
-                    style={{
-                      background: `rgb(${vibrant.LightVibrant?.join(",")})`,
-                    }}
-                  ></div>
-                  <div
-                    style={{
-                      background: `rgb(${vibrant.DarkVibrant?.join(",")})`,
-                    }}
-                  ></div>
-                  <div
-                    style={{ background: `rgb(${vibrant.Muted?.join(",")})` }}
-                  ></div>
-                  <div
-                    style={{
-                      background: `rgb(${vibrant.LightMuted?.join(",")})`,
-                    }}
-                  ></div>
-                  <div
-                    style={{
-                      background: `rgb(${vibrant.DarkMuted?.join(",")})`,
-                    }}
-                  ></div>
-                </div>}
+                {showPalette && vibrant && (
+                  <div className="grid grid-cols-6 flex-shrink-0 h-[20px] w-full">
+                    <div
+                      style={{
+                        background: `rgba(${vibrant.Vibrant?.join(",")})`,
+                      }}
+                    ></div>
+                    <div
+                      style={{
+                        background: `rgb(${vibrant.LightVibrant?.join(",")})`,
+                      }}
+                    ></div>
+                    <div
+                      style={{
+                        background: `rgb(${vibrant.DarkVibrant?.join(",")})`,
+                      }}
+                    ></div>
+                    <div
+                      style={{ background: `rgb(${vibrant.Muted?.join(",")})` }}
+                    ></div>
+                    <div
+                      style={{
+                        background: `rgb(${vibrant.LightMuted?.join(",")})`,
+                      }}
+                    ></div>
+                    <div
+                      style={{
+                        background: `rgb(${vibrant.DarkMuted?.join(",")})`,
+                      }}
+                    ></div>
+                  </div>
+                )}
               </div>
             )}
           </Link>

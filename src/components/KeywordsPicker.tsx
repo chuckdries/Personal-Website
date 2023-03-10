@@ -1,44 +1,37 @@
 import * as React from "react";
 import classNames from "classnames";
-import Checkmark from "@spectrum-icons/workflow/Checkmark";
+import { Link } from "gatsby";
 
 interface KeywordsPickerProps {
   keywords: string[];
   value: string | null;
-  onChange: (val: string | null) => void;
+  getHref: (value: string | null) => string;
+  onPick: (value: string | null) => void;
 }
-const KeywordsPicker = ({ keywords, value, onChange }: KeywordsPickerProps) => {
+const KeywordsPicker = ({ keywords, value, getHref, onPick }: KeywordsPickerProps) => {
   return (
     <div className="mx-2 mt-2">
-      <span className="text-xs text-black">
-        Collections
-      </span>
+      <span className="text-xs text-black">Collections</span>
       <ul className="flex gap-1 flex-wrap mt-1 mb-2">
         {keywords.map((keyword) => {
           const selected = value === keyword;
           return (
             <li key={keyword}>
-              <button
+              <Link
                 className={classNames(
-                  `py-[5px] px-3 rounded-full text-sm`,
-                  `text-black border border-black`,
+                  `py-[5px] px-3 rounded-full text-sm block`,
+                  `text-black border border-gray-400`,
                   selected
-                    ? "bg-transparentblack font-bold"
+                    ? "bg-black/10 font-bold"
                     : `bg-white
-                    hover:bg-transparentblack`
+                    hover:bg-black/10`
                 )}
-                onClick={() => (selected ? onChange(null) : onChange(keyword))}
-                type="button"
+                onClick={() => onPick(keyword)}
+                replace={false}
+                to={getHref(keyword)}
               >
                 {keyword}{" "}
-                {/* {selected && (
-                  <Checkmark
-                    UNSAFE_className="mx-1"
-                    UNSAFE_style={{ width: "15px" }}
-                    aria-hidden="true"
-                  />
-                )} */}
-              </button>
+              </Link>
             </li>
           );
         })}

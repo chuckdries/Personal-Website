@@ -1,12 +1,13 @@
 import * as React from "react";
 import * as R from "ramda";
-import { graphql, PageProps } from "gatsby";
+import { graphql, Link, navigate, PageProps } from "gatsby";
 import { Helmet } from "react-helmet";
 // import { Picker, Item } from "@adobe/react-spectrum";
 
 import MasonryGallery from "../components/MasonryGallery";
 import KeywordsPicker from "../components/KeywordsPicker";
 import {
+  compareDates,
   getGalleryPageUrl,
   getHelmetSafeBodyStyle,
   getVibrantStyle,
@@ -19,27 +20,41 @@ import ColorPalette from "@spectrum-icons/workflow/ColorPalette";
 const SORT_KEYS = {
   hue: ["fields", "imageMeta", "vibrantHue"],
   rating: ["fields", "imageMeta", "meta", "Rating"],
-  hue_debug: ["fields", "imageMeta", "dominantHue", 0],
-  date: [],
+  // hue_debug: ["fields", "imageMeta", "dominantHue", 0],
+  hue_debug: ["fields", "imageMeta", "dominantHue", "0"],
+  date: ["fields", "imageMeta", "dateTaken"],
+  datePublished: ["fields", "imageMeta", "datePublished"],
 } as const;
 
 export type GalleryImage =
-  Queries.GalleryPageQueryQuery["allFile"]["nodes"][number];
+  Queries.GalleryPageQueryQuery["all"]["nodes"][number];
 
-const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
-  const hash =
-    typeof window !== "undefined" ? window.location.hash.replace("#", "") : "";
+function smartCompareDates(
+  key: keyof typeof SORT_KEYS,
+  left: GalleryImage,
+  right: GalleryImage
+) {
+  let diff = compareDates(SORT_KEYS[key], left, right);
+  if (diff !== 0) {
+    return diff;
+  }
+  return compareDates(SORT_KEYS.date, left, right);
+}
 
-  const [hashCleared, setHashCleared] = React.useState(false); // eslint-disable-line no-unused-vars
-  //     ^ used just to force a re-render with the cleared hash value (I know, it's a smell for sure)
-  const [filterKeyword, _setKeyword] = React.useState(null as string | null);
-  const [sortKey, _setSortKey] = React.useState("rating" as string);
-  const showDebug =
-    typeof window !== "undefined" &&
-    window.location.search.includes("debug=true");
+const GalleryPage = ({
+  data,
+  location,
+}: PageProps<Queries.GalleryPageQueryQuery>) => {
+  const hash = location.hash ? location.hash.replace("#", "") : "";
+
+  const params = new URLSearchParams(location.search);
+  const filterKeyword = params.get("filter");
+  const sortKey = params.get("sort") ?? "rating";
+
+  const showDebug = Boolean(params.get("debug")?.length);
   const [showPalette, setShowPalette] = React.useState(false);
 
-  const setKeyword = React.useCallback(
+  const onKeywordPick = React.useCallback(
     (newKeyword: string | null) => {
       if (newKeyword) {
         try {
@@ -50,14 +65,8 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
           // do nothing
         }
       }
-      _setKeyword(newKeyword);
-      window.history.replaceState(
-        null,
-        "",
-        getGalleryPageUrl({ keyword: newKeyword, sortKey }, hash)
-      );
     },
-    [_setKeyword, sortKey, hash]
+    []
   );
 
   const setSortKey = React.useCallback(
@@ -69,17 +78,21 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
       } catch (e) {
         // do nothing
       }
-      _setSortKey(newSortKey);
-      window.history.replaceState(
-        null,
-        "",
-        getGalleryPageUrl({ sortKey: newSortKey, keyword: filterKeyword }, hash)
+      navigate(
+        getGalleryPageUrl(
+          { sortKey: newSortKey, keyword: filterKeyword, showDebug },
+          hash
+        ),
+        { replace: true }
       );
     },
-    [_setSortKey, filterKeyword, hash]
+    [filterKeyword, hash, showDebug]
   );
 
   const removeHash = React.useCallback(() => {
+    if (!hash.length) {
+      return;
+    }
     const url = new URL(
       typeof window !== "undefined"
         ? window.location.href.toString()
@@ -89,55 +102,38 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
     url.hash = "";
     window.history.replaceState(null, "", url.href.toString());
     window.removeEventListener("wheel", removeHash);
-    setHashCleared(true);
-  }, []);
-
-  const scrollIntoView = React.useCallback(() => {
-    if (!hash) {
-      return;
-    }
-    const el = document.getElementById(hash);
-    if (!el) {
-      return;
-    }
-    el.scrollIntoView({
-      block: "center",
-    });
-    window.addEventListener("wheel", removeHash);
-  }, [hash, removeHash]);
+  }, [hash]);
 
   React.useEffect(() => {
-    const url = new URL(window.location.toString());
+    window.addEventListener("wheel", removeHash);
+    return () => window.removeEventListener("wheel", removeHash);
+  }, [removeHash]);
 
-    const sortKeyFromUrl = url.searchParams.get("sort");
-    if (sortKeyFromUrl) {
-      _setSortKey(sortKeyFromUrl);
-    }
-
-    const filterKeyFromUrl = url.searchParams.get("filter");
-    if (filterKeyFromUrl) {
-      _setKeyword(filterKeyFromUrl);
-    }
-
+  React.useEffect(() => {
     // hacky but it works for now
-    setTimeout(() => {
-      // don't scroll into view if user got here with back button
-      scrollIntoView();
-    }, 100);
-  }, [setSortKey, setKeyword, scrollIntoView]);
+    requestAnimationFrame(() => {
+      // don't scroll into view if user got here with back button or if we just cleared it
+      if (!hash.length) {
+        return;
+      }
+      const el = document.getElementById(hash);
+      if (!el) {
+        console.log("⚠️failed to find hash");
+        return;
+      }
+      console.log('scrolling into view manually')
+      el.scrollIntoView({
+        block: hash.startsWith("all") ? "start" : "center",
+      });
+    });
+  }, [hash]);
 
   const images: GalleryImage[] = React.useMemo(() => {
     const sort =
-      sortKey === "date"
-        ? R.sort((node1: typeof data["allFile"]["nodes"][number], node2) => {
-            const date1 = new Date(
-              R.pathOr("", ["fields", "imageMeta", "dateTaken"], node1)
-            );
-            const date2 = new Date(
-              R.pathOr("", ["fields", "imageMeta", "dateTaken"], node2)
-            );
-            return -1 * (date1.getTime() - date2.getTime());
-          })
+      sortKey === "date" || sortKey === "datePublished"
+        ? R.sort((node1: typeof data["all"]["nodes"][number], node2) =>
+            smartCompareDates(sortKey, node1, node2)
+          )
         : R.sort(
             // @ts-ignore
             R.descend(R.path<GalleryImage>(SORT_KEYS[sortKey]))
@@ -157,13 +153,40 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
         // @ts-ignore
         sort,
         filter
-      )(data.allFile.nodes) as any;
+      )(data.all.nodes) as any;
       return ret;
     } catch (e) {
       console.log("caught images!", e);
       return [];
     }
   }, [data, sortKey, filterKeyword]);
+
+  const recents = React.useMemo(() => {
+    return R.sort(
+      (left, right) => smartCompareDates("datePublished", left, right),
+      data.recents.nodes
+    );
+  }, [data]);
+
+  const dataFn = React.useCallback(
+    (image: GalleryImage): string | null => {
+      if (!showDebug) {
+        return null;
+      }
+      if (sortKey === "rating") {
+        return `[${R.pathOr(null, SORT_KEYS.rating, image)}] ${image.base}`;
+      }
+      if (sortKey === "datePublished") {
+        const date = R.pathOr(null, SORT_KEYS.datePublished, image);
+        if (!date) {
+          return null;
+        }
+        return new Date(date).toLocaleString();
+      }
+      return null;
+    },
+    [showDebug, sortKey]
+  );
 
   return (
     <>
@@ -174,6 +197,7 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
           className="bg-white transition-color"
           // @ts-ignore
           style={getHelmetSafeBodyStyle(
+            // @ts-ignore shrug
             getVibrantStyle({
               Muted: [0, 0, 0],
               LightMuted: [0, 0, 0],
@@ -195,8 +219,47 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
             ]}
           />
         </div>
+        <div className="gradient pb-6">
+          <div className="px-4 md:px-8 flex items-baseline">
+            <h3 className="mx-2 font-bold" id="recently">
+              Recently published
+            </h3>
+            {sortKey !== "datePublished" && (
+              <Link
+                className="underline cursor-pointer text-gray-500"
+                to="?sort=datePublished#all"
+              >
+                show more
+              </Link>
+            )}
+          </div>
+          <MasonryGallery
+            aspectsByBreakpoint={{
+              xs: 3,
+              sm: 3,
+              md: 4,
+              lg: 4,
+              xl: 5,
+              "2xl": 6,
+              "3xl": 8,
+            }}
+            images={recents}
+            singleRow
+          />
+        </div>
+        <div className="px-4 md:px-8 mt-2 pt-2">
+          <h3 className="mx-2 font-bold" id="all">
+            All images
+          </h3>
+        </div>
         <div className="flex flex-col lg:flex-row lg:items-end justify-between px-4 md:px-8 sm:mx-auto">
           <KeywordsPicker
+            getHref={(val) =>
+              getGalleryPageUrl(
+                { keyword: val, sortKey, showDebug },
+                hash
+              )
+            }
             keywords={[
               "Boyce Thompson Arboretum",
               "winter",
@@ -206,29 +269,29 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
               "landscape",
               "flowers",
               "product",
-              "waterfall",
-              "fireworks",
-              "panoramic",
+              // "waterfall",
+              // "fireworks",
+              // "panoramic",
               "Portland Japanese Garden",
               // "shoot the light",
               // "sunset",
             ]}
-            onChange={setKeyword}
+            onPick={onKeywordPick}
             value={filterKeyword}
           />
-          <div className="m-2 flex flex-row items-end">
-            <div className="border border-black rounded mr-2">
-            <Switch
-              isSelected={showPalette}
-              onChange={(val) => setShowPalette(val)}
-            >
-              <ColorPalette
-                UNSAFE_style={{
-                  width: "24px",
-                  margin: "0 4px",
-                }}
-              />
-            </Switch>
+          <div className="my-2 mr-2 flex flex-row items-end">
+            <div className="border border-gray-400 rounded mr-2">
+              <Switch
+                isSelected={showPalette}
+                onChange={(val) => setShowPalette(val)}
+              >
+                <ColorPalette
+                  UNSAFE_style={{
+                    width: "24px",
+                    margin: "0 4px",
+                  }}
+                />
+              </Switch>
             </div>
             <Select
               label="Sort by..."
@@ -237,7 +300,8 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
               selectedKey={sortKey}
             >
               <Item key="rating">Curated</Item>
-              <Item key="date">Date</Item>
+              <Item key="datePublished">Date published</Item>
+              <Item key="date">Date taken</Item>
               <Item key="hue">Hue</Item>
             </Select>
           </div>
@@ -253,8 +317,8 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
           "2xl": 6.1,
           "3xl": 8,
         }}
+        dataFn={dataFn}
         debugHue={sortKey === "hue_debug"}
-        debugRating={sortKey === "rating" && showDebug}
         images={images}
         linkState={{
           sortKey,
@@ -268,37 +332,49 @@ const GalleryPage = ({ data }: PageProps<Queries.GalleryPageQueryQuery>) => {
 
 export const query = graphql`
   query GalleryPageQuery {
-    allFile(
+    recents: allFile(
+      filter: { sourceInstanceName: { eq: "gallery" } }
+      sort: { fields: { imageMeta: { datePublished: DESC } } }
+      limit: 10
+    ) {
+      ...GalleryImageFile
+    }
+    all: allFile(
       filter: { sourceInstanceName: { eq: "gallery" } }
       sort: { fields: { imageMeta: { dateTaken: DESC } } }
     ) {
-      nodes {
-        relativePath
-        base
-        childImageSharp {
-          fluid {
-            aspectRatio
-          }
-          gatsbyImageData(
-            layout: CONSTRAINED
-            height: 550
-            placeholder: DOMINANT_COLOR
-          )
+      ...GalleryImageFile
+    }
+  }
+
+  fragment GalleryImageFile on FileConnection {
+    nodes {
+      base
+      childImageSharp {
+        fluid {
+          aspectRatio
         }
-        fields {
-          imageMeta {
-            vibrantHue
-            dominantHue
-            dateTaken
-            meta {
-              Keywords
-              Rating
-              ObjectName
-            }
-            vibrant {
-              # Vibrant
-              ...VibrantColors
-            }
+        gatsbyImageData(
+          layout: CONSTRAINED
+          height: 550
+          placeholder: DOMINANT_COLOR
+        )
+      }
+      fields {
+        imageMeta {
+          vibrantHue
+          dominantHue
+          dateTaken
+          datePublished
+          meta {
+            Keywords
+            Rating
+            ObjectName
+            CreateDate
+            ModifyDate
+          }
+          vibrant {
+            ...VibrantColors
           }
         }
       }
