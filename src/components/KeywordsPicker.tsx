@@ -28,7 +28,7 @@ const KeywordsPicker = ({ keywords, value, onChange }: KeywordsPickerProps) => {
                     : `bg-white
                     hover:bg-black/10`
                 )}
-                to="?filter=keyword"
+                to={selected ? '/photogallery/' : `?filter=${encodeURIComponent(keyword)}`}
                 // onClick={() => (selected ? onChange(null) : onChange(keyword))}
               >
                 {keyword}{" "}
