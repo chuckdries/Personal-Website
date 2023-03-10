@@ -41,22 +41,23 @@ function smartCompareDates(
   return compareDates(SORT_KEYS.date, left, right);
 }
 
-const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery>) => {
+const GalleryPage = ({
+  data,
+  location,
+}: PageProps<Queries.GalleryPageQueryQuery>) => {
   // const hash =
-    // typeof window !== "undefined" ? window.location.hash.replace("#", "") : "";
+  // typeof window !== "undefined" ? window.location.hash.replace("#", "") : "";
 
   const hash = location.hash ? location.hash.replace("#", "") : "";
 
   const params = new URLSearchParams(location.search);
-  const filterKeyword = params.get('filter')
-  const sortKey = params.get('sort') ?? "rating"
-  console.log("🚀 ~ file: photogallery.tsx:51 ~ GalleryPage ~ params:", params)
+  const filterKeyword = params.get("filter");
+  const sortKey = params.get("sort") ?? "rating";
+  console.log("🚀 ~ file: photogallery.tsx:51 ~ GalleryPage ~ params:", params);
 
   const [hashCleared, setHashCleared] = React.useState(false); // eslint-disable-line no-unused-vars
   //     ^ used just to force a re-render with the cleared hash value (I know, it's a smell for sure)
-  const showDebug =
-    typeof window !== "undefined" &&
-    window.location.search.includes("debug=true");
+  const showDebug = Boolean(params.get("debug")?.length);
   const [showPalette, setShowPalette] = React.useState(false);
 
   const setKeyword = React.useCallback(
@@ -70,15 +71,11 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
           // do nothing
         }
       }
-      // _setKeyword(newKeyword);
-      // window.history.replaceState(
-      //   null,
-      //   "",
-      //   getGalleryPageUrl({ keyword: newKeyword, sortKey }, hash)
-      // );
-      navigate(getGalleryPageUrl({ keyword: newKeyword, sortKey }, hash))
+      navigate(
+        getGalleryPageUrl({ keyword: newKeyword, sortKey, showDebug }, hash)
+      );
     },
-    [sortKey, hash]
+    [sortKey, hash, showDebug]
   );
 
   const setSortKey = React.useCallback(
@@ -90,15 +87,15 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
       } catch (e) {
         // do nothing
       }
-      // _setSortKey(newSortKey);
-      // window.history.pushState(
-      //   null,
-      //   "",
-      //   getGalleryPageUrl({ sortKey: newSortKey, keyword: filterKeyword }, hash)
-      // );
-      navigate(getGalleryPageUrl({ sortKey: newSortKey, keyword: filterKeyword }, hash), { replace: true })
+      navigate(
+        getGalleryPageUrl(
+          { sortKey: newSortKey, keyword: filterKeyword, showDebug },
+          hash
+        ),
+        { replace: true }
+      );
     },
-    [filterKeyword, hash]
+    [filterKeyword, hash, showDebug]
   );
 
   const removeHash = React.useCallback(() => {
@@ -128,25 +125,11 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
       return;
     }
     el.scrollIntoView({
-      block: hash.startsWith('all') ? "start" : "center",
+      block: hash.startsWith("all") ? "start" : "center",
     });
-  }, [hash, removeHash]);
+  }, [hash]);
 
   React.useEffect(() => {
-    // const url = new URL(window.location.toString());
-
-    // const sortKeyFromUrl = url.searchParams.get("sort");
-    // if (sortKeyFromUrl) {
-    //   _setSortKey(sortKeyFromUrl);
-    // } else {
-    //   _setSortKey('rating')
-    // }
-
-    // const filterKeyFromUrl = url.searchParams.get("filter");
-    // if (filterKeyFromUrl) {
-    //   // _setKeyword(filterKeyFromUrl);
-    // }
-
     // hacky but it works for now
     setTimeout(() => {
       // don't scroll into view if user got here with back button
@@ -192,7 +175,27 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
       (left, right) => smartCompareDates("datePublished", left, right),
       data.recents.nodes
     );
-  }, [data, "hi"]);
+  }, [data]);
+
+  const dataFn = React.useCallback(
+    (image: GalleryImage): string | null => {
+      if (!showDebug) {
+        return null;
+      }
+      if (sortKey === "rating") {
+        return R.pathOr(null, SORT_KEYS.rating, image);
+      }
+      if (sortKey === "datePublished") {
+        const date = R.pathOr(null, SORT_KEYS.datePublished, image);
+        if(!date) {
+          return null;
+        }
+        return new Date(date).toLocaleString();
+      }
+      return null;
+    },
+    [showDebug, sortKey]
+  );
 
   return (
     <>
@@ -245,12 +248,12 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
           </div>
           <MasonryGallery
             aspectsByBreakpoint={{
-              xs: 2,
-              sm: 2,
-              md: 3,
+              xs: 3,
+              sm: 3,
+              md: 4,
               lg: 4,
               xl: 5,
-              "2xl": 6.1,
+              "2xl": 6,
               "3xl": 8,
             }}
             images={recents}
@@ -322,7 +325,9 @@ const GalleryPage = ({ data, location }: PageProps<Queries.GalleryPageQueryQuery
           "3xl": 8,
         }}
         debugHue={sortKey === "hue_debug"}
-        debugRating={sortKey === "rating" && showDebug}
+        // debugRating={sortKey === "rating" && showDebug}
+        // debugPublished={showDebug}
+        dataFn={dataFn}
         images={images}
         linkState={{
           sortKey,
@@ -339,7 +344,7 @@ export const query = graphql`
     recents: allFile(
       filter: { sourceInstanceName: { eq: "gallery" } }
       sort: { fields: { imageMeta: { datePublished: DESC } } }
-      limit: 7
+      limit: 10
     ) {
       ...GalleryImageFile
     }

@@ -21,7 +21,7 @@ const KeywordsPicker = ({ keywords, value, onChange }: KeywordsPickerProps) => {
             <li key={keyword}>
               <Link
                 className={classNames(
-                  `py-[5px] px-3 rounded-full text-sm`,
+                  `py-[5px] px-3 rounded-full text-sm block`,
                   `text-black border border-gray-400`,
                   selected
                     ? "bg-black/10 font-bold"

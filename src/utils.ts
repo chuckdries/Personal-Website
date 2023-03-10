@@ -102,10 +102,11 @@ export const getShutterFractionFromExposureTime = (exposureTime: number) => {
 interface galleryPageUrlProps {
   keyword: string | null;
   sortKey: string | null;
+  showDebug: boolean;
 }
 
 export const getGalleryPageUrl = (
-  { keyword, sortKey }: galleryPageUrlProps,
+  { keyword, sortKey, showDebug }: galleryPageUrlProps,
   hash: string
 ) => {
   const url = new URL(
@@ -129,6 +130,9 @@ export const getGalleryPageUrl = (
       url.searchParams.set("sort", sortKey);
     }
   }
+  if (showDebug) {
+    url.searchParams.set("debug", "true");
+  }
   if (hash) {
     url.hash = hash;
   }
@@ -141,8 +145,8 @@ export function compareDates<T>(
   right: T
 ): number {
   // why tf do my dates have newlines in them?!?!
-  const date1 = new Date(pathOr("", date_path, left).replace(/\s/g, ''));
-  const date2 = new Date(pathOr("", date_path, right).replace(/\s/g, ''));
+  const date1 = new Date(pathOr("", date_path, left).replace(/\s/g, ""));
+  const date2 = new Date(pathOr("", date_path, right).replace(/\s/g, ""));
   const diff = -1 * (date1.getTime() - date2.getTime());
   return diff;
 }

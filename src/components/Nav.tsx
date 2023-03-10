@@ -4,7 +4,7 @@ import { Link } from "gatsby";
 import { Popover } from "react-tiny-popover";
 import { StaticImage } from "gatsby-plugin-image";
 
-const navClasses = "hover:underline hover:bg-black/10 block p-3 text-black";
+const navClasses = "hover:underline hover:bg-black/10 block p-3 text-black flex-shrink-0 whitespace-nowrap";
 
 const ExternalLinks = () => (
   <ul
@@ -100,7 +100,7 @@ const Nav = ({ internalLinks, className }: NavProps) => {
       <div className="flex flex-auto items-center">
         <div
           className={classnames(
-            "h-[150px] w-[150px] mr-4 my-6",
+            "h-[120px] w-[120px] mr-4 my-5 flex-shrink-0",
             // "ml-[-130px]",
             // "rounded-full overflow-hidden relative"
           )}
@@ -109,6 +109,7 @@ const Nav = ({ internalLinks, className }: NavProps) => {
             alt="A picture of me"
             className="relative"
             src="../images/circle-profile.png"
+            placeholder="tracedSVG"
             style={{
               // top: "-70%",
               // left: "-50%",

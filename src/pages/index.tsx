@@ -102,8 +102,8 @@ const IndexPage = ({
               objectFit={browserIsLandscape ? "cover" : "contain"}
               style={{
                 height: screenHeight
-                  ? `${screenHeight - 360}px`
-                  : "calc(100vh-360px)",
+                  ? `${screenHeight - 268}px`
+                  : "calc(100vh-268px)",
               }}
             />
           </Link>
