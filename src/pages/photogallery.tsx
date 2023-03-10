@@ -90,16 +90,17 @@ const GalleryPage = ({
     if (!hash.length) {
       return;
     }
-    const url = new URL(
-      typeof window !== "undefined"
-        ? window.location.href.toString()
-        : "https://chuckdries.com/photogallery/"
-    );
+    // const url = new URL(
+    //   typeof window !== "undefined"
+    //     ? window.location.href.toString()
+    //     : "https://chuckdries.com/photogallery/"
+    // );
 
-    url.hash = "";
-    window.history.replaceState(null, "", url.href.toString());
+    // url.hash = "";
+    // window.history.replaceState(null, "", url.href.toString());
+    navigate(getGalleryPageUrl({ sortKey, keyword: filterKeyword, showDebug}, ""), { replace: true })
     window.removeEventListener("wheel", removeHash);
-  }, [hash]);
+  }, [hash, sortKey, filterKeyword, showDebug]);
 
   React.useEffect(() => {
     window.addEventListener("wheel", removeHash);
