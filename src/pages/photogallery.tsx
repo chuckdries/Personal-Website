@@ -2,6 +2,7 @@ import * as React from "react";
 import * as R from "ramda";
 import { graphql, Link, navigate, PageProps } from "gatsby";
 import { Helmet } from "react-helmet";
+import debounce from "lodash.debounce";
 // import { Picker, Item } from "@adobe/react-spectrum";
 
 import MasonryGallery from "../components/MasonryGallery";
@@ -86,31 +87,26 @@ const GalleryPage = ({
     [filterKeyword, hash, showDebug]
   );
 
-  const removeHash = React.useCallback(() => {
-    if (!hash.length) {
-      return;
-    }
-    // const url = new URL(
-    //   typeof window !== "undefined"
-    //     ? window.location.href.toString()
-    //     : "https://chuckdries.com/photogallery/"
-    // );
+  const removeHash = React.useCallback(
+    () => {
+      if (!hash.length) {
+        return;
+      }
+      navigate(
+        getGalleryPageUrl({ sortKey, keyword: filterKeyword, showDebug }, ""),
+        { replace: true, state: { suppressAutoscroll: true } }
+      );
+      // window.removeEventListener("scroll", removeHash);
+    },
+    [hash, sortKey, filterKeyword, showDebug]
+  );
 
-    // url.hash = "";
-    // window.history.replaceState(null, "", url.href.toString());
-    navigate(getGalleryPageUrl({ sortKey, keyword: filterKeyword, showDebug}, ""), { replace: true })
-    window.removeEventListener("wheel", removeHash);
-    window.removeEventListener("touchmove", removeHash);
-  }, [hash, sortKey, filterKeyword, showDebug]);
-
-  React.useEffect(() => {
-    window.addEventListener("wheel", removeHash);
-    window.addEventListener("touchmove", removeHash);
-    return () => {
-      window.removeEventListener("wheel", removeHash);
-      window.removeEventListener("touchmove", removeHash);
-    }
-  }, [removeHash]);
+  // React.useEffect(() => {
+  //   window.addEventListener("scroll", removeHash);
+  //   return () => {
+  //     window.removeEventListener("scroll", removeHash);
+  //   };
+  // }, [removeHash]);
 
   React.useEffect(() => {
     // hacky but it works for now
@@ -124,12 +120,18 @@ const GalleryPage = ({
         console.log("⚠️failed to find hash");
         return;
       }
-      console.log("scrolling into view manually");
+      console.log("scrolling into view manually", el.offsetTop);
       el.scrollIntoView({
         block: hash.startsWith("all") ? "start" : "center",
       });
+      setTimeout(() => {
+        removeHash();
+      }, 500)
     });
-  }, [hash]);
+  }, [
+    hash,
+    removeHash
+  ]);
 
   const images: GalleryImage[] = React.useMemo(() => {
     const sort =

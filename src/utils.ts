@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useRef } from "react";
 
 import { pathOr } from "ramda";
 // import kebabCase from 'lodash/kebabCase';
@@ -150,3 +150,29 @@ export function compareDates<T>(
   const diff = -1 * (date1.getTime() - date2.getTime());
   return diff;
 }
+
+
+/**
+ * Returns a memoized function that will only call the passed function when it hasn't been called for the wait period
+ * @param func The function to be called
+ * @param wait Wait period after function hasn't been called for
+ * @returns A memoized function that is debounced
+ */
+export const useDebouncedCallback = (func: Function, wait: number) => {
+  // Use a ref to store the timeout between renders
+  // and prevent changes to it from causing re-renders
+  const timeout = useRef<ReturnType<typeof setTimeout>>();
+
+  return useCallback(
+    (...args: any) => {
+      const later = () => {
+        clearTimeout(timeout.current!);
+        func(...args);
+      };
+
+      clearTimeout(timeout.current ?? undefined);
+      timeout.current = setTimeout(later, wait);
+    },
+    [func, wait]
+  );
+};
