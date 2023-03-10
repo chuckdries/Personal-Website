@@ -109,8 +109,8 @@ const GalleryPage = ({
   React.useEffect(() => {
     // hacky but it works for now
     requestAnimationFrame(() => {
-      // don't scroll into view if user got here with back button
-      if (!hash) {
+      // don't scroll into view if user got here with back button or if we just cleared it
+      if (!hash || !hash.length) {
         return;
       }
       const el = document.getElementById(hash);
