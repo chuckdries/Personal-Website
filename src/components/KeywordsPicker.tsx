@@ -5,7 +5,7 @@ import { Link } from "gatsby";
 interface KeywordsPickerProps {
   keywords: string[];
   value: string | null;
-  getHref: (value: string | null) => string;
+  getHref: (value: string | null, selected: boolean) => string;
   onPick: (value: string | null) => void;
 }
 const KeywordsPicker = ({ keywords, value, getHref, onPick }: KeywordsPickerProps) => {
@@ -28,7 +28,7 @@ const KeywordsPicker = ({ keywords, value, getHref, onPick }: KeywordsPickerProp
                 )}
                 onClick={() => onPick(keyword)}
                 replace={false}
-                to={getHref(keyword)}
+                to={getHref(keyword, selected)}
               >
                 {keyword}{" "}
               </Link>

@@ -54,20 +54,17 @@ const GalleryPage = ({
   const showDebug = Boolean(params.get("debug")?.length);
   const [showPalette, setShowPalette] = React.useState(false);
 
-  const onKeywordPick = React.useCallback(
-    (newKeyword: string | null) => {
-      if (newKeyword) {
-        try {
-          window.plausible("Filter Keyword", {
-            props: { keyword: newKeyword },
-          });
-        } catch (e) {
-          // do nothing
-        }
+  const onKeywordPick = React.useCallback((newKeyword: string | null) => {
+    if (newKeyword) {
+      try {
+        window.plausible("Filter Keyword", {
+          props: { keyword: newKeyword },
+        });
+      } catch (e) {
+        // do nothing
       }
-    },
-    []
-  );
+    }
+  }, []);
 
   const setSortKey = React.useCallback(
     (newSortKey: string) => {
@@ -121,7 +118,7 @@ const GalleryPage = ({
         console.log("⚠️failed to find hash");
         return;
       }
-      console.log('scrolling into view manually')
+      console.log("scrolling into view manually");
       el.scrollIntoView({
         block: hash.startsWith("all") ? "start" : "center",
       });
@@ -254,11 +251,10 @@ const GalleryPage = ({
         </div>
         <div className="flex flex-col lg:flex-row lg:items-end justify-between px-4 md:px-8 sm:mx-auto">
           <KeywordsPicker
-            getHref={(val) =>
-              getGalleryPageUrl(
-                { keyword: val, sortKey, showDebug },
-                hash
-              )
+            getHref={(val, selected) =>
+              selected
+                ? getGalleryPageUrl({ keyword: null, sortKey, showDebug }, hash)
+                : getGalleryPageUrl({ keyword: val, sortKey, showDebug }, hash)
             }
             keywords={[
               "Boyce Thompson Arboretum",
