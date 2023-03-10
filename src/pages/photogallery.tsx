@@ -90,6 +90,9 @@ const GalleryPage = ({
   );
 
   const removeHash = React.useCallback(() => {
+    if (!hash.length) {
+      return;
+    }
     const url = new URL(
       typeof window !== "undefined"
         ? window.location.href.toString()
@@ -97,9 +100,9 @@ const GalleryPage = ({
     );
 
     url.hash = "";
-    navigate(url.href.toString());
+    window.history.replaceState(null, "", url.href.toString());
     window.removeEventListener("wheel", removeHash);
-  }, []);
+  }, [hash]);
 
   React.useEffect(() => {
     window.addEventListener("wheel", removeHash);
@@ -110,7 +113,7 @@ const GalleryPage = ({
     // hacky but it works for now
     requestAnimationFrame(() => {
       // don't scroll into view if user got here with back button or if we just cleared it
-      if (!hash || !hash.length) {
+      if (!hash.length) {
         return;
       }
       const el = document.getElementById(hash);
@@ -118,6 +121,7 @@ const GalleryPage = ({
         console.log("⚠️failed to find hash");
         return;
       }
+      console.log('scrolling into view manually')
       el.scrollIntoView({
         block: hash.startsWith("all") ? "start" : "center",
       });
