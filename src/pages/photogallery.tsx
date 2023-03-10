@@ -100,11 +100,16 @@ const GalleryPage = ({
     // window.history.replaceState(null, "", url.href.toString());
     navigate(getGalleryPageUrl({ sortKey, keyword: filterKeyword, showDebug}, ""), { replace: true })
     window.removeEventListener("wheel", removeHash);
+    window.removeEventListener("touchmove", removeHash);
   }, [hash, sortKey, filterKeyword, showDebug]);
 
   React.useEffect(() => {
     window.addEventListener("wheel", removeHash);
-    return () => window.removeEventListener("wheel", removeHash);
+    window.addEventListener("touchmove", removeHash);
+    return () => {
+      window.removeEventListener("wheel", removeHash);
+      window.removeEventListener("touchmove", removeHash);
+    }
   }, [removeHash]);
 
   React.useEffect(() => {
