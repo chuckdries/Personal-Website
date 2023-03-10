@@ -63,6 +63,12 @@ const GalleryImage = ({ data, location: { state } }) => {
     setIsClient(true);
   }, []);
 
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 180);
+    });
+  }, [image.base]);
+
   const nextIndex =
     sortedImageList && currentIndex < sortedImageList.length
       ? currentIndex + 1
@@ -135,7 +141,7 @@ const GalleryImage = ({ data, location: { state } }) => {
     locationString = location.join(", ");
   }
   const vibrant = getVibrant(image, true);
-  const BLEND = 'hsl'
+  const BLEND = "hsl";
   const darkAccent = chroma
     .mix(vibrant.Vibrant, "hsla(216, 0%, 90%, 1)", 0.6, BLEND)
     .hex();
@@ -145,7 +151,7 @@ const GalleryImage = ({ data, location: { state } }) => {
     ar > 1
       ? "flex-col"
       : "portrait:mx-auto landscape:mx-5 landscape:flex-row-reverse portrait:flex-col";
-  const verticalPad = ar > 1 ? "250px" : "100px";
+  const verticalPad = ar > 1 ? "180px" : "20px";
 
   const shutterSpeed = React.useMemo(
     () =>

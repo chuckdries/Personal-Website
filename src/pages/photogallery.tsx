@@ -45,22 +45,16 @@ const GalleryPage = ({
   data,
   location,
 }: PageProps<Queries.GalleryPageQueryQuery>) => {
-  // const hash =
-  // typeof window !== "undefined" ? window.location.hash.replace("#", "") : "";
-
   const hash = location.hash ? location.hash.replace("#", "") : "";
 
   const params = new URLSearchParams(location.search);
   const filterKeyword = params.get("filter");
   const sortKey = params.get("sort") ?? "rating";
-  console.log("🚀 ~ file: photogallery.tsx:51 ~ GalleryPage ~ params:", params);
 
-  const [hashCleared, setHashCleared] = React.useState(false); // eslint-disable-line no-unused-vars
-  //     ^ used just to force a re-render with the cleared hash value (I know, it's a smell for sure)
   const showDebug = Boolean(params.get("debug")?.length);
   const [showPalette, setShowPalette] = React.useState(false);
 
-  const setKeyword = React.useCallback(
+  const onKeywordPick = React.useCallback(
     (newKeyword: string | null) => {
       if (newKeyword) {
         try {
@@ -71,11 +65,8 @@ const GalleryPage = ({
           // do nothing
         }
       }
-      navigate(
-        getGalleryPageUrl({ keyword: newKeyword, sortKey, showDebug }, hash)
-      );
     },
-    [sortKey, hash, showDebug]
+    []
   );
 
   const setSortKey = React.useCallback(
@@ -106,36 +97,32 @@ const GalleryPage = ({
     );
 
     url.hash = "";
-    // window.history.pushState(null, "", url.href.toString());
     navigate(url.href.toString());
     window.removeEventListener("wheel", removeHash);
-    setHashCleared(true);
   }, []);
 
   React.useEffect(() => {
     window.addEventListener("wheel", removeHash);
+    return () => window.removeEventListener("wheel", removeHash);
   }, [removeHash]);
-
-  const scrollIntoView = React.useCallback(() => {
-    if (!hash) {
-      return;
-    }
-    const el = document.getElementById(hash);
-    if (!el) {
-      return;
-    }
-    el.scrollIntoView({
-      block: hash.startsWith("all") ? "start" : "center",
-    });
-  }, [hash]);
 
   React.useEffect(() => {
     // hacky but it works for now
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       // don't scroll into view if user got here with back button
-      scrollIntoView();
-    }, 0);
-  }, [setSortKey, setKeyword, scrollIntoView, location]);
+      if (!hash) {
+        return;
+      }
+      const el = document.getElementById(hash);
+      if (!el) {
+        console.log("⚠️failed to find hash");
+        return;
+      }
+      el.scrollIntoView({
+        block: hash.startsWith("all") ? "start" : "center",
+      });
+    });
+  }, [hash]);
 
   const images: GalleryImage[] = React.useMemo(() => {
     const sort =
@@ -183,11 +170,11 @@ const GalleryPage = ({
         return null;
       }
       if (sortKey === "rating") {
-        return R.pathOr(null, SORT_KEYS.rating, image);
+        return `[${R.pathOr(null, SORT_KEYS.rating, image)}] ${image.base}`;
       }
       if (sortKey === "datePublished") {
         const date = R.pathOr(null, SORT_KEYS.datePublished, image);
-        if(!date) {
+        if (!date) {
           return null;
         }
         return new Date(date).toLocaleString();
@@ -236,10 +223,6 @@ const GalleryPage = ({
             {sortKey !== "datePublished" && (
               <Link
                 className="underline cursor-pointer text-gray-500"
-                // onClick={(e) => {
-                //   // e.preventDefault();
-                //   // setSortKey("datePublished")
-                // }}
                 to="?sort=datePublished#all"
               >
                 show more
@@ -267,6 +250,12 @@ const GalleryPage = ({
         </div>
         <div className="flex flex-col lg:flex-row lg:items-end justify-between px-4 md:px-8 sm:mx-auto">
           <KeywordsPicker
+            getHref={(val) =>
+              getGalleryPageUrl(
+                { keyword: val, sortKey, showDebug },
+                hash
+              )
+            }
             keywords={[
               "Boyce Thompson Arboretum",
               "winter",
@@ -283,7 +272,7 @@ const GalleryPage = ({
               // "shoot the light",
               // "sunset",
             ]}
-            onChange={setKeyword}
+            onPick={onKeywordPick}
             value={filterKeyword}
           />
           <div className="my-2 mr-2 flex flex-row items-end">
@@ -324,10 +313,8 @@ const GalleryPage = ({
           "2xl": 6.1,
           "3xl": 8,
         }}
-        debugHue={sortKey === "hue_debug"}
-        // debugRating={sortKey === "rating" && showDebug}
-        // debugPublished={showDebug}
         dataFn={dataFn}
+        debugHue={sortKey === "hue_debug"}
         images={images}
         linkState={{
           sortKey,

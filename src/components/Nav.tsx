@@ -108,8 +108,8 @@ const Nav = ({ internalLinks, className }: NavProps) => {
           <StaticImage
             alt="A picture of me"
             className="relative"
-            src="../images/circle-profile.png"
             placeholder="tracedSVG"
+            src="../images/circle-profile.png"
             style={{
               // top: "-70%",
               // left: "-50%",

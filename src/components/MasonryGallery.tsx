@@ -97,7 +97,6 @@ const MasonryGallery = ({
 
     return R.indexBy(R.prop("startIndex"), _rows);
   }, [aspectRatios, targetAspect, singleRow]);
-  console.log("🚀 ~ file: MasonryGallery.tsx:109 ~ rows:", rows);
 
   const sortedImageList = React.useMemo(
     () => _images.map((image) => image.base),
