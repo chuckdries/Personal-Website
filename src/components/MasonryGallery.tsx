@@ -23,7 +23,7 @@ interface MasonryGalleryProps {
     [breakpoint: string]: number;
   };
   debugHue?: boolean;
-  dataFn?: (image: GalleryImage) => (string | null);
+  dataFn?: (image: GalleryImage) => string[] | null;
   linkState?: object;
   showPalette?: boolean;
   singleRow?: boolean;
@@ -72,7 +72,7 @@ const MasonryGallery = ({
       // does adding current image to our row get us closer to our target aspect ratio?
       if (currentDiff > diffIfImageIsAddedToCurrentRow) {
         currentRow.aspect += currentAspect;
-        currentRow.images += 1
+        currentRow.images += 1;
         // _rows.push(currentRow);
         continue;
       }
@@ -85,8 +85,8 @@ const MasonryGallery = ({
       _rows.push({
         aspect: currentAspect,
         images: 1,
-        startIndex: currentRow.startIndex + currentRow.images
-      })
+        startIndex: currentRow.startIndex + currentRow.images,
+      });
     }
 
     return R.indexBy(R.prop("startIndex"), _rows);
@@ -159,9 +159,15 @@ const MasonryGallery = ({
             }}
             to={`/photogallery/${image.base}/`}
           >
-              {data && <span className="text-white z-20 absolute bg-black">
-                {data}
-              </span>}
+            {data && (
+              <div className="text-white z-20 absolute flex flex-col items-start">
+                {data.map((dataString) => (
+                  <span className="bg-black/50" key={dataString.substring(3)}>
+                    {dataString}
+                  </span>
+                ))}
+              </div>
+            )}
             {img && (
               <div
                 className={`h-full ${
