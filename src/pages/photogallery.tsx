@@ -2,8 +2,6 @@ import * as React from "react";
 import * as R from "ramda";
 import { graphql, Link, navigate, PageProps } from "gatsby";
 import { Helmet } from "react-helmet";
-import debounce from "lodash.debounce";
-// import { Picker, Item } from "@adobe/react-spectrum";
 
 import MasonryGallery from "../components/MasonryGallery";
 import KeywordsPicker from "../components/KeywordsPicker";
@@ -92,6 +90,7 @@ const GalleryPage = ({
     if (!hash.length) {
       return;
     }
+    console.log('remove hash')
     navigate(
       getGalleryPageUrl({ sortKey, keyword: filterKeyword, showDebug }, ""),
       { replace: true }
