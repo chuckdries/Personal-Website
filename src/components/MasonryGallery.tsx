@@ -47,14 +47,8 @@ const MasonryGallery = ({
     [aspectTargetsByBreakpoint]
   );
 
-  // const { observe, currentBreakpoint } = useDimensions({
-  //   breakpoints,
-  // });
-
   const { breakpoint } = useBreakpoint(breakpoints, "xs");
-  console.log("🚀 ~ file: MasonryGallery.tsx:55 ~ breakpoint:", breakpoint)
 
-  // const breakpoint = currentBreakpoint.length ? currentBreakpoint : "xs";
   const galleryWidth = `calc(100vw - ${
     breakpoint === "xs" || breakpoint === "sm" ? "32" : "160"
   }px)`;

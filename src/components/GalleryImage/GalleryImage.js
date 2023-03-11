@@ -63,12 +63,6 @@ const GalleryImage = ({ data, location: { state } }) => {
     setIsClient(true);
   }, []);
 
-  useEffect(() => {
-    requestAnimationFrame(() => {
-      window.scrollTo(0, 180);
-    });
-  }, [image.base]);
-
   const nextIndex =
     sortedImageList && currentIndex < sortedImageList.length
       ? currentIndex + 1

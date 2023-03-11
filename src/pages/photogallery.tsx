@@ -96,17 +96,17 @@ const GalleryPage = ({
         getGalleryPageUrl({ sortKey, keyword: filterKeyword, showDebug }, ""),
         { replace: true, state: { suppressAutoscroll: true } }
       );
-      // window.removeEventListener("scroll", removeHash);
+      window.removeEventListener("scroll", removeHash);
     },
     [hash, sortKey, filterKeyword, showDebug]
   );
 
-  // React.useEffect(() => {
-  //   window.addEventListener("scroll", removeHash);
-  //   return () => {
-  //     window.removeEventListener("scroll", removeHash);
-  //   };
-  // }, [removeHash]);
+  React.useEffect(() => {
+    // window.addEventListener("scroll", removeHash);
+    return () => {
+      window.removeEventListener("scroll", removeHash);
+    };
+  }, [removeHash]);
 
   React.useEffect(() => {
     // hacky but it works for now
@@ -125,8 +125,8 @@ const GalleryPage = ({
         block: hash.startsWith("all") ? "start" : "center",
       });
       setTimeout(() => {
-        removeHash();
-      }, 500)
+        window.addEventListener("scroll", removeHash);
+      }, 900)
     });
   }, [
     hash,
