@@ -264,6 +264,10 @@ const GalleryPage = ({
               "3xl": 8,
             }}
             images={recents}
+            linkState={{
+              sortKey: 'datePublished',
+              filterKeyword,
+            }}
             singleRow
           />
         </div>

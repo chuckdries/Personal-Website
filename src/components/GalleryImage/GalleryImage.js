@@ -64,12 +64,12 @@ const GalleryImage = ({ data, location: { state } }) => {
   }, []);
 
   useEffect(() => {
-    requestAnimationFrame(() => {
+    setTimeout(() => {
       window.scrollTo({
         top: 180,
         behavior: 'smooth'
       });
-    });
+    }, 50);
   }, [image.base]);
 
   const nextIndex =

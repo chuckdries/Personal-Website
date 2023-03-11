@@ -37,7 +37,6 @@ export const shouldUpdateScroll = ({
     //     window.scrollTo(0, 180);
     //   })
     // }
-    console.log('gallery image, skipping')
     return false;
   }
   if (prevRouterProps?.location.pathname === pathname) {

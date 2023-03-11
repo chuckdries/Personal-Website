@@ -138,8 +138,8 @@ const MasonryGallery = ({
         const data = dataFn ? dataFn(image) : null;
         return (
           <Link
-          className={classNames("border-8 border-white overflow-hidden relative")}
-            id={image.base}
+            className="border-8 border-white overflow-hidden relative"
+            id={singleRow ? undefined : image.base}
             key={`${image.base}`}
             state={{
               ...linkState,
