@@ -94,7 +94,7 @@ const GalleryPage = ({
       }
       navigate(
         getGalleryPageUrl({ sortKey, keyword: filterKeyword, showDebug }, ""),
-        { replace: true, state: { suppressAutoscroll: true } }
+        // { replace: false }
       );
       window.removeEventListener("scroll", removeHash);
     },
@@ -126,7 +126,7 @@ const GalleryPage = ({
       });
       setTimeout(() => {
         window.addEventListener("scroll", removeHash);
-      }, 900)
+      }, 100)
     });
   }, [
     hash,

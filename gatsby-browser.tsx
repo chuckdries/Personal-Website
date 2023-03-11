@@ -22,10 +22,22 @@ export const shouldUpdateScroll = ({
   pathname,
 }) => {
   if (pathname.startsWith('/photogallery/') && pathname !== '/photogallery/' ) {
-    console.log('scroll to image')
-    requestAnimationFrame(() => {
-      window.scrollTo(0, 180);
-    })
+    // if (prevRouterProps?.location.pathname === '/photogallery/') {
+    //   console.log('scroll to image from gallery')
+    //   // setTimeout(() => {
+
+    //   //   window.scrollTo(0, 0);
+    //   // }, 100)
+    //   setTimeout(() => {
+    //     window.scrollTo(0, 180);
+    //   }, 10)
+    // } else {
+    //   console.log('scroll to image from elsewhere')
+    //   requestAnimationFrame(() => {
+    //     window.scrollTo(0, 180);
+    //   })
+    // }
+    console.log('gallery image, skipping')
     return false;
   }
   if (prevRouterProps?.location.pathname === pathname) {

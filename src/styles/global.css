@@ -10,7 +10,7 @@
   box-sizing: border-box;
 }
 :root {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
 }
 /* .hero * {
   transition: color .2s, background-color .2s;
