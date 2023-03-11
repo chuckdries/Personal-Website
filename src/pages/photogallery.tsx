@@ -185,24 +185,23 @@ const GalleryPage = ({
         switch (sortKey) {
           case "hue":
           case "rating": {
-            data.push(`[${R.pathOr(null, SORT_KEYS[sortKey], image)}]`);
+            data.push(R.pathOr("x", SORT_KEYS[sortKey], image));
             break;
           }
           case "date":
           case "datePublished": {
             const date = R.pathOr(null, SORT_KEYS[sortKey], image);
             if (date) {
-              data.push(`[${new Date(date).toLocaleString()}]`);
+              data.push(new Date(date).toLocaleString());
+            } else {
+              data.push("x");
             }
             break;
           }
         }
       }
       if (dbgTags) {
-        const keywords = image.fields?.imageMeta?.meta?.Keywords?.join(',')
-        if (keywords) {
-          data.push(keywords);
-        }
+        data.push(image.fields?.imageMeta?.meta?.Keywords?.join(",") ?? "x");
       }
       return data;
     },

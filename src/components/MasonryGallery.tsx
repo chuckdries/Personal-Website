@@ -161,8 +161,8 @@ const MasonryGallery = ({
           >
             {data && (
               <div className="text-white z-20 absolute flex flex-col items-start">
-                {data.map((dataString) => (
-                  <span className="bg-black/50" key={dataString.substring(3)}>
+                {data.map((dataString, i) => (
+                  <span className="bg-black/50" key={i}>
                     {dataString}
                   </span>
                 ))}
