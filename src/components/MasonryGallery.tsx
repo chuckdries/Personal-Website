@@ -178,7 +178,13 @@ const MasonryGallery = ({
                 }`}
               >
                 <GatsbyImage
-                  alt={getName(image)}
+                  alt={
+                    image.fields?.imageMeta?.meta?.Keywords?.length
+                      ? `image of ${image.fields?.imageMeta?.meta?.Keywords.join(
+                          " and "
+                        )}. ${getName(image)}`
+                      : getName(image)
+                  }
                   className="w-full"
                   image={img}
                   objectFit="cover"
