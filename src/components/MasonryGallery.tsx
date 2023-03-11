@@ -119,7 +119,7 @@ const MasonryGallery = ({
         }
         const rowAspectRatioSum = currentRow.aspect;
         const ar = getAspectRatio(image);
-        let width;
+        let width: string;
         let height = `calc(${galleryWidth} / ${rowAspectRatioSum} ${
           showPalette ? "+ 10px" : "- 10px"
         })`;
@@ -138,7 +138,7 @@ const MasonryGallery = ({
         const data = dataFn ? dataFn(image) : null;
         return (
           <Link
-            className={classNames("border-8 border-white overflow-hidden")}
+          className={classNames("border-8 border-white overflow-hidden relative")}
             id={image.base}
             key={`${image.base}`}
             state={{
@@ -162,7 +162,10 @@ const MasonryGallery = ({
             {data && (
               <div className="text-white z-20 absolute flex flex-col items-start">
                 {data.map((dataString, i) => (
-                  <span className="bg-black/50" key={i}>
+                  <span
+                    className="bg-black/30 backdrop-blur p-[2px] m-[2px] max-w-full"
+                    key={i}
+                  >
                     {dataString}
                   </span>
                 ))}
