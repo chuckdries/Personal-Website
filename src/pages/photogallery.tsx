@@ -121,7 +121,7 @@ const GalleryPage = ({
       console.log("scrolling into view manually", el.offsetTop);
       el.scrollIntoView({
         block: hash.startsWith("all") ? "start" : "center",
-        behavior: "smooth",
+        behavior: hash.startsWith("all") ? "smooth" : "auto",
       });
       setTimeout(() => {
         window.addEventListener("scroll", removeHash);
