@@ -2,6 +2,7 @@ import * as React from "react";
 import * as R from "ramda";
 import { graphql, Link, navigate, PageProps } from "gatsby";
 import { Helmet } from "react-helmet";
+import debounce from "lodash.debounce";
 // import { Picker, Item } from "@adobe/react-spectrum";
 
 import MasonryGallery from "../components/MasonryGallery";
@@ -16,6 +17,7 @@ import Nav from "../components/Nav";
 import { Item, Select } from "../components/Select";
 import { Switch } from "../components/Switch";
 import ColorPalette from "@spectrum-icons/workflow/ColorPalette";
+import { ToggleButton } from "../components/ToggleButton";
 
 const SORT_KEYS = {
   hue: ["fields", "imageMeta", "vibrantHue"],
@@ -79,8 +81,8 @@ const GalleryPage = ({
         getGalleryPageUrl(
           { sortKey: newSortKey, keyword: filterKeyword, showDebug },
           hash
-        ),
-        { replace: true }
+        )
+        // { replace: true }
       );
     },
     [filterKeyword, hash, showDebug]
@@ -90,21 +92,18 @@ const GalleryPage = ({
     if (!hash.length) {
       return;
     }
-    // const url = new URL(
-    //   typeof window !== "undefined"
-    //     ? window.location.href.toString()
-    //     : "https://chuckdries.com/photogallery/"
-    // );
-
-    // url.hash = "";
-    // window.history.replaceState(null, "", url.href.toString());
-    navigate(getGalleryPageUrl({ sortKey, keyword: filterKeyword, showDebug}, ""), { replace: true })
-    window.removeEventListener("wheel", removeHash);
+    navigate(
+      getGalleryPageUrl({ sortKey, keyword: filterKeyword, showDebug }, ""),
+      { replace: true }
+    );
+    window.removeEventListener("scroll", removeHash);
   }, [hash, sortKey, filterKeyword, showDebug]);
 
   React.useEffect(() => {
-    window.addEventListener("wheel", removeHash);
-    return () => window.removeEventListener("wheel", removeHash);
+    // window.addEventListener("scroll", removeHash);
+    return () => {
+      window.removeEventListener("scroll", removeHash);
+    };
   }, [removeHash]);
 
   React.useEffect(() => {
@@ -119,12 +118,16 @@ const GalleryPage = ({
         console.log("⚠️failed to find hash");
         return;
       }
-      console.log("scrolling into view manually");
+      console.log("scrolling into view manually", el.offsetTop);
       el.scrollIntoView({
         block: hash.startsWith("all") ? "start" : "center",
+        behavior: "smooth",
       });
+      setTimeout(() => {
+        window.addEventListener("scroll", removeHash);
+      }, 100);
     });
-  }, [hash]);
+  }, [hash, removeHash]);
 
   const images: GalleryImage[] = React.useMemo(() => {
     const sort =
@@ -166,24 +169,43 @@ const GalleryPage = ({
     );
   }, [data]);
 
+  const [dbgTags, setDbgTags] = React.useState(false);
+  const [dbgSortKey, setDbgSortKey] = React.useState(false);
+  const [dbgName, setDbgName] = React.useState(false);
   const dataFn = React.useCallback(
-    (image: GalleryImage): string | null => {
+    (image: GalleryImage): string[] | null => {
       if (!showDebug) {
         return null;
       }
-      if (sortKey === "rating") {
-        return `[${R.pathOr(null, SORT_KEYS.rating, image)}] ${image.base}`;
+      let data: string[] = [];
+      if (dbgName) {
+        data.push(image.base);
       }
-      if (sortKey === "datePublished") {
-        const date = R.pathOr(null, SORT_KEYS.datePublished, image);
-        if (!date) {
-          return null;
+      if (dbgSortKey) {
+        switch (sortKey) {
+          case "hue":
+          case "rating": {
+            data.push(R.pathOr("x", SORT_KEYS[sortKey], image));
+            break;
+          }
+          case "date":
+          case "datePublished": {
+            const date = R.pathOr(null, SORT_KEYS[sortKey], image);
+            if (date) {
+              data.push(new Date(date).toLocaleString());
+            } else {
+              data.push("x");
+            }
+            break;
+          }
         }
-        return new Date(date).toLocaleString();
       }
-      return null;
+      if (dbgTags) {
+        data.push(image.fields?.imageMeta?.meta?.Keywords?.join(",") ?? "x");
+      }
+      return data;
     },
-    [showDebug, sortKey]
+    [showDebug, sortKey, dbgName, dbgSortKey, dbgTags]
   );
 
   return (
@@ -276,7 +298,20 @@ const GalleryPage = ({
             onPick={onKeywordPick}
             value={filterKeyword}
           />
-          <div className="my-2 mr-2 flex flex-row items-end">
+          <div className="my-2 mx-2 flex flex-row items-end">
+            {showDebug && (
+              <div className="mr-2">
+                <ToggleButton isSelected={dbgName} onChange={setDbgName}>
+                  name
+                </ToggleButton>
+                <ToggleButton isSelected={dbgSortKey} onChange={setDbgSortKey}>
+                  sort key
+                </ToggleButton>
+                <ToggleButton isSelected={dbgTags} onChange={setDbgTags}>
+                  tags
+                </ToggleButton>
+              </div>
+            )}
             <div className="border border-gray-400 rounded mr-2">
               <Switch
                 isSelected={showPalette}
@@ -292,7 +327,7 @@ const GalleryPage = ({
             </div>
             <Select
               label="Sort by..."
-              // @ts-ignore
+              // @ts-expect-error React.key, but string is more convenient for the state
               onSelectionChange={setSortKey}
               selectedKey={sortKey}
             >

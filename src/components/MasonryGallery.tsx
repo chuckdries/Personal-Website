@@ -23,7 +23,7 @@ interface MasonryGalleryProps {
     [breakpoint: string]: number;
   };
   debugHue?: boolean;
-  dataFn?: (image: GalleryImage) => (string | null);
+  dataFn?: (image: GalleryImage) => string[] | null;
   linkState?: object;
   showPalette?: boolean;
   singleRow?: boolean;
@@ -47,14 +47,8 @@ const MasonryGallery = ({
     [aspectTargetsByBreakpoint]
   );
 
-  // const { observe, currentBreakpoint } = useDimensions({
-  //   breakpoints,
-  // });
-
   const { breakpoint } = useBreakpoint(breakpoints, "xs");
-  console.log("🚀 ~ file: MasonryGallery.tsx:55 ~ breakpoint:", breakpoint)
 
-  // const breakpoint = currentBreakpoint.length ? currentBreakpoint : "xs";
   const galleryWidth = `calc(100vw - ${
     breakpoint === "xs" || breakpoint === "sm" ? "32" : "160"
   }px)`;
@@ -78,7 +72,7 @@ const MasonryGallery = ({
       // does adding current image to our row get us closer to our target aspect ratio?
       if (currentDiff > diffIfImageIsAddedToCurrentRow) {
         currentRow.aspect += currentAspect;
-        currentRow.images += 1
+        currentRow.images += 1;
         // _rows.push(currentRow);
         continue;
       }
@@ -91,8 +85,8 @@ const MasonryGallery = ({
       _rows.push({
         aspect: currentAspect,
         images: 1,
-        startIndex: currentRow.startIndex + currentRow.images
-      })
+        startIndex: currentRow.startIndex + currentRow.images,
+      });
     }
 
     return R.indexBy(R.prop("startIndex"), _rows);
@@ -125,7 +119,7 @@ const MasonryGallery = ({
         }
         const rowAspectRatioSum = currentRow.aspect;
         const ar = getAspectRatio(image);
-        let width;
+        let width: string;
         let height = `calc(${galleryWidth} / ${rowAspectRatioSum} ${
           showPalette ? "+ 10px" : "- 10px"
         })`;
@@ -144,7 +138,7 @@ const MasonryGallery = ({
         const data = dataFn ? dataFn(image) : null;
         return (
           <Link
-            className={classNames("border-8 border-white overflow-hidden")}
+          className={classNames("border-8 border-white overflow-hidden relative")}
             id={image.base}
             key={`${image.base}`}
             state={{
@@ -165,9 +159,18 @@ const MasonryGallery = ({
             }}
             to={`/photogallery/${image.base}/`}
           >
-              {data && <span className="text-white z-20 absolute bg-black">
-                {data}
-              </span>}
+            {data && (
+              <div className="text-white z-20 absolute flex flex-col items-start">
+                {data.map((dataString, i) => (
+                  <span
+                    className="bg-black/30 backdrop-blur p-[2px] m-[2px] max-w-full"
+                    key={i}
+                  >
+                    {dataString}
+                  </span>
+                ))}
+              </div>
+            )}
             {img && (
               <div
                 className={`h-full ${

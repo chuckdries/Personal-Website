@@ -41,6 +41,7 @@
     "gatsby-source-filesystem": "^5.0.0",
     "gatsby-transformer-sharp": "^5.0.0",
     "kebab-case": "^1.0.1",
+    "lodash.debounce": "^4.0.8",
     "node-iptc": "^1.0.5",
     "node-vibrant": "3.1.6",
     "postcss": "^8.4.19",
@@ -60,6 +61,7 @@
   },
   "devDependencies": {
     "@types/chroma-js": "^2.1.4",
+    "@types/lodash.debounce": "^4.0.7",
     "@types/node": "^18.8.3",
     "@types/ramda": "^0.28.15",
     "@types/react": "^18.0.21",

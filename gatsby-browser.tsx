@@ -14,6 +14,41 @@ export const onRouteUpdate = function () {
     window.plausible("pageview");
   }
 };
+
+// docs say you can return a scroll position from this fn, but that's a bold-faced lie
+export const shouldUpdateScroll = ({
+  prevRouterProps,
+  routerProps: { location },
+  pathname,
+}) => {
+  if (pathname.startsWith('/photogallery/') && pathname !== '/photogallery/' ) {
+    // if (prevRouterProps?.location.pathname === '/photogallery/') {
+    //   console.log('scroll to image from gallery')
+    //   // setTimeout(() => {
+
+    //   //   window.scrollTo(0, 0);
+    //   // }, 100)
+    //   setTimeout(() => {
+    //     window.scrollTo(0, 180);
+    //   }, 10)
+    // } else {
+    //   console.log('scroll to image from elsewhere')
+    //   requestAnimationFrame(() => {
+    //     window.scrollTo(0, 180);
+    //   })
+    // }
+    console.log('gallery image, skipping')
+    return false;
+  }
+  if (prevRouterProps?.location.pathname === pathname) {
+    return false;
+  }
+  if (pathname === "/photogallery/" && location.hash.length) {
+    return false;
+  }
+  return true;
+}
+
 // import * as React from 'react';
 // import { MDXProvider } from '@mdx-js/react';
 

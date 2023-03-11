@@ -65,7 +65,10 @@ const GalleryImage = ({ data, location: { state } }) => {
 
   useEffect(() => {
     requestAnimationFrame(() => {
-      window.scrollTo(0, 180);
+      window.scrollTo({
+        top: 180,
+        behavior: 'smooth'
+      });
     });
   }, [image.base]);
 
