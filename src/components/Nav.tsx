@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import classnames from "classnames";
-import { Link } from "gatsby";
+import { Link, navigate } from "gatsby";
 import { Popover } from "react-tiny-popover";
 import { StaticImage } from "gatsby-plugin-image";
 
-const navClasses = "hover:underline hover:bg-black/10 block p-3 text-black flex-shrink-0 whitespace-nowrap";
+const navClasses =
+  "hover:underline hover:bg-black/10 block p-3 text-black flex-shrink-0 whitespace-nowrap";
 
 const ExternalLinks = () => (
   <ul
@@ -87,6 +88,8 @@ interface NavProps {
 
 const Nav = ({ internalLinks, className }: NavProps) => {
   const [linksMenu, setLinksMenu] = useState(false);
+  const faceClicks = useRef(0);
+  const faceLastClicked = useRef(0);
 
   return (
     <nav
@@ -100,21 +103,35 @@ const Nav = ({ internalLinks, className }: NavProps) => {
       <div className="flex flex-auto items-center">
         <div
           className={classnames(
-            "h-[120px] w-[120px] mr-4 my-5 flex-shrink-0",
-            // "ml-[-130px]",
-            // "rounded-full overflow-hidden relative"
+            "h-[120px] w-[120px] mr-4 my-5 flex-shrink-0"
           )}
+          onClick={() => {
+            const prevClick = faceLastClicked.current;
+            faceLastClicked.current = Date.now();
+            if (prevClick > 0 && faceLastClicked.current - prevClick > 500) {
+              console.log('too slow!')
+              faceClicks.current = 1;
+              return;
+            }
+            if (faceClicks.current === 4) {
+              navigate("/photogallery/?debug=true");
+              return;
+            }
+            faceClicks.current += 1;
+          }}
         >
           <StaticImage
             alt="A picture of me"
             className="relative"
             placeholder="tracedSVG"
             src="../images/circle-profile.png"
-            style={{
-              // top: "-70%",
-              // left: "-50%",
-              // width: "200%",
-            }}
+            style={
+              {
+                // top: "-70%",
+                // left: "-50%",
+                // width: "200%",
+              }
+            }
           />
         </div>
         <div className="items-baseline">
