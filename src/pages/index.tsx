@@ -99,7 +99,8 @@ const IndexPage = ({
               alt=""
               image={img!}
               loading="eager"
-              objectFit={browserIsLandscape ? "cover" : "contain"}
+              // objectFit={browserIsLandscape ? "contain" : "cover"}
+              objectFit="cover"
               style={{
                 height: screenHeight
                   ? `${screenHeight - 268}px`
@@ -117,16 +118,8 @@ const IndexPage = ({
 export const query = graphql`
   query IndexPage {
     allFile(
-      filter: {
-        sourceInstanceName: { eq: "gallery" }
-        base: { in: [
-          # "DSC02610-2.jpg",
-          # "DSC02615-2.jpg",
-          "DSC05702.jpg",
-          "DSC05538.jpg"
-        ] }
-      }
-      sort: { base: ASC }
+      filter: {sourceInstanceName: {eq: "gallery"}, base: {in: ["DSC00602.jpg", "DSC00600.jpg"]}}
+      sort: {childImageSharp: {fluid: {aspectRatio: ASC}}}
     ) {
       nodes {
         relativePath
@@ -151,6 +144,6 @@ export const query = graphql`
       }
     }
   }
-`;
+  `;
 
 export default IndexPage;
