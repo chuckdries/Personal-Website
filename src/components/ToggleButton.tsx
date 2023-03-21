@@ -1,9 +1,9 @@
-import * as React from 'react';
+import * as React from "react";
 
-import {useToggleState} from 'react-stately';
-import {AriaToggleButtonProps, useToggleButton} from 'react-aria';
-import {useRef} from 'react';
-import classNames from 'classnames';
+import { useToggleState } from "react-stately";
+import { AriaToggleButtonProps, useToggleButton } from "react-aria";
+import { useRef } from "react";
+import classNames from "classnames";
 
 export function ToggleButton(props: AriaToggleButtonProps) {
   let ref = useRef(null);
@@ -13,18 +13,16 @@ export function ToggleButton(props: AriaToggleButtonProps) {
   return (
     <button
       {...buttonProps}
-      className={classNames(buttonProps.className, "py-[3px] px-2 mx-1 rounded")}
+      className={classNames(
+        buttonProps.className,
+        "py-[3px] px-2 mx-1 border border-gray-400 rounded mr-1",
+        state.isSelected ? 'bg-blue-600' : ''
+      )}
       ref={ref}
       style={{
-        background: isPressed
-          ? state.isSelected ? 'darkgreen' : 'gray'
-          : state.isSelected
-          ? 'green'
-          : 'lightgray',
-        color: state.isSelected ? 'white' : 'black',
-        userSelect: 'none',
-        WebkitUserSelect: 'none',
-        border: 'none'
+        color: state.isSelected ? "white" : "black",
+        userSelect: "none",
+        WebkitUserSelect: "none",
       }}
     >
       {props.children}

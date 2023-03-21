@@ -306,7 +306,7 @@ const GalleryPage = ({
           />
           <div className="my-2 mx-2 flex flex-row items-end">
             {showDebug && (
-              <div className="mr-2">
+              <div className="mr-1">
                 <ToggleButton isSelected={dbgName} onChange={setDbgName}>
                   name
                 </ToggleButton>
@@ -318,18 +318,18 @@ const GalleryPage = ({
                 </ToggleButton>
               </div>
             )}
-            <div className="border border-gray-400 rounded mr-2">
-              <Switch
+            <div className="mr-1">
+              <ToggleButton
                 isSelected={showPalette}
-                onChange={(val) => setShowPalette(val)}
+                onChange={setShowPalette}
               >
                 <ColorPalette
                   UNSAFE_style={{
-                    width: "24px",
-                    margin: "0 4px",
+                    width: "22px",
+                    margin: "0 0px",
                   }}
                 />
-              </Switch>
+              </ToggleButton>
             </div>
             <Select
               label="Sort by..."
