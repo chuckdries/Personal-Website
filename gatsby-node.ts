@@ -8,7 +8,9 @@ import * as R from "ramda";
 import exifr from "exifr";
 import sharp from "sharp";
 import { Palette } from "node-vibrant/lib/color";
-import { performance } from "perf_hooks";
+import fs from "fs";
+import md5 from "md5";
+import glob from "glob";
 
 import util from "node:util";
 import { exec as _exec } from "child_process";
@@ -22,6 +24,37 @@ const exec = util.promisify(_exec);
 // const exifr = require("exifr");
 // const sharp = require("sharp");
 // const { graphql } = require("gatsby");
+
+const hash = md5(`${new Date().getTime()}`);
+
+const addPageDataVersion = async (file: any) => {
+  const stats = await util.promisify(fs.stat)(file);
+  if (stats.isFile()) {
+    console.log(`Adding version to page-data.json in ${file}..`);
+    let content = await util.promisify(fs.readFile)(file, "utf8");
+    const result = content.replace(
+      /page-data.json(\?v=[a-f0-9]{32})?/g,
+      `page-data.json?v=${hash}`
+    );
+    await util.promisify(fs.writeFile)(file, result, "utf8");
+  }
+};
+
+export const onPostBootstrap = async () => {
+  const loader = path.join(
+    __dirname,
+    "node_modules/gatsby/cache-dir/loader.js"
+  );
+  await addPageDataVersion(loader);
+};
+
+export const onPostBuild = async () => {
+  const publicPath = path.join(__dirname, "public");
+  const htmlAndJSFiles = glob.sync(`${publicPath}/**/*.{html,js}`);
+  for (let file of htmlAndJSFiles) {
+    await addPageDataVersion(file);
+  }
+};
 
 const badContrast = (color1: Color, color2: Color) =>
   chroma.contrast(color1, color2) < 4.5;
@@ -173,7 +206,7 @@ function transformMetaToNodeData(
 //   createTypes(typedefs);
 // };
 
-export const onCreateNode: GatsbyNode["onCreateNode"] = async function({
+export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
   node,
   actions,
 }) {
@@ -230,7 +263,9 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function({
         node.absolutePath as string,
         dominant,
         // if datePublished is empty, image has not been committed to git yet and is thus brand new
-        datePublished.length ? datePublished.replace("\n", "") : new Date().toDateString()
+        datePublished.length
+          ? datePublished.replace("\n", "")
+          : new Date().toDateString()
       ),
     });
   }
