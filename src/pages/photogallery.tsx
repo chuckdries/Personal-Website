@@ -113,6 +113,7 @@ const GalleryPage = ({
         return;
       }
       const el = document.getElementById(hash);
+      console.log("hash", hash);
       if (!el) {
         console.log("⚠️failed to find hash");
         return;
@@ -123,8 +124,10 @@ const GalleryPage = ({
         behavior: hash.startsWith("all") ? "smooth" : "auto",
       });
       setTimeout(() => {
-        window.addEventListener("scroll", removeHash);
-      }, 100);
+        if (!hash.startsWith("all")) {
+          window.addEventListener("scroll", removeHash);
+        }
+      }, 1000);
     });
   }, [hash, removeHash]);
 
@@ -132,20 +135,20 @@ const GalleryPage = ({
     const sort =
       sortKey === "date" || sortKey === "datePublished"
         ? R.sort((node1: typeof data["all"]["nodes"][number], node2) =>
-            smartCompareDates(sortKey, node1, node2)
-          )
+          smartCompareDates(sortKey, node1, node2)
+        )
         : R.sort(
-            // @ts-ignore
-            R.descend(R.path<GalleryImage>(SORT_KEYS[sortKey]))
-          );
+          // @ts-ignore
+          R.descend(R.path<GalleryImage>(SORT_KEYS[sortKey]))
+        );
 
     const filter = filterKeyword
       ? R.filter((image) =>
-          R.includes(
-            filterKeyword,
-            R.pathOr([], ["fields", "imageMeta", "meta", "Keywords"], image)
-          )
+        R.includes(
+          filterKeyword,
+          R.pathOr([], ["fields", "imageMeta", "meta", "Keywords"], image)
         )
+      )
       : R.identity;
 
     try {

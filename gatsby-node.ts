@@ -173,7 +173,7 @@ function transformMetaToNodeData(
 //   createTypes(typedefs);
 // };
 
-export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
+export const onCreateNode: GatsbyNode["onCreateNode"] = async function({
   node,
   actions,
 }) {
@@ -230,7 +230,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
         node.absolutePath as string,
         dominant,
         // if datePublished is empty, image has not been committed to git yet and is thus brand new
-        datePublished.length ? datePublished.replace("\n", "") : new Date().toISOString()
+        datePublished.length ? datePublished.replace("\n", "") : new Date().toDateString()
       ),
     });
   }
