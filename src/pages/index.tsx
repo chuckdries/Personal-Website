@@ -99,8 +99,8 @@ const IndexPage = ({
               alt=""
               image={img!}
               loading="eager"
-              //objectFit={browserIsLandscape ? "cover" : "contain"}
-              objectFit="contain"
+              objectFit={browserIsLandscape ? "cover" : "contain"}
+              // objectFit="contain"
               style={{
                 height: screenHeight
                   ? `${screenHeight - 268}px`
@@ -118,7 +118,7 @@ const IndexPage = ({
 export const query = graphql`
   query IndexPage {
     allFile(
-      filter: {sourceInstanceName: {eq: "gallery"}, base: {in: ["DSC00575.jpg", "DSC00243.jpg"]}}
+      filter: {sourceInstanceName: {eq: "gallery"}, base: {in: ["DSC01380.jpg", "DSC00243.jpg"]}}
       sort: {childImageSharp: {fluid: {aspectRatio: ASC}}}
     ) {
       nodes {
