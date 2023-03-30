@@ -118,7 +118,7 @@ const IndexPage = ({
 export const query = graphql`
   query IndexPage {
     allFile(
-      filter: {sourceInstanceName: {eq: "gallery"}, base: {in: ["DSC01380.jpg", "DSC00243.jpg"]}}
+      filter: {sourceInstanceName: {eq: "gallery"}, base: {in: ["DSC01340.jpg", "DSC00243.jpg"]}}
       sort: {childImageSharp: {fluid: {aspectRatio: ASC}}}
     ) {
       nodes {
