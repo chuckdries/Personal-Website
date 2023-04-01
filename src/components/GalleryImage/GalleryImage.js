@@ -47,8 +47,8 @@ const IconStyle = {
   margin: "0 4px",
 };
 
-const ArrowLinkClasses = `hover:underline text-black 
-lg:px-4 self-stretch flex items-center hover:bg-black/50 max-h-screen sticky top-0
+const ArrowLinkClasses = `hover:underline text-black
+px-4 flex items-center hover:bg-black/50 max-h-screen z-10
 `;
 
 const GalleryImage = ({ data, location: { state } }) => {
@@ -207,41 +207,66 @@ const GalleryImage = ({ data, location: { state } }) => {
           ]}
           isClient={isClient}
         />
-        <div className="flex flex-auto items-center lg:gap-2 justify-between">
-          {prevImage ? (
-            <Link
-              className={ArrowLinkClasses}
-              state={{
-                currentIndex: currentIndex - 1,
-                sortedImageList,
-                filterKeyword,
-                sortKey,
-              }}
-              to={`/photogallery/${prevImage}/`}
-            >
-              <span
-                className="p-1 lg:p-4 rounded-full"
-                style={{
-                  background: darkAccent,
-                }}
-              >
-                <ChevronLeft UNSAFE_style={IconStyle} />
-              </span>
-            </Link>
-          ) : (
-            <div></div>
-          )}
+        <div className="flex flex-auto items-center justify-center">
           <div className={classnames("pb-2 flex", orientationClasses)}>
             <div
               className={classnames(
                 // zoom ? "cursor-zoom-out" : "cursor-zoom-in",
-                "mb-2 self-center"
+                "mb-2 self-center relative"
               )}
               // onClick={() => setZoom((_zoom) => !_zoom)}
               style={{
                 maxWidth: `calc(max(calc(100vh - ${verticalPad}), 500px) * ${ar})`,
               }}
             >
+              <div className="absolute top-0 bottom-0 left-0 right-0 z-10 flex justify-between opacity-0 hover:opacity-100">
+                {prevImage ? (
+                  <Link
+                    className={ArrowLinkClasses}
+                    state={{
+                      currentIndex: currentIndex - 1,
+                      sortedImageList,
+                      filterKeyword,
+                      sortKey,
+                    }}
+                    to={`/photogallery/${prevImage}/`}
+                  >
+                    <span
+                      className="p-4 rounded-full"
+                      style={{
+                        background: darkAccent,
+                      }}
+                    >
+                      <ChevronLeft UNSAFE_style={IconStyle} />
+                    </span>
+                  </Link>
+                ) : (
+                  <div></div>
+                )}
+                {nextImage ? (
+                  <Link
+                    className={ArrowLinkClasses}
+                    state={{
+                      currentIndex: currentIndex + 1,
+                      sortedImageList,
+                      filterKeyword,
+                      sortKey,
+                    }}
+                    to={`/photogallery/${nextImage}/`}
+                  >
+                    <span
+                      className="p-4 rounded-full"
+                      style={{
+                        background: darkAccent,
+                      }}
+                    >
+                      <ChevronRight UNSAFE_style={IconStyle} />
+                    </span>
+                  </Link>
+                ) : (
+                  <div></div>
+                )}
+              </div>
               {zoom ? (
                 <img
                   alt={name}
@@ -390,29 +415,6 @@ const GalleryImage = ({ data, location: { state } }) => {
               </div>
             </div>
           </div>
-          {nextImage ? (
-            <Link
-              className={ArrowLinkClasses}
-              state={{
-                currentIndex: currentIndex + 1,
-                sortedImageList,
-                filterKeyword,
-                sortKey,
-              }}
-              to={`/photogallery/${nextImage}/`}
-            >
-              <span
-                className="p-1 lg:p-4 rounded-full"
-                style={{
-                  background: darkAccent,
-                }}
-              >
-                <ChevronRight UNSAFE_style={IconStyle} />
-              </span>
-            </Link>
-          ) : (
-            <div></div>
-          )}
         </div>
       </div>
     </>
