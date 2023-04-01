@@ -87,7 +87,7 @@ const GalleryPage = ({
   );
 
   const removeHash = React.useCallback(() => {
-    if (!hash.length) {
+    if (!hash.length || window.location.pathname !== '/photogallery/') {
       return;
     }
     console.log('remove hash')
