@@ -66,7 +66,7 @@ const GalleryImage = ({ data, location: { state } }) => {
   useEffect(() => {
     setTimeout(() => {
       window.scrollTo({
-        top: 180,
+        top: 190,
         behavior: "smooth",
       });
     }, 50);
@@ -212,7 +212,7 @@ const GalleryImage = ({ data, location: { state } }) => {
             <div
               className={classnames(
                 // zoom ? "cursor-zoom-out" : "cursor-zoom-in",
-                "mb-2 self-center relative flex hover-none:flex-col-reverse"
+                "mb-2 shadow-md self-center relative flex hover-none:flex-col-reverse"
               )}
               // onClick={() => setZoom((_zoom) => !_zoom)}
               style={{
