@@ -208,7 +208,7 @@ const GalleryImage = ({ data, location: { state } }) => {
           isClient={isClient}
         />
         <div className="flex flex-auto items-center justify-center">
-          <div className={classnames("pb-2 flex", orientationClasses)}>
+          <div className={classnames("pb-2 flex hover-none:flex-col-reverse", orientationClasses)}>
             <div
               className={classnames(
                 // zoom ? "cursor-zoom-out" : "cursor-zoom-in",
@@ -219,7 +219,7 @@ const GalleryImage = ({ data, location: { state } }) => {
                 maxWidth: `calc(max(calc(100vh - ${verticalPad}), 500px) * ${ar})`,
               }}
             >
-              <div className="absolute top-0 bottom-0 left-0 right-0 z-10 flex justify-between opacity-0 hover:opacity-100 focus-within:opacity-100">
+              <div className="hover-hover:absolute top-0 bottom-0 left-0 right-0 z-10 flex justify-between opacity-0 hover:opacity-100 focus-within:opacity-100">
                 {prevImage ? (
                   <Link
                     className={ArrowLinkClasses}
