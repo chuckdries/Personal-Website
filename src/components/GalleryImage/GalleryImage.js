@@ -47,8 +47,8 @@ const IconStyle = {
   margin: "0 4px",
 };
 
-const ArrowLinkClasses = `hover:underline text-black
-px-4 flex items-center hover:bg-black/50 max-h-screen z-10
+const ArrowLinkClasses = `text-black backdrop-blur
+px-4 flex items-center hover:bg-vibrant-dark/10 max-h-screen z-10
 `;
 
 const GalleryImage = ({ data, location: { state } }) => {
@@ -219,7 +219,7 @@ const GalleryImage = ({ data, location: { state } }) => {
                 maxWidth: `calc(max(calc(100vh - ${verticalPad}), 500px) * ${ar})`,
               }}
             >
-              <div className="absolute top-0 bottom-0 left-0 right-0 z-10 flex justify-between opacity-0 hover:opacity-100">
+              <div className="absolute top-0 bottom-0 left-0 right-0 z-10 flex justify-between opacity-0 hover:opacity-100 focus-within:opacity-100">
                 {prevImage ? (
                   <Link
                     className={ArrowLinkClasses}
@@ -279,7 +279,6 @@ const GalleryImage = ({ data, location: { state } }) => {
               ) : (
                 <GatsbyImage
                   alt={name}
-                  className="border-4 border-black"
                   image={getImage(image)}
                   key={image.base}
                   loading="eager"
