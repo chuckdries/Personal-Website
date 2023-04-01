@@ -10,7 +10,7 @@ const navClasses =
 const ExternalLinks = () => (
   <ul
     className={classnames(
-      "z-30 overflow-hidden bg-vibrant-light/50 backdrop-blur",
+      "z-30 overflow-hidden bg-vibrant-light/50 backdrop-blur-lg",
       "rounded shadow-lg border border-gray-400"
     )}
   >
