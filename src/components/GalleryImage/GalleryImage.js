@@ -212,7 +212,7 @@ const GalleryImage = ({ data, location: { state } }) => {
             <div
               className={classnames(
                 // zoom ? "cursor-zoom-out" : "cursor-zoom-in",
-                "mb-2 shadow-md self-center relative flex hover-none:flex-col-reverse"
+                "mb-2 self-center relative flex hover-none:flex-col-reverse"
               )}
               // onClick={() => setZoom((_zoom) => !_zoom)}
               style={{
@@ -286,6 +286,7 @@ const GalleryImage = ({ data, location: { state } }) => {
               ) : (
                 <GatsbyImage
                   alt={name}
+                  className="shadow-md"
                   image={getImage(image)}
                   key={image.base}
                   loading="eager"
