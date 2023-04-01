@@ -47,8 +47,8 @@ const IconStyle = {
   margin: "0 4px",
 };
 
-const ArrowLinkClasses = `text-black backdrop-blur
-px-4 flex items-center hover:bg-vibrant-dark/10 max-h-screen z-10
+const ArrowLinkClasses = `text-black hover:backdrop-blur opacity-50 hover:opacity-100
+px-4 flex items-center hover:bg-black/20 max-h-screen z-10
 `;
 
 const GalleryImage = ({ data, location: { state } }) => {
@@ -232,7 +232,7 @@ const GalleryImage = ({ data, location: { state } }) => {
                     to={`/photogallery/${prevImage}/`}
                   >
                     <span
-                      className="p-4 rounded-full"
+                      className="p-4 rounded-full backdrop-blur"
                       style={{
                         background: darkAccent,
                       }}
