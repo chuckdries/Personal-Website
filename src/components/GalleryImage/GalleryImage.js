@@ -67,7 +67,7 @@ const GalleryImage = ({ data, location: { state } }) => {
     setTimeout(() => {
       window.scrollTo({
         top: 180,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }, 50);
   }, [image.base]);
@@ -172,7 +172,12 @@ const GalleryImage = ({ data, location: { state } }) => {
           className="text-black transition-colors"
           // style={getHelmetSafeBodyStyle(vibrant)}
           style={getHelmetSafeBodyStyle({
-            ...getVibrantStyle(vibrant),
+            ...getVibrantStyle({
+              ...vibrant,
+              LightVibrant: chroma
+                .mix(vibrant.Vibrant, "white", 0.7, BLEND)
+                .rgb(),
+            }),
             background: chroma.mix(vibrant.Vibrant, "white", 0.7, BLEND).hex(),
           })}
         />
@@ -201,7 +206,6 @@ const GalleryImage = ({ data, location: { state } }) => {
             },
           ]}
           isClient={isClient}
-          linkBg={chroma.mix(vibrant.Vibrant, "white", 0.7, BLEND).hex()}
         />
         <div className="flex flex-auto items-center lg:gap-2 justify-between">
           {prevImage ? (

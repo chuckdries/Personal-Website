@@ -7,15 +7,12 @@ import { StaticImage } from "gatsby-plugin-image";
 const navClasses =
   "hover:underline hover:bg-black/10 block p-3 text-black flex-shrink-0 whitespace-nowrap";
 
-const ExternalLinks = ({ linkBg }: { linkBg?: string; }) => (
+const ExternalLinks = () => (
   <ul
     className={classnames(
-      "z-30 overflow-hidden bg-vibrant-light",
+      "z-30 overflow-hidden bg-vibrant-light/50 backdrop-blur",
       "rounded shadow-lg border border-gray-400"
     )}
-    style={{
-      background: linkBg
-    }}
   >
     <li>
       {/* eslint-disable-next-line */}
@@ -87,10 +84,9 @@ interface NavProps {
     href: string;
     label: string;
   }[];
-  linkBg?: string;
 }
 
-const Nav = ({ internalLinks, className, linkBg }: NavProps) => {
+const Nav = ({ internalLinks, className }: NavProps) => {
   const [linksMenu, setLinksMenu] = useState(false);
   const faceClicks = useRef(0);
   const faceLastClicked = useRef(0);
@@ -161,7 +157,7 @@ const Nav = ({ internalLinks, className, linkBg }: NavProps) => {
         </ul>
         <Popover
           containerClassName="z-30 p-1"
-          content={<ExternalLinks linkBg={linkBg} />}
+          content={<ExternalLinks />}
           isOpen={linksMenu}
           onClickOutside={() => setLinksMenu(false)}
           positions={["bottom"]} // preferred positions by priority

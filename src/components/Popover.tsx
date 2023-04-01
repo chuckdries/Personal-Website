@@ -27,7 +27,7 @@ export function Popover(props: PopoverProps) {
       {!isNonModal && <div {...underlayProps} className="fixed inset-0" />}
       <div
         {...popoverProps}
-        className={`z-10 shadow border border-gray-400 bg-white rounded mt-1 ${className}`}
+        className={`z-10 shadow border border-gray-400 bg-vibrant-light/50 backdrop-blur rounded mt-1 ${className}`}
         ref={popoverRef}
       >
         {!isNonModal && <DismissButton onDismiss={state.close} />}
