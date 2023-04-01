@@ -6546,6 +6546,7 @@ __metadata:
     react-tiny-popover: ^7.2.0
     sass: ^1.34.0
     tailwindcss: ^3.2.4
+    tailwindcss-touch: ^1.0.1
     typescript: ^4.8.4
     use-breakpoint: ^2.0.1
   languageName: unknown
@@ -15371,6 +15372,13 @@ __metadata:
     string-width: ^4.2.3
     strip-ansi: ^6.0.1
   checksum: 08249c7046125d9d0a944a6e96cfe9ec66908d6b8a9db125531be6eb05fa0de047fd5542e9d43b4f987057f00a093b276b8d3e19af162a9c40db2681058fd306
+  languageName: node
+  linkType: hard
+
+"tailwindcss-touch@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "tailwindcss-touch@npm:1.0.1"
+  checksum: 022c8190ed7cf126160ed3d280678a63193660b883799a4fffc3f767d32613bcbc3a43ac1607b6a18676cbfd2a075d5f116164a1d3e6f1b347866a168f56e089
   languageName: node
   linkType: hard
 

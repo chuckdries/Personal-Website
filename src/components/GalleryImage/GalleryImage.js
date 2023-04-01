@@ -47,8 +47,8 @@ const IconStyle = {
   margin: "0 4px",
 };
 
-const ArrowLinkClasses = `hover:underline text-black 
-lg:px-4 self-stretch flex items-center hover:bg-black/50 max-h-screen sticky top-0
+const ArrowLinkClasses = `text-black hover:backdrop-blur opacity-50 hover:opacity-100
+px-4 flex items-center hover:bg-black/20 max-h-screen z-10 hover-none:pt-2
 `;
 
 const GalleryImage = ({ data, location: { state } }) => {
@@ -207,41 +207,73 @@ const GalleryImage = ({ data, location: { state } }) => {
           ]}
           isClient={isClient}
         />
-        <div className="flex flex-auto items-center lg:gap-2 justify-between">
-          {prevImage ? (
-            <Link
-              className={ArrowLinkClasses}
-              state={{
-                currentIndex: currentIndex - 1,
-                sortedImageList,
-                filterKeyword,
-                sortKey,
-              }}
-              to={`/photogallery/${prevImage}/`}
-            >
-              <span
-                className="p-1 lg:p-4 rounded-full"
-                style={{
-                  background: darkAccent,
-                }}
-              >
-                <ChevronLeft UNSAFE_style={IconStyle} />
-              </span>
-            </Link>
-          ) : (
-            <div></div>
-          )}
+        <div className="flex flex-auto items-center justify-center">
           <div className={classnames("pb-2 flex", orientationClasses)}>
             <div
               className={classnames(
                 // zoom ? "cursor-zoom-out" : "cursor-zoom-in",
-                "mb-2 self-center"
+                "mb-2 self-center relative flex hover-none:flex-col-reverse"
               )}
               // onClick={() => setZoom((_zoom) => !_zoom)}
               style={{
                 maxWidth: `calc(max(calc(100vh - ${verticalPad}), 500px) * ${ar})`,
               }}
             >
+              <div
+                className={classnames(
+                  "hover-hover:absolute",
+                  "hover-hover:top-0 hover-hover:bottom-0 hover-hover:left-0 hover-hover:right-0",
+                  "hover-hover:opacity-0 hover:opacity-100 focus-within:opacity-100",
+                  "z-10 flex justify-between"
+                )}
+              >
+                {prevImage ? (
+                  <Link
+                    className={ArrowLinkClasses}
+                    state={{
+                      currentIndex: currentIndex - 1,
+                      sortedImageList,
+                      filterKeyword,
+                      sortKey,
+                    }}
+                    to={`/photogallery/${prevImage}/`}
+                  >
+                    <span
+                      className="p-4 rounded-full backdrop-blur"
+                      style={{
+                        background: darkAccent,
+                      }}
+                    >
+                      <ChevronLeft UNSAFE_style={IconStyle} />
+                    </span>
+                  </Link>
+                ) : (
+                  <div></div>
+                )}
+                {nextImage ? (
+                  <Link
+                    className={ArrowLinkClasses}
+                    state={{
+                      currentIndex: currentIndex + 1,
+                      sortedImageList,
+                      filterKeyword,
+                      sortKey,
+                    }}
+                    to={`/photogallery/${nextImage}/`}
+                  >
+                    <span
+                      className="p-4 rounded-full"
+                      style={{
+                        background: darkAccent,
+                      }}
+                    >
+                      <ChevronRight UNSAFE_style={IconStyle} />
+                    </span>
+                  </Link>
+                ) : (
+                  <div></div>
+                )}
+              </div>
               {zoom ? (
                 <img
                   alt={name}
@@ -254,7 +286,6 @@ const GalleryImage = ({ data, location: { state } }) => {
               ) : (
                 <GatsbyImage
                   alt={name}
-                  className="border-4 border-black"
                   image={getImage(image)}
                   key={image.base}
                   loading="eager"
@@ -390,29 +421,6 @@ const GalleryImage = ({ data, location: { state } }) => {
               </div>
             </div>
           </div>
-          {nextImage ? (
-            <Link
-              className={ArrowLinkClasses}
-              state={{
-                currentIndex: currentIndex + 1,
-                sortedImageList,
-                filterKeyword,
-                sortKey,
-              }}
-              to={`/photogallery/${nextImage}/`}
-            >
-              <span
-                className="p-1 lg:p-4 rounded-full"
-                style={{
-                  background: darkAccent,
-                }}
-              >
-                <ChevronRight UNSAFE_style={IconStyle} />
-              </span>
-            </Link>
-          ) : (
-            <div></div>
-          )}
         </div>
       </div>
     </>
