@@ -48,7 +48,7 @@ const IconStyle = {
 };
 
 const ArrowLinkClasses = `text-black hover:backdrop-blur opacity-50 hover:opacity-100
-px-4 flex items-center hover:bg-black/20 max-h-screen z-10
+px-4 flex items-center hover:bg-black/20 max-h-screen z-10 hover-none:pt-2
 `;
 
 const GalleryImage = ({ data, location: { state } }) => {
@@ -208,18 +208,25 @@ const GalleryImage = ({ data, location: { state } }) => {
           isClient={isClient}
         />
         <div className="flex flex-auto items-center justify-center">
-          <div className={classnames("pb-2 flex hover-none:flex-col-reverse", orientationClasses)}>
+          <div className={classnames("pb-2 flex", orientationClasses)}>
             <div
               className={classnames(
                 // zoom ? "cursor-zoom-out" : "cursor-zoom-in",
-                "mb-2 self-center relative"
+                "mb-2 self-center relative flex hover-none:flex-col-reverse"
               )}
               // onClick={() => setZoom((_zoom) => !_zoom)}
               style={{
                 maxWidth: `calc(max(calc(100vh - ${verticalPad}), 500px) * ${ar})`,
               }}
             >
-              <div className="hover-hover:absolute top-0 bottom-0 left-0 right-0 z-10 flex justify-between opacity-0 hover:opacity-100 focus-within:opacity-100">
+              <div
+                className={classnames(
+                  "hover-hover:absolute",
+                  "hover-hover:top-0 hover-hover:bottom-0 hover-hover:left-0 hover-hover:right-0",
+                  "hover-hover:opacity-0 hover:opacity-100 focus-within:opacity-100",
+                  "z-10 flex justify-between"
+                )}
+              >
                 {prevImage ? (
                   <Link
                     className={ArrowLinkClasses}
