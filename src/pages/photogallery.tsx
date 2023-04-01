@@ -241,7 +241,7 @@ const GalleryPage = ({
             ]}
           />
         </div>
-        {sortKey !== 'datePublished' && <div className="gradient pb-6">
+        {sortKey !== 'datePublished' && <div className="gradient pb-6 mb-4">
           <div className="px-4 md:px-8 flex items-baseline">
             <h3 className="mx-2 font-bold" id="recently">
               Recently published
@@ -273,7 +273,7 @@ const GalleryPage = ({
             singleRow
           />
         </div>}
-        <div className="px-4 md:px-8 mt-2 pt-2">
+        <div className="px-4 md:px-8">
           <h3 className="mx-2 font-bold" id="all">
             All images
           </h3>
