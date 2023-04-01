@@ -172,6 +172,7 @@ const GalleryImage = ({ data, location: { state } }) => {
           className="text-black transition-colors"
           // style={getHelmetSafeBodyStyle(vibrant)}
           style={getHelmetSafeBodyStyle({
+            ...getVibrantStyle(vibrant),
             background: chroma.mix(vibrant.Vibrant, "white", 0.7, BLEND).hex(),
           })}
         />
@@ -200,6 +201,7 @@ const GalleryImage = ({ data, location: { state } }) => {
             },
           ]}
           isClient={isClient}
+          linkBg={chroma.mix(vibrant.Vibrant, "white", 0.7, BLEND).hex()}
         />
         <div className="flex flex-auto items-center lg:gap-2 justify-between">
           {prevImage ? (

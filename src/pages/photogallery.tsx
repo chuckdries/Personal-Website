@@ -224,7 +224,7 @@ const GalleryPage = ({
               Muted: [0, 0, 0],
               LightMuted: [0, 0, 0],
               Vibrant: [0, 0, 0],
-              LightVibrant: [0, 0, 0],
+              LightVibrant: [238, 238, 238],
               DarkMuted: [238, 238, 238],
               DarkVibrant: [238, 238, 238],
             })
