@@ -571,20 +571,12 @@ type FileFieldsFilterInput = {
 };
 
 type FileFieldsImageMeta = {
-  readonly datePublished: Maybe<Scalars['Date']>;
+  readonly datePublished: Maybe<Scalars['String']>;
   readonly dateTaken: Maybe<Scalars['Date']>;
   readonly dominantHue: Maybe<ReadonlyArray<Maybe<Scalars['Float']>>>;
   readonly meta: Maybe<FileFieldsImageMetaMeta>;
   readonly vibrant: Maybe<FileFieldsImageMetaVibrant>;
   readonly vibrantHue: Maybe<Scalars['Float']>;
-};
-
-
-type FileFieldsImageMeta_datePublishedArgs = {
-  difference: InputMaybe<Scalars['String']>;
-  formatString: InputMaybe<Scalars['String']>;
-  fromNow: InputMaybe<Scalars['Boolean']>;
-  locale: InputMaybe<Scalars['String']>;
 };
 
 
@@ -605,7 +597,7 @@ type FileFieldsImageMetaFieldSelector = {
 };
 
 type FileFieldsImageMetaFilterInput = {
-  readonly datePublished: InputMaybe<DateQueryOperatorInput>;
+  readonly datePublished: InputMaybe<StringQueryOperatorInput>;
   readonly dateTaken: InputMaybe<DateQueryOperatorInput>;
   readonly dominantHue: InputMaybe<FloatQueryOperatorInput>;
   readonly meta: InputMaybe<FileFieldsImageMetaMetaFilterInput>;
