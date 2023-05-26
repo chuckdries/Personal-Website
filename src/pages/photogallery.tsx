@@ -173,6 +173,7 @@ const GalleryPage = ({
 
   const [dbgTags, setDbgTags] = React.useState(false);
   const [dbgSortKey, setDbgSortKey] = React.useState(false);
+  const [dbgRating, setDbgRating] = React.useState(false);
   const [dbgName, setDbgName] = React.useState(false);
   const dataFn = React.useCallback(
     (image: GalleryImage): string[] | null => {
@@ -182,6 +183,9 @@ const GalleryPage = ({
       let data: string[] = [];
       if (dbgName) {
         data.push(image.base);
+      }
+      if (dbgRating) {
+        data.push(R.pathOr("x", SORT_KEYS.rating, image));
       }
       if (dbgSortKey) {
         switch (sortKey) {
@@ -207,7 +211,7 @@ const GalleryPage = ({
       }
       return data;
     },
-    [showDebug, sortKey, dbgName, dbgSortKey, dbgTags]
+    [showDebug, sortKey, dbgName, dbgRating, dbgSortKey, dbgTags]
   );
 
   return (
@@ -309,6 +313,9 @@ const GalleryPage = ({
               <div className="mr-1">
                 <ToggleButton isSelected={dbgName} onChange={setDbgName}>
                   name
+                </ToggleButton>
+                <ToggleButton isSelected={dbgRating} onChange={setDbgRating}>
+                  rating
                 </ToggleButton>
                 <ToggleButton isSelected={dbgSortKey} onChange={setDbgSortKey}>
                   sort key
