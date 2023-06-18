@@ -4,25 +4,26 @@ import { Link, navigate } from "gatsby";
 import { Popover } from "react-tiny-popover";
 import { StaticImage } from "gatsby-plugin-image";
 
-const navClasses =
-  "hover:underline hover:bg-black/10 block p-3 text-black flex-shrink-0 whitespace-nowrap";
-
-const ExternalLinks = () => (
+const navClasses = (scheme: "light" | "dark") => classnames(
+  "hover:underline hover:bg-black/10 block p-3 flex-shrink-0 whitespace-nowrap",
+  scheme === "dark" ? "text-white" : "text-black"
+)
+const ExternalLinks = ({ scheme }: { scheme: "light" | "dark"}) => (
   <ul
     className={classnames(
-      "z-30 overflow-hidden bg-vibrant-light/50 backdrop-blur-lg",
+      "z-30 overflow-hidden bg-vibrant-dark/50 backdrop-blur-lg",
       "rounded shadow-lg border border-gray-400"
     )}
   >
     <li>
       {/* eslint-disable-next-line */}
-      <a className={navClasses} href="https://buzzwords.gg" target="_blank">
+      <a className={navClasses(scheme)} href="https://buzzwords.gg" target="_blank">
         Buzzwords
       </a>
     </li>
     <li>
       <a
-        className={navClasses}
+        className={navClasses(scheme)}
         href="https://twitter.com/chuckletmilk"
         rel="noreferrer"
         target="_blank"
@@ -32,7 +33,7 @@ const ExternalLinks = () => (
     </li>
     <li>
       <a
-        className={navClasses}
+        className={navClasses(scheme)}
         href="https://www.instagram.com/asubtlebutdeliciouscoffeecake/"
         rel="noreferrer"
         target="_blank"
@@ -42,7 +43,7 @@ const ExternalLinks = () => (
     </li>
     <li>
       <a
-        className={navClasses}
+        className={navClasses(scheme)}
         href="https://www.youtube.com/channel/UCknR_DdytuOgzus--b2gZhg"
         rel="noreferrer"
         target="_blank"
@@ -52,7 +53,7 @@ const ExternalLinks = () => (
     </li>
     <li>
       <a
-        className={navClasses}
+        className={navClasses(scheme)}
         href="https://github.com/chuckdries"
         rel="noreferrer"
         target="_blank"
@@ -62,7 +63,7 @@ const ExternalLinks = () => (
     </li>
     <li>
       <a
-        className={navClasses}
+        className={navClasses(scheme)}
         href="https://hachyderm.io/@chuckletmilk"
         rel="me noreferrer"
         target="_blank"
@@ -71,7 +72,7 @@ const ExternalLinks = () => (
       </a>
     </li>
     <li>
-      <a className={navClasses} href="mailto:chuck@chuckdries.com">
+      <a className={navClasses(scheme)} href="mailto:chuck@chuckdries.com">
         chuck@chuckdries.com
       </a>
     </li>
@@ -84,12 +85,14 @@ interface NavProps {
     href: string;
     label: string;
   }[];
+  scheme?: "dark" | "light"
 }
 
-const Nav = ({ internalLinks, className }: NavProps) => {
+const Nav = ({ internalLinks, className, scheme: _scheme }: NavProps) => {
   const [linksMenu, setLinksMenu] = useState(false);
   const faceClicks = useRef(0);
   const faceLastClicked = useRef(0);
+  const scheme = _scheme ?? "light"
 
   return (
     <nav
@@ -147,7 +150,7 @@ const Nav = ({ internalLinks, className }: NavProps) => {
               <li key={href}>
                 <Link
                   activeClassName="font-bold underline"
-                  className={navClasses}
+                  className={navClasses(scheme)}
                   to={href}
                 >
                   {label}
@@ -157,7 +160,7 @@ const Nav = ({ internalLinks, className }: NavProps) => {
         </ul>
         <Popover
           containerClassName="z-30 p-1"
-          content={<ExternalLinks />}
+          content={<ExternalLinks scheme={scheme} />}
           isOpen={linksMenu}
           onClickOutside={() => setLinksMenu(false)}
           positions={["bottom"]} // preferred positions by priority
@@ -165,7 +168,7 @@ const Nav = ({ internalLinks, className }: NavProps) => {
           <button
             className={classnames(
               "hover:underline inline-flex align-middle items-center",
-              navClasses
+              navClasses(scheme)
             )}
             onClick={() => setLinksMenu(!linksMenu)}
           >

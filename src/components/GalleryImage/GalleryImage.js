@@ -143,7 +143,7 @@ const GalleryImage = ({ data, location: { state } }) => {
     const location = [meta.Location, meta.City, meta.State].filter(Boolean);
     locationString = location.join(", ");
   }
-  const vibrant = getVibrant(image, true);
+  const vibrant = getVibrant(image);
   const BLEND = "hsl";
   const darkAccent = chroma
     .mix(vibrant.Vibrant, "hsla(216, 0%, 90%, 1)", 0.6, BLEND)
@@ -169,16 +169,13 @@ const GalleryImage = ({ data, location: { state } }) => {
       <Helmet>
         <title>{name} - Gallery | Chuck Dries</title>
         <body
-          className="text-black transition-colors"
+          className="text-white transition-colors"
           // style={getHelmetSafeBodyStyle(vibrant)}
           style={getHelmetSafeBodyStyle({
-            ...getVibrantStyle({
-              ...vibrant,
-              LightVibrant: chroma
-                .mix(vibrant.Vibrant, "white", 0.7, BLEND)
-                .rgb(),
-            }),
-            background: chroma.mix(vibrant.Vibrant, "white", 0.7, BLEND).hex(),
+            ...getVibrantStyle(vibrant),
+            background: chroma
+              .mix(vibrant.DarkVibrant, "black", 0.6, BLEND)
+              .hex(),
           })}
         />
       </Helmet>
@@ -206,6 +203,7 @@ const GalleryImage = ({ data, location: { state } }) => {
             },
           ]}
           isClient={isClient}
+          scheme="dark"
         />
         <div className="flex flex-auto items-center justify-center">
           <div className={classnames("pb-2 flex", orientationClasses)}>

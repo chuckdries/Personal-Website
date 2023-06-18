@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from "react";
 
-import { pathOr } from "ramda";
+import { pathOr, take } from "ramda";
 // import kebabCase from 'lodash/kebabCase';
 
 import { HomepageImage } from "./pages";
@@ -30,16 +30,19 @@ export const getCanonicalSize = (image: GalleryImage) => ({
 export const getRgba = (palette: string[], alpha: number) =>
   `rgba(${palette[0]}, ${palette[1]}, ${palette[2]}, ${alpha || 1})`;
 
+// ??????? why do vibrant rgb triples sometimes have a 1 at the end?????
+const maybeTake3 = <T>(arg: T | null) => arg ? take(3, arg as unknown[]) : [];
+
 export const getVibrantStyle = (
   vibrant: Queries.FileFieldsImageMetaVibrant,
   screenHeight?: number
 ) => ({
-  "--muted": vibrant.Muted,
-  "--dark-muted": vibrant.DarkMuted,
-  "--light-muted": vibrant.LightMuted,
-  "--vibrant": vibrant.Vibrant,
-  "--dark-vibrant": vibrant.DarkVibrant,
-  "--light-vibrant": vibrant.LightVibrant,
+  "--muted": maybeTake3(vibrant.Muted),
+  "--dark-muted": maybeTake3(vibrant.DarkMuted),
+  "--light-muted": maybeTake3(vibrant.LightMuted),
+  "--vibrant": maybeTake3(vibrant.Vibrant),
+  "--dark-vibrant": maybeTake3(vibrant.DarkVibrant),
+  "--light-vibrant": maybeTake3(vibrant.LightVibrant),
   "--height-screen": screenHeight ? `${screenHeight}px` : "100vh",
 });
 
