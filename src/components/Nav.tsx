@@ -17,7 +17,8 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark"}) => (
   >
     <li>
       {/* eslint-disable-next-line */}
-      <a className={navClasses(scheme)} href="https://buzzwords.gg" target="_blank">
+      <a className={classnames(navClasses('light'), 'bg-buzzwordsLightBg hover:bg-gray-300')} href="https://buzzwords.gg" target="_blank">
+        <StaticImage alt="buzzwords icon" className="mr-2" placeholder="none" src="../images/buzzwords_icon.png" style={{ height: '30px', width: '30px' }} />
         Buzzwords
       </a>
     </li>

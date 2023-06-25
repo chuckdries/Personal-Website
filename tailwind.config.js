@@ -47,6 +47,7 @@ module.exports = {
       colors: {
         "white": "#eee",
         buzzwordsPrimary: "#F6C54B",
+        buzzwordsLightBg: "#fae7b2",
         transparentblack: "rgba(0,0,0,0.24)",
         vibrant: {
           DEFAULT: ({ opacityVariable, opacityValue }) => {
