@@ -59,7 +59,7 @@ const ProjectsPage = ({
         />
       </Helmet>
       <main className="font-sans flex flex-col h-screen">
-        <div className="bg-buzzwordsLightBg h-[100vh] pb-8 flex flex-col">
+        <div className="bg-buzzwordsLightBg/70 h-[100vh] pb-8 flex flex-col">
           <Nav
             internalLinks={[
               { href: "/", label: "Home" },
@@ -78,7 +78,7 @@ const ProjectsPage = ({
                 float: "left",
               }}
             />
-            <div className="flex flex-col gap-4 justify-center p-2 lg:p-4">
+            <div className="flex flex-col gap-4 justify-center p-2 lg:p-5">
               <div>
                 <h3 className="text-4xl font-bold">Buzzwords</h3>
                 <span>Browser based word game</span>
@@ -90,7 +90,7 @@ const ProjectsPage = ({
               </ul>
               <div className="flex gap-3 px-2">
                 <a
-                  className="text-black bg-gray-500/10 hover:bg-gray-500/40 rounded-full p-2 px-4"
+                  className="text-black bg-gray-500/10 hover:bg-gray-500/30 rounded-full p-2 px-4"
                   href="https://github.com/ViciousFish/buzzwords"
                   rel="noreferrer"
                   target="_blank"
@@ -98,7 +98,7 @@ const ProjectsPage = ({
                   GitHub
                 </a>
                 <a
-                  className="text-black bg-gray-500/10 hover:bg-gray-500/40 rounded-full p-2 px-4"
+                  className="text-black bg-gray-500/10 hover:bg-gray-500/30 rounded-full p-2 px-4"
                   href="https://chuckdries.itch.io/buzzwords"
                   rel="noreferrer"
                   target="_blank"
