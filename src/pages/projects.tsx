@@ -85,9 +85,9 @@ const ProjectsPage = ({
                 <li>UI with react, react-spring and react-three-fiber</li>
                 <li>Backend with Mongo, Express, Typescript</li>
               </ul>
-              <div className="flex gap-4 px-2">
+              <div className="flex gap-3 px-2">
                 <a
-                  className="hover:bg-gray-500/20 rounded-full p-2 px-4"
+                  className="text-black bg-gray-500/10 hover:bg-gray-500/40 rounded-full p-2 px-4"
                   href="https://github.com/ViciousFish/buzzwords"
                   rel="noreferrer"
                   target="_blank"
@@ -95,7 +95,7 @@ const ProjectsPage = ({
                   GitHub
                 </a>
                 <a
-                  className="hover:bg-gray-500/20 rounded-full p-2 px-4"
+                  className="text-black bg-gray-500/10 hover:bg-gray-500/40 rounded-full p-2 px-4"
                   href="https://chuckdries.itch.io/buzzwords"
                   rel="noreferrer"
                   target="_blank"
@@ -103,7 +103,7 @@ const ProjectsPage = ({
                   Itch.io
                 </a>
                 <a
-                  className="bg-buzzwordsPrimary hover:bg-buzzwordsPrimary/50 text-black rounded-full p-2 px-4"
+                  className="bg-buzzwordsPrimary hover:bg-buzzwordsPrimary/60 text-black rounded-full p-2 px-4"
                   href="https://buzzwords.gg"
                   rel="noreferrer"
                   target="_blank"
