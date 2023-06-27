@@ -79,9 +79,12 @@ const ProjectsPage = ({
               }}
             />
             <div className="flex flex-col gap-4 justify-center p-2 lg:p-4">
-              <h3 className="text-4xl font-bold">Buzzwords</h3>
+              <div>
+                <h3 className="text-4xl font-bold">Buzzwords</h3>
+                <span>Browser based word game</span>
+              </div>
               <ul className="pl-4 list-disc">
-                <li>Browser based word game with seamless link sharing multiplayer</li>
+                <li>Seamless url-based multiplayer</li>
                 <li>UI with react, react-spring and react-three-fiber</li>
                 <li>Backend with Mongo, Express, Typescript</li>
               </ul>
