@@ -78,12 +78,12 @@ const ProjectsPage = ({
                 float: "left",
               }}
             />
-            <div className="flex flex-col gap-4 justify-center p-2 lg:p-5">
+            <div className="flex flex-col justify-center p-2 lg:p-5">
               <div>
                 <h3 className="text-4xl font-bold">Buzzwords</h3>
                 <span>Browser based word game</span>
               </div>
-              <ul className="pl-4 list-disc">
+              <ul className="pl-4 list-disc mt-2 mb-4">
                 <li>Seamless url-based multiplayer</li>
                 <li>UI with react, react-spring and react-three-fiber</li>
                 <li>Backend with Mongo, Express, Typescript</li>
