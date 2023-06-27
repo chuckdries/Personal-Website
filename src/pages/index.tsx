@@ -87,12 +87,13 @@ const IndexPage = ({
         <Nav
           internalLinks={[
             { href: "/", label: "Home" },
+            { href: "/projects", label: "Projects"},
             { href: "/photogallery/", label: "Gallery" },
           ]}
         />
         {isClient && (
           <Link
-            className="flex-auto flex flex-col  m-4 md:m-8 mt-0 md:mt-0"
+            className="flex-auto flex flex-col m-4 md:m-8 mt-0 md:mt-0"
             to={`/photogallery/${image.base}/`}
           >
             <GatsbyImage
