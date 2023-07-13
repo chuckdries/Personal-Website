@@ -189,6 +189,7 @@ const MasonryGallery = ({
                   className="w-full"
                   image={img}
                   objectFit="cover"
+                  objectPosition="center top"
                 />
                 {showPalette && vibrant && (
                   <div className="grid grid-cols-6 flex-shrink-0 h-[20px] w-full">
