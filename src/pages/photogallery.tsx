@@ -355,13 +355,13 @@ const GalleryPage = ({
       </div>
       <MasonryGallery
         aspectsByBreakpoint={{
-          xs: 2,
+          xs: 1.5,
           sm: 2,
-          md: 3,
-          lg: 4,
-          xl: 5,
-          "2xl": 6.1,
-          "3xl": 8,
+          md: 2.5,
+          lg: 3,
+          xl: 3.8,
+          "2xl": 4.9,
+          "3xl": 6.1,
         }}
         dataFn={dataFn}
         debugHue={sortKey === "hue_debug"}
