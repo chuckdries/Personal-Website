@@ -18,14 +18,16 @@ module.exports = {
     },
     "gatsby-transformer-sharp",
     "gatsby-plugin-postcss",
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "images",
-        path: "./src/images/",
-      },
-      __key: "images",
-    },
+
+    /** source plugins */
+    // {
+    //   resolve: "gatsby-source-filesystem",
+    //   options: {
+    //     name: "images",
+    //     path: "./src/images/",
+    //   },
+    //   __key: "images",
+    // },
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -34,14 +36,16 @@ module.exports = {
       },
       __key: "gallery",
     },
-    // {
-    //   resolve: "gatsby-source-filesystem",
-    //   options: {
-    //     name: "pages",
-    //     path: "./src/pages/",
-    //   },
-    //   __key: "pages",
-    // },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "pages",
+        path: "./src/pages/",
+      },
+      __key: "pages",
+    },
+    
+    /** post-source plugins */
     "gatsby-plugin-preval",
     "gatsby-plugin-robots-txt",
     {
