@@ -1,6 +1,6 @@
 import * as React from "react";
 import { graphql, Link, PageProps } from "gatsby";
-import { getImage, StaticImage } from "gatsby-plugin-image";
+import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
 import classnames from "classnames";
 
@@ -16,14 +16,11 @@ import { useMediaQuery } from "../useMediaQuery";
 const env =
   process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
 
-export type HomepageImage =
-  Queries.ProjectsPageQuery["allFile"]["nodes"][number];
-
 const ProjectsPage = ({
   data: {
-    allFile: { nodes: images },
+    allMdx: { nodes },
   },
-}: PageProps<Queries.ProjectsPageQuery>) => {
+}: PageProps<Queries.ProjectsQuery>) => {
   const [isClient, setIsClient] = React.useState(false);
 
   React.useEffect(() => {
@@ -59,7 +56,7 @@ const ProjectsPage = ({
         />
       </Helmet>
       <main className="font-sans flex flex-col h-screen">
-        <div className="bg-buzzwordsLightBg/70 h-[100vh] pb-8 flex flex-col">
+        <div className="bg-buzzwordsLightBg/70 min-h-[70vh] pb-8 flex flex-col overflow-hidden">
           <Nav
             internalLinks={[
               { href: "/", label: "Home" },
@@ -67,16 +64,13 @@ const ProjectsPage = ({
               { href: "/photogallery/", label: "Gallery" },
             ]}
           />
-          <div className="flex lg:flex-auto flex-col items-center lg:flex-row justify-center">
+          <div className="relative flex lg:flex-auto flex-col items-center lg:flex-row justify-center lg:justify-items-stretch">
             <StaticImage
               alt="buzzwords screenshot"
-              className="lg:max-w-[calc(1.53*50vh)] lg:w-[50vw]"
+              className="lg:max-w-[calc(1.53*50vh)]"
               // layout="constrained"
               objectFit="contain"
               src="../images/buzzwords_screenshot.png"
-              style={{
-                float: "left",
-              }}
             />
             <div className="flex flex-col justify-center p-2 lg:p-5">
               <div>
@@ -117,6 +111,22 @@ const ProjectsPage = ({
             </div>
           </div>
         </div>
+        <div className="flex flex-wrap p-4">
+          {nodes.map((project) => {
+            const imgDat =
+              project.frontmatter?.featuredImage?.childImageSharp
+                ?.gatsbyImageData;
+            const image = imgDat ? getImage(imgDat) : null;
+            return (
+              <div className="p-4 rounded-xl bg-slate-300">
+                {image && (
+                  <GatsbyImage alt="screenshot of project" image={image} />
+                )}
+                <h3>{project.frontmatter?.title}</h3>
+              </div>
+            );
+          })}
+        </div>
       </main>
       <a className="hidden" href="https://hachyderm.io/@chuckletmilk" rel="me">
         Mastodon
@@ -126,16 +136,19 @@ const ProjectsPage = ({
 };
 
 export const query = graphql`
-  query ProjectsPage {
-    allFile(
-      filter: {
-        sourceInstanceName: { eq: "gallery" }
-        base: { in: ["DSC05842.jpg", "DSC05900.jpg"] }
-      }
-      sort: { childImageSharp: { fluid: { aspectRatio: ASC } } }
-    ) {
+  query Projects {
+    allMdx(filter: { frontmatter: { type: { eq: "project" } } }) {
       nodes {
-        base
+        excerpt
+        frontmatter {
+          title
+          slug
+          featuredImage {
+            childImageSharp {
+              gatsbyImageData(width: 300)
+            }
+          }
+        }
       }
     }
   }
