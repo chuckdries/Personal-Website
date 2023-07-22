@@ -56,7 +56,7 @@ const ProjectsPage = ({
         />
       </Helmet>
       <main className="font-sans flex flex-col h-screen">
-        <div className="bg-buzzwordsLightBg/70 min-h-[70vh] pb-8 flex flex-col overflow-hidden">
+        <div className="bg-buzzwordsLightBg/70 max-h-[70vh] pb-6 flex flex-col overflow-hidden justify-stretch">
           <Nav
             internalLinks={[
               { href: "/", label: "Home" },
@@ -64,10 +64,10 @@ const ProjectsPage = ({
               { href: "/photogallery/", label: "Gallery" },
             ]}
           />
-          <div className="relative flex lg:flex-auto flex-col items-center lg:flex-row justify-center lg:justify-items-stretch">
+          <div className="flex flex-1 flex-col items-center lg:flex-row justify-center min-h-0">
             <StaticImage
               alt="buzzwords screenshot"
-              className="lg:max-w-[calc(1.53*50vh)]"
+              className="min-h-0 max-h-full lg:max-w-[50vw]"
               // layout="constrained"
               objectFit="contain"
               src="../images/buzzwords_screenshot.png"
@@ -111,7 +111,7 @@ const ProjectsPage = ({
             </div>
           </div>
         </div>
-        <div className="flex flex-wrap p-4">
+        <div className="flex flex-1 flex-wrap p-4 w-[350px]">
           {nodes.map((project) => {
             const imgDat =
               project.frontmatter?.featuredImage?.childImageSharp
@@ -123,6 +123,7 @@ const ProjectsPage = ({
                   <GatsbyImage alt="screenshot of project" image={image} />
                 )}
                 <h3>{project.frontmatter?.title}</h3>
+                <p>{project.excerpt}</p>
               </div>
             );
           })}
