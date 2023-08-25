@@ -73,6 +73,16 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark"}) => (
       </a>
     </li>
     <li>
+      <a
+        className={navClasses(scheme)}
+        href="https://cohost.org/chuck"
+        rel="noreferrer"
+        target="_blank"
+      >
+        Cohost
+      </a>
+    </li>
+    <li>
       <a className={navClasses(scheme)} href="mailto:chuck@chuckdries.com">
         chuck@chuckdries.com
       </a>
