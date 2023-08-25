@@ -48,6 +48,7 @@ const MasonryGallery = ({
   );
 
   const { breakpoint } = useBreakpoint(breakpoints, "xs");
+  console.log("🚀 ~ file: MasonryGallery.tsx:51 ~ breakpoint:", breakpoint)
 
   const galleryWidth = `calc(100vw - ${
     breakpoint === "xs" || breakpoint === "sm" ? "32" : "160"
@@ -188,6 +189,7 @@ const MasonryGallery = ({
                   className="w-full"
                   image={img}
                   objectFit="cover"
+                  objectPosition="center top"
                 />
                 {showPalette && vibrant && (
                   <div className="grid grid-cols-6 flex-shrink-0 h-[20px] w-full">
