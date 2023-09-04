@@ -462,6 +462,7 @@ export const query = graphql`
             Location
             City
             State
+            Keywords
           }
           vibrant {
             ...VibrantColors
