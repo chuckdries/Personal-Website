@@ -302,7 +302,7 @@ const GalleryPage = ({
               // "waterfall",
               // "fireworks",
               // "panoramic",
-              "Portland Japanese Garden",
+              // "Portland Japanese Garden",
               "Film",
               // "shoot the light",
               // "sunset",
