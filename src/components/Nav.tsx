@@ -4,11 +4,12 @@ import { Link, navigate } from "gatsby";
 import { Popover } from "react-tiny-popover";
 import { StaticImage } from "gatsby-plugin-image";
 
-const navClasses = (scheme: "light" | "dark") => classnames(
-  "hover:underline hover:bg-black/10 block p-3 flex-shrink-0 whitespace-nowrap",
-  scheme === "dark" ? "text-white" : "text-black"
-)
-const ExternalLinks = ({ scheme }: { scheme: "light" | "dark"}) => (
+const navClasses = (scheme: "light" | "dark") =>
+  classnames(
+    "hover:underline hover:bg-black/10 block p-3 flex-shrink-0 whitespace-nowrap",
+    scheme === "dark" ? "text-white" : "text-black"
+  );
+const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
   <ul
     className={classnames(
       "z-30 overflow-hidden bg-vibrant-dark/50 backdrop-blur-lg",
@@ -17,8 +18,21 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark"}) => (
   >
     <li>
       {/* eslint-disable-next-line */}
-      <a className={classnames(navClasses('light'), 'bg-buzzwordsLightBg hover:bg-gray-300')} href="https://buzzwords.gg" target="_blank">
-        <StaticImage alt="buzzwords icon" className="mr-2" placeholder="none" src="../images/buzzwords_icon.png" style={{ height: '25px', width: '25px' }} />
+      <a
+        className={classnames(
+          navClasses("light"),
+          "bg-buzzwordsLightBg hover:bg-gray-300"
+        )}
+        href="https://buzzwords.gg"
+        target="_blank"
+      >
+        <StaticImage
+          alt="buzzwords icon"
+          className="mr-2"
+          placeholder="none"
+          src="../images/buzzwords_icon.png"
+          style={{ height: "25px", width: "25px" }}
+        />
         Buzzwords
       </a>
     </li>
@@ -96,14 +110,14 @@ interface NavProps {
     href: string;
     label: string;
   }[];
-  scheme?: "dark" | "light"
+  scheme?: "dark" | "light";
 }
 
 const Nav = ({ internalLinks, className, scheme: _scheme }: NavProps) => {
   const [linksMenu, setLinksMenu] = useState(false);
   const faceClicks = useRef(0);
   const faceLastClicked = useRef(0);
-  const scheme = _scheme ?? "light"
+  const scheme = _scheme ?? "light";
 
   return (
     <nav
@@ -116,14 +130,12 @@ const Nav = ({ internalLinks, className, scheme: _scheme }: NavProps) => {
     >
       <div className="flex flex-auto items-center">
         <div
-          className={classnames(
-            "h-[120px] w-[120px] mr-4 my-5 flex-shrink-0"
-          )}
+          className={classnames("h-[120px] w-[120px] mr-4 my-5 flex-shrink-0")}
           onClick={() => {
             const prevClick = faceLastClicked.current;
             faceLastClicked.current = Date.now();
             if (prevClick > 0 && faceLastClicked.current - prevClick > 500) {
-              console.log('too slow!')
+              console.log("too slow!");
               faceClicks.current = 1;
               return;
             }
@@ -168,6 +180,16 @@ const Nav = ({ internalLinks, className, scheme: _scheme }: NavProps) => {
                 </Link>
               </li>
             ))}
+          <li>
+            <a
+              rel="noreferrer"
+              target="_blank"
+              className={navClasses(scheme)}
+              href="https://chuckdries.darkroom.com/"
+            >
+              Prints
+            </a>
+          </li>
         </ul>
         <Popover
           containerClassName="z-30 p-1"
