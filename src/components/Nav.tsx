@@ -39,13 +39,23 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
     <li>
       <a
         className={navClasses(scheme)}
+        href="https://chuckdries.darkroom.com/"
+        rel="noreferrer"
+        target="_blank"
+      >
+        Prints
+      </a>
+    </li>
+    {/* <li>
+      <a
+        className={navClasses(scheme)}
         href="https://twitter.com/chuckletmilk"
         rel="noreferrer"
         target="_blank"
       >
         Twitter
       </a>
-    </li>
+    </li> */}
     <li>
       <a
         className={navClasses(scheme)}
@@ -180,7 +190,7 @@ const Nav = ({ internalLinks, className, scheme: _scheme }: NavProps) => {
                 </Link>
               </li>
             ))}
-          <li>
+          {/* <li>
             <a
               rel="noreferrer"
               target="_blank"
@@ -189,7 +199,7 @@ const Nav = ({ internalLinks, className, scheme: _scheme }: NavProps) => {
             >
               Prints
             </a>
-          </li>
+          </li> */}
         </ul>
         <Popover
           containerClassName="z-30 p-1"

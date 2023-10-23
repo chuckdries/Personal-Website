@@ -241,8 +241,8 @@ const GalleryPage = ({
             className="mb-4"
             internalLinks={[
               { href: "/", label: "Home" },
-              { href: "/projects", label: "Projects"},
               { href: "/photogallery/", label: "Gallery" },
+              { href: "/projects", label: "Projects"},
             ]}
           />
         </div>

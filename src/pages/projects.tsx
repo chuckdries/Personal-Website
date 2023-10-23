@@ -63,8 +63,8 @@ const ProjectsPage = ({
           <Nav
             internalLinks={[
               { href: "/", label: "Home" },
-              { href: "/projects", label: "Projects" },
               { href: "/photogallery/", label: "Gallery" },
+              { href: "/projects", label: "Projects" },
             ]}
           />
           <div className="flex lg:flex-auto flex-col items-center lg:flex-row justify-center">

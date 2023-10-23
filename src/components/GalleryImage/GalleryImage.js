@@ -184,7 +184,6 @@ const GalleryImage = ({ data, location: { state } }) => {
           className="mb-4"
           internalLinks={[
             { href: "/", label: "Home" },
-            { href: "/projects", label: "Projects"},
             {
               href: getGalleryPageUrl(
                 { keyword: filterKeyword, sortKey },
@@ -202,6 +201,7 @@ const GalleryImage = ({ data, location: { state } }) => {
                 </>
               ),
             },
+            { href: "/projects", label: "Projects"},
           ]}
           isClient={isClient}
           scheme="dark"
