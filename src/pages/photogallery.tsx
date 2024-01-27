@@ -291,7 +291,7 @@ const GalleryPage = ({
                 : getGalleryPageUrl({ keyword: val, sortKey, showDebug }, hash)
             }
             keywords={[
-              "Boyce Thompson Arboretum",
+              // "Boyce Thompson Arboretum",
               "winter",
               "night",
               "coast",
@@ -300,12 +300,12 @@ const GalleryPage = ({
               "flowers",
               "product",
               // "waterfall",
-              // "fireworks",
+              "fireworks",
               // "panoramic",
               // "Portland Japanese Garden",
-              "Film",
+              // "Film",
               // "shoot the light",
-              // "sunset",
+              "sunset",
             ]}
             onPick={onKeywordPick}
             value={filterKeyword}

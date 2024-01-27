@@ -228,8 +228,11 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
         xmp: true,
         // icc: true
       });
+      if (!metaData.Rating) {
+        console.log(node.base, metaData);
+      }
     } catch (e) {
-      console.error(`something wen wrong with exifr on image ${node.base}`, e);
+      console.error(`🅱️ something wen wrong with exifr on image ${node.base}`, e);
       throw e;
     }
 
