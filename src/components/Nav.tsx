@@ -96,7 +96,7 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
         Mastodon
       </a>
     </li>
-    <li>
+    {/* <li>
       <a
         className={navClasses(scheme)}
         href="https://cohost.org/chuck"
@@ -105,7 +105,7 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
       >
         Cohost
       </a>
-    </li>
+    </li> */}
     <li>
       <a className={navClasses(scheme)} href="mailto:chuck@chuckdries.com">
         chuck@chuckdries.com
@@ -190,16 +190,16 @@ const Nav = ({ internalLinks, className, scheme: _scheme }: NavProps) => {
                 </Link>
               </li>
             ))}
-          {/* <li>
+          <li>
             <a
               rel="noreferrer"
               target="_blank"
               className={navClasses(scheme)}
-              href="https://chuckdries.darkroom.com/"
+              href="https://cohost.org/chuck/"
             >
-              Prints
+              Blog
             </a>
-          </li> */}
+          </li>
         </ul>
         <Popover
           containerClassName="z-30 p-1"
