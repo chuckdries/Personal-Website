@@ -69,6 +69,7 @@ export const query = graphql`
               dateTaken
               meta {
                 Rating
+                Keywords
               }
             }
           }

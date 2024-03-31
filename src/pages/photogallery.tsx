@@ -327,7 +327,7 @@ const GalleryPage = ({
                 </ToggleButton>
               </div>
             )}
-            <div className="mr-1">
+            {/* <div className="mr-1">
               <ToggleButton
                 isSelected={showPalette}
                 onChange={setShowPalette}
@@ -339,7 +339,7 @@ const GalleryPage = ({
                   }}
                 />
               </ToggleButton>
-            </div>
+            </div> */}
             <Select
               label="Sort by..."
               // @ts-expect-error React.key, but string is more convenient for the state
