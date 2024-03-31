@@ -24,7 +24,7 @@ const SORT_KEYS = {
   hue_debug: ["fields", "imageMeta", "dominantHue", "0"],
   date: ["fields", "imageMeta", "dateTaken"],
   datePublished: ["fields", "imageMeta", "datePublished"],
-} as const;
+};
 
 export type GalleryImage =
   Queries.GalleryPageQueryQuery["all"]["nodes"][number];
