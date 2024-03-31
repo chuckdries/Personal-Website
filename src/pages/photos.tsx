@@ -70,7 +70,7 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
         maxWidth="calc(100vw - 200px)"
         widthFn={(n) => `calc(calc(100vw - 200px) * ${n})`}
       />
-      <div className="h-screen" style={{ position: "fixed", top: 0, right: 0 }}>
+      <div className="h-screen w-[120px]" style={{ position: "fixed", top: 0, right: 0 }}>
         <TimelineSlider stops={stops} />
       </div>
     </PhotoLayout>

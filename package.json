@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@internationalized/date": "^3.5.2",
+    "@react-aria/utils": "^3.23.2",
     "@react-spectrum/provider": "^3.9.5",
     "@spectrum-icons/workflow": "^4.2.10",
     "autoprefixer": "^10.4.19",
