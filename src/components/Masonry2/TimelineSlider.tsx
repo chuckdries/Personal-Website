@@ -29,20 +29,22 @@ interface TimelineSliderProps {
   stops: TimelineStop[];
 }
 
-export function TimelineSlider(props: AriaSliderProps & TimelineSliderProps) {
+export function TimelineSlider({ stops }: TimelineSliderProps) {
+  const props: AriaSliderProps = {
+    orientation: "vertical",
+    minValue: 0,
+    maxValue: 1000,
+    step: 1,
+  };
   let trackRef = React.useRef<HTMLDivElement>(null);
   let numberFormatter = useNumberFormatter();
   let state = useSliderState({
     ...props,
-    orientation: "vertical",
     numberFormatter,
   });
   console.log("🚀 ~ TimelineSlider ~ state:", state);
   let { groupProps, trackProps, labelProps, outputProps } = useSlider(
-    {
-      ...props,
-      orientation: "vertical",
-    },
+    props,
     state,
     trackRef,
   );
@@ -84,17 +86,17 @@ export function TimelineSlider(props: AriaSliderProps & TimelineSliderProps) {
           />
         </div>
         <div className="absolute top-0 bottom-0 right-0 left-0">
-          {props.stops.map((stop, i) => (
+          {stops.map((stop, i) => (
             <div
               key={stop.slug}
               style={{
-                top: `${(i / (props.stops.length + 1)) * 100}%`,
+                top: `${(i / (stops.length + 1)) * 100}%`,
                 right: 10,
               }}
               className={classNames(
                 "text-white/60 absolute select-none w-full flex items-baseline justify-end",
                 // stop.emphasis == 1 ? "font-bold text-sm" : "text-xs",
-                "text-xs"
+                "text-xs",
               )}
             >
               {stop.slug} &bull;
