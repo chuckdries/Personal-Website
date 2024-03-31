@@ -19,8 +19,12 @@ const files = (
       return false;
     }
     datetime = datetime.split(" ")[0].replace(/:/g, "-");
-    const date = parseDate(datetime);
-    const dir = `${YEAR_FORMATTER.format(date.toDate())}/${MONTH_FORMATTER.format(date.toDate())}`;
+    const date = parseDate(datetime).toDate();
+    const year= YEAR_FORMATTER.format(date)
+    if (Number(year) < 2021) {
+      return { filename, dir: 'Older' };
+    }
+    const dir = `${year}/${MONTH_FORMATTER.format(date)}`;
     return { filename, dir };
   })
   .filter(Boolean);

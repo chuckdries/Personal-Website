@@ -34,6 +34,14 @@ module.exports = {
       },
       __key: "gallery",
     },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "photos",
+        path: "./data/photos/",
+      },
+      __key: "photos",
+    },
     // {
     //   resolve: "gatsby-source-filesystem",
     //   options: {
