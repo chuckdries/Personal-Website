@@ -135,13 +135,13 @@ export const query = graphql`
             breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
           )
         }
-        fields {
-          imageMeta {
-            vibrant {
-              ...VibrantColors
-            }
-          }
-        }
+        # fields {
+        #   imageMeta {
+        #     vibrant {
+        #       ...VibrantColors
+        #     }
+        #   }
+        # }
       }
     }
   }

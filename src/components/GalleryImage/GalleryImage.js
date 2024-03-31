@@ -432,43 +432,43 @@ export const query = graphql`
     file(base: { eq: $imageFilename }) {
       base
       publicURL
-      childImageSharp {
-        fluid {
-          aspectRatio
-        }
-        gatsbyImageData(
-          layout: CONSTRAINED
-          placeholder: DOMINANT_COLOR
-          quality: 90
-        )
-      }
-      fields {
-        imageMeta {
-          dateTaken
-          meta {
-            Make
-            Model
-            ExposureTime
-            FNumber
-            ISO
-            DateTimeOriginal
-            CreateDate
-            ShutterSpeedValue
-            ApertureValue
-            FocalLength
-            LensModel
-            ObjectName
-            Caption
-            Location
-            City
-            State
-            Keywords
-          }
-          vibrant {
-            ...VibrantColors
-          }
-        }
-      }
+      # childImageSharp {
+      #   fluid {
+      #     aspectRatio
+      #   }
+      #   gatsbyImageData(
+      #     layout: CONSTRAINED
+      #     placeholder: DOMINANT_COLOR
+      #     quality: 90
+      #   )
+      # }
+      # fields {
+      #   imageMeta {
+      #     dateTaken
+      #     meta {
+      #       Make
+      #       Model
+      #       ExposureTime
+      #       FNumber
+      #       ISO
+      #       DateTimeOriginal
+      #       CreateDate
+      #       ShutterSpeedValue
+      #       ApertureValue
+      #       FocalLength
+      #       LensModel
+      #       ObjectName
+      #       Caption
+      #       Location
+      #       City
+      #       State
+      #       Keywords
+      #     }
+      #     vibrant {
+      #       ...VibrantColors
+      #     }
+      #   }
+      # }
     }
   }
 `;

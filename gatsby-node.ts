@@ -34,7 +34,7 @@ const addPageDataVersion = async (file: any) => {
     let content = await util.promisify(fs.readFile)(file, "utf8");
     const result = content.replace(
       /page-data.json(\?v=[a-f0-9]{32})?/g,
-      `page-data.json?v=${hash}`
+      `page-data.json?v=${hash}`,
     );
     await util.promisify(fs.writeFile)(file, result, "utf8");
   }
@@ -43,7 +43,7 @@ const addPageDataVersion = async (file: any) => {
 export const onPostBootstrap = async () => {
   const loader = path.join(
     __dirname,
-    "node_modules/gatsby/cache-dir/loader.js"
+    "node_modules/gatsby/cache-dir/loader.js",
   );
   await addPageDataVersion(loader);
 };
@@ -64,8 +64,8 @@ const logColorsWithContrast = (color1: Color, color2: Color, text: string) => {
   const c2hex = color2.hex();
   console.log(
     chalk.hex(c1hex).bgHex(c2hex)(
-      `${text} ${c1hex}/${c2hex} ${chroma.contrast(color1, color2)}`
-    )
+      `${text} ${c1hex}/${c2hex} ${chroma.contrast(color1, color2)}`,
+    ),
   );
 };
 
@@ -152,10 +152,10 @@ function transformMetaToNodeData(
   vibrantData: Palette,
   imagePath: string,
   { r, g, b }: { r: number; b: number; g: number },
-  datePublished: string
+  datePublished: string,
 ) {
-  const vibrant = vibrantData ? processColors(vibrantData, imagePath) : null;
-  const vibrantHue = vibrantData.Vibrant!.getHsl()[0] * 360;
+  // const vibrant = vibrantData ? processColors(vibrantData, imagePath) : null;
+  // const vibrantHue = vibrantData.Vibrant!.getHsl()[0] * 360;
   let dominantHue = chroma(r, g, b).hsl();
   if (isNaN(dominantHue[0])) {
     dominantHue[0] = 0;
@@ -191,8 +191,8 @@ function transformMetaToNodeData(
       Rating: metaData.Rating,
       Keywords,
     },
-    vibrant,
-    vibrantHue,
+    // vibrant,
+    // vibrantHue,
     dominantHue,
   };
 }
@@ -212,9 +212,41 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
 }) {
   const { createNodeField } = actions;
 
-  if (node.internal.type === "File" && node.sourceInstanceName === "gallery") {
+  if (node.internal.type === "File" && node.sourceInstanceName === "photos") {
+    let [yearFolder, _monthFolder, filename] = (
+      node.relativePath as string
+    ).split("/");
+
+    const d = new Date(
+      (await exifr.parse(node.absolutePath as string)).DateTimeOriginal,
+    );
+    const month = Number(d.toLocaleString("default", { month: "numeric" }));
+    const year = d.getFullYear();
+
+    const monthFolder =
+      yearFolder === "Older" || !filename
+        ? `${yearFolder}`
+        : `${yearFolder}/${_monthFolder}`;
+
+    const slug = `photos/${monthFolder}/${node.base}`;
+    console.log("🚀 ~ slug:", slug);
+
+    createNodeField({
+      node,
+      name: "organization",
+      value: {
+        year,
+        month,
+        yearFolder,
+        monthFolder,
+        slug,
+      },
+    });
+  }
+
+  if (node.internal.type === "File" && node.sourceInstanceName === "photos") {
     const { stdout: datePublished, stderr } = await exec(
-      `git log --diff-filter=A --follow --format=%aI -1 -- ${node.absolutePath}`
+      `git log --diff-filter=A --follow --format=%aI -1 -- ${node.absolutePath}`,
     );
 
     if (stderr.length) {
@@ -232,7 +264,10 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
         console.log(node.base, metaData);
       }
     } catch (e) {
-      console.error(`🅱️ something wen wrong with exifr on image ${node.base}`, e);
+      console.error(
+        `🅱️ something wen wrong with exifr on image ${node.base}`,
+        e,
+      );
       throw e;
     }
 
@@ -245,33 +280,48 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
       throw e;
     }
     const { dominant } = await sharpImage.stats();
-    const resizedImage = await sharpImage
-      .resize({
-        width: 3000,
-        height: 3000,
-        fit: "inside",
-      })
-      .toBuffer();
+    // const resizedImage = await sharpImage
+    //   .resize({
+    //     width: 3000,
+    //     height: 3000,
+    //     fit: "inside",
+    //   })
+    //   .toBuffer();
 
-    const vibrantData = await Vibrant.from(resizedImage)
-      // .quality(1)
-      .getPalette();
+    // const vibrantData = await Vibrant.from(resizedImage)
+    //   // .quality(1)
+    //   .getPalette();
 
     createNodeField({
       node,
       name: "imageMeta",
       value: transformMetaToNodeData(
         metaData,
-        vibrantData,
+        null,// vibrantData,
         node.absolutePath as string,
         dominant,
         // if datePublished is empty, image has not been committed to git yet and is thus brand new
         datePublished.length
           ? datePublished.replace("\n", "")
-          : new Date().toDateString()
+          : new Date().toDateString(),
       ),
     });
   }
+};
+
+const MONTHS = {
+  1: "January",
+  2: "February",
+  3: "March",
+  4: "April",
+  5: "May",
+  6: "June",
+  7: "July",
+  8: "August",
+  9: "September",
+  10: "October",
+  11: "November",
+  12: "December",
 };
 
 // Implement the Gatsby API “createPages”. This is called once the
@@ -282,56 +332,97 @@ export const createPages: GatsbyNode["createPages"] = async ({
   reporter,
 }) => {
   const { createPage } = actions;
-  const galleryImages = await graphql<Queries.GalleryImagesNodeQuery>(`
-    query GalleryImagesNode {
-      allFile(filter: { sourceInstanceName: { eq: "gallery" } }) {
-        edges {
-          node {
-            relativePath
-            base
-            fields {
-              imageMeta {
-                dateTaken
-              }
+
+  const photos = await graphql<Queries.PhotosQuery>(`
+    query Photos {
+      allFile(filter: { sourceInstanceName: { eq: "photos" } }) {
+        nodes {
+          base
+          id
+          fields {
+            organization {
+              year
+              yearFolder
+              monthFolder
+              month
+              slug
             }
           }
         }
       }
     }
   `);
+
   // Handle errors
-  if (galleryImages.errors) {
+  if (photos.errors) {
     reporter.panicOnBuild("Error while running GraphQL query.");
     return;
   }
   // Create pages for each markdown file.
-  const galleryImageTemplate = path.resolve(
-    "src/components/GalleryImage/GalleryImage.js"
+  const photoImageTemplate = path.resolve(
+    "src/components/photos/PhotoImage.tsx",
   );
   // const diffDate = (a, b) =>
   //   new Date(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken'], a)).getTime() - new Date(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken'],b)).getTime();
 
-  const edges = R.sort(
+  const nodes = R.sort(
     R.descend(
       (edge) =>
-        new Date(R.path(["node", "fields", "imageMeta", "dateTaken"], edge)!)
+        new Date(R.path(["node", "fields", "imageMeta", "dateTaken"], edge)!),
     ),
-    galleryImages.data?.allFile.edges!
+    photos.data!.allFile.nodes!,
   );
 
-  edges.forEach(({ node }, index) => {
-    // const nextImage =
-    //   index === edges.length - 1 ? null : edges[index + 1].node.base;
-    // const prevImage = index === 0 ? null : edges[index - 1].node.base;
+  const years: Record<string, number> = {
+    Older: 1,
+  };
+  const months: Record<string, number> = {};
+
+  nodes.forEach(({ base, fields, id }) => {
+    if (!fields) {
+      console.log("no fields", base);
+      return;
+    }
+    const { yearFolder, monthFolder, slug } = fields.organization!;
+
+    years[yearFolder!] = 1;
+    months[monthFolder!] = 1;
     const page = {
-      path: `photogallery/${node.base}`,
-      component: galleryImageTemplate,
+      path: slug!,
+      component: photoImageTemplate,
       context: {
-        imageFilename: node.base,
-        // nextImage,
-        // prevImage,
+        imageId: id,
       },
     };
     createPage(page);
   });
+
+  const photoYearTemplate = path.resolve("src/components/photos/PhotoYear.tsx");
+
+  Object.keys(years).forEach((year) => {
+    createPage({
+      path: `photos/${year}`,
+      component: photoYearTemplate,
+      context: {
+        year,
+      },
+    });
+  });
+
+  const photoMonthTemplate = path.resolve(
+    "src/components/photos/PhotoMonth.tsx",
+  );
+
+  Object.keys(months).forEach((month) => {
+    createPage({
+      path: `photos/${month}`,
+      component: photoMonthTemplate,
+      context: {
+        month,
+      },
+    });
+  });
+
+  console.log("years", years);
+  console.log("months", months);
 };
