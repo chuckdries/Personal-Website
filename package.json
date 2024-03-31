@@ -22,6 +22,7 @@
     "pretty": "prettier --write ."
   },
   "dependencies": {
+    "@internationalized/date": "^3.5.2",
     "@react-spectrum/provider": "^3.9.5",
     "@spectrum-icons/workflow": "^4.2.10",
     "autoprefixer": "^10.4.19",
@@ -81,7 +82,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-webpack-plugin": "^4.1.0",
     "prettier": "3.2.5",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "zx": "^7.2.3"
   },
   "resolutions": {
     "mini-css-extract-plugin": "1.6.2"
