@@ -6,6 +6,8 @@ import { parseDate, DateFormatter } from "@internationalized/date";
 const MONTH_FORMATTER = new DateFormatter("en", { month: "long" });
 const YEAR_FORMATTER = new DateFormatter("en", { year: "numeric" });
 
+const errors = [];
+
 const files = (
   await $`exiftool -T -FileName -DateTimeOriginal data/gallery`
 ).stdout
@@ -13,18 +15,17 @@ const files = (
   .map((line) => {
     let [filename, datetime] = line.split("\t");
     if (!datetime || !datetime.trim().length) {
-      console.log("⚠️ No datetime for file", filename)
-      return { filename, dir: null };
+      errors.push("⚠️ No datetime for file", filename);
+      return false;
     }
     datetime = datetime.split(" ")[0].replace(/:/g, "-");
     const date = parseDate(datetime);
     const dir = `${YEAR_FORMATTER.format(date.toDate())}/${MONTH_FORMATTER.format(date.toDate())}`;
-    return { filename, dir};
-  });
+    return { filename, dir };
+  })
+  .filter(Boolean);
 
 const dirs = R.groupBy(R.prop("dir"), files);
-
-console.log(dirs);
 
 for (const dir in dirs) {
   if (dir === null) {
@@ -37,3 +38,6 @@ for (const dir in dirs) {
     await $`cp data/gallery/${file.filename} data/photos/${dir}`;
   }
 }
+
+console.log("Errors:");
+console.log(errors.join("\n"));
