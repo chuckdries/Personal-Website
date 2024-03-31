@@ -21,12 +21,14 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
 
     for (const year of sortedYears) {
       if (
-        year.fieldValue === "Older" &&
-        _groups.find((g) => g.slug === "Older")
+        year.fieldValue === "Older"
       ) {
-        _groups
-          .find((g) => g.slug === "Older")!
-          .nodes.push(...year.group[0].nodes);
+        _groups.push({
+          slug: "Older",
+          label:<h2 className="text-2xl">Older</h2>,
+          nodes: R.flatten(year.group.map((m) => m.nodes)),
+        })
+          
       } else {
         const sortedMonths = R.sort(
           (a, b) => Number(b.fieldValue!) - Number(a.fieldValue!),
@@ -54,6 +56,10 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
         }
       }
     }
+      console.log(
+        "slugs",
+        _groups.map((g) => g.slug),
+      );
     return _groups;
   }, [data.allFile.group]);
   return (

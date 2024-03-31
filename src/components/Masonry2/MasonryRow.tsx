@@ -28,7 +28,7 @@ export function MasonryRow({
         const height = `calc(${width} / ${aspect})`;
         return (
           <Link
-            className="inline-block bg-red-500"
+            className="inline-block"
             key={node.id}
             style={{ width, height }}
             to={`/photos/${node.fields!.organization!.monthSlug}/${node.relativePath}`}
