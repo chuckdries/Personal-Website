@@ -3,12 +3,13 @@ import { GatsbyImage } from "gatsby-plugin-image";
 import React, { useMemo } from "react";
 import * as R from "ramda";
 import { PhotoLayout } from "./PhotoLayout";
+import { MonthTile } from "./PhotoYear/MonthTile";
 
-type Node = Queries.PhotoYearQuery["allFile"]["group"][number]["nodes"][number];
+export type PhotoYearNode = Queries.PhotoYearQuery["allFile"]["group"][number]["nodes"][number];
 
-interface Month {
+export interface PhotoYearMonth {
   fieldValue: number;
-  nodes: readonly Node[];
+  nodes: readonly PhotoYearNode[];
   score: number;
 }
 
@@ -17,7 +18,7 @@ function PhotoYear({
   data,
 }: PageProps<Queries.PhotoYearQuery, { year: string }>) {
   const months = useMemo(() => {
-    const cleaned: Month []= R.map(
+    const cleaned: PhotoYearMonth []= R.map(
       (group) => ({
         nodes: group.nodes,
         fieldValue: parseInt(group.fieldValue!),
@@ -33,23 +34,7 @@ function PhotoYear({
       <h1>{pageContext.year}</h1>
       <div className="flex flex-wrap">
         {months.map((month) => (
-          <Link
-            key={month.fieldValue}
-            // style={{ width: `${(1 / months.length) * 100}%` }}
-            style={{ flexBasis: "400px" }}
-            className="flex-auto"
-            to={`/photos/${month.nodes[0].fields!.organization!.monthSlug}`}
-          >
-            {month.fieldValue} {month.score}
-            {month.nodes.slice(0, 1).map((node) => (
-              <GatsbyImage
-                alt={node.relativePath}
-                className="rounded-lg m-2"
-                image={node.childImageSharp!.gatsbyImageData}
-                key={node.id}
-              />
-            ))}
-          </Link>
+          <MonthTile key={month.fieldValue} month={month} />
         ))}
       </div>
     </PhotoLayout>
