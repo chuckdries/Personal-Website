@@ -237,7 +237,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
     const month = Number(d.toLocaleString("en", { month: "numeric" }));
     const year = d.getFullYear();
 
-    const yearFolder = year < 2020 ? "Older" : `${year}`;
+    const yearFolder = year < 2021 ? "Older" : `${year}`;
 
     const monthSlug =
       yearFolder === "Older"
