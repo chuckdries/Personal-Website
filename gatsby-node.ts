@@ -239,12 +239,12 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
 
     const yearFolder = year < 2020 ? "Older" : `${year}`;
 
-    const monthFolder =
+    const monthSlug =
       yearFolder === "Older"
         ? `${yearFolder}`
         : `${yearFolder}/${d.toLocaleString("en", { month: "long" })}`;
 
-    const slug = `photos/${monthFolder}/${node.base}`;
+    const slug = `photos/${monthSlug}/${node.base}`;
     console.log("🚀 ~ slug:", slug);
 
     createNodeField({
@@ -254,7 +254,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
         year,
         month,
         yearFolder,
-        monthFolder,
+        monthSlug,
         slug,
       },
     });
@@ -346,7 +346,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
             organization {
               year
               yearFolder
-              monthFolder
+              monthSlug
               month
               slug
             }
@@ -386,10 +386,10 @@ export const createPages: GatsbyNode["createPages"] = async ({
       console.log("no fields", base);
       return;
     }
-    const { yearFolder, monthFolder, slug } = fields.organization!;
+    const { yearFolder, monthSlug, slug } = fields.organization!;
 
     years[yearFolder!] = 1;
-    months[monthFolder!] = 1;
+    months[monthSlug!] = 1;
     const page = {
       path: slug!,
       component: photoImageTemplate,
@@ -421,7 +421,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
       path: `photos/${month}`,
       component: photoMonthTemplate,
       context: {
-        month,
+        monthSlug: month,
       },
     });
   });

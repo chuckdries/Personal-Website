@@ -733,7 +733,7 @@ type FileFieldsImageMetaSortInput = {
 
 type FileFieldsOrganization = {
   readonly month: Maybe<Scalars['Int']>;
-  readonly monthFolder: Maybe<Scalars['String']>;
+  readonly monthSlug: Maybe<Scalars['String']>;
   readonly slug: Maybe<Scalars['String']>;
   readonly year: Maybe<Scalars['Int']>;
   readonly yearFolder: Maybe<Scalars['String']>;
@@ -741,7 +741,7 @@ type FileFieldsOrganization = {
 
 type FileFieldsOrganizationFieldSelector = {
   readonly month: InputMaybe<FieldSelectorEnum>;
-  readonly monthFolder: InputMaybe<FieldSelectorEnum>;
+  readonly monthSlug: InputMaybe<FieldSelectorEnum>;
   readonly slug: InputMaybe<FieldSelectorEnum>;
   readonly year: InputMaybe<FieldSelectorEnum>;
   readonly yearFolder: InputMaybe<FieldSelectorEnum>;
@@ -749,7 +749,7 @@ type FileFieldsOrganizationFieldSelector = {
 
 type FileFieldsOrganizationFilterInput = {
   readonly month: InputMaybe<IntQueryOperatorInput>;
-  readonly monthFolder: InputMaybe<StringQueryOperatorInput>;
+  readonly monthSlug: InputMaybe<StringQueryOperatorInput>;
   readonly slug: InputMaybe<StringQueryOperatorInput>;
   readonly year: InputMaybe<IntQueryOperatorInput>;
   readonly yearFolder: InputMaybe<StringQueryOperatorInput>;
@@ -757,7 +757,7 @@ type FileFieldsOrganizationFilterInput = {
 
 type FileFieldsOrganizationSortInput = {
   readonly month: InputMaybe<SortOrderEnum>;
-  readonly monthFolder: InputMaybe<SortOrderEnum>;
+  readonly monthSlug: InputMaybe<SortOrderEnum>;
   readonly slug: InputMaybe<SortOrderEnum>;
   readonly year: InputMaybe<SortOrderEnum>;
   readonly yearFolder: InputMaybe<SortOrderEnum>;
@@ -2614,12 +2614,12 @@ type PhotoImageQueryVariables = Exact<{
 
 type PhotoImageQuery = { readonly image: { readonly id: string, readonly relativePath: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null };
 
-type PhotoYearQueryVariables = Exact<{
-  year: InputMaybe<Scalars['String']>;
+type PhotoMonthQueryVariables = Exact<{
+  monthSlug: InputMaybe<Scalars['String']>;
 }>;
 
 
-type PhotoYearQuery = { readonly images: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly base: string, readonly fields: { readonly organization: { readonly monthFolder: string | null } | null, readonly imageMeta: { readonly dateTaken: string | null, readonly meta: { readonly Rating: number | null } | null } | null } | null }> } };
+type PhotoMonthQuery = { readonly images: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly relativePath: string, readonly fields: { readonly organization: { readonly monthSlug: string | null } | null, readonly imageMeta: { readonly dateTaken: string | null, readonly meta: { readonly Rating: number | null } | null } | null } | null, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null }> } };
 
 type ProjectsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2629,7 +2629,7 @@ type ProjectsPageQuery = { readonly allFile: { readonly nodes: ReadonlyArray<{ r
 type PhotosQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type PhotosQuery = { readonly allFile: { readonly nodes: ReadonlyArray<{ readonly base: string, readonly id: string, readonly fields: { readonly organization: { readonly year: number | null, readonly yearFolder: string | null, readonly monthFolder: string | null, readonly month: number | null, readonly slug: string | null } | null } | null }> } };
+type PhotosQuery = { readonly allFile: { readonly nodes: ReadonlyArray<{ readonly base: string, readonly id: string, readonly fields: { readonly organization: { readonly year: number | null, readonly yearFolder: string | null, readonly monthSlug: string | null, readonly month: number | null, readonly slug: string | null } | null } | null }> } };
 
 
 }
