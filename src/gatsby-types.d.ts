@@ -580,8 +580,6 @@ type FileFieldsImageMeta = {
   readonly dateTaken: Maybe<Scalars['Date']>;
   readonly dominantHue: Maybe<ReadonlyArray<Maybe<Scalars['Float']>>>;
   readonly meta: Maybe<FileFieldsImageMetaMeta>;
-  readonly vibrant: Maybe<FileFieldsImageMetaVibrant>;
-  readonly vibrantHue: Maybe<Scalars['Float']>;
 };
 
 
@@ -605,8 +603,6 @@ type FileFieldsImageMetaFieldSelector = {
   readonly dateTaken: InputMaybe<FieldSelectorEnum>;
   readonly dominantHue: InputMaybe<FieldSelectorEnum>;
   readonly meta: InputMaybe<FileFieldsImageMetaMetaFieldSelector>;
-  readonly vibrant: InputMaybe<FileFieldsImageMetaVibrantFieldSelector>;
-  readonly vibrantHue: InputMaybe<FieldSelectorEnum>;
 };
 
 type FileFieldsImageMetaFilterInput = {
@@ -614,25 +610,28 @@ type FileFieldsImageMetaFilterInput = {
   readonly dateTaken: InputMaybe<DateQueryOperatorInput>;
   readonly dominantHue: InputMaybe<FloatQueryOperatorInput>;
   readonly meta: InputMaybe<FileFieldsImageMetaMetaFilterInput>;
-  readonly vibrant: InputMaybe<FileFieldsImageMetaVibrantFilterInput>;
-  readonly vibrantHue: InputMaybe<FloatQueryOperatorInput>;
 };
 
 type FileFieldsImageMetaMeta = {
   readonly ApertureValue: Maybe<Scalars['Float']>;
+  readonly Caption: Maybe<Scalars['String']>;
+  readonly City: Maybe<Scalars['String']>;
   readonly CreateDate: Maybe<Scalars['Date']>;
   readonly DateTimeOriginal: Maybe<Scalars['Date']>;
-  readonly ExposureTime: Maybe<Scalars['Int']>;
+  readonly ExposureTime: Maybe<Scalars['Float']>;
   readonly FNumber: Maybe<Scalars['Float']>;
-  readonly FocalLength: Maybe<Scalars['Int']>;
+  readonly FocalLength: Maybe<Scalars['Float']>;
   readonly ISO: Maybe<Scalars['Int']>;
   readonly Keywords: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly LensModel: Maybe<Scalars['String']>;
+  readonly Location: Maybe<Scalars['String']>;
   readonly Make: Maybe<Scalars['String']>;
   readonly Model: Maybe<Scalars['String']>;
   readonly ModifyDate: Maybe<Scalars['Date']>;
+  readonly ObjectName: Maybe<Scalars['String']>;
   readonly Rating: Maybe<Scalars['Int']>;
   readonly ShutterSpeedValue: Maybe<Scalars['Float']>;
+  readonly State: Maybe<Scalars['String']>;
 };
 
 
@@ -661,6 +660,8 @@ type FileFieldsImageMetaMeta_ModifyDateArgs = {
 
 type FileFieldsImageMetaMetaFieldSelector = {
   readonly ApertureValue: InputMaybe<FieldSelectorEnum>;
+  readonly Caption: InputMaybe<FieldSelectorEnum>;
+  readonly City: InputMaybe<FieldSelectorEnum>;
   readonly CreateDate: InputMaybe<FieldSelectorEnum>;
   readonly DateTimeOriginal: InputMaybe<FieldSelectorEnum>;
   readonly ExposureTime: InputMaybe<FieldSelectorEnum>;
@@ -669,32 +670,42 @@ type FileFieldsImageMetaMetaFieldSelector = {
   readonly ISO: InputMaybe<FieldSelectorEnum>;
   readonly Keywords: InputMaybe<FieldSelectorEnum>;
   readonly LensModel: InputMaybe<FieldSelectorEnum>;
+  readonly Location: InputMaybe<FieldSelectorEnum>;
   readonly Make: InputMaybe<FieldSelectorEnum>;
   readonly Model: InputMaybe<FieldSelectorEnum>;
   readonly ModifyDate: InputMaybe<FieldSelectorEnum>;
+  readonly ObjectName: InputMaybe<FieldSelectorEnum>;
   readonly Rating: InputMaybe<FieldSelectorEnum>;
   readonly ShutterSpeedValue: InputMaybe<FieldSelectorEnum>;
+  readonly State: InputMaybe<FieldSelectorEnum>;
 };
 
 type FileFieldsImageMetaMetaFilterInput = {
   readonly ApertureValue: InputMaybe<FloatQueryOperatorInput>;
+  readonly Caption: InputMaybe<StringQueryOperatorInput>;
+  readonly City: InputMaybe<StringQueryOperatorInput>;
   readonly CreateDate: InputMaybe<DateQueryOperatorInput>;
   readonly DateTimeOriginal: InputMaybe<DateQueryOperatorInput>;
-  readonly ExposureTime: InputMaybe<IntQueryOperatorInput>;
+  readonly ExposureTime: InputMaybe<FloatQueryOperatorInput>;
   readonly FNumber: InputMaybe<FloatQueryOperatorInput>;
-  readonly FocalLength: InputMaybe<IntQueryOperatorInput>;
+  readonly FocalLength: InputMaybe<FloatQueryOperatorInput>;
   readonly ISO: InputMaybe<IntQueryOperatorInput>;
   readonly Keywords: InputMaybe<StringQueryOperatorInput>;
   readonly LensModel: InputMaybe<StringQueryOperatorInput>;
+  readonly Location: InputMaybe<StringQueryOperatorInput>;
   readonly Make: InputMaybe<StringQueryOperatorInput>;
   readonly Model: InputMaybe<StringQueryOperatorInput>;
   readonly ModifyDate: InputMaybe<DateQueryOperatorInput>;
+  readonly ObjectName: InputMaybe<StringQueryOperatorInput>;
   readonly Rating: InputMaybe<IntQueryOperatorInput>;
   readonly ShutterSpeedValue: InputMaybe<FloatQueryOperatorInput>;
+  readonly State: InputMaybe<StringQueryOperatorInput>;
 };
 
 type FileFieldsImageMetaMetaSortInput = {
   readonly ApertureValue: InputMaybe<SortOrderEnum>;
+  readonly Caption: InputMaybe<SortOrderEnum>;
+  readonly City: InputMaybe<SortOrderEnum>;
   readonly CreateDate: InputMaybe<SortOrderEnum>;
   readonly DateTimeOriginal: InputMaybe<SortOrderEnum>;
   readonly ExposureTime: InputMaybe<SortOrderEnum>;
@@ -703,11 +714,14 @@ type FileFieldsImageMetaMetaSortInput = {
   readonly ISO: InputMaybe<SortOrderEnum>;
   readonly Keywords: InputMaybe<SortOrderEnum>;
   readonly LensModel: InputMaybe<SortOrderEnum>;
+  readonly Location: InputMaybe<SortOrderEnum>;
   readonly Make: InputMaybe<SortOrderEnum>;
   readonly Model: InputMaybe<SortOrderEnum>;
   readonly ModifyDate: InputMaybe<SortOrderEnum>;
+  readonly ObjectName: InputMaybe<SortOrderEnum>;
   readonly Rating: InputMaybe<SortOrderEnum>;
   readonly ShutterSpeedValue: InputMaybe<SortOrderEnum>;
+  readonly State: InputMaybe<SortOrderEnum>;
 };
 
 type FileFieldsImageMetaSortInput = {
@@ -715,44 +729,6 @@ type FileFieldsImageMetaSortInput = {
   readonly dateTaken: InputMaybe<SortOrderEnum>;
   readonly dominantHue: InputMaybe<SortOrderEnum>;
   readonly meta: InputMaybe<FileFieldsImageMetaMetaSortInput>;
-  readonly vibrant: InputMaybe<FileFieldsImageMetaVibrantSortInput>;
-  readonly vibrantHue: InputMaybe<SortOrderEnum>;
-};
-
-type FileFieldsImageMetaVibrant = {
-  readonly DarkMuted: Maybe<ReadonlyArray<Maybe<Scalars['Int']>>>;
-  readonly DarkVibrant: Maybe<ReadonlyArray<Maybe<Scalars['Int']>>>;
-  readonly LightMuted: Maybe<ReadonlyArray<Maybe<Scalars['Int']>>>;
-  readonly LightVibrant: Maybe<ReadonlyArray<Maybe<Scalars['Int']>>>;
-  readonly Muted: Maybe<ReadonlyArray<Maybe<Scalars['Int']>>>;
-  readonly Vibrant: Maybe<ReadonlyArray<Maybe<Scalars['Int']>>>;
-};
-
-type FileFieldsImageMetaVibrantFieldSelector = {
-  readonly DarkMuted: InputMaybe<FieldSelectorEnum>;
-  readonly DarkVibrant: InputMaybe<FieldSelectorEnum>;
-  readonly LightMuted: InputMaybe<FieldSelectorEnum>;
-  readonly LightVibrant: InputMaybe<FieldSelectorEnum>;
-  readonly Muted: InputMaybe<FieldSelectorEnum>;
-  readonly Vibrant: InputMaybe<FieldSelectorEnum>;
-};
-
-type FileFieldsImageMetaVibrantFilterInput = {
-  readonly DarkMuted: InputMaybe<IntQueryOperatorInput>;
-  readonly DarkVibrant: InputMaybe<IntQueryOperatorInput>;
-  readonly LightMuted: InputMaybe<IntQueryOperatorInput>;
-  readonly LightVibrant: InputMaybe<IntQueryOperatorInput>;
-  readonly Muted: InputMaybe<IntQueryOperatorInput>;
-  readonly Vibrant: InputMaybe<IntQueryOperatorInput>;
-};
-
-type FileFieldsImageMetaVibrantSortInput = {
-  readonly DarkMuted: InputMaybe<SortOrderEnum>;
-  readonly DarkVibrant: InputMaybe<SortOrderEnum>;
-  readonly LightMuted: InputMaybe<SortOrderEnum>;
-  readonly LightVibrant: InputMaybe<SortOrderEnum>;
-  readonly Muted: InputMaybe<SortOrderEnum>;
-  readonly Vibrant: InputMaybe<SortOrderEnum>;
 };
 
 type FileFieldsOrganization = {
@@ -2593,12 +2569,12 @@ type GalleryImageQueryVariables = Exact<{
 
 type GalleryImageQuery = { readonly file: { readonly base: string, readonly publicURL: string | null } | null };
 
-type GalleryImageFileFragment = { readonly nodes: ReadonlyArray<{ readonly base: string }> };
+type GalleryImageFileFragment = { readonly nodes: ReadonlyArray<{ readonly base: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null, readonly fields: { readonly imageMeta: { readonly dominantHue: ReadonlyArray<number | null> | null, readonly dateTaken: string | null, readonly datePublished: string | null, readonly meta: { readonly Keywords: ReadonlyArray<string | null> | null, readonly Rating: number | null, readonly ObjectName: string | null, readonly CreateDate: string | null, readonly ModifyDate: string | null } | null } | null } | null }> };
 
 type GalleryPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type GalleryPageQueryQuery = { readonly recents: { readonly nodes: ReadonlyArray<{ readonly base: string }> }, readonly all: { readonly nodes: ReadonlyArray<{ readonly base: string }> } };
+type GalleryPageQueryQuery = { readonly recents: { readonly nodes: ReadonlyArray<{ readonly base: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null, readonly fields: { readonly imageMeta: { readonly dominantHue: ReadonlyArray<number | null> | null, readonly dateTaken: string | null, readonly datePublished: string | null, readonly meta: { readonly Keywords: ReadonlyArray<string | null> | null, readonly Rating: number | null, readonly ObjectName: string | null, readonly CreateDate: string | null, readonly ModifyDate: string | null } | null } | null } | null }> }, readonly all: { readonly nodes: ReadonlyArray<{ readonly base: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null, readonly fields: { readonly imageMeta: { readonly dominantHue: ReadonlyArray<number | null> | null, readonly dateTaken: string | null, readonly datePublished: string | null, readonly meta: { readonly Keywords: ReadonlyArray<string | null> | null, readonly Rating: number | null, readonly ObjectName: string | null, readonly CreateDate: string | null, readonly ModifyDate: string | null } | null } | null } | null }> } };
 
 type GatsbyImageSharpFixedFragment = { readonly base64: string | null, readonly width: number, readonly height: number, readonly src: string, readonly srcSet: string };
 
@@ -2629,7 +2605,7 @@ type GatsbyImageSharpFluidLimitPresentationSizeFragment = { readonly maxHeight: 
 type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type IndexPageQuery = { readonly allFile: { readonly nodes: ReadonlyArray<{ readonly relativePath: string, readonly base: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null, readonly fields: { readonly imageMeta: { readonly vibrant: { readonly DarkMuted: ReadonlyArray<number | null> | null, readonly DarkVibrant: ReadonlyArray<number | null> | null, readonly LightMuted: ReadonlyArray<number | null> | null, readonly LightVibrant: ReadonlyArray<number | null> | null, readonly Vibrant: ReadonlyArray<number | null> | null, readonly Muted: ReadonlyArray<number | null> | null } | null } | null } | null }> } };
+type IndexPageQuery = { readonly allFile: { readonly nodes: ReadonlyArray<{ readonly relativePath: string, readonly base: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null }> } };
 
 type PhotoImageQueryVariables = Exact<{
   imageId: InputMaybe<Scalars['String']>;
@@ -2649,8 +2625,6 @@ type ProjectsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type ProjectsPageQuery = { readonly allFile: { readonly nodes: ReadonlyArray<{ readonly base: string }> } };
-
-type VibrantColorsFragment = { readonly DarkMuted: ReadonlyArray<number | null> | null, readonly DarkVibrant: ReadonlyArray<number | null> | null, readonly LightMuted: ReadonlyArray<number | null> | null, readonly LightVibrant: ReadonlyArray<number | null> | null, readonly Vibrant: ReadonlyArray<number | null> | null, readonly Muted: ReadonlyArray<number | null> | null };
 
 type PhotosQueryVariables = Exact<{ [key: string]: never; }>;
 

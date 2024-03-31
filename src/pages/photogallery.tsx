@@ -380,14 +380,14 @@ const GalleryPage = ({
 export const query = graphql`
   query GalleryPageQuery {
     recents: allFile(
-      filter: { sourceInstanceName: { eq: "gallery" } }
+      filter: { sourceInstanceName: { eq: "photos" } }
       sort: { fields: { imageMeta: { datePublished: DESC } } }
       limit: 10
     ) {
       ...GalleryImageFile
     }
     all: allFile(
-      filter: { sourceInstanceName: { eq: "gallery" } }
+      filter: { sourceInstanceName: { eq: "photos" } }
       sort: { fields: { imageMeta: { dateTaken: DESC } } }
     ) {
       ...GalleryImageFile
@@ -397,34 +397,34 @@ export const query = graphql`
   fragment GalleryImageFile on FileConnection {
     nodes {
       base
-      # childImageSharp {
-      #   fluid {
-      #     aspectRatio
-      #   }
-      #   gatsbyImageData(
-      #     layout: CONSTRAINED
-      #     height: 550
-      #     placeholder: DOMINANT_COLOR
-      #   )
-      # }
-      # fields {
-      #   imageMeta {
-      #     vibrantHue
-      #     dominantHue
-      #     dateTaken
-      #     datePublished
-      #     meta {
-      #       Keywords
-      #       Rating
-      #       ObjectName
-      #       CreateDate
-      #       ModifyDate
-      #     }
-      #     vibrant {
-      #       ...VibrantColors
-      #     }
-      #   }
-      # }
+      childImageSharp {
+        fluid {
+          aspectRatio
+        }
+        gatsbyImageData(
+          layout: CONSTRAINED
+          height: 550
+          placeholder: DOMINANT_COLOR
+        )
+      }
+      fields {
+        imageMeta {
+          # vibrantHue
+          dominantHue
+          dateTaken
+          datePublished
+          meta {
+            Keywords
+            Rating
+            ObjectName
+            CreateDate
+            ModifyDate
+          }
+          # vibrant {
+          #   ...VibrantColors
+          # }
+        }
+      }
     }
   }
 `;

@@ -206,6 +206,21 @@ function transformMetaToNodeData(
 //   createTypes(typedefs);
 // };
 
+// const MONTHS = {
+//   1: "January",
+//   2: "February",
+//   3: "March",
+//   4: "April",
+//   5: "May",
+//   6: "June",
+//   7: "July",
+//   8: "August",
+//   9: "September",
+//   10: "October",
+//   11: "November",
+//   12: "December",
+// };
+
 export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
   node,
   actions,
@@ -213,20 +228,21 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
   const { createNodeField } = actions;
 
   if (node.internal.type === "File" && node.sourceInstanceName === "photos") {
-    let [yearFolder, _monthFolder, filename] = (
-      node.relativePath as string
-    ).split("/");
+    
+    // organization data
 
     const d = new Date(
       (await exifr.parse(node.absolutePath as string)).DateTimeOriginal,
     );
-    const month = Number(d.toLocaleString("default", { month: "numeric" }));
+    const month = Number(d.toLocaleString("en", { month: "numeric" }));
     const year = d.getFullYear();
 
+    const yearFolder = year < 2020 ? "Older" : `${year}`;
+
     const monthFolder =
-      yearFolder === "Older" || !filename
+      yearFolder === "Older"
         ? `${yearFolder}`
-        : `${yearFolder}/${_monthFolder}`;
+        : `${yearFolder}/${d.toLocaleString("en", { month: "long" })}`;
 
     const slug = `photos/${monthFolder}/${node.base}`;
     console.log("🚀 ~ slug:", slug);
@@ -242,9 +258,9 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
         slug,
       },
     });
-  }
 
-  if (node.internal.type === "File" && node.sourceInstanceName === "photos") {
+    // image metadata
+
     const { stdout: datePublished, stderr } = await exec(
       `git log --diff-filter=A --follow --format=%aI -1 -- ${node.absolutePath}`,
     );
@@ -309,20 +325,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
   }
 };
 
-const MONTHS = {
-  1: "January",
-  2: "February",
-  3: "March",
-  4: "April",
-  5: "May",
-  6: "June",
-  7: "July",
-  8: "August",
-  9: "September",
-  10: "October",
-  11: "November",
-  12: "December",
-};
+
 
 // Implement the Gatsby API “createPages”. This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
