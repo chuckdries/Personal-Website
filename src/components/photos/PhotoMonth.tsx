@@ -2,6 +2,7 @@ import { PageProps, graphql } from "gatsby";
 import React from "react";
 import { MasonryRow } from "../Masonry2/MasonryRow";
 import { MasonryContainer } from "../Masonry2/MasonryContainer";
+import { PhotoLayout } from "./PhotoLayout";
 
 export type PhotoMonthNode = Queries.PhotoMonthQuery["images"]["nodes"][number];
 
@@ -10,12 +11,12 @@ function PhotoMonth({
   data,
 }: PageProps<Queries.PhotoMonthQuery, { monthSlug: string }>) {
   return (
-    <div>
+    <PhotoLayout>
       <h1>{pageContext.monthSlug}</h1>
       <div>
-        <MasonryContainer items={data.images.nodes.slice(0, 5)} />
+        <MasonryContainer items={data.images.nodes} />
       </div>
-    </div>
+    </PhotoLayout>
   );
 }
 
