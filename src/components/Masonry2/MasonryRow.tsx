@@ -17,7 +17,7 @@ export function MasonryRow({
   ...props
 }: MasonryRowProps) {
   return (
-    <div className="w-screen relative my-2">
+    <div className="w-screen relative">
       {items.map((node) => {
         const aspect = node.childImageSharp!.fluid!.aspectRatio;
         const widthNumber =
@@ -41,11 +41,10 @@ export function MasonryRow({
               //       )}. ${getName(image)}`
               //     : getName(image)
               // }
-              // className="w-full"
-              // className="h-full w-full"
+              className="h-full w-full"
               image={node.childImageSharp!.gatsbyImageData!}
-              objectFit="cover"
-              objectPosition="center top"
+              // objectFit="cover"
+              // objectPosition="center top"
             />
           </div>
         );

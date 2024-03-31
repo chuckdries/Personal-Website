@@ -2621,6 +2621,13 @@ type PhotoMonthQueryVariables = Exact<{
 
 type PhotoMonthQuery = { readonly images: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly relativePath: string, readonly fields: { readonly organization: { readonly monthSlug: string | null } | null, readonly imageMeta: { readonly dateTaken: string | null, readonly meta: { readonly Rating: number | null } | null } | null } | null, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null }> } };
 
+type PhotoYearQueryVariables = Exact<{
+  year: InputMaybe<Scalars['String']>;
+}>;
+
+
+type PhotoYearQuery = { readonly allFile: { readonly group: ReadonlyArray<{ readonly fieldValue: string | null, readonly nodes: ReadonlyArray<{ readonly id: string, readonly relativePath: string, readonly fields: { readonly organization: { readonly monthSlug: string | null, readonly month: number | null } | null, readonly imageMeta: { readonly dateTaken: string | null, readonly meta: { readonly Rating: number | null } | null } | null } | null, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null }> }> } };
+
 type ProjectsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
