@@ -1,13 +1,13 @@
 import React from "react";
 import { PhotoMonthNode } from "../photos/PhotoMonth";
-import { Row } from "./MasonryContainer";
+import { MasonryImageRow } from "./MasonryContainer";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { Link } from "gatsby";
 
 interface MasonryRowProps {
   // children: React.ReactNode;
-  items: PhotoMonthNode[];
-  row: Row;
+  items: readonly PhotoMonthNode[];
+  row: MasonryImageRow;
   targetAspect: number;
 }
 

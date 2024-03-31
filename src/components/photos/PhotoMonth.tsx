@@ -14,7 +14,7 @@ function PhotoMonth({
     <PhotoLayout>
       <h1>{pageContext.monthSlug}</h1>
       <div>
-        <MasonryContainer items={data.images.nodes} />
+        <MasonryContainer groups={data.images.nodes} />
       </div>
     </PhotoLayout>
   );
