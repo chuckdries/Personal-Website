@@ -14,6 +14,7 @@ export interface MasonryGroup {
 interface MasonryContainerProps {
   groups: MasonryGroup[];
   widthFn: (widthNumber: number) => string;
+  maxWidth: string;
 }
 
 const targetAspect = 6;
@@ -35,7 +36,7 @@ export interface MasonryLabelRow {
 
 export type MasonryRowData = MasonryImageRow | MasonryLabelRow;
 
-export function MasonryContainer({ groups, widthFn }: MasonryContainerProps) {
+export function MasonryContainer({ groups, widthFn, maxWidth }: MasonryContainerProps) {
   const rows = React.useMemo(() => {
     const _rows: MasonryRowData[] = [];
 
@@ -93,7 +94,7 @@ export function MasonryContainer({ groups, widthFn }: MasonryContainerProps) {
   }, [groups]);
 
   return (
-    <PhotoLayout>
+    <div className="overflow-hidden" style={{ maxWidth }}>
       {rows.map((row) => {
         switch (row.type) {
           case "l":
@@ -117,6 +118,6 @@ export function MasonryContainer({ groups, widthFn }: MasonryContainerProps) {
             );
         }
       })}
-    </PhotoLayout>
+    </div>
   );
 }

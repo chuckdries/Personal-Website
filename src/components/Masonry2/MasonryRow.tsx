@@ -19,7 +19,7 @@ export function MasonryRow({
   widthFn
 }: MasonryRowProps) {
   return (
-    <div className="w-screen relative">
+    <div className="relative">
       {items.map((node) => {
         const aspect = node.childImageSharp!.fluid!.aspectRatio;
         const widthNumber =

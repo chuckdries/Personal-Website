@@ -1,13 +1,16 @@
-import React, { useMemo } from "react";
+import React, { ReactNode, useMemo } from "react";
 import * as R from "ramda";
 import { PageProps, graphql } from "gatsby";
 import {
   MasonryContainer,
   MasonryGroup,
 } from "../components/Masonry2/MasonryContainer";
+import { PhotoLayout } from "../components/photos/PhotoLayout";
+import { TimelineSlider, TimelineStop } from "../components/Masonry2/TimelineSlider";
+
 
 const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
-  const groups: MasonryGroup[] = useMemo(() => {
+  const [groups, stops] = useMemo((): [MasonryGroup[], TimelineStop[]] => {
     const _groups: MasonryGroup[] = [];
     const sortedYears = R.sort((a, b) => {
       if (a.fieldValue === "Older") {
@@ -20,15 +23,12 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
     }, data.allFile.group);
 
     for (const year of sortedYears) {
-      if (
-        year.fieldValue === "Older"
-      ) {
+      if (year.fieldValue === "Older") {
         _groups.push({
           slug: "Older",
-          label:<h2 className="text-2xl">Older</h2>,
+          label: <h2 className="text-2xl">Older</h2>,
           nodes: R.flatten(year.group.map((m) => m.nodes)),
-        })
-          
+        });
       } else {
         const sortedMonths = R.sort(
           (a, b) => Number(b.fieldValue!) - Number(a.fieldValue!),
@@ -56,16 +56,24 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
         }
       }
     }
-      console.log(
-        "slugs",
-        _groups.map((g) => g.slug),
-      );
-    return _groups;
+    const stops: TimelineStop[] = _groups.map((g) => ({
+      slug: g.slug,
+      emphasis: g.slug.endsWith("January") ? 1 : 2,
+    })); 
+    return [_groups, stops];
   }, [data.allFile.group]);
+
   return (
-    <div>
-      <MasonryContainer groups={groups} widthFn={n => `calc(calc(100vw - 200px) * ${n})`} />
-    </div>
+    <PhotoLayout>
+      <MasonryContainer
+        groups={groups}
+        maxWidth="calc(100vw - 200px)"
+        widthFn={(n) => `calc(calc(100vw - 200px) * ${n})`}
+      />
+      <div className="h-screen" style={{ position: "fixed", top: 0, right: 0 }}>
+        <TimelineSlider stops={stops} />
+      </div>
+    </PhotoLayout>
   );
 };
 
