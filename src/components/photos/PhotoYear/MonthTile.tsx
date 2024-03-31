@@ -11,24 +11,29 @@ export function MonthTile({ month }: MonthTileProps) {
   const node = month.nodes[0];
   return (
     <Link
-      className="rounded-lg m-2 overflow-hidden w-[30vw] h-[30vh] flex-auto grid grid-cols-1 grid-rows-1 "
+      className="rounded-2xl p-2 m-2 overflow-hidden w-[30vw] h-[20vw] flex-auto grid grid-cols-1 grid-rows-[3em,1fr] bg-neutral-900"
       to={`/photos/${month.nodes[0].fields!.organization!.monthSlug}`}
     >
-      {/* {month.fieldValue} {month.score} */}
-      {month.nodes.slice(0, 1).map((node) => (
-        <GatsbyImage
-          key={node.id}
-          alt={node.relativePath}
-          className="h-full w-full col-span-full row-span-full blur"
-          image={node.childImageSharp!.gatsbyImageData}
-          objectFit="cover"
-          objectPosition="center center"
-        />
-      ))}
-      <div className="text-white col-span-full row-span-full z-10 flex justify-center items-center">
-        <h2 className="text-4xl font-bold">{new Date(2024, month.fieldValue, 1).toLocaleString("en", {
-          month: "long",
-        })}</h2>
+      <div className="text-white px-2 pt-2 shrink-0 z-10 flex items-baseline justify-between">
+        <h2 className="text-2xl">
+          {month.nodes[0].fields!.organization!.monthSlug?.split("/")[1]}
+        </h2>
+        <span className="text-neutral-400 text-sm">Sunsets, Waterfalls, Flowers</span>
+      </div>
+      <div className="rounded-lg flex relative overflow-auto">
+        {month.nodes.map((node) => (
+          <GatsbyImage
+            alt={node.relativePath}
+            className="flex-shrink-0 h-full mr-2"
+            key={node.id}
+            style={{
+              aspectRatio: node.childImageSharp!.fluid!.aspectRatio,
+            }}
+            image={node.childImageSharp!.gatsbyImageData}
+            // objectFit="contain"
+            // objectPosition="center center"
+          />
+        ))}
       </div>
     </Link>
   );

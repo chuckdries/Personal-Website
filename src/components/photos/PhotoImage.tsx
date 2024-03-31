@@ -1,8 +1,12 @@
 import { PageProps, graphql } from 'gatsby';
 import React from 'react';
+import { PhotoLayout } from './PhotoLayout';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
-function PhotoImage({ pageContext, data }: PageProps<unknown, { imageId: string }>) {
-  return <h1>{pageContext.imageId}</h1>
+function PhotoImage({ pageContext, data }: PageProps<Queries.PhotoImageQuery, { imageId: string }>) {
+  return <PhotoLayout>
+    <GatsbyImage image={data.image!.childImageSharp!.gatsbyImageData} alt="photo" />
+  </PhotoLayout>
 }
 
 export default PhotoImage;

@@ -4,10 +4,10 @@ import { PhotoMonthNode } from "../photos/PhotoMonth";
 import { MasonryRow } from "./MasonryRow";
 
 interface MasonryContainerProps {
-  items: PhotoMonthNode[];
+  items: readonly PhotoMonthNode[];
 }
 
-const targetAspect = 4;
+const targetAspect = 6;
 
 export interface Row {
   aspect: number;

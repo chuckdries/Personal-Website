@@ -5,7 +5,7 @@ export function PhotoLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="">
       <Helmet>
-        <body className="bg-black text-white" />
+        <body className="bg-neutral-950 text-white" />
       </Helmet>
       {children}
     </div>

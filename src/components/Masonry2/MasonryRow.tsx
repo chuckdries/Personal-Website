@@ -2,6 +2,7 @@ import React from "react";
 import { PhotoMonthNode } from "../photos/PhotoMonth";
 import { Row } from "./MasonryContainer";
 import { GatsbyImage } from "gatsby-plugin-image";
+import { Link } from "gatsby";
 
 interface MasonryRowProps {
   // children: React.ReactNode;
@@ -25,12 +26,12 @@ export function MasonryRow({
 
         const width = `${widthNumber}vw`;
         const height = `calc(${width} / ${aspect})`;
-        console.log("🚀 height:", height);
         return (
-          <div
+          <Link
             className="inline-block bg-red-500"
             key={node.id}
             style={{ width, height }}
+            to={`/photos/${node.fields!.organization!.monthSlug}/${node.relativePath}`}
           >
             <GatsbyImage
               key={node.id}
@@ -46,7 +47,7 @@ export function MasonryRow({
               // objectFit="cover"
               // objectPosition="center top"
             />
-          </div>
+          </Link>
         );
       })}
     </div>

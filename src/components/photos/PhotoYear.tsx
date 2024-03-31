@@ -31,7 +31,7 @@ function PhotoYear({
 
   return (
     <PhotoLayout>
-      <h1>{pageContext.year}</h1>
+      <h1 className="mx-5 my-3">{pageContext.year}</h1>
       <div className="flex flex-wrap">
         {months.map((month) => (
           <MonthTile key={month.fieldValue} month={month} />
@@ -55,7 +55,7 @@ export const query = graphql`
       }
       sort: { fields: { imageMeta: { meta: { Rating: DESC } } } }
     ) {
-      group(field: { fields: { organization: { month: SELECT } } }, limit: 5) {
+      group(field: { fields: { organization: { month: SELECT } } }, limit: 6) {
         fieldValue
         nodes {
           id
@@ -78,7 +78,7 @@ export const query = graphql`
             }
             gatsbyImageData(
               layout: CONSTRAINED
-              height: 550
+              height: 300
               placeholder: DOMINANT_COLOR
             )
           }
