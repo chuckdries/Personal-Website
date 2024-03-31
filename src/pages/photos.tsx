@@ -64,7 +64,7 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
   }, [data.allFile.group]);
   return (
     <div>
-      <MasonryContainer groups={groups} />
+      <MasonryContainer groups={groups} widthFn={n => `calc(calc(100vw - 200px) * ${n})`} />
     </div>
   );
 };

@@ -9,22 +9,23 @@ interface MasonryRowProps {
   items: readonly PhotoMonthNode[];
   row: MasonryImageRow;
   targetAspect: number;
+  widthFn: (widthNumber: number) => string;
 }
 
 export function MasonryRow({
   items,
   row,
   targetAspect,
-  ...props
+  widthFn
 }: MasonryRowProps) {
   return (
     <div className="w-screen relative">
       {items.map((node) => {
         const aspect = node.childImageSharp!.fluid!.aspectRatio;
         const widthNumber =
-          (aspect / (row.isWhole ? row.aspect : targetAspect)) * 100;
+          (aspect / (row.isWhole ? row.aspect : targetAspect));
 
-        const width = `${widthNumber}vw`;
+        const width = widthFn(widthNumber);
         const height = `calc(${width} / ${aspect})`;
         return (
           <Link

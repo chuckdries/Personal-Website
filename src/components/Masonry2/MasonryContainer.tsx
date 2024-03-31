@@ -13,6 +13,7 @@ export interface MasonryGroup {
 
 interface MasonryContainerProps {
   groups: MasonryGroup[];
+  widthFn: (widthNumber: number) => string;
 }
 
 const targetAspect = 6;
@@ -34,7 +35,7 @@ export interface MasonryLabelRow {
 
 export type MasonryRowData = MasonryImageRow | MasonryLabelRow;
 
-export function MasonryContainer({ groups }: MasonryContainerProps) {
+export function MasonryContainer({ groups, widthFn }: MasonryContainerProps) {
   const rows = React.useMemo(() => {
     const _rows: MasonryRowData[] = [];
 
@@ -96,14 +97,24 @@ export function MasonryContainer({ groups }: MasonryContainerProps) {
       {rows.map((row) => {
         switch (row.type) {
           case "l":
-            return <div className="mt-[100px]" key={row.slug}>{row.label}</div>;
+            return (
+              <div className="mt-[100px]" key={row.slug}>
+                {row.label}
+              </div>
+            );
           case "i":
-            return <MasonryRow
-              items={groups[row.groupIndex].nodes.slice(row.startIndex, row.startIndex + row.images)}
-              key={`${row.groupIndex}-${row.startIndex}`}
-              row={row}
-              targetAspect={targetAspect}
-            />;
+            return (
+              <MasonryRow
+                items={groups[row.groupIndex].nodes.slice(
+                  row.startIndex,
+                  row.startIndex + row.images,
+                )}
+                key={`${row.groupIndex}-${row.startIndex}`}
+                row={row}
+                targetAspect={targetAspect}
+                widthFn={widthFn}
+              />
+            );
         }
       })}
     </PhotoLayout>
