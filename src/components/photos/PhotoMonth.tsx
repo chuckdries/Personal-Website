@@ -1,7 +1,7 @@
 import { PageProps, graphql } from "gatsby";
-import React from "react";
-import { MasonryRow } from "../Masonry2/MasonryRow";
-import { MasonryContainer } from "../Masonry2/MasonryContainer";
+import React, { useMemo } from "react";
+import * as R from "ramda";
+import { MasonryContainer, MasonryGroup } from "../Masonry2/MasonryContainer";
 import { PhotoLayout } from "./PhotoLayout";
 
 export type PhotoMonthNode = Queries.PhotoMonthQuery["images"]["nodes"][number];
@@ -10,11 +10,21 @@ function PhotoMonth({
   pageContext,
   data,
 }: PageProps<Queries.PhotoMonthQuery, { monthSlug: string }>) {
+  const groups: MasonryGroup[] = useMemo(
+    () => [
+      {
+        slug: pageContext.monthSlug,
+        label: pageContext.monthSlug,
+        nodes: R.clone(data.images.nodes),
+      },
+    ],
+    [data.images.nodes, pageContext.monthSlug],
+  );
   return (
     <PhotoLayout>
-      <h1>{pageContext.monthSlug}</h1>
+      {/* <h1>{pageContext.monthSlug}</h1> */}
       <div>
-        <MasonryContainer groups={data.images.nodes} />
+        <MasonryContainer groups={groups} />
       </div>
     </PhotoLayout>
   );

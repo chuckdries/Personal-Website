@@ -56,7 +56,6 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
     }
     return _groups;
   }, [data.allFile.group]);
-  console.log("🚀 ~ Photos ~ data.allFile.group:", data.allFile.group);
   return (
     <div>
       <MasonryContainer groups={groups} />
