@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { ReactNode, useMemo } from "react";
 import * as R from "ramda";
 import { PhotoMonthNode } from "../photos/PhotoMonth";
 import { MasonryRow } from "./MasonryRow";
@@ -7,7 +7,7 @@ import { PhotoLayout } from "../photos/PhotoLayout";
 
 export interface MasonryGroup {
   slug: string;
-  label: string;
+  label: ReactNode;
   nodes: PhotoMonthNode[];
 }
 
@@ -28,7 +28,7 @@ export interface MasonryImageRow {
 
 export interface MasonryLabelRow {
   type: "l";
-  label: string;
+  label: ReactNode;
   slug: string;
 }
 
@@ -89,16 +89,14 @@ export function MasonryContainer({ groups }: MasonryContainerProps) {
     }
 
     return _rows;
-    // return R.indexBy(R.prop("startIndex"), _rows);
   }, [groups]);
-  console.log("🚀 ~ rows ~ rows:", rows);
 
   return (
     <PhotoLayout>
       {rows.map((row) => {
         switch (row.type) {
           case "l":
-            return <h2 className="mt-4" key={row.slug}>{row.label}</h2>;
+            return <div className="mt-[100px]" key={row.slug}>{row.label}</div>;
           case "i":
             return <MasonryRow
               items={groups[row.groupIndex].nodes.slice(row.startIndex, row.startIndex + row.images)}

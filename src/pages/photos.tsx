@@ -35,13 +35,25 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
         for (const month of sortedMonths) {
           _groups.push({
             slug: month.nodes[0].fields!.organization!.monthSlug!,
-            label: month.nodes[0].fields!.organization!.monthSlug!,
+            label: (
+              <div className="mx-2 flex items-baseline">
+                <h2 className="text-2xl">
+                  {month.nodes[0].fields!.organization!.year!}
+                </h2>
+                <h3 className="ml-2">
+                  {new Date(
+                    2024,
+                    month.nodes[0].fields!.organization!.month!,
+                    1,
+                  ).toLocaleString("en", { month: "long" })}
+                </h3>
+              </div>
+            ),
             nodes: R.clone(month.nodes),
           });
         }
       }
     }
-    console.log("🚀 ~ _groups:", _groups);
     return _groups;
   }, [data.allFile.group]);
   console.log("🚀 ~ Photos ~ data.allFile.group:", data.allFile.group);
@@ -71,6 +83,7 @@ export const query = graphql`
               organization {
                 monthSlug
                 month
+                year
               }
               imageMeta {
                 dateTaken

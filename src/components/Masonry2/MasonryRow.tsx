@@ -34,6 +34,7 @@ export function MasonryRow({
             to={`/photos/${node.fields!.organization!.monthSlug}/${node.relativePath}`}
           >
             <GatsbyImage
+              alt={node.id}
               key={node.id}
               // alt={
               //   node.fields?.imageMeta?.meta?.Keywords?.length

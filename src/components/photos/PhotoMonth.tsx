@@ -37,6 +37,8 @@ export const query = graphql`
         fields {
           organization {
             monthSlug
+            month
+            year
           }
           imageMeta {
             dateTaken
