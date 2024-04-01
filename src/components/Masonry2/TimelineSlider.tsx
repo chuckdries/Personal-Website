@@ -74,7 +74,7 @@ export function TimelineSlider({ stops }: TimelineSliderProps) {
             name={props.name}
           />
         </div>
-        <div className="absolute top-0 bottom-0 right-0 left-0">
+        <div className="absolute top-0 bottom-0 right-0 left-0 translate-y-[-5px]">
           {stops.map((stop, i) => (
             <div
               key={stop.slug}
