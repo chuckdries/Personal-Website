@@ -45,7 +45,7 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
                 <h3 className="ml-2">
                   {new Date(
                     2024,
-                    month.nodes[0].fields!.organization!.month!,
+                    month.nodes[0].fields!.organization!.month! - 1,
                     1,
                   ).toLocaleString("en", { month: "long" })}
                 </h3>

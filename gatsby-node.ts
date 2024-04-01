@@ -245,7 +245,6 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
         : `${yearFolder}/${d.toLocaleString("en", { month: "long" })}`;
 
     const slug = `photos/${monthSlug}/${node.base}`;
-    console.log("🚀 ~ slug:", slug);
 
     createNodeField({
       node,
