@@ -80,7 +80,7 @@ export function TimelineSlider({ stops }: TimelineSliderProps) {
             <div
               key={stop.slug}
               style={{
-                top: `${(i / (stops.length)) * 100 + 3}%`,
+                top: `${(i / (stops.length)) * 100}%`,
                 right: 10,
               }}
               className={classNames(
@@ -90,7 +90,7 @@ export function TimelineSlider({ stops }: TimelineSliderProps) {
               )}
             >
               {stop.tickLabel}
-              <div className="absolute w-3 top-[-2px] h-[1px] bg-white/80"></div>
+              {/* <div className="absolute w-3 top-[-2px] h-[1px] bg-white/80"></div> */}
             </div>
           ))}
         </div>

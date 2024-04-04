@@ -66,7 +66,7 @@ export function MasonryContainer({
       const group = groups[i];
       _rows.push({
         type: "l",
-        aspect: 9,
+        aspect: i == 0 ? 12 : 7,
         contents: group.label,
         slug: group.slug,
       });
@@ -172,7 +172,7 @@ const itemSize = (index: number) => {
                       )}
                       row={row}
                       targetAspect={targetAspect}
-                      width={width - 8}
+                      width={width - 10}
                       // widthFn={widthFn}
                     />
                   </div>
