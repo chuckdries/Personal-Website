@@ -25,7 +25,7 @@ const targetAspect = 6;
 
 interface MasonryBaseRow {
   type: "i" | "l" | "c";
-  aspect: number;
+  aspect: number; // TODO: simply store height directly
 }
 
 /** placeholder for children */
@@ -66,7 +66,7 @@ export function MasonryContainer({
       const group = groups[i];
       _rows.push({
         type: "l",
-        aspect: 12,
+        aspect: 9,
         contents: group.label,
         slug: group.slug,
       });
@@ -172,7 +172,7 @@ const itemSize = (index: number) => {
                       )}
                       row={row}
                       targetAspect={targetAspect}
-                      width={width - 15}
+                      width={width - 8}
                       // widthFn={widthFn}
                     />
                   </div>

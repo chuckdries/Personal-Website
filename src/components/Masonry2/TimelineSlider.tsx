@@ -76,21 +76,21 @@ export function TimelineSlider({ stops }: TimelineSliderProps) {
           />
         </div>
         <div className="absolute top-0 bottom-0 right-0 left-0">
-          {[{}, ...stops].map((stop, i) => i === 0 ? (<></>) : (
+          {stops.map((stop, i) => (
             <div
               key={stop.slug}
               style={{
-                top: `${(i / (stops.length)) * 100}%`,
+                top: `${(i / (stops.length)) * 100 + 3}%`,
                 right: 10,
               }}
               className={classNames(
-                "text-white/60 absolute select-none w-full flex items-baseline justify-end",
+                "text-white/40 absolute select-none w-full flex items-baseline justify-end",
                 // stop.emphasis == 1 ? "font-bold text-sm" : "text-xs",
                 "text-xs",
               )}
             >
-              <div className="absolute w-3 h-[1px] bg-white/80"></div>
               {stop.tickLabel}
+              <div className="absolute w-3 top-[-2px] h-[1px] bg-white/80"></div>
             </div>
           ))}
         </div>

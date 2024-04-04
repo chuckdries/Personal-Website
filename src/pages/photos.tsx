@@ -13,9 +13,9 @@ import {
 import { StaticImage } from "gatsby-plugin-image";
 import Nav from "../components/Nav";
 
-const FIXED_STOPS: TimelineStop[] = [
-  // { slug: "welcome", emphasis: 1 },
-];
+// const FIXED_STOPS: TimelineStop[] = [
+//   // { slug: "welcome", emphasis: 1 },
+// ];
 
 function getMonthName(month: number) {
   return new Date(2024, month - 1, 1).toLocaleString("en", { month: "long" });
@@ -24,14 +24,8 @@ function getMonthName(month: number) {
 const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
   useScrollRestoration("photos");
   const [groups, stops] = useMemo((): [MasonryGroup[], TimelineStop[]] => {
-    const _groups: MasonryGroup[] = [
-      // {
-      //   slug: "welcome",
-      //   tickLabel: "Welcome",
-      //   label: <h2 className="text-2xl">Welcome</h2>,
-      //   nodes: [],
-      // },
-    ];
+    const _groups: MasonryGroup[] = [];
+    const stops: TimelineStop[] = [];
     const sortedYears = R.sort((a, b) => {
       if (a.fieldValue === "Older") {
         return 1;
@@ -43,6 +37,11 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
     }, data.allFile.group);
 
     for (const year of sortedYears) {
+      stops.push({
+        slug: year.fieldValue!,
+        tickLabel: year.fieldValue!,
+        emphasis: year.fieldValue === "Older" ? 1 : 2,
+      })
       if (year.fieldValue === "Older") {
         _groups.push({
           slug: "Older",
@@ -75,13 +74,13 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
         }
       }
     }
-    const stops: TimelineStop[] = _groups.map((g) => ({
-      slug: g.slug,
-      label: g.label,
-      tickLabel: g.tickLabel,
-      emphasis: g.slug.endsWith("January") ? 1 : 2,
-    }));
-    return [_groups, [...FIXED_STOPS, ...stops]];
+    // const stops: TimelineStop[] = _groups.map((g) => ({
+    //   slug: g.slug,
+    //   label: g.label,
+    //   tickLabel: g.tickLabel,
+    //   emphasis: g.slug.endsWith("January") ? 1 : 2,
+    // }));
+    return [_groups, stops];
   }, [data.allFile.group]);
 
   return (

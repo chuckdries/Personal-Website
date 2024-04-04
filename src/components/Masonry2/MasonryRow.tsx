@@ -55,7 +55,7 @@ export function MasonryRow({
             />
             <div className="absolute top-0 left-0 right-0 bottom-0">
               <span className="bg-black/50 text-white">
-                {node.relativePath}
+                {/* {node.relativePath} */}
               </span>
             </div>
           </Link>
