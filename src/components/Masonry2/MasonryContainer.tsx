@@ -1,9 +1,13 @@
-import React, { ReactNode, useMemo } from "react";
+import React, { ReactNode, useMemo, useRef } from "react";
 import * as R from "ramda";
 import { PhotoMonthNode } from "../photos/PhotoMonth";
 import { MasonryRow } from "./MasonryRow";
 import { lab } from "chroma-js";
 import { PhotoLayout } from "../photos/PhotoLayout";
+import useDimensions from "react-cool-dimensions";
+import { VariableSizeList as List } from "react-window";
+
+import "./MasonryContainer.css";
 
 export interface MasonryGroup {
   slug: string;
@@ -14,15 +18,13 @@ export interface MasonryGroup {
 
 interface MasonryContainerProps {
   groups: MasonryGroup[];
-  widthFn: (widthNumber: number) => string;
-  maxWidth: string;
 }
 
 const targetAspect = 6;
 
 interface MasonryBaseRow {
   type: "i" | "l";
-  
+  aspect: number;
 }
 
 export interface MasonryImageRow extends MasonryBaseRow {
@@ -31,7 +33,6 @@ export interface MasonryImageRow extends MasonryBaseRow {
   startIndex: number;
   isWhole: boolean;
   groupIndex: number;
-  aspect: number;
 }
 
 export interface MasonryLabelRow extends MasonryBaseRow {
@@ -42,10 +43,10 @@ export interface MasonryLabelRow extends MasonryBaseRow {
 
 export type MasonryRowData = MasonryImageRow | MasonryLabelRow;
 
+function MasonryVirtualizedRow() {}
+
 export function MasonryContainer({
   groups,
-  widthFn,
-  maxWidth,
 }: MasonryContainerProps) {
   const rows = React.useMemo(() => {
     const _rows: MasonryRowData[] = [];
@@ -104,41 +105,61 @@ export function MasonryContainer({
     return _rows;
   }, [groups]);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { observe, width, height } = useDimensions();
+
+const itemSize = (index: number) => {
+  const row = rows[index];
+  if (row.type === 'i' && !row.isWhole) {
+    return width / targetAspect;
+  }
+
+  return width / rows[index].aspect
+}
+
   return (
-    <div className="overflow-hidden" style={{ maxWidth }}>
-      {rows.map((row) => {
-        switch (row.type) {
-          case "l":
-            return (
-              <div
-                className="relative"
-                key={row.slug}
-                // style={{
-                //   aspectRatio: ["lg", "xl", "2xl", "3xl"].includes(
-                //     breakpoint as string,
-                //   )
-                //     ? row.aspect
-                //     : undefined,
-                // }}
-              >
-                {row.contents}
-              </div>
-            );
-          case "i":
-            return (
-              <MasonryRow
-                items={groups[row.groupIndex].nodes.slice(
-                  row.startIndex,
-                  row.startIndex + row.images,
-                )}
-                key={`${row.groupIndex}-${row.startIndex}`}
-                row={row}
-                targetAspect={targetAspect}
-                widthFn={widthFn}
-              />
-            );
-        }
-      })}
+    <div ref={observe} className="h-full w-full">
+      {width && (
+        <List
+          itemCount={rows.length}
+          height={height}
+          itemData={rows}
+          width={width}
+          itemSize={itemSize}
+          className='masorny-container'
+        >
+          {({ index, style, data }) => {
+            const row = data[index];
+            switch (row.type) {
+              case "l":
+                return (
+                  <div className="relative" key={row.slug} style={style}>
+                    {row.contents}
+                  </div>
+                );
+              case "i":
+                return (
+                  <div
+                    className="relative"
+                    key={`${row.groupIndex}-${row.startIndex}`}
+                    style={style}
+                  >
+                    <MasonryRow
+                      items={groups[row.groupIndex].nodes.slice(
+                        row.startIndex,
+                        row.startIndex + row.images,
+                      )}
+                      row={row}
+                      targetAspect={targetAspect}
+                      width={width - 1}
+                      // widthFn={widthFn}
+                    />
+                  </div>
+                );
+            }
+          }}
+        </List>
+      )}
     </div>
   );
 }

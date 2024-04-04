@@ -6,22 +6,21 @@ import {
   MasonryGroup,
 } from "../components/Masonry2/MasonryContainer";
 import { PhotoLayout } from "../components/photos/PhotoLayout";
-import { TimelineSlider, TimelineStop } from "../components/Masonry2/TimelineSlider";
+import {
+  TimelineSlider,
+  TimelineStop,
+} from "../components/Masonry2/TimelineSlider";
 
 const FIXED_STOPS: TimelineStop[] = [
   // { slug: "welcome", emphasis: 1 },
-]
+];
 
 function getMonthName(month: number) {
-  return new Date(
-    2024,
-    month - 1,
-    1,
-  ).toLocaleString("en", { month: "long" })
+  return new Date(2024, month - 1, 1).toLocaleString("en", { month: "long" });
 }
 
 const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
-  useScrollRestoration('photos');
+  useScrollRestoration("photos");
   const [groups, stops] = useMemo((): [MasonryGroup[], TimelineStop[]] => {
     const _groups: MasonryGroup[] = [];
     const sortedYears = R.sort((a, b) => {
@@ -53,11 +52,11 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
             slug: month.nodes[0].fields!.organization!.monthSlug!,
             tickLabel: `${monthName} ${month.nodes[0].fields!.organization!.year!}`,
             label: (
-              <div className="p-4 lg:pl-8 lg:aspect-[8] flex flex-col justify-end h-full">
-                <h3 className="text-lg ">
+              <div className="p-4 lg:pl-8 flex flex-col justify-end h-full">
+                <h3 className="text-lg m-1">
                   {month.nodes[0].fields!.organization!.year!}
                 </h3>
-                <h2 className="text-[60px] mt-2">
+                <h2 className="text-[4vw] m-1 mt-[.5vw] font-bold">
                   {monthName}
                 </h2>
               </div>
@@ -72,18 +71,20 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
       label: g.label,
       tickLabel: g.tickLabel,
       emphasis: g.slug.endsWith("January") ? 1 : 2,
-    })); 
+    }));
     return [_groups, [...FIXED_STOPS, ...stops]];
   }, [data.allFile.group]);
 
   return (
     <PhotoLayout>
-      <MasonryContainer
-        groups={groups}
-        maxWidth="calc(100vw - 200px)"
-        widthFn={(n) => `calc(calc(100vw - 200px) * ${n})`}
-      />
-      <div className="h-screen w-[120px]" style={{ position: "fixed", top: 0, right: 0 }}>
+      <div className="flex-auto relative w-[calc(100vw-120px)]">
+        <MasonryContainer groups={groups} />
+      </div>
+      {/* hypothetical API uses like a collection of <Masonry(Content|Label|Image)Row aspect={aspect}>...</> passed to children */}
+      <div
+        className="h-screen w-[120px]"
+        style={{ position: "fixed", top: 0, right: 0 }}
+      >
         <TimelineSlider stops={stops} />
       </div>
     </PhotoLayout>

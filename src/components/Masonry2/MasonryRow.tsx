@@ -9,14 +9,18 @@ interface MasonryRowProps {
   items: readonly PhotoMonthNode[];
   row: MasonryImageRow;
   targetAspect: number;
-  widthFn: (widthNumber: number) => string;
+  // widthFn: (widthNumber: number) => string;
+  width: number;
 }
+
+// const widthFn = (n) => `calc(calc(100vw - 200px) * ${n})`;
 
 export function MasonryRow({
   items,
   row,
   targetAspect,
-  widthFn,
+  // widthFn,
+  width: rowWidth,
 }: MasonryRowProps) {
   return (
     <div className="relative">
@@ -24,13 +28,14 @@ export function MasonryRow({
         const aspect = node.childImageSharp!.fluid!.aspectRatio;
         const widthNumber = aspect / (row.isWhole ? row.aspect : targetAspect);
 
-        const width = widthFn(widthNumber);
-        const height = `calc(${width} / ${aspect})`;
+        // wtf?? magic number??
+        const width = (rowWidth * widthNumber) + "px";
+        // const height = `calc(${width} / ${aspect})`;
         return (
           <Link
             className="inline-block relative"
             key={node.id}
-            style={{ width, height }}
+            style={{ width }}
             to={`/photos/${node.fields!.organization!.monthSlug}/${node.relativePath}`}
           >
             <GatsbyImage
