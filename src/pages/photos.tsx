@@ -53,11 +53,11 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
             slug: month.nodes[0].fields!.organization!.monthSlug!,
             tickLabel: `${monthName} ${month.nodes[0].fields!.organization!.year!}`,
             label: (
-              <div className="p-2 h-[100px]">
-                <h3 className="text-lg m-2">
+              <div className="p-4 lg:pl-8 lg:aspect-[8] flex flex-col justify-end h-full">
+                <h3 className="text-lg ">
                   {month.nodes[0].fields!.organization!.year!}
                 </h3>
-                <h2 className="text-[60px] m-2">
+                <h2 className="text-[60px] mt-2">
                   {monthName}
                 </h2>
               </div>

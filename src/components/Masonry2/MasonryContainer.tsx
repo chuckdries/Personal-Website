@@ -20,24 +20,33 @@ interface MasonryContainerProps {
 
 const targetAspect = 6;
 
-export interface MasonryImageRow {
+interface MasonryBaseRow {
+  type: "i" | "l";
+  
+}
+
+export interface MasonryImageRow extends MasonryBaseRow {
   type: "i";
-  aspect: number;
   images: number;
   startIndex: number;
   isWhole: boolean;
   groupIndex: number;
+  aspect: number;
 }
 
-export interface MasonryLabelRow {
+export interface MasonryLabelRow extends MasonryBaseRow {
   type: "l";
-  label: ReactNode;
+  contents: ReactNode;
   slug: string;
 }
 
 export type MasonryRowData = MasonryImageRow | MasonryLabelRow;
 
-export function MasonryContainer({ groups, widthFn, maxWidth }: MasonryContainerProps) {
+export function MasonryContainer({
+  groups,
+  widthFn,
+  maxWidth,
+}: MasonryContainerProps) {
   const rows = React.useMemo(() => {
     const _rows: MasonryRowData[] = [];
 
@@ -45,7 +54,8 @@ export function MasonryContainer({ groups, widthFn, maxWidth }: MasonryContainer
       const group = groups[i];
       _rows.push({
         type: "l",
-        label: group.label,
+        aspect: 12,
+        contents: group.label,
         slug: group.slug,
       });
       _rows.push({
@@ -100,8 +110,18 @@ export function MasonryContainer({ groups, widthFn, maxWidth }: MasonryContainer
         switch (row.type) {
           case "l":
             return (
-              <div className="mt-[100px]" key={row.slug}>
-                {row.label}
+              <div
+                className="relative"
+                key={row.slug}
+                // style={{
+                //   aspectRatio: ["lg", "xl", "2xl", "3xl"].includes(
+                //     breakpoint as string,
+                //   )
+                //     ? row.aspect
+                //     : undefined,
+                // }}
+              >
+                {row.contents}
               </div>
             );
           case "i":
