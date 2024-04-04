@@ -7,7 +7,7 @@ import { PhotoLayout } from "../photos/PhotoLayout";
 import useDimensions from "react-cool-dimensions";
 import { VariableSizeList as List } from "react-window";
 
-import "./MasonryContainer.css";
+// import "./MasonryContainer.css";
 
 export interface MasonryGroup {
   slug: string;
@@ -127,6 +127,9 @@ const itemSize = (index: number) => {
           width={width}
           itemSize={itemSize}
           className='masorny-container'
+          onScroll={(data) => {
+            console.log(data);
+          }}
         >
           {({ index, style, data }) => {
             const row = data[index];
@@ -151,7 +154,7 @@ const itemSize = (index: number) => {
                       )}
                       row={row}
                       targetAspect={targetAspect}
-                      width={width - 1}
+                      width={width - 15}
                       // widthFn={widthFn}
                     />
                   </div>
