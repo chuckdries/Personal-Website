@@ -23,6 +23,7 @@ import classNames from "classnames";
 export interface TimelineStop {
   slug: string;
   emphasis: number;
+  tickLabel: string;
 }
 
 interface TimelineSliderProps {
@@ -74,7 +75,7 @@ export function TimelineSlider({ stops }: TimelineSliderProps) {
             name={props.name}
           />
         </div>
-        <div className="absolute top-0 bottom-0 right-0 left-0 translate-y-[-5px]">
+        <div className="absolute top-0 bottom-0 right-0 left-0">
           {stops.map((stop, i) => (
             <div
               key={stop.slug}
@@ -88,7 +89,8 @@ export function TimelineSlider({ stops }: TimelineSliderProps) {
                 "text-xs",
               )}
             >
-              {stop.slug} &bull;
+              <div className="absolute w-3 h-[1px] bg-white/80"></div>
+              {stop.tickLabel}
             </div>
           ))}
         </div>

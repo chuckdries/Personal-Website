@@ -16,20 +16,19 @@ export function MasonryRow({
   items,
   row,
   targetAspect,
-  widthFn
+  widthFn,
 }: MasonryRowProps) {
   return (
     <div className="relative">
       {items.map((node) => {
         const aspect = node.childImageSharp!.fluid!.aspectRatio;
-        const widthNumber =
-          (aspect / (row.isWhole ? row.aspect : targetAspect));
+        const widthNumber = aspect / (row.isWhole ? row.aspect : targetAspect);
 
         const width = widthFn(widthNumber);
         const height = `calc(${width} / ${aspect})`;
         return (
           <Link
-            className="inline-block"
+            className="inline-block relative"
             key={node.id}
             style={{ width, height }}
             to={`/photos/${node.fields!.organization!.monthSlug}/${node.relativePath}`}
@@ -49,6 +48,11 @@ export function MasonryRow({
               // objectFit="cover"
               // objectPosition="center top"
             />
+            {/* <div className="absolute top-0 left-0 right-0 bottom-0">
+              <span className="bg-black/50 text-white">
+                {node.relativePath}
+              </span>
+            </div> */}
           </Link>
         );
       })}

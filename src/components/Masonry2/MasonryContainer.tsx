@@ -7,6 +7,7 @@ import { PhotoLayout } from "../photos/PhotoLayout";
 
 export interface MasonryGroup {
   slug: string;
+  tickLabel: string;
   label: ReactNode;
   nodes: PhotoMonthNode[];
 }

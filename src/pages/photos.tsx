@@ -1,6 +1,6 @@
 import React, { ReactNode, useMemo } from "react";
 import * as R from "ramda";
-import { PageProps, graphql } from "gatsby";
+import { PageProps, graphql, useScrollRestoration } from "gatsby";
 import {
   MasonryContainer,
   MasonryGroup,
@@ -8,8 +8,20 @@ import {
 import { PhotoLayout } from "../components/photos/PhotoLayout";
 import { TimelineSlider, TimelineStop } from "../components/Masonry2/TimelineSlider";
 
+const FIXED_STOPS: TimelineStop[] = [
+  // { slug: "welcome", emphasis: 1 },
+]
+
+function getMonthName(month: number) {
+  return new Date(
+    2024,
+    month - 1,
+    1,
+  ).toLocaleString("en", { month: "long" })
+}
 
 const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
+  useScrollRestoration('photos');
   const [groups, stops] = useMemo((): [MasonryGroup[], TimelineStop[]] => {
     const _groups: MasonryGroup[] = [];
     const sortedYears = R.sort((a, b) => {
@@ -26,6 +38,7 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
       if (year.fieldValue === "Older") {
         _groups.push({
           slug: "Older",
+          tickLabel: "Older",
           label: <h2 className="text-2xl">Older</h2>,
           nodes: R.flatten(year.group.map((m) => m.nodes)),
         });
@@ -35,20 +48,18 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
           year.group,
         );
         for (const month of sortedMonths) {
+          const monthName = getMonthName(Number(month.fieldValue!));
           _groups.push({
             slug: month.nodes[0].fields!.organization!.monthSlug!,
+            tickLabel: `${monthName} ${month.nodes[0].fields!.organization!.year!}`,
             label: (
-              <div className="mx-2 flex items-baseline">
-                <h2 className="text-2xl">
+              <div className="p-2 h-[100px]">
+                <h3 className="text-lg m-2">
                   {month.nodes[0].fields!.organization!.year!}
-                </h2>
-                <h3 className="ml-2">
-                  {new Date(
-                    2024,
-                    month.nodes[0].fields!.organization!.month! - 1,
-                    1,
-                  ).toLocaleString("en", { month: "long" })}
                 </h3>
+                <h2 className="text-[60px] m-2">
+                  {monthName}
+                </h2>
               </div>
             ),
             nodes: R.clone(month.nodes),
@@ -58,9 +69,11 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
     }
     const stops: TimelineStop[] = _groups.map((g) => ({
       slug: g.slug,
+      label: g.label,
+      tickLabel: g.tickLabel,
       emphasis: g.slug.endsWith("January") ? 1 : 2,
     })); 
-    return [_groups, stops];
+    return [_groups, [...FIXED_STOPS, ...stops]];
   }, [data.allFile.group]);
 
   return (

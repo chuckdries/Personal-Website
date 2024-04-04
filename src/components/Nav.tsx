@@ -7,13 +7,13 @@ import { StaticImage } from "gatsby-plugin-image";
 const navClasses = (scheme: "light" | "dark") =>
   classnames(
     "hover:underline hover:bg-black/10 block p-3 flex-shrink-0 whitespace-nowrap",
-    scheme === "dark" ? "text-white" : "text-black"
+    scheme === "dark" ? "text-white" : "text-black",
   );
 const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
   <ul
     className={classnames(
       "z-30 overflow-hidden bg-vibrant-dark/50 backdrop-blur-lg",
-      "rounded shadow-lg border border-gray-400"
+      "rounded shadow-lg border border-gray-400",
     )}
   >
     <li>
@@ -21,7 +21,7 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
       <a
         className={classnames(
           navClasses("light"),
-          "bg-buzzwordsLightBg hover:bg-gray-300"
+          "bg-buzzwordsLightBg hover:bg-gray-300",
         )}
         href="https://buzzwords.gg"
         target="_blank"
@@ -116,14 +116,15 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
 
 interface NavProps {
   className?: string;
-  internalLinks: {
-    href: string;
-    label: string;
-  }[];
+  // internalLinks: {
+  //   href: string;
+  //   label: string;
+  // }[];
   scheme?: "dark" | "light";
+  
 }
 
-const Nav = ({ internalLinks, className, scheme: _scheme }: NavProps) => {
+const Nav = ({ className, scheme: _scheme }: NavProps) => {
   const [linksMenu, setLinksMenu] = useState(false);
   const faceClicks = useRef(0);
   const faceLastClicked = useRef(0);
@@ -132,10 +133,10 @@ const Nav = ({ internalLinks, className, scheme: _scheme }: NavProps) => {
   return (
     <nav
       className={classnames(
-        "my-4 flex flex-col-reverse md:flex-row",
+        "my-4 flex flex-col-reverse lg:flex-row",
         "justify-between",
-        "items-center w-full font-sans px-4 md:px-8",
-        className
+        "items-center w-full font-sans px-4 lg:px-8",
+        className,
       )}
     >
       <div className="flex flex-auto items-center">
@@ -178,18 +179,33 @@ const Nav = ({ internalLinks, className, scheme: _scheme }: NavProps) => {
 
       <div className="flex">
         <ul className="flex">
-          {internalLinks &&
-            internalLinks.map(({ href, label }) => (
-              <li key={href}>
-                <Link
-                  activeClassName="font-bold underline"
-                  className={navClasses(scheme)}
-                  to={href}
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
+          <li>
+            <Link
+              activeClassName="underline"
+              className={navClasses(scheme)}
+              to="/"
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeClassName="underline"
+              className={navClasses(scheme)}
+              to="/photos"
+            >
+              Photos
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeClassName="underline"
+              className={navClasses(scheme)}
+              to="/projects"
+            >
+              Projects
+            </Link>
+          </li>
           <li>
             <a
               rel="noreferrer"
@@ -211,7 +227,7 @@ const Nav = ({ internalLinks, className, scheme: _scheme }: NavProps) => {
           <button
             className={classnames(
               "hover:underline inline-flex align-middle items-center",
-              navClasses(scheme)
+              navClasses(scheme),
             )}
             onClick={() => setLinksMenu(!linksMenu)}
           >
