@@ -10,6 +10,8 @@ import {
   TimelineSlider,
   TimelineStop,
 } from "../components/Masonry2/TimelineSlider";
+import { StaticImage } from "gatsby-plugin-image";
+import Nav from "../components/Nav";
 
 const FIXED_STOPS: TimelineStop[] = [
   // { slug: "welcome", emphasis: 1 },
@@ -22,7 +24,14 @@ function getMonthName(month: number) {
 const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
   useScrollRestoration("photos");
   const [groups, stops] = useMemo((): [MasonryGroup[], TimelineStop[]] => {
-    const _groups: MasonryGroup[] = [];
+    const _groups: MasonryGroup[] = [
+      // {
+      //   slug: "welcome",
+      //   tickLabel: "Welcome",
+      //   label: <h2 className="text-2xl">Welcome</h2>,
+      //   nodes: [],
+      // },
+    ];
     const sortedYears = R.sort((a, b) => {
       if (a.fieldValue === "Older") {
         return 1;
@@ -76,9 +85,21 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
   }, [data.allFile.group]);
 
   return (
-    <PhotoLayout>
+    <PhotoLayout omitNav>
       <div className="flex-auto relative w-[calc(100vw-120px)]">
-        <MasonryContainer groups={groups} />
+        {/* TODO take childrenHeight prop? */}
+        <MasonryContainer groups={groups}>
+          <div className="h-[200px] flex flex-col">
+            <Nav className="mb-4" scheme="dark" />
+            {/* for homepage */}
+            {/* <StaticImage
+              objectFit="fill"
+              className="flex-auto mr-3"
+              src="../../data/gallery/DSC05151.jpg"
+              alt="test"
+            /> */}
+          </div>
+        </MasonryContainer>
       </div>
       {/* hypothetical API uses like a collection of <Masonry(Content|Label|Image)Row aspect={aspect}>...</> passed to children */}
       <div

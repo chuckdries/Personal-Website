@@ -7,7 +7,7 @@ import { PhotoLayout } from "../photos/PhotoLayout";
 import useDimensions from "react-cool-dimensions";
 import { VariableSizeList as List } from "react-window";
 
-// import "./MasonryContainer.css";
+import "./MasonryContainer.css";
 
 export interface MasonryGroup {
   slug: string;
@@ -18,13 +18,20 @@ export interface MasonryGroup {
 
 interface MasonryContainerProps {
   groups: MasonryGroup[];
+  children: ReactNode;
 }
 
 const targetAspect = 6;
 
 interface MasonryBaseRow {
-  type: "i" | "l";
+  type: "i" | "l" | "c";
   aspect: number;
+}
+
+/** placeholder for children */
+export interface MasonryChildrenRow extends MasonryBaseRow {
+  type: "c";
+  aspect: 0;
 }
 
 export interface MasonryImageRow extends MasonryBaseRow {
@@ -41,15 +48,19 @@ export interface MasonryLabelRow extends MasonryBaseRow {
   slug: string;
 }
 
-export type MasonryRowData = MasonryImageRow | MasonryLabelRow;
+export type MasonryRowData = MasonryChildrenRow | MasonryImageRow | MasonryLabelRow;
 
 function MasonryVirtualizedRow() {}
 
 export function MasonryContainer({
   groups,
+  children,
 }: MasonryContainerProps) {
   const rows = React.useMemo(() => {
-    const _rows: MasonryRowData[] = [];
+    const _rows: MasonryRowData[] = [{
+      type: "c",
+      aspect: 0,
+    }];
 
     for (let i = 0; i < groups.length; i++) {
       const group = groups[i];
@@ -109,6 +120,10 @@ export function MasonryContainer({
   const { observe, width, height } = useDimensions();
 
 const itemSize = (index: number) => {
+  if (index === 0 && children) {
+    // TODO: improve
+    return 200;
+  }
   const row = rows[index];
   if (row.type === 'i' && !row.isWhole) {
     return width / targetAspect;
@@ -132,6 +147,9 @@ const itemSize = (index: number) => {
           }}
         >
           {({ index, style, data }) => {
+            if (index === 0 && children) {
+              return <div className="relative" key={0} style={style}>{children}</div>
+            }
             const row = data[index];
             switch (row.type) {
               case "l":

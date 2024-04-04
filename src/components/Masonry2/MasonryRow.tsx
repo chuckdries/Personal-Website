@@ -53,11 +53,11 @@ export function MasonryRow({
               // objectFit="cover"
               // objectPosition="center top"
             />
-            {/* <div className="absolute top-0 left-0 right-0 bottom-0">
+            <div className="absolute top-0 left-0 right-0 bottom-0">
               <span className="bg-black/50 text-white">
                 {node.relativePath}
               </span>
-            </div> */}
+            </div>
           </Link>
         );
       })}
