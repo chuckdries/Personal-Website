@@ -10,7 +10,7 @@ import sharp from "sharp";
 import { Palette } from "node-vibrant/lib/color";
 import fs from "fs";
 import md5 from "md5";
-import glob from "glob";
+import {globSync} from "glob";
 
 import util from "node:util";
 import { exec as _exec } from "child_process";
@@ -50,7 +50,7 @@ export const onPostBootstrap = async () => {
 
 export const onPostBuild = async () => {
   const publicPath = path.join(__dirname, "public");
-  const htmlAndJSFiles = glob.sync(`${publicPath}/**/*.{html,js}`);
+  const htmlAndJSFiles = globSync(`${publicPath}/**/*.{html,js}`);
   for (let file of htmlAndJSFiles) {
     await addPageDataVersion(file);
   }
