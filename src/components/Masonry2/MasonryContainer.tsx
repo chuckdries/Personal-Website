@@ -153,7 +153,11 @@ export function MasonryContainer({
   const itemSize = (index: number) => {
     if (index === 0 && children) {
       // TODO: improve
-      return 110;
+      return 210;
+    }
+
+    if (index === 1) {
+      return 120;
     }
     const row = rows[index];
     if (row.type === "i" && !row.isWhole) {

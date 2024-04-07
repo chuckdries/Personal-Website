@@ -187,7 +187,7 @@ const Nav = ({ className, scheme: _scheme, compact }: NavProps) => {
         )}
         <div className="items-baseline">
           <h1 className="font-bold mr-2">Chuck Dries</h1>
-          <h2 className="text-md">Software Engineer & Photographer</h2>
+          {!compact && <h2 className="text-md">Software Engineer & Photographer</h2>}
         </div>
       </div>
 
