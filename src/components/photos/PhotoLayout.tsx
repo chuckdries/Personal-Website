@@ -9,7 +9,7 @@ export function PhotoLayout({ children, omitNav }: { children: React.ReactNode, 
         <title>Photos | Chuck Dries</title>
         <body className="bg-neutral-900 text-white" />
       </Helmet>
-      {!omitNav && <div className="pr-[120px]">
+      {!omitNav && <div className="">
         <Nav className="mb-4" scheme="dark" />
       </div>}
       {children}

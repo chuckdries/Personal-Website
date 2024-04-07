@@ -1,5 +1,5 @@
-import { PageProps, graphql } from "gatsby";
-import React, { useMemo } from "react";
+import { PageProps, graphql, navigate } from "gatsby";
+import React, { useLayoutEffect, useMemo } from "react";
 import * as R from "ramda";
 import { MasonryContainer, MasonryGroup } from "../Masonry2/MasonryContainer";
 import { PhotoLayout } from "./PhotoLayout";
@@ -10,6 +10,9 @@ function PhotoMonth({
   pageContext,
   data,
 }: PageProps<Queries.PhotoMonthQuery, { monthSlug: string }>) {
+  useLayoutEffect(() => {
+    navigate("/photos");
+  }, []);
   const groups: MasonryGroup[] = useMemo(
     () => [
       {
@@ -23,9 +26,9 @@ function PhotoMonth({
   return (
     <PhotoLayout>
       {/* <h1>{pageContext.monthSlug}</h1> */}
-      <div>
+      {/* <div>
         <MasonryContainer groups={groups} />
-      </div>
+      </div> */}
     </PhotoLayout>
   );
 }

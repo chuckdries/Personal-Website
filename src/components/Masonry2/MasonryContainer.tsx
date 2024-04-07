@@ -1,13 +1,19 @@
-import React, { ReactNode, useMemo, useRef } from "react";
+import React, {
+  ReactNode,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+} from "react";
 import * as R from "ramda";
 import { PhotoMonthNode } from "../photos/PhotoMonth";
 import { MasonryRow } from "./MasonryRow";
 import { lab } from "chroma-js";
 import { PhotoLayout } from "../photos/PhotoLayout";
 import useDimensions from "react-cool-dimensions";
-import { VariableSizeList as List } from "react-window";
+import { VariableSizeList as List, ListOnScrollProps } from "react-window";
 
-import "./MasonryContainer.css";
+// import "./MasonryContainer.css";
 
 export interface MasonryGroup {
   slug: string;
@@ -18,10 +24,12 @@ export interface MasonryGroup {
 
 interface MasonryContainerProps {
   groups: MasonryGroup[];
+  onScroll?: (data: ListOnScrollProps) => void;
+  scrollPosition?: number;
   children: ReactNode;
 }
 
-const targetAspect = 6;
+// const targetAspect = 6;
 
 interface MasonryBaseRow {
   type: "i" | "l" | "c";
@@ -48,25 +56,46 @@ export interface MasonryLabelRow extends MasonryBaseRow {
   slug: string;
 }
 
-export type MasonryRowData = MasonryChildrenRow | MasonryImageRow | MasonryLabelRow;
+export type MasonryRowData =
+  | MasonryChildrenRow
+  | MasonryImageRow
+  | MasonryLabelRow;
 
 function MasonryVirtualizedRow() {}
 
 export function MasonryContainer({
   groups,
   children,
+  onScroll,
+  scrollPosition,
 }: MasonryContainerProps) {
+  const { observe, width, height } = useDimensions();
+  const listRef = useRef<List>(null);
+  useEffect(() => {
+    if (listRef.current) {
+      listRef.current.resetAfterIndex(0);
+    }
+  }, [width]);
+  useLayoutEffect(() => {
+    if (scrollPosition && listRef.current) {
+      listRef.current.scrollTo(scrollPosition);
+    }
+  }, [scrollPosition]);
+  // listRef.current?.scrollTo(scrollPosition);
+  const targetAspect = width / 250;
   const rows = React.useMemo(() => {
-    const _rows: MasonryRowData[] = [{
-      type: "c",
-      aspect: 0,
-    }];
+    const _rows: MasonryRowData[] = [
+      {
+        type: "c",
+        aspect: 0,
+      },
+    ];
 
     for (let i = 0; i < groups.length; i++) {
       const group = groups[i];
       _rows.push({
         type: "l",
-        aspect: i == 0 ? 12 : 7,
+        aspect: targetAspect,
         contents: group.label,
         slug: group.slug,
       });
@@ -114,41 +143,41 @@ export function MasonryContainer({
     }
 
     return _rows;
-  }, [groups]);
+  }, [groups, targetAspect]);
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { observe, width, height } = useDimensions();
+  const itemSize = (index: number) => {
+    if (index === 0 && children) {
+      // TODO: improve
+      return 110;
+    }
+    const row = rows[index];
+    if (row.type === "i" && !row.isWhole) {
+      return width / targetAspect;
+    }
 
-const itemSize = (index: number) => {
-  if (index === 0 && children) {
-    // TODO: improve
-    return 200;
-  }
-  const row = rows[index];
-  if (row.type === 'i' && !row.isWhole) {
-    return width / targetAspect;
-  }
-
-  return width / rows[index].aspect
-}
+    return width / rows[index].aspect;
+  };
 
   return (
-    <div ref={observe} className="h-full w-full">
+    <div className="h-full w-full" ref={observe}>
       {width && (
         <List
-          itemCount={rows.length}
+          className="masorny-container w-full"
           height={height}
+          itemCount={rows.length}
           itemData={rows}
-          width={width}
           itemSize={itemSize}
-          className='masorny-container'
-          onScroll={(data) => {
-            console.log(data);
-          }}
+          onScroll={onScroll}
+          ref={listRef}
+          width={width}
         >
           {({ index, style, data }) => {
             if (index === 0 && children) {
-              return <div className="relative" key={0} style={style}>{children}</div>
+              return (
+                <div className="relative" key={0} style={style}>
+                  {children}
+                </div>
+              );
             }
             const row = data[index];
             switch (row.type) {
@@ -161,7 +190,7 @@ const itemSize = (index: number) => {
               case "i":
                 return (
                   <div
-                    className="relative"
+                    className="relative flex"
                     key={`${row.groupIndex}-${row.startIndex}`}
                     style={style}
                   >

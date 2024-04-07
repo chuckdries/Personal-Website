@@ -1,6 +1,6 @@
-import React, { ReactNode, useMemo } from "react";
+import React, { ReactNode, useEffect, useMemo, useState } from "react";
 import * as R from "ramda";
-import { PageProps, graphql, useScrollRestoration } from "gatsby";
+import { PageProps, graphql } from "gatsby";
 import {
   MasonryContainer,
   MasonryGroup,
@@ -21,8 +21,11 @@ function getMonthName(month: number) {
   return new Date(2024, month - 1, 1).toLocaleString("en", { month: "long" });
 }
 
+function useScrollState() {}
+
 const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
-  useScrollRestoration("photos");
+  // useScrollRestoration("photos");
+
   const [groups, stops] = useMemo((): [MasonryGroup[], TimelineStop[]] => {
     const _groups: MasonryGroup[] = [];
     const stops: TimelineStop[] = [];
@@ -41,12 +44,16 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
         slug: year.fieldValue!,
         tickLabel: year.fieldValue!,
         emphasis: year.fieldValue === "Older" ? 1 : 2,
-      })
+      });
       if (year.fieldValue === "Older") {
         _groups.push({
           slug: "Older",
           tickLabel: "Older",
-          label: <h2 className="text-2xl">Older</h2>,
+          label: (
+            <div className="p-4 lg:pl-8 flex flex-col justify-end h-full">
+              <h2 className="text-[70px] m-1 mt-[.5vw] font-bold">Older</h2>
+            </div>
+          ),
           nodes: R.flatten(year.group.map((m) => m.nodes)),
         });
       } else {
@@ -64,7 +71,7 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
                 <h3 className="text-lg m-1">
                   {month.nodes[0].fields!.organization!.year!}
                 </h3>
-                <h2 className="text-[4vw] m-1 mt-[.5vw] font-bold">
+                <h2 className="text-[70px] m-1 mt-[.5vw] font-bold">
                   {monthName}
                 </h2>
               </div>
@@ -83,11 +90,26 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
     return [_groups, stops];
   }, [data.allFile.group]);
 
+  const [initialScroll, setInitialScroll] = useState(0);
+  useEffect(() => {
+    const prevScroll = sessionStorage.getItem("photos-scroll");
+    if (prevScroll) {
+      setInitialScroll(Number(prevScroll));
+    }
+  }, []);
+
   return (
     <PhotoLayout omitNav>
-      <div className="flex-auto relative w-[calc(100vw-120px)]">
+      {/* <div className="flex-auto relative w-[calc(100vw-120px)]"> */}
+      <div className="flex-auto relative w-screen">
         {/* TODO take childrenHeight prop? */}
-        <MasonryContainer groups={groups}>
+        <MasonryContainer
+          groups={groups}
+          onScroll={(data) => {
+            sessionStorage.setItem("photos-scroll", `${data.scrollOffset}`);
+          }}
+          scrollPosition={initialScroll}
+        >
           <div className="h-[200px] flex flex-col">
             <Nav className="mb-4" scheme="dark" />
             {/* for homepage */}
@@ -101,12 +123,12 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
         </MasonryContainer>
       </div>
       {/* hypothetical API uses like a collection of <Masonry(Content|Label|Image)Row aspect={aspect}>...</> passed to children */}
-      <div
+      {/* <div
         className="h-screen w-[120px]"
         style={{ position: "fixed", top: 0, right: 0 }}
       >
         <TimelineSlider stops={stops} />
-      </div>
+      </div> */}
     </PhotoLayout>
   );
 };

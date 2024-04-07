@@ -1,11 +1,12 @@
-import { Link, PageProps, graphql } from "gatsby";
+import { Link, PageProps, graphql, navigate } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
-import React, { useMemo } from "react";
+import React, { useLayoutEffect, useMemo } from "react";
 import * as R from "ramda";
 import { PhotoLayout } from "./PhotoLayout";
 import { MonthTile } from "./PhotoYear/MonthTile";
 
-export type PhotoYearNode = Queries.PhotoYearQuery["allFile"]["group"][number]["nodes"][number];
+export type PhotoYearNode =
+  Queries.PhotoYearQuery["allFile"]["group"][number]["nodes"][number];
 
 export interface PhotoYearMonth {
   fieldValue: number;
@@ -17,12 +18,19 @@ function PhotoYear({
   pageContext,
   data,
 }: PageProps<Queries.PhotoYearQuery, { year: string }>) {
+  useLayoutEffect(() => {
+    navigate("/photos");
+  }, []);
   const months = useMemo(() => {
-    const cleaned: PhotoYearMonth []= R.map(
+    const cleaned: PhotoYearMonth[] = R.map(
       (group) => ({
         nodes: group.nodes,
         fieldValue: parseInt(group.fieldValue!),
-        score: R.sum(group.nodes.map((node) => node.fields!.imageMeta!.meta!.Rating!).filter(Boolean)),
+        score: R.sum(
+          group.nodes
+            .map((node) => node.fields!.imageMeta!.meta!.Rating!)
+            .filter(Boolean),
+        ),
       }),
       data.allFile.group,
     );

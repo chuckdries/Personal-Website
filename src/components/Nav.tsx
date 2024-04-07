@@ -121,10 +121,10 @@ interface NavProps {
   //   label: string;
   // }[];
   scheme?: "dark" | "light";
-  
+  compact?: boolean;
 }
 
-const Nav = ({ className, scheme: _scheme }: NavProps) => {
+const Nav = ({ className, scheme: _scheme, compact }: NavProps) => {
   const [linksMenu, setLinksMenu] = useState(false);
   const faceClicks = useRef(0);
   const faceLastClicked = useRef(0);
@@ -133,44 +133,58 @@ const Nav = ({ className, scheme: _scheme }: NavProps) => {
   return (
     <nav
       className={classnames(
-        "my-4 flex flex-col-reverse lg:flex-row",
+        compact ? "my-0 pr-4 lg:pr-4" : "my-4 px-4 lg:px-8",
+        "flex flex-col-reverse lg:flex-row",
         "justify-between",
-        "items-center w-full font-sans px-4 lg:px-8",
+        "items-center w-full font-sans ",
         className,
       )}
     >
       <div className="flex flex-auto items-center">
-        <div
-          className={classnames("h-[120px] w-[120px] mr-4 my-5 flex-shrink-0")}
-          onClick={() => {
-            const prevClick = faceLastClicked.current;
-            faceLastClicked.current = Date.now();
-            if (prevClick > 0 && faceLastClicked.current - prevClick > 500) {
-              console.log("too slow!");
-              faceClicks.current = 1;
-              return;
-            }
-            if (faceClicks.current === 4) {
-              navigate("/photogallery/?debug=true");
-              return;
-            }
-            faceClicks.current += 1;
-          }}
-        >
-          <StaticImage
-            alt="A picture of me"
-            className="relative"
-            placeholder="tracedSVG"
-            src="../images/circle-profile.png"
-            style={
-              {
-                // top: "-70%",
-                // left: "-50%",
-                // width: "200%",
+        {compact ? (
+          <div className="py-2 px-4 grid">
+            <button
+              className="rounded-md h-[40px] w-[40px] bg-neutral-600 text-white flex items-center justify-center"
+              onClick={() => navigate(-1)}
+            >
+              &lt;
+            </button>
+          </div>
+        ) : (
+          <div
+            className={classnames(
+              "h-[120px] w-[120px] mr-4 my-5 flex-shrink-0",
+            )}
+            onClick={() => {
+              const prevClick = faceLastClicked.current;
+              faceLastClicked.current = Date.now();
+              if (prevClick > 0 && faceLastClicked.current - prevClick > 500) {
+                console.log("too slow!");
+                faceClicks.current = 1;
+                return;
               }
-            }
-          />
-        </div>
+              if (faceClicks.current === 4) {
+                navigate("/photogallery/?debug=true");
+                return;
+              }
+              faceClicks.current += 1;
+            }}
+          >
+            <StaticImage
+              alt="A picture of me"
+              className="relative"
+              placeholder="tracedSVG"
+              src="../images/circle-profile.png"
+              style={
+                {
+                  // top: "-70%",
+                  // left: "-50%",
+                  // width: "200%",
+                }
+              }
+            />
+          </div>
+        )}
         <div className="items-baseline">
           <h1 className="font-bold mr-2">Chuck Dries</h1>
           <h2 className="text-md">Software Engineer & Photographer</h2>
