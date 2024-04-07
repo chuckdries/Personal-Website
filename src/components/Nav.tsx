@@ -7,13 +7,13 @@ import { StaticImage } from "gatsby-plugin-image";
 const navClasses = (scheme: "light" | "dark") =>
   classnames(
     "hover:underline hover:bg-black/10 block p-3 flex-shrink-0 whitespace-nowrap",
-    scheme === "dark" ? "text-white" : "text-black"
+    scheme === "dark" ? "text-white" : "text-black",
   );
 const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
   <ul
     className={classnames(
       "z-30 overflow-hidden bg-vibrant-dark/50 backdrop-blur-lg",
-      "rounded shadow-lg border border-gray-400"
+      "rounded shadow-lg border border-gray-400",
     )}
   >
     <li>
@@ -21,7 +21,7 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
       <a
         className={classnames(
           navClasses("light"),
-          "bg-buzzwordsLightBg hover:bg-gray-300"
+          "bg-buzzwordsLightBg hover:bg-gray-300",
         )}
         href="https://buzzwords.gg"
         target="_blank"
@@ -116,14 +116,15 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
 
 interface NavProps {
   className?: string;
-  internalLinks: {
-    href: string;
-    label: string;
-  }[];
+  // internalLinks: {
+  //   href: string;
+  //   label: string;
+  // }[];
   scheme?: "dark" | "light";
+  compact?: boolean;
 }
 
-const Nav = ({ internalLinks, className, scheme: _scheme }: NavProps) => {
+const Nav = ({ className, scheme: _scheme, compact }: NavProps) => {
   const [linksMenu, setLinksMenu] = useState(false);
   const faceClicks = useRef(0);
   const faceLastClicked = useRef(0);
@@ -132,44 +133,58 @@ const Nav = ({ internalLinks, className, scheme: _scheme }: NavProps) => {
   return (
     <nav
       className={classnames(
-        "my-4 flex flex-col-reverse md:flex-row",
+        compact ? "my-0 pr-4 lg:pr-4" : "my-4 px-4 lg:px-8",
+        "flex flex-col-reverse lg:flex-row",
         "justify-between",
-        "items-center w-full font-sans px-4 md:px-8",
-        className
+        "items-center w-full font-sans ",
+        className,
       )}
     >
       <div className="flex flex-auto items-center">
-        <div
-          className={classnames("h-[120px] w-[120px] mr-4 my-5 flex-shrink-0")}
-          onClick={() => {
-            const prevClick = faceLastClicked.current;
-            faceLastClicked.current = Date.now();
-            if (prevClick > 0 && faceLastClicked.current - prevClick > 500) {
-              console.log("too slow!");
-              faceClicks.current = 1;
-              return;
-            }
-            if (faceClicks.current === 4) {
-              navigate("/photogallery/?debug=true");
-              return;
-            }
-            faceClicks.current += 1;
-          }}
-        >
-          <StaticImage
-            alt="A picture of me"
-            className="relative"
-            placeholder="tracedSVG"
-            src="../images/circle-profile.png"
-            style={
-              {
-                // top: "-70%",
-                // left: "-50%",
-                // width: "200%",
+        {compact ? (
+          <div className="py-2 px-4 grid">
+            <button
+              className="rounded-md h-[40px] w-[40px] bg-neutral-600 text-white flex items-center justify-center"
+              onClick={() => navigate(-1)}
+            >
+              &lt;
+            </button>
+          </div>
+        ) : (
+          <div
+            className={classnames(
+              "h-[120px] w-[120px] mr-4 my-5 flex-shrink-0",
+            )}
+            onClick={() => {
+              const prevClick = faceLastClicked.current;
+              faceLastClicked.current = Date.now();
+              if (prevClick > 0 && faceLastClicked.current - prevClick > 500) {
+                console.log("too slow!");
+                faceClicks.current = 1;
+                return;
               }
-            }
-          />
-        </div>
+              if (faceClicks.current === 4) {
+                navigate("/photogallery/?debug=true");
+                return;
+              }
+              faceClicks.current += 1;
+            }}
+          >
+            <StaticImage
+              alt="A picture of me"
+              className="relative"
+              placeholder="tracedSVG"
+              src="../images/circle-profile.png"
+              style={
+                {
+                  // top: "-70%",
+                  // left: "-50%",
+                  // width: "200%",
+                }
+              }
+            />
+          </div>
+        )}
         <div className="items-baseline">
           <h1 className="font-bold mr-2">Chuck Dries</h1>
           <h2 className="text-md">Software Engineer & Photographer</h2>
@@ -178,18 +193,33 @@ const Nav = ({ internalLinks, className, scheme: _scheme }: NavProps) => {
 
       <div className="flex">
         <ul className="flex">
-          {internalLinks &&
-            internalLinks.map(({ href, label }) => (
-              <li key={href}>
-                <Link
-                  activeClassName="font-bold underline"
-                  className={navClasses(scheme)}
-                  to={href}
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
+          <li>
+            <Link
+              activeClassName="underline"
+              className={navClasses(scheme)}
+              to="/"
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeClassName="underline"
+              className={navClasses(scheme)}
+              to="/photos"
+            >
+              Photos
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeClassName="underline"
+              className={navClasses(scheme)}
+              to="/projects"
+            >
+              Projects
+            </Link>
+          </li>
           <li>
             <a
               rel="noreferrer"
@@ -211,7 +241,7 @@ const Nav = ({ internalLinks, className, scheme: _scheme }: NavProps) => {
           <button
             className={classnames(
               "hover:underline inline-flex align-middle items-center",
-              navClasses(scheme)
+              navClasses(scheme),
             )}
             onClick={() => setLinksMenu(!linksMenu)}
           >

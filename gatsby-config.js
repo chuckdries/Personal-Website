@@ -18,22 +18,33 @@ module.exports = {
     },
     "gatsby-transformer-sharp",
     "gatsby-plugin-postcss",
+    // TODO do I need this
+    // {
+    //   resolve: "gatsby-source-filesystem",
+    //   options: {
+    //     name: "images",
+    //     path: "./src/images/",
+    //   },
+    //   __key: "images",
+    // },
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "images",
-        path: "./src/images/",
-      },
-      __key: "images",
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "gallery",
+        // name: "gallery",
+        name: "photos",
         path: "./data/gallery/",
       },
-      __key: "gallery",
+      // __key: "gallery",
+      __key: "photos",
     },
+    // {
+    //   resolve: "gatsby-source-filesystem",
+    //   options: {
+    //     name: "photos",
+    //     path: "./data/photos/",
+    //   },
+    //   __key: "photos",
+    // },
     // {
     //   resolve: "gatsby-source-filesystem",
     //   options: {

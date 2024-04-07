@@ -24,7 +24,7 @@ const SORT_KEYS = {
   hue_debug: ["fields", "imageMeta", "dominantHue", "0"],
   date: ["fields", "imageMeta", "dateTaken"],
   datePublished: ["fields", "imageMeta", "datePublished"],
-} as const;
+};
 
 export type GalleryImage =
   Queries.GalleryPageQueryQuery["all"]["nodes"][number];
@@ -327,7 +327,7 @@ const GalleryPage = ({
                 </ToggleButton>
               </div>
             )}
-            <div className="mr-1">
+            {/* <div className="mr-1">
               <ToggleButton
                 isSelected={showPalette}
                 onChange={setShowPalette}
@@ -339,7 +339,7 @@ const GalleryPage = ({
                   }}
                 />
               </ToggleButton>
-            </div>
+            </div> */}
             <Select
               label="Sort by..."
               // @ts-expect-error React.key, but string is more convenient for the state
@@ -380,14 +380,14 @@ const GalleryPage = ({
 export const query = graphql`
   query GalleryPageQuery {
     recents: allFile(
-      filter: { sourceInstanceName: { eq: "gallery" } }
+      filter: { sourceInstanceName: { eq: "photos" } }
       sort: { fields: { imageMeta: { datePublished: DESC } } }
       limit: 10
     ) {
       ...GalleryImageFile
     }
     all: allFile(
-      filter: { sourceInstanceName: { eq: "gallery" } }
+      filter: { sourceInstanceName: { eq: "photos" } }
       sort: { fields: { imageMeta: { dateTaken: DESC } } }
     ) {
       ...GalleryImageFile
@@ -409,7 +409,7 @@ export const query = graphql`
       }
       fields {
         imageMeta {
-          vibrantHue
+          # vibrantHue
           dominantHue
           dateTaken
           datePublished
@@ -420,9 +420,9 @@ export const query = graphql`
             CreateDate
             ModifyDate
           }
-          vibrant {
-            ...VibrantColors
-          }
+          # vibrant {
+          #   ...VibrantColors
+          # }
         }
       }
     }

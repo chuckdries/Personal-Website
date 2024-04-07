@@ -1,0 +1,56 @@
+import { Link, PageProps, graphql, navigate } from "gatsby";
+import React, { useEffect } from "react";
+import { PhotoLayout } from "./PhotoLayout";
+import { GatsbyImage } from "gatsby-plugin-image";
+import { Helmet } from "react-helmet";
+import Nav from "../Nav";
+
+function PhotoImage({
+  pageContext,
+  data,
+}: PageProps<Queries.PhotoImageQuery, { imageId: string }>) {
+  useEffect(() => {
+    const keyListener = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        navigate(-1);
+      }
+    };
+    document.addEventListener("keydown", keyListener);
+    return () => {
+      document.removeEventListener("keydown", keyListener);
+    };
+  }, []);
+  return (
+    <div className="flex flex-col h-screen overflow-hidden">
+      <Helmet>
+        <title>Photos | Chuck Dries</title>
+        <body className="bg-neutral-900 text-white" />
+      </Helmet>
+      <Nav compact className="mb-0" scheme="dark" />
+      {/* <div className="flex-auto "> */}
+      <GatsbyImage
+        image={data.image!.childImageSharp!.gatsbyImageData}
+        // className="h-full w-full object-contain"
+        className="h-full"
+        objectFit="contain"
+        alt="photo"
+      />
+
+      {/* </div> */}
+    </div>
+  );
+}
+
+export default PhotoImage;
+
+export const query = graphql`
+  query PhotoImage($imageId: String) {
+    image: file(id: { eq: $imageId }) {
+      id
+      relativePath
+      childImageSharp {
+        gatsbyImageData(placeholder: BLURRED)
+      }
+    }
+  }
+`;
