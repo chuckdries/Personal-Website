@@ -12,6 +12,8 @@ import { lab } from "chroma-js";
 import { PhotoLayout } from "../photos/PhotoLayout";
 import useDimensions from "react-cool-dimensions";
 import { VariableSizeList as List, ListOnScrollProps } from "react-window";
+import useBreakpoint from "use-breakpoint";
+import themeBreakpoints from "../../breakpoints";
 
 // import "./MasonryContainer.css";
 
@@ -82,7 +84,10 @@ export function MasonryContainer({
     }
   }, [scrollPosition]);
   // listRef.current?.scrollTo(scrollPosition);
-  const targetAspect = width / 250;
+
+  const { breakpoint } = useBreakpoint(themeBreakpoints, "sm")
+
+  const targetAspect = width / (breakpoint === 'sm' ? 150 : 250);
   const rows = React.useMemo(() => {
     const _rows: MasonryRowData[] = [
       {
