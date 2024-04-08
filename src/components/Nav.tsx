@@ -12,7 +12,7 @@ const navClasses = (scheme: "light" | "dark") =>
 const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
   <ul
     className={classnames(
-      "z-30 overflow-hidden bg-vibrant-dark/50 backdrop-blur-lg",
+      "z-30 overflow-hidden bg-vibrant-dark/30 backdrop-blur-lg",
       "rounded shadow-lg border border-gray-400",
     )}
   >
@@ -39,13 +39,23 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
     <li>
       <a
         className={navClasses(scheme)}
+        href="https://cohost.org/chuck"
+        rel="noreferrer"
+        target="_blank"
+      >
+        Cohost
+      </a>
+    </li>
+    {/* <li>
+      <a
+        className={navClasses(scheme)}
         href="https://chuckdries.darkroom.com/"
         rel="noreferrer"
         target="_blank"
       >
         Prints
       </a>
-    </li>
+    </li> */}
     {/* <li>
       <a
         className={navClasses(scheme)}
@@ -96,16 +106,7 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
         Mastodon
       </a>
     </li>
-    {/* <li>
-      <a
-        className={navClasses(scheme)}
-        href="https://cohost.org/chuck"
-        rel="noreferrer"
-        target="_blank"
-      >
-        Cohost
-      </a>
-    </li> */}
+
     <li>
       <a className={navClasses(scheme)} href="mailto:chuck@chuckdries.com">
         chuck@chuckdries.com
@@ -187,7 +188,9 @@ const Nav = ({ className, scheme: _scheme, compact }: NavProps) => {
         )}
         <div className="items-baseline">
           <h1 className="font-bold mr-2">Chuck Dries</h1>
-          {!compact && <h2 className="text-md">Software Engineer & Photographer</h2>}
+          {!compact && (
+            <h2 className="text-md">Software Engineer & Photographer</h2>
+          )}
         </div>
       </div>
 
@@ -220,7 +223,7 @@ const Nav = ({ className, scheme: _scheme, compact }: NavProps) => {
               Projects
             </Link>
           </li>
-          <li>
+          {/* <li>
             <a
               rel="noreferrer"
               target="_blank"
@@ -229,7 +232,7 @@ const Nav = ({ className, scheme: _scheme, compact }: NavProps) => {
             >
               Blog
             </a>
-          </li>
+          </li> */}
         </ul>
         <Popover
           containerClassName="z-30 p-1"
