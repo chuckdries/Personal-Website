@@ -4,7 +4,7 @@ import Nav from "../Nav";
 
 export function PhotoLayout({ children, omitNav }: { children: React.ReactNode, omitNav?: boolean}) {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-[100svh]">
       <Helmet>
         <title>Photos | Chuck Dries</title>
         <body className="bg-neutral-900 text-white" />
