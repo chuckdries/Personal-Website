@@ -134,7 +134,7 @@ const Nav = ({ className, scheme: _scheme, compact }: NavProps) => {
   return (
     <nav
       className={classnames(
-        compact ? "my-0 pr-4 lg:pr-4" : "my-4 px-4 lg:px-8",
+        compact ? "my-0 px-4 lg:px-4" : "my-4 px-4 lg:px-8",
         "flex flex-col-reverse lg:flex-row",
         "justify-between",
         "items-center w-full font-sans ",
@@ -142,16 +142,7 @@ const Nav = ({ className, scheme: _scheme, compact }: NavProps) => {
       )}
     >
       <div className="flex flex-auto items-center">
-        {compact ? (
-          <div className="py-2 px-4 grid">
-            <button
-              className="rounded-md h-[40px] w-[40px] bg-neutral-600 text-white flex items-center justify-center"
-              onClick={() => navigate(-1)}
-            >
-              &lt;
-            </button>
-          </div>
-        ) : (
+        {!compact && (
           <div
             className={classnames(
               "h-[120px] w-[120px] mr-4 my-5 flex-shrink-0",
