@@ -4,6 +4,7 @@ import { PhotoLayout } from "./PhotoLayout";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
 import Nav from "../Nav";
+import { getHelmetSafeBodyStyle, getVibrantStyle } from "../../utils";
 
 function PhotoImage({
   pageContext,
@@ -24,16 +25,23 @@ function PhotoImage({
     <div className="relative flex flex-col h-screen overflow-hidden">
       <Helmet>
         <title>Photos | Chuck Dries</title>
-        <body className="bg-neutral-900 text-white" />
+        <body
+          className="bg-neutral-900 text-white"
+          // @ts-expect-error not a style prop
+          style={getHelmetSafeBodyStyle({
+            // @ts-expect-error not a style prop
+            "--dark-vibrant": `25, 25, 25`,
+          })}
+        />
       </Helmet>
-      <Nav compact className="mb-0" scheme="dark" />
+      <Nav className="mb-0" compact scheme="dark" />
       {/* <div className="flex-auto "> */}
       <GatsbyImage
+        alt="photo"
+        objectFit="contain"
         image={data.image!.childImageSharp!.gatsbyImageData}
         // className="h-full w-full object-contain"
         className="h-full"
-        objectFit="contain"
-        alt="photo"
       />
       <div className="absolute bottom-0 right-0 p-4 ">
         <a

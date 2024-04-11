@@ -13,6 +13,7 @@ import { PhotoLayout } from "../photos/PhotoLayout";
 import useDimensions from "react-cool-dimensions";
 import { VariableSizeList as List, ListOnScrollProps } from "react-window";
 import useBreakpoint from "use-breakpoint";
+// @ts-expect-error babel preval != ts
 import themeBreakpoints from "../../breakpoints";
 
 // import "./MasonryContainer.css";
@@ -168,7 +169,7 @@ export function MasonryContainer({
   };
 
   return (
-    <div className="h-full w-full" ref={observe}>
+    <div className="h-[100svh] w-full" ref={observe}>
       {width && (
         <List
           className="masorny-container w-full"
@@ -177,6 +178,7 @@ export function MasonryContainer({
           itemData={rows}
           itemSize={itemSize}
           onScroll={onScroll}
+          overscanCount={5}
           ref={listRef}
           width={width}
         >
