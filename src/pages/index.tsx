@@ -119,7 +119,7 @@ const IndexPage = ({
 export const query = graphql`
   query IndexPage {
     allFile(
-      filter: {sourceInstanceName: {eq: "gallery"}, base: {in: ["DSC01132-positive.jpg", "DSC08277-Edit-positive.jpg"]}}
+      filter: {sourceInstanceName: {eq: "photos"}, base: {in: ["DSC05151.jpg", "DSC05318.jpg"]}}
       sort: {childImageSharp: {fluid: {aspectRatio: ASC}}}
     ) {
       nodes {
@@ -135,13 +135,13 @@ export const query = graphql`
             breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
           )
         }
-        fields {
-          imageMeta {
-            vibrant {
-              ...VibrantColors
-            }
-          }
-        }
+        # fields {
+        #   imageMeta {
+        #     vibrant {
+        #       ...VibrantColors
+        #     }
+        #   }
+        # }
       }
     }
   }
