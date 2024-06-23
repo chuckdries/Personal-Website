@@ -410,7 +410,7 @@ export const query = graphql`
       fields {
         imageMeta {
           # vibrantHue
-          dominantHue
+          # dominantHue
           dateTaken
           datePublished
           meta {

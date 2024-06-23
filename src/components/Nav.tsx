@@ -165,7 +165,7 @@ const Nav = ({ className, scheme: _scheme, compact }: NavProps) => {
             <StaticImage
               alt="A picture of me"
               className="relative"
-              placeholder="tracedSVG"
+              placeholder="none"
               src="../images/circle-profile.png"
               style={
                 {

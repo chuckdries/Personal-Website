@@ -84,17 +84,11 @@ const IndexPage = ({
         />
       </Helmet>
       <main className="font-sans flex flex-col h-screen">
-        <Nav
-          internalLinks={[
-            { href: "/", label: "Home" },
-            { href: "/photogallery/", label: "Gallery" },
-            { href: "/projects", label: "Projects"},
-          ]}
-        />
+        <Nav />
         {isClient && (
           <Link
             className="flex-auto flex flex-col m-4 md:m-8 mt-0 md:mt-0"
-            to={`/photogallery/${image.base}/`}
+            to={image.fields!.organization!.slug!}
           >
             <GatsbyImage
               alt=""
@@ -131,9 +125,14 @@ export const query = graphql`
           }
           gatsbyImageData(
             layout: CONSTRAINED
-            placeholder: NONE
+            placeholder: DOMINANT_COLOR
             breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
           )
+        }
+        fields {
+          organization {
+            slug
+          }
         }
         # fields {
         #   imageMeta {

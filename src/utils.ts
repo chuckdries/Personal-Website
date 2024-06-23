@@ -6,7 +6,7 @@ import { pathOr, take } from "ramda";
 import { HomepageImage } from "./pages";
 import { GalleryImage } from "./pages/photogallery";
 
-export const getMeta = <T extends GalleryImage | HomepageImage>(image: T) =>
+export const getMeta = <T extends GalleryImage | HomepageImage | Queries.PhotoImageQuery>(image: T) =>
   image.fields?.imageMeta;
 
 export const getName = (image: GalleryImage) =>

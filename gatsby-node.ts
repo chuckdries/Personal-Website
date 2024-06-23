@@ -193,7 +193,7 @@ function transformMetaToNodeData(
     },
     // vibrant,
     // vibrantHue,
-    dominantHue,
+    // dominantHue,
   };
 }
 
@@ -277,7 +277,8 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
         // icc: true
       });
       if (!metaData.Rating) {
-        console.log(node.base, metaData);
+        // console.log(node.base, metaData);
+        console.log(`${node.base} has no rating`);
       }
     } catch (e) {
       console.error(
