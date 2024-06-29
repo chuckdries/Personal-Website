@@ -57,7 +57,7 @@ function PhotoImage({
   );
   const dateTaken = React.useMemo(() => (dt ? new Date(dt) : null), [dt]);
 
-  const film = React.useMemo(() => meta?.Keywords?.includes("Film"), [meta]);
+  const film = React.useMemo(() => meta?.Make === "NORITSU KOKI" || meta?.Keywords?.includes("Film"), [meta]);
   return (
     <div className="min-h-screen">
       <Helmet>
@@ -99,7 +99,7 @@ function PhotoImage({
             )}
             {!film && (
               <>
-                {meta && (
+                {meta && (shutterSpeed || meta.FNumber || meta.ISO || meta.FocalLength) && (
                   <div className="sm:flex justify-end gap-2 bg-gray-500/20 py-3 pl-4 rounded">
                     <MetadataItem
                       data={shutterSpeed}

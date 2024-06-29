@@ -230,9 +230,19 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
   if (node.internal.type === "File" && node.sourceInstanceName === "photos") {
     
     // organization data
+    let exif: Awaited<ReturnType<typeof exifr.parse>>;
+    try {
+      exif = await exifr.parse(node.absolutePath as string);
+    } catch (e) {
+      console.error(
+        `🅱️ something went wrong with exifr on image ${node.base}`,
+        e,
+      );
+      throw e;
+    }
 
     const d = new Date(
-      (await exifr.parse(node.absolutePath as string)).DateTimeOriginal,
+      exif.DateTimeOriginal,
     );
     const month = Number(d.toLocaleString("en", { month: "numeric" }));
     const year = d.getFullYear();
