@@ -4,14 +4,14 @@ import { PageProps, graphql } from "gatsby";
 import {
   MasonryContainer,
   MasonryGroup,
-} from "../components/Masonry2/MasonryContainer";
-import { PhotoLayout } from "../components/photos/PhotoLayout";
+} from "../../components/Masonry2/MasonryContainer";
+import { PhotoLayout } from "../../components/photos/PhotoLayout";
 import {
   TimelineSlider,
   TimelineStop,
-} from "../components/Masonry2/TimelineSlider";
-import Nav from "../components/Nav";
-import { MasonryRow } from "../components/Masonry2/MasonryRow";
+} from "../../components/Masonry2/TimelineSlider";
+import Nav from "../../components/Nav";
+import { MasonryRow } from "../../components/Masonry2/MasonryRow";
 
 // const FIXED_STOPS: TimelineStop[] = [
 //   // { slug: "welcome", emphasis: 1 },
@@ -53,7 +53,8 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
           year.group,
         );
         for (const month of sortedMonths) {
-          const monthName = month.nodes[0].fields!.organization!.monthSlug?.split("/")[1]!;
+          const monthName =
+            month.nodes[0].fields!.organization!.monthSlug?.split("/")[1]!;
           _groups.push({
             slug: month.nodes[0].fields!.organization!.monthSlug!,
             tickLabel: `${monthName} ${month.nodes[0].fields!.organization!.year!}`,
@@ -112,9 +113,12 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
                         </h2>
                       </div>
                     ) : (
-                      <div className="p-4 lg:pl-8 flex justify-start items-end h-full">
-                        <h2 className="text-3xl md:text-[70px] m-0 md:m-1">
-                          <span className="font-bold">{row.month}</span> <span className="font-extralight opacity-70">{row.year}</span>
+                      <div className="p-2 lg:pl-8 flex justify-start items-end h-full">
+                        <h2 className="text-2xl md:text-4xl m-0 md:m-1">
+                          <span className="font-bold">{row.month}</span>{" "}
+                          <span className="font-extralight opacity-70">
+                            {row.year}
+                          </span>
                         </h2>
                         {/* <h3 className="text-lg m-0 md:m-1"></h3> */}
                       </div>

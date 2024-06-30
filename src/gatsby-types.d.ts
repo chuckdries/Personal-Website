@@ -2608,12 +2608,19 @@ type PhotoImageQueryVariables = Exact<{
 
 type PhotoImageQuery = { readonly image: { readonly id: string, readonly publicURL: string | null, readonly base: string, readonly relativePath: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null, readonly fields: { readonly imageMeta: { readonly dateTaken: string | null, readonly meta: { readonly Make: string | null, readonly Model: string | null, readonly ExposureTime: number | null, readonly FNumber: number | null, readonly ISO: number | null, readonly DateTimeOriginal: string | null, readonly CreateDate: string | null, readonly ShutterSpeedValue: number | null, readonly ApertureValue: number | null, readonly FocalLength: number | null, readonly LensModel: string | null, readonly ObjectName: string | null, readonly Caption: string | null, readonly Location: string | null, readonly City: string | null, readonly State: string | null, readonly Keywords: ReadonlyArray<string | null> | null } | null } | null } | null } | null };
 
+type PhotoImageFileFragment = { readonly nodes: ReadonlyArray<{ readonly id: string, readonly relativePath: string, readonly fields: { readonly organization: { readonly monthSlug: string | null, readonly month: number | null, readonly year: number | null } | null, readonly imageMeta: { readonly dateTaken: string | null, readonly meta: { readonly Rating: number | null, readonly Keywords: ReadonlyArray<string | null> | null } | null } | null } | null, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null }> };
+
 type PhotoMonthQueryVariables = Exact<{
   monthSlug: InputMaybe<Scalars['String']>;
 }>;
 
 
 type PhotoMonthQuery = { readonly images: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly relativePath: string, readonly fields: { readonly organization: { readonly monthSlug: string | null, readonly month: number | null, readonly year: number | null } | null, readonly imageMeta: { readonly dateTaken: string | null, readonly meta: { readonly Rating: number | null } | null } | null } | null, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null }> } };
+
+type PhotosPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PhotosPageQueryQuery = { readonly recents: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly relativePath: string, readonly fields: { readonly organization: { readonly monthSlug: string | null, readonly month: number | null, readonly year: number | null } | null, readonly imageMeta: { readonly dateTaken: string | null, readonly meta: { readonly Rating: number | null, readonly Keywords: ReadonlyArray<string | null> | null } | null } | null } | null, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null }> }, readonly all: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly relativePath: string, readonly fields: { readonly organization: { readonly monthSlug: string | null, readonly month: number | null, readonly year: number | null } | null, readonly imageMeta: { readonly dateTaken: string | null, readonly meta: { readonly Rating: number | null, readonly Keywords: ReadonlyArray<string | null> | null } | null } | null } | null, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null }> } };
 
 type PhotoYearQueryVariables = Exact<{
   year: InputMaybe<Scalars['String']>;
