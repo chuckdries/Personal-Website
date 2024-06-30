@@ -32,7 +32,7 @@ export type GalleryImage =
 function smartCompareDates(
   key: keyof typeof SORT_KEYS,
   left: GalleryImage,
-  right: GalleryImage
+  right: GalleryImage,
 ) {
   let diff = compareDates(SORT_KEYS[key], left, right);
   if (diff !== 0) {
@@ -78,22 +78,22 @@ const GalleryPage = ({
       navigate(
         getGalleryPageUrl(
           { sortKey: newSortKey, keyword: filterKeyword, showDebug },
-          hash
-        )
+          hash,
+        ),
         // { replace: true }
       );
     },
-    [filterKeyword, hash, showDebug]
+    [filterKeyword, hash, showDebug],
   );
 
   const removeHash = React.useCallback(() => {
-    if (!hash.length || window.location.pathname !== '/photogallery/') {
+    if (!hash.length || window.location.pathname !== "/photogallery/") {
       return;
     }
-    console.log('remove hash')
+    console.log("remove hash");
     navigate(
       getGalleryPageUrl({ sortKey, keyword: filterKeyword, showDebug }, ""),
-      { replace: true }
+      { replace: true },
     );
     window.removeEventListener("scroll", removeHash);
   }, [hash, sortKey, filterKeyword, showDebug]);
@@ -134,28 +134,28 @@ const GalleryPage = ({
   const images: GalleryImage[] = React.useMemo(() => {
     const sort =
       sortKey === "date" || sortKey === "datePublished"
-        ? R.sort((node1: typeof data["all"]["nodes"][number], node2) =>
-          smartCompareDates(sortKey, node1, node2)
-        )
+        ? R.sort((node1: (typeof data)["all"]["nodes"][number], node2) =>
+            smartCompareDates(sortKey, node1, node2),
+          )
         : R.sort(
-          // @ts-ignore
-          R.descend(R.path<GalleryImage>(SORT_KEYS[sortKey]))
-        );
+            // @ts-ignore
+            R.descend(R.path<GalleryImage>(SORT_KEYS[sortKey])),
+          );
 
     const filter = filterKeyword
       ? R.filter((image) =>
-        R.includes(
-          filterKeyword,
-          R.pathOr([], ["fields", "imageMeta", "meta", "Keywords"], image)
+          R.includes(
+            filterKeyword,
+            R.pathOr([], ["fields", "imageMeta", "meta", "Keywords"], image),
+          ),
         )
-      )
       : R.identity;
 
     try {
       const ret = R.pipe(
         // @ts-ignore
         sort,
-        filter
+        filter,
       )(data.all.nodes) as any;
       return ret;
     } catch (e) {
@@ -167,7 +167,7 @@ const GalleryPage = ({
   const recents = React.useMemo(() => {
     return R.sort(
       (left, right) => smartCompareDates("datePublished", left, right),
-      data.recents.nodes
+      data.recents.nodes,
     );
   }, [data]);
 
@@ -211,7 +211,7 @@ const GalleryPage = ({
       }
       return data;
     },
-    [showDebug, sortKey, dbgName, dbgRating, dbgSortKey, dbgTags]
+    [showDebug, sortKey, dbgName, dbgRating, dbgSortKey, dbgTags],
   );
 
   return (
@@ -231,7 +231,7 @@ const GalleryPage = ({
               LightVibrant: [238, 238, 238],
               DarkMuted: [238, 238, 238],
               DarkVibrant: [238, 238, 238],
-            })
+            }),
           )}
         />
       </Helmet>
@@ -242,42 +242,44 @@ const GalleryPage = ({
             internalLinks={[
               { href: "/", label: "Home" },
               { href: "/photogallery/", label: "Gallery" },
-              { href: "/projects", label: "Projects"},
+              { href: "/projects", label: "Projects" },
             ]}
           />
         </div>
-        {sortKey !== 'datePublished' && <div className="gradient pb-6 mb-4">
-          <div className="px-4 md:px-8 flex items-baseline">
-            <h3 className="mx-2 font-bold" id="recently">
-              Recently published
-            </h3>
-            {sortKey !== "datePublished" && (
-              <Link
-                className="underline cursor-pointer text-gray-500"
-                to="?sort=datePublished#all"
-              >
-                show more
-              </Link>
-            )}
+        {sortKey !== "datePublished" && (
+          <div className="gradient pb-6 mb-4">
+            <div className="px-4 md:px-8 flex items-baseline">
+              <h3 className="mx-2 font-bold" id="recently">
+                Recently published
+              </h3>
+              {sortKey !== "datePublished" && (
+                <Link
+                  className="underline cursor-pointer text-gray-500"
+                  to="?sort=datePublished#all"
+                >
+                  show more
+                </Link>
+              )}
+            </div>
+            <MasonryGallery
+              aspectsByBreakpoint={{
+                xs: 3,
+                sm: 3,
+                md: 4,
+                lg: 4,
+                xl: 5,
+                "2xl": 6,
+                "3xl": 8,
+              }}
+              images={recents}
+              linkState={{
+                sortKey: "datePublished",
+                filterKeyword,
+              }}
+              singleRow
+            />
           </div>
-          <MasonryGallery
-            aspectsByBreakpoint={{
-              xs: 3,
-              sm: 3,
-              md: 4,
-              lg: 4,
-              xl: 5,
-              "2xl": 6,
-              "3xl": 8,
-            }}
-            images={recents}
-            linkState={{
-              sortKey: 'datePublished',
-              filterKeyword,
-            }}
-            singleRow
-          />
-        </div>}
+        )}
         <div className="px-4 md:px-8">
           <h3 className="mx-2 font-bold" id="all">
             All images
@@ -387,8 +389,11 @@ export const query = graphql`
       ...GalleryImageFile
     }
     all: allFile(
-      filter: { sourceInstanceName: { eq: "photos" } }
-      sort: { fields: { imageMeta: { dateTaken: DESC } } }
+      filter: {
+        sourceInstanceName: { eq: "photos" }
+        fields: { imageMeta: { meta: { Rating: { gte: 4 } } } }
+      }
+      sort: { fields: { imageMeta: { meta: { Rating: DESC } } } }
     ) {
       ...GalleryImageFile
     }

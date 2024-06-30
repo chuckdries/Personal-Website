@@ -1,6 +1,12 @@
 import React from "react";
 
-const MetadataItem = ({ icon, data, title }) =>
+interface MetadataItemProps {
+  icon: React.ReactNode;
+  data: React.ReactNode | null;
+  title: string;
+}
+
+const MetadataItem = ({ icon, data, title }: MetadataItemProps) =>
   data ? (
     <div className="flex justify-end items-end mr-2 font-mono">
       <div className="flex flex-col items-end">

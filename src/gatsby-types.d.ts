@@ -2563,13 +2563,6 @@ type AllPhotoGroupedQueryVariables = Exact<{ [key: string]: never; }>;
 
 type AllPhotoGroupedQuery = { readonly allFile: { readonly group: ReadonlyArray<{ readonly fieldValue: string | null, readonly group: ReadonlyArray<{ readonly fieldValue: string | null, readonly nodes: ReadonlyArray<{ readonly id: string, readonly relativePath: string, readonly fields: { readonly organization: { readonly monthSlug: string | null, readonly month: number | null, readonly year: number | null } | null, readonly imageMeta: { readonly dateTaken: string | null, readonly meta: { readonly Rating: number | null, readonly Keywords: ReadonlyArray<string | null> | null } | null } | null } | null, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null }> }> }> } };
 
-type GalleryImageQueryVariables = Exact<{
-  imageFilename: InputMaybe<Scalars['String']>;
-}>;
-
-
-type GalleryImageQuery = { readonly file: { readonly base: string, readonly publicURL: string | null } | null };
-
 type GalleryImageFileFragment = { readonly nodes: ReadonlyArray<{ readonly base: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null, readonly fields: { readonly imageMeta: { readonly dateTaken: string | null, readonly datePublished: string | null, readonly meta: { readonly Keywords: ReadonlyArray<string | null> | null, readonly Rating: number | null, readonly ObjectName: string | null, readonly CreateDate: string | null, readonly ModifyDate: string | null } | null } | null } | null }> };
 
 type GalleryPageQueryQueryVariables = Exact<{ [key: string]: never; }>;

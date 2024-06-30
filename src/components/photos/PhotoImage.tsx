@@ -10,7 +10,7 @@ import {
   getShutterFractionFromExposureTime,
   getVibrantStyle,
 } from "../../utils";
-import MetadataItem from "../GalleryImage/MetadataItem";
+import MetadataItem from "./MetadataItem";
 
 import ChevronLeft from "@spectrum-icons/workflow/ChevronLeft";
 import ChevronRight from "@spectrum-icons/workflow/ChevronRight";
