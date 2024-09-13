@@ -118,6 +118,7 @@ const FilmstockKeywords = [
   "Cinestill 50D",
   "Ektar 100",
   "Kodak Gold 200",
+  "Gold 200",
   "Ektachrome E100",
   "Instax Square",
   "Portra 400",
