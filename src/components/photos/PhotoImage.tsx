@@ -1,5 +1,5 @@
 import { Link, PageProps, graphql, navigate } from "gatsby";
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { PhotoLayout } from "./PhotoLayout";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
@@ -110,9 +110,18 @@ function nav(
   const { next, state } = to;
   navigate(next, {
     state,
-    replace: true
+    replace: true,
   });
 }
+
+const FilmstockKeywords = [
+  "Cinestill 50D",
+  "Ektar 100",
+  "Kodak Gold 200",
+  "Ektachrome E100",
+  "Instax Square",
+  "Portra 400",
+];
 
 function PhotoImage({
   pageContext,
@@ -122,7 +131,19 @@ function PhotoImage({
   const siblingNavDatas = isSiblingState(location.state)
     ? getSiblingDatas(location.state, data.image!.fields!.organization!.slug!)
     : null;
-  console.log("🚀 ~ siblingNavDatas:", siblingNavDatas);
+
+  const imageRef = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      if ((imageRef.current?.clientHeight ?? 0) > (window.innerHeight - 220)) {
+        window.scrollTo({
+          top: (imageRef.current?.offsetTop ?? 0) - (0.005 * window.innerHeight),
+          behavior: "smooth",
+        });
+      }
+    }, 60);
+  }, [data.image?.base]);
+
   useEffect(() => {
     const keyListener = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -159,8 +180,15 @@ function PhotoImage({
     () => meta?.Make === "NORITSU KOKI" || meta?.Keywords?.includes("Film"),
     [meta],
   );
+  const filmStock = React.useMemo(
+    () =>
+      film
+        ? meta?.Keywords?.find((k) => k && FilmstockKeywords.includes(k))
+        : null,
+    [],
+  );
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen p-0">
       <Helmet>
         <title>Photos | Chuck Dries</title>
         <body
@@ -174,14 +202,17 @@ function PhotoImage({
       </Helmet>
       <Nav className="mb-0" scheme="dark" />
       {/* <div className="flex-auto "> */}
-      <div className="relative">
+      <div className="relative" ref={imageRef}>
         <GatsbyImage
           alt="photo"
-          className="max-h-[90vh]"
+          className="max-h-[99vh]"
+          id="photo"
           image={data.image!.childImageSharp!.gatsbyImageData}
           objectFit="contain"
         />
-        {siblingNavDatas && <NavArrowOverlay siblingNavDatas={siblingNavDatas} />}
+        {siblingNavDatas && (
+          <NavArrowOverlay siblingNavDatas={siblingNavDatas} />
+        )}
       </div>
       <div className="flex justify-center p-6">
         <div className="px-4">
@@ -195,7 +226,7 @@ function PhotoImage({
             )}
             {film && (
               <MetadataItem
-                data={"-"}
+                data={filmStock ?? "-"}
                 icon={<Filmroll UNSAFE_style={IconStyle} />}
                 title={"filmstock"}
               />

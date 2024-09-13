@@ -134,7 +134,7 @@ const Nav = ({ className, scheme: _scheme, compact }: NavProps) => {
   return (
     <nav
       className={classnames(
-        compact ? "my-0 px-4 lg:px-4" : "my-4 px-4 lg:px-8",
+        compact ? "my-0 px-4 lg:px-4" : "py-4 px-4 lg:px-8",
         "flex flex-col-reverse lg:flex-row",
         "justify-between",
         "items-center w-full font-sans ",
