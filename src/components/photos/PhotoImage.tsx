@@ -135,9 +135,10 @@ function PhotoImage({
   const imageRef = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
     setTimeout(() => {
-      if ((imageRef.current?.clientHeight ?? 0) > (window.innerHeight - 220)) {
+      const imgHeight = (imageRef.current?.clientHeight ?? 0) 
+      if (imgHeight > (window.innerHeight - 220)) {
         window.scrollTo({
-          top: (imageRef.current?.offsetTop ?? 0) - (0.005 * window.innerHeight),
+          top: (imageRef.current?.offsetTop ?? 0) - (window.innerHeight - imgHeight) / 2,
           behavior: "smooth",
         });
       }
