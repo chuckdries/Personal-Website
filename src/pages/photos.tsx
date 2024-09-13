@@ -107,13 +107,13 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
                   <div className="relative" key={row.slug} style={style}>
                     {row.slug === "Older" ? (
                       <div className="p-4 lg:pl-8 flex flex-col justify-end h-full">
-                        <h2 className="text-[70px] m-1 mt-[.5vw] font-bold">
+                        <h2 className="text-3xl md:text-4xl m-0 md:m-1 font-bold">
                           Older
                         </h2>
                       </div>
                     ) : (
                       <div className="p-4 lg:pl-8 flex justify-start items-end h-full">
-                        <h2 className="text-3xl md:text-[70px] m-0 md:m-1">
+                        <h2 className="text-3xl md:text-4xl m-0 md:m-1">
                           <span className="font-bold">{row.month}</span> <span className="font-extralight opacity-70">{row.year}</span>
                         </h2>
                         {/* <h3 className="text-lg m-0 md:m-1"></h3> */}
