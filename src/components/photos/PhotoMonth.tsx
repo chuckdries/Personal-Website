@@ -25,6 +25,7 @@ function PhotoMonth({
   );
   return (
     <PhotoLayout>
+      <></>
       {/* <h1>{pageContext.monthSlug}</h1> */}
       {/* <div>
         <MasonryContainer groups={groups} />
@@ -52,6 +53,7 @@ export const query = graphql`
             monthSlug
             month
             year
+            slug
           }
           imageMeta {
             dateTaken

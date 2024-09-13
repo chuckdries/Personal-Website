@@ -175,6 +175,7 @@ export const query = graphql`
                 monthSlug
                 month
                 year
+                slug
               }
               imageMeta {
                 dateTaken

@@ -22,28 +22,126 @@ import Dolly from "@spectrum-icons/workflow/Dolly";
 import Camera from "@spectrum-icons/workflow/Camera";
 import Circle from "@spectrum-icons/workflow/Circle";
 import Location from "@spectrum-icons/workflow/Location";
+import { slice } from "ramda";
+import { OverlayNavArrow } from "./PhotoImage/OverlayNavArrow";
+import { NavArrowOverlay } from "./PhotoImage/NavArrowOverlay";
 
 const IconStyle = {
   width: "24px",
   margin: "0 4px",
 };
 
+interface SiblingLocationState {
+  siblingNodesLeft: string[];
+  siblingNodesRight: string[];
+}
+
+function isSiblingState(state: unknown): state is SiblingLocationState {
+  return (
+    typeof state === "object" &&
+    state !== null &&
+    "siblingNodesLeft" in state &&
+    "siblingNodesRight" in state
+  );
+}
+
+export interface SiblingNavData {
+  next: string;
+  state: SiblingLocationState;
+}
+
+function getLeftNavData(
+  { siblingNodesLeft, siblingNodesRight }: SiblingLocationState,
+  current: string,
+): SiblingNavData | null {
+  if (!siblingNodesLeft.length) {
+    return null;
+  }
+  const [next, ...rest] = siblingNodesLeft;
+  return {
+    next: `/${next}`,
+    state: {
+      siblingNodesLeft: rest,
+      siblingNodesRight: [current, ...siblingNodesRight],
+    },
+  };
+}
+
+function getRightNavData(
+  { siblingNodesLeft, siblingNodesRight }: SiblingLocationState,
+  current: string,
+): SiblingNavData | null {
+  if (!siblingNodesRight.length) {
+    return null;
+  }
+  const [next, ...rest] = siblingNodesRight;
+  return {
+    next: `/${next}`,
+    state: {
+      siblingNodesLeft: [current, ...siblingNodesLeft],
+      siblingNodesRight: rest,
+    },
+  };
+}
+
+export interface SiblingNavDatas {
+  left: SiblingNavData | null;
+  right: SiblingNavData | null;
+}
+
+function getSiblingDatas(
+  _state: SiblingLocationState,
+  current: string,
+): SiblingNavDatas {
+  return {
+    left: getLeftNavData(_state, current),
+    right: getRightNavData(_state, current),
+  };
+}
+
+function nav(
+  { left, right }: SiblingNavDatas,
+  direction: "ArrowLeft" | "ArrowRight",
+) {
+  const to = direction === "ArrowLeft" ? left : right;
+  if (!to) {
+    return;
+  }
+  const { next, state } = to;
+  navigate(next, {
+    state,
+    replace: true
+  });
+}
+
 function PhotoImage({
   pageContext,
   data,
+  location,
 }: PageProps<Queries.PhotoImageQuery, { imageId: string }>) {
-  console.log("🚀 ~ data:", data);
+  const siblingNavDatas = isSiblingState(location.state)
+    ? getSiblingDatas(location.state, data.image!.fields!.organization!.slug!)
+    : null;
+  console.log("🚀 ~ siblingNavDatas:", siblingNavDatas);
   useEffect(() => {
     const keyListener = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         navigate(-1);
+      }
+      switch (e.code) {
+        case "ArrowLeft":
+        case "ArrowRight":
+          if (siblingNavDatas) {
+            nav(siblingNavDatas, e.code);
+            break;
+          }
       }
     };
     document.addEventListener("keydown", keyListener);
     return () => {
       document.removeEventListener("keydown", keyListener);
     };
-  }, []);
+  }, [siblingNavDatas]);
 
   const image = data.image!;
   const { meta, dateTaken: dt } = image.fields!.imageMeta!;
@@ -57,7 +155,10 @@ function PhotoImage({
   );
   const dateTaken = React.useMemo(() => (dt ? new Date(dt) : null), [dt]);
 
-  const film = React.useMemo(() => meta?.Make === "NORITSU KOKI" || meta?.Keywords?.includes("Film"), [meta]);
+  const film = React.useMemo(
+    () => meta?.Make === "NORITSU KOKI" || meta?.Keywords?.includes("Film"),
+    [meta],
+  );
   return (
     <div className="min-h-screen">
       <Helmet>
@@ -73,13 +174,15 @@ function PhotoImage({
       </Helmet>
       <Nav className="mb-0" scheme="dark" />
       {/* <div className="flex-auto "> */}
-      <GatsbyImage
-        alt="photo"
-        objectFit="contain"
-        image={data.image!.childImageSharp!.gatsbyImageData}
-        // className="h-full w-full object-contain"
-        className="max-h-[90vh]"
-      />
+      <div className="relative">
+        <GatsbyImage
+          alt="photo"
+          className="max-h-[90vh]"
+          image={data.image!.childImageSharp!.gatsbyImageData}
+          objectFit="contain"
+        />
+        {siblingNavDatas && <NavArrowOverlay siblingNavDatas={siblingNavDatas} />}
+      </div>
       <div className="flex justify-center p-6">
         <div className="px-4">
           <div className="flex flex-col items-end gap-2">
@@ -99,32 +202,36 @@ function PhotoImage({
             )}
             {!film && (
               <>
-                {meta && (shutterSpeed || meta.FNumber || meta.ISO || meta.FocalLength) && (
-                  <div className="sm:flex justify-end gap-2 bg-gray-500/20 py-3 pl-4 rounded">
-                    <MetadataItem
-                      data={shutterSpeed}
-                      icon={<Stopwatch UNSAFE_style={IconStyle} />}
-                      title="shutter"
-                    />
-                    {meta.FNumber && (
+                {meta &&
+                  (shutterSpeed ||
+                    meta.FNumber ||
+                    meta.ISO ||
+                    meta.FocalLength) && (
+                    <div className="sm:flex justify-end gap-2 bg-gray-500/20 py-3 pl-4 rounded">
                       <MetadataItem
-                        data={`f/${meta.FNumber}`}
-                        icon={<Exposure UNSAFE_style={IconStyle} />}
-                        title="aperture"
+                        data={shutterSpeed}
+                        icon={<Stopwatch UNSAFE_style={IconStyle} />}
+                        title="shutter"
                       />
-                    )}
-                    <MetadataItem
-                      data={meta.ISO}
-                      icon={<Filmroll UNSAFE_style={IconStyle} />}
-                      title="ISO"
-                    />
-                    <MetadataItem
-                      data={meta.FocalLength ? meta.FocalLength + "mm" : null}
-                      icon={<Dolly UNSAFE_style={IconStyle} />}
-                      title="focal"
-                    />
-                  </div>
-                )}
+                      {meta.FNumber && (
+                        <MetadataItem
+                          data={`f/${meta.FNumber}`}
+                          icon={<Exposure UNSAFE_style={IconStyle} />}
+                          title="aperture"
+                        />
+                      )}
+                      <MetadataItem
+                        data={meta.ISO}
+                        icon={<Filmroll UNSAFE_style={IconStyle} />}
+                        title="ISO"
+                      />
+                      <MetadataItem
+                        data={meta.FocalLength ? meta.FocalLength + "mm" : null}
+                        icon={<Dolly UNSAFE_style={IconStyle} />}
+                        title="focal"
+                      />
+                    </div>
+                  )}
                 {/* <MetadataItem
             data={locationString}
             icon={<Location UNSAFE_style={IconStyle} />}
@@ -189,6 +296,9 @@ export const query = graphql`
         gatsbyImageData(placeholder: BLURRED)
       }
       fields {
+        organization {
+          slug
+        }
         imageMeta {
           dateTaken
           meta {

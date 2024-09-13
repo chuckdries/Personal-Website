@@ -3,6 +3,7 @@ import { PhotoMonthNode } from "../photos/PhotoMonth";
 import { MasonryImageRow } from "./MasonryContainer";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { Link } from "gatsby";
+import { slice } from "ramda";
 
 interface MasonryRowProps {
   // children: React.ReactNode;
@@ -24,17 +25,25 @@ export function MasonryRow({
 }: MasonryRowProps) {
   return (
     <>
-      {items.map((node) => {
+      {items.map((node, index) => {
         const aspect = node.childImageSharp!.fluid!.aspectRatio;
         const widthNumber = aspect / (row.isWhole ? row.aspect : targetAspect);
 
         // wtf?? magic number??
-        const width = (rowWidth * widthNumber) + "px";
+        const width = rowWidth * widthNumber + "px";
         // const height = `calc(${width} / ${aspect})`;
         return (
           <Link
             className="inline-block relative p-1"
             key={node.id}
+            state={{
+              siblingNodesLeft: slice(0, index, items).map(
+                (n) => n.fields?.organization?.slug,
+              ),
+              siblingNodesRight: slice(index + 1, Infinity, items).map(
+                (n) => n.fields?.organization?.slug,
+              ),
+            }}
             style={{ width }}
             to={`/photos/${node.fields!.organization!.monthSlug}/${node.relativePath}`}
           >
