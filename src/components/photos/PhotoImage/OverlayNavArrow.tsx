@@ -31,7 +31,7 @@ export function OverlayNavArrow({
         "hover:opacity-100 hover:backdrop-blur hover:bg-black/20",
         "hover-none:pt-2"
       )}
-      replace
+      // replace
       state={navData.state}
       to={navData.next}
     >

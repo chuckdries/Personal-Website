@@ -110,7 +110,7 @@ function nav(
   const { next, state } = to;
   navigate(next, {
     state,
-    replace: true,
+    // replace: true,
   });
 }
 
@@ -149,7 +149,7 @@ function PhotoImage({
   useEffect(() => {
     const keyListener = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        navigate(-1);
+        navigate("/photos");
       }
       switch (e.code) {
         case "ArrowLeft":
