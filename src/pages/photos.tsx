@@ -133,6 +133,9 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
                         row.startIndex,
                         row.startIndex + row.images,
                       )}
+                      nodes={groups[row.groupIndex].nodes.map(
+                        (n) => n.fields!.organization!.slug!,
+                      )}
                       row={row}
                       targetAspect={targetAspect}
                       width={width - 10}

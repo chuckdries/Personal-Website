@@ -12,6 +12,7 @@ interface MasonryRowProps {
   targetAspect: number;
   // widthFn: (widthNumber: number) => string;
   width: number;
+  nodes: string[];
 }
 
 // const widthFn = (n) => `calc(calc(100vw - 200px) * ${n})`;
@@ -22,6 +23,7 @@ export function MasonryRow({
   targetAspect,
   // widthFn,
   width: rowWidth,
+  nodes,
 }: MasonryRowProps) {
   return (
     <>
@@ -32,17 +34,15 @@ export function MasonryRow({
         // wtf?? magic number??
         const width = rowWidth * widthNumber + "px";
         // const height = `calc(${width} / ${aspect})`;
+
+        const selfIndex = row.startIndex + index;
         return (
           <Link
             className="inline-block relative p-1"
             key={node.id}
             state={{
-              siblingNodesLeft: slice(0, index, items).map(
-                (n) => n.fields?.organization?.slug,
-              ),
-              siblingNodesRight: slice(index + 1, Infinity, items).map(
-                (n) => n.fields?.organization?.slug,
-              ),
+              siblingNodesLeft: slice(0, selfIndex, nodes),
+              siblingNodesRight: slice(selfIndex + 1, Infinity, nodes),
             }}
             style={{ width }}
             to={`/photos/${node.fields!.organization!.monthSlug}/${node.relativePath}`}

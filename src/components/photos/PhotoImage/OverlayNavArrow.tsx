@@ -27,8 +27,8 @@ export function OverlayNavArrow({
       className={classNames(
         show ? "opacity-70" : 'opacity-0',
         "px-4 flex items-center  h-full z-10",
-        "text-white backdrop-blur-sm  transition",
-        "hover:opacity-100 hover:backdrop-blur-md hover:bg-black/20",
+        "text-white backdrop-blur-0  transition",
+        "hover:opacity-100 hover:backdrop-blur hover:bg-black/20",
         "hover-none:pt-2"
       )}
       replace
