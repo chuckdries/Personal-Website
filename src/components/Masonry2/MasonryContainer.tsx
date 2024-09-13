@@ -2,26 +2,24 @@ import React, {
   ReactNode,
   useEffect,
   useLayoutEffect,
-  useMemo,
   useRef,
 } from "react";
-import * as R from "ramda";
 import { PhotoMonthNode } from "../photos/PhotoMonth";
-import { MasonryRow } from "./MasonryRow";
-import { lab } from "chroma-js";
-import { PhotoLayout } from "../photos/PhotoLayout";
 import useDimensions from "react-cool-dimensions";
-import { VariableSizeList as List, ListOnScrollProps } from "react-window";
+import { VariableSizeList as List, ListChildComponentProps, ListOnScrollProps } from "react-window";
 import useBreakpoint from "use-breakpoint";
 // @ts-expect-error babel preval != ts
 import themeBreakpoints from "../../breakpoints";
+import { useMasonryRows } from "./hooks/useMasonryRows";
 
 // import "./MasonryContainer.css";
 
 export interface MasonryGroup {
   slug: string;
   tickLabel: string;
-  label: ReactNode;
+  // label: ReactNode;
+  month: string | null;
+  year: string | null;
   nodes: PhotoMonthNode[];
 }
 
@@ -29,10 +27,8 @@ interface MasonryContainerProps {
   groups: MasonryGroup[];
   onScroll?: (data: ListOnScrollProps) => void;
   scrollPosition?: number;
-  children: ReactNode;
+  children: (row: MasonryRowData, props: ListChildComponentProps, targetAspect: number, width: number) => ReactNode;
 }
-
-// const targetAspect = 6;
 
 interface MasonryBaseRow {
   type: "i" | "l" | "c";
@@ -55,7 +51,8 @@ export interface MasonryImageRow extends MasonryBaseRow {
 
 export interface MasonryLabelRow extends MasonryBaseRow {
   type: "l";
-  contents: ReactNode;
+  month: string | null;
+  year: string | null;
   slug: string;
 }
 
@@ -89,70 +86,10 @@ export function MasonryContainer({
   const { breakpoint } = useBreakpoint(themeBreakpoints, "sm")
 
   const targetAspect = width / (breakpoint === 'sm' ? 150 : 250);
-  const rows = React.useMemo(() => {
-    const _rows: MasonryRowData[] = [
-      {
-        type: "c",
-        aspect: 0,
-      },
-    ];
-
-    for (let i = 0; i < groups.length; i++) {
-      const group = groups[i];
-      _rows.push({
-        type: "l",
-        aspect: targetAspect,
-        contents: group.label,
-        slug: group.slug,
-      });
-      _rows.push({
-        type: "i",
-        aspect: 0,
-        startIndex: 0,
-        images: 0,
-        isWhole: false,
-        groupIndex: i,
-      });
-
-      for (const node of group.nodes) {
-        const currentAspect = node.childImageSharp!.fluid!.aspectRatio;
-
-        const currentRow = _rows[_rows.length - 1] as MasonryImageRow;
-        const currentDiff = Math.abs(targetAspect - currentRow.aspect);
-        const diffIfImageIsAddedToCurrentRow = Math.abs(
-          targetAspect - (currentRow.aspect + currentAspect),
-        );
-
-        // does adding current image to our row get us closer to our target aspect ratio?
-        if (currentDiff > diffIfImageIsAddedToCurrentRow) {
-          currentRow.aspect += currentAspect;
-          currentRow.images += 1;
-          // _rows.push(currentRow);
-          continue;
-        }
-
-        // if (singleRow) {
-        //   break;
-        // }
-
-        // start a new row
-        currentRow.isWhole = true;
-        _rows.push({
-          type: "i",
-          aspect: currentAspect,
-          images: 1,
-          startIndex: currentRow.startIndex + currentRow.images,
-          isWhole: false,
-          groupIndex: i,
-        });
-      }
-    }
-
-    return _rows;
-  }, [groups, targetAspect]);
+  const rows = useMasonryRows(targetAspect, groups);
 
   const itemSize = (index: number) => {
-    if (index === 0 && children) {
+    if (index === 0) {
       // TODO: improve
       return 210;
     }
@@ -182,43 +119,7 @@ export function MasonryContainer({
           ref={listRef}
           width={width}
         >
-          {({ index, style, data }) => {
-            if (index === 0 && children) {
-              return (
-                <div className="relative" key={0} style={style}>
-                  {children}
-                </div>
-              );
-            }
-            const row = data[index];
-            switch (row.type) {
-              case "l":
-                return (
-                  <div className="relative" key={row.slug} style={style}>
-                    {row.contents}
-                  </div>
-                );
-              case "i":
-                return (
-                  <div
-                    className="relative flex"
-                    key={`${row.groupIndex}-${row.startIndex}`}
-                    style={style}
-                  >
-                    <MasonryRow
-                      items={groups[row.groupIndex].nodes.slice(
-                        row.startIndex,
-                        row.startIndex + row.images,
-                      )}
-                      row={row}
-                      targetAspect={targetAspect}
-                      width={width - 10}
-                      // widthFn={widthFn}
-                    />
-                  </div>
-                );
-            }
-          }}
+          {(props) => children(rows[props.index], props, targetAspect, width)}
         </List>
       )}
     </div>

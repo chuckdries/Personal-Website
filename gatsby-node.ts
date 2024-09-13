@@ -7,6 +7,7 @@ import chalk from "chalk";
 import * as R from "ramda";
 import exifr from "exifr";
 import sharp from "sharp";
+// @ts-ignore
 import { Palette } from "node-vibrant/lib/color";
 import fs from "fs";
 import md5 from "md5";

@@ -3,6 +3,7 @@ import { PhotoMonthNode } from "../photos/PhotoMonth";
 import { MasonryImageRow } from "./MasonryContainer";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { Link } from "gatsby";
+import { slice } from "ramda";
 
 interface MasonryRowProps {
   // children: React.ReactNode;
@@ -11,6 +12,7 @@ interface MasonryRowProps {
   targetAspect: number;
   // widthFn: (widthNumber: number) => string;
   width: number;
+  nodes: string[];
 }
 
 // const widthFn = (n) => `calc(calc(100vw - 200px) * ${n})`;
@@ -21,26 +23,33 @@ export function MasonryRow({
   targetAspect,
   // widthFn,
   width: rowWidth,
+  nodes,
 }: MasonryRowProps) {
   return (
     <>
-      {items.map((node) => {
+      {items.map((node, index) => {
         const aspect = node.childImageSharp!.fluid!.aspectRatio;
         const widthNumber = aspect / (row.isWhole ? row.aspect : targetAspect);
 
         // wtf?? magic number??
-        const width = (rowWidth * widthNumber) + "px";
+        const width = rowWidth * widthNumber + "px";
         // const height = `calc(${width} / ${aspect})`;
+
+        const selfIndex = row.startIndex + index;
         return (
           <Link
             className="inline-block relative p-1"
             key={node.id}
+            state={{
+              siblingNodesLeft: slice(0, selfIndex, nodes),
+              siblingNodesRight: slice(selfIndex + 1, Infinity, nodes),
+            }}
             style={{ width }}
             to={`/photos/${node.fields!.organization!.monthSlug}/${node.relativePath}`}
           >
             {/* eslint-disable-next-line */}
             <GatsbyImage
-              // alt={node.id}
+              alt={`photo called ${node.id}`}
               className="h-full w-full"
               image={node.childImageSharp!.gatsbyImageData!}
               key={node.id}

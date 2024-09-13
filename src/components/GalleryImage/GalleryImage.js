@@ -28,7 +28,7 @@ import {
   getGalleryPageUrl,
   getVibrantStyle,
 } from "../../utils";
-import MetadataItem from "./MetadataItem";
+import MetadataItem from "../photos/MetadataItem";
 import Nav from "../Nav";
 
 const logKeyShortcut = (keyCode) => {
@@ -427,50 +427,50 @@ const GalleryImage = ({ data, location: { state } }) => {
   );
 };
 
-export const query = graphql`
-  query GalleryImage($imageFilename: String) {
-    file(base: { eq: $imageFilename }) {
-      base
-      publicURL
-      # childImageSharp {
-      #   fluid {
-      #     aspectRatio
-      #   }
-      #   gatsbyImageData(
-      #     layout: CONSTRAINED
-      #     placeholder: DOMINANT_COLOR
-      #     quality: 90
-      #   )
-      # }
-      # fields {
-      #   imageMeta {
-      #     dateTaken
-      #     meta {
-      #       Make
-      #       Model
-      #       ExposureTime
-      #       FNumber
-      #       ISO
-      #       DateTimeOriginal
-      #       CreateDate
-      #       ShutterSpeedValue
-      #       ApertureValue
-      #       FocalLength
-      #       LensModel
-      #       ObjectName
-      #       Caption
-      #       Location
-      #       City
-      #       State
-      #       Keywords
-      #     }
-      #     vibrant {
-      #       ...VibrantColors
-      #     }
-      #   }
-      # }
-    }
-  }
-`;
+// export const query = graphql`
+//   query GalleryImage($imageFilename: String) {
+//     file(base: { eq: $imageFilename }) {
+//       base
+//       publicURL
+//       # childImageSharp {
+//       #   fluid {
+//       #     aspectRatio
+//       #   }
+//       #   gatsbyImageData(
+//       #     layout: CONSTRAINED
+//       #     placeholder: DOMINANT_COLOR
+//       #     quality: 90
+//       #   )
+//       # }
+//       # fields {
+//       #   imageMeta {
+//       #     dateTaken
+//       #     meta {
+//       #       Make
+//       #       Model
+//       #       ExposureTime
+//       #       FNumber
+//       #       ISO
+//       #       DateTimeOriginal
+//       #       CreateDate
+//       #       ShutterSpeedValue
+//       #       ApertureValue
+//       #       FocalLength
+//       #       LensModel
+//       #       ObjectName
+//       #       Caption
+//       #       Location
+//       #       City
+//       #       State
+//       #       Keywords
+//       #     }
+//       #     vibrant {
+//       #       ...VibrantColors
+//       #     }
+//       #   }
+//       # }
+//     }
+//   }
+// `;
 
 export default GalleryImage;

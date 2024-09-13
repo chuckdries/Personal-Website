@@ -10,22 +10,16 @@ import {
   TimelineSlider,
   TimelineStop,
 } from "../components/Masonry2/TimelineSlider";
-import { StaticImage } from "gatsby-plugin-image";
 import Nav from "../components/Nav";
+import { MasonryRow } from "../components/Masonry2/MasonryRow";
 
 // const FIXED_STOPS: TimelineStop[] = [
 //   // { slug: "welcome", emphasis: 1 },
 // ];
 
-function getMonthName(month: number) {
-  return new Date(2024, month - 1, 1).toLocaleString("en", { month: "long" });
-}
-
 function useScrollState() {}
 
 const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
-  // useScrollRestoration("photos");
-
   const [groups, stops] = useMemo((): [MasonryGroup[], TimelineStop[]] => {
     const _groups: MasonryGroup[] = [];
     const stops: TimelineStop[] = [];
@@ -49,11 +43,8 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
         _groups.push({
           slug: "Older",
           tickLabel: "Older",
-          label: (
-            <div className="p-4 lg:pl-8 flex flex-col justify-end h-full">
-              <h2 className="text-[70px] m-1 mt-[.5vw] font-bold">Older</h2>
-            </div>
-          ),
+          month: null,
+          year: null,
           nodes: R.flatten(year.group.map((m) => m.nodes)),
         });
       } else {
@@ -62,20 +53,12 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
           year.group,
         );
         for (const month of sortedMonths) {
-          const monthName = getMonthName(Number(month.fieldValue!));
+          const monthName = month.nodes[0].fields!.organization!.monthSlug?.split("/")[1]!;
           _groups.push({
             slug: month.nodes[0].fields!.organization!.monthSlug!,
             tickLabel: `${monthName} ${month.nodes[0].fields!.organization!.year!}`,
-            label: (
-              <div className="p-4 lg:pl-8 flex flex-col justify-end h-full">
-                <h3 className="text-lg m-0 md:m-1">
-                  {month.nodes[0].fields!.organization!.year!}
-                </h3>
-                <h2 className="text-3xl md:text-[70px] m-0 md:m-1 font-bold">
-                  {monthName}
-                </h2>
-              </div>
-            ),
+            year: String(month.nodes[0].fields!.organization!.year!),
+            month: monthName,
             nodes: R.clone(month.nodes),
           });
         }
@@ -92,6 +75,7 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
 
   const [initialScroll, setInitialScroll] = useState(0);
   useEffect(() => {
+    // TODO: keep in router state
     const prevScroll = sessionStorage.getItem("photos-scroll");
     if (prevScroll) {
       setInitialScroll(Number(prevScroll));
@@ -110,16 +94,57 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
           }}
           scrollPosition={initialScroll}
         >
-          <div className="h-[200px] flex flex-col">
-            <Nav className="mb-4" scheme="dark" />
-            {/* for homepage */}
-            {/* <StaticImage
-              objectFit="fill"
-              className="flex-auto mr-3"
-              src="../../data/gallery/DSC05151.jpg"
-              alt="test"
-            /> */}
-          </div>
+          {(row, { index, style }, targetAspect, width) => {
+            switch (row.type) {
+              case "c":
+                return (
+                  <div className="h-[200px] flex flex-col">
+                    <Nav className="mb-4" scheme="dark" />
+                  </div>
+                );
+              case "l":
+                return (
+                  <div className="relative" key={row.slug} style={style}>
+                    {row.slug === "Older" ? (
+                      <div className="p-4 lg:pl-8 flex flex-col justify-end h-full">
+                        <h2 className="text-[70px] m-1 mt-[.5vw] font-bold">
+                          Older
+                        </h2>
+                      </div>
+                    ) : (
+                      <div className="p-4 lg:pl-8 flex justify-start items-end h-full">
+                        <h2 className="text-3xl md:text-[70px] m-0 md:m-1">
+                          <span className="font-bold">{row.month}</span> <span className="font-extralight opacity-70">{row.year}</span>
+                        </h2>
+                        {/* <h3 className="text-lg m-0 md:m-1"></h3> */}
+                      </div>
+                    )}
+                  </div>
+                );
+              case "i":
+                return (
+                  <div
+                    className="relative flex"
+                    key={`${row.groupIndex}-${row.startIndex}`}
+                    style={style}
+                  >
+                    <MasonryRow
+                      items={groups[row.groupIndex].nodes.slice(
+                        row.startIndex,
+                        row.startIndex + row.images,
+                      )}
+                      nodes={groups[row.groupIndex].nodes.map(
+                        (n) => n.fields!.organization!.slug!,
+                      )}
+                      row={row}
+                      targetAspect={targetAspect}
+                      width={width - 10}
+                      // widthFn={widthFn}
+                    />
+                  </div>
+                );
+            }
+          }}
         </MasonryContainer>
       </div>
       {/* hypothetical API uses like a collection of <Masonry(Content|Label|Image)Row aspect={aspect}>...</> passed to children */}
@@ -153,6 +178,7 @@ export const query = graphql`
                 monthSlug
                 month
                 year
+                slug
               }
               imageMeta {
                 dateTaken
