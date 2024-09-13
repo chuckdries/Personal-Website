@@ -14,7 +14,7 @@ export function useMasonryRows(targetAspect: number, groups: MasonryGroup[]): Ma
       const group = groups[i];
       _rows.push({
         type: "l",
-        aspect: targetAspect,
+        aspect: targetAspect * 1.7,
         month: group.month,
         year: group.year,
         slug: group.slug,

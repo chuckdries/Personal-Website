@@ -99,7 +99,7 @@ export function MasonryContainer({
     }
     const row = rows[index];
     if (row.type === "i" && !row.isWhole) {
-      return width / targetAspect;
+      return (width / targetAspect);
     }
 
     return width / rows[index].aspect;
