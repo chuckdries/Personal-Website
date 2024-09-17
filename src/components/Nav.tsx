@@ -69,7 +69,7 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
     <li>
       <a
         className={navClasses(scheme)}
-        href="https://www.instagram.com/asubtlebutdeliciouscoffeecake/"
+        href="https://www.instagram.com/chuck.dries.photo/"
         rel="noreferrer"
         target="_blank"
       >
