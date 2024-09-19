@@ -41,9 +41,10 @@ export interface SiblingNavData {
   state: SiblingLocationState;
 }
 
-function getLeftNavData(
-  { context, selfIndex }: SiblingLocationState,
-): SiblingNavData | null {
+function getLeftNavData({
+  context,
+  selfIndex,
+}: SiblingLocationState): SiblingNavData | null {
   if (selfIndex < 1) {
     return null;
   }
@@ -58,10 +59,11 @@ function getLeftNavData(
   };
 }
 
-function getRightNavData(
-  { context, selfIndex }: SiblingLocationState,
-): SiblingNavData | null {
-  if (selfIndex >= context.length) {
+function getRightNavData({
+  context,
+  selfIndex,
+}: SiblingLocationState): SiblingNavData | null {
+  if (selfIndex >= context.length - 1) {
     return null;
   }
   const nextSelf = selfIndex + 1;
@@ -80,9 +82,7 @@ export interface SiblingNavDatas {
   right: SiblingNavData | null;
 }
 
-function getSiblingDatas(
-  _state: SiblingLocationState,
-): SiblingNavDatas {
+function getSiblingDatas(_state: SiblingLocationState): SiblingNavDatas {
   return {
     left: getLeftNavData(_state),
     right: getRightNavData(_state),
@@ -114,6 +114,9 @@ const FilmstockKeywords = [
   "Portra 400",
 ];
 
+const smoothScrollSupported =
+  "scrollBehavior" in document.documentElement.style;
+
 function PhotoImage({
   pageContext,
   data,
@@ -125,15 +128,20 @@ function PhotoImage({
 
   const imageRef = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
-    setTimeout(() => {
-      const imgHeight = (imageRef.current?.clientHeight ?? 0) 
-      if (imgHeight > (window.innerHeight - 220)) {
-        window.scrollTo({
-          top: (imageRef.current?.offsetTop ?? 0) - (window.innerHeight - imgHeight) / 2,
-          behavior: "smooth",
-        });
-      }
-    }, 60);
+    const scroll = () => {
+      const imgHeight = imageRef.current?.clientHeight ?? 0;
+      window.scrollTo({
+        top:
+          (imageRef.current?.offsetTop ?? 0) -
+          (window.innerHeight - imgHeight) / 2,
+        behavior: "smooth",
+      });
+    };
+    if (smoothScrollSupported) {
+      setTimeout(scroll, 60);
+    } else {
+      scroll();
+    }
   }, [data.image?.base]);
 
   useEffect(() => {

@@ -21,13 +21,10 @@ export const shouldUpdateScroll = ({
   routerProps: { location },
   pathname,
 }) => {
-  if (pathname.startsWith('/photogallery/') && pathname !== '/photogallery/' ) {
+  if (pathname.startsWith('/photos')) {
     return false;
   }
   if (prevRouterProps?.location.pathname === pathname) {
-    return false;
-  }
-  if (pathname === "/photogallery/" && location.hash.length) {
     return false;
   }
   return true;
