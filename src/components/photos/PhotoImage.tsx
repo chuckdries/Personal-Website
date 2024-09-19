@@ -31,18 +31,9 @@ const IconStyle = {
   margin: "0 4px",
 };
 
-interface SiblingLocationState {
-  siblingNodesLeft: string[];
-  siblingNodesRight: string[];
-}
-
-function isSiblingState(state: unknown): state is SiblingLocationState {
-  return (
-    typeof state === "object" &&
-    state !== null &&
-    "siblingNodesLeft" in state &&
-    "siblingNodesRight" in state
-  );
+export interface SiblingLocationState {
+  context: string[];
+  selfIndex: number;
 }
 
 export interface SiblingNavData {
@@ -51,35 +42,35 @@ export interface SiblingNavData {
 }
 
 function getLeftNavData(
-  { siblingNodesLeft, siblingNodesRight }: SiblingLocationState,
-  current: string,
+  { context, selfIndex }: SiblingLocationState,
 ): SiblingNavData | null {
-  if (!siblingNodesLeft.length) {
+  if (selfIndex < 1) {
     return null;
   }
-  const [next, ...rest] = siblingNodesLeft;
+  const nextSelf = selfIndex - 1;
+  const next = context[nextSelf];
   return {
     next: `/${next}`,
     state: {
-      siblingNodesLeft: rest,
-      siblingNodesRight: [current, ...siblingNodesRight],
+      context,
+      selfIndex: nextSelf,
     },
   };
 }
 
 function getRightNavData(
-  { siblingNodesLeft, siblingNodesRight }: SiblingLocationState,
-  current: string,
+  { context, selfIndex }: SiblingLocationState,
 ): SiblingNavData | null {
-  if (!siblingNodesRight.length) {
+  if (selfIndex >= context.length) {
     return null;
   }
-  const [next, ...rest] = siblingNodesRight;
+  const nextSelf = selfIndex + 1;
+  const next = context[nextSelf];
   return {
     next: `/${next}`,
     state: {
-      siblingNodesLeft: [current, ...siblingNodesLeft],
-      siblingNodesRight: rest,
+      context,
+      selfIndex: nextSelf,
     },
   };
 }
@@ -91,11 +82,10 @@ export interface SiblingNavDatas {
 
 function getSiblingDatas(
   _state: SiblingLocationState,
-  current: string,
 ): SiblingNavDatas {
   return {
-    left: getLeftNavData(_state, current),
-    right: getRightNavData(_state, current),
+    left: getLeftNavData(_state),
+    right: getRightNavData(_state),
   };
 }
 
@@ -129,8 +119,8 @@ function PhotoImage({
   data,
   location,
 }: PageProps<Queries.PhotoImageQuery, { imageId: string }>) {
-  const siblingNavDatas = isSiblingState(location.state)
-    ? getSiblingDatas(location.state, data.image!.fields!.organization!.slug!)
+  const siblingNavDatas = location.state
+    ? getSiblingDatas(location.state as SiblingLocationState)
     : null;
 
   const imageRef = useRef<HTMLDivElement>(null);

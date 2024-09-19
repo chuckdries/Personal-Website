@@ -4,6 +4,7 @@ import { MasonryImageRow } from "./MasonryContainer";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { Link } from "gatsby";
 import { slice } from "ramda";
+import { SiblingLocationState } from "../photos/PhotoImage";
 
 interface MasonryRowProps {
   // children: React.ReactNode;
@@ -41,9 +42,9 @@ export function MasonryRow({
             className="inline-block relative p-1"
             key={node.id}
             state={{
-              siblingNodesLeft: slice(0, selfIndex, nodes),
-              siblingNodesRight: slice(selfIndex + 1, Infinity, nodes),
-            }}
+              selfIndex,
+              context: nodes
+            } as SiblingLocationState}
             style={{ width }}
             to={`/photos/${node.fields!.organization!.monthSlug}/${node.relativePath}`}
           >
