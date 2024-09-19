@@ -115,7 +115,9 @@ const FilmstockKeywords = [
 ];
 
 const smoothScrollSupported =
-  document && "scrollBehavior" in document.documentElement.style;
+  typeof window !== "undefined" &&
+  window.document &&
+  "scrollBehavior" in document.documentElement.style;
 
 function PhotoImage({
   pageContext,
