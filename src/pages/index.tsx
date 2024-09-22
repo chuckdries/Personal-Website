@@ -35,10 +35,10 @@ const IndexPage = ({
   },
 }: PageProps<Queries.IndexPageQuery>) => {
   const [isClient, setIsClient] = React.useState(false);
-  const [imageIndex, setImageIndex] = React.useState(0);
+  // const [imageIndex, setImageIndex] = React.useState(0);
   const image = React.useMemo(() => {
-    return images[imageIndex];
-  }, [images, imageIndex]);
+    return images[0];
+  }, [images]);
 
   React.useEffect(() => {
     if (!isClient) {
@@ -46,15 +46,15 @@ const IndexPage = ({
     }
   }, [isClient]);
 
-  const browserIsLandscape = useMediaQuery("(orientation: landscape)");
+  // const browserIsLandscape = useMediaQuery("(orientation: landscape)");
 
-  React.useLayoutEffect(() => {
-    if (browserIsLandscape) {
-      setImageIndex(1);
-    } else {
-      setImageIndex(0);
-    }
-  }, [browserIsLandscape]);
+  // React.useLayoutEffect(() => {
+  //   if (browserIsLandscape) {
+  //     setImageIndex(1);
+  //   } else {
+  //     setImageIndex(0);
+  //   }
+  // }, [browserIsLandscape]);
 
   // const vibrant = getVibrant(image);
   // const ar = getAspectRatio(image);
@@ -94,7 +94,7 @@ const IndexPage = ({
               alt=""
               image={img!}
               loading="eager"
-              objectFit={browserIsLandscape ? "cover" : "contain"}
+              objectFit={"cover"}
               // objectFit="contain"
               style={{
                 height: screenHeight
@@ -105,7 +105,7 @@ const IndexPage = ({
           </Link>
         )}
       </main>
-      <a className="hidden" rel="me" href="https://hachyderm.io/@chuckletmilk">Mastodon</a>
+      <a className="hidden" href="https://hachyderm.io/@chuckletmilk" rel="me">Mastodon</a>
     </>
   );
 };
@@ -114,7 +114,7 @@ export const query = graphql`
   query IndexPage {
     allFile(
       #                                                           landscape      portrait
-      filter: {sourceInstanceName: {eq: "photos"}, base: {in: ["DSC06196.jpg", "DSC09010.jpg"]}}
+      filter: {sourceInstanceName: {eq: "photos"}, base: {in: ["DSC08277-Edit-positive.jpg"]}}
       sort: {childImageSharp: {fluid: {aspectRatio: ASC}}}
     ) {
       nodes {
