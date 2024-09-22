@@ -126,7 +126,7 @@ function PhotoImage({
 }: PageProps<Queries.PhotoImageQuery, { imageId: string }>) {
   const siblingNavDatas =
     (location.state as SiblingLocationState)?.context &&
-    (location.state as SiblingLocationState)?.selfIndex
+    (location.state as SiblingLocationState)?.selfIndex !== undefined
       ? getSiblingDatas(location.state as SiblingLocationState)
       : null;
 
