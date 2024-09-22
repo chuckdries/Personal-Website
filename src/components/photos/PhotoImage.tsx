@@ -124,9 +124,11 @@ function PhotoImage({
   data,
   location,
 }: PageProps<Queries.PhotoImageQuery, { imageId: string }>) {
-  const siblingNavDatas = location.state
-    ? getSiblingDatas(location.state as SiblingLocationState)
-    : null;
+  const siblingNavDatas =
+    (location.state as SiblingLocationState)?.context &&
+    (location.state as SiblingLocationState)?.selfIndex
+      ? getSiblingDatas(location.state as SiblingLocationState)
+      : null;
 
   const imageRef = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
