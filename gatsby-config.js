@@ -71,7 +71,7 @@ module.exports = {
                     node.fields.imageMeta.meta?.Caption ??
                     node.base,
                   description: `<img src="${node.publicURL}" />`,
-                  date: node.fields.imageMeta.datePublished,
+                  date: node.fields.imageMeta.dateTaken,
                   url:
                     site.siteMetadata.siteUrl +
                     "/" +
