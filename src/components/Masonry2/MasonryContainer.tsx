@@ -16,7 +16,7 @@ import { useMasonryRows } from "./hooks/useMasonryRows";
 
 export interface MasonryGroup {
   slug: string;
-  tickLabel: string;
+  tickLabel?: string;
   // label: ReactNode;
   month: string | null;
   year: string | null;
@@ -24,6 +24,7 @@ export interface MasonryGroup {
 }
 
 interface MasonryContainerProps {
+  includeNavRow?: boolean;
   groups: MasonryGroup[];
   onScroll?: (data: ListOnScrollProps) => void;
   scrollPosition?: number;
@@ -86,7 +87,8 @@ export function MasonryContainer({
   const { breakpoint } = useBreakpoint(themeBreakpoints, "sm")
 
   const targetAspect = width / (breakpoint === 'sm' ? 150 : 250);
-  const rows = useMasonryRows(targetAspect, groups);
+  // todo move to outer component
+  const rows = useMasonryRows(targetAspect, groups, {});
 
   const itemSize = (index: number) => {
     if (index === 0) {
@@ -119,6 +121,7 @@ export function MasonryContainer({
           ref={listRef}
           width={width}
         >
+          {/* TODO inline children here actually?? */}
           {(props) => children(rows[props.index], props, targetAspect, width)}
         </List>
       )}

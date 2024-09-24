@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect, useMemo, useState } from "react";
 import * as R from "ramda";
-import { PageProps, graphql } from "gatsby";
+import { Link, PageProps, graphql } from "gatsby";
 import {
   MasonryContainer,
   MasonryGroup,
@@ -53,7 +53,8 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
           year.group,
         );
         for (const month of sortedMonths) {
-          const monthName = month.nodes[0].fields!.organization!.monthSlug?.split("/")[1]!;
+          const monthName =
+            month.nodes[0].fields!.organization!.monthSlug?.split("/")[1]!;
           _groups.push({
             slug: month.nodes[0].fields!.organization!.monthSlug!,
             tickLabel: `${monthName} ${month.nodes[0].fields!.organization!.year!}`,
@@ -105,20 +106,26 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
               case "l":
                 return (
                   <div className="relative" key={row.slug} style={style}>
-                    {row.slug === "Older" ? (
-                      <div className="p-4 lg:pl-8 flex flex-col justify-end h-full">
-                        <h2 className="text-3xl md:text-4xl m-0 md:m-1 font-bold">
-                          Older
-                        </h2>
-                      </div>
-                    ) : (
-                      <div className="p-4 lg:pl-8 flex justify-start items-end h-full">
-                        <h2 className="text-3xl md:text-4xl m-0 md:m-1">
-                          <span className="font-bold">{row.month}</span> <span className="font-extralight opacity-70">{row.year}</span>
-                        </h2>
-                        {/* <h3 className="text-lg m-0 md:m-1"></h3> */}
-                      </div>
-                    )}
+                    <div className="p-4 lg:pl-8 flex flex-col justify-end h-full">
+                      <h2 className="text-3xl md:text-4xl m-0 md:m-1 font-bold">
+                        <Link
+                          className="text-white hover:underline"
+                          to={row.slug}
+                        >
+                          {row.slug === "Older" ? (
+                            <>Older</>
+                          ) : (
+                            <>
+                              <span className="font-bold">{row.month}</span>
+                              <span className="font-extralight opacity-70">
+                                {" "}
+                                {row.year}
+                              </span>
+                            </>
+                          )}
+                        </Link>
+                      </h2>
+                    </div>
                   </div>
                 );
               case "i":

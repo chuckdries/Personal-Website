@@ -1,7 +1,15 @@
 import { useMemo } from "react";
-import { MasonryGroup, MasonryImageRow, MasonryRowData } from "../MasonryContainer";
+import {
+  MasonryGroup,
+  MasonryImageRow,
+  MasonryRowData,
+} from "../MasonryContainer";
 
-export function useMasonryRows(targetAspect: number, groups: MasonryGroup[]): MasonryRowData[] {
+export function useMasonryRows(
+  targetAspect: number,
+  groups: MasonryGroup[],
+  options: {},
+): MasonryRowData[] {
   return useMemo(() => {
     const _rows: MasonryRowData[] = [
       {
@@ -15,8 +23,8 @@ export function useMasonryRows(targetAspect: number, groups: MasonryGroup[]): Ma
       _rows.push({
         type: "l",
         aspect: targetAspect * 1.7,
-        month: group.month,
-        year: group.year,
+        month: group.month ?? null,
+        year: group.year ?? null,
         slug: group.slug,
       });
       _rows.push({

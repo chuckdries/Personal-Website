@@ -11,7 +11,7 @@ import sharp from "sharp";
 import { Palette } from "node-vibrant/lib/color";
 import fs from "fs";
 import md5 from "md5";
-import {globSync} from "glob";
+import { globSync } from "glob";
 
 import util from "node:util";
 import { exec as _exec } from "child_process";
@@ -229,7 +229,6 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
   const { createNodeField } = actions;
 
   if (node.internal.type === "File" && node.sourceInstanceName === "photos") {
-    
     // organization data
     let exif: Awaited<ReturnType<typeof exifr.parse>>;
     try {
@@ -242,18 +241,15 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
       throw e;
     }
 
-    const d = new Date(
-      exif.DateTimeOriginal,
-    );
+    const d = new Date(exif.DateTimeOriginal);
     const month = Number(d.toLocaleString("en", { month: "numeric" }));
+    const monthString = d.toLocaleString("en", { month: "long" });
     const year = d.getFullYear();
 
     const yearFolder = year < 2021 ? "Older" : `${year}`;
 
     const monthSlug =
-      yearFolder === "Older"
-        ? `${yearFolder}`
-        : `${yearFolder}/${d.toLocaleString("en", { month: "long" })}`;
+      yearFolder === "Older" ? `${yearFolder}` : `${yearFolder}/${monthString}`;
 
     const slug = `photos/${monthSlug}/${node.base}`;
     // const slug = `photos/${node.base}`;
@@ -266,6 +262,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
         month,
         yearFolder,
         monthSlug,
+        monthString,
         slug,
       },
     });
@@ -325,7 +322,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
       name: "imageMeta",
       value: transformMetaToNodeData(
         metaData,
-        null,// vibrantData,
+        null, // vibrantData,
         node.absolutePath as string,
         dominant,
         // if datePublished is empty, image has not been committed to git yet and is thus brand new
@@ -336,8 +333,6 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
     });
   }
 };
-
-
 
 // Implement the Gatsby API “createPages”. This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
@@ -359,6 +354,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
               year
               yearFolder
               monthSlug
+              monthString
               month
               slug
             }
@@ -391,17 +387,29 @@ export const createPages: GatsbyNode["createPages"] = async ({
   const years: Record<string, number> = {
     Older: 1,
   };
-  const months: Record<string, number> = {};
+  const months: Record<
+    string,
+    {
+      monthSlug: string | null;
+      monthString: string | null;
+      year: number | null;
+    }
+  > = {};
 
   nodes.forEach(({ base, fields, id }) => {
     if (!fields) {
       console.log("no fields", base);
       return;
     }
-    const { yearFolder, monthSlug, slug } = fields.organization!;
+    const { yearFolder, monthSlug, monthString, year, slug } =
+      fields.organization!;
 
     years[yearFolder!] = 1;
-    months[monthSlug!] = 1;
+    months[monthSlug!] = {
+      monthSlug,
+      monthString,
+      year,
+    };
     const page = {
       path: slug!,
       component: photoImageTemplate,
@@ -432,9 +440,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     createPage({
       path: `photos/${month}`,
       component: photoMonthTemplate,
-      context: {
-        monthSlug: month,
-      },
+      context: months[month],
     });
   });
 
