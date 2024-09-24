@@ -4,6 +4,7 @@ module.exports = {
   siteMetadata: {
     title: "Chuck Dries",
     siteUrl: "https://chuckdries.com",
+    site_url: "https://chuckdries.com", // ??
   },
   plugins: [
     "gatsby-plugin-image",
@@ -12,21 +13,12 @@ module.exports = {
       resolve: `gatsby-plugin-sharp`,
       options: {
         defaults: {
-          quality: 90
-        }
-      }
+          quality: 90,
+        },
+      },
     },
     "gatsby-transformer-sharp",
     "gatsby-plugin-postcss",
-    // TODO do I need this
-    // {
-    //   resolve: "gatsby-source-filesystem",
-    //   options: {
-    //     name: "images",
-    //     path: "./src/images/",
-    //   },
-    //   __key: "images",
-    // },
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -37,28 +29,74 @@ module.exports = {
       // __key: "gallery",
       __key: "photos",
     },
-    // {
-    //   resolve: "gatsby-source-filesystem",
-    //   options: {
-    //     name: "photos",
-    //     path: "./data/photos/",
-    //   },
-    //   __key: "photos",
-    // },
-    // {
-    //   resolve: "gatsby-source-filesystem",
-    //   options: {
-    //     name: "pages",
-    //     path: "./src/pages/",
-    //   },
-    //   __key: "pages",
-    // },
     "gatsby-plugin-preval",
     "gatsby-plugin-robots-txt",
     {
       resolve: "gatsby-plugin-manifest",
       options: {
         icon: "src/images/glasses-outline.svg",
+      },
+    },
+    {
+      resolve: "gatsby-plugin-feed",
+      options: {
+        feeds: [
+          {
+            serialize: ({ query: { site, allFile } }) => {
+              return allFile.nodes.map((node) => {
+                return {
+                  title:
+                    node.fields.imageMeta.meta?.ObjectName ??
+                    node.fields.imageMeta.meta?.Caption ??
+                    node.base,
+                  description: `<img src="${node.publicURL}" />`,
+                  date: node.fields.imageMeta.datePublished,
+                  url:
+                    site.siteMetadata.siteUrl +
+                    "/" +
+                    node.fields.organization.slug,
+                  guid:
+                    site.siteMetadata.siteUrl +
+                    "/" +
+                    node.fields.organization.slug,
+                  // custom_elements: [{ "content:encoded": node.html }],
+                };
+              });
+            },
+            query: `
+              {
+                allFile(
+                  filter: { sourceInstanceName: { eq: "photos" } }
+                  sort: { fields: { imageMeta: { dateTaken: DESC } } }
+                ) {
+                  nodes {
+                    id
+                    relativePath
+                    base
+                    publicURL
+                    fields {
+                      organization {
+                        slug
+                      }
+                      imageMeta {
+                        datePublished
+                        dateTaken
+                        meta {
+                          Rating
+                          Keywords
+                          Caption
+                          ObjectName
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+            output: "/rss.xml",
+            title: "Chuck Dries Photos",
+          },
+        ],
       },
     },
   ],
