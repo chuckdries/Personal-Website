@@ -1,0 +1,10 @@
+#photo::after {
+  content: "hello";
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  /* position: absolute; */
+  background: red;
+  /* filter: blur(20px); */
+  /* z-index: -1; */
+}

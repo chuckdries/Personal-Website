@@ -375,7 +375,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
   }
   // Create pages for each markdown file.
   const photoImageTemplate = path.resolve(
-    "src/components/photos/PhotoImage.tsx",
+    "src/components/photos/PhotoImage/PhotoImage.tsx",
   );
   // const diffDate = (a, b) =>
   //   new Date(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken'], a)).getTime() - new Date(R.path(['node', 'childImageSharp', 'fields', 'imageMeta', 'dateTaken'],b)).getTime();

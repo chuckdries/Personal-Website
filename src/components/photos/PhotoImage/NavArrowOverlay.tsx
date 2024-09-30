@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import debounce from "lodash.debounce";
 
-import { SiblingNavDatas } from "../PhotoImage";
+import { SiblingNavDatas } from "./PhotoImage";
 import { OverlayNavArrow } from "./OverlayNavArrow";
 
 export function NavArrowOverlay({

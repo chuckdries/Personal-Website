@@ -1,16 +1,18 @@
 import { Link, PageProps, graphql, navigate } from "gatsby";
 import React, { useEffect, useLayoutEffect, useRef } from "react";
-import { PhotoLayout } from "./PhotoLayout";
+import { PhotoLayout } from "../PhotoLayout";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
-import Nav from "../Nav";
+import Nav from "../../Nav";
 import {
   getHelmetSafeBodyStyle,
   getMeta,
   getShutterFractionFromExposureTime,
   getVibrantStyle,
-} from "../../utils";
-import MetadataItem from "./MetadataItem";
+} from "../../../utils";
+import MetadataItem from "../MetadataItem";
+
+import './PhotoImage.css'
 
 import ChevronLeft from "@spectrum-icons/workflow/ChevronLeft";
 import ChevronRight from "@spectrum-icons/workflow/ChevronRight";
@@ -23,8 +25,8 @@ import Camera from "@spectrum-icons/workflow/Camera";
 import Circle from "@spectrum-icons/workflow/Circle";
 import Location from "@spectrum-icons/workflow/Location";
 import { slice } from "ramda";
-import { OverlayNavArrow } from "./PhotoImage/OverlayNavArrow";
-import { NavArrowOverlay } from "./PhotoImage/NavArrowOverlay";
+import { OverlayNavArrow } from "./OverlayNavArrow";
+import { NavArrowOverlay } from "./NavArrowOverlay";
 
 const IconStyle = {
   width: "24px",
@@ -218,7 +220,7 @@ function PhotoImage({
           <NavArrowOverlay siblingNavDatas={siblingNavDatas} />
         )}
       </div>
-      <div className="flex justify-center p-6">
+      <div className="flex justify-center flex-col sm:flex-row p-6">
         <div className="px-4">
           <div className="flex flex-col items-end gap-2">
             {dateTaken && (
@@ -242,7 +244,7 @@ function PhotoImage({
                     meta.FNumber ||
                     meta.ISO ||
                     meta.FocalLength) && (
-                    <div className="sm:flex justify-end gap-2 bg-gray-500/20 py-3 pl-4 rounded">
+                    <div className="flex flex-wrap justify-end gap-2 bg-gray-500/20 py-3 pl-4 rounded">
                       <MetadataItem
                         data={shutterSpeed}
                         icon={<Stopwatch UNSAFE_style={IconStyle} />}
@@ -290,11 +292,11 @@ function PhotoImage({
             )}
           </div>
         </div>
-        <div className="justify-self-stretch border border-white border-opacity-10" />
-        <div className="px-4">
+        <div className="justify-self-stretch border border-white border-opacity-10 my-4" />
+      <div className="px-4 text-right sm:text-left">
           <p className="font-mono text-sm mb-4">{image.base}</p>
           <a
-            className="cursor-pointer font-sans px-3 py-2 rounded text-white border border-blue-500/50 bg-blue-500/30 hover:bg-blue-500/70 hover:border-blue-500/80 transition-colors"
+            className="cursor-pointer inline-block text-center font-sans px-3 py-2 rounded text-white border border-blue-500/50 bg-blue-500/30 hover:bg-blue-500/70 hover:border-blue-500/80 transition-colors"
             download
             href={data.image!.publicURL!}
             onClick={() => {

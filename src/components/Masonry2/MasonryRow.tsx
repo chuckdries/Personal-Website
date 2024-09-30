@@ -4,7 +4,7 @@ import { MasonryImageRow } from "./MasonryContainer";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { Link } from "gatsby";
 import { slice } from "ramda";
-import { SiblingLocationState } from "../photos/PhotoImage";
+import { SiblingLocationState } from "../photos/PhotoImage/PhotoImage";
 
 interface MasonryRowProps {
   // children: React.ReactNode;
