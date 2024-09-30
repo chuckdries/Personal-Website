@@ -12,16 +12,21 @@ export default function PageTemplate({
   data,
   children,
 }: PageProps<Queries.PostPageQuery>) {
-  const date = useMemo(() => data.mdx?.frontmatter?.date && new Date(data.mdx!.frontmatter!.date), [data.mdx])
+  const date = useMemo(
+    () => data.mdx?.frontmatter?.date && new Date(data.mdx!.frontmatter!.date),
+    [data.mdx],
+  );
   const df = useDateFormatter({
-    timeZone: 'utc'
+    timeZone: "utc",
   });
   return (
     <PostsLayout>
       <div className="prose lg:prose-xl max-w-[1200px] px-4 md:px-6 mx-auto">
-      <h1 className="mb-0">{data.mdx!.frontmatter!.title}</h1>
-      {date && <span>{df.format(date)}</span>}
-      <MDXProvider components={shortcodes}>{children}</MDXProvider>
+        <h1 style={date ? { marginBottom: 0} : {}}>{data.mdx!.frontmatter!.title}</h1>
+        {date && <p style={{ marginTop: 0}}>{df.format(date)}</p>}
+        <div className="prose lg:prose-xl">
+          <MDXProvider components={shortcodes}>{children}</MDXProvider>
+        </div>
       </div>
     </PostsLayout>
   );
