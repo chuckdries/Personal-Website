@@ -12,7 +12,7 @@ import {
 } from "../../../utils";
 import MetadataItem from "../MetadataItem";
 
-import './PhotoImage.css'
+import "./PhotoImage.css";
 
 import ChevronLeft from "@spectrum-icons/workflow/ChevronLeft";
 import ChevronRight from "@spectrum-icons/workflow/ChevronRight";
@@ -198,28 +198,31 @@ function PhotoImage({
       <Helmet>
         <title>Photos | Chuck Dries</title>
         <body
-          className="bg-neutral-900 text-white"
+          className="bg-white text-black"
           // @ts-expect-error not a style prop
           style={getHelmetSafeBodyStyle({
-            // @ts-expect-error not a style prop
-            "--dark-vibrant": `25, 25, 25`,
+            "--dark-vibrant": `255, 255, 255`,
           })}
         />
       </Helmet>
-      <Nav className="mb-0" scheme="dark" />
+      <Nav className="mb-0" scheme="light" />
       {/* <div className="flex-auto "> */}
-      <div className="relative" ref={imageRef}>
-        <GatsbyImage
-          alt="photo"
-          className="max-h-[99vh]"
-          id="photo"
-          image={data.image!.childImageSharp!.gatsbyImageData}
-          objectFit="contain"
-        />
-        {siblingNavDatas && (
-          <NavArrowOverlay siblingNavDatas={siblingNavDatas} />
-        )}
-      </div>
+        <div className="relative flex justify-center" ref={imageRef}>
+          <GatsbyImage
+            alt="photo"
+            className="max-h-[90vh] max-w-[90vw] main-photo"
+            id="photo"
+            image={data.image!.childImageSharp!.gatsbyImageData}
+            objectFit="contain"
+            objectPosition="middle"
+            style={{
+              "--img-src": `url('${data.image!.childImageSharp!.gatsbyImageData.images.fallback!.src}')`,
+            }}
+          />
+          {siblingNavDatas && (
+            <NavArrowOverlay siblingNavDatas={siblingNavDatas} />
+          )}
+        </div>
       <div className="flex justify-center flex-col sm:flex-row p-6">
         <div className="px-4">
           <div className="flex flex-col items-end gap-2">
@@ -292,11 +295,11 @@ function PhotoImage({
             )}
           </div>
         </div>
-        <div className="justify-self-stretch border border-white border-opacity-10 my-4" />
-      <div className="px-4 text-right sm:text-left">
-          <p className="font-mono text-sm mb-4">{image.base}</p>
+        <div className="justify-self-stretch border border-black border-opacity-10 my-4" />
+        <div className="px-4 text-right sm:text-left">
+          <p className="font-mono text-sm mr-2 mb-4">{image.base}</p>
           <a
-            className="cursor-pointer inline-block text-center font-sans px-3 py-2 rounded text-white border border-blue-500/50 bg-blue-500/30 hover:bg-blue-500/70 hover:border-blue-500/80 transition-colors"
+            className="cursor-pointer inline-block text-center font-sans mr-2 px-3 py-2 rounded text-white border-2 border-blue-500 bg-blue-600 hover:bg-blue-500 hover:border-blue-400 transition-colors"
             download
             href={data.image!.publicURL!}
             onClick={() => {

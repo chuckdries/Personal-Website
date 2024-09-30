@@ -15,11 +15,10 @@ export function PhotoLayout({
       <Helmet>
         <title>Photos | Chuck Dries</title>
         <body
-          className="bg-neutral-900 text-white transition-colors"
+          className="bg-white text-black transition-colors"
           // @ts-expect-error not a style prop
           style={getHelmetSafeBodyStyle({
-            // @ts-expect-error not a style prop
-            "--dark-vibrant": `25, 25, 25`,
+            "--dark-vibrant": `255, 255, 255`,
           })}
         />
       </Helmet>
