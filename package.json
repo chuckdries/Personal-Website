@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@internationalized/date": "^3.5.2",
+    "@mdx-js/react": "^3.0.1",
     "@react-aria/utils": "^3.23.2",
     "@react-spectrum/provider": "^3.9.5",
     "@spectrum-icons/workflow": "^4.2.10",
@@ -36,11 +37,13 @@
     "gatsby": "^5.13.3",
     "gatsby-plugin-image": "^3.13.1",
     "gatsby-plugin-manifest": "^5.13.1",
+    "gatsby-plugin-mdx": "^5.13.1",
     "gatsby-plugin-postcss": "^6.13.1",
     "gatsby-plugin-preval": "^1.0.0",
     "gatsby-plugin-react-helmet": "^6.13.1",
     "gatsby-plugin-robots-txt": "^1.8.0",
     "gatsby-plugin-sharp": "^5.13.1",
+    "gatsby-remark-images": "^7.13.2",
     "gatsby-source-filesystem": "^5.13.1",
     "gatsby-transformer-sharp": "^5.13.1",
     "glob": "^10.3.12",
@@ -68,6 +71,7 @@
     "use-breakpoint": "^2.0.3"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.15",
     "@types/chroma-js": "^2.4.4",
     "@types/lodash.debounce": "^4.0.9",
     "@types/md5": "^2.3.5",

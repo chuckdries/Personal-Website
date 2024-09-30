@@ -12,21 +12,25 @@ module.exports = {
       resolve: `gatsby-plugin-sharp`,
       options: {
         defaults: {
-          quality: 90
-        }
-      }
+          quality: 90,
+        },
+      },
     },
     "gatsby-transformer-sharp",
     "gatsby-plugin-postcss",
-    // TODO do I need this
-    // {
-    //   resolve: "gatsby-source-filesystem",
-    //   options: {
-    //     name: "images",
-    //     path: "./src/images/",
-    //   },
-    //   __key: "images",
-    // },
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1200,
+            },
+          },
+        ],
+      },
+    },
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -37,22 +41,14 @@ module.exports = {
       // __key: "gallery",
       __key: "photos",
     },
-    // {
-    //   resolve: "gatsby-source-filesystem",
-    //   options: {
-    //     name: "photos",
-    //     path: "./data/photos/",
-    //   },
-    //   __key: "photos",
-    // },
-    // {
-    //   resolve: "gatsby-source-filesystem",
-    //   options: {
-    //     name: "pages",
-    //     path: "./src/pages/",
-    //   },
-    //   __key: "pages",
-    // },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "posts",
+        path: "./data/posts/",
+      },
+      __key: "posts",
+    },
     "gatsby-plugin-preval",
     "gatsby-plugin-robots-txt",
     {

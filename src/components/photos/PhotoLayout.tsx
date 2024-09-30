@@ -24,7 +24,7 @@ export function PhotoLayout({
       </Helmet>
       {!omitNav && (
         <div className="">
-          <Nav className="mb-4" scheme="dark" />
+          <Nav className="mb-4" scheme="light" />
         </div>
       )}
       {children}

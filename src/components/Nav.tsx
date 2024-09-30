@@ -209,6 +209,15 @@ const Nav = ({ className, scheme: _scheme, compact }: NavProps) => {
             <Link
               activeClassName="underline"
               className={navClasses(scheme)}
+              to="/posts"
+            >
+              Posts
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeClassName="underline"
+              className={navClasses(scheme)}
               to="/projects"
             >
               Projects

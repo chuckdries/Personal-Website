@@ -1,4 +1,4 @@
-import type { GatsbyNode } from "gatsby";
+import type { CreateSchemaCustomizationArgs, GatsbyNode } from "gatsby";
 
 import path from "path";
 import Vibrant from "node-vibrant";
@@ -11,7 +11,7 @@ import sharp from "sharp";
 import { Palette } from "node-vibrant/lib/color";
 import fs from "fs";
 import md5 from "md5";
-import {globSync} from "glob";
+import { globSync } from "glob";
 
 import util from "node:util";
 import { exec as _exec } from "child_process";
@@ -229,7 +229,6 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
   const { createNodeField } = actions;
 
   if (node.internal.type === "File" && node.sourceInstanceName === "photos") {
-    
     // organization data
     let exif: Awaited<ReturnType<typeof exifr.parse>>;
     try {
@@ -242,9 +241,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
       throw e;
     }
 
-    const d = new Date(
-      exif.DateTimeOriginal,
-    );
+    const d = new Date(exif.DateTimeOriginal);
     const month = Number(d.toLocaleString("en", { month: "numeric" }));
     const year = d.getFullYear();
 
@@ -325,7 +322,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
       name: "imageMeta",
       value: transformMetaToNodeData(
         metaData,
-        null,// vibrantData,
+        null, // vibrantData,
         node.absolutePath as string,
         dominant,
         // if datePublished is empty, image has not been committed to git yet and is thus brand new
@@ -336,8 +333,6 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
     });
   }
 };
-
-
 
 // Implement the Gatsby API “createPages”. This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
@@ -440,4 +435,61 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
   console.log("years", years);
   console.log("months", months);
+
+  // posts
+  const postsQuery = await graphql<Queries.PostsQuery>(`
+    query Posts {
+      allMdx {
+        nodes {
+          id
+          frontmatter {
+            slug
+            date
+          }
+          internal {
+            contentFilePath
+          }
+        }
+      }
+    }
+  `);
+
+  if (postsQuery.errors) {
+    reporter.panicOnBuild("Error loading MDX result", postsQuery.errors);
+  }
+
+  // Create blog post pages.
+  const posts = postsQuery.data!.allMdx.nodes;
+
+  const postTemplate = path.resolve(`./src/components/Posts/PostTemplate.tsx`);
+  // you'll call `createPage` for each result
+  posts.forEach((node) => {
+    createPage({
+      // As mentioned above you could also query something else like frontmatter.title above and use a helper function
+      // like slugify to create a slug
+      path: `/posts${node.frontmatter!.slug!}`,
+      // Provide the path to the MDX content file so webpack can pick it up and transform it into JSX
+      component: `${postTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
+      // You can use the values in this context in
+      // our page layout component
+      context: { id: node.id },
+    });
+  });
 };
+
+export const createSchemaCustomization = ({actions, schema}: CreateSchemaCustomizationArgs) => {
+  const { createTypes } = actions;
+
+ createTypes(`
+   type Mdx implements Node {
+     frontmatter: Frontmatter
+   }
+
+   type Frontmatter @dontInfer {
+     date: Date
+     slug: String
+     title: String
+     galleryImages: [File] @link(by: "base")
+   }
+ `);
+}
