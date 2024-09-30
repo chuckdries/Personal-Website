@@ -5,15 +5,15 @@ import { getHelmetSafeBodyStyle } from "../../utils";
 
 export function PostsLayout({
   children,
-  omitNav,
+  title,
 }: {
   children: React.ReactNode;
-  omitNav?: boolean;
+  title?: string | null;
 }) {
   return (
     <div className="flex flex-col h-[100svh]">
       <Helmet>
-        <title>Posts | Chuck Dries</title>
+        <title>{title ?? "Posts"} | Chuck Dries</title>
         <body className="bg-white text-black transition-colors" />
       </Helmet>
       <Nav className="mb-4" scheme="light" />

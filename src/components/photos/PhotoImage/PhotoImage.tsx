@@ -210,7 +210,7 @@ function PhotoImage({
       <div className="mx-auto relative max-w-[90vw]" ref={imageRef}>
         <GatsbyImage
           alt="photo"
-          className="max-h-[90vh] main-photo"
+          className="max-h-[90vh] big-blur"
           id="photo"
           image={data.image!.childImageSharp!.gatsbyImageData}
           objectFit="contain"

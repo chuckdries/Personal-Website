@@ -4,9 +4,9 @@ import { MDXProvider } from "@mdx-js/react";
 import { Link } from "gatsby";
 import { PostsLayout } from "./PostsLayout";
 import { useDateFormatter } from "react-aria";
-import { parseDate } from "@internationalized/date";
+import { PostImage } from "./PostImage";
 
-const shortcodes = { Link }; // Provide common components here
+const shortcodes = { Link, PostImage }; // Provide common components here
 
 export default function PageTemplate({
   data,
@@ -20,10 +20,12 @@ export default function PageTemplate({
     timeZone: "utc",
   });
   return (
-    <PostsLayout>
-      <div className="prose lg:prose-xl max-w-[1200px] px-4 md:px-6 mx-auto">
-        <h1 style={date ? { marginBottom: 0} : {}}>{data.mdx!.frontmatter!.title}</h1>
-        {date && <p style={{ marginTop: 0}}>{df.format(date)}</p>}
+    <PostsLayout title={data.mdx!.frontmatter!.title}>
+      <div className="prose lg:prose-xl px-4 md:px-6 mx-auto pb-7">
+        <h1 style={date ? { marginBottom: 0 } : {}}>
+          {data.mdx!.frontmatter!.title}
+        </h1>
+        {date && <p style={{ marginTop: 0 }}>{df.format(date)}</p>}
         <div className="prose lg:prose-xl">
           <MDXProvider components={shortcodes}>{children}</MDXProvider>
         </div>
@@ -39,6 +41,39 @@ export const query = graphql`
         title
         date
         slug
+        galleryImages {
+          base
+          fields {
+            organization {
+              slug
+            }
+            imageMeta {
+              dateTaken
+              meta {
+                Make
+                Model
+                ExposureTime
+                FNumber
+                ISO
+                DateTimeOriginal
+                CreateDate
+                ShutterSpeedValue
+                ApertureValue
+                FocalLength
+                LensModel
+                ObjectName
+                Caption
+                Location
+                City
+                State
+                Keywords
+              }
+            }
+          }
+          childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
+        }
       }
     }
   }

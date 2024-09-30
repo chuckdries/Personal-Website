@@ -1,4 +1,4 @@
-import type { GatsbyNode } from "gatsby";
+import type { CreateSchemaCustomizationArgs, GatsbyNode } from "gatsby";
 
 import path from "path";
 import Vibrant from "node-vibrant";
@@ -476,3 +476,20 @@ export const createPages: GatsbyNode["createPages"] = async ({
     });
   });
 };
+
+export const createSchemaCustomization = ({actions, schema}: CreateSchemaCustomizationArgs) => {
+  const { createTypes } = actions;
+
+ createTypes(`
+   type Mdx implements Node {
+     frontmatter: Frontmatter
+   }
+
+   type Frontmatter @dontInfer {
+     date: Date
+     slug: String
+     title: String
+     galleryImages: [File] @link(by: "base")
+   }
+ `);
+}

@@ -1,4 +1,4 @@
-.main-photo {
+.gatsby-image-wrapper {
   overflow: visible;
 }
 picture::after {
@@ -11,8 +11,10 @@ picture::after {
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
-  /* background: red; */
-  filter: blur(25px);
-  opacity: 0.8;
+  filter: blur(15px);
+  opacity: 0.7;
   z-index: -1;
+}
+.big-blur picture::after {
+  filter: blur(25px);
 }
