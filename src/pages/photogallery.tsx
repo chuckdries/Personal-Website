@@ -237,14 +237,7 @@ const GalleryPage = ({
       </Helmet>
       <div className="top-0 z-10">
         <div className="bg-vibrant-dark text-light-vibrant pb-1">
-          <Nav
-            className="mb-4"
-            internalLinks={[
-              { href: "/", label: "Home" },
-              { href: "/photogallery/", label: "Gallery" },
-              { href: "/projects", label: "Projects" },
-            ]}
-          />
+          <Nav className="mb-4" />
         </div>
         {sortKey !== "datePublished" && (
           <div className="gradient pb-6 mb-4">

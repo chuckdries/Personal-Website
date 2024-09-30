@@ -12,6 +12,7 @@
     "playground": "GATSBY_GRAPHQL_IDE=playground gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
+    "typecheck": "tsc",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "lint-fix": "eslint --fix --ext .jsx,.js src",

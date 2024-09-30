@@ -60,13 +60,7 @@ const ProjectsPage = ({
       </Helmet>
       <main className="font-sans flex flex-col h-screen">
         <div className="bg-buzzwordsLightBg/70 h-[100vh] pb-8 flex flex-col">
-          <Nav
-            internalLinks={[
-              { href: "/", label: "Home" },
-              { href: "/photogallery/", label: "Gallery" },
-              { href: "/projects", label: "Projects" },
-            ]}
-          />
+          <Nav />
           <div className="flex lg:flex-auto flex-col items-center lg:flex-row justify-center">
             <StaticImage
               alt="buzzwords screenshot"

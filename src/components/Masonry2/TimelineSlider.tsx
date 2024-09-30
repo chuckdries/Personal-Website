@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Ref, RefObject, useState } from "react";
 // import {
 //   Label,
 //   Slider,
@@ -7,9 +7,10 @@ import React, { useState } from "react";
 //   SliderTrack,
 // } from "react-aria-components";
 import useDimensions from "react-cool-dimensions";
-import { useSliderState } from "react-stately";
+import { SliderState, useSliderState } from "react-stately";
 import {
   AriaSliderProps,
+  AriaSliderThumbProps,
   mergeProps,
   useFocusRing,
   useNumberFormatter,
@@ -70,24 +71,24 @@ export function TimelineSlider({ stops }: TimelineSliderProps) {
         >
           <Thumb
             index={0}
+            name={(props as any).name}
             state={state}
             trackRef={trackRef}
-            name={props.name}
           />
         </div>
         <div className="absolute top-0 bottom-0 right-0 left-0">
           {stops.map((stop, i) => (
             <div
-              key={stop.slug}
-              style={{
-                top: `${(i / (stops.length)) * 100}%`,
-                right: 10,
-              }}
               className={classNames(
                 "text-white/40 absolute select-none w-full flex items-baseline justify-end",
                 // stop.emphasis == 1 ? "font-bold text-sm" : "text-xs",
                 "text-xs",
               )}
+              key={stop.slug}
+              style={{
+                top: `${(i / (stops.length)) * 100}%`,
+                right: 10,
+              }}
             >
               {stop.tickLabel}
               {/* <div className="absolute w-3 top-[-2px] h-[1px] bg-white/80"></div> */}
@@ -99,7 +100,11 @@ export function TimelineSlider({ stops }: TimelineSliderProps) {
   );
 }
 
-function Thumb(props) {
+// ariasliderprops might be wrong
+function Thumb(props: AriaSliderThumbProps & {
+  state: SliderState;
+  trackRef: RefObject<Element>
+}) {
   let { state, trackRef, index, name } = props;
   let inputRef = React.useRef(null);
   let {
@@ -120,10 +125,10 @@ function Thumb(props) {
   return (
     <div
       {...thumbProps}
-      style={{
-        top: `${100 - state.getThumbPercent(index) * 100}%`,
-      }}
       className="absolute right-0 translate-x-[10px] w-7 h-2 bg-white rounded-full"
+      style={{
+        top: `${100 - state.getThumbPercent(index!) * 100}%`,
+      }}
     >
       <VisuallyHidden>
         <input ref={inputRef} {...mergeProps(inputProps, focusProps)} />

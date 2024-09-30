@@ -7,13 +7,13 @@ import { HomepageImage } from "./pages";
 import { GalleryImage } from "./pages/photogallery";
 
 export const getMeta = <T extends GalleryImage | HomepageImage | Queries.PhotoImageQuery>(image: T) =>
-  image.fields?.imageMeta;
+  (image as GalleryImage).fields?.imageMeta;
 
 export const getName = (image: GalleryImage) =>
   image.fields?.imageMeta?.meta?.ObjectName || image.base;
 
-// some pleasing default colors for SSR and initial hydration
 export const getVibrant = (image: GalleryImage | HomepageImage) =>
+  // @ts-expect-error no queries grab this field rn
   getMeta(image)?.vibrant;
 
 export const hasName = (image: GalleryImage) =>
@@ -34,7 +34,8 @@ export const getRgba = (palette: string[], alpha: number) =>
 const maybeTake3 = <T>(arg: T | null) => arg ? take(3, arg as unknown[]) : [];
 
 export const getVibrantStyle = (
-  vibrant: Queries.FileFieldsImageMetaVibrant,
+  // vibrant: Queries.FileFieldsImageMetaVibrant,
+  vibrant: any,
   screenHeight?: number
 ) => ({
   "--muted": maybeTake3(vibrant.Muted),
@@ -143,7 +144,7 @@ export const getGalleryPageUrl = (
 };
 
 export function compareDates<T>(
-  date_path: readonly string[],
+  date_path: string[],
   left: T,
   right: T
 ): number {

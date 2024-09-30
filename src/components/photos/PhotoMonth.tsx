@@ -9,7 +9,7 @@ export type PhotoMonthNode = Queries.PhotoMonthQuery["images"]["nodes"][number];
 function PhotoMonth({
   pageContext,
   data,
-}: PageProps<Queries.PhotoMonthQuery, { monthSlug: string }>) {
+}: PageProps<Queries.PhotoMonthQuery, { monthSlug: string, month: string, year: string, }>) {
   useLayoutEffect(() => {
     navigate("/photos");
   }, []);
@@ -17,11 +17,14 @@ function PhotoMonth({
     () => [
       {
         slug: pageContext.monthSlug,
+        tickLabel: pageContext.monthSlug,
         label: pageContext.monthSlug,
+        month: pageContext.month,
+        year: pageContext.year,
         nodes: R.clone(data.images.nodes),
-      },
+      } as MasonryGroup,
     ],
-    [data.images.nodes, pageContext.monthSlug],
+    [data.images.nodes, pageContext],
   );
   return (
     <PhotoLayout>
