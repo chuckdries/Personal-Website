@@ -115,5 +115,6 @@ module.exports = {
   },
   plugins: [
     require('tailwindcss-touch')(),
+    require('@tailwindcss/typography')
   ],
 };
