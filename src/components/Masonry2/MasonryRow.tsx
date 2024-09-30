@@ -51,7 +51,7 @@ export function MasonryRow({
             {/* eslint-disable-next-line */}
             <GatsbyImage
               alt={`photo called ${node.id}`}
-              className="h-full w-full"
+              className="h-full w-full shadow shadow-black/60"
               image={node.childImageSharp!.gatsbyImageData!}
               key={node.id}
               // alt={

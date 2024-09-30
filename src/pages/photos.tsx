@@ -99,7 +99,7 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
               case "c":
                 return (
                   <div className="h-[200px] flex flex-col">
-                    <Nav className="mb-4" scheme="dark" />
+                    <Nav className="mb-4" scheme="light" />
                   </div>
                 );
               case "l":
