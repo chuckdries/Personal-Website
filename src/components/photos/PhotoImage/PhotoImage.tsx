@@ -207,22 +207,22 @@ function PhotoImage({
       </Helmet>
       <Nav className="mb-0" scheme="light" />
       {/* <div className="flex-auto "> */}
-        <div className="relative flex justify-center" ref={imageRef}>
-          <GatsbyImage
-            alt="photo"
-            className="max-h-[90vh] max-w-[90vw] main-photo"
-            id="photo"
-            image={data.image!.childImageSharp!.gatsbyImageData}
-            objectFit="contain"
-            objectPosition="middle"
-            style={{
-              "--img-src": `url('${data.image!.childImageSharp!.gatsbyImageData.images.fallback!.src}')`,
-            }}
-          />
-          {siblingNavDatas && (
-            <NavArrowOverlay siblingNavDatas={siblingNavDatas} />
-          )}
-        </div>
+      <div className="mx-auto relative max-w-[90vw]" ref={imageRef}>
+        <GatsbyImage
+          alt="photo"
+          className="max-h-[90vh] main-photo"
+          id="photo"
+          image={data.image!.childImageSharp!.gatsbyImageData}
+          objectFit="contain"
+          objectPosition="middle"
+          style={{
+            "--img-src": `url('${data.image!.childImageSharp!.gatsbyImageData.images.fallback!.src}')`,
+          }}
+        />
+        {siblingNavDatas && (
+          <NavArrowOverlay siblingNavDatas={siblingNavDatas} />
+        )}
+      </div>
       <div className="flex justify-center flex-col sm:flex-row p-6">
         <div className="px-4">
           <div className="flex flex-col items-end gap-2">
