@@ -189,7 +189,7 @@ function PhotoImage({
       film
         ? meta?.Keywords?.find((k) => k && FilmstockKeywords.includes(k))
         : null,
-    [],
+    [film, meta],
   );
   return (
     <div className="min-h-screen p-0">
@@ -206,16 +206,15 @@ function PhotoImage({
       <Nav className="mb-0" scheme="light" />
       {/* <div className="flex-auto "> */}
       <div
-        className="mx-auto relative max-w-[90vw]"
+        className="relative py-[55px] px-[55px] overflow-hidden"
         ref={imageRef}
       >
         <GatsbyImage
           alt="photo"
-          className="max-h-[90vh] big-blur"
+          className="max-h-[calc(100svh-110px)] big-blur"
           id="photo"
           image={data.image!.childImageSharp!.gatsbyImageData}
           objectFit="contain"
-          objectPosition="middle"
           style={{
             "--img-src": `url('${data.image!.childImageSharp!.gatsbyImageData.placeholder!.fallback}')`,
           }}
@@ -224,7 +223,7 @@ function PhotoImage({
           <NavArrowOverlay siblingNavDatas={siblingNavDatas} />
         )}
       </div>
-      <div className="flex justify-center flex-col sm:flex-row p-6">
+      <div className="flex justify-center flex-col sm:flex-row pt-0 p-6">
         <div className="px-4">
           <div className="flex flex-col items-end gap-2">
             {dateTaken && (
@@ -334,7 +333,7 @@ export const query = graphql`
         fluid {
           aspectRatio
         }
-        gatsbyImageData(placeholder: BLURRED)
+        gatsbyImageData(placeholder: BLURRED, width: 3000)
       }
       fields {
         organization {
