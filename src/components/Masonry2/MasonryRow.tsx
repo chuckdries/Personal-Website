@@ -37,6 +37,7 @@ export function MasonryRow({
         // const height = `calc(${width} / ${aspect})`;
 
         const selfIndex = row.startIndex + index;
+        console.log(node.childImageSharp?.gatsbyImageData.backgroundColor)
         return (
           <Link
             className="inline-block relative p-1"
@@ -51,9 +52,12 @@ export function MasonryRow({
             {/* eslint-disable-next-line */}
             <GatsbyImage
               alt={`photo called ${node.id}`}
-              className="h-full w-full shadow shadow-black/45"
+              className="h-full w-full"
               image={node.childImageSharp!.gatsbyImageData!}
               key={node.id}
+              // style={{
+              //   "--img-src": node.childImageSharp?.gatsbyImageData.backgroundColor
+              // }}
               // alt={
               //   node.fields?.imageMeta?.meta?.Keywords?.length
               //     ? `image of ${image.fields?.imageMeta?.meta?.Keywords.join(

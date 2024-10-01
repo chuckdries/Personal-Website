@@ -14,8 +14,6 @@ import MetadataItem from "../MetadataItem";
 
 import "./PhotoImage.css";
 
-import ChevronLeft from "@spectrum-icons/workflow/ChevronLeft";
-import ChevronRight from "@spectrum-icons/workflow/ChevronRight";
 import Calendar from "@spectrum-icons/workflow/Calendar";
 import Stopwatch from "@spectrum-icons/workflow/Stopwatch";
 import Exposure from "@spectrum-icons/workflow/Exposure";
@@ -207,7 +205,10 @@ function PhotoImage({
       </Helmet>
       <Nav className="mb-0" scheme="light" />
       {/* <div className="flex-auto "> */}
-      <div className="mx-auto relative max-w-[90vw]" ref={imageRef}>
+      <div
+        className="mx-auto relative max-w-[90vw]"
+        ref={imageRef}
+      >
         <GatsbyImage
           alt="photo"
           className="max-h-[90vh] big-blur"
@@ -216,7 +217,7 @@ function PhotoImage({
           objectFit="contain"
           objectPosition="middle"
           style={{
-            "--img-src": `url('${data.image!.childImageSharp!.gatsbyImageData.images.fallback!.src}')`,
+            "--img-src": `url('${data.image!.childImageSharp!.gatsbyImageData.placeholder!.fallback}')`,
           }}
         />
         {siblingNavDatas && (

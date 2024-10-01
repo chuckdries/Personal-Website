@@ -7,7 +7,7 @@ picture::after {
   height: 100%;
   position: absolute;
   top: 0;
-  background-image: var(--img-src);
+  background: var(--img-src);
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;

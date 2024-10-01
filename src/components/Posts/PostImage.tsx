@@ -29,7 +29,7 @@ export function PostImage({
         // @ts-expect-error shrug
         image={getImage(image)!}
         style={{
-          "--img-src": `url('${image!.childImageSharp!.gatsbyImageData.images.fallback!.src}')`,
+          "--img-src": `url('${image!.childImageSharp!.gatsbyImageData.placeholder!.fallback}')`,
         }}
       />
       <div className="t-0">

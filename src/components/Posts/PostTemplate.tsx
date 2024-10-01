@@ -71,7 +71,7 @@ export const query = graphql`
             }
           }
           childImageSharp {
-            gatsbyImageData(width: 700)
+            gatsbyImageData(width: 700, placeholder: BLURRED)
           }
         }
       }
