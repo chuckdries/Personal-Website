@@ -145,7 +145,7 @@ const Nav = ({ className, scheme: _scheme, compact }: NavProps) => {
         {!compact && (
           <div
             className={classnames(
-              "h-[120px] w-[120px] mr-4 my-5 flex-shrink-0",
+              "h-[60px] w-[60px] lg:w-[120px] lg:h-[120px] mr-4 my-5 flex-shrink-0",
             )}
             onClick={() => {
               const prevClick = faceLastClicked.current;
@@ -156,7 +156,7 @@ const Nav = ({ className, scheme: _scheme, compact }: NavProps) => {
                 return;
               }
               if (faceClicks.current === 4) {
-                navigate("/photogallery/?debug=true");
+                navigate("/photos/?debug=true");
                 return;
               }
               faceClicks.current += 1;
