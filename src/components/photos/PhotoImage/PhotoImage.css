@@ -1,5 +1,5 @@
 .gatsby-image-wrapper {
-  overflow: visible;
+  overflow: visible !important;
 }
 picture::after {
   content: "";

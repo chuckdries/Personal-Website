@@ -114,8 +114,45 @@ module.exports = {
                 }
               }
             `,
-            output: "/rss.xml",
+            output: "/photos.rss.xml",
             title: "Chuck Dries Photos",
+          },
+          {
+            serialize: ({ query: { site, allMdx } }) => {
+              return allMdx.nodes.map((node) => {
+                console.log('node', node);
+                return {
+                  title: node.frontmatter.title,
+                  description: node.excerpt,
+                  date: node.frontmatter.date,
+                  url:
+                    site.siteMetadata.siteUrl +
+                    "/posts" +
+                    node.frontmatter.slug,
+                  guid:
+                    site.siteMetadata.siteUrl +
+                    "/posts" +
+                    node.frontmatter.slug,
+                  custom_elements: [{ "content:encoded": node.html }],
+                };
+              });
+            },
+            query: `
+              {
+                allMdx {
+                  nodes {
+                    frontmatter {
+                      slug
+                      title
+                      date
+                    }
+                    excerpt
+                  }
+                }
+              }
+            `,
+            output: "/rss.xml",
+            title: "Chuck Dries Posts",
           },
         ],
       },
