@@ -71,7 +71,7 @@ export const query = graphql`
             }
           }
           childImageSharp {
-            gatsbyImageData(layout: FULL_WIDTH)
+            gatsbyImageData(width: 700)
           }
         }
       }
