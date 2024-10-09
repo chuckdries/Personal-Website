@@ -206,12 +206,12 @@ function PhotoImage({
       <Nav className="mb-0" scheme="light" />
       {/* <div className="flex-auto "> */}
       <div
-        className="relative py-[55px] px-[55px] overflow-hidden"
+        className="relative p-5 md:p-8 overflow-hidden"
         ref={imageRef}
       >
         <GatsbyImage
           alt="photo"
-          className="max-h-[calc(100svh-110px)] big-blur"
+          className="max-h-[calc(100svh-110px)] md:big-blur"
           id="photo"
           image={data.image!.childImageSharp!.gatsbyImageData}
           objectFit="contain"

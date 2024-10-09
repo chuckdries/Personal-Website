@@ -90,6 +90,9 @@
       hsla(0deg, 0%, 0%, 10%) 100%
     );
   }
+  .big-blur picture::after {
+    filter: blur(25px);
+  }
 }
 
 body {
