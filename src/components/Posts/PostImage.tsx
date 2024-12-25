@@ -23,7 +23,7 @@ export function PostImage({
   }
   return (
     <Link
-      className="block my-7 w-full flex-shrink-0"
+      className="block my-7 prose lg:prose-xl flex-shrink-0 mx-auto"
       // style={{
       //   aspectRatio:
       //     image.childImageSharp?.gatsbyImageData.height /

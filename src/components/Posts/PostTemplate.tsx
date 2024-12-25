@@ -6,7 +6,13 @@ import { PostsLayout } from "./PostsLayout";
 import { useDateFormatter } from "react-aria";
 import { PostImage } from "./PostImage";
 
-const shortcodes = { Link, PostImage }; // Provide common components here
+const components = {
+  Link,
+  PostImage,
+  p(props: any) {
+    return <p className="mx-auto prose lg:prose-xl" {...props} />;
+  }
+};
 
 export default function PageTemplate({
   data,
@@ -21,14 +27,14 @@ export default function PageTemplate({
   });
   return (
     <PostsLayout title={data.mdx!.frontmatter!.title}>
-      <div className="prose lg:prose-xl px-4 md:px-6 mx-auto pb-7">
-        <h1 style={date ? { marginBottom: 0 } : {}}>
-          {data.mdx!.frontmatter!.title}
-        </h1>
-        {date && <p style={{ marginTop: 0 }}>{df.format(date)}</p>}
-        <div className="prose lg:prose-xl">
-          <MDXProvider components={shortcodes}>{children}</MDXProvider>
+      <div className="font-serif px-4 md:px-6 mx-auto pb-7">
+        <div className="mx-auto prose lg:prose-xl ">
+          <h1 style={date ? { marginBottom: 0 } : {}}>
+            {data.mdx!.frontmatter!.title}
+          </h1>
+          {date && <p style={{ marginTop: 0 }}>{df.format(date)}</p>}
         </div>
+        <MDXProvider components={components}>{children}</MDXProvider>
       </div>
     </PostsLayout>
   );

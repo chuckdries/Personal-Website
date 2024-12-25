@@ -11,30 +11,33 @@ function Posts({ data }: PageProps<Queries.PostsPageQuery>) {
   return (
     <PostsLayout>
       {data.allMdx.nodes.map((node) => (
-        <div className="w-full max-w-[1200px] mx-auto p-4 md:p-6" key={node.frontmatter!.slug}>
-            <Link
-              className="underline text-blue-600 visited:text-purple-600 font-bold text-xl"
-              to={`/posts${node.frontmatter!.slug}`}
-            >
-              {node.frontmatter!.title}
-            </Link>
-            {node.frontmatter?.date && (
-              <p className="text-sm opacity-60">
-                {df.format(new Date(node.frontmatter.date))}
-              </p>
-            )}
-            <p>{node.excerpt}</p>
+        <div
+          className="w-full prose lg:prose-xl mx-auto p-4 md:p-6"
+          key={node.frontmatter!.slug}
+        >
+          <Link
+            className="underline text-blue-600 visited:text-purple-600 font-bold text-xl"
+            to={`/posts${node.frontmatter!.slug}`}
+          >
+            {node.frontmatter!.title}
+          </Link>
+          {node.frontmatter?.date && (
+            <span className="block text-sm opacity-60">
+              {df.format(new Date(node.frontmatter.date))}
+            </span>
+          )}
+          <p>{node.excerpt}</p>
           {node.frontmatter?.galleryImages?.length && (
             <div className="overflow-x-scroll w-full rounded-md mt-2">
               <div className="min-w-[max-content] flex gap-2">
-              {node.frontmatter.galleryImages.map((image) => (
-                <GatsbyImage
-                  alt=""
-                  // @ts-expect-error idk man
-                  image={getImage(image)!}
-                  key={image?.base}
-                />
-              ))}
+                {node.frontmatter.galleryImages.map((image) => (
+                  <GatsbyImage
+                    alt=""
+                    // @ts-expect-error idk man
+                    image={getImage(image)!}
+                    key={image?.base}
+                  />
+                ))}
               </div>
             </div>
           )}
@@ -48,7 +51,7 @@ export default Posts;
 
 export const query = graphql`
   query PostsPage {
-    allMdx(sort: {frontmatter: {date: DESC}}) {
+    allMdx(sort: { frontmatter: { date: DESC } }) {
       nodes {
         id
         frontmatter {
