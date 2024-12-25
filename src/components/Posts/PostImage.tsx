@@ -12,20 +12,28 @@ export function PostImage({
 }: {
   props: PageProps<Queries.PostPageQuery>;
   index: number;
-  alt: string
+  alt: string;
 }) {
   const image = getPostImage(props, index);
   const df = useDateFormatter({
-    timeZone: 'utc'
-  })
+    timeZone: "utc",
+  });
   if (!image) {
     return <></>;
   }
   return (
-    <Link className="block my-7" to={`/${image.fields?.organization?.slug}`}>
+    <Link
+      className="block my-7 w-full flex-shrink-0"
+      // style={{
+      //   aspectRatio:
+      //     image.childImageSharp?.gatsbyImageData.height /
+      //     image.childImageSharp?.gatsbyImageData.width,
+      // }}
+      to={`/${image.fields?.organization?.slug}`}
+    >
       <GatsbyImage
         alt={alt}
-        className="not-prose"
+        className="not-prose max-h-screen"
         // @ts-expect-error shrug
         image={getImage(image)!}
         style={{
@@ -33,8 +41,11 @@ export function PostImage({
         }}
       />
       <div className="t-0">
-        {/* @ts-expect-error shrug */}
-        <span className="text-sm">{df.format(new Date(image.fields?.imageMeta?.dateTaken))}</span>
+        {image.fields?.imageMeta?.dateTaken && (
+          <span className="text-sm">
+            {df.format(new Date(image.fields?.imageMeta?.dateTaken))}
+          </span>
+        )}
       </div>
     </Link>
   );

@@ -48,7 +48,7 @@ export default Posts;
 
 export const query = graphql`
   query PostsPage {
-    allMdx {
+    allMdx(sort: {frontmatter: {date: DESC}}) {
       nodes {
         id
         frontmatter {
