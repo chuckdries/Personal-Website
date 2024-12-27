@@ -15,18 +15,18 @@ function Posts({ data }: PageProps<Queries.PostsPageQuery>) {
           className="w-full prose lg:prose-xl mx-auto p-4 md:p-6"
           key={node.frontmatter!.slug}
         >
+          {node.frontmatter?.date && (
+            <span className="block text-sm opacity-60">
+              {df.format(new Date(node.frontmatter.date))}
+            </span>
+          )}
           <Link
             className="underline text-blue-600 visited:text-purple-600 font-bold text-xl"
             to={`/posts${node.frontmatter!.slug}`}
           >
             {node.frontmatter!.title}
           </Link>
-          {node.frontmatter?.date && (
-            <span className="block text-sm opacity-60">
-              {df.format(new Date(node.frontmatter.date))}
-            </span>
-          )}
-          <p>{node.excerpt}</p>
+          <p className="my-0 not-prose">{node.excerpt}</p>
           {node.frontmatter?.galleryImages?.length && (
             <div className="overflow-x-scroll w-full rounded-md mt-2">
               <div className="min-w-[max-content] flex gap-2">
