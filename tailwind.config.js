@@ -1,7 +1,7 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}", "./data/**/*.{mdx}"],
   mode: "jit",
   // darkMode: 'media', // or 'media' or 'class'
   theme: {
@@ -45,7 +45,7 @@ module.exports = {
         "huge-2": "max(7.8vw, 120px)",
       },
       colors: {
-        "white": "#eee",
+        white: "#eee",
         buzzwordsPrimary: "#F6C54B",
         buzzwordsLightBg: "#fae7b2",
         transparentblack: "rgba(0,0,0,0.24)",
@@ -113,8 +113,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [
-    require('tailwindcss-touch')(),
-    require('@tailwindcss/typography')
-  ],
+  plugins: [require("tailwindcss-touch")(), require("@tailwindcss/typography")],
 };

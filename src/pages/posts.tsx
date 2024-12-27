@@ -12,7 +12,7 @@ function Posts({ data }: PageProps<Queries.PostsPageQuery>) {
     <PostsLayout>
       {data.allMdx.nodes.map((node) => (
         <div
-          className="w-full prose lg:prose-xl mx-auto p-4 md:p-6"
+          className="w-full prose  mx-auto p-4 md:p-6"
           key={node.frontmatter!.slug}
         >
           {node.frontmatter?.date && (

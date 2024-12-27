@@ -23,17 +23,16 @@ export function PostImage({
   }
   return (
     <Link
-      className="block my-7 prose lg:prose-xl flex-shrink-0 mx-auto"
-      // style={{
-      //   aspectRatio:
-      //     image.childImageSharp?.gatsbyImageData.height /
-      //     image.childImageSharp?.gatsbyImageData.width,
-      // }}
+      className="block my-2 flex-shrink-0 "
+      style={{
+        maxWidth: `min(calc(${image.childImageSharp?.fluid?.aspectRatio} * 100vh - 32px), calc(100vw - 32px))`,
+        // maxHeight: "calc(100vh - 2em)",
+      }}
       to={`/${image.fields?.organization?.slug}`}
     >
       <GatsbyImage
         alt={alt}
-        className="not-prose max-h-screen"
+        // className="max-h-screen"
         // @ts-expect-error shrug
         image={getImage(image)!}
         style={{

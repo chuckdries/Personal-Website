@@ -5,13 +5,36 @@ import { Link } from "gatsby";
 import { PostsLayout } from "./PostsLayout";
 import { useDateFormatter } from "react-aria";
 import { PostImage } from "./PostImage";
+import { PostImageGroup } from "./PostImageGroup";
 
 const components = {
   Link,
   PostImage,
-  p(props: any) {
-    return <p className="mx-auto prose lg:prose-xl" {...props} />;
-  }
+  PostImageGroup,
+  // p(props: any) {
+  //   return (
+  //     <div className="mx-auto prose">
+  //       <p {...props} />
+  //       <span></span>
+  //     </div>
+  //   );
+  // },
+  // h1(props: any) {
+  //   return (
+  //     <div className="mx-auto prose">
+  //       <h1 className="w-full" {...props} />
+  //       <div></div>
+  //     </div>
+  //   );
+  // },
+  // h2(props: any) {
+  //   return (
+  //     <div className="mx-auto prose">
+  //       <h2 className="w-full" {...props} />
+  //       <div></div>
+  //     </div>
+  //   );
+  // },
 };
 
 export default function PageTemplate({
@@ -27,13 +50,11 @@ export default function PageTemplate({
   });
   return (
     <PostsLayout title={data.mdx!.frontmatter!.title}>
-      <div className="font-serif px-4 md:px-6 mx-auto pb-7">
-        <div className="mx-auto prose lg:prose-xl ">
-          <h1 style={date ? { marginBottom: 0 } : {}}>
-            {data.mdx!.frontmatter!.title}
-          </h1>
-          {date && <p style={{ marginTop: 0 }}>{df.format(date)}</p>}
-        </div>
+      <div className="mx-auto prose px-2">
+        <h1 style={date ? { marginBottom: 0 } : {}}>
+          {data.mdx!.frontmatter!.title}
+        </h1>
+        {date && <p style={{ marginTop: 0 }}>{df.format(date)}</p>}
         <MDXProvider components={components}>{children}</MDXProvider>
       </div>
     </PostsLayout>
@@ -78,6 +99,9 @@ export const query = graphql`
           }
           childImageSharp {
             gatsbyImageData(width: 700, placeholder: BLURRED)
+            fluid {
+              aspectRatio
+            }
           }
         }
       }
