@@ -2,9 +2,14 @@ import React, { useMemo } from "react";
 import { graphql, PageProps } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
 import { Link } from "gatsby";
-import { PostsLayout } from "./PostsLayout";
 import { useDateFormatter } from "react-aria";
+
+import { PostsLayout } from "./PostsLayout";
 import { PostImage } from "./PostImage";
+
+import "bluesky-comments/bluesky-comments.css";
+// @ts-ignore
+import { BlueskyComments } from "bluesky-comments";
 
 const shortcodes = { Link, PostImage }; // Provide common components here
 
@@ -28,6 +33,17 @@ export default function PageTemplate({
         {date && <p style={{ marginTop: 0 }}>{df.format(date)}</p>}
         <div className="prose lg:prose-xl">
           <MDXProvider components={shortcodes}>{children}</MDXProvider>
+          <section>
+            {/* <h2>Comments</h2> */}
+            <BlueskyComments
+              onEmpty={(details) => {
+                console.log("Failed to load comments:", details);
+                document.getElementById("bluesky-comments")!.innerHTML =
+                  "No comments on this post yet. Details: " + details.message;
+              }}
+              profile="chuckdries.com"
+            />
+          </section>
         </div>
       </div>
     </PostsLayout>

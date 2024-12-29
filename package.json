@@ -29,6 +29,7 @@
     "@react-spectrum/provider": "^3.9.5",
     "@spectrum-icons/workflow": "^4.2.10",
     "autoprefixer": "^10.4.19",
+    "bluesky-comments": "^0.9.0",
     "chalk": "^4.1.2",
     "chroma-js": "^2.4.2",
     "classnames": "^2.5.1",
