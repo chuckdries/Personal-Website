@@ -2,8 +2,9 @@ import React, { useMemo } from "react";
 import { graphql, PageProps } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
 import { Link } from "gatsby";
-import { PostsLayout } from "./PostsLayout";
 import { useDateFormatter } from "react-aria";
+
+import { PostsLayout } from "./PostsLayout";
 import { PostImage } from "./PostImage";
 import { PostImageGroup } from "./PostImageGroup";
 

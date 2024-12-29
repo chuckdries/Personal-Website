@@ -23,16 +23,16 @@ export function PostImage({
   }
   return (
     <Link
-      className="block my-2 flex-shrink-0 "
+      className="block my-2 flex-shrink-0"
       style={{
-        maxWidth: `min(calc(${image.childImageSharp?.fluid?.aspectRatio} * 100vh - 32px), calc(100vw - 32px))`,
+        maxWidth: `min(calc(${image.childImageSharp?.fluid?.aspectRatio} * 90vh), calc(100vw - 32px))`,
         // maxHeight: "calc(100vh - 2em)",
       }}
       to={`/${image.fields?.organization?.slug}`}
     >
       <GatsbyImage
         alt={alt}
-        // className="max-h-screen"
+        className="overflow-visible"
         // @ts-expect-error shrug
         image={getImage(image)!}
         style={{
