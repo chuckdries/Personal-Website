@@ -155,6 +155,10 @@ export function compareDates<T>(
   return diff;
 }
 
+export function round(num: number) {
+  return +num.toFixed(3)
+}
+
 
 /**
  * Returns a memoized function that will only call the passed function when it hasn't been called for the wait period

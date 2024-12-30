@@ -1,0 +1,16 @@
+.prog-blur:after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  bottom: 20px;
+  left: -50px;
+  right: 50px;
+  /* height: 20%; */
+  /* inset: 10%; */
+  /* backdrop-filter: blur(20px); */
+  /* border: 1px solid white; */
+  @apply bg-white;
+  mask: linear-gradient(black 70px, transparent 320px);
+  /* -webkit-mask: linear-gradient(0deg, black, transparent 50%); */
+
+}

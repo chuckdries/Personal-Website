@@ -10,10 +10,10 @@ export default function HTML(props) {
       <head>
         <meta charSet="utf-8" />
         <meta content="ie=edge" httpEquiv="x-ua-compatible" />
-        <meta
+        {/* <meta
           content="Full Stack Software Engineer and Photographer"
           name="description"
-        />
+        /> */}
         <meta
           content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
           name="viewport"

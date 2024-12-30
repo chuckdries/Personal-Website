@@ -1,8 +1,7 @@
 import React from "react";
 import { SiblingNavData } from "./PhotoImage";
 import classNames from "classnames";
-import ChevronLeft from "@spectrum-icons/workflow/ChevronLeft";
-import ChevronRight from "@spectrum-icons/workflow/ChevronRight";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "gatsby";
 
 const IconStyle = {
@@ -36,9 +35,9 @@ export function OverlayNavArrow({
       to={navData.next}
     >
       {direction === "left" ? (
-        <ChevronLeft UNSAFE_style={IconStyle} />
+        <ChevronLeft />
       ) : (
-        <ChevronRight UNSAFE_style={IconStyle} />
+        <ChevronRight />
       )}
     </Link>
   );

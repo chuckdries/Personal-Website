@@ -26,7 +26,8 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 1200,
+              // maxWidth: 1200,
+              showCaptions: true,
             },
           },
         ],
@@ -64,25 +65,33 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allFile } }) => {
-              return allFile.nodes.map((node) => {
-                return {
-                  title:
-                    node.fields.imageMeta.meta?.ObjectName ??
-                    node.fields.imageMeta.meta?.Caption ??
-                    node.base,
-                  description: `<img src="${node.publicURL}" />`,
-                  date: node.fields.imageMeta.dateTaken,
-                  url:
-                    site.siteMetadata.siteUrl +
-                    "/" +
-                    node.fields.organization.slug,
-                  guid:
-                    site.siteMetadata.siteUrl +
-                    "/" +
-                    node.fields.organization.slug,
-                  // custom_elements: [{ "content:encoded": node.html }],
-                };
-              });
+              const today = new Date();
+              return allFile.nodes
+                .filter((node) => {
+                  return (
+                    node.frontmatter?.date &&
+                    today > new Date(node.frontmatter?.date)
+                  );
+                })
+                .map((node) => {
+                  return {
+                    title:
+                      node.fields.imageMeta.meta?.ObjectName ??
+                      node.fields.imageMeta.meta?.Caption ??
+                      node.base,
+                    description: `<img src="${node.publicURL}" />`,
+                    date: node.fields.imageMeta.dateTaken,
+                    url:
+                      site.siteMetadata.siteUrl +
+                      "/" +
+                      node.fields.organization.slug,
+                    guid:
+                      site.siteMetadata.siteUrl +
+                      "/" +
+                      node.fields.organization.slug,
+                    // custom_elements: [{ "content:encoded": node.html }],
+                  };
+                });
             },
             query: `
               {
@@ -120,7 +129,6 @@ module.exports = {
           {
             serialize: ({ query: { site, allMdx } }) => {
               return allMdx.nodes.map((node) => {
-                console.log('node', node);
                 return {
                   title: node.frontmatter.title,
                   description: node.excerpt,
