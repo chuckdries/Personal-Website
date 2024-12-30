@@ -15,9 +15,7 @@ export function PostImage({
   alt: string;
 }) {
   const image = getPostImage(props, index);
-  const df = useDateFormatter({
-    timeZone: "utc",
-  });
+  const df = useDateFormatter({});
   if (!image) {
     return <></>;
   }

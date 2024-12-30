@@ -12,30 +12,6 @@ const components = {
   Link,
   PostImage,
   PostImageGroup,
-  // p(props: any) {
-  //   return (
-  //     <div className="mx-auto prose">
-  //       <p {...props} />
-  //       <span></span>
-  //     </div>
-  //   );
-  // },
-  // h1(props: any) {
-  //   return (
-  //     <div className="mx-auto prose">
-  //       <h1 className="w-full" {...props} />
-  //       <div></div>
-  //     </div>
-  //   );
-  // },
-  // h2(props: any) {
-  //   return (
-  //     <div className="mx-auto prose">
-  //       <h2 className="w-full" {...props} />
-  //       <div></div>
-  //     </div>
-  //   );
-  // },
 };
 
 export default function PageTemplate({
@@ -46,9 +22,7 @@ export default function PageTemplate({
     () => data.mdx?.frontmatter?.date && new Date(data.mdx!.frontmatter!.date),
     [data.mdx],
   );
-  const df = useDateFormatter({
-    timeZone: "utc",
-  });
+  const df = useDateFormatter({});
   return (
     <PostsLayout
       description={data.mdx!.excerpt}
