@@ -15,7 +15,8 @@ const components = {
   h2({ children, ...props }: any) {
     return (
       <h2 {...props}>
-        <span className="border-t pt-3 border-slate-400">{children}</span>
+        <div className="w-1/2 mx-auto border-t pt-4 border-slate-400" />
+{children}
       </h2>
     );
   },

@@ -2,7 +2,7 @@ import { Link, PageProps } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import React from "react";
 import { getPostImage } from "./getPostImage";
-import "../photos/PhotoImage/PhotoImage.css";
+// import "../photos/PhotoImage/PhotoImage.css";
 import { useDateFormatter } from "react-aria";
 
 export function PostImage({
@@ -33,7 +33,7 @@ export function PostImage({
         // @ts-expect-error shrug
         image={getImage(image)!}
         style={{
-          "--img-src": `url('${image!.childImageSharp!.gatsbyImageData.placeholder!.fallback}')`,
+          // "--img-src": `url('${image!.childImageSharp!.gatsbyImageData.placeholder!.fallback}')`,
         }}
       />
       <Link className="t-0 block" to={`/${image.fields?.organization?.slug}`}>
