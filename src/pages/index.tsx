@@ -97,7 +97,7 @@ const IndexPage = ({
         <Nav />
         <div className="overflow-hidden relative" style={{ gridArea: `2 / 1` }}>
           {isClient && (
-            <div className="animate-in fade-in duration-200 prog-blur w-[calc(100%+300px)] left-[-150px] flex flex-wrap justify-center relative top-[-50px]">
+            <div className="animate-in fade-in duration-700 delay-300 prog-blur w-[calc(100%+300px)] left-[-150px] flex flex-wrap justify-center relative top-[-50px]">
               {images?.map(
                 (imageData) =>
                   imageData?.childImageSharp?.gatsbyImageData && (
