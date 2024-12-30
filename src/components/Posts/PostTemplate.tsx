@@ -50,7 +50,10 @@ export default function PageTemplate({
     timeZone: "utc",
   });
   return (
-    <PostsLayout title={data.mdx!.frontmatter!.title}>
+    <PostsLayout
+      description={data.mdx!.excerpt}
+      title={data.mdx!.frontmatter!.title}
+    >
       <div className="mx-auto prose px-2">
         <h1 style={date ? { marginBottom: 0 } : {}}>
           {data.mdx!.frontmatter!.title}
@@ -65,6 +68,7 @@ export default function PageTemplate({
 export const query = graphql`
   query PostPage($id: String!) {
     mdx(id: { eq: $id }) {
+      excerpt
       frontmatter {
         title
         date

@@ -11,7 +11,7 @@ export default function HTML(props) {
         <meta charSet="utf-8" />
         <meta content="ie=edge" httpEquiv="x-ua-compatible" />
         <meta
-          content="Chuck Dries: Full Stack Software Engineer and Photographer"
+          content="Full Stack Software Engineer and Photographer"
           name="description"
         />
         <meta

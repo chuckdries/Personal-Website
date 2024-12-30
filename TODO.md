@@ -12,3 +12,8 @@
 
 CI
 - [ ] incorporate branch name in cache keys and rebuild cache per-PR
+
+Book stuff
+- [ ] organize images
+- [ ] SEO component
+- [ ] RSS html?

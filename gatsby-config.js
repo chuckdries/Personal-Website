@@ -120,7 +120,6 @@ module.exports = {
           {
             serialize: ({ query: { site, allMdx } }) => {
               return allMdx.nodes.map((node) => {
-                console.log('node', node);
                 return {
                   title: node.frontmatter.title,
                   description: node.excerpt,
