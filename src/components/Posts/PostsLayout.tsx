@@ -28,8 +28,8 @@ export function PostsLayout({
       </Helmet>
       {cover && (
         <Helmet>
-          <meta content={cover} property="og:image" />
-          <meta content={cover} name="twitter:image" />
+          <meta content={`https://staging.chuckdries.com${cover}`} property="og:image" />
+          <meta content={`https://staging.chuckdries.com${cover}`} name="twitter:image" />
         </Helmet>
       )}
       <Nav className="mb-4" scheme="light" />
