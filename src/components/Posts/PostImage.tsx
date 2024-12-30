@@ -36,6 +36,12 @@ export function PostImage({
           // "--img-src": `url('${image!.childImageSharp!.gatsbyImageData.placeholder!.fallback}')`,
         }}
       />
+      {/* WIP */}
+      {/* <div className="text-sm inline-block float-right">
+        <span>ISO {image.fields?.imageMeta?.meta?.ISO}</span>
+        <span>f/{image.fields?.imageMeta?.meta?.ApertureValue}</span>
+        <span>{image.fields?.imageMeta?.meta?.ShutterSpeedValue}</span>
+      </div> */}
       <Link className="t-0 block" to={`/${image.fields?.organization?.slug}`}>
         {image.fields?.imageMeta?.dateTaken && (
           <span className="text-sm">

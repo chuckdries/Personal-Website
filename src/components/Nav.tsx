@@ -212,7 +212,7 @@ const Nav = ({ className, scheme: _scheme, compact }: NavProps) => {
               partiallyActive
               to="/posts"
             >
-              Posts
+              Blog
             </Link>
           </li>
           <li>
