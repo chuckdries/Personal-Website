@@ -21,6 +21,10 @@ export function PhotoLayout({
             "--dark-vibrant": `255, 255, 255`,
           })}
         />
+        <meta
+          content="Full Stack Software Engineer and Photographer"
+          name="description"
+        />
       </Helmet>
       {!omitNav && (
         <div className="">

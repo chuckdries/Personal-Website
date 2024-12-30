@@ -82,6 +82,10 @@ const IndexPage = ({
             DarkVibrant: [238, 238, 238],
           }))}
         />
+        <meta
+          content="Full Stack Software Engineer and Photographer"
+          name="description"
+        /> 
       </Helmet>
       <main className="font-sans flex flex-col h-screen">
         <Nav />

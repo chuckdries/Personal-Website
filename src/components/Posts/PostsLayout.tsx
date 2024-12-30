@@ -17,7 +17,12 @@ export function PostsLayout({
       <Helmet>
         <title>{title ?? "Posts"} | Chuck Dries</title>
         <body className="bg-white text-black transition-colors" />
-        {/* {description && <meta content={description} name="description" />} */}
+        <meta
+          content={
+            description ?? "Full Stack Software Engineer and Photographer"
+          }
+          name="description"
+        />
         {/* CQ TODO SEO component */}
       </Helmet>
       <Nav className="mb-4" scheme="light" />
