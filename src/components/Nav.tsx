@@ -209,6 +209,7 @@ const Nav = ({ className, scheme: _scheme, compact }: NavProps) => {
             <Link
               activeClassName="underline"
               className={navClasses(scheme)}
+              partiallyActive
               to="/posts"
             >
               Posts
