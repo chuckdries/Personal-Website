@@ -27,7 +27,7 @@ export function PostImageGroup({ children, label }: PostImageGroupProps) {
   }, [containerWidth]);
 
   return (
-    <div style={{ height: childrenHeight ? childrenHeight : '80vh' }}>
+    <div style={{ height: childrenHeight ? childrenHeight : '90vh' }}>
       {/* <div className="h-screen"> */}
       <div
         className="justify-center w-screen absolute left-0 right-0 flex overflow-y-hidden"

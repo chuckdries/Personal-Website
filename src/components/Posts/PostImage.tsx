@@ -23,7 +23,7 @@ export function PostImage({
     <Link
       className="block my-2 flex-shrink-0"
       style={{
-        maxWidth: `min(calc(${image.childImageSharp?.fluid?.aspectRatio} * 90vh), calc(100vw - 32px))`,
+        maxWidth: `min(calc(${image.childImageSharp?.fluid?.aspectRatio} * 80vh), calc(100vw - 32px))`,
         // maxHeight: "calc(100vh - 2em)",
       }}
       to={`/${image.fields?.organization?.slug}`}
