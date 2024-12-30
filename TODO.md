@@ -16,4 +16,5 @@ CI
 Book stuff
 - [ ] organize images
 - [ ] SEO component
-- [ ] RSS html?
+- [ ] fix PostImage when not in container
+- [ ] get rid of frontmatter based image approach? fork gatbsy-remark-images?

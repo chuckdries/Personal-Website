@@ -20,13 +20,12 @@ export function PostImage({
     return <></>;
   }
   return (
-    <Link
+    <div
       className="block my-2 flex-shrink-0"
       style={{
         maxWidth: `min(calc(${image.childImageSharp?.fluid?.aspectRatio} * 80vh), calc(100vw - 32px))`,
         // maxHeight: "calc(100vh - 2em)",
       }}
-      to={`/${image.fields?.organization?.slug}`}
     >
       <GatsbyImage
         alt={alt}
@@ -37,13 +36,13 @@ export function PostImage({
           "--img-src": `url('${image!.childImageSharp!.gatsbyImageData.placeholder!.fallback}')`,
         }}
       />
-      <div className="t-0">
+      <Link className="t-0 block" to={`/${image.fields?.organization?.slug}`}>
         {image.fields?.imageMeta?.dateTaken && (
           <span className="text-sm">
             {df.format(new Date(image.fields?.imageMeta?.dateTaken))}
           </span>
         )}
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }

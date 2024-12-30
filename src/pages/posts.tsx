@@ -27,7 +27,7 @@ function Posts({ data }: PageProps<Queries.PostsPageQuery>) {
             {node.frontmatter!.title}
           </Link>
           <p className="my-0 not-prose">{node.excerpt}</p>
-          {node.frontmatter?.galleryImages?.length && (
+          {/* {node.frontmatter?.galleryImages?.length && (
             <div className="overflow-x-scroll w-full rounded-md mt-2">
               <div className="min-w-[max-content] flex gap-2">
                 {node.frontmatter.galleryImages.map((image) => (
@@ -40,7 +40,7 @@ function Posts({ data }: PageProps<Queries.PostsPageQuery>) {
                 ))}
               </div>
             </div>
-          )}
+          )} */}
         </div>
       ))}
     </PostsLayout>
