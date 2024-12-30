@@ -18,6 +18,7 @@ export function PostImage({
   const image = getPostImage(props, index);
   const df = useDateFormatter({});
   if (!image) {
+    console.log('image not found', { index, props })
     return <></>;
   }
   return (
