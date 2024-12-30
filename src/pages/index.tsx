@@ -97,7 +97,7 @@ const IndexPage = ({
         <Nav />
         <div className="overflow-hidden relative" style={{ gridArea: `2 / 1` }}>
           <div className="prog-blur w-[calc(100%+300px)] left-[-150px] flex flex-wrap justify-center relative top-[-50px]">
-            {images?.map(
+            {isClient && images?.map(
               (imageData) =>
                 imageData?.childImageSharp?.gatsbyImageData && (
                   <GatsbyImage
@@ -162,46 +162,46 @@ export const query = graphql`
         galleryImages {
           base
           childImageSharp {
-            gatsbyImageData(height: 170)
+            gatsbyImageData(height: 170, placeholder: DOMINANT_COLOR)
           }
         }
       }
     }
-    allFile(
-      #                                                           landscape      portrait
-      filter: {
-        sourceInstanceName: { eq: "photos" }
-        base: { in: ["DSC08277-Edit-positive.jpg"] }
-      }
-      sort: { childImageSharp: { fluid: { aspectRatio: ASC } } }
-    ) {
-      nodes {
-        relativePath
-        base
-        childImageSharp {
-          fluid {
-            aspectRatio
-          }
-          gatsbyImageData(
-            layout: CONSTRAINED
-            placeholder: DOMINANT_COLOR
-            breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
-          )
-        }
-        fields {
-          organization {
-            slug
-          }
-        }
-        # fields {
-        #   imageMeta {
-        #     vibrant {
-        #       ...VibrantColors
-        #     }
-        #   }
-        # }
-      }
-    }
+    # allFile(
+    #   #                                                           landscape      portrait
+    #   filter: {
+    #     sourceInstanceName: { eq: "photos" }
+    #     base: { in: ["DSC08277-Edit-positive.jpg"] }
+    #   }
+    #   sort: { childImageSharp: { fluid: { aspectRatio: ASC } } }
+    # ) {
+    #   nodes {
+    #     relativePath
+    #     base
+    #     childImageSharp {
+    #       fluid {
+    #         aspectRatio
+    #       }
+    #       gatsbyImageData(
+    #         layout: CONSTRAINED
+    #         placeholder: DOMINANT_COLOR
+    #         breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
+    #       )
+    #     }
+    #     fields {
+    #       organization {
+    #         slug
+    #       }
+    #     }
+    #     # fields {
+    #     #   imageMeta {
+    #     #     vibrant {
+    #     #       ...VibrantColors
+    #     #     }
+    #     #   }
+    #     # }
+    #   }
+    # }
   }
 `;
 

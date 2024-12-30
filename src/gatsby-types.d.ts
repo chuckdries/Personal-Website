@@ -2805,7 +2805,7 @@ type GatsbyImageSharpFluidLimitPresentationSizeFragment = { readonly maxHeight: 
 type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type IndexPageQuery = { readonly mdx: { readonly frontmatter: { readonly slug: string | null, readonly title: string | null, readonly galleryImages: ReadonlyArray<{ readonly base: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null> | null } | null } | null, readonly allFile: { readonly nodes: ReadonlyArray<{ readonly relativePath: string, readonly base: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null, readonly fields: { readonly organization: { readonly slug: string | null } | null } | null }> } };
+type IndexPageQuery = { readonly mdx: { readonly frontmatter: { readonly slug: string | null, readonly title: string | null, readonly galleryImages: ReadonlyArray<{ readonly base: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null> | null } | null } | null };
 
 type PhotoImageQueryVariables = Exact<{
   imageId: InputMaybe<Scalars['String']>;
