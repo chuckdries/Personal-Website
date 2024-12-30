@@ -2847,6 +2847,11 @@ type PostPageQueryVariables = Exact<{
 
 type PostPageQuery = { readonly mdx: { readonly excerpt: string | null, readonly frontmatter: { readonly title: string | null, readonly date: string | null, readonly slug: string | null, readonly cover: { readonly childImageSharp: { readonly original: { readonly src: string | null } | null } | null } | null, readonly galleryImages: ReadonlyArray<{ readonly base: string, readonly fields: { readonly organization: { readonly slug: string | null } | null, readonly imageMeta: { readonly dateTaken: string | null, readonly meta: { readonly Make: string | null, readonly Model: string | null, readonly ExposureTime: number | null, readonly FNumber: number | null, readonly ISO: number | null, readonly DateTimeOriginal: string | null, readonly CreateDate: string | null, readonly ShutterSpeedValue: number | null, readonly ApertureValue: number | null, readonly FocalLength: number | null, readonly LensModel: string | null, readonly ObjectName: string | null, readonly Caption: string | null, readonly Location: string | null, readonly City: string | null, readonly State: string | null, readonly Keywords: ReadonlyArray<string | null> | null } | null } | null } | null, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null } | null> | null } | null } | null };
 
+type PostsLayoutMetaQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PostsLayoutMetaQueryQuery = { readonly site: { readonly siteMetadata: { readonly siteUrl: string | null } | null } | null };
+
 type PostsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 

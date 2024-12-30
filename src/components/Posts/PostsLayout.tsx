@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import Nav from "../Nav";
-import { getHelmetSafeBodyStyle } from "../../utils";
+import { graphql, useStaticQuery } from "gatsby";
 
 export function PostsLayout({
   children,
@@ -14,6 +14,15 @@ export function PostsLayout({
   description?: string | null;
   cover?: string | null;
 }) {
+  const { site } = useStaticQuery(graphql`
+    query PostsLayoutMetaQuery {
+      site {
+        siteMetadata {
+          siteUrl
+        }
+      }
+    }
+  `);
   return (
     <div className="flex flex-col h-actual-screen font-serif pb-8">
       <Helmet>
@@ -28,8 +37,14 @@ export function PostsLayout({
       </Helmet>
       {cover && (
         <Helmet>
-          <meta content={`https://staging.chuckdries.com${cover}`} property="og:image" />
-          <meta content={`https://staging.chuckdries.com${cover}`} name="twitter:image" />
+          <meta
+            content={`${site.siteMetadata.siteUrl}${cover}`}
+            property="og:image"
+          />
+          <meta
+            content={`${site.siteMetadata.siteUrl}${cover}`}
+            name="twitter:image"
+          />
         </Helmet>
       )}
       <Nav className="mb-4" scheme="light" />
