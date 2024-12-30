@@ -12,6 +12,13 @@ const components = {
   Link,
   PostImage,
   PostImageGroup,
+  h2({ children, ...props }: any) {
+    return (
+      <h2 {...props}>
+        <span className="border-t pt-3 border-slate-400">{children}</span>
+      </h2>
+    );
+  },
 };
 
 export default function PageTemplate({

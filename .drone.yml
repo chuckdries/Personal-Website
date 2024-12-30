@@ -125,7 +125,7 @@ steps:
 volumes:
   - name: cache
     host:
-      path: /mnt/user/dronecache
+      path: /data/dronecache
 
 # ---
 # kind: pipeline
