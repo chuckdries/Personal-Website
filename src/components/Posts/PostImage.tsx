@@ -13,7 +13,7 @@ export function PostImage({
 }: {
   props: PageProps<Queries.PostPageQuery>;
   index: number;
-  alt: string;
+  alt?: string;
 }) {
   const image = getPostImage(props, index);
   const df = useDateFormatter({});
@@ -53,8 +53,8 @@ export function PostImage({
                 s
               </span>
             )}
-            {image.fields?.imageMeta?.meta?.ApertureValue && (
-              <span>f/{image.fields?.imageMeta?.meta?.ApertureValue}</span>
+            {image.fields?.imageMeta?.meta?.FNumber && (
+              <span>f/{image.fields?.imageMeta?.meta?.FNumber}</span>
             )}
             {image.fields?.imageMeta?.meta?.ISO && (
               <span>{image.fields?.imageMeta?.meta?.ISO} ISO</span>

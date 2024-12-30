@@ -30,7 +30,9 @@ export default function PageTemplate({
     () => data.mdx?.frontmatter?.date && new Date(data.mdx!.frontmatter!.date),
     [data.mdx],
   );
-  const df = useDateFormatter({});
+  const df = useDateFormatter({
+    timeZone: 'utc'
+  });
   return (
     <PostsLayout
       description={data.mdx!.excerpt}
