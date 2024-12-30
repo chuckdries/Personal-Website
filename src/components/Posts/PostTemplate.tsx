@@ -48,14 +48,7 @@ export default function PageTemplate({
         <MDXProvider components={components}>{children}</MDXProvider>
         <section>
           {/* <h2>Comments</h2> */}
-          <BlueskyComments
-            onEmpty={(details) => {
-              console.log("Failed to load comments:", details);
-              document.getElementById("bluesky-comments")!.innerHTML =
-                "No comments on this post yet. Details: " + details.message;
-            }}
-            profile="chuckdries.com"
-          />
+          <BlueskyComments author="chuckdries.com" />
         </section>
       </div>
     </PostsLayout>
