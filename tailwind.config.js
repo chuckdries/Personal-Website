@@ -113,5 +113,9 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require("tailwindcss-touch")(), require("@tailwindcss/typography")],
+  plugins: [
+    require("tailwindcss-touch")(),
+    require("@tailwindcss/typography"),
+    require("tailwindcss-animate"),
+  ],
 };

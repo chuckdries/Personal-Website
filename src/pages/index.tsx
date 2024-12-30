@@ -14,7 +14,7 @@ import Nav from "../components/Nav";
 // import ActionButtons from "../components/index/ActionButtons";
 import { use100vh } from "react-div-100vh";
 import { useMediaQuery } from "../useMediaQuery";
-import './index.css';
+import "./index.css";
 
 const env =
   process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
@@ -96,25 +96,26 @@ const IndexPage = ({
       <main className="font-sans h-screen grid grid-rows-[min-content,minmax(0,1fr)]">
         <Nav />
         <div className="overflow-hidden relative" style={{ gridArea: `2 / 1` }}>
-          <div className="prog-blur w-[calc(100%+300px)] left-[-150px] flex flex-wrap justify-center relative top-[-50px]">
-            {isClient && images?.map(
-              (imageData) =>
-                imageData?.childImageSharp?.gatsbyImageData && (
-                  <GatsbyImage
-                    alt={`An image called ${imageData?.base}`}
-                    image={imageData!.childImageSharp!.gatsbyImageData!}
-                    key={imageData?.base}
-                  />
-                ),
-            )}
-          </div>
+          {isClient && (
+            <div className="animate-in fade-in duration-200 prog-blur w-[calc(100%+300px)] left-[-150px] flex flex-wrap justify-center relative top-[-50px]">
+              {images?.map(
+                (imageData) =>
+                  imageData?.childImageSharp?.gatsbyImageData && (
+                    <GatsbyImage
+                      alt={`An image called ${imageData?.base}`}
+                      image={imageData!.childImageSharp!.gatsbyImageData!}
+                      key={imageData?.base}
+                    />
+                  ),
+              )}
+            </div>
+          )}
         </div>
         <div
           className="relative font-serif flex justify-center md:items-center p-4"
           style={{ gridArea: `2 / 1` }}
         >
           <div className="relative mt-6 md:-mt-6">
-            
             <Link to={`/posts${mdx?.frontmatter!.slug}`}>
               <h1 className="text-center drop-shadow text-4xl font-bold text-slate-900 underline p-4 bg-white rounded-xl shadow-lg">
                 {mdx?.frontmatter?.title}
