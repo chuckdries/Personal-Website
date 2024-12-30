@@ -39,6 +39,7 @@ steps:
       exclude:
         - node_modules
         - .git*
+        - .yarn
       source: ./public/
       target: ~/www/personal-website
       delete: true
