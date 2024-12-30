@@ -36,7 +36,7 @@ export default function PageTemplate({
       description={data.mdx!.excerpt}
       title={data.mdx!.frontmatter!.title}
     >
-      <div className="mx-auto prose px-2">
+      <div className="mx-auto prose px-4">
         <h1 style={date ? { marginBottom: 0 } : {}}>
           {data.mdx!.frontmatter!.title}
         </h1>

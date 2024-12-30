@@ -41,12 +41,12 @@ export function PostImageGroup({ children, label }: PostImageGroupProps) {
         ref={observeChildren}
       >
         <div
-          className="flex flex-nowrap items-center overflow-x-auto w-fit px-3 lg:px-6 gap-6 pb-2"
+          className="flex flex-nowrap items-center overflow-x-auto w-fit pr-3 lg:pr-6 gap-6 pb-2"
           ref={observeInner}
         >
           {showScrollPrompt && (
-            <p className="text-nowrap lg:text-lg lg:mx-6 italic opacity-50 bg-[var(--tw-prose-body)] text-white px-3 rounded-full">
-              scroll &rarr;
+            <p className="text-nowrap lg:text-lg lg:mr-6 pr-3 pl-6 lg:pl-8 py-8 italic opacity-40 bg-[var(--tw-prose-body)] text-white rounded-r-full">
+              <span className="pointer-coarse:hidden">scroll &rarr;</span><span className="pointer-fine:hidden">swipe &larr;</span>
             </p>
           )}
           {/* <p>{innerWidth} &gt; {containerWidth}</p> */}
