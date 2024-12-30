@@ -14,7 +14,8 @@ CI
 - [ ] incorporate branch name in cache keys and rebuild cache per-PR
 
 Book stuff
-- [ ] organize images
-- [ ] SEO component
+- [ ] fix image dates and keywords
+- [ ] write image alts?
+- [x] SEO component (sorta done)
 - [ ] fix PostImage when not in container
 - [ ] get rid of frontmatter based image approach? fork gatbsy-remark-images?

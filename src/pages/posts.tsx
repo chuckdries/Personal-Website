@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { graphql, Link, PageProps } from "gatsby";
 import { PostsLayout } from "../components/Posts/PostsLayout";
 import { useDateFormatter } from "react-aria";
@@ -8,9 +8,16 @@ function Posts({ data }: PageProps<Queries.PostsPageQuery>) {
   const df = useDateFormatter({
     timeZone: "utc",
   });
+  const filteredPosts = useMemo(() => {
+    const today = new Date();
+    return data.allMdx.nodes.filter(
+      (node) =>
+        node.frontmatter?.date && today > new Date(node.frontmatter?.date),
+    );
+  }, [data.allMdx.nodes]);
   return (
     <PostsLayout>
-      {data.allMdx.nodes.map((node) => (
+      {filteredPosts.map((node) => (
         <div
           className="w-full prose  mx-auto p-4 md:p-6"
           key={node.frontmatter!.slug}

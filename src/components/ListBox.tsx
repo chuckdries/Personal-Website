@@ -4,8 +4,7 @@ import type { AriaListBoxOptions } from "@react-aria/listbox";
 import type { ListState } from "react-stately";
 import type { Node } from "@react-types/shared";
 import { useListBox, useListBoxSection, useOption } from "react-aria";
-// import { CheckIcon } from "@heroicons/react/solid";
-import Checkmark from '@spectrum-icons/workflow/Checkmark'
+import { Check } from "lucide-react";
 
 interface ListBoxProps extends AriaListBoxOptions<unknown> {
   listBoxRef?: React.RefObject<HTMLUListElement>;
@@ -98,7 +97,7 @@ function Option({ item, state }: OptionProps) {
     >
       {item.rendered}
       {isSelected && (
-        <Checkmark UNSAFE_className="mx-1" UNSAFE_style={{ width: '15px' }} aria-hidden="true" />
+        <Check aria-hidden="true" className="mx-1" />
       )}
     </li>
   );

@@ -288,6 +288,9 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
         // console.log(node.base, metaData);
         console.log(`${node.base} has no rating`);
       }
+      if (!metaData.Keywords) {
+        console.log(`${node.base} has no keywords`)
+      }
     } catch (e) {
       console.error(
         `🅱️ something wen wrong with exifr on image ${node.base}`,

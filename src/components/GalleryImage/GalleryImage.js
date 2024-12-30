@@ -5,16 +5,16 @@ import { Helmet } from "react-helmet";
 import classnames from "classnames";
 import chroma, { Color } from "chroma-js";
 
-import ChevronLeft from "@spectrum-icons/workflow/ChevronLeft";
-import ChevronRight from "@spectrum-icons/workflow/ChevronRight";
-import Calendar from "@spectrum-icons/workflow/Calendar";
-import Stopwatch from "@spectrum-icons/workflow/Stopwatch";
-import Exposure from "@spectrum-icons/workflow/Exposure";
-import Filmroll from "@spectrum-icons/workflow/Filmroll";
-import Dolly from "@spectrum-icons/workflow/Dolly";
-import Camera from "@spectrum-icons/workflow/Camera";
-import Circle from "@spectrum-icons/workflow/Circle";
-import Location from "@spectrum-icons/workflow/Location";
+import {ChevronLeft, ChevronRight} from 'lucide-react'
+// import ChevronRight from "@spectrum-icons/workflow/ChevronRight";
+// import Calendar from "@spectrum-icons/workflow/Calendar";
+// import Stopwatch from "@spectrum-icons/workflow/Stopwatch";
+// import Exposure from "@spectrum-icons/workflow/Exposure";
+// import Filmroll from "@spectrum-icons/workflow/Filmroll";
+// import Dolly from "@spectrum-icons/workflow/Dolly";
+// import Camera from "@spectrum-icons/workflow/Camera";
+// import Circle from "@spectrum-icons/workflow/Circle";
+// import Location from "@spectrum-icons/workflow/Location";
 
 import {
   getAspectRatio,
@@ -369,7 +369,7 @@ const GalleryImage = ({ data, location: { state } }) => {
                   style={{ width: 30 }}
                 ></div>
               }
-              <div className="flex flex-col items-end">
+              {/* <div className="flex flex-col items-end">
                 <MetadataItem
                   data={dateTaken.toLocaleDateString()}
                   icon={<Calendar UNSAFE_style={IconStyle} />}
@@ -418,7 +418,7 @@ const GalleryImage = ({ data, location: { state } }) => {
                     title="lens"
                   />
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

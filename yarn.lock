@@ -12,16 +12,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@adobe/react-spectrum-workflow@npm:2.3.4":
-  version: 2.3.4
-  resolution: "@adobe/react-spectrum-workflow@npm:2.3.4"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 10/71eb20c340eb443b46909c1ec4281c5461670115d67c050b4b37cf4e655193ba4e1989dcb6866807807e7678c6c88da84da9f2fcd3fdf086f75944efe631114d
-  languageName: node
-  linkType: hard
-
 "@alloc/quick-lru@npm:^5.2.0":
   version: 5.2.0
   resolution: "@alloc/quick-lru@npm:5.2.0"
@@ -3948,21 +3938,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-spectrum/icon@npm:^3.7.11":
-  version: 3.7.11
-  resolution: "@react-spectrum/icon@npm:3.7.11"
-  dependencies:
-    "@react-aria/utils": "npm:^3.23.2"
-    "@react-spectrum/utils": "npm:^3.11.5"
-    "@react-types/shared": "npm:^3.22.1"
-    "@swc/helpers": "npm:^0.5.0"
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 10/5d40c9b04cce378542521faeeafef8f7a57d5e23fb6e4cba38d9e7d6885dd0dd1d91054091218c920cceae60ce3ca3b42635286f5a425851d429ffafeb96aa2c
-  languageName: node
-  linkType: hard
-
 "@react-spectrum/provider@npm:^3.9.5":
   version: 3.9.5
   resolution: "@react-spectrum/provider@npm:3.9.5"
@@ -4888,20 +4863,6 @@ __metadata:
   version: 3.1.0
   resolution: "@socket.io/component-emitter@npm:3.1.0"
   checksum: 10/db069d95425b419de1514dffe945cc439795f6a8ef5b9465715acf5b8b50798e2c91b8719cbf5434b3fe7de179d6cdcd503c277b7871cb3dd03febb69bdd50fa
-  languageName: node
-  linkType: hard
-
-"@spectrum-icons/workflow@npm:^4.2.10":
-  version: 4.2.10
-  resolution: "@spectrum-icons/workflow@npm:4.2.10"
-  dependencies:
-    "@adobe/react-spectrum-workflow": "npm:2.3.4"
-    "@react-spectrum/icon": "npm:^3.7.11"
-    "@swc/helpers": "npm:^0.5.0"
-  peerDependencies:
-    "@react-spectrum/provider": ^3.0.0
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 10/b4b8937b4a98e218aefdafa50bef376767d00fcc392bd08d4b1313bf7020aeb511b4c2b281d8d592b74d3b12906c624d3c8a2fa7165a27ea51ea79147a273c50
   languageName: node
   linkType: hard
 
@@ -7669,7 +7630,6 @@ __metadata:
     "@mdx-js/react": "npm:^3.0.1"
     "@react-aria/utils": "npm:^3.23.2"
     "@react-spectrum/provider": "npm:^3.9.5"
-    "@spectrum-icons/workflow": "npm:^4.2.10"
     "@tailwindcss/typography": "npm:^0.5.15"
     "@types/chroma-js": "npm:^2.4.4"
     "@types/lodash.debounce": "npm:^4.0.9"
@@ -7711,6 +7671,7 @@ __metadata:
     glob: "npm:^10.3.12"
     kebab-case: "npm:^1.0.2"
     lodash.debounce: "npm:^4.0.8"
+    lucide-react: "npm:^0.469.0"
     md5: "npm:^2.3.0"
     node-iptc: "npm:^1.0.5"
     node-vibrant: "npm:3.2.1-alpha.1"
@@ -13985,6 +13946,15 @@ __metadata:
   dependencies:
     es5-ext: "npm:~0.10.2"
   checksum: 10/55b08ee3a7dbefb7d8ee2d14e0a97c69a887f78bddd9e28a687a1944b57e09513d4b401db515279e8829d52331df12a767f3ed27ca67c3322c723cc25c06403f
+  languageName: node
+  linkType: hard
+
+"lucide-react@npm:^0.469.0":
+  version: 0.469.0
+  resolution: "lucide-react@npm:0.469.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/8cf1f5b125354f1ac4304bb0eead52f369fd67866199bc37a63c856369c97003702b90522e257971670e75acaaf1e55c05c8e4960aaa7ba96dc084d3f0505102
   languageName: node
   linkType: hard
 

@@ -4,6 +4,7 @@ import React from "react";
 import { getPostImage } from "./getPostImage";
 // import "../photos/PhotoImage/PhotoImage.css";
 import { useDateFormatter } from "react-aria";
+import { getShutterFractionFromExposureTime } from "../../utils";
 
 export function PostImage({
   props,
@@ -21,28 +22,45 @@ export function PostImage({
   }
   return (
     <div
-      className="block my-2 flex-shrink-0"
+      className="block my-2 flex-shrink-0 group"
       style={{
         maxWidth: `min(calc(${image.childImageSharp?.fluid?.aspectRatio} * 80vh), calc(100vw - 32px))`,
         // maxHeight: "calc(100vh - 2em)",
       }}
     >
       <GatsbyImage
-        alt={alt}
+        alt={`A photo calleed ${image.base}`}
         className="overflow-visible"
         // @ts-expect-error shrug
         image={getImage(image)!}
-        style={{
-          // "--img-src": `url('${image!.childImageSharp!.gatsbyImageData.placeholder!.fallback}')`,
-        }}
+        style={
+          {
+            // "--img-src": `url('${image!.childImageSharp!.gatsbyImageData.placeholder!.fallback}')`,
+          }
+        }
       />
-      {/* WIP */}
-      {/* <div className="text-sm inline-block float-right">
-        <span>ISO {image.fields?.imageMeta?.meta?.ISO}</span>
-        <span>f/{image.fields?.imageMeta?.meta?.ApertureValue}</span>
-        <span>{image.fields?.imageMeta?.meta?.ShutterSpeedValue}</span>
-      </div> */}
-      <Link className="t-0 block" to={`/${image.fields?.organization?.slug}`}>
+      <Link
+        className="t-0 block opacity-0 group-hover:opacity-100 transition-opacity"
+        to={`/${image.fields?.organization?.slug}`}
+      >
+        {!image.fields?.imageMeta?.meta?.Keywords?.includes("Film") && (
+          <div className="text-sm float-right flex gap-2">
+            {image.fields?.imageMeta?.meta?.ExposureTime && (
+              <span>
+                {getShutterFractionFromExposureTime(
+                  image.fields?.imageMeta?.meta?.ExposureTime,
+                )}
+                s
+              </span>
+            )}
+            {image.fields?.imageMeta?.meta?.ApertureValue && (
+              <span>f/{image.fields?.imageMeta?.meta?.ApertureValue}</span>
+            )}
+            {image.fields?.imageMeta?.meta?.ISO && (
+              <span>{image.fields?.imageMeta?.meta?.ISO} ISO</span>
+            )}
+          </div>
+        )}
         {image.fields?.imageMeta?.dateTaken && (
           <span className="text-sm">
             {df.format(new Date(image.fields?.imageMeta?.dateTaken))}

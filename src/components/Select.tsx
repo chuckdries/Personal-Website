@@ -8,7 +8,7 @@ import {
   mergeProps,
   useFocusRing,
 } from "react-aria";
-import ChevronDown from "@spectrum-icons/workflow/ChevronDown";
+import { ChevronDown } from "lucide-react"; 
 
 import { ListBox } from "./ListBox";
 import { Popover } from "./Popover";
@@ -59,10 +59,7 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
             : "Select an option"}
         </span>
         <ChevronDown
-          UNSAFE_className="mx-1"
-          UNSAFE_style={{
-            width: "15px",
-          }}
+          className="mx-1"
         />
       </button>
       {state.isOpen && (

@@ -14,15 +14,15 @@ import MetadataItem from "../MetadataItem";
 
 import "./PhotoImage.css";
 
-import Calendar from "@spectrum-icons/workflow/Calendar";
-import Stopwatch from "@spectrum-icons/workflow/Stopwatch";
-import Exposure from "@spectrum-icons/workflow/Exposure";
-import Filmroll from "@spectrum-icons/workflow/Filmroll";
-import Dolly from "@spectrum-icons/workflow/Dolly";
-import Camera from "@spectrum-icons/workflow/Camera";
-import Circle from "@spectrum-icons/workflow/Circle";
-import Location from "@spectrum-icons/workflow/Location";
-import { slice } from "ramda";
+import {
+  Camera,
+  Calendar,
+  Aperture,
+  Film,
+  Ruler,
+  Timer,
+  Focus,
+} from "lucide-react";
 import { OverlayNavArrow } from "./OverlayNavArrow";
 import { NavArrowOverlay } from "./NavArrowOverlay";
 
@@ -205,10 +205,7 @@ function PhotoImage({
       </Helmet>
       <Nav className="mb-0" scheme="light" />
       {/* <div className="flex-auto "> */}
-      <div
-        className="relative p-5 md:p-8 overflow-hidden"
-        ref={imageRef}
-      >
+      <div className="relative p-5 md:p-8 overflow-hidden" ref={imageRef}>
         <GatsbyImage
           alt="photo"
           className="max-h-[calc(100svh-110px)] md:big-blur"
@@ -229,14 +226,14 @@ function PhotoImage({
             {dateTaken && (
               <MetadataItem
                 data={dateTaken.toLocaleDateString()}
-                icon={<Calendar UNSAFE_style={IconStyle} />}
+                icon={<Calendar />}
                 title={film ? "date scanned" : "date taken"}
               />
             )}
             {film && (
               <MetadataItem
                 data={filmStock ?? "-"}
-                icon={<Filmroll UNSAFE_style={IconStyle} />}
+                icon={<Film />}
                 title={"filmstock"}
               />
             )}
@@ -250,24 +247,24 @@ function PhotoImage({
                     <div className="flex flex-wrap justify-end gap-2 bg-gray-500/20 py-3 pl-4 rounded">
                       <MetadataItem
                         data={shutterSpeed}
-                        icon={<Stopwatch UNSAFE_style={IconStyle} />}
+                        icon={<Timer />}
                         title="shutter"
                       />
                       {meta.FNumber && (
                         <MetadataItem
                           data={`f/${meta.FNumber}`}
-                          icon={<Exposure UNSAFE_style={IconStyle} />}
+                          icon={<Aperture />}
                           title="aperture"
                         />
                       )}
                       <MetadataItem
                         data={meta.ISO}
-                        icon={<Filmroll UNSAFE_style={IconStyle} />}
+                        icon={<Film />}
                         title="ISO"
                       />
                       <MetadataItem
                         data={meta.FocalLength ? meta.FocalLength + "mm" : null}
-                        icon={<Dolly UNSAFE_style={IconStyle} />}
+                        icon={<Ruler />}
                         title="focal"
                       />
                     </div>
@@ -280,14 +277,14 @@ function PhotoImage({
                 {(meta?.Make || meta?.Model) && (
                   <MetadataItem
                     data={[meta?.Make, meta?.Model].join(" ")}
-                    icon={<Camera UNSAFE_style={IconStyle} />}
+                    icon={<Camera />}
                     title="camera"
                   />
                 )}
                 {(meta?.LensModel || meta?.FocalLength) && (
                   <MetadataItem
                     data={meta?.LensModel === "----" ? null : meta?.LensModel}
-                    icon={<Circle UNSAFE_style={IconStyle} />}
+                    icon={<Focus />}
                     title="lens"
                   />
                 )}
