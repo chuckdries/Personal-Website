@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import useDimensions from "react-cool-dimensions";
 
 interface PostImageGroupProps {
@@ -15,7 +15,7 @@ export function PostImageGroup({ children, label }: PostImageGroupProps) {
   const observeInner = useRef<HTMLDivElement>(null);
   const [showScrollPrompt, setScrollPrompt] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!observeInner.current) {
       return;
     }
