@@ -13,7 +13,7 @@ export function PostsLayout({
   description?: string | null;
 }) {
   return (
-    <div className="flex flex-col h-actual-screen font-serif">
+    <div className="flex flex-col h-actual-screen font-serif pb-8">
       <Helmet>
         <title>{title ?? "Posts"} | Chuck Dries</title>
         <body className="bg-white text-black transition-colors" />
