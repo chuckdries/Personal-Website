@@ -19,7 +19,7 @@ import "./index.css";
 const env =
   process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
 
-export type HomepageImage = Queries.IndexPageQuery["allFile"]["nodes"][number];
+// export type HomepageImage = Queries.IndexPageQuery["allFile"]["nodes"][number];
 
 const getDifferentRand = (
   range: number,
@@ -115,7 +115,7 @@ const IndexPage = ({
           className="relative font-serif flex justify-center md:items-center p-4"
           style={{ gridArea: `2 / 1` }}
         >
-          <div className="relative mt-6 md:-mt-6">
+          <div className="relative mt-6 md:-mt-8">
             <Link to={`/posts${mdx?.frontmatter!.slug}`}>
               <h1 className="text-center drop-shadow text-4xl font-bold text-slate-900 underline p-4 bg-white rounded-xl shadow-lg">
                 {mdx?.frontmatter?.title}

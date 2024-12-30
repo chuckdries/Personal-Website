@@ -9,6 +9,7 @@ import {
   getMeta,
   getShutterFractionFromExposureTime,
   getVibrantStyle,
+  round,
 } from "../../../utils";
 import MetadataItem from "../MetadataItem";
 
@@ -263,7 +264,7 @@ function PhotoImage({
                         title="ISO"
                       />
                       <MetadataItem
-                        data={meta.FocalLength ? meta.FocalLength + "mm" : null}
+                        data={meta.FocalLength ? round(meta.FocalLength) + "mm" : null}
                         icon={<Ruler />}
                         title="focal"
                       />
