@@ -35,6 +35,7 @@ export default function PageTemplate({
   });
   return (
     <PostsLayout
+      cover={data.mdx?.frontmatter?.cover?.childImageSharp?.original?.src}
       description={data.mdx!.excerpt}
       title={data.mdx!.frontmatter!.title}
     >
@@ -56,6 +57,13 @@ export const query = graphql`
       frontmatter {
         title
         date
+        cover {
+          childImageSharp {
+            original {
+              src
+            }
+          }
+        }
         slug
         galleryImages {
           base

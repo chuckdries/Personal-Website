@@ -7,11 +7,14 @@ export function PostsLayout({
   children,
   title,
   description,
+  cover,
 }: {
   children: React.ReactNode;
   title?: string | null;
   description?: string | null;
+  cover?: string | null;
 }) {
+  console.log("🚀 ~ cover:", cover)
   return (
     <div className="flex flex-col h-actual-screen font-serif pb-8">
       <Helmet>
@@ -23,6 +26,12 @@ export function PostsLayout({
           }
           name="description"
         />
+        {cover && (
+          <>
+            <meta content={cover} property="og:image" />
+            <meta content={cover} name="twitter:image" />
+          </>
+        )}
         {/* CQ TODO SEO component */}
       </Helmet>
       <Nav className="mb-4" scheme="light" />

@@ -488,7 +488,7 @@ export const createSchemaCustomization = ({actions, schema}: CreateSchemaCustomi
      frontmatter: Frontmatter
    }
 
-   type Frontmatter @dontInfer {
+   type Frontmatter {
      date: Date
      slug: String
      title: String
