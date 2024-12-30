@@ -110,10 +110,10 @@ const IndexPage = ({
           </div>
         </div>
         <div
-          className="relative font-serif flex justify-center items-center p-4"
+          className="relative font-serif flex justify-center md:items-center p-4"
           style={{ gridArea: `2 / 1` }}
         >
-          <div className="relative -mt-6">
+          <div className="relative mt-6 md:-mt-6">
             
             <Link to={`/posts${mdx?.frontmatter!.slug}`}>
               <h1 className="text-center drop-shadow text-4xl font-bold text-slate-900 underline p-4 bg-white rounded-xl shadow-lg">
@@ -162,7 +162,7 @@ export const query = graphql`
         galleryImages {
           base
           childImageSharp {
-            gatsbyImageData(height: 200)
+            gatsbyImageData(height: 170)
           }
         }
       }
