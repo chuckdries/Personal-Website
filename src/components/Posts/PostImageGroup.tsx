@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import useDimensions from "react-cool-dimensions";
 
 interface PostImageGroupProps {
@@ -14,9 +14,16 @@ export function PostImageGroup({ children, label }: PostImageGroupProps) {
   } = useDimensions();
   const observeInner = useRef<HTMLDivElement>(null);
   const [showScrollPrompt, setScrollPrompt] = useState(false);
+  const [isClient, setIsClient] = React.useState(false);
 
-  useLayoutEffect(() => {
-    if (!observeInner.current) {
+  React.useEffect(() => {
+    if (!isClient) {
+      setIsClient(true);
+    }
+  }, [isClient]);
+
+  useEffect(() => {
+    if (!observeInner.current || !isClient) {
       return;
     }
     if (observeInner.current?.scrollWidth > observeInner.current?.clientWidth) {
@@ -24,7 +31,7 @@ export function PostImageGroup({ children, label }: PostImageGroupProps) {
     } else {
       setScrollPrompt(false);
     }
-  }, [containerWidth]);
+  }, [containerWidth, isClient]);
 
   return (
     <div style={{ height: childrenHeight ? childrenHeight : "90vh" }}>
