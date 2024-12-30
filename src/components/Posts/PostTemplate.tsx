@@ -16,7 +16,7 @@ const components = {
     return (
       <h2 {...props}>
         <div className="w-1/2 mx-auto border-t pt-4 border-slate-400" />
-{children}
+        {children}
       </h2>
     );
   },
@@ -85,7 +85,7 @@ export const query = graphql`
             }
           }
           childImageSharp {
-            gatsbyImageData(width: 1000, placeholder: BLURRED)
+            gatsbyImageData(width: 1200, placeholder: BLURRED)
             fluid {
               aspectRatio
             }
