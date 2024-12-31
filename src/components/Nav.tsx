@@ -12,7 +12,7 @@ const navClasses = (scheme: "light" | "dark") =>
 const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
   <ul
     className={classnames(
-      "z-30 overflow-hidden bg-vibrant-dark/30 backdrop-blur-lg",
+      "z-30 overflow-hidden bg-white/50 backdrop-blur-lg",
       "rounded shadow-lg border border-gray-400",
     )}
   >
@@ -39,11 +39,11 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
     <li>
       <a
         className={navClasses(scheme)}
-        href="https://cohost.org/chuck"
+        href="https://bsky.app/profile/chuckdries.com"
         rel="noreferrer"
         target="_blank"
       >
-        Cohost
+        Bluesky
       </a>
     </li>
     {/* <li>
@@ -96,7 +96,7 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
         GitHub
       </a>
     </li>
-    <li>
+    {/* <li>
       <a
         className={navClasses(scheme)}
         href="https://hachyderm.io/@chuckletmilk"
@@ -105,7 +105,7 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
       >
         Mastodon
       </a>
-    </li>
+    </li> */}
 
     <li>
       <a className={navClasses(scheme)} href="mailto:chuck@chuckdries.com">
