@@ -7,6 +7,8 @@ import { useDateFormatter } from "react-aria";
 import { PostsLayout } from "./PostsLayout";
 import { PostImage } from "./PostImage";
 import { PostImageGroup } from "./PostImageGroup";
+import 'bluesky-comments/bluesky-comments.css'
+// @ts-ignore
 import { BlueskyComments } from "bluesky-comments";
 
 const components = {
