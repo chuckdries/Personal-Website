@@ -48,7 +48,7 @@ export default function PageTemplate({
         </h1>
         {date && <p style={{ marginTop: 0 }}>{df.format(date)}</p>}
         <MDXProvider components={components}>{children}</MDXProvider>
-        <section>
+        <section className="not-prose">
           {/* <h2>Comments</h2> */}
           <BlueskyComments author="chuckdries.com" />
         </section>
