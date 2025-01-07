@@ -102,7 +102,7 @@ export const query = graphql`
             }
           }
           childImageSharp {
-            gatsbyImageData(width: 1200, placeholder: BLURRED)
+            gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
             fluid {
               aspectRatio
             }

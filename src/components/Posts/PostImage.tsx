@@ -25,13 +25,13 @@ export function PostImage({
     <div
       className="block my-2 flex-shrink-0 group"
       style={{
-        maxWidth: `min(calc(${image.childImageSharp?.fluid?.aspectRatio} * 80vh), calc(100vw - 32px))`,
+        width: `min(calc(${image.childImageSharp?.fluid?.aspectRatio} * 85vh), calc(100vw - 32px))`,
         // maxHeight: "calc(100vh - 2em)",
       }}
     >
       <GatsbyImage
         alt={`A photo calleed ${image.base}`}
-        className="overflow-visible"
+        className="overflow-visible not-prose"
         // @ts-expect-error shrug
         image={getImage(image)!}
         style={
