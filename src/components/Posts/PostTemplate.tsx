@@ -1,15 +1,18 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { graphql, PageProps } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
 import { Link } from "gatsby";
 import { useDateFormatter } from "react-aria";
 
+import "./PostTemplate.css"
 import { PostsLayout } from "./PostsLayout";
 import { PostImage } from "./PostImage";
 import { PostImageGroup } from "./PostImageGroup";
-import 'bluesky-comments/bluesky-comments.css'
+import "bluesky-comments/bluesky-comments.css";
 // @ts-ignore
 import { BlueskyComments } from "bluesky-comments";
+import classNames from "classnames";
+import { TOCEntry, TocEntry } from "./TOCEntry";
 
 const components = {
   Link,
@@ -36,6 +39,8 @@ export default function PageTemplate({
   const df = useDateFormatter({
     timeZone: "utc",
   });
+  const [activeEntry, setActiveEntry] = useState<string | null>(null);
+  const tocEntries = (data.mdx?.tableOfContents?.items as TOCEntry[] | undefined);
   return (
     <PostsLayout
       cover={data.mdx?.frontmatter?.cover?.childImageSharp?.original?.src}
@@ -53,6 +58,24 @@ export default function PageTemplate({
           <BlueskyComments author="chuckdries.com" />
         </section>
       </div>
+      {tocEntries && <div
+        className={classNames(
+          "fixed bottom-0 left-0 right-0 backdrop-blur-lg bg-stone-200/50",
+          "flex flex-nowrap overflow-auto p-2 px-4 justify-between",
+        )}
+      >
+        {tocEntries.map(
+          ({ title, url }) => (
+            <TocEntry
+              isActive={activeEntry === url}
+              key={url}
+              onTargetScrollIntoView={setActiveEntry}
+              title={title}
+              url={url}
+            />
+          ),
+        )}
+      </div>}
     </PostsLayout>
   );
 }
@@ -61,6 +84,7 @@ export const query = graphql`
   query PostPage($id: String!) {
     mdx(id: { eq: $id }) {
       excerpt
+      tableOfContents
       frontmatter {
         title
         date

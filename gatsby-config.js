@@ -30,6 +30,7 @@ module.exports = {
               showCaptions: true,
             },
           },
+          'gatsby-remark-autolink-headers'
         ],
       },
     },
