@@ -166,5 +166,12 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: 'gatsby-plugin-static-page-modal',
+      options: {
+        pageRendererPath: `${__dirname}/src/components/PageRenderer.tsx`,
+        routes: ['/photos/:slug/'],
+      },
+    },
   ],
 };

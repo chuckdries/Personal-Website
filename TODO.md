@@ -19,3 +19,6 @@ Book stuff
 - [x] SEO component (sorta done)
 - [ ] fix PostImage when not in container
 - [ ] get rid of frontmatter based image approach? fork gatbsy-remark-images?
+
+Modals
+https://www.gatsbyjs.com/plugins/gatsby-plugin-static-page-modal/

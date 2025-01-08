@@ -60,7 +60,7 @@ export default function PageTemplate({
       </div>
       {tocEntries && <div
         className={classNames(
-          "fixed bottom-0 left-0 right-0 backdrop-blur-lg bg-stone-200/50",
+          "fixed bottom-0 left-0 right-0 backdrop-blur-lg bg-stone-300/50",
           "flex flex-nowrap overflow-auto p-2 px-4 justify-between",
         )}
       >

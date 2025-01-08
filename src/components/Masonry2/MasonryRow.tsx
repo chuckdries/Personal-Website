@@ -2,7 +2,8 @@ import React from "react";
 import { PhotoMonthNode } from "../photos/PhotoMonth";
 import { MasonryImageRow } from "./MasonryContainer";
 import { GatsbyImage } from "gatsby-plugin-image";
-import { Link } from "gatsby";
+// import { Link } from "gatsby";
+import { Link } from 'gatsby-plugin-modal-routing-3'
 import { slice } from "ramda";
 import { SiblingLocationState } from "../photos/PhotoImage/PhotoImage";
 
@@ -37,16 +38,16 @@ export function MasonryRow({
         // const height = `calc(${width} / ${aspect})`;
 
         const selfIndex = row.startIndex + index;
-        console.log(node.childImageSharp?.gatsbyImageData.backgroundColor)
         return (
           <Link
             className="inline-block relative p-1"
             key={node.id}
             state={{
               selfIndex,
-              context: nodes
+              context: nodes,
             } as SiblingLocationState}
             style={{ width }}
+            asModal
             to={`/photos/${node.fields!.organization!.monthSlug}/${node.relativePath}`}
           >
             {/* eslint-disable-next-line */}

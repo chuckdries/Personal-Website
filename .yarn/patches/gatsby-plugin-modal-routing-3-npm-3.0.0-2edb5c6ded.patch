@@ -1,0 +1,13 @@
+diff --git a/wrapPageElement.js b/wrapPageElement.js
+index 658931b1d79349ba7038729d23d48826a68f2938..c77c03fa8da47124fa06f843b667a190a6174b44 100644
+--- a/wrapPageElement.js
++++ b/wrapPageElement.js
+@@ -93,7 +93,7 @@ var WrapPageElement = /*#__PURE__*/function (_React$Component) {
+         lastModalProps = _this$state.lastModalProps;
+     var isModal = prevProps && (0, _get2.default)(location, 'state.modal');
+     var resources = isModal ? prevProps.pageResources : pageResources; // the page is the previous path if this is a modal, otherwise it's the current path
+-
++    pageResources.component = pageResources.component ? pageResources.component.default ? pageResources.component.default : pageResources.component : pageResources.component
+     var pageElement = isModal ? /*#__PURE__*/_react.default.createElement(prevProps.pageResources.component, (0, _extends2.default)({}, prevProps, {
+       key: prevProps.pageResources.page.path
+     })) : /*#__PURE__*/_react.default.createElement(pageResources.component, (0, _extends2.default)({}, this.props, {

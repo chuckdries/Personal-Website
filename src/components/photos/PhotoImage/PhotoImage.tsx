@@ -1,8 +1,10 @@
 import { Link, PageProps, graphql, navigate } from "gatsby";
 import React, { useEffect, useLayoutEffect, useRef } from "react";
-import { PhotoLayout } from "../PhotoLayout";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
+// @ts-ignore
+import { ModalRoutingContext } from "gatsby-plugin-modal-routing-3";
+
 import Nav from "../../Nav";
 import {
   getHelmetSafeBodyStyle,
@@ -26,6 +28,7 @@ import {
 } from "lucide-react";
 import { OverlayNavArrow } from "./OverlayNavArrow";
 import { NavArrowOverlay } from "./NavArrowOverlay";
+import classNames from "classnames";
 
 const IconStyle = {
   width: "24px",
@@ -193,128 +196,147 @@ function PhotoImage({
     [film, meta],
   );
   return (
-    <div className="min-h-screen p-0">
-      <Helmet>
-        <title>Photos | Chuck Dries</title>
-        <body
-          className="bg-white text-black"
-          // @ts-expect-error not a style prop
-          style={getHelmetSafeBodyStyle({
-            "--dark-vibrant": `255, 255, 255`,
-          })}
-        />
-      </Helmet>
-      <Nav className="mb-0" scheme="light" />
-      {/* <div className="flex-auto "> */}
-      <div className="relative p-5 md:p-8 overflow-hidden" ref={imageRef}>
-        <GatsbyImage
-          alt="photo"
-          className="max-h-[calc(100svh-110px)] md:big-blur"
-          id="photo"
-          image={data.image!.childImageSharp!.gatsbyImageData}
-          objectFit="contain"
-          style={{
-            "--img-src": `url('${data.image!.childImageSharp!.gatsbyImageData.placeholder!.fallback}')`,
-          }}
-        />
-        {siblingNavDatas && (
-          <NavArrowOverlay siblingNavDatas={siblingNavDatas} />
-        )}
-      </div>
-      <div className="flex justify-center flex-col sm:flex-row pt-0 p-6">
-        <div className="px-4">
-          <div className="flex flex-col items-end gap-2">
-            {dateTaken && (
-              <MetadataItem
-                data={dateTaken.toLocaleDateString()}
-                icon={<Calendar />}
-                title={film ? "date scanned" : "date taken"}
-              />
+    <ModalRoutingContext.Consumer>
+      {({ modal, closeTo }: { modal: boolean; closeTo: string }) => {
+        console.log(modal);
+        return (
+        <div className="min-h-screen p-0">
+          <Helmet>
+            <title>Photos | Chuck Dries</title>
+            {/* <body
+              className="bg-white text-black"
+              // @ts-expect-error not a style prop
+              style={getHelmetSafeBodyStyle({
+                "--dark-vibrant": `255, 255, 255`,
+              })}
+            /> */}
+          </Helmet>
+          {!modal && <Nav className="mb-0" scheme="light" />}
+          {/* <div className="flex-auto "> */}
+          <div
+            className={classNames(
+              modal ? "bg-stone-400/50 backdrop-blur-lg" : "p-5 md:p-8",
+              "relative overflow-hidden",
             )}
-            {film && (
-              <MetadataItem
-                data={filmStock ?? "-"}
-                icon={<Film />}
-                title={"filmstock"}
-              />
+            ref={imageRef}
+          >
+            <GatsbyImage
+              alt="photo"
+              className={classNames(!modal && "max-h-[calc(100svh-110px)]", "md:big-blur")}
+              // className="big-blur"
+              id="photo"
+              image={data.image!.childImageSharp!.gatsbyImageData}
+              objectFit="contain"
+              style={{
+                "--img-src": `url('${data.image!.childImageSharp!.gatsbyImageData.placeholder!.fallback}')`,
+              }}
+            />
+            {siblingNavDatas && (
+              <NavArrowOverlay siblingNavDatas={siblingNavDatas} />
             )}
-            {!film && (
-              <>
-                {meta &&
-                  (shutterSpeed ||
-                    meta.FNumber ||
-                    meta.ISO ||
-                    meta.FocalLength) && (
-                    <div className="flex flex-wrap justify-end gap-2 bg-gray-500/20 py-3 pl-4 rounded">
-                      <MetadataItem
-                        data={shutterSpeed}
-                        icon={<Timer />}
-                        title="shutter"
-                      />
-                      {meta.FNumber && (
-                        <MetadataItem
-                          data={`f/${meta.FNumber}`}
-                          icon={<Aperture />}
-                          title="aperture"
-                        />
+          </div>
+          <div className="flex justify-center flex-col sm:flex-row pt-0 p-6">
+            <div className="px-4">
+              <div className="flex flex-col items-end gap-2">
+                {dateTaken && (
+                  <MetadataItem
+                    data={dateTaken.toLocaleDateString()}
+                    icon={<Calendar />}
+                    title={film ? "date scanned" : "date taken"}
+                  />
+                )}
+                {film && (
+                  <MetadataItem
+                    data={filmStock ?? "-"}
+                    icon={<Film />}
+                    title={"filmstock"}
+                  />
+                )}
+                {!film && (
+                  <>
+                    {meta &&
+                      (shutterSpeed ||
+                        meta.FNumber ||
+                        meta.ISO ||
+                        meta.FocalLength) && (
+                        <div className="flex flex-wrap justify-end gap-2 bg-gray-500/20 py-3 pl-4 rounded">
+                          <MetadataItem
+                            data={shutterSpeed}
+                            icon={<Timer />}
+                            title="shutter"
+                          />
+                          {meta.FNumber && (
+                            <MetadataItem
+                              data={`f/${meta.FNumber}`}
+                              icon={<Aperture />}
+                              title="aperture"
+                            />
+                          )}
+                          <MetadataItem
+                            data={meta.ISO}
+                            icon={<Film />}
+                            title="ISO"
+                          />
+                          <MetadataItem
+                            data={
+                              meta.FocalLength
+                                ? round(meta.FocalLength) + "mm"
+                                : null
+                            }
+                            icon={<Ruler />}
+                            title="focal"
+                          />
+                        </div>
                       )}
-                      <MetadataItem
-                        data={meta.ISO}
-                        icon={<Film />}
-                        title="ISO"
-                      />
-                      <MetadataItem
-                        data={meta.FocalLength ? round(meta.FocalLength) + "mm" : null}
-                        icon={<Ruler />}
-                        title="focal"
-                      />
-                    </div>
-                  )}
-                {/* <MetadataItem
+                    {/* <MetadataItem
             data={locationString}
             icon={<Location UNSAFE_style={IconStyle} />}
             title="location"
           /> */}
-                {(meta?.Make || meta?.Model) && (
-                  <MetadataItem
-                    data={[meta?.Make, meta?.Model].join(" ")}
-                    icon={<Camera />}
-                    title="camera"
-                  />
+                    {(meta?.Make || meta?.Model) && (
+                      <MetadataItem
+                        data={[meta?.Make, meta?.Model].join(" ")}
+                        icon={<Camera />}
+                        title="camera"
+                      />
+                    )}
+                    {(meta?.LensModel || meta?.FocalLength) && (
+                      <MetadataItem
+                        data={
+                          meta?.LensModel === "----" ? null : meta?.LensModel
+                        }
+                        icon={<Focus />}
+                        title="lens"
+                      />
+                    )}
+                  </>
                 )}
-                {(meta?.LensModel || meta?.FocalLength) && (
-                  <MetadataItem
-                    data={meta?.LensModel === "----" ? null : meta?.LensModel}
-                    icon={<Focus />}
-                    title="lens"
-                  />
-                )}
-              </>
-            )}
+              </div>
+            </div>
+            <div className="justify-self-stretch border border-black border-opacity-10 my-4" />
+            <div className="px-4 text-right sm:text-left">
+              <p className="font-mono text-sm mr-2 mb-4">{image.base}</p>
+              <a
+                className="cursor-pointer inline-block text-center font-sans mr-2 px-3 py-2 rounded text-white border-2 border-blue-500 bg-blue-600 hover:bg-blue-500 hover:border-blue-400 transition-colors"
+                download
+                href={data.image!.publicURL!}
+                onClick={() => {
+                  try {
+                    window.plausible("Download Wallpaper", {
+                      props: { image: data.image!.base },
+                    });
+                  } catch {
+                    // do nothing
+                  }
+                }}
+              >
+                Download wallpaper
+              </a>
+            </div>
           </div>
         </div>
-        <div className="justify-self-stretch border border-black border-opacity-10 my-4" />
-        <div className="px-4 text-right sm:text-left">
-          <p className="font-mono text-sm mr-2 mb-4">{image.base}</p>
-          <a
-            className="cursor-pointer inline-block text-center font-sans mr-2 px-3 py-2 rounded text-white border-2 border-blue-500 bg-blue-600 hover:bg-blue-500 hover:border-blue-400 transition-colors"
-            download
-            href={data.image!.publicURL!}
-            onClick={() => {
-              try {
-                window.plausible("Download Wallpaper", {
-                  props: { image: data.image!.base },
-                });
-              } catch {
-                // do nothing
-              }
-            }}
-          >
-            Download wallpaper
-          </a>
-        </div>
-      </div>
-    </div>
+      )}}
+    </ModalRoutingContext.Consumer>
   );
 }
 
@@ -331,7 +353,7 @@ export const query = graphql`
         fluid {
           aspectRatio
         }
-        gatsbyImageData(placeholder: BLURRED, width: 3000)
+        gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
       }
       fields {
         organization {

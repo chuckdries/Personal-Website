@@ -10,7 +10,7 @@
   "scripts": {
     "develop": "gatsby develop",
     "playground": "GATSBY_GRAPHQL_IDE=playground gatsby develop",
-    "start": "gatsby develop",
+    "start": "./initialisePageData.sh && gatsby develop",
     "build": "gatsby build",
     "typecheck": "tsc",
     "serve": "gatsby serve",
@@ -44,6 +44,7 @@
     "gatsby-plugin-react-helmet": "^6.13.1",
     "gatsby-plugin-robots-txt": "^1.8.0",
     "gatsby-plugin-sharp": "^5.13.1",
+    "gatsby-plugin-static-page-modal": "^1.0.4",
     "gatsby-remark-autolink-headers": "^6.14.0",
     "gatsby-remark-images": "^7.13.2",
     "gatsby-source-filesystem": "^5.13.1",
