@@ -1,7 +1,8 @@
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import useDimensions from "react-cool-dimensions";
-import { animated, useSpring } from "@react-spring/web";
+import { animate, createScope, createAnimatable, utils } from "@juliangarnierorg/anime-beta";
+import * as R from "ramda";
 
 import { GalleryImages } from "../../pages/posts";
 
@@ -10,6 +11,10 @@ export function PostListingCarousel({
 }: {
   galleryImages?: GalleryImages;
 }) {
+  const images = useMemo(
+    () => galleryImages && R.take(15, galleryImages),
+    [galleryImages],
+  );
   const { observe: observeOuter, width } = useDimensions();
 
   const observeInner = useRef<HTMLDivElement>(null);
@@ -26,14 +31,49 @@ export function PostListingCarousel({
     if (!observeInner.current || !isClient) {
       return;
     }
-    if (observeInner.current?.scrollWidth > width) {
-      setScrollPrompt(true);
-    } else {
-      setScrollPrompt(false);
+    const scrollWidth = observeInner.current?.scrollWidth ?? 0;
+    if (scrollWidth > width) {
+      console.log("here");
+      const scope = createScope({
+        root: observeInner.current,
+        mediaQueries: {
+          reduceMotion: "(prefers-reduced-motion)",
+          touch: "(pointer: coarse)"
+        },
+      }).add((self) => {
+        const { reduceMotion, touch } = self.matches;
+        if (reduceMotion) {
+          return
+        }
+        if (touch) {
+          animate(observeInner.current!, {
+              x: 0 - (scrollWidth - width),
+              ease: "cubicBezier(.21,.05,.73,.94)",
+              loop: true,
+              loopDelay: 1000,
+              alternate: true,
+              duration: reduceMotion ? 0 : (scrollWidth - width) * 15,
+            });
+        } else {
+          const animatableCarousel = createAnimatable(observeInner.current!, {
+            x: 0,
+            // ease:"cubicBezier(.21,.05,.73,.94)"
+          })
+          const mouseMoveListener = (e: MouseEvent) => {
+            animatableCarousel.x(utils.lerp(0, (scrollWidth - width) * -1, (width - e.x)/width))
+          }
+          self.add('mousemove', mouseMoveListener);
+        }
+      });
+      window.addEventListener('mousemove', scope.methods.mousemove);
+      return () => {
+        window.removeEventListener('mousemove', scope.methods.mousemove)
+        scope.revert();
+      };
     }
   }, [width, isClient]);
 
-  if (!galleryImages) {
+  if (!images) {
     return <></>;
   }
   return (
@@ -42,7 +82,7 @@ export function PostListingCarousel({
       ref={observeOuter}
     >
       <div className="flex flex-nowrap" ref={observeInner}>
-        {galleryImages.map((image) => (
+        {images.map((image) => (
           <GatsbyImage
             alt=""
             className="shrink-0"
