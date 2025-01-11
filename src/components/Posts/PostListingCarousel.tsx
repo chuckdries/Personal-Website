@@ -1,10 +1,11 @@
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import useDimensions from "react-cool-dimensions";
-import { animate, createScope, createAnimatable, utils } from "@juliangarnierorg/anime-beta";
+import { animate, createScope, createAnimatable, utils, createSpring } from "@juliangarnierorg/anime-beta";
 import * as R from "ramda";
 
 import { GalleryImages } from "../../pages/posts";
+import classNames from "classnames";
 
 export function PostListingCarousel({
   galleryImages,
@@ -33,7 +34,7 @@ export function PostListingCarousel({
     }
     const scrollWidth = observeInner.current?.scrollWidth ?? 0;
     if (scrollWidth > width) {
-      console.log("here");
+      setScrollPrompt(true);
       const scope = createScope({
         root: observeInner.current,
         mediaQueries: {
@@ -57,6 +58,8 @@ export function PostListingCarousel({
         } else {
           const animatableCarousel = createAnimatable(observeInner.current!, {
             x: 0,
+            // composition: 'blend',
+            // // ease: createSpring()
             // ease:"cubicBezier(.21,.05,.73,.94)"
           })
           const mouseMoveListener = (e: MouseEvent) => {
@@ -70,6 +73,10 @@ export function PostListingCarousel({
         window.removeEventListener('mousemove', scope.methods.mousemove)
         scope.revert();
       };
+ 
+    }
+    else {
+      setScrollPrompt(false);
     }
   }, [width, isClient]);
 
@@ -78,7 +85,7 @@ export function PostListingCarousel({
   }
   return (
     <div
-      className="w-full flex gap-2 overflow-hidden h-[250px]"
+      className={classNames(!showScrollPrompt && "justify-center", "w-full flex gap-2 overflow-hidden h-[250px]")}
       ref={observeOuter}
     >
       <div className="flex flex-nowrap" ref={observeInner}>
