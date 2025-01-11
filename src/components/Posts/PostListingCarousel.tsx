@@ -1,7 +1,13 @@
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import useDimensions from "react-cool-dimensions";
-import { animate, createScope, createAnimatable, utils, createSpring } from "@juliangarnierorg/anime-beta";
+import {
+  animate,
+  createScope,
+  createAnimatable,
+  utils,
+  createSpring,
+} from "@juliangarnierorg/anime-beta";
 import * as R from "ramda";
 
 import { GalleryImages } from "../../pages/posts";
@@ -39,43 +45,43 @@ export function PostListingCarousel({
         root: observeInner.current,
         mediaQueries: {
           reduceMotion: "(prefers-reduced-motion)",
-          touch: "(pointer: coarse)"
+          touch: "(pointer: coarse)",
         },
       }).add((self) => {
         const { reduceMotion, touch } = self.matches;
         if (reduceMotion) {
-          return
+          return;
         }
         if (touch) {
           animate(observeInner.current!, {
-              x: 0 - (scrollWidth - width),
-              ease: "cubicBezier(.21,.05,.73,.94)",
-              loop: true,
-              loopDelay: 1000,
-              alternate: true,
-              duration: reduceMotion ? 0 : (scrollWidth - width) * 15,
-            });
+            x: 0 - (scrollWidth - width),
+            ease: "cubicBezier(.21,.05,.73,.94)",
+            loop: true,
+            loopDelay: 1000,
+            alternate: true,
+            duration: reduceMotion ? 0 : (scrollWidth - width) * 15,
+          });
         } else {
           const animatableCarousel = createAnimatable(observeInner.current!, {
             x: 0,
             // composition: 'blend',
             // // ease: createSpring()
             // ease:"cubicBezier(.21,.05,.73,.94)"
-          })
+          });
           const mouseMoveListener = (e: MouseEvent) => {
-            animatableCarousel.x(utils.lerp(0, (scrollWidth - width) * -1, (width - e.x)/width))
-          }
-          self.add('mousemove', mouseMoveListener);
+            const progress = utils.clamp((width - e.x) / width, 0, 1);
+            const val = utils.lerp(0, 0 - (scrollWidth - width), progress);
+            animatableCarousel.x(val);
+          };
+          self.add("mousemove", mouseMoveListener);
         }
       });
-      window.addEventListener('mousemove', scope.methods.mousemove);
+      window.addEventListener("mousemove", scope.methods.mousemove);
       return () => {
-        window.removeEventListener('mousemove', scope.methods.mousemove)
+        window.removeEventListener("mousemove", scope.methods.mousemove);
         scope.revert();
       };
- 
-    }
-    else {
+    } else {
       setScrollPrompt(false);
     }
   }, [width, isClient]);
@@ -85,7 +91,10 @@ export function PostListingCarousel({
   }
   return (
     <div
-      className={classNames(!showScrollPrompt && "justify-center", "w-full flex gap-2 overflow-hidden h-[250px]")}
+      className={classNames(
+        showScrollPrompt ? "" : "justify-center",
+        "w-full flex gap-2 overflow-hidden h-[250px]",
+      )}
       ref={observeOuter}
     >
       <div className="flex flex-nowrap" ref={observeInner}>
