@@ -105,7 +105,7 @@ function nav(
   });
 }
 
-const FilmstockKeywords = [
+export const FilmstockKeywords = [
   "Cinestill 50D",
   "Ektar 100",
   "Kodak Gold 200",
@@ -113,6 +113,8 @@ const FilmstockKeywords = [
   "Ektachrome E100",
   "Instax Square",
   "Portra 400",
+  "Ektachrome",
+  "Portra 160"
 ];
 
 const smoothScrollSupported =

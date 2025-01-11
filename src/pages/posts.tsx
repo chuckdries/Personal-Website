@@ -65,12 +65,12 @@ export const query = graphql`
           title
           slug
           date
-          galleryImages {
-            base
-            childImageSharp {
-              gatsbyImageData(height: 300)
-            }
-          }
+          # galleryImages {
+          #   base
+          #   childImageSharp {
+          #     gatsbyImageData(height: 300)
+          #   }
+          # }
         }
         excerpt
         internal {

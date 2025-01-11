@@ -24,7 +24,7 @@ export function TocEntry({
       (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.target.id === realId && entry.isIntersecting) {
-            onTargetScrollIntoView(url, entry.boundingClientRect.y);
+            onTargetScrollIntoView(url);
             document.getElementById(id)!.scrollIntoView({ 
               behavior: 'smooth',
             })
@@ -44,7 +44,7 @@ export function TocEntry({
   return (
     <a
       className={classNames(
-        "text-black shrink-0 p-2 rounded-full",
+        "text-black shrink-0 p-2 px-4 rounded-full",
         isActive && "bg-[#FFF]/50 font-bold",
       )}
       href={url}
