@@ -22,11 +22,14 @@ steps:
         path: /cache
 
   - name: build
-    image: node:18
+    image: node:22.12.0
     commands:
       - yarn install
       - yarn build
       - du -sh public
+    environment:
+      GITHUB_NPM_TOKEN:
+        from_secret: github_npm_token
 
   - name: rsync
     image: drillster/drone-rsync
@@ -87,11 +90,14 @@ steps:
         path: /cache
 
   - name: build
-    image: node:18
+    image: node:22.12.0
     commands:
       - yarn install
       - yarn build
       - du -sh public
+    environment:
+      GITHUB_NPM_TOKEN:
+        from_secret: github_npm_token
 
   - name: rsync
     image: drillster/drone-rsync
