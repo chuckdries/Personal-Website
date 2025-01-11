@@ -3203,7 +3203,7 @@ type PostsLayoutMetaQueryQuery = { readonly site: { readonly siteMetadata: { rea
 type PostsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type PostsPageQuery = { readonly allMdx: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly excerpt: string | null, readonly frontmatter: { readonly title: string | null, readonly slug: string | null, readonly date: string | null } | null, readonly internal: { readonly contentFilePath: string | null, readonly contentDigest: string } }> } };
+type PostsPageQuery = { readonly allMdx: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly excerpt: string | null, readonly frontmatter: { readonly title: string | null, readonly slug: string | null, readonly date: string | null, readonly galleryImages: ReadonlyArray<{ readonly base: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null> | null } | null, readonly internal: { readonly contentFilePath: string | null, readonly contentDigest: string } }> } };
 
 type ProjectsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
