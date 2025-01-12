@@ -1,15 +1,8 @@
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { utils } from "@juliangarnierorg/anime-beta";
+import { useSpring, animated } from "@react-spring/web";
 import useDimensions from "react-cool-dimensions";
-import {
-  animate,
-  createScope,
-  createAnimatable,
-  utils,
-  createSpring,
-  onScroll,
-  createTimer,
-} from "@juliangarnierorg/anime-beta";
 import * as R from "ramda";
 
 import { GalleryImages } from "../../pages/posts";
@@ -23,12 +16,12 @@ export function PostListingCarousel({
   playing: boolean;
 }) {
   const images = useMemo(
-    () => galleryImages && R.take(15, galleryImages),
+    () => galleryImages && R.take(10, utils.shuffle(galleryImages)),
     [galleryImages],
   );
   const outerRef = useRef<HTMLDivElement>(null);
-  // const { observe: observeOuter, width } = useDimensions();
-  // observeOuter(outerRef.current)
+  const { observe: observeOuter, width: outerWidth } = useDimensions();
+  observeOuter(outerRef.current);
 
   const innerRef = useRef<HTMLDivElement>(null);
   const [willAnimate, setWillAnimate] = useState(false);
@@ -40,57 +33,51 @@ export function PostListingCarousel({
     }
   }, [isClient]);
 
-  const scopeRef = useRef<ReturnType<typeof createScope>>(null);
+  const [direction, setDirection] = useState(1);
+  console.log("🚀 ~ direction:", direction)
+  const progressRef = useRef<number>(0);
+  const endValue = 0 -
+  ((innerRef.current?.scrollWidth ?? outerWidth) - outerWidth)
+  const translateX = endValue;
+  const [scrollSpring, scrollApi] = useSpring(
+    () => ({
+      translateX: playing ? translateX : 0,
+      onChange: (props: any) => {
+        progressRef.current = props.value.translateX;
+      },
+      onRest(result, ctrl, item) {
+        // if (result.value.translateX === translateX) {
+        //   ctrl.start({
+        //     translateX: 0
+        //   })
+        // }
+      },
+      // onRest: (value) => {
+      //   if (progressRef.current === translateX) {
+      //     setDirection(-1 * direction);
+      //   }
+      // },
+      // pause: !playing,
+      config: {
+        // duration: -1 * translateX * 2,
+        friction: 200,
+        tension: 7,
+        mass: 3
+      },
+    }),
+    [playing],
+  );
+
   useEffect(() => {
-    if (!outerRef.current || !innerRef.current || !isClient) {
+    if (!innerRef.current || !isClient) {
       return;
     }
-    const scrollWidth = innerRef.current?.scrollWidth ?? 0;
-    const outerWidth = outerRef.current?.clientWidth ?? 0;
-    if (scrollWidth > outerWidth) {
-      setWillAnimate(true);
-      // @ts-expect-error whatevs bro
-      scopeRef.current = createScope({
-        mediaQueries: {
-          reduceMotion: "(prefers-reduced-motion)",
-          touch: "(pointer: coarse)",
-        },
-      }).add((self) => {
-        const duration = (scrollWidth - outerWidth) * 20;
-        const { reduceMotion, touch } = self.matches;
-        const animation = animate(outerRef.current!, {
-          // x: 0 - (innerWidth - width),
-          scrollLeft: 0,
-          ease: 'out',
-          loop: true,
-          loopDelay: 1000,
-          alternate: true,
-          duration: reduceMotion ? 0 : (scrollWidth - outerWidth) * 20,
-          autoplay: true,
-        });
-        self.add("play", (e) => {
-          animation.play();
-        });
-        self.add("pause", () => {
-          animation.pause();
-        });
-      });
-
-      return () => {
-        scopeRef.current?.revert();
-      };
+    if (innerRef.current.scrollWidth > outerWidth) {
+      setWillAnimate(true)
     } else {
-      setWillAnimate(false);
+      setWillAnimate(false)
     }
-  }, [isClient]);
-
-  useEffect(() => {
-    if (playing) {
-      scopeRef.current?.methods.play();
-    } else {
-      scopeRef.current?.methods.pause();
-    }
-  }, [playing]);
+  }, [isClient, outerWidth])
 
   if (!images) {
     return <></>;
@@ -99,11 +86,15 @@ export function PostListingCarousel({
     <div
       className={classNames(
         willAnimate ? "" : "justify-center",
-        "flex gap-2 overflow-x-auto overflow-y-hidden h-[250px]",
+        "flex gap-2 overflow-hidden h-[250px] relative",
       )}
       ref={outerRef}
     >
-      <div className="flex flex-nowrap" ref={innerRef}>
+      <animated.div
+        style={scrollSpring}
+        className="flex flex-nowrap"
+        ref={innerRef}
+      >
         {images.map((image) => (
           <GatsbyImage
             alt=""
@@ -113,7 +104,7 @@ export function PostListingCarousel({
             key={image?.base}
           />
         ))}
-      </div>
+      </animated.div>
     </div>
   );
 }
