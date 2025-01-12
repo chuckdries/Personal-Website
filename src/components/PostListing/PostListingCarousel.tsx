@@ -34,11 +34,11 @@ export function PostListingCarousel({
   }, [isClient]);
 
   const [direction, setDirection] = useState(1);
-  console.log("🚀 ~ direction:", direction)
   const progressRef = useRef<number>(0);
-  const endValue = 0 -
-  ((innerRef.current?.scrollWidth ?? outerWidth) - outerWidth)
-  const translateX = endValue;
+  const endValue =
+    0 - ((innerRef.current?.scrollWidth ?? outerWidth) - outerWidth);
+  const translateX = willAnimate ? endValue : 0;
+  console.log("🚀 ~ ratio:", (outerWidth / (innerRef.current?.scrollWidth ?? outerWidth)))
   const [scrollSpring, scrollApi] = useSpring(
     () => ({
       translateX: playing ? translateX : 0,
@@ -58,11 +58,14 @@ export function PostListingCarousel({
       //   }
       // },
       // pause: !playing,
+      // config: { tension: 280, friction: 120 }
       config: {
         // duration: -1 * translateX * 2,
-        friction: 200,
-        tension: 7,
-        mass: 3
+        mass: 50,
+        tension: 30 * (outerWidth / (innerRef.current?.scrollWidth ?? outerWidth)),
+        friction: 100,
+        // clamp: true,
+        // damping: 100,
       },
     }),
     [playing],
@@ -73,11 +76,11 @@ export function PostListingCarousel({
       return;
     }
     if (innerRef.current.scrollWidth > outerWidth) {
-      setWillAnimate(true)
+      setWillAnimate(true);
     } else {
-      setWillAnimate(false)
+      setWillAnimate(false);
     }
-  }, [isClient, outerWidth])
+  }, [isClient, outerWidth]);
 
   if (!images) {
     return <></>;
