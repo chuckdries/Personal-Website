@@ -3,11 +3,14 @@ import { graphql, Link, PageProps } from "gatsby";
 import { PostsLayout } from "../components/Posts/PostsLayout";
 import { useDateFormatter } from "react-aria";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { PostListingCarousel } from "../components/Posts/PostListingCarousel";
+import { PostListingCarousel } from "../components/PostListing/PostListingCarousel";
+import { PostListing } from "../components/PostListing/PostListing";
 
 export type GalleryImages = NonNullable<
   Queries.PostsPageQuery["allMdx"]["nodes"][number]["frontmatter"]
 >["galleryImages"];
+
+export type PostsNode = Queries.PostsPageQuery["allMdx"]["nodes"][number];
 
 function Posts({ data }: PageProps<Queries.PostsPageQuery>) {
   const df = useDateFormatter({
@@ -23,27 +26,7 @@ function Posts({ data }: PageProps<Queries.PostsPageQuery>) {
   return (
     <PostsLayout>
       {filteredPosts.map((node) => (
-        <div key={node.frontmatter!.slug}>
-          <div className="w-full prose mx-auto p-4 md:p-6">
-            <div className="z-10 bg-white">
-              {node.frontmatter?.date && (
-                <span className="block text-sm opacity-60">
-                  {df.format(new Date(node.frontmatter.date))}
-                </span>
-              )}
-              <Link
-                className="underline text-blue-600 visited:text-purple-600 font-bold text-xl"
-                to={`/posts${node.frontmatter!.slug}`}
-              >
-                {node.frontmatter!.title}
-              </Link>
-              <p className="my-0 not-prose">{node.excerpt}</p>
-            </div>
-          </div>
-          <PostListingCarousel
-            galleryImages={node.frontmatter?.galleryImages}
-          />
-        </div>
+        <PostListing df={df} key={node.frontmatter!.slug} node={node} />
       ))}
     </PostsLayout>
   );

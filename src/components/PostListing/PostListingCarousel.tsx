@@ -15,8 +15,10 @@ import classNames from "classnames";
 
 export function PostListingCarousel({
   galleryImages,
+  playing,
 }: {
   galleryImages?: GalleryImages;
+  playing: boolean;
 }) {
   const images = useMemo(
     () => galleryImages && R.take(15, galleryImages),
@@ -24,8 +26,8 @@ export function PostListingCarousel({
   );
   const { observe: observeOuter, width } = useDimensions();
 
-  const observeInner = useRef<HTMLDivElement>(null);
-  const [showScrollPrompt, setScrollPrompt] = useState(false);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const [willAnimate, setWillAnimate] = useState(false);
   const [isClient, setIsClient] = React.useState(false);
 
   React.useEffect(() => {
@@ -34,57 +36,56 @@ export function PostListingCarousel({
     }
   }, [isClient]);
 
+  const scopeRef = useRef<ReturnType<typeof createScope>>(null);
   useEffect(() => {
-    if (!observeInner.current || !isClient) {
+    if (!innerRef.current || !isClient) {
       return;
     }
-    const scrollWidth = observeInner.current?.scrollWidth ?? 0;
+    const scrollWidth = innerRef.current?.scrollWidth ?? 0;
     if (scrollWidth > width) {
-      setScrollPrompt(true);
-      const scope = createScope({
-        root: observeInner.current,
+      setWillAnimate(true);
+      // @ts-expect-error whatevs bro
+      scopeRef.current = createScope({
+        root: innerRef.current,
         mediaQueries: {
           reduceMotion: "(prefers-reduced-motion)",
           touch: "(pointer: coarse)",
         },
       }).add((self) => {
         const { reduceMotion, touch } = self.matches;
-        if (reduceMotion) {
-          return;
-        }
-        if (touch) {
-          animate(observeInner.current!, {
-            x: 0 - (scrollWidth - width),
-            ease: "cubicBezier(.21,.05,.73,.94)",
-            loop: true,
-            loopDelay: 1000,
-            alternate: true,
-            duration: reduceMotion ? 0 : (scrollWidth - width) * 15,
-          });
-        } else {
-          const animatableCarousel = createAnimatable(observeInner.current!, {
-            x: 0,
-            // composition: 'blend',
-            // // ease: createSpring()
-            // ease:"cubicBezier(.21,.05,.73,.94)"
-          });
-          const mouseMoveListener = (e: MouseEvent) => {
-            const progress = utils.clamp((width - e.x) / width, 0, 1);
-            const val = utils.lerp(0, 0 - (scrollWidth - width), progress);
-            animatableCarousel.x(val);
-          };
-          self.add("mousemove", mouseMoveListener);
-        }
+        const animation = animate(innerRef.current!, {
+          x: 0 - (scrollWidth - width),
+          // ease: "cubicBezier(.21,.05,.73,.94)",
+          // ease: 'inOut',
+          loop: true,
+          loopDelay: 1000,
+          alternate: true,
+          duration: reduceMotion ? 0 : (scrollWidth - width) * 20,
+          autoplay: false,
+        });
+        self.add('play', (e)=>{
+          animation.play();
+        })
+        self.add('pause', () => {
+          animation.pause();
+        })
       });
-      window.addEventListener("mousemove", scope.methods.mousemove);
+
       return () => {
-        window.removeEventListener("mousemove", scope.methods.mousemove);
         scope.revert();
       };
     } else {
-      setScrollPrompt(false);
+      setWillAnimate(false);
     }
   }, [width, isClient]);
+
+  useEffect(() => {
+    if (playing) {
+      scopeRef.current?.methods.play();
+    } else {
+      scopeRef.current?.methods.pause();
+    }
+  }, [playing])
 
   if (!images) {
     return <></>;
@@ -92,12 +93,12 @@ export function PostListingCarousel({
   return (
     <div
       className={classNames(
-        showScrollPrompt ? "" : "justify-center",
+        willAnimate ? "" : "justify-center",
         "w-full flex gap-2 overflow-hidden h-[250px]",
       )}
       ref={observeOuter}
     >
-      <div className="flex flex-nowrap" ref={observeInner}>
+      <div className="flex flex-nowrap" ref={innerRef}>
         {images.map((image) => (
           <GatsbyImage
             alt=""
