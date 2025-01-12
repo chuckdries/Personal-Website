@@ -7,6 +7,8 @@ import {
   createAnimatable,
   utils,
   createSpring,
+  onScroll,
+  createTimer,
 } from "@juliangarnierorg/anime-beta";
 import * as R from "ramda";
 
@@ -24,7 +26,9 @@ export function PostListingCarousel({
     () => galleryImages && R.take(15, galleryImages),
     [galleryImages],
   );
-  const { observe: observeOuter, width } = useDimensions();
+  const outerRef = useRef<HTMLDivElement>(null);
+  // const { observe: observeOuter, width } = useDimensions();
+  // observeOuter(outerRef.current)
 
   const innerRef = useRef<HTMLDivElement>(null);
   const [willAnimate, setWillAnimate] = useState(false);
@@ -38,46 +42,47 @@ export function PostListingCarousel({
 
   const scopeRef = useRef<ReturnType<typeof createScope>>(null);
   useEffect(() => {
-    if (!innerRef.current || !isClient) {
+    if (!outerRef.current || !innerRef.current || !isClient) {
       return;
     }
     const scrollWidth = innerRef.current?.scrollWidth ?? 0;
-    if (scrollWidth > width) {
+    const outerWidth = outerRef.current?.clientWidth ?? 0;
+    if (scrollWidth > outerWidth) {
       setWillAnimate(true);
       // @ts-expect-error whatevs bro
       scopeRef.current = createScope({
-        root: innerRef.current,
         mediaQueries: {
           reduceMotion: "(prefers-reduced-motion)",
           touch: "(pointer: coarse)",
         },
       }).add((self) => {
+        const duration = (scrollWidth - outerWidth) * 20;
         const { reduceMotion, touch } = self.matches;
-        const animation = animate(innerRef.current!, {
-          x: 0 - (scrollWidth - width),
-          // ease: "cubicBezier(.21,.05,.73,.94)",
-          // ease: 'inOut',
+        const animation = animate(outerRef.current!, {
+          // x: 0 - (innerWidth - width),
+          scrollLeft: 0,
+          ease: 'out',
           loop: true,
           loopDelay: 1000,
           alternate: true,
-          duration: reduceMotion ? 0 : (scrollWidth - width) * 20,
-          autoplay: false,
+          duration: reduceMotion ? 0 : (scrollWidth - outerWidth) * 20,
+          autoplay: true,
         });
-        self.add('play', (e)=>{
+        self.add("play", (e) => {
           animation.play();
-        })
-        self.add('pause', () => {
+        });
+        self.add("pause", () => {
           animation.pause();
-        })
+        });
       });
 
       return () => {
-        scope.revert();
+        scopeRef.current?.revert();
       };
     } else {
       setWillAnimate(false);
     }
-  }, [width, isClient]);
+  }, [isClient]);
 
   useEffect(() => {
     if (playing) {
@@ -85,7 +90,7 @@ export function PostListingCarousel({
     } else {
       scopeRef.current?.methods.pause();
     }
-  }, [playing])
+  }, [playing]);
 
   if (!images) {
     return <></>;
@@ -94,9 +99,9 @@ export function PostListingCarousel({
     <div
       className={classNames(
         willAnimate ? "" : "justify-center",
-        "w-full flex gap-2 overflow-hidden h-[250px]",
+        "flex gap-2 overflow-x-auto overflow-y-hidden h-[250px]",
       )}
-      ref={observeOuter}
+      ref={outerRef}
     >
       <div className="flex flex-nowrap" ref={innerRef}>
         {images.map((image) => (
