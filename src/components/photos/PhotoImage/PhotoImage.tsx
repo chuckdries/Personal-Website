@@ -114,7 +114,7 @@ export const FilmstockKeywords = [
   "Instax Square",
   "Portra 400",
   "Ektachrome",
-  "Portra 160"
+  "Portra 160",
 ];
 
 const smoothScrollSupported =
@@ -182,7 +182,6 @@ function PhotoImage({
     [meta],
   );
   const dateTaken = React.useMemo(() => (dt ? new Date(dt) : null), [dt]);
-  console.log("🚀 ~ dateTaken:", dateTaken)
 
   const film = React.useMemo(
     () => meta?.Make === "NORITSU KOKI" || meta?.Keywords?.includes("Film"),
