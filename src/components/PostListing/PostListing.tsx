@@ -23,7 +23,7 @@ export function PostListing({
   }, []);
   return (
     <div
-      className={classNames(isHover  || isTouch ? "" : "opacity-80", "transition")}
+      className=""
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >

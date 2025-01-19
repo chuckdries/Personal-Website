@@ -52,7 +52,7 @@ export function PostListingCarousel({
     const endValue = -innerWidth - 12;
     const beginValue = 0;
     const distanceRemaining = Math.abs(endValue - beginValue);
-    const duration = distanceRemaining * 50;
+    const duration = distanceRemaining * 45;
     scopeRef.current = createScope({
       root: animContainerRef.current,
       mediaQueries: {
@@ -66,13 +66,13 @@ export function PostListingCarousel({
         ease: 'linear',
         loop: true,
         duration: reduceMotion ? 0 : duration,
-        autoplay: touch,
+        autoplay: true,
       });
       self.add('play', ()=>{
-        animation.play();
+        // animation.play();
       })
       self.add('pause', () => {
-        animation.pause();
+        // animation.pause();
       })
     });
 
