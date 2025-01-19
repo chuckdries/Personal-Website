@@ -45,7 +45,7 @@ export function PostListing({
       </div>
       <PostListingCarousel
         galleryImages={node.frontmatter?.galleryImages}
-        playing={isHover}
+        playing={isHover || isTouch}
         to={`/posts${node.frontmatter!.slug}`}
       />
     </div>
