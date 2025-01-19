@@ -4,6 +4,7 @@ import { PostListingCarousel } from "./PostListingCarousel";
 import { Link } from "gatsby";
 import { DateFormatter } from "react-aria";
 import classNames from "classnames";
+import { useMediaQuery } from "../../useMediaQuery";
 
 export function PostListing({
   node,
@@ -12,6 +13,7 @@ export function PostListing({
   node: PostsNode;
   df: DateFormatter;
 }) {
+  const isTouch = useMediaQuery('(pointer: coarse)');
   const [isHover, setIsHover] = useState(false);
   const onMouseEnter = useCallback(() => {
     setIsHover(true);
@@ -21,7 +23,7 @@ export function PostListing({
   }, []);
   return (
     <div
-      className={classNames(isHover ? "" : "opacity-80", "transition")}
+      className={classNames(isHover  || isTouch ? "" : "opacity-80", "transition")}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
