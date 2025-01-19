@@ -46,7 +46,7 @@ export const query = graphql`
           galleryImages {
             base
             childImageSharp {
-              gatsbyImageData(height: 250)
+              gatsbyImageData(height: 250, placeholder: DOMINANT_COLOR)
             }
           }
         }
