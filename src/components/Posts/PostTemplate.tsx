@@ -21,7 +21,10 @@ const components = {
   PostImageGroup,
   h2({ children, ...props }: any) {
     return (
-      <h2 {...props} className="pt-[50px] mt-[-50px]">
+      <h2
+        {...props}
+        // className="pt-[50px] mt-[-50px]"
+      >
         <div className="w-1/2 mx-auto border-t pt-4 border-slate-400" />
         {children}
       </h2>
