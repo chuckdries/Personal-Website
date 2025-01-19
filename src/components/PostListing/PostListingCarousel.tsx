@@ -68,7 +68,7 @@ export function PostListingCarousel({
         duration: reduceMotion ? 0 : duration,
         autoplay: touch,
       });
-      self.add('play', (e)=>{
+      self.add('play', ()=>{
         animation.play();
       })
       self.add('pause', () => {
@@ -97,9 +97,9 @@ export function PostListingCarousel({
       return;
     }
     if (playing) {
-      scopeRef.current.methods.play();
+      scopeRef.current.methods.play?.();
     } else {
-      scopeRef.current.methods.pause();
+      scopeRef.current.methods.pause?.();
     }
   }, [isClient, playing]);
 
