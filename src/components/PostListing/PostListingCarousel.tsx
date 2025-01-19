@@ -52,7 +52,7 @@ export function PostListingCarousel({
     const endValue = -innerWidth - 12;
     const beginValue = 0;
     const distanceRemaining = Math.abs(endValue - beginValue);
-    const duration = distanceRemaining * 12;
+    const duration = distanceRemaining * 20;
     scopeRef.current = createScope({
       root: animContainerRef.current,
       mediaQueries: {
