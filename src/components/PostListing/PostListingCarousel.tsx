@@ -40,7 +40,7 @@ export function PostListingCarousel({
   }, [isClient]);
 
   const images = useMemo(
-    () => galleryImages && (isClient ? galleryImages : utils.shuffle(R.clone(galleryImages))),
+    () => galleryImages && (isClient ? utils.shuffle(R.clone(galleryImages)) : galleryImages),
     [galleryImages, isClient],
   );
 
