@@ -23,10 +23,6 @@ export function PostListingCarousel({
   playing: boolean;
   to: string;
 }) {
-  const images = useMemo(
-    () => galleryImages && utils.shuffle(R.clone(galleryImages)),
-    [galleryImages],
-  );
   const { observe: observeOuter, width: outerWidth } = useDimensions();
 
   const innerRef = useRef<HTMLDivElement>(null);
@@ -42,6 +38,11 @@ export function PostListingCarousel({
       setIsClient(true);
     }
   }, [isClient]);
+
+  const images = useMemo(
+    () => galleryImages && (isClient ? galleryImages : utils.shuffle(R.clone(galleryImages))),
+    [galleryImages, isClient],
+  );
 
   const scopeRef = useRef<ReturnType<typeof createScope>>();
   useEffect(() => {
