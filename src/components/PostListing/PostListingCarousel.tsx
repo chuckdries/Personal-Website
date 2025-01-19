@@ -1,7 +1,7 @@
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { utils } from "@juliangarnierorg/anime-beta";
-import { animate, useMotionValue, motion } from "motion/react";
+import { animate, useMotionValue, motion, AnimationPlaybackControls } from "motion/react";
 import useDimensions from "react-cool-dimensions";
 import * as R from "ramda";
 
@@ -36,26 +36,30 @@ export function PostListingCarousel({
     }
   }, [isClient]);
 
+  // const [loop, setLoop] = useState(0);
+
+  const controlsRef = useRef<AnimationPlaybackControls>();
   const xTranslation = useMotionValue(0);
   useEffect(() => {
     if (!willAnimate) {
-      xTranslation.set(0);
+      // xTranslation.set(0);
       return;
     }
     const endValue = -innerWidth - 12;
-    const beginValue = xTranslation.get();
+    // const beginValue = xTranslation.get();
+    const beginValue = 0;
     const distanceRemaining = endValue - beginValue;
-    const duration = distanceRemaining / -80;
-    const controls = animate(xTranslation, [beginValue, endValue], {
+    const duration = distanceRemaining / -60;
+    controlsRef.current = animate(xTranslation, [beginValue, endValue], {
       ease: "linear",
-      duration: playing ? duration * 2 : duration,
+      duration,
       repeat: Infinity,
       repeatType: "loop",
       repeatDelay: 0,
-      autoplay: willAnimate,
+      autoplay: false,
     });
-    return controls.stop;
-  }, [innerWidth, willAnimate, playing, xTranslation]);
+    return controlsRef.current.stop;
+  }, [innerWidth, willAnimate, xTranslation]);
 
   useEffect(() => {
     if (!isClient) {
@@ -67,6 +71,17 @@ export function PostListingCarousel({
       setWillAnimate(false);
     }
   }, [isClient, innerWidth, outerWidth]);
+
+  useEffect(() => {
+    if (!isClient || !controlsRef.current) {
+      return;
+    }
+    if (playing) {
+      controlsRef.current.play();
+    } else {
+      controlsRef.current.pause();
+    }
+  }, [isClient, playing])
 
   if (!images) {
     return <></>;
