@@ -1,7 +1,7 @@
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { utils } from "@juliangarnierorg/anime-beta";
-import { useSpring, animated } from "@react-spring/web";
+import { animate, useMotionValue, motion } from "motion/react";
 import useDimensions from "react-cool-dimensions";
 import * as R from "ramda";
 
@@ -16,14 +16,14 @@ export function PostListingCarousel({
   playing: boolean;
 }) {
   const images = useMemo(
-    () => galleryImages && R.take(10, utils.shuffle(galleryImages)),
+    () => galleryImages && utils.shuffle(R.clone(galleryImages)),
     [galleryImages],
   );
-  const outerRef = useRef<HTMLDivElement>(null);
   const { observe: observeOuter, width: outerWidth } = useDimensions();
-  observeOuter(outerRef.current);
 
   const innerRef = useRef<HTMLDivElement>(null);
+  const innerWidth = innerRef.current?.scrollWidth ?? 0;
+
   const [willAnimate, setWillAnimate] = useState(false);
   const [isClient, setIsClient] = React.useState(false);
 
@@ -33,54 +33,37 @@ export function PostListingCarousel({
     }
   }, [isClient]);
 
-  const [direction, setDirection] = useState(1);
-  const progressRef = useRef<number>(0);
-  const endValue =
-    0 - ((innerRef.current?.scrollWidth ?? outerWidth) - outerWidth);
-  const translateX = willAnimate ? endValue : 0;
-  console.log("🚀 ~ ratio:", (outerWidth / (innerRef.current?.scrollWidth ?? outerWidth)))
-  const [scrollSpring, scrollApi] = useSpring(
-    () => ({
-      translateX: playing ? translateX : 0,
-      onChange: (props: any) => {
-        progressRef.current = props.value.translateX;
-      },
-      onRest(result, ctrl, item) {
-        // if (result.value.translateX === translateX) {
-        //   ctrl.start({
-        //     translateX: 0
-        //   })
-        // }
-      },
-      // onRest: (value) => {
-      //   if (progressRef.current === translateX) {
-      //     setDirection(-1 * direction);
-      //   }
-      // },
-      // pause: !playing,
-      // config: { tension: 280, friction: 120 }
-      config: {
-        // duration: -1 * translateX * 2,
-        mass: 50,
-        tension: 30 * (outerWidth / (innerRef.current?.scrollWidth ?? outerWidth)),
-        friction: 100,
-        // clamp: true,
-        // damping: 100,
-      },
-    }),
-    [playing],
-  );
-
+  const xTranslation = useMotionValue(0);
   useEffect(() => {
-    if (!innerRef.current || !isClient) {
+    if  (!willAnimate) {
+      xTranslation.set(0);
       return;
     }
-    if (innerRef.current.scrollWidth > outerWidth) {
+    const endValue = -innerWidth - 12;
+    const beginValue = xTranslation.get();
+    const distanceRemaining = endValue - beginValue;
+    const duration = distanceRemaining / -80;
+    const controls = animate(xTranslation, [beginValue, endValue], {
+      ease: "linear",
+      duration,
+      repeat: Infinity,
+      repeatType: "loop",
+      repeatDelay: 0,
+      autoplay: willAnimate && playing,
+    });
+    return controls.stop;
+  }, [innerWidth, willAnimate, playing, xTranslation]);
+
+  useEffect(() => {
+    if (!isClient) {
+      return;
+    }
+    if (innerWidth > outerWidth) {
       setWillAnimate(true);
     } else {
       setWillAnimate(false);
     }
-  }, [isClient, outerWidth]);
+  }, [isClient, innerWidth, outerWidth]);
 
   if (!images) {
     return <></>;
@@ -89,25 +72,35 @@ export function PostListingCarousel({
     <div
       className={classNames(
         willAnimate ? "" : "justify-center",
-        "flex gap-2 overflow-hidden h-[250px] relative",
+        "flex overflow-hidden h-[250px] relative",
       )}
-      ref={outerRef}
+      ref={observeOuter}
     >
-      <animated.div
-        style={scrollSpring}
-        className="flex flex-nowrap"
-        ref={innerRef}
+      <motion.div
+        className="flex flex-nowrap gap-3"
+        style={{ x: xTranslation }}
       >
-        {images.map((image) => (
-          <GatsbyImage
-            alt=""
-            className="shrink-0"
-            // @ts-expect-error idk man
-            image={getImage(image)!}
-            key={image?.base}
-          />
-        ))}
-      </animated.div>
+        <div className="flex shrink-0 flex-nowrap gap-3" ref={innerRef}>
+          {images.map((image, i) => (
+            <div
+              className="shrink-0 rounded overflow-hidden"
+              key={`${image?.base}${i}`}
+            >
+              <GatsbyImage alt="" className="" image={getImage(image)!} />
+            </div>
+          ))}
+        </div>
+        {willAnimate && <div className="flex shrink-0 flex-nowrap gap-3">
+          {images.map((image, i) => (
+            <div
+              className="shrink-0 rounded overflow-hidden"
+              key={`${image?.base}${i}`}
+            >
+              <GatsbyImage alt="" className="" image={getImage(image)!} />
+            </div>
+          ))}
+        </div>}
+      </motion.div>
     </div>
   );
 }
