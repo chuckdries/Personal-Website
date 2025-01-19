@@ -27,6 +27,9 @@ export function PostListingCarousel({
 
   const innerRef = useRef<HTMLDivElement>(null);
   const innerWidth = innerRef.current?.scrollWidth ?? 0;
+  const widthFactor = outerWidth && innerWidth && Math.floor(outerWidth / innerWidth);
+
+  const filler = useMemo(() => widthFactor ? R.repeat(null, widthFactor + 1) : [], [widthFactor]);
 
   const animContainerRef = useRef<HTMLDivElement>(null);
 
@@ -40,13 +43,15 @@ export function PostListingCarousel({
   }, [isClient]);
 
   const images = useMemo(
-    () => galleryImages && (isClient ? utils.shuffle(R.clone(galleryImages)) : galleryImages),
+    () =>
+      galleryImages &&
+      (isClient ? utils.shuffle(R.clone(galleryImages)) : galleryImages),
     [galleryImages, isClient],
   );
 
   const scopeRef = useRef<ReturnType<typeof createScope>>();
   useEffect(() => {
-    if (!willAnimate || !animContainerRef.current) {
+    if (!isClient || !animContainerRef.current) {
       return;
     }
     const endValue = -innerWidth - 12;
@@ -63,54 +68,44 @@ export function PostListingCarousel({
       const { reduceMotion, touch } = self.matches;
       const animation = animate(animContainerRef.current!, {
         x: endValue,
-        ease: 'linear',
+        ease: "linear",
         loop: true,
         duration: reduceMotion ? 0 : duration,
         autoplay: true,
       });
-      self.add('play', ()=>{
+      self.add("play", () => {
         // animation.play();
-      })
-      self.add('pause', () => {
+      });
+      self.add("pause", () => {
         // animation.pause();
-      })
+      });
     });
 
     return () => {
       scopeRef.current?.revert();
     };
-  }, [innerWidth, willAnimate]);
+  }, [innerWidth, isClient]);
 
-  useEffect(() => {
-    if (!isClient) {
-      return;
-    }
-    if (innerWidth > outerWidth) {
-      setWillAnimate(true);
-    } else {
-      setWillAnimate(false);
-    }
-  }, [isClient, innerWidth, outerWidth]);
-
-  useEffect(() => {
-    if (!isClient || !scopeRef.current) {
-      return;
-    }
-    if (playing) {
-      scopeRef.current.methods.play?.();
-    } else {
-      scopeRef.current.methods.pause?.();
-    }
-  }, [isClient, playing]);
+  // useEffect(() => {
+  //   if (!isClient) {
+  //     return;
+  //   }
+  //   if (innerWidth > outerWidth) {
+  //     setWillAnimate(true);
+  //   } else {
+  //     setWillAnimate(false);
+  //   }
+  // }, [isClient, innerWidth, outerWidth]);
 
   if (!images) {
     return <></>;
   }
+
   return (
     <div
       className={classNames(
         willAnimate ? "" : "justify-center",
-        "flex h-[250px] relative overflow-x-hidden overflow-y-visible",
+        "flex h-[250px] relative overflow-x-hidden overflow-y-visible max-w-[1280px] mx-auto xl:rounded-md",
       )}
       ref={observeOuter}
     >
@@ -118,19 +113,26 @@ export function PostListingCarousel({
         className="flex flex-nowrap gap-3 overflow-y-visible"
         ref={animContainerRef}
       >
-        <div className="flex shrink-0 flex-nowrap gap-3" ref={innerRef}>
-          {images.map((image, i) => (
-            <Link
-              className="shrink-0 rounded-md overflow-hidden"
-              key={`${image?.base}${i}`}
-              to={`${to}#${image?.base}`}
-            >
-              <GatsbyImage alt="" className="" image={getImage(image)!} />
-            </Link>
-          ))}
+        <div
+          className={classNames(
+            "flex shrink-0 flex-nowrap gap-3 transition duration-1000",
+            isClient ? "opacity-100" : "opacity-0",
+          )}
+          ref={innerRef}
+        >
+          {isClient &&
+            images.map((image, i) => (
+              <Link
+                className="shrink-0 rounded-md overflow-hidden"
+                key={`${image?.base}${i}`}
+                to={`${to}#${image?.base}`}
+              >
+                <GatsbyImage alt="" className="" image={getImage(image)!} />
+              </Link>
+            ))}
         </div>
-        {willAnimate && (
-          <div className="flex shrink-0 flex-nowrap gap-3">
+        {filler.map((_, i) => (
+          <div className="flex shrink-0 flex-nowrap gap-3" key={`filler-${i}`}>
             {images.map((image, i) => (
               <Link
                 className="shrink-0 rounded-md overflow-hidden"
@@ -141,7 +143,7 @@ export function PostListingCarousel({
               </Link>
             ))}
           </div>
-        )}
+        ))}
       </div>
     </div>
   );
