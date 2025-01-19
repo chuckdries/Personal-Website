@@ -12,15 +12,19 @@ export function PostListing({
   node: PostsNode;
   df: DateFormatter;
 }) {
-  const [isHover, setIsHover] = useState(false)
+  const [isHover, setIsHover] = useState(false);
   const onMouseEnter = useCallback(() => {
-    setIsHover(true)
+    setIsHover(true);
   }, []);
   const onMouseLeave = useCallback(() => {
-    setIsHover(false)
+    setIsHover(false);
   }, []);
   return (
-    <div className={classNames(isHover ? "" : "opacity-80", "transition")} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+    <div
+      className={classNames(isHover ? "" : "opacity-80", "transition")}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <div className="w-full prose mx-auto p-4 md:p-6">
         <div className="z-10 bg-white">
           {node.frontmatter?.date && (
@@ -37,7 +41,11 @@ export function PostListing({
           <p className="my-0 not-prose">{node.excerpt}</p>
         </div>
       </div>
-      <PostListingCarousel playing={isHover} galleryImages={node.frontmatter?.galleryImages} />
+      <PostListingCarousel
+        galleryImages={node.frontmatter?.galleryImages}
+        playing={isHover}
+        to={`/posts${node.frontmatter!.slug}`}
+      />
     </div>
   );
 }

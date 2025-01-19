@@ -7,13 +7,16 @@ import * as R from "ramda";
 
 import { GalleryImages } from "../../pages/posts";
 import classNames from "classnames";
+import { Link } from "gatsby";
 
 export function PostListingCarousel({
   galleryImages,
   playing,
+  to,
 }: {
   galleryImages?: GalleryImages;
   playing: boolean;
+  to: string;
 }) {
   const images = useMemo(
     () => galleryImages && utils.shuffle(R.clone(galleryImages)),
@@ -35,7 +38,7 @@ export function PostListingCarousel({
 
   const xTranslation = useMotionValue(0);
   useEffect(() => {
-    if  (!willAnimate) {
+    if (!willAnimate) {
       xTranslation.set(0);
       return;
     }
@@ -45,11 +48,11 @@ export function PostListingCarousel({
     const duration = distanceRemaining / -80;
     const controls = animate(xTranslation, [beginValue, endValue], {
       ease: "linear",
-      duration,
+      duration: playing ? duration * 2 : duration,
       repeat: Infinity,
       repeatType: "loop",
       repeatDelay: 0,
-      autoplay: willAnimate && playing,
+      autoplay: willAnimate,
     });
     return controls.stop;
   }, [innerWidth, willAnimate, playing, xTranslation]);
@@ -72,7 +75,7 @@ export function PostListingCarousel({
     <div
       className={classNames(
         willAnimate ? "" : "justify-center",
-        "flex overflow-hidden h-[250px] relative",
+        "flex h-[250px] relative",
       )}
       ref={observeOuter}
     >
@@ -82,24 +85,28 @@ export function PostListingCarousel({
       >
         <div className="flex shrink-0 flex-nowrap gap-3" ref={innerRef}>
           {images.map((image, i) => (
-            <div
-              className="shrink-0 rounded overflow-hidden"
+            <Link
+              className="shrink-0 rounded-md overflow-hidden hover:scale-105 hover:z-10 transition-transform"
               key={`${image?.base}${i}`}
+              to={to}
             >
               <GatsbyImage alt="" className="" image={getImage(image)!} />
-            </div>
+            </Link>
           ))}
         </div>
-        {willAnimate && <div className="flex shrink-0 flex-nowrap gap-3">
-          {images.map((image, i) => (
-            <div
-              className="shrink-0 rounded overflow-hidden"
-              key={`${image?.base}${i}`}
-            >
-              <GatsbyImage alt="" className="" image={getImage(image)!} />
-            </div>
-          ))}
-        </div>}
+        {willAnimate && (
+          <div className="flex shrink-0 flex-nowrap gap-3">
+            {images.map((image, i) => (
+              <Link
+                className="shrink-0 rounded-md overflow-hidden hover:scale-105 hover:z-10 transition-transform"
+                key={`${image?.base}${i}`}
+                to={to}
+              >
+                <GatsbyImage alt="" className="" image={getImage(image)!} />
+              </Link>
+            ))}
+          </div>
+        )}
       </motion.div>
     </div>
   );
