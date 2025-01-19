@@ -88,7 +88,7 @@ export function PostListingCarousel({
             <Link
               className="shrink-0 rounded-md overflow-hidden hover:scale-105 hover:z-10 transition-transform"
               key={`${image?.base}${i}`}
-              to={to}
+              to={`${to}#${image?.base}`}
             >
               <GatsbyImage alt="" className="" image={getImage(image)!} />
             </Link>
