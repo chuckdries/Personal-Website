@@ -88,7 +88,7 @@ export function PostListingCarousel({
     return () => {
       scopeRef.current?.revert();
     };
-  }, [innerWidth, isClient]);
+  }, [innerWidth, outerWidth, isClient]);
 
   // useEffect(() => {
   //   if (!isClient) {
