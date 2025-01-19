@@ -29,7 +29,7 @@ export function PostListingCarousel({
   const innerWidth = innerRef.current?.scrollWidth ?? 0;
   const widthFactor = outerWidth && innerWidth && Math.floor(outerWidth / innerWidth);
 
-  const filler = useMemo(() => widthFactor ? R.repeat(null, widthFactor + 1) : [], [widthFactor]);
+  const filler = useMemo(() => widthFactor ? R.repeat(null, widthFactor + 1) : [null], [widthFactor]);
 
   const animContainerRef = useRef<HTMLDivElement>(null);
 
