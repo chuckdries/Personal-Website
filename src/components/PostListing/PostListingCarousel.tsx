@@ -27,9 +27,13 @@ export function PostListingCarousel({
 
   const innerRef = useRef<HTMLDivElement>(null);
   const innerWidth = innerRef.current?.scrollWidth ?? 0;
-  const widthFactor = outerWidth && innerWidth && Math.floor(outerWidth / innerWidth);
+  const widthFactor =
+    outerWidth && innerWidth && Math.floor(outerWidth / innerWidth);
 
-  const filler = useMemo(() => widthFactor ? R.repeat(null, widthFactor + 1) : [null], [widthFactor]);
+  const filler = useMemo(
+    () => (widthFactor ? R.repeat(null, widthFactor + 1) : [null]),
+    [widthFactor],
+  );
 
   const animContainerRef = useRef<HTMLDivElement>(null);
 
@@ -132,7 +136,13 @@ export function PostListingCarousel({
             ))}
         </div>
         {filler.map((_, i) => (
-          <div className="flex shrink-0 flex-nowrap gap-3" key={`filler-${i}`}>
+          <div
+            className={classNames(
+              "flex shrink-0 flex-nowrap gap-3 transition duration-1000",
+              isClient ? "opacity-100" : "opacity-0",
+            )}
+            key={`filler-${i}`}
+          >
             {images.map((image, i) => (
               <Link
                 className="shrink-0 rounded-md overflow-hidden"
