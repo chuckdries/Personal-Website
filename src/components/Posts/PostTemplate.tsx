@@ -64,7 +64,7 @@ export default function PageTemplate({
           <BlueskyComments author="chuckdries.com" />
         </section>
       </div>
-      {tocEntries && (
+      {/* {tocEntries && (
         <animated.div
           className={classNames(
             "fixed left-0 right-0 ",
@@ -89,7 +89,7 @@ export default function PageTemplate({
             ))}
           </div>
         </animated.div>
-      )}
+      )} */}
     </PostsLayout>
   );
 }

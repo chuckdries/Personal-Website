@@ -182,6 +182,7 @@ function PhotoImage({
     [meta],
   );
   const dateTaken = React.useMemo(() => (dt ? new Date(dt) : null), [dt]);
+  console.log("🚀 ~ dateTaken:", dateTaken)
 
   const film = React.useMemo(
     () => meta?.Make === "NORITSU KOKI" || meta?.Keywords?.includes("Film"),
@@ -230,7 +231,7 @@ function PhotoImage({
               <MetadataItem
                 data={dateTaken.toLocaleDateString()}
                 icon={<Calendar />}
-                title={film ? "date scanned" : "date taken"}
+                title={film ? "date" : "date taken"}
               />
             )}
             {film && (

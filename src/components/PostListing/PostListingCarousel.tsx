@@ -1,7 +1,12 @@
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { utils } from "@juliangarnierorg/anime-beta";
-import { animate, useMotionValue, motion, AnimationPlaybackControls } from "motion/react";
+import {
+  animate,
+  createScope,
+  createAnimatable,
+  utils,
+  createSpring,
+} from "@juliangarnierorg/anime-beta";
 import useDimensions from "react-cool-dimensions";
 import * as R from "ramda";
 
@@ -27,6 +32,8 @@ export function PostListingCarousel({
   const innerRef = useRef<HTMLDivElement>(null);
   const innerWidth = innerRef.current?.scrollWidth ?? 0;
 
+  const animContainerRef = useRef<HTMLDivElement>(null);
+
   const [willAnimate, setWillAnimate] = useState(false);
   const [isClient, setIsClient] = React.useState(false);
 
@@ -36,30 +43,43 @@ export function PostListingCarousel({
     }
   }, [isClient]);
 
-  // const [loop, setLoop] = useState(0);
-
-  const controlsRef = useRef<AnimationPlaybackControls>();
-  const xTranslation = useMotionValue(0);
+  const scopeRef = useRef<ReturnType<typeof createScope>>();
   useEffect(() => {
-    if (!willAnimate) {
-      // xTranslation.set(0);
+    if (!willAnimate || !animContainerRef.current) {
       return;
     }
     const endValue = -innerWidth - 12;
-    // const beginValue = xTranslation.get();
     const beginValue = 0;
     const distanceRemaining = endValue - beginValue;
-    const duration = distanceRemaining / -60;
-    controlsRef.current = animate(xTranslation, [beginValue, endValue], {
-      ease: "linear",
-      duration,
-      repeat: Infinity,
-      repeatType: "loop",
-      repeatDelay: 0,
-      autoplay: false,
+    const duration = distanceRemaining * -8;
+    console.log("🚀 ~ useEffect ~ duration:", duration)
+    scopeRef.current = createScope({
+      root: animContainerRef.current,
+      mediaQueries: {
+        reduceMotion: "(prefers-reduced-motion)",
+        touch: "(pointer: coarse)",
+      },
+    }).add((self) => {
+      const { reduceMotion, touch } = self.matches;
+      const animation = animate(animContainerRef.current!, {
+        x: endValue,
+        ease: 'linear',
+        loop: true,
+        duration: reduceMotion ? 0 : duration,
+        autoplay: touch,
+      });
+      self.add('play', (e)=>{
+        animation.play();
+      })
+      self.add('pause', () => {
+        animation.pause();
+      })
     });
-    return controlsRef.current.stop;
-  }, [innerWidth, willAnimate, xTranslation]);
+
+    return () => {
+      scopeRef.current?.revert();
+    };
+  }, [innerWidth, willAnimate]);
 
   useEffect(() => {
     if (!isClient) {
@@ -73,15 +93,15 @@ export function PostListingCarousel({
   }, [isClient, innerWidth, outerWidth]);
 
   useEffect(() => {
-    if (!isClient || !controlsRef.current) {
+    if (!isClient || !scopeRef.current) {
       return;
     }
     if (playing) {
-      controlsRef.current.play();
+      scopeRef.current.methods.play();
     } else {
-      controlsRef.current.pause();
+      scopeRef.current.methods.pause();
     }
-  }, [isClient, playing])
+  }, [isClient, playing]);
 
   if (!images) {
     return <></>;
@@ -90,18 +110,18 @@ export function PostListingCarousel({
     <div
       className={classNames(
         willAnimate ? "" : "justify-center",
-        "flex h-[250px] relative",
+        "flex h-[250px] relative overflow-x-hidden overflow-y-visible",
       )}
       ref={observeOuter}
     >
-      <motion.div
-        className="flex flex-nowrap gap-3"
-        style={{ x: xTranslation }}
+      <div
+        className="flex flex-nowrap gap-3 overflow-y-visible"
+        ref={animContainerRef}
       >
         <div className="flex shrink-0 flex-nowrap gap-3" ref={innerRef}>
           {images.map((image, i) => (
             <Link
-              className="shrink-0 rounded-md overflow-hidden hover:scale-105 hover:z-10 transition-transform"
+              className="shrink-0 rounded-md overflow-hidden"
               key={`${image?.base}${i}`}
               to={`${to}#${image?.base}`}
             >
@@ -113,7 +133,7 @@ export function PostListingCarousel({
           <div className="flex shrink-0 flex-nowrap gap-3">
             {images.map((image, i) => (
               <Link
-                className="shrink-0 rounded-md overflow-hidden hover:scale-105 hover:z-10 transition-transform"
+                className="shrink-0 rounded-md overflow-hidden"
                 key={`${image?.base}${i}`}
                 to={to}
               >
@@ -122,7 +142,7 @@ export function PostListingCarousel({
             ))}
           </div>
         )}
-      </motion.div>
+      </div>
     </div>
   );
 }
