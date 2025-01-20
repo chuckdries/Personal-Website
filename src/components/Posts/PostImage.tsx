@@ -37,7 +37,7 @@ export function PostImage({
       className="block my-2 flex-shrink-0 group"
       id={image.base}
       style={{
-        width: `min(calc(${image.childImageSharp?.fluid?.aspectRatio} * 85vh), calc(100vw - 32px))`,
+        maxWidth: `min(calc(${image.childImageSharp?.fluid?.aspectRatio} * 85vh), calc(100vw - 32px))`,
         // maxHeight: "calc(100vh - 2em)",
       }}
     >

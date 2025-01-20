@@ -143,7 +143,7 @@ export const query = graphql`
             }
           }
           childImageSharp {
-            gatsbyImageData(width: 2000, placeholder: DOMINANT_COLOR)
+            gatsbyImageData(width: 1400, placeholder: DOMINANT_COLOR)
             fluid {
               aspectRatio
             }

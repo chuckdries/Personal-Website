@@ -25,8 +25,15 @@ export function PostListingCarousel({
 }) {
   const { observe: observeOuter, width: outerWidth } = useDimensions();
 
-  const innerRef = useRef<HTMLDivElement>(null);
-  const innerWidth = innerRef.current?.scrollWidth ?? 0;
+  // const innerRef = useRef<HTMLDivElement>(null);
+  // const innerWidth = innerRef.current?.scrollWidth ?? 0;
+  // const [innerWidth, setInnerWidth] = useState(0);
+  const { observe:observeInner, width: innerWidth } = useDimensions({
+    onResize: ({entry}) => {
+      console.log("🚀 ~ entry:", entry.borderBoxSize.inlineSize)
+      // setInnerWidth(entry.borderBoxSize.inlineSize);
+    }
+  })
   const widthFactor =
     outerWidth && innerWidth && Math.floor(outerWidth / innerWidth);
 
@@ -122,7 +129,7 @@ export function PostListingCarousel({
             "flex shrink-0 flex-nowrap gap-3 transition duration-1000",
             isClient ? "opacity-100" : "opacity-0",
           )}
-          ref={innerRef}
+          ref={observeInner}
         >
           {isClient &&
             images.map((image, i) => (
