@@ -47,6 +47,9 @@ export const query = graphql`
             base
             childImageSharp {
               gatsbyImageData(height: 250, placeholder: DOMINANT_COLOR)
+              fluid {
+                aspectRatio
+              }
             }
           }
         }

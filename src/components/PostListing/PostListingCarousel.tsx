@@ -13,6 +13,7 @@ import * as R from "ramda";
 import { GalleryImages } from "../../pages/posts";
 import classNames from "classnames";
 import { Link } from "gatsby";
+import { PostListingImage } from "./PostListingImage";
 
 export function PostListingCarousel({
   galleryImages,
@@ -28,12 +29,12 @@ export function PostListingCarousel({
   // const innerRef = useRef<HTMLDivElement>(null);
   // const innerWidth = innerRef.current?.scrollWidth ?? 0;
   // const [innerWidth, setInnerWidth] = useState(0);
-  const { observe:observeInner, width: innerWidth } = useDimensions({
-    onResize: ({entry}) => {
-      console.log("🚀 ~ entry:", entry.borderBoxSize.inlineSize)
+  const { observe: observeInner, width: innerWidth } = useDimensions({
+    onResize: ({ entry }) => {
+      console.log("🚀 ~ entry:", entry.borderBoxSize.inlineSize);
       // setInnerWidth(entry.borderBoxSize.inlineSize);
-    }
-  })
+    },
+  });
   const widthFactor =
     outerWidth && innerWidth && Math.floor(outerWidth / innerWidth);
 
@@ -53,7 +54,7 @@ export function PostListingCarousel({
     }
   }, [isClient]);
 
-  const images = useMemo(
+  const images: typeof galleryImages = useMemo(
     () =>
       galleryImages &&
       (isClient ? utils.shuffle(R.clone(galleryImages)) : galleryImages),
@@ -115,31 +116,29 @@ export function PostListingCarousel({
   return (
     <div
       className={classNames(
-        willAnimate ? "" : "justify-center",
-        "flex h-[250px] relative overflow-x-hidden overflow-y-visible max-w-[1280px] mx-auto xl:rounded-md",
+        // willAnimate ? "" : "justify-center",
+        "flex max-h-[30vw] max-w-[1280px] items-stretch relative overflow-x-hidden mx-auto xl:rounded-md",
       )}
       ref={observeOuter}
     >
       <div
-        className="flex flex-nowrap gap-3 overflow-y-visible"
+        className="flex flex-nowrap items-stretch gap-3"
         ref={animContainerRef}
       >
         <div
           className={classNames(
-            "flex shrink-0 flex-nowrap gap-3 transition duration-1000",
+            "flex shrink-0 flex-nowrap gap-3 transition duration-1000 items-stretch",
             isClient ? "opacity-100" : "opacity-0",
           )}
           ref={observeInner}
         >
           {isClient &&
             images.map((image, i) => (
-              <Link
-                className="shrink-0 rounded-md overflow-hidden"
+              <PostListingImage
+                image={image}
                 key={`${image?.base}${i}`}
-                to={`${to}#${image?.base}`}
-              >
-                <GatsbyImage alt="" className="" image={getImage(image)!} />
-              </Link>
+                to={to}
+              />
             ))}
         </div>
         {filler.map((_, i) => (
@@ -151,13 +150,11 @@ export function PostListingCarousel({
             key={`filler-${i}`}
           >
             {images.map((image, i) => (
-              <Link
-                className="shrink-0 rounded-md overflow-hidden"
+              <PostListingImage
+                image={image}
                 key={`${image?.base}${i}`}
                 to={to}
-              >
-                <GatsbyImage alt="" className="" image={getImage(image)!} />
-              </Link>
+              />
             ))}
           </div>
         ))}
