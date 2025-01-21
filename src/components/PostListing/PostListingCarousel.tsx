@@ -3,16 +3,13 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   animate,
   createScope,
-  createAnimatable,
   utils,
-  createSpring,
 } from "@juliangarnierorg/anime-beta";
 import useDimensions from "react-cool-dimensions";
 import * as R from "ramda";
 
 import { GalleryImages } from "../../pages/posts";
 import classNames from "classnames";
-import { Link } from "gatsby";
 import { PostListingImage } from "./PostListingImage";
 
 export function PostListingCarousel({
@@ -26,15 +23,7 @@ export function PostListingCarousel({
 }) {
   const { observe: observeOuter, width: outerWidth } = useDimensions();
 
-  // const innerRef = useRef<HTMLDivElement>(null);
-  // const innerWidth = innerRef.current?.scrollWidth ?? 0;
-  // const [innerWidth, setInnerWidth] = useState(0);
-  const { observe: observeInner, width: innerWidth } = useDimensions({
-    onResize: ({ entry }) => {
-      console.log("🚀 ~ entry:", entry.borderBoxSize.inlineSize);
-      // setInnerWidth(entry.borderBoxSize.inlineSize);
-    },
-  });
+  const { observe: observeInner, width: innerWidth } = useDimensions();
   const widthFactor =
     outerWidth && innerWidth && Math.floor(outerWidth / innerWidth);
 
@@ -45,7 +34,6 @@ export function PostListingCarousel({
 
   const animContainerRef = useRef<HTMLDivElement>(null);
 
-  const [willAnimate, setWillAnimate] = useState(false);
   const [isClient, setIsClient] = React.useState(false);
 
   React.useEffect(() => {
@@ -69,7 +57,7 @@ export function PostListingCarousel({
     const endValue = -innerWidth - 12;
     const beginValue = 0;
     const distanceRemaining = Math.abs(endValue - beginValue);
-    const duration = distanceRemaining * 45;
+    const duration = distanceRemaining * 55;
     scopeRef.current = createScope({
       root: animContainerRef.current,
       mediaQueries: {
@@ -85,29 +73,12 @@ export function PostListingCarousel({
         duration: reduceMotion ? 0 : duration,
         autoplay: true,
       });
-      self.add("play", () => {
-        // animation.play();
-      });
-      self.add("pause", () => {
-        // animation.pause();
-      });
     });
 
     return () => {
       scopeRef.current?.revert();
     };
   }, [innerWidth, outerWidth, isClient]);
-
-  // useEffect(() => {
-  //   if (!isClient) {
-  //     return;
-  //   }
-  //   if (innerWidth > outerWidth) {
-  //     setWillAnimate(true);
-  //   } else {
-  //     setWillAnimate(false);
-  //   }
-  // }, [isClient, innerWidth, outerWidth]);
 
   if (!images) {
     return <></>;
@@ -116,7 +87,6 @@ export function PostListingCarousel({
   return (
     <div
       className={classNames(
-        // willAnimate ? "" : "justify-center",
         "prog-blur-x",
         "flex max-h-[30vw] max-w-[1280px] items-stretch relative overflow-x-hidden mx-auto",
       )}
