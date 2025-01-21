@@ -21,15 +21,14 @@
   bottom: 0px;
   left: 0px;
   right: 0px;
-  @apply bg-white;
-  mask-image: linear-gradient(
-      90deg,
-      hsl(0deg 0% 100%) 1%,
-      hsl(0deg 0% 70%) 5%,
-      hsl(0deg 0% 0%) 20%,
-      hsl(0deg 0% 0%) 80%,
-      hsl(0deg 0% 70%) 95%,
-      hsl(0deg 0% 100%) 99%
-    );
-   mask-mode: luminance;
+  background: linear-gradient(
+    90deg,
+    hsla(0deg 0% 93.3% / 1) 1%,
+    hsla(0deg 0% 93.3% / 0.7) 5%,
+    hsla(0deg 0% 93.3% / 0) 20%,
+    hsla(0deg 0% 93.3% / 0) 80%,
+    hsla(0deg 0% 93.3% / 0.7) 95%,
+    hsla(0deg 0% 93.3% / 1) 99%
+  );
+  /* mask-mode: luminance; */
 }
