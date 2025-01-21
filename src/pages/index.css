@@ -22,7 +22,7 @@
   left: 0px;
   right: 0px;
   @apply bg-white;
-  mask: linear-gradient(
+  mask-image: linear-gradient(
       90deg,
       hsl(0deg 0% 100%) 1%,
       hsl(0deg 0% 70%) 5%,
@@ -30,6 +30,6 @@
       hsl(0deg 0% 0%) 80%,
       hsl(0deg 0% 70%) 95%,
       hsl(0deg 0% 100%) 99%
-    )
-    luminance;
+    );
+   mask-mode: luminance;
 }
