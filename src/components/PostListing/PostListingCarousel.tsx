@@ -117,7 +117,8 @@ export function PostListingCarousel({
     <div
       className={classNames(
         // willAnimate ? "" : "justify-center",
-        "flex max-h-[30vw] max-w-[1280px] items-stretch relative overflow-x-hidden mx-auto xl:rounded-md",
+        "prog-blur-x",
+        "flex max-h-[30vw] max-w-[1280px] items-stretch relative overflow-x-hidden mx-auto",
       )}
       ref={observeOuter}
     >
