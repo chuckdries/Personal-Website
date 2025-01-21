@@ -79,6 +79,8 @@ export function PostListingCarousel({
       }
       const tl = createTimeline({
         loop: true,
+        delay: 3500,
+        loopDelay: 2500,
         defaults: {
           duration: 1000,
           ease: "inOutCubic",
@@ -91,24 +93,18 @@ export function PostListingCarousel({
         }
         const widthSum = ratioSum * height;
         const width = ratio * height;
-        const duration = 200;
-        const timelinePoint = (index + 1) * 2000;
-        const finalPosition = index === aspectRatios.length - 1;
+        const timelinePoint = index * 3500;
+        const finalSlide = index === aspectRatios.length - 1;
         tl.add(
           animContainerRef.current!,
           {
-            x: -1 * (widthSum + width + ((index + 1) * 12)),
+            x: -1 * (widthSum + width + (index + 1) * 12),
           },
           timelinePoint,
+          // finalSlide ? timelinePoint - 100 : timelinePoint,
         );
         return ratioSum + ratio;
       }, 0);
-      self.add("play", () => {
-        // animation.play();
-      });
-      self.add("pause", () => {
-        // animation.pause();
-      });
     });
 
     return () => {
@@ -135,7 +131,7 @@ export function PostListingCarousel({
     <div
       className={classNames(
         // willAnimate ? "" : "justify-center",
-        "prog-blur-x",
+        // "prog-blur-x",
         "flex max-h-[30vw] max-w-[1280px] items-stretch relative overflow-x-hidden mx-auto",
       )}
       ref={observeOuter}
