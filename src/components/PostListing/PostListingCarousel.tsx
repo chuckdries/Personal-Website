@@ -1,4 +1,3 @@
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   animate,
@@ -6,6 +5,7 @@ import {
   createAnimatable,
   utils,
   createSpring,
+  createTimeline,
 } from "@juliangarnierorg/anime-beta";
 import useDimensions from "react-cool-dimensions";
 import * as R from "ramda";
@@ -24,28 +24,19 @@ export function PostListingCarousel({
   playing: boolean;
   to: string;
 }) {
-  const { observe: observeOuter, width: outerWidth } = useDimensions();
+  const { observe: observeOuter, width: outerWidth, height } = useDimensions();
 
-  // const innerRef = useRef<HTMLDivElement>(null);
-  // const innerWidth = innerRef.current?.scrollWidth ?? 0;
-  // const [innerWidth, setInnerWidth] = useState(0);
-  const { observe: observeInner, width: innerWidth } = useDimensions({
-    onResize: ({ entry }) => {
-      console.log("🚀 ~ entry:", entry.borderBoxSize.inlineSize);
-      // setInnerWidth(entry.borderBoxSize.inlineSize);
-    },
-  });
+  const { observe: observeInner, width: innerWidth } = useDimensions();
   const widthFactor =
-    outerWidth && innerWidth && Math.floor(outerWidth / innerWidth);
+    outerWidth && innerWidth && Math.ceil(outerWidth / innerWidth);
 
   const filler = useMemo(
-    () => (widthFactor ? R.repeat(null, widthFactor + 1) : [null]),
+    () => (widthFactor ? R.repeat(null, widthFactor) : [null]),
     [widthFactor],
   );
 
   const animContainerRef = useRef<HTMLDivElement>(null);
 
-  const [willAnimate, setWillAnimate] = useState(false);
   const [isClient, setIsClient] = React.useState(false);
 
   React.useEffect(() => {
@@ -59,6 +50,11 @@ export function PostListingCarousel({
       galleryImages &&
       (isClient ? utils.shuffle(R.clone(galleryImages)) : galleryImages),
     [galleryImages, isClient],
+  );
+
+  const aspectRatios = useMemo(
+    () => images?.map((image) => image?.childImageSharp?.fluid?.aspectRatio),
+    [images],
   );
 
   const scopeRef = useRef<ReturnType<typeof createScope>>();
@@ -78,13 +74,35 @@ export function PostListingCarousel({
       },
     }).add((self) => {
       const { reduceMotion, touch } = self.matches;
-      const animation = animate(animContainerRef.current!, {
-        x: endValue,
-        ease: "linear",
+      if (reduceMotion) {
+        return;
+      }
+      const tl = createTimeline({
         loop: true,
-        duration: reduceMotion ? 0 : duration,
-        autoplay: true,
+        defaults: {
+          duration: 1000,
+          ease: "inOutCubic",
+          autoplay: true,
+        },
       });
+      const ratio = aspectRatios?.reduce((ratioSum = 0, ratio, index) => {
+        if (!ratio) {
+          return ratioSum;
+        }
+        const widthSum = ratioSum * height;
+        const width = ratio * height;
+        const duration = 200;
+        const timelinePoint = (index + 1) * 2000;
+        const finalPosition = index === aspectRatios.length - 1;
+        tl.add(
+          animContainerRef.current!,
+          {
+            x: -1 * (widthSum + width + ((index + 1) * 12)),
+          },
+          timelinePoint,
+        );
+        return ratioSum + ratio;
+      }, 0);
       self.add("play", () => {
         // animation.play();
       });
@@ -96,7 +114,7 @@ export function PostListingCarousel({
     return () => {
       scopeRef.current?.revert();
     };
-  }, [innerWidth, outerWidth, isClient]);
+  }, [innerWidth, outerWidth, isClient, height, aspectRatios]);
 
   // useEffect(() => {
   //   if (!isClient) {
