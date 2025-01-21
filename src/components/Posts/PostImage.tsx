@@ -19,7 +19,9 @@ export function PostImage({
   const image = getPostImage(props, index);
   const meta = image?.fields?.imageMeta?.meta;
   const film = meta?.Keywords?.includes("Film");
-  const df = useDateFormatter({});
+  const df = useDateFormatter({
+    timeZone: 'America/Los_Angeles'
+  });
   const filmStock = React.useMemo(
     () =>
       film

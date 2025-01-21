@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import { OverlayNavArrow } from "./OverlayNavArrow";
 import { NavArrowOverlay } from "./NavArrowOverlay";
+import { useDateFormatter } from "react-aria";
 
 const IconStyle = {
   width: "24px",
@@ -195,6 +196,9 @@ function PhotoImage({
         : null,
     [film, meta],
   );
+  const df = useDateFormatter({
+    timeZone: "America/Los_Angeles"
+  })
   return (
     <div className="min-h-screen p-0">
       <Helmet>
@@ -229,7 +233,7 @@ function PhotoImage({
           <div className="flex flex-col items-end gap-2">
             {dateTaken && (
               <MetadataItem
-                data={dateTaken.toLocaleDateString()}
+                data={df.format(dateTaken)}
                 icon={<Calendar />}
                 title={film ? "date" : "date taken"}
               />
