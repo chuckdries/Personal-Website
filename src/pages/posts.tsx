@@ -3,6 +3,14 @@ import { graphql, Link, PageProps } from "gatsby";
 import { PostsLayout } from "../components/Posts/PostsLayout";
 import { useDateFormatter } from "react-aria";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { PostListingCarousel } from "../components/PostListing/PostListingCarousel";
+import { PostListing } from "../components/PostListing/PostListing";
+
+export type GalleryImages = NonNullable<
+  Queries.PostsPageQuery["allMdx"]["nodes"][number]["frontmatter"]
+>["galleryImages"];
+
+export type PostsNode = Queries.PostsPageQuery["allMdx"]["nodes"][number];
 
 function Posts({ data }: PageProps<Queries.PostsPageQuery>) {
   const df = useDateFormatter({
@@ -18,37 +26,7 @@ function Posts({ data }: PageProps<Queries.PostsPageQuery>) {
   return (
     <PostsLayout>
       {filteredPosts.map((node) => (
-        <div
-          className="w-full prose  mx-auto p-4 md:p-6"
-          key={node.frontmatter!.slug}
-        >
-          {node.frontmatter?.date && (
-            <span className="block text-sm opacity-60">
-              {df.format(new Date(node.frontmatter.date))}
-            </span>
-          )}
-          <Link
-            className="underline text-blue-600 visited:text-purple-600 font-bold text-xl"
-            to={`/posts${node.frontmatter!.slug}`}
-          >
-            {node.frontmatter!.title}
-          </Link>
-          <p className="my-0 not-prose">{node.excerpt}</p>
-          {/* {node.frontmatter?.galleryImages?.length && (
-            <div className="overflow-x-scroll w-full rounded-md mt-2">
-              <div className="min-w-[max-content] flex gap-2">
-                {node.frontmatter.galleryImages.map((image) => (
-                  <GatsbyImage
-                    alt=""
-                    // @ts-expect-error idk man
-                    image={getImage(image)!}
-                    key={image?.base}
-                  />
-                ))}
-              </div>
-            </div>
-          )} */}
-        </div>
+        <PostListing df={df} key={node.frontmatter!.slug} node={node} />
       ))}
     </PostsLayout>
   );
@@ -68,7 +46,10 @@ export const query = graphql`
           galleryImages {
             base
             childImageSharp {
-              gatsbyImageData(height: 300)
+              gatsbyImageData(height: 250, placeholder: DOMINANT_COLOR)
+              fluid {
+                aspectRatio
+              }
             }
           }
         }

@@ -87,7 +87,7 @@ const IndexPage = ({
       {/* @ts-ignore */}
       <Helmet>
         <title>Chuck Dries</title>
-        <body className="bg-white transition-colors" />
+        <body className="bg-white" />
         <meta
           content="Full Stack Software Engineer and Photographer"
           name="description"

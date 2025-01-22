@@ -19,3 +19,4 @@ Book stuff
 - [x] SEO component (sorta done)
 - [ ] fix PostImage when not in container
 - [ ] get rid of frontmatter based image approach? fork gatbsy-remark-images?
+- [ ] fix table of contents active selection when scrolling up

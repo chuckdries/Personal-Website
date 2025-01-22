@@ -1,5 +1,5 @@
 .prog-blur:after {
-  content: '';
+  content: "";
   position: absolute;
   top: -20px;
   bottom: 20px;
@@ -12,5 +12,25 @@
   @apply bg-white;
   mask: linear-gradient(black 70px, transparent 320px);
   /* -webkit-mask: linear-gradient(0deg, black, transparent 50%); */
+}
 
+.prog-blur-x:after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background: linear-gradient(
+    90deg,
+    rgba(238, 238, 238, 1) 0%,
+    rgba(238, 238, 238, 0.7) 5%,
+    rgba(238, 238, 238, 0.3) 11%,
+    rgba(238, 238, 238, 0) 18%,
+    rgba(238, 238, 238, 0) 82%,
+    rgba(238, 238, 238, 0.3) 89%,
+    rgba(238, 238, 238, 0.7) 95%,
+    rgba(238, 238, 238, 1) 100%
+  );
+  /* mask-mode: luminance; */
 }

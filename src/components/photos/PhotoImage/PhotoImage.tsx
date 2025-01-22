@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import { OverlayNavArrow } from "./OverlayNavArrow";
 import { NavArrowOverlay } from "./NavArrowOverlay";
+import { useDateFormatter } from "react-aria";
 
 const IconStyle = {
   width: "24px",
@@ -105,7 +106,7 @@ function nav(
   });
 }
 
-const FilmstockKeywords = [
+export const FilmstockKeywords = [
   "Cinestill 50D",
   "Ektar 100",
   "Kodak Gold 200",
@@ -113,6 +114,9 @@ const FilmstockKeywords = [
   "Ektachrome E100",
   "Instax Square",
   "Portra 400",
+  "Ektachrome",
+  "Portra 160",
+  "Candido 800",
 ];
 
 const smoothScrollSupported =
@@ -192,6 +196,9 @@ function PhotoImage({
         : null,
     [film, meta],
   );
+  const df = useDateFormatter({
+    timeZone: "America/Los_Angeles"
+  })
   return (
     <div className="min-h-screen p-0">
       <Helmet>
@@ -226,9 +233,9 @@ function PhotoImage({
           <div className="flex flex-col items-end gap-2">
             {dateTaken && (
               <MetadataItem
-                data={dateTaken.toLocaleDateString()}
+                data={df.format(dateTaken)}
                 icon={<Calendar />}
-                title={film ? "date scanned" : "date taken"}
+                title={film ? "date" : "date taken"}
               />
             )}
             {film && (

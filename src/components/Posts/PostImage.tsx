@@ -5,6 +5,7 @@ import { getPostImage } from "./getPostImage";
 // import "../photos/PhotoImage/PhotoImage.css";
 import { useDateFormatter } from "react-aria";
 import { getShutterFractionFromExposureTime } from "../../utils";
+import { FilmstockKeywords } from "../photos/PhotoImage/PhotoImage";
 
 export function PostImage({
   props,
@@ -16,16 +17,29 @@ export function PostImage({
   alt?: string;
 }) {
   const image = getPostImage(props, index);
-  const df = useDateFormatter({});
+  const meta = image?.fields?.imageMeta?.meta;
+  const film = meta?.Keywords?.includes("Film");
+  const df = useDateFormatter({
+    timeZone: 'America/Los_Angeles'
+  });
+  const filmStock = React.useMemo(
+    () =>
+      film
+        ? meta?.Keywords?.find((k) => k && FilmstockKeywords.includes(k))
+        : null,
+    [film, meta],
+  );
   if (!image) {
-    console.log('image not found', { index, props })
+    console.log("image not found", { index, props });
     return <></>;
   }
+
   return (
     <div
       className="block my-2 flex-shrink-0 group"
+      id={image.base}
       style={{
-        width: `min(calc(${image.childImageSharp?.fluid?.aspectRatio} * 85vh), calc(100vw - 32px))`,
+        maxWidth: `min(calc(${image.childImageSharp?.fluid?.aspectRatio} * 85vh), calc(100vw - 32px))`,
         // maxHeight: "calc(100vh - 2em)",
       }}
     >
@@ -44,7 +58,7 @@ export function PostImage({
         className="t-0 block opacity-0 group-hover:opacity-100 transition-opacity"
         to={`/${image.fields?.organization?.slug}`}
       >
-        {!image.fields?.imageMeta?.meta?.Keywords?.includes("Film") && (
+        {!film && (
           <div className="text-sm float-right flex gap-2">
             {image.fields?.imageMeta?.meta?.ExposureTime && (
               <span>
@@ -60,6 +74,11 @@ export function PostImage({
             {image.fields?.imageMeta?.meta?.ISO && (
               <span>{image.fields?.imageMeta?.meta?.ISO} ISO</span>
             )}
+          </div>
+        )}
+        {film && filmStock && (
+          <div className="text-sm float-right flex gap-2">
+            <span>{filmStock}</span>
           </div>
         )}
         {image.fields?.imageMeta?.dateTaken && (
