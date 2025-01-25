@@ -1,7 +1,6 @@
 import type { CreateSchemaCustomizationArgs, GatsbyNode } from "gatsby";
 
 import path from "path";
-import Vibrant from "node-vibrant";
 import chroma, { Color } from "chroma-js";
 import chalk from "chalk";
 import * as R from "ramda";
