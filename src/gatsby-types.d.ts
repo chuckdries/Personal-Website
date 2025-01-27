@@ -619,7 +619,7 @@ type FileFieldsImageMetaMeta = {
   readonly ApertureValue: Maybe<Scalars['Float']>;
   readonly Caption: Maybe<Scalars['String']>;
   readonly City: Maybe<Scalars['String']>;
-  readonly CreateDate: Maybe<Scalars['Date']>;
+  readonly CreateDate: Maybe<Scalars['String']>;
   readonly DateTimeOriginal: Maybe<Scalars['Date']>;
   readonly ExposureTime: Maybe<Scalars['Float']>;
   readonly FNumber: Maybe<Scalars['Float']>;
@@ -630,31 +630,16 @@ type FileFieldsImageMetaMeta = {
   readonly Location: Maybe<Scalars['String']>;
   readonly Make: Maybe<Scalars['String']>;
   readonly Model: Maybe<Scalars['String']>;
-  readonly ModifyDate: Maybe<Scalars['Date']>;
+  readonly ModifyDate: Maybe<Scalars['String']>;
   readonly ObjectName: Maybe<Scalars['String']>;
+  readonly OffsetTimeOriginal: Maybe<Scalars['String']>;
   readonly Rating: Maybe<Scalars['Int']>;
   readonly ShutterSpeedValue: Maybe<Scalars['Float']>;
   readonly State: Maybe<Scalars['String']>;
 };
 
 
-type FileFieldsImageMetaMeta_CreateDateArgs = {
-  difference: InputMaybe<Scalars['String']>;
-  formatString: InputMaybe<Scalars['String']>;
-  fromNow: InputMaybe<Scalars['Boolean']>;
-  locale: InputMaybe<Scalars['String']>;
-};
-
-
 type FileFieldsImageMetaMeta_DateTimeOriginalArgs = {
-  difference: InputMaybe<Scalars['String']>;
-  formatString: InputMaybe<Scalars['String']>;
-  fromNow: InputMaybe<Scalars['Boolean']>;
-  locale: InputMaybe<Scalars['String']>;
-};
-
-
-type FileFieldsImageMetaMeta_ModifyDateArgs = {
   difference: InputMaybe<Scalars['String']>;
   formatString: InputMaybe<Scalars['String']>;
   fromNow: InputMaybe<Scalars['Boolean']>;
@@ -678,6 +663,7 @@ type FileFieldsImageMetaMetaFieldSelector = {
   readonly Model: InputMaybe<FieldSelectorEnum>;
   readonly ModifyDate: InputMaybe<FieldSelectorEnum>;
   readonly ObjectName: InputMaybe<FieldSelectorEnum>;
+  readonly OffsetTimeOriginal: InputMaybe<FieldSelectorEnum>;
   readonly Rating: InputMaybe<FieldSelectorEnum>;
   readonly ShutterSpeedValue: InputMaybe<FieldSelectorEnum>;
   readonly State: InputMaybe<FieldSelectorEnum>;
@@ -687,7 +673,7 @@ type FileFieldsImageMetaMetaFilterInput = {
   readonly ApertureValue: InputMaybe<FloatQueryOperatorInput>;
   readonly Caption: InputMaybe<StringQueryOperatorInput>;
   readonly City: InputMaybe<StringQueryOperatorInput>;
-  readonly CreateDate: InputMaybe<DateQueryOperatorInput>;
+  readonly CreateDate: InputMaybe<StringQueryOperatorInput>;
   readonly DateTimeOriginal: InputMaybe<DateQueryOperatorInput>;
   readonly ExposureTime: InputMaybe<FloatQueryOperatorInput>;
   readonly FNumber: InputMaybe<FloatQueryOperatorInput>;
@@ -698,8 +684,9 @@ type FileFieldsImageMetaMetaFilterInput = {
   readonly Location: InputMaybe<StringQueryOperatorInput>;
   readonly Make: InputMaybe<StringQueryOperatorInput>;
   readonly Model: InputMaybe<StringQueryOperatorInput>;
-  readonly ModifyDate: InputMaybe<DateQueryOperatorInput>;
+  readonly ModifyDate: InputMaybe<StringQueryOperatorInput>;
   readonly ObjectName: InputMaybe<StringQueryOperatorInput>;
+  readonly OffsetTimeOriginal: InputMaybe<StringQueryOperatorInput>;
   readonly Rating: InputMaybe<IntQueryOperatorInput>;
   readonly ShutterSpeedValue: InputMaybe<FloatQueryOperatorInput>;
   readonly State: InputMaybe<StringQueryOperatorInput>;
@@ -722,6 +709,7 @@ type FileFieldsImageMetaMetaSortInput = {
   readonly Model: InputMaybe<SortOrderEnum>;
   readonly ModifyDate: InputMaybe<SortOrderEnum>;
   readonly ObjectName: InputMaybe<SortOrderEnum>;
+  readonly OffsetTimeOriginal: InputMaybe<SortOrderEnum>;
   readonly Rating: InputMaybe<SortOrderEnum>;
   readonly ShutterSpeedValue: InputMaybe<SortOrderEnum>;
   readonly State: InputMaybe<SortOrderEnum>;
@@ -1713,6 +1701,7 @@ type Query = {
   readonly allSiteFunction: SiteFunctionConnection;
   readonly allSitePage: SitePageConnection;
   readonly allSitePlugin: SitePluginConnection;
+  readonly allStaticImage: StaticImageConnection;
   readonly directory: Maybe<Directory>;
   readonly file: Maybe<File>;
   readonly imageSharp: Maybe<ImageSharp>;
@@ -1722,6 +1711,7 @@ type Query = {
   readonly siteFunction: Maybe<SiteFunction>;
   readonly sitePage: Maybe<SitePage>;
   readonly sitePlugin: Maybe<SitePlugin>;
+  readonly staticImage: Maybe<StaticImage>;
 };
 
 
@@ -1794,6 +1784,14 @@ type Query_allSitePluginArgs = {
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
   sort: InputMaybe<ReadonlyArray<InputMaybe<SitePluginSortInput>>>;
+};
+
+
+type Query_allStaticImageArgs = {
+  filter: InputMaybe<StaticImageFilterInput>;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+  sort: InputMaybe<ReadonlyArray<InputMaybe<StaticImageSortInput>>>;
 };
 
 
@@ -1978,6 +1976,46 @@ type Query_sitePluginArgs = {
   resolve: InputMaybe<StringQueryOperatorInput>;
   ssrAPIs: InputMaybe<StringQueryOperatorInput>;
   version: InputMaybe<StringQueryOperatorInput>;
+};
+
+
+type Query_staticImageArgs = {
+  absolutePath: InputMaybe<StringQueryOperatorInput>;
+  accessTime: InputMaybe<DateQueryOperatorInput>;
+  atime: InputMaybe<DateQueryOperatorInput>;
+  atimeMs: InputMaybe<FloatQueryOperatorInput>;
+  base: InputMaybe<StringQueryOperatorInput>;
+  birthTime: InputMaybe<DateQueryOperatorInput>;
+  birthtime: InputMaybe<DateQueryOperatorInput>;
+  birthtimeMs: InputMaybe<FloatQueryOperatorInput>;
+  blksize: InputMaybe<IntQueryOperatorInput>;
+  blocks: InputMaybe<IntQueryOperatorInput>;
+  changeTime: InputMaybe<DateQueryOperatorInput>;
+  children: InputMaybe<NodeFilterListInput>;
+  ctime: InputMaybe<DateQueryOperatorInput>;
+  ctimeMs: InputMaybe<FloatQueryOperatorInput>;
+  dev: InputMaybe<IntQueryOperatorInput>;
+  dir: InputMaybe<StringQueryOperatorInput>;
+  ext: InputMaybe<StringQueryOperatorInput>;
+  extension: InputMaybe<StringQueryOperatorInput>;
+  id: InputMaybe<StringQueryOperatorInput>;
+  ino: InputMaybe<IntQueryOperatorInput>;
+  internal: InputMaybe<InternalFilterInput>;
+  mode: InputMaybe<IntQueryOperatorInput>;
+  modifiedTime: InputMaybe<DateQueryOperatorInput>;
+  mtime: InputMaybe<DateQueryOperatorInput>;
+  mtimeMs: InputMaybe<FloatQueryOperatorInput>;
+  name: InputMaybe<StringQueryOperatorInput>;
+  nlink: InputMaybe<IntQueryOperatorInput>;
+  parent: InputMaybe<NodeFilterInput>;
+  prettySize: InputMaybe<StringQueryOperatorInput>;
+  rdev: InputMaybe<IntQueryOperatorInput>;
+  relativeDirectory: InputMaybe<StringQueryOperatorInput>;
+  relativePath: InputMaybe<StringQueryOperatorInput>;
+  root: InputMaybe<StringQueryOperatorInput>;
+  size: InputMaybe<IntQueryOperatorInput>;
+  sourceInstanceName: InputMaybe<StringQueryOperatorInput>;
+  uid: InputMaybe<IntQueryOperatorInput>;
 };
 
 type Site = Node & {
@@ -2754,6 +2792,312 @@ type SortOrderEnum =
   | 'ASC'
   | 'DESC';
 
+type StaticImage = Node & {
+  readonly absolutePath: Maybe<Scalars['String']>;
+  readonly accessTime: Maybe<Scalars['Date']>;
+  readonly atime: Maybe<Scalars['Date']>;
+  readonly atimeMs: Maybe<Scalars['Float']>;
+  readonly base: Maybe<Scalars['String']>;
+  readonly birthTime: Maybe<Scalars['Date']>;
+  readonly birthtime: Maybe<Scalars['Date']>;
+  readonly birthtimeMs: Maybe<Scalars['Float']>;
+  readonly blksize: Maybe<Scalars['Int']>;
+  readonly blocks: Maybe<Scalars['Int']>;
+  readonly changeTime: Maybe<Scalars['Date']>;
+  readonly children: ReadonlyArray<Node>;
+  readonly ctime: Maybe<Scalars['Date']>;
+  readonly ctimeMs: Maybe<Scalars['Float']>;
+  readonly dev: Maybe<Scalars['Int']>;
+  readonly dir: Maybe<Scalars['String']>;
+  readonly ext: Maybe<Scalars['String']>;
+  readonly extension: Maybe<Scalars['String']>;
+  readonly id: Scalars['ID'];
+  readonly ino: Maybe<Scalars['Int']>;
+  readonly internal: Internal;
+  readonly mode: Maybe<Scalars['Int']>;
+  readonly modifiedTime: Maybe<Scalars['Date']>;
+  readonly mtime: Maybe<Scalars['Date']>;
+  readonly mtimeMs: Maybe<Scalars['Float']>;
+  readonly name: Maybe<Scalars['String']>;
+  readonly nlink: Maybe<Scalars['Int']>;
+  readonly parent: Maybe<Node>;
+  readonly prettySize: Maybe<Scalars['String']>;
+  readonly rdev: Maybe<Scalars['Int']>;
+  readonly relativeDirectory: Maybe<Scalars['String']>;
+  readonly relativePath: Maybe<Scalars['String']>;
+  readonly root: Maybe<Scalars['String']>;
+  readonly size: Maybe<Scalars['Int']>;
+  readonly sourceInstanceName: Maybe<Scalars['String']>;
+  readonly uid: Maybe<Scalars['Int']>;
+};
+
+
+type StaticImage_accessTimeArgs = {
+  difference: InputMaybe<Scalars['String']>;
+  formatString: InputMaybe<Scalars['String']>;
+  fromNow: InputMaybe<Scalars['Boolean']>;
+  locale: InputMaybe<Scalars['String']>;
+};
+
+
+type StaticImage_atimeArgs = {
+  difference: InputMaybe<Scalars['String']>;
+  formatString: InputMaybe<Scalars['String']>;
+  fromNow: InputMaybe<Scalars['Boolean']>;
+  locale: InputMaybe<Scalars['String']>;
+};
+
+
+type StaticImage_birthTimeArgs = {
+  difference: InputMaybe<Scalars['String']>;
+  formatString: InputMaybe<Scalars['String']>;
+  fromNow: InputMaybe<Scalars['Boolean']>;
+  locale: InputMaybe<Scalars['String']>;
+};
+
+
+type StaticImage_birthtimeArgs = {
+  difference: InputMaybe<Scalars['String']>;
+  formatString: InputMaybe<Scalars['String']>;
+  fromNow: InputMaybe<Scalars['Boolean']>;
+  locale: InputMaybe<Scalars['String']>;
+};
+
+
+type StaticImage_changeTimeArgs = {
+  difference: InputMaybe<Scalars['String']>;
+  formatString: InputMaybe<Scalars['String']>;
+  fromNow: InputMaybe<Scalars['Boolean']>;
+  locale: InputMaybe<Scalars['String']>;
+};
+
+
+type StaticImage_ctimeArgs = {
+  difference: InputMaybe<Scalars['String']>;
+  formatString: InputMaybe<Scalars['String']>;
+  fromNow: InputMaybe<Scalars['Boolean']>;
+  locale: InputMaybe<Scalars['String']>;
+};
+
+
+type StaticImage_modifiedTimeArgs = {
+  difference: InputMaybe<Scalars['String']>;
+  formatString: InputMaybe<Scalars['String']>;
+  fromNow: InputMaybe<Scalars['Boolean']>;
+  locale: InputMaybe<Scalars['String']>;
+};
+
+
+type StaticImage_mtimeArgs = {
+  difference: InputMaybe<Scalars['String']>;
+  formatString: InputMaybe<Scalars['String']>;
+  fromNow: InputMaybe<Scalars['Boolean']>;
+  locale: InputMaybe<Scalars['String']>;
+};
+
+type StaticImageConnection = {
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly edges: ReadonlyArray<StaticImageEdge>;
+  readonly group: ReadonlyArray<StaticImageGroupConnection>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly nodes: ReadonlyArray<StaticImage>;
+  readonly pageInfo: PageInfo;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly totalCount: Scalars['Int'];
+};
+
+
+type StaticImageConnection_distinctArgs = {
+  field: StaticImageFieldSelector;
+};
+
+
+type StaticImageConnection_groupArgs = {
+  field: StaticImageFieldSelector;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+};
+
+
+type StaticImageConnection_maxArgs = {
+  field: StaticImageFieldSelector;
+};
+
+
+type StaticImageConnection_minArgs = {
+  field: StaticImageFieldSelector;
+};
+
+
+type StaticImageConnection_sumArgs = {
+  field: StaticImageFieldSelector;
+};
+
+type StaticImageEdge = {
+  readonly next: Maybe<StaticImage>;
+  readonly node: StaticImage;
+  readonly previous: Maybe<StaticImage>;
+};
+
+type StaticImageFieldSelector = {
+  readonly absolutePath: InputMaybe<FieldSelectorEnum>;
+  readonly accessTime: InputMaybe<FieldSelectorEnum>;
+  readonly atime: InputMaybe<FieldSelectorEnum>;
+  readonly atimeMs: InputMaybe<FieldSelectorEnum>;
+  readonly base: InputMaybe<FieldSelectorEnum>;
+  readonly birthTime: InputMaybe<FieldSelectorEnum>;
+  readonly birthtime: InputMaybe<FieldSelectorEnum>;
+  readonly birthtimeMs: InputMaybe<FieldSelectorEnum>;
+  readonly blksize: InputMaybe<FieldSelectorEnum>;
+  readonly blocks: InputMaybe<FieldSelectorEnum>;
+  readonly changeTime: InputMaybe<FieldSelectorEnum>;
+  readonly children: InputMaybe<NodeFieldSelector>;
+  readonly ctime: InputMaybe<FieldSelectorEnum>;
+  readonly ctimeMs: InputMaybe<FieldSelectorEnum>;
+  readonly dev: InputMaybe<FieldSelectorEnum>;
+  readonly dir: InputMaybe<FieldSelectorEnum>;
+  readonly ext: InputMaybe<FieldSelectorEnum>;
+  readonly extension: InputMaybe<FieldSelectorEnum>;
+  readonly id: InputMaybe<FieldSelectorEnum>;
+  readonly ino: InputMaybe<FieldSelectorEnum>;
+  readonly internal: InputMaybe<InternalFieldSelector>;
+  readonly mode: InputMaybe<FieldSelectorEnum>;
+  readonly modifiedTime: InputMaybe<FieldSelectorEnum>;
+  readonly mtime: InputMaybe<FieldSelectorEnum>;
+  readonly mtimeMs: InputMaybe<FieldSelectorEnum>;
+  readonly name: InputMaybe<FieldSelectorEnum>;
+  readonly nlink: InputMaybe<FieldSelectorEnum>;
+  readonly parent: InputMaybe<NodeFieldSelector>;
+  readonly prettySize: InputMaybe<FieldSelectorEnum>;
+  readonly rdev: InputMaybe<FieldSelectorEnum>;
+  readonly relativeDirectory: InputMaybe<FieldSelectorEnum>;
+  readonly relativePath: InputMaybe<FieldSelectorEnum>;
+  readonly root: InputMaybe<FieldSelectorEnum>;
+  readonly size: InputMaybe<FieldSelectorEnum>;
+  readonly sourceInstanceName: InputMaybe<FieldSelectorEnum>;
+  readonly uid: InputMaybe<FieldSelectorEnum>;
+};
+
+type StaticImageFilterInput = {
+  readonly absolutePath: InputMaybe<StringQueryOperatorInput>;
+  readonly accessTime: InputMaybe<DateQueryOperatorInput>;
+  readonly atime: InputMaybe<DateQueryOperatorInput>;
+  readonly atimeMs: InputMaybe<FloatQueryOperatorInput>;
+  readonly base: InputMaybe<StringQueryOperatorInput>;
+  readonly birthTime: InputMaybe<DateQueryOperatorInput>;
+  readonly birthtime: InputMaybe<DateQueryOperatorInput>;
+  readonly birthtimeMs: InputMaybe<FloatQueryOperatorInput>;
+  readonly blksize: InputMaybe<IntQueryOperatorInput>;
+  readonly blocks: InputMaybe<IntQueryOperatorInput>;
+  readonly changeTime: InputMaybe<DateQueryOperatorInput>;
+  readonly children: InputMaybe<NodeFilterListInput>;
+  readonly ctime: InputMaybe<DateQueryOperatorInput>;
+  readonly ctimeMs: InputMaybe<FloatQueryOperatorInput>;
+  readonly dev: InputMaybe<IntQueryOperatorInput>;
+  readonly dir: InputMaybe<StringQueryOperatorInput>;
+  readonly ext: InputMaybe<StringQueryOperatorInput>;
+  readonly extension: InputMaybe<StringQueryOperatorInput>;
+  readonly id: InputMaybe<StringQueryOperatorInput>;
+  readonly ino: InputMaybe<IntQueryOperatorInput>;
+  readonly internal: InputMaybe<InternalFilterInput>;
+  readonly mode: InputMaybe<IntQueryOperatorInput>;
+  readonly modifiedTime: InputMaybe<DateQueryOperatorInput>;
+  readonly mtime: InputMaybe<DateQueryOperatorInput>;
+  readonly mtimeMs: InputMaybe<FloatQueryOperatorInput>;
+  readonly name: InputMaybe<StringQueryOperatorInput>;
+  readonly nlink: InputMaybe<IntQueryOperatorInput>;
+  readonly parent: InputMaybe<NodeFilterInput>;
+  readonly prettySize: InputMaybe<StringQueryOperatorInput>;
+  readonly rdev: InputMaybe<IntQueryOperatorInput>;
+  readonly relativeDirectory: InputMaybe<StringQueryOperatorInput>;
+  readonly relativePath: InputMaybe<StringQueryOperatorInput>;
+  readonly root: InputMaybe<StringQueryOperatorInput>;
+  readonly size: InputMaybe<IntQueryOperatorInput>;
+  readonly sourceInstanceName: InputMaybe<StringQueryOperatorInput>;
+  readonly uid: InputMaybe<IntQueryOperatorInput>;
+};
+
+type StaticImageGroupConnection = {
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly edges: ReadonlyArray<StaticImageEdge>;
+  readonly field: Scalars['String'];
+  readonly fieldValue: Maybe<Scalars['String']>;
+  readonly group: ReadonlyArray<StaticImageGroupConnection>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly nodes: ReadonlyArray<StaticImage>;
+  readonly pageInfo: PageInfo;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly totalCount: Scalars['Int'];
+};
+
+
+type StaticImageGroupConnection_distinctArgs = {
+  field: StaticImageFieldSelector;
+};
+
+
+type StaticImageGroupConnection_groupArgs = {
+  field: StaticImageFieldSelector;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+};
+
+
+type StaticImageGroupConnection_maxArgs = {
+  field: StaticImageFieldSelector;
+};
+
+
+type StaticImageGroupConnection_minArgs = {
+  field: StaticImageFieldSelector;
+};
+
+
+type StaticImageGroupConnection_sumArgs = {
+  field: StaticImageFieldSelector;
+};
+
+type StaticImageSortInput = {
+  readonly absolutePath: InputMaybe<SortOrderEnum>;
+  readonly accessTime: InputMaybe<SortOrderEnum>;
+  readonly atime: InputMaybe<SortOrderEnum>;
+  readonly atimeMs: InputMaybe<SortOrderEnum>;
+  readonly base: InputMaybe<SortOrderEnum>;
+  readonly birthTime: InputMaybe<SortOrderEnum>;
+  readonly birthtime: InputMaybe<SortOrderEnum>;
+  readonly birthtimeMs: InputMaybe<SortOrderEnum>;
+  readonly blksize: InputMaybe<SortOrderEnum>;
+  readonly blocks: InputMaybe<SortOrderEnum>;
+  readonly changeTime: InputMaybe<SortOrderEnum>;
+  readonly children: InputMaybe<NodeSortInput>;
+  readonly ctime: InputMaybe<SortOrderEnum>;
+  readonly ctimeMs: InputMaybe<SortOrderEnum>;
+  readonly dev: InputMaybe<SortOrderEnum>;
+  readonly dir: InputMaybe<SortOrderEnum>;
+  readonly ext: InputMaybe<SortOrderEnum>;
+  readonly extension: InputMaybe<SortOrderEnum>;
+  readonly id: InputMaybe<SortOrderEnum>;
+  readonly ino: InputMaybe<SortOrderEnum>;
+  readonly internal: InputMaybe<InternalSortInput>;
+  readonly mode: InputMaybe<SortOrderEnum>;
+  readonly modifiedTime: InputMaybe<SortOrderEnum>;
+  readonly mtime: InputMaybe<SortOrderEnum>;
+  readonly mtimeMs: InputMaybe<SortOrderEnum>;
+  readonly name: InputMaybe<SortOrderEnum>;
+  readonly nlink: InputMaybe<SortOrderEnum>;
+  readonly parent: InputMaybe<NodeSortInput>;
+  readonly prettySize: InputMaybe<SortOrderEnum>;
+  readonly rdev: InputMaybe<SortOrderEnum>;
+  readonly relativeDirectory: InputMaybe<SortOrderEnum>;
+  readonly relativePath: InputMaybe<SortOrderEnum>;
+  readonly root: InputMaybe<SortOrderEnum>;
+  readonly size: InputMaybe<SortOrderEnum>;
+  readonly sourceInstanceName: InputMaybe<SortOrderEnum>;
+  readonly uid: InputMaybe<SortOrderEnum>;
+};
+
 type StringQueryOperatorInput = {
   readonly eq: InputMaybe<Scalars['String']>;
   readonly glob: InputMaybe<Scalars['String']>;
@@ -2824,7 +3168,7 @@ type PhotoImageQueryVariables = Exact<{
 }>;
 
 
-type PhotoImageQuery = { readonly image: { readonly id: string, readonly publicURL: string | null, readonly base: string, readonly relativePath: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null, readonly fields: { readonly organization: { readonly slug: string | null } | null, readonly imageMeta: { readonly dateTaken: string | null, readonly meta: { readonly Make: string | null, readonly Model: string | null, readonly ExposureTime: number | null, readonly FNumber: number | null, readonly ISO: number | null, readonly DateTimeOriginal: string | null, readonly CreateDate: string | null, readonly ShutterSpeedValue: number | null, readonly ApertureValue: number | null, readonly FocalLength: number | null, readonly LensModel: string | null, readonly ObjectName: string | null, readonly Caption: string | null, readonly Location: string | null, readonly City: string | null, readonly State: string | null, readonly Keywords: ReadonlyArray<string | null> | null } | null } | null } | null } | null };
+type PhotoImageQuery = { readonly image: { readonly id: string, readonly publicURL: string | null, readonly base: string, readonly relativePath: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null, readonly fields: { readonly organization: { readonly slug: string | null } | null, readonly imageMeta: { readonly dateTaken: string | null, readonly meta: { readonly Make: string | null, readonly Model: string | null, readonly ExposureTime: number | null, readonly FNumber: number | null, readonly ISO: number | null, readonly DateTimeOriginal: string | null, readonly OffsetTimeOriginal: string | null, readonly CreateDate: string | null, readonly ShutterSpeedValue: number | null, readonly ApertureValue: number | null, readonly FocalLength: number | null, readonly LensModel: string | null, readonly ObjectName: string | null, readonly Caption: string | null, readonly Location: string | null, readonly City: string | null, readonly State: string | null, readonly Keywords: ReadonlyArray<string | null> | null } | null } | null } | null } | null };
 
 type PhotoMonthQueryVariables = Exact<{
   monthSlug: InputMaybe<Scalars['String']>;
@@ -2845,7 +3189,7 @@ type PostPageQueryVariables = Exact<{
 }>;
 
 
-type PostPageQuery = { readonly mdx: { readonly excerpt: string | null, readonly tableOfContents: Record<string, unknown> | null, readonly frontmatter: { readonly title: string | null, readonly date: string | null, readonly slug: string | null, readonly cover: { readonly childImageSharp: { readonly original: { readonly src: string | null } | null } | null } | null, readonly galleryImages: ReadonlyArray<{ readonly base: string, readonly fields: { readonly organization: { readonly slug: string | null } | null, readonly imageMeta: { readonly dateTaken: string | null, readonly meta: { readonly Make: string | null, readonly Model: string | null, readonly ExposureTime: number | null, readonly FNumber: number | null, readonly ISO: number | null, readonly DateTimeOriginal: string | null, readonly CreateDate: string | null, readonly ShutterSpeedValue: number | null, readonly ApertureValue: number | null, readonly FocalLength: number | null, readonly LensModel: string | null, readonly ObjectName: string | null, readonly Caption: string | null, readonly Location: string | null, readonly City: string | null, readonly State: string | null, readonly Keywords: ReadonlyArray<string | null> | null } | null } | null } | null, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null } | null> | null } | null } | null };
+type PostPageQuery = { readonly mdx: { readonly excerpt: string | null, readonly tableOfContents: Record<string, unknown> | null, readonly frontmatter: { readonly title: string | null, readonly date: string | null, readonly slug: string | null, readonly cover: { readonly childImageSharp: { readonly original: { readonly src: string | null } | null } | null } | null, readonly galleryImages: ReadonlyArray<{ readonly base: string, readonly fields: { readonly organization: { readonly slug: string | null } | null, readonly imageMeta: { readonly dateTaken: string | null, readonly meta: { readonly Make: string | null, readonly Model: string | null, readonly ExposureTime: number | null, readonly FNumber: number | null, readonly ISO: number | null, readonly DateTimeOriginal: string | null, readonly OffsetTimeOriginal: string | null, readonly CreateDate: string | null, readonly ShutterSpeedValue: number | null, readonly ApertureValue: number | null, readonly FocalLength: number | null, readonly LensModel: string | null, readonly ObjectName: string | null, readonly Caption: string | null, readonly Location: string | null, readonly City: string | null, readonly State: string | null, readonly Keywords: ReadonlyArray<string | null> | null } | null } | null } | null, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null } | null> | null } | null } | null };
 
 type PostsLayoutMetaQueryQueryVariables = Exact<{ [key: string]: never; }>;
 

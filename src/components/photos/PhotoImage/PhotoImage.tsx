@@ -27,6 +27,7 @@ import {
 import { OverlayNavArrow } from "./OverlayNavArrow";
 import { NavArrowOverlay } from "./NavArrowOverlay";
 import { useDateFormatter } from "react-aria";
+import { parseAbsoluteToLocal } from "@internationalized/date";
 
 const IconStyle = {
   width: "24px",
@@ -174,7 +175,7 @@ function PhotoImage({
   }, [siblingNavDatas]);
 
   const image = data.image!;
-  const { meta, dateTaken: dt } = image.fields!.imageMeta!;
+  const { meta, dateTaken } = image.fields!.imageMeta!;
 
   const shutterSpeed = React.useMemo(
     () =>
@@ -183,7 +184,7 @@ function PhotoImage({
         : null,
     [meta],
   );
-  const dateTaken = React.useMemo(() => (dt ? new Date(dt) : null), [dt]);
+  const dt = React.useMemo(() => (dateTaken ? parseAbsoluteToLocal(dateTaken) : null), [dateTaken]);
 
   const film = React.useMemo(
     () => meta?.Make === "NORITSU KOKI" || meta?.Keywords?.includes("Film"),
@@ -197,7 +198,7 @@ function PhotoImage({
     [film, meta],
   );
   const df = useDateFormatter({
-    timeZone: "America/Los_Angeles"
+    timeZone: meta?.OffsetTimeOriginal ?? 'America/Los_Angeles'
   })
   return (
     <div className="min-h-screen p-0">
@@ -231,9 +232,9 @@ function PhotoImage({
       <div className="flex justify-center flex-col sm:flex-row pt-0 p-6">
         <div className="px-4">
           <div className="flex flex-col items-end gap-2">
-            {dateTaken && (
+            {dt && (
               <MetadataItem
-                data={df.format(dateTaken)}
+                data={df.format(dt?.toDate())}
                 icon={<Calendar />}
                 title={film ? "date" : "date taken"}
               />
@@ -353,6 +354,7 @@ export const query = graphql`
             FNumber
             ISO
             DateTimeOriginal
+            OffsetTimeOriginal
             CreateDate
             ShutterSpeedValue
             ApertureValue

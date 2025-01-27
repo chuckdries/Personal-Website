@@ -1,11 +1,12 @@
 import { Link, PageProps } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import React from "react";
+import React, { useMemo } from "react";
 import { getPostImage } from "./getPostImage";
 // import "../photos/PhotoImage/PhotoImage.css";
 import { useDateFormatter } from "react-aria";
 import { getShutterFractionFromExposureTime } from "../../utils";
 import { FilmstockKeywords } from "../photos/PhotoImage/PhotoImage";
+import { parseAbsolute, parseAbsoluteToLocal } from "@internationalized/date";
 
 export function PostImage({
   props,
@@ -18,10 +19,10 @@ export function PostImage({
 }) {
   const image = getPostImage(props, index);
   const meta = image?.fields?.imageMeta?.meta;
-  console.log("🚀 ~ meta:", meta)
+  console.log("🚀 ~ meta:", meta);
   const film = meta?.Keywords?.includes("Film");
   const df = useDateFormatter({
-    timeZone: 'America/Los_Angeles'
+    timeZone: meta?.OffsetTimeOriginal ?? "America/Los_Angeles",
   });
   const filmStock = React.useMemo(
     () =>
@@ -30,6 +31,15 @@ export function PostImage({
         : null,
     [film, meta],
   );
+
+  const dt = useMemo(
+    () =>
+      meta?.DateTimeOriginal
+        ? parseAbsoluteToLocal(meta.DateTimeOriginal)
+        : null,
+    [meta?.DateTimeOriginal],
+  );
+
   if (!image) {
     console.log("image not found", { index, props });
     return <></>;
@@ -82,10 +92,8 @@ export function PostImage({
             <span>{filmStock}</span>
           </div>
         )}
-        {image.fields?.imageMeta?.dateTaken && (
-          <span className="text-sm">
-            {df.format(new Date(image.fields?.imageMeta?.dateTaken))}
-          </span>
+        {dt && (
+          <span className="text-sm">{df.format(dt?.toDate())}</span>
         )}
       </Link>
     </div>

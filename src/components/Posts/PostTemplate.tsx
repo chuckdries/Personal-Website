@@ -128,6 +128,7 @@ export const query = graphql`
                 FNumber
                 ISO
                 DateTimeOriginal
+                OffsetTimeOriginal
                 CreateDate
                 ShutterSpeedValue
                 ApertureValue

@@ -2,7 +2,7 @@ import type { CreateSchemaCustomizationArgs, GatsbyNode } from "gatsby";
 
 import path from "path";
 import chroma, { Color } from "chroma-js";
-import chalk from "chalk";
+// import chalk from "chalk";
 import * as R from "ramda";
 import exifr from "exifr";
 import sharp from "sharp";
@@ -11,19 +11,15 @@ import { Palette } from "node-vibrant/lib/color";
 import fs from "fs";
 import md5 from "md5";
 import { globSync } from "glob";
+import {
+  DateFormatter,
+  parseAbsoluteToLocal,
+  ZonedDateTime,
+} from "@internationalized/date";
 
 import util from "node:util";
 import { exec as _exec } from "child_process";
 const exec = util.promisify(_exec);
-
-// const path = require("path");
-// const Vibrant = require("node-vibrant");
-// const chroma = require("chroma-js");
-// const chalk = require("chalk");
-// const R = require("ramda");
-// const exifr = require("exifr");
-// const sharp = require("sharp");
-// const { graphql } = require("gatsby");
 
 const hash = md5(`${new Date().getTime()}`);
 
@@ -56,18 +52,18 @@ export const onPostBuild = async () => {
   }
 };
 
-const badContrast = (color1: Color, color2: Color) =>
-  chroma.contrast(color1, color2) < 4.5;
+// const badContrast = (color1: Color, color2: Color) =>
+//   chroma.contrast(color1, color2) < 4.5;
 
-const logColorsWithContrast = (color1: Color, color2: Color, text: string) => {
-  const c1hex = color1.hex();
-  const c2hex = color2.hex();
-  console.log(
-    chalk.hex(c1hex).bgHex(c2hex)(
-      `${text} ${c1hex}/${c2hex} ${chroma.contrast(color1, color2)}`,
-    ),
-  );
-};
+// const logColorsWithContrast = (color1: Color, color2: Color, text: string) => {
+//   const c1hex = color1.hex();
+//   const c2hex = color2.hex();
+//   console.log(
+//     // chalk.hex(c1hex).bgHex(c2hex)(
+//     //   `${text} ${c1hex}/${c2hex} ${chroma.contrast(color1, color2)}`,
+//     // ),
+//   );
+// };
 
 function processColors(vibrantData: Palette, imagePath: string) {
   let Vibrant = chroma(vibrantData.Vibrant!.getRgb());
@@ -149,6 +145,7 @@ function processColors(vibrantData: Palette, imagePath: string) {
 
 function transformMetaToNodeData(
   metaData: Record<string, unknown>,
+  dateTimeOriginal: ZonedDateTime,
   vibrantData: Palette,
   imagePath: string,
   { r, g, b }: { r: number; b: number; g: number },
@@ -168,7 +165,7 @@ function transformMetaToNodeData(
     Keywords = [Keywords];
   }
   return {
-    dateTaken: metaData.DateTimeOriginal,
+    dateTaken: dateTimeOriginal.toDate(),
     datePublished,
     meta: {
       Make: metaData.Make,
@@ -176,7 +173,8 @@ function transformMetaToNodeData(
       ExposureTime: metaData.ExposureTime,
       FNumber: metaData.FNumber,
       ISO: metaData.ISO,
-      DateTimeOriginal: metaData.DateTimeOriginal,
+      DateTimeOriginal: dateTimeOriginal.toDate(),
+      OffsetTimeOriginal: metaData.OffsetTimeOriginal,
       CreateDate: metaData.CreateDate,
       ModifyDate: metaData.ModifyDate,
       ShutterSpeedValue: metaData.ShutterSpeedValue,
@@ -197,29 +195,18 @@ function transformMetaToNodeData(
   };
 }
 
-// exports.createSchemaCustomization = function ({ actions }) {
-//   const { createTypes } = actions;
-//   const typedefs = `
-//   type FileFieldsImageMetaMeta{
-//     Keywords: [String]
-//   }`;
-//   createTypes(typedefs);
-// };
+function transformDate(imagePath: string, dateTimeOriginal: string, offsetTimeOriginal: string) {
+  if (!offsetTimeOriginal) {
+    console.log(`${imagePath} has no timezone offset. Defaulting to UTC-8`)
+  }
+  const [date, time] = dateTimeOriginal.split(" ");
+  const iso8601 = `${date.replace(/\:/g, "-")}T${time}${offsetTimeOriginal ?? '-08:00'}`;
+  return parseAbsoluteToLocal(iso8601);
+}
 
-// const MONTHS = {
-//   1: "January",
-//   2: "February",
-//   3: "March",
-//   4: "April",
-//   5: "May",
-//   6: "June",
-//   7: "July",
-//   8: "August",
-//   9: "September",
-//   10: "October",
-//   11: "November",
-//   12: "December",
-// };
+// const monthFormatter = new DateFormatter("en_US", {
+//   month: "long",
+// });
 
 export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
   node,
@@ -229,9 +216,14 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
 
   if (node.internal.type === "File" && node.sourceInstanceName === "photos") {
     // organization data
-    let exif: Awaited<ReturnType<typeof exifr.parse>>;
+    let meta: Awaited<ReturnType<typeof exifr.parse>>;
     try {
-      exif = await exifr.parse(node.absolutePath as string);
+      meta = await exifr.parse(node.absolutePath as string, {
+        iptc: true,
+        xmp: true,
+        reviveValues: false,
+        // icc: true
+      });
     } catch (e) {
       console.error(
         `🅱️ something went wrong with exifr on image ${node.base}`,
@@ -240,16 +232,21 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
       throw e;
     }
 
-    const d = new Date(exif.DateTimeOriginal);
-    const month = Number(d.toLocaleString("en", { month: "numeric" }));
-    const year = d.getFullYear();
+    const dateTimeOriginal = transformDate(
+      node.base as string,
+      meta.DateTimeOriginal,
+      meta.OffsetTimeOriginal,
+    );
+
+    const month = dateTimeOriginal.month;
+    const year = dateTimeOriginal.year;
 
     const yearFolder = year < 2021 ? "Older" : `${year}`;
 
     const monthSlug =
       yearFolder === "Older"
         ? `${yearFolder}`
-        : `${yearFolder}/${d.toLocaleString("en", { month: "long" })}`;
+        : `${yearFolder}/${dateTimeOriginal.toDate().toLocaleString("en", { month: "long" })}`;
 
     const slug = `photos/${monthSlug}/${node.base}`;
     // const slug = `photos/${node.base}`;
@@ -276,26 +273,11 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
       console.error("something went wrong checking publish date: ", stderr);
     }
 
-    let metaData;
-    try {
-      metaData = await exifr.parse(node.absolutePath as string, {
-        iptc: true,
-        xmp: true,
-        // icc: true
-      });
-      if (!metaData.Rating) {
-        // console.log(node.base, metaData);
-        console.log(`${node.base} has no rating`);
-      }
-      if (!metaData.Keywords) {
-        console.log(`${node.base} has no keywords`)
-      }
-    } catch (e) {
-      console.error(
-        `🅱️ something wen wrong with exifr on image ${node.base}`,
-        e,
-      );
-      throw e;
+    if (!meta.Rating) {
+      console.log(`${node.base} has no rating`);
+    }
+    if (!meta.Keywords) {
+      console.log(`${node.base} has no keywords`);
     }
 
     let sharpImage: sharp.Sharp;
@@ -323,7 +305,8 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
       node,
       name: "imageMeta",
       value: transformMetaToNodeData(
-        metaData,
+        meta,
+        dateTimeOriginal,
         null, // vibrantData,
         node.absolutePath as string,
         dominant,
@@ -479,10 +462,13 @@ export const createPages: GatsbyNode["createPages"] = async ({
   });
 };
 
-export const createSchemaCustomization = ({actions, schema}: CreateSchemaCustomizationArgs) => {
+export const createSchemaCustomization = ({
+  actions,
+  schema,
+}: CreateSchemaCustomizationArgs) => {
   const { createTypes } = actions;
 
- createTypes(`
+  createTypes(`
    type Mdx implements Node {
      frontmatter: Frontmatter
    }
@@ -494,4 +480,4 @@ export const createSchemaCustomization = ({actions, schema}: CreateSchemaCustomi
      galleryImages: [File] @link(by: "base")
    }
  `);
-}
+};

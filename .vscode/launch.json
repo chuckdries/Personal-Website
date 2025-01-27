@@ -54,15 +54,13 @@
     },
     {
       "name": "Attach",
-      "type": "node",
       "request": "attach",
-      "port": 3000,
-      "address": "localhost",
-      "restart": false,
-      "sourceMaps": false,
-      "outDir": null,
-      "localRoot": "${workspaceRoot}",
-      "remoteRoot": null
+      "type": "node",
+      "port": 9229,
+      "sourceMaps": true,
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
     }
   ]
 }
