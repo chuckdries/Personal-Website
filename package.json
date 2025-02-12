@@ -45,6 +45,7 @@
     "gatsby-plugin-react-helmet": "^6.14.0",
     "gatsby-plugin-robots-txt": "^1.8.0",
     "gatsby-plugin-sharp": "^5.14.0",
+    "gatsby-plugin-use-query-params": "^1.0.1",
     "gatsby-remark-autolink-headers": "^6.14.0",
     "gatsby-remark-images": "^7.14.0",
     "gatsby-source-filesystem": "^5.14.0",
@@ -72,7 +73,8 @@
     "sass": "^1.83.4",
     "tailwindcss": "^3.4.17",
     "tailwindcss-touch": "^1.0.1",
-    "use-breakpoint": "^2.0.3"
+    "use-breakpoint": "^2.0.3",
+    "use-query-params": "1"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",

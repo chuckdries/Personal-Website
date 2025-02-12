@@ -1,17 +1,27 @@
-import React, { ReactNode, useEffect, useMemo, useState } from "react";
+import React, {
+  Key,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import * as R from "ramda";
 import { PageProps, graphql } from "gatsby";
 import {
   MasonryContainer,
   MasonryGroup,
-} from "../components/Masonry2/MasonryContainer";
-import { PhotoLayout } from "../components/photos/PhotoLayout";
+} from "../../components/Masonry2/MasonryContainer";
+import { PhotoLayout } from "../../components/photos/PhotoLayout";
 import {
   TimelineSlider,
   TimelineStop,
-} from "../components/Masonry2/TimelineSlider";
-import Nav from "../components/Nav";
-import { MasonryRow } from "../components/Masonry2/MasonryRow";
+} from "../../components/Masonry2/TimelineSlider";
+import Nav from "../../components/Nav";
+import { MasonryRow } from "../../components/Masonry2/MasonryRow";
+import { useQueryParam, NumberParam, StringParam } from "use-query-params";
+import { Item, Select } from "../../components/Select";
+import { PhotoMonthNode } from "../../components/photos/PhotoMonth";
 
 // const FIXED_STOPS: TimelineStop[] = [
 //   // { slug: "welcome", emphasis: 1 },
@@ -19,7 +29,24 @@ import { MasonryRow } from "../components/Masonry2/MasonryRow";
 
 function useScrollState() {}
 
+function filterNodes(nodes: PhotoMonthNode[], or: string | null | undefined) {
+  if (or === "portrait") {
+    return R.filter((node) => {
+      const matches = (node.childImageSharp?.fluid?.aspectRatio ?? 0) <= 1;
+      return matches;
+    }, nodes);
+  }
+  if (or === "landscape") {
+    return R.filter(
+      (node) => (node.childImageSharp?.fluid?.aspectRatio ?? 1) >= 1,
+      nodes,
+    );
+  }
+  return nodes;
+}
+
 const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
+  const [orientation, setOrientation] = useQueryParam("or", StringParam);
   const [groups, stops] = useMemo((): [MasonryGroup[], TimelineStop[]] => {
     const _groups: MasonryGroup[] = [];
     const stops: TimelineStop[] = [];
@@ -45,7 +72,9 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
           tickLabel: "Older",
           month: null,
           year: null,
-          nodes: R.flatten(year.group.map((m) => m.nodes)),
+          nodes: R.flatten(
+            year.group.map((m) => filterNodes(R.clone(m.nodes), orientation)),
+          ),
         });
       } else {
         const sortedMonths = R.sort(
@@ -53,13 +82,14 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
           year.group,
         );
         for (const month of sortedMonths) {
-          const monthName = month.nodes[0].fields!.organization!.monthSlug?.split("/")[1]!;
+          const monthName =
+            month.nodes[0].fields!.organization!.monthSlug?.split("/")[1]!;
           _groups.push({
             slug: month.nodes[0].fields!.organization!.monthSlug!,
             tickLabel: `${monthName} ${month.nodes[0].fields!.organization!.year!}`,
             year: String(month.nodes[0].fields!.organization!.year!),
             month: monthName,
-            nodes: R.clone(month.nodes),
+            nodes: filterNodes(R.clone(month.nodes), orientation),
           });
         }
       }
@@ -71,7 +101,17 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
     //   emphasis: g.slug.endsWith("January") ? 1 : 2,
     // }));
     return [_groups, stops];
-  }, [data.allFile.group]);
+  }, [data.allFile.group, orientation]);
+
+  const onOrientationSelection = useCallback((or: Key) => {
+    if (or === "all") {
+      setOrientation(undefined);
+      return;
+    }
+    if (typeof or === "string" && ["portrait", "landscape"].includes(or)) {
+      setOrientation(or);
+    }
+  }, []);
 
   const [initialScroll, setInitialScroll] = useState(0);
   useEffect(() => {
@@ -98,8 +138,20 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
             switch (row.type) {
               case "c":
                 return (
-                  <div className="h-[200px] flex flex-col">
+                  <div className="h-[400px] flex flex-col">
                     <Nav className="mb-4" scheme="light" />
+                    <div className="flex gap-4 p-2 rounded items-center max-w-prose w-full mx-auto">
+                      <h2>Wallpaper filter</h2>
+                      <Select
+                        label="orientation"
+                        selectedKey={orientation ?? "all"}
+                        onSelectionChange={onOrientationSelection}
+                      >
+                        <Item key="all">All</Item>
+                        <Item key="portrait">Portrait</Item>
+                        <Item key="landscape">Landscape</Item>
+                      </Select>
+                    </div>
                   </div>
                 );
               case "l":
@@ -114,7 +166,10 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
                     ) : (
                       <div className="p-4 lg:pl-8 flex justify-start items-end h-full">
                         <h2 className="text-3xl md:text-4xl m-0 md:m-1">
-                          <span className="font-bold">{row.month}</span> <span className="font-extralight opacity-70">{row.year}</span>
+                          <span className="font-bold">{row.month}</span>{" "}
+                          <span className="font-extralight opacity-70">
+                            {row.year}
+                          </span>
                         </h2>
                         {/* <h3 className="text-lg m-0 md:m-1"></h3> */}
                       </div>

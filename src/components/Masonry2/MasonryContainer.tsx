@@ -91,7 +91,7 @@ export function MasonryContainer({
   const itemSize = (index: number) => {
     if (index === 0) {
       // TODO: improve
-      return 210;
+      return 410;
     }
 
     if (index === 1) {

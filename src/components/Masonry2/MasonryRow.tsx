@@ -37,7 +37,6 @@ export function MasonryRow({
         // const height = `calc(${width} / ${aspect})`;
 
         const selfIndex = row.startIndex + index;
-        console.log(node.childImageSharp?.gatsbyImageData.backgroundColor)
         return (
           <Link
             className="inline-block relative p-1"

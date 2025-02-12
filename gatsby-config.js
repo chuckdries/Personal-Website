@@ -60,6 +60,8 @@ module.exports = {
         icon: "src/images/glasses-outline.svg",
       },
     },
+    'gatsby-plugin-use-query-params',
+    // #region rss
     {
       resolve: "gatsby-plugin-feed",
       options: {
@@ -166,5 +168,6 @@ module.exports = {
         ],
       },
     },
+    // #endregion
   ],
 };
