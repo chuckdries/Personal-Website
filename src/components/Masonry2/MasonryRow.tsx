@@ -27,19 +27,19 @@ export function MasonryRow({
   nodes,
 }: MasonryRowProps) {
   return (
-    <div className={row.isWhole ? "mx-auto" : "ml-[5px]"}>
+    <>
       {items.map((node, index) => {
         const aspect = node.childImageSharp!.fluid!.aspectRatio;
         const widthNumber = aspect / (row.isWhole ? row.aspect : targetAspect);
 
-        // wtf?? magic number??
-        const width = rowWidth * widthNumber + "px";
+        const width = row.isWhole ? `${(aspect / row.aspect) * 100}%` : rowWidth * widthNumber + "px"
+        // const width = rowWidth * widthNumber + "px";
         // const height = `calc(${width} / ${aspect})`;
 
         const selfIndex = row.startIndex + index;
         return (
           <Link
-            className="inline-block relative p-1"
+            className="p-1"
             key={node.id}
             state={{
               selfIndex,
@@ -75,6 +75,6 @@ export function MasonryRow({
           </Link>
         );
       })}
-    </div>
+    </>
   );
 }

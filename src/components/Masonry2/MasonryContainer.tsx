@@ -75,7 +75,7 @@ export function MasonryContainer({
     if (listRef.current) {
       listRef.current.resetAfterIndex(0);
     }
-  }, [width]);
+  }, [width, groups]);
   useLayoutEffect(() => {
     if (scrollPosition && listRef.current) {
       listRef.current.scrollTo(scrollPosition);

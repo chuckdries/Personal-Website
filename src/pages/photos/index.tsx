@@ -127,21 +127,14 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
   }, []);
 
   const filterGadget = (
-    <div
-      className={classNames(
-        "p-2",
-        "bg-gray-200/60 backdrop-blur-lg rounded-full mx-auto",
-      )}
+    <Select
+      selectedKey={orientation ?? "all"}
+      onSelectionChange={onOrientationSelection}
     >
-      <Select
-        selectedKey={orientation ?? "all"}
-        onSelectionChange={onOrientationSelection}
-      >
-        <Item key="all">All Orientations</Item>
-        <Item key="portrait">Portrait</Item>
-        <Item key="landscape">Landscape</Item>
-      </Select>
-    </div>
+      <Item key="all">All Orientations</Item>
+      <Item key="portrait">Portrait</Item>
+      <Item key="landscape">Landscape</Item>
+    </Select>
   );
   return (
     <PhotoLayout omitNav>
@@ -151,10 +144,20 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
           navOutOfView && scrollingUp
             ? "translate-y-0"
             : "translate-y-[-200px]",
-          "transition-transform fixed top-0 left-0 right-0 z-10 p-2 px-4",
+          "transition-transform fixed top-0 left-0 right-0 z-10 p-2 px-4 lg:px-8",
         )}
       >
-        {filterGadget}
+        <div
+          className={classNames(
+            "p-2 pl-4 gap-2 flex justify-between items-center",
+            "bg-gradient-to-t from-gray-300/60 to-gray-100/60 backdrop-blur-lg rounded-full mx-auto shadow-lg",
+          )}
+        >
+          <div className="text-lg">
+            <span className="font-bold">December</span> 2024
+          </div>
+          {filterGadget}
+        </div>
       </div>
       <div className="flex-auto relative w-screen">
         {/* TODO take childrenHeight prop? */}
@@ -181,7 +184,7 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
                 return (
                   <div className="h-full flex flex-col">
                     <Nav className="mb-4" scheme="light" />
-                    <div className="w-full px-4">{filterGadget}</div>
+                    <div className="w-full px-4 lg:px-8 flex justify-end">{filterGadget}</div>
                   </div>
                 );
               case "l":
@@ -209,7 +212,7 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
               case "i":
                 return (
                   <div
-                    className="relative flex"
+                    className="relative flex w-full px-[5px]"
                     key={`${row.groupIndex}-${row.startIndex}`}
                     style={style}
                   >
