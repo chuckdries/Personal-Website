@@ -22,6 +22,7 @@ import { MasonryRow } from "../../components/Masonry2/MasonryRow";
 import { useQueryParam, NumberParam, StringParam } from "use-query-params";
 import { Item, Select } from "../../components/Select";
 import { PhotoMonthNode } from "../../components/photos/PhotoMonth";
+import classNames from "classnames";
 
 // const FIXED_STOPS: TimelineStop[] = [
 //   // { slug: "welcome", emphasis: 1 },
@@ -113,6 +114,9 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
     }
   }, []);
 
+  const [navOutOfView, setNavOutOfView] = useState(false);
+  const [scrollingUp, setScrollingUp] = useState(false);
+
   const [initialScroll, setInitialScroll] = useState(0);
   useEffect(() => {
     // TODO: keep in router state
@@ -122,15 +126,52 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
     }
   }, []);
 
+  const filterGadget = (
+    <div
+      className={classNames(
+        "p-2",
+        "bg-gray-200/60 backdrop-blur-lg rounded-full mx-auto",
+      )}
+    >
+      <Select
+        selectedKey={orientation ?? "all"}
+        onSelectionChange={onOrientationSelection}
+      >
+        <Item key="all">All Orientations</Item>
+        <Item key="portrait">Portrait</Item>
+        <Item key="landscape">Landscape</Item>
+      </Select>
+    </div>
+  );
   return (
     <PhotoLayout omitNav>
       {/* <div className="flex-auto relative w-[calc(100vw-120px)]"> */}
+      <div
+        className={classNames(
+          navOutOfView && scrollingUp
+            ? "translate-y-0"
+            : "translate-y-[-200px]",
+          "transition-transform fixed top-0 left-0 right-0 z-10 p-2 px-4",
+        )}
+      >
+        {filterGadget}
+      </div>
       <div className="flex-auto relative w-screen">
         {/* TODO take childrenHeight prop? */}
         <MasonryContainer
           groups={groups}
           onScroll={(data) => {
             sessionStorage.setItem("photos-scroll", `${data.scrollOffset}`);
+            if (!navOutOfView && data.scrollOffset > 250) {
+              setNavOutOfView(true);
+            } else if (navOutOfView && data.scrollOffset <= 250) {
+              setNavOutOfView(false);
+            }
+            if (!scrollingUp && data.scrollDirection === "backward") {
+              setScrollingUp(true);
+            } else if (scrollingUp && data.scrollDirection === "forward") {
+              setScrollingUp(false);
+            }
           }}
           scrollPosition={initialScroll}
         >
@@ -138,20 +179,9 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
             switch (row.type) {
               case "c":
                 return (
-                  <div className="h-[400px] flex flex-col">
+                  <div className="h-full flex flex-col">
                     <Nav className="mb-4" scheme="light" />
-                    <div className="flex gap-4 p-2 rounded items-center max-w-prose w-full mx-auto">
-                      <h2>Wallpaper filter</h2>
-                      <Select
-                        label="orientation"
-                        selectedKey={orientation ?? "all"}
-                        onSelectionChange={onOrientationSelection}
-                      >
-                        <Item key="all">All</Item>
-                        <Item key="portrait">Portrait</Item>
-                        <Item key="landscape">Landscape</Item>
-                      </Select>
-                    </div>
+                    <div className="w-full px-4">{filterGadget}</div>
                   </div>
                 );
               case "l":

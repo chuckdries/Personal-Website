@@ -91,7 +91,7 @@ export function MasonryContainer({
   const itemSize = (index: number) => {
     if (index === 0) {
       // TODO: improve
-      return 410;
+      return 310;
     }
 
     if (index === 1) {
@@ -109,7 +109,7 @@ export function MasonryContainer({
     <div className="h-[100svh] w-full" ref={observe}>
       {width && (
         <List
-          className="masorny-container w-full"
+          className="w-full"
           height={height}
           itemCount={rows.length}
           itemData={rows}

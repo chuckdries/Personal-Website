@@ -27,7 +27,7 @@ export function MasonryRow({
   nodes,
 }: MasonryRowProps) {
   return (
-    <>
+    <div className={row.isWhole ? "mx-auto" : "ml-[5px]"}>
       {items.map((node, index) => {
         const aspect = node.childImageSharp!.fluid!.aspectRatio;
         const widthNumber = aspect / (row.isWhole ? row.aspect : targetAspect);
@@ -75,6 +75,6 @@ export function MasonryRow({
           </Link>
         );
       })}
-    </>
+    </div>
   );
 }

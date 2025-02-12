@@ -8,10 +8,11 @@ import {
   mergeProps,
   useFocusRing,
 } from "react-aria";
-import { ChevronDown } from "lucide-react"; 
+import { ChevronDown } from "lucide-react";
 
 import { ListBox } from "./ListBox";
 import { Popover } from "./Popover";
+import classNames from "classnames";
 
 export { Item } from "react-stately";
 
@@ -24,7 +25,7 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
   let { labelProps, triggerProps, valueProps, menuProps } = useSelect(
     props,
     state,
-    ref
+    ref,
   );
 
   // Get props for the button based on the trigger props from useSelect
@@ -34,12 +35,14 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
 
   return (
     <div className="inline-flex flex-col relative">
-      <div
-        {...labelProps}
-        className="block text-xs text-left cursor-default mb-1"
-      >
-        {props.label}
-      </div>
+      {props.label && (
+        <div
+          {...labelProps}
+          className="block text-xs text-left cursor-default mb-1"
+        >
+          {props.label}
+        </div>
+      )}
       <HiddenSelect
         label={props.label}
         name={props.name}
@@ -48,9 +51,11 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
       />
       <button
         {...mergeProps(buttonProps, focusProps)}
-        className={`py-[5px] px-3 w-[150px] flex flex-row items-center justify-between overflow-hidden cursor-default rounded border hover:bg-black/10 ${
-          isFocusVisible ? "border-green-700" : "border-gray-400"
-        } ${state.isOpen ? "bg-white" : "bg-white"}`}
+        className={classNames(
+          `py-[5px] px-2 gap-1 max-w-[250px] flex flex-row items-center justify-between overflow-hidden cursor-default rounded-full border `,
+          isFocusVisible ? "border-green-700" : "",
+          "bg-white/80 hover:bg-white shadow"
+        )}
         ref={ref}
       >
         <span {...valueProps} className="text-sm">
@@ -58,13 +63,11 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
             ? state.selectedItem.rendered
             : "Select an option"}
         </span>
-        <ChevronDown
-          className="mx-1"
-        />
+        <ChevronDown className="relative top-[1px]" />
       </button>
       {state.isOpen && (
         <Popover
-          className="w-[150px]"
+          className="max-w-[250px]"
           placement="bottom start"
           state={state}
           triggerRef={ref}
