@@ -39,7 +39,7 @@ export function MasonryRow({
         const selfIndex = row.startIndex + index;
         return (
           <Link
-            className="p-1"
+            className="p-1 relative"
             key={node.id}
             state={{
               selfIndex,
