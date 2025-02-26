@@ -15,8 +15,7 @@ export function useMasonryRows(targetAspect: number, groups: MasonryGroup[]): Ma
       _rows.push({
         type: "l",
         aspect: targetAspect * 1.7,
-        month: group.month,
-        year: group.year,
+        label: group.label,
         slug: group.slug,
       });
       _rows.push({
@@ -44,10 +43,6 @@ export function useMasonryRows(targetAspect: number, groups: MasonryGroup[]): Ma
           // _rows.push(currentRow);
           continue;
         }
-
-        // if (singleRow) {
-        //   break;
-        // }
 
         // start a new row
         currentRow.isWhole = true;

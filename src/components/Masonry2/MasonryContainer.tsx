@@ -1,25 +1,23 @@
-import React, {
-  ReactNode,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-} from "react";
+import React, { ReactNode, useEffect, useLayoutEffect, useRef } from "react";
 import { PhotoMonthNode } from "../photos/PhotoMonth";
 import useDimensions from "react-cool-dimensions";
-import { VariableSizeList as List, ListChildComponentProps, ListOnScrollProps } from "react-window";
+import {
+  VariableSizeList as List,
+  ListChildComponentProps,
+  ListOnScrollProps,
+} from "react-window";
 import useBreakpoint from "use-breakpoint";
 // @ts-expect-error babel preval != ts
 import themeBreakpoints from "../../breakpoints";
 import { useMasonryRows } from "./hooks/useMasonryRows";
+import { MasonryRow } from "./MasonryRow";
 
 // import "./MasonryContainer.css";
 
 export interface MasonryGroup {
   slug: string;
   tickLabel: string;
-  // label: ReactNode;
-  month: string | null;
-  year: string | null;
+  label: ReactNode;
   nodes: PhotoMonthNode[];
 }
 
@@ -27,7 +25,7 @@ interface MasonryContainerProps {
   groups: MasonryGroup[];
   onScroll?: (data: ListOnScrollProps) => void;
   scrollPosition?: number;
-  children: (row: MasonryRowData, props: ListChildComponentProps, targetAspect: number, width: number) => ReactNode;
+  children: React.ReactNode;
 }
 
 interface MasonryBaseRow {
@@ -51,8 +49,7 @@ export interface MasonryImageRow extends MasonryBaseRow {
 
 export interface MasonryLabelRow extends MasonryBaseRow {
   type: "l";
-  month: string | null;
-  year: string | null;
+  label: React.ReactNode;
   slug: string;
 }
 
@@ -83,9 +80,9 @@ export function MasonryContainer({
   }, [scrollPosition]);
   // listRef.current?.scrollTo(scrollPosition);
 
-  const { breakpoint } = useBreakpoint(themeBreakpoints, "sm")
+  const { breakpoint } = useBreakpoint(themeBreakpoints, "sm");
 
-  const targetAspect = width / (breakpoint === 'sm' ? 150 : 250);
+  const targetAspect = width / (breakpoint === "sm" ? 150 : 250);
   const rows = useMasonryRows(targetAspect, groups);
 
   const itemSize = (index: number) => {
@@ -99,7 +96,7 @@ export function MasonryContainer({
     }
     const row = rows[index];
     if (row.type === "i" && !row.isWhole) {
-      return (width / targetAspect);
+      return width / targetAspect;
     }
 
     return width / rows[index].aspect;
@@ -119,7 +116,47 @@ export function MasonryContainer({
           ref={listRef}
           width={width}
         >
-          {(props) => children(rows[props.index], props, targetAspect, width)}
+          {({ style, index }) => {
+            const row = rows[index];
+            switch (row.type) {
+              case "c":
+                return (
+                  <div className="h-full flex flex-col" style={style}>
+                    {children}
+                  </div>
+                );
+              case "l":
+                return (
+                  <div className="relative" key={row.slug} style={style}>
+                    <div className="p-4 lg:pl-8 flex justify-start items-end h-full">
+                      {row.label}
+                    </div>
+                  </div>
+                );
+              case "i":
+                return (
+                  <div
+                    className="relative flex w-full px-[5px]"
+                    key={`${row.groupIndex}-${row.startIndex}`}
+                    style={style}
+                  >
+                    <MasonryRow
+                      items={groups[row.groupIndex].nodes.slice(
+                        row.startIndex,
+                        row.startIndex + row.images,
+                      )}
+                      nodes={groups[row.groupIndex].nodes.map(
+                        (n) => n.fields!.organization!.slug!,
+                      )}
+                      row={row}
+                      targetAspect={targetAspect}
+                      width={width - 10}
+                      // widthFn={widthFn}
+                    />
+                  </div>
+                );
+            }
+          }}
         </List>
       )}
     </div>

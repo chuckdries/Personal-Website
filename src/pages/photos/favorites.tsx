@@ -7,7 +7,7 @@ import React, {
   useState,
 } from "react";
 import * as R from "ramda";
-import { Link, PageProps, graphql } from "gatsby";
+import { PageProps, graphql } from "gatsby";
 import {
   MasonryContainer,
   MasonryGroup,
@@ -47,70 +47,32 @@ function filterNodes(nodes: PhotoMonthNode[], or: string | null | undefined) {
   return nodes;
 }
 
-const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
+const Photos = ({ data }: PageProps<Queries.FavoritePhotosQuery>) => {
   const [orientation, setOrientation] = useQueryParam("or", StringParam);
-  const [groups, stops] = useMemo((): [MasonryGroup[], TimelineStop[]] => {
-    const _groups: MasonryGroup[] = [];
-    const stops: TimelineStop[] = [];
-    const sortedYears = R.sort((a, b) => {
-      if (a.fieldValue === "Older") {
-        return 1;
+  const groups = useMemo((): MasonryGroup[] => {
+    const _groups: MasonryGroup[] = [
+      {
+        slug: 'favorites!',
+        tickLabel: 'favorites',
+        label: (
+          <h2 className="text-3xl md:text-4xl m-0 md:m-1">
+            <span className="font-bold">
+              Favorites
+            </span>
+          </h2>
+        ),
+        nodes: filterNodes(R.clone(data.allFile.nodes), orientation),
       }
-      if (b.fieldValue === "Older") {
-        return -1;
-      }
-      return Number(b.fieldValue!) - Number(a.fieldValue!);
-    }, data.allFile.group);
+    ];
 
-    for (const year of sortedYears) {
-      stops.push({
-        slug: year.fieldValue!,
-        tickLabel: year.fieldValue!,
-        emphasis: year.fieldValue === "Older" ? 1 : 2,
-      });
-      if (year.fieldValue === "Older") {
-        _groups.push({
-          slug: "Older",
-          tickLabel: "Older",
-          label: (
-            <h2 className="text-3xl md:text-4xl m-0 md:m-1 font-bold">Older</h2>
-          ),
-          nodes: R.flatten(
-            year.group.map((m) => filterNodes(R.clone(m.nodes), orientation)),
-          ),
-        });
-      } else {
-        const sortedMonths = R.sort(
-          (a, b) => Number(b.fieldValue!) - Number(a.fieldValue!),
-          year.group,
-        );
-        for (const month of sortedMonths) {
-          const monthName =
-            month.nodes[0].fields!.organization!.monthSlug?.split("/")[1]!;
-          _groups.push({
-            slug: month.nodes[0].fields!.organization!.monthSlug!,
-            tickLabel: `${monthName} ${month.nodes[0].fields!.organization!.year!}`,
-            label: (
-              <h2 className="text-3xl md:text-4xl m-0 md:m-1">
-                <span className="font-bold">{monthName}</span>{" "}
-                <span className="font-extralight opacity-70">
-                  {String(month.nodes[0].fields!.organization!.year!)}
-                </span>
-              </h2>
-            ),
-            nodes: filterNodes(R.clone(month.nodes), orientation),
-          });
-        }
-      }
-    }
     // const stops: TimelineStop[] = _groups.map((g) => ({
     //   slug: g.slug,
     //   label: g.label,
     //   tickLabel: g.tickLabel,
     //   emphasis: g.slug.endsWith("January") ? 1 : 2,
     // }));
-    return [_groups, stops];
-  }, [data.allFile.group, orientation]);
+    return _groups;
+  }, [data.allFile, orientation]);
 
   const onOrientationSelection = useCallback((or: Key) => {
     if (or === "all") {
@@ -215,44 +177,41 @@ const Photos = ({ data }: PageProps<Queries.AllPhotoGroupedQuery>) => {
 export default Photos;
 
 export const query = graphql`
-  query AllPhotoGrouped {
+  query FavoritePhotos {
     allFile(
-      filter: { sourceInstanceName: { eq: "photos" } }
-      sort: { fields: { imageMeta: { dateTaken: DESC } } }
+      filter: {
+        sourceInstanceName: { eq: "photos" }
+        fields: { imageMeta: { meta: { Rating: { ne: null } } } }
+      }
+      sort: { fields: { imageMeta: { meta: { Rating: DESC } } } }
     ) {
-      group(field: { fields: { organization: { yearFolder: SELECT } } }) {
-        fieldValue
-        group(field: { fields: { organization: { month: SELECT } } }) {
-          fieldValue
-          nodes {
-            id
-            relativePath
-            fields {
-              organization {
-                monthSlug
-                month
-                year
-                slug
-              }
-              imageMeta {
-                dateTaken
-                meta {
-                  Rating
-                  Keywords
-                }
-              }
-            }
-            childImageSharp {
-              fluid {
-                aspectRatio
-              }
-              gatsbyImageData(
-                layout: CONSTRAINED
-                height: 550
-                placeholder: DOMINANT_COLOR
-              )
+      nodes {
+        id
+        relativePath
+        fields {
+          organization {
+            monthSlug
+            month
+            year
+            slug
+          }
+          imageMeta {
+            dateTaken
+            meta {
+              Rating
+              Keywords
             }
           }
+        }
+        childImageSharp {
+          fluid {
+            aspectRatio
+          }
+          gatsbyImageData(
+            layout: CONSTRAINED
+            height: 550
+            placeholder: DOMINANT_COLOR
+          )
         }
       }
     }
