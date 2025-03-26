@@ -184,7 +184,10 @@ function PhotoImage({
         : null,
     [meta],
   );
-  const dt = React.useMemo(() => (dateTaken ? parseAbsoluteToLocal(dateTaken) : null), [dateTaken]);
+  const dt = React.useMemo(
+    () => (dateTaken ? parseAbsoluteToLocal(dateTaken) : null),
+    [dateTaken],
+  );
 
   const film = React.useMemo(
     () => meta?.Make === "NORITSU KOKI" || meta?.Keywords?.includes("Film"),
@@ -198,8 +201,8 @@ function PhotoImage({
     [film, meta],
   );
   const df = useDateFormatter({
-    timeZone: meta?.OffsetTimeOriginal ?? 'America/Los_Angeles'
-  })
+    timeZone: meta?.OffsetTimeOriginal ?? "America/Los_Angeles",
+  });
   return (
     <div className="min-h-screen p-0">
       <Helmet>
@@ -229,6 +232,7 @@ function PhotoImage({
           <NavArrowOverlay siblingNavDatas={siblingNavDatas} />
         )}
       </div>
+
       <div className="flex justify-center flex-col sm:flex-row pt-0 p-6">
         <div className="px-4">
           <div className="flex flex-col items-end gap-2">
@@ -272,7 +276,11 @@ function PhotoImage({
                         title="ISO"
                       />
                       <MetadataItem
-                        data={meta.FocalLength ? round(meta.FocalLength) + "mm" : null}
+                        data={
+                          meta.FocalLength
+                            ? round(meta.FocalLength) + "mm"
+                            : null
+                        }
                         icon={<Ruler />}
                         title="focal"
                       />
@@ -303,6 +311,25 @@ function PhotoImage({
         </div>
         <div className="justify-self-stretch border border-black border-opacity-10 my-4" />
         <div className="px-4 text-right sm:text-left">
+          <div className="flex gap-4 mb-4 ">
+            {[
+              "Vibrant",
+              "DarkVibrant",
+              "LightVibrant",
+              "Muted",
+              "DarkMuted",
+              "LightMuted",
+            ].map((v) => (
+              <div
+                className="w-5 h-5 rounded-full"
+                style={{
+                  backgroundColor: data.image?.fields?.imageMeta?.vibrant?.[v]
+                    ? `rgb(${data.image.fields.imageMeta.vibrant[v]})`
+                    : undefined,
+                }}
+              />
+            ))}
+          </div>
           <p className="font-mono text-sm mr-2 mb-4">{image.base}</p>
           <a
             className="cursor-pointer inline-block text-center font-sans mr-2 px-3 py-2 rounded text-white border-2 border-blue-500 bg-blue-600 hover:bg-blue-500 hover:border-blue-400 transition-colors"
@@ -347,6 +374,14 @@ export const query = graphql`
         }
         imageMeta {
           dateTaken
+          vibrant {
+            Vibrant
+            DarkVibrant
+            LightVibrant
+            Muted
+            DarkMuted
+            LightMuted
+          }
           meta {
             Make
             Model

@@ -7,7 +7,8 @@ import * as R from "ramda";
 import exifr from "exifr";
 import sharp from "sharp";
 // @ts-ignore
-import { Palette } from "node-vibrant/lib/color";
+import { Vibrant } from "node-vibrant/node";
+import type { Palette } from "@vibrant/color";
 import fs from "fs";
 import md5 from "md5";
 import { globSync } from "glob";
@@ -66,12 +67,13 @@ export const onPostBuild = async () => {
 // };
 
 function processColors(vibrantData: Palette, imagePath: string) {
-  let Vibrant = chroma(vibrantData.Vibrant!.getRgb());
-  let DarkVibrant = chroma(vibrantData.DarkVibrant!.getRgb());
-  let LightVibrant = chroma(vibrantData.LightVibrant!.getRgb());
-  let Muted = chroma(vibrantData.Muted!.getRgb());
-  let DarkMuted = chroma(vibrantData.DarkMuted!.getRgb());
-  let LightMuted = chroma(vibrantData.LightMuted!.getRgb());
+  console.log("🚀 ~ processColors ~ vibrantData.Vibrant:", vibrantData.Vibrant)
+  let Vibrant = vibrantData.Vibrant?.rgb ? chroma(vibrantData.Vibrant?.rgb) : null;
+  let DarkVibrant = vibrantData.DarkVibrant?.rgb ? chroma(vibrantData.DarkVibrant?.rgb) : null;
+  let LightVibrant = vibrantData.LightVibrant?.rgb ? chroma(vibrantData.LightVibrant?.rgb) : null;
+  let Muted = vibrantData.Muted?.rgb ? chroma(vibrantData.Muted?.rgb) : null;
+  let DarkMuted = vibrantData.DarkMuted?.rgb ? chroma(vibrantData.DarkMuted?.rgb) : null;
+  let LightMuted = vibrantData.LightMuted?.rgb ? chroma(vibrantData.LightMuted?.rgb) : null;
 
   // // first pass - darken bg and lighten relevant fg colors
   // if (
@@ -110,12 +112,12 @@ function processColors(vibrantData: Palette, imagePath: string) {
   // }
 
   return {
-    Vibrant: Vibrant.rgb(),
-    DarkVibrant: DarkVibrant.rgb(),
-    LightVibrant: LightVibrant.rgb(),
-    Muted: Muted.rgb(),
-    DarkMuted: DarkMuted.rgb(),
-    LightMuted: LightMuted.rgb(),
+    Vibrant: Vibrant?.rgb(),
+    DarkVibrant: DarkVibrant?.rgb(),
+    LightVibrant: LightVibrant?.rgb(),
+    Muted: Muted?.rgb(),
+    DarkMuted: DarkMuted?.rgb(),
+    LightMuted: LightMuted?.rgb(),
   };
 }
 
@@ -151,7 +153,7 @@ function transformMetaToNodeData(
   { r, g, b }: { r: number; b: number; g: number },
   datePublished: string,
 ) {
-  // const vibrant = vibrantData ? processColors(vibrantData, imagePath) : null;
+  const vibrant = vibrantData ? processColors(vibrantData, imagePath) : null;
   // const vibrantHue = vibrantData.Vibrant!.getHsl()[0] * 360;
   let dominantHue = chroma(r, g, b).hsl();
   if (isNaN(dominantHue[0])) {
@@ -189,7 +191,7 @@ function transformMetaToNodeData(
       Rating: metaData.Rating,
       Keywords,
     },
-    // vibrant,
+    vibrant,
     // vibrantHue,
     // dominantHue,
   };
@@ -289,17 +291,17 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
       throw e;
     }
     const { dominant } = await sharpImage.stats();
-    // const resizedImage = await sharpImage
-    //   .resize({
-    //     width: 3000,
-    //     height: 3000,
-    //     fit: "inside",
-    //   })
-    //   .toBuffer();
+    const resizedImage = await sharpImage
+      .resize({
+        width: 1024,
+        height: 1024,
+        fit: "inside",
+      })
+      .toBuffer();
 
-    // const vibrantData = await Vibrant.from(resizedImage)
-    //   // .quality(1)
-    //   .getPalette();
+    const vibrantData = await Vibrant.from(resizedImage)
+      .quality(1)
+      .getPalette();
 
     createNodeField({
       node,
@@ -307,7 +309,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async function ({
       value: transformMetaToNodeData(
         meta,
         dateTimeOriginal,
-        null, // vibrantData,
+        vibrantData,
         node.absolutePath as string,
         dominant,
         // if datePublished is empty, image has not been committed to git yet and is thus brand new

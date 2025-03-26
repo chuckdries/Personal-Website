@@ -2,6 +2,21 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Gatsby develop",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/node_modules/.bin/gatsby",
+      "args": ["develop"],
+      "env": {
+        "PARCEL_WORKERS": "0",
+        "GATSBY_CPU_COUNT": "1",
+      },
+      "runtimeArgs": ["--nolazy", "--inspect-brk"],
+      "console": "integratedTerminal",
+      
+    },
+
+    {
       "name": "Launch Chrome",
       "type": "chrome",
       "request": "launch",
