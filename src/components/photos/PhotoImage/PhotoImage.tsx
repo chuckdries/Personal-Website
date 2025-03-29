@@ -114,10 +114,12 @@ export const FilmstockKeywords = [
   "Gold 200",
   "Ektachrome E100",
   "Instax Square",
+  "Instax Monochrome",
   "Portra 400",
   "Ektachrome",
   "Portra 160",
   "Candido 800",
+  "Harman Phoenix"
 ];
 
 const smoothScrollSupported =
