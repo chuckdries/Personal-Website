@@ -15,11 +15,11 @@ import { PostListingImage } from "./PostListingImage";
 export function PostListingCarousel({
   galleryImages,
   playing,
-  to,
+  fullWidth,
 }: {
   galleryImages?: GalleryImages;
   playing: boolean;
-  to: string;
+  fullWidth?: boolean;
 }) {
   const { observe: observeOuter, width: outerWidth } = useDimensions();
 
@@ -88,7 +88,8 @@ export function PostListingCarousel({
     <div
       className={classNames(
         "prog-blur-x",
-        "flex max-h-[30vw] max-w-[1280px] items-stretch relative overflow-x-hidden mx-auto",
+        "flex items-stretch relative overflow-x-hidden mx-auto",
+        fullWidth ? "max-w-full" : "max-w-[1280px] max-h-[25vw]",
       )}
       ref={observeOuter}
     >
@@ -108,7 +109,6 @@ export function PostListingCarousel({
               <PostListingImage
                 image={image}
                 key={`${image?.base}${i}`}
-                to={to}
               />
             ))}
         </div>
@@ -124,7 +124,6 @@ export function PostListingCarousel({
               <PostListingImage
                 image={image}
                 key={`${image?.base}${i}`}
-                to={to}
               />
             ))}
           </div>

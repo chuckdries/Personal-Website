@@ -14,12 +14,12 @@ export function PostListingImage({
   }
   return (
     <div
-      className="rounded-md overflow-hidden h-full"
+      className="rounded-md overflow-hidden min-h-full"
       style={{ aspectRatio: (image.childImageSharp?.fluid?.aspectRatio ?? 1) }}
     >
       <GatsbyImage
         alt=""
-        className="h-full"
+        className="h-full w-full"
         image={getImage(image)!}
       />
     </div>

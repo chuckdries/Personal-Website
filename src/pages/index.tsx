@@ -15,6 +15,9 @@ import Nav from "../components/Nav";
 import { use100vh } from "react-div-100vh";
 import { useMediaQuery } from "../useMediaQuery";
 import "./index.css";
+import { useDateFormatter } from "react-aria";
+import { PostListing } from "../components/PostListing/PostListing";
+import { PostListingCarousel } from "../components/PostListing/PostListingCarousel";
 
 const env =
   process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
@@ -38,6 +41,8 @@ const IndexPage = ({
   data: {
     // allFile: { nodes: images },
     mdx,
+    file,
+    allFile,
   },
 }: PageProps<Queries.IndexPageQuery>) => {
   const [isClient, setIsClient] = React.useState(false);
@@ -46,6 +51,9 @@ const IndexPage = ({
   //   return images[0];
   // }, [images]);
 
+  const df = useDateFormatter({
+    timeZone: "utc",
+  });
   React.useEffect(() => {
     if (!isClient) {
       setIsClient(true);
@@ -93,59 +101,42 @@ const IndexPage = ({
           name="description"
         />
       </Helmet>
-      <main className="font-sans h-screen grid grid-rows-[min-content,minmax(0,1fr)]">
+      <main className="font-serif min-h-screen max-w-screen grid grid-rows-[min-content,minmax(0,1fr)]">
         <Nav />
-        <div className="overflow-hidden relative" style={{ gridArea: `2 / 1` }}>
-          {isClient && (
-            <div className="animate-in fade-in duration-1000 prog-blur w-[calc(100%+300px)] left-[-150px] flex flex-wrap justify-center relative top-[-50px]">
-              {images?.map(
-                (imageData) =>
-                  imageData?.childImageSharp?.gatsbyImageData && (
-                    <GatsbyImage
-                      alt={`An image called ${imageData?.base}`}
-                      image={imageData!.childImageSharp!.gatsbyImageData!}
-                      key={imageData?.base}
-                    />
-                  ),
-              )}
+        <div className="flex flex-col gap-4 max-w-full overflow-x-hidden">
+          <div>
+            <div className="prose p-4 font-serif mx-auto">
+              <span className="text-sm text-gray-500">featured blog post</span>
+              <h2 className="mt-0">
+                <Link
+                  className="font-bold"
+                  to={`/posts${mdx?.frontmatter?.slug}`}
+                >
+                  {mdx?.frontmatter?.title}
+                </Link>
+              </h2>
             </div>
-          )}
-        </div>
-        <div
-          className="relative font-serif flex justify-center md:items-center p-4"
-          style={{ gridArea: `2 / 1` }}
-        >
-          <div className="relative mt-6 md:-mt-8">
-            <Link to={`/posts${mdx?.frontmatter!.slug}`}>
-              <h1 className="text-center drop-shadow text-4xl font-bold text-slate-900 underline p-4 bg-white rounded-xl shadow-lg">
-                {mdx?.frontmatter?.title}
-              </h1>
-            </Link>
-            <span className="absolute -top-6 -left-3 z-10 inline-block text-left italic p-2 px-3 bg-green-200 rounded-full shadow-lg -rotate-6">
-              new blog post
-            </span>
+            <PostListingCarousel
+              fullWidth={true}
+              galleryImages={mdx?.frontmatter?.galleryImages}
+              playing
+            />
+          </div>
+          <div>
+            <div className="prose p-4 font-serif mx-auto">
+              <h2>
+                <Link className="font-bold" to="/photos">
+                  New photos this month
+                </Link>
+              </h2>
+            </div>
+            <PostListingCarousel
+              fullWidth={true}
+              galleryImages={allFile.nodes.map((node) => node.childImageSharp)}
+              playing
+            />
           </div>
         </div>
-        {/*
-        {isClient && (
-          <Link
-            className="flex-auto flex flex-col m-4 md:m-8 mt-0 md:mt-0"
-            to={image.fields!.organization!.slug!}
-          >
-            <GatsbyImage
-              alt=""
-              image={img!}
-              loading="eager"
-              objectFit={"cover"}
-              // objectFit="contain"
-              style={{
-                height: screenHeight
-                  ? `${screenHeight - 268}px`
-                  : "calc(100vh-268px)",
-              }}
-            />
-          </Link>
-        )} */}
       </main>
       <a className="hidden" href="https://hachyderm.io/@chuckletmilk" rel="me">
         Mastodon
@@ -157,52 +148,47 @@ const IndexPage = ({
 export const query = graphql`
   query IndexPage {
     mdx(frontmatter: { slug: { eq: "/2024-year-in-review" } }) {
+      excerpt
       frontmatter {
         slug
         title
         galleryImages {
           base
           childImageSharp {
-            gatsbyImageData(height: 170, placeholder: DOMINANT_COLOR)
+            gatsbyImageData(height: 200, placeholder: DOMINANT_COLOR)
+            fluid {
+              aspectRatio
+            }
           }
         }
       }
     }
-    # allFile(
-    #   #                                                           landscape      portrait
-    #   filter: {
-    #     sourceInstanceName: { eq: "photos" }
-    #     base: { in: ["DSC08277-Edit-positive.jpg"] }
-    #   }
-    #   sort: { childImageSharp: { fluid: { aspectRatio: ASC } } }
-    # ) {
-    #   nodes {
-    #     relativePath
-    #     base
-    #     childImageSharp {
-    #       fluid {
-    #         aspectRatio
-    #       }
-    #       gatsbyImageData(
-    #         layout: CONSTRAINED
-    #         placeholder: DOMINANT_COLOR
-    #         breakpoints: [750, 1080, 1366, 1920, 2560, 3840]
-    #       )
-    #     }
-    #     fields {
-    #       organization {
-    #         slug
-    #       }
-    #     }
-    #     # fields {
-    #     #   imageMeta {
-    #     #     vibrant {
-    #     #       ...VibrantColors
-    #     #     }
-    #     #   }
-    #     # }
-    #   }
-    # }
+    file(fields: { organization: { month: { eq: 3 }, year: { eq: 2025 } } }) {
+      fields {
+        organization {
+          month
+          monthSlug
+          yearFolder
+          slug
+          year
+        }
+      }
+    }
+    allFile(
+      filter: {
+        fields: { organization: { month: { eq: 3 }, year: { eq: 2025 } } }
+      }
+    ) {
+      nodes {
+        base
+        childImageSharp {
+          gatsbyImageData(height: 200, placeholder: DOMINANT_COLOR)
+          fluid {
+            aspectRatio
+          }
+        }
+      }
+    }
   }
 `;
 
