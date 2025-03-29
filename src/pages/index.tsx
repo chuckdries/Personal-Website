@@ -114,7 +114,7 @@ const IndexPage = ({
         <PostListingCarousel
           fullWidth={true}
           galleryImages={mdx?.frontmatter?.galleryImages}
-          playing={false}
+          playing
         />
         <div className="mt-2 lg:mt-4 xl:mt-6 prose w-full p-4 mx-auto">
           <h2>
@@ -126,7 +126,7 @@ const IndexPage = ({
         <PostListingCarousel
           fullWidth={true}
           galleryImages={allFile.nodes}
-          playing={false}
+          playing
         />
       </main>
       <a className="hidden" href="https://hachyderm.io/@chuckletmilk" rel="me">
