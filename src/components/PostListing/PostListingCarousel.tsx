@@ -89,7 +89,7 @@ export function PostListingCarousel({
       className={classNames(
         "prog-blur-x",
         "flex items-stretch relative overflow-x-hidden mx-auto",
-        fullWidth ? "max-w-full" : "max-w-[1280px] max-h-[25vw]",
+        fullWidth ? "max-w-full max-h-[min(40vw,30vh)]" : "max-w-[1280px] max-h-[25vw]",
       )}
       ref={observeOuter}
     >

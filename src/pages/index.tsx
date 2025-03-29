@@ -101,42 +101,33 @@ const IndexPage = ({
           name="description"
         />
       </Helmet>
-      <main className="font-serif min-h-screen max-w-screen grid grid-rows-[min-content,minmax(0,1fr)]">
+      <main className="font-serif min-h-screen max-w-screen flex flex-col pb-2 lg:pb-4">
         <Nav />
-        <div className="flex flex-col gap-4 max-w-full overflow-x-hidden">
-          <div>
-            <div className="prose p-4 font-serif mx-auto">
-              <span className="text-sm text-gray-500">featured blog post</span>
-              <h2 className="mt-0">
-                <Link
-                  className="font-bold"
-                  to={`/posts${mdx?.frontmatter?.slug}`}
-                >
-                  {mdx?.frontmatter?.title}
-                </Link>
-              </h2>
-            </div>
-            <PostListingCarousel
-              fullWidth={true}
-              galleryImages={mdx?.frontmatter?.galleryImages}
-              playing
-            />
-          </div>
-          <div>
-            <div className="prose p-4 font-serif mx-auto">
-              <h2>
-                <Link className="font-bold" to="/photos">
-                  New photos this month
-                </Link>
-              </h2>
-            </div>
-            <PostListingCarousel
-              fullWidth={true}
-              galleryImages={allFile.nodes.map((node) => node.childImageSharp)}
-              playing
-            />
-          </div>
+        <div className="prose w-full p-4 mx-auto">
+          <span className="text-sm text-gray-500">featured blog post</span>
+          <h2 className="mt-0">
+            <Link className="font-bold" to={`/posts${mdx?.frontmatter?.slug}`}>
+              {mdx?.frontmatter?.title} &rarr;
+            </Link>
+          </h2>
         </div>
+        <PostListingCarousel
+          fullWidth={true}
+          galleryImages={mdx?.frontmatter?.galleryImages}
+          playing
+        />
+        <div className="mt-2 lg:mt-4 xl:mt-6 prose w-full p-4 mx-auto">
+          <h2>
+            <Link className="font-bold" to="/photos">
+              New photos this month &rarr;
+            </Link>
+          </h2>
+        </div>
+        <PostListingCarousel
+          fullWidth={true}
+          galleryImages={allFile.nodes.map((node) => node.childImageSharp)}
+          playing
+        />
       </main>
       <a className="hidden" href="https://hachyderm.io/@chuckletmilk" rel="me">
         Mastodon
@@ -155,7 +146,7 @@ export const query = graphql`
         galleryImages {
           base
           childImageSharp {
-            gatsbyImageData(height: 200, placeholder: DOMINANT_COLOR)
+            gatsbyImageData(height: 400, placeholder: DOMINANT_COLOR)
             fluid {
               aspectRatio
             }
@@ -182,7 +173,7 @@ export const query = graphql`
       nodes {
         base
         childImageSharp {
-          gatsbyImageData(height: 200, placeholder: DOMINANT_COLOR)
+          gatsbyImageData(height: 400, placeholder: DOMINANT_COLOR)
           fluid {
             aspectRatio
           }
