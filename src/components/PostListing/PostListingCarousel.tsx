@@ -70,7 +70,7 @@ export function PostListingCarousel({
         x: endValue,
         ease: "linear",
         loop: true,
-        duration: reduceMotion ? 0 : duration,
+        duration: reduceMotion || !playing ? 0 : duration,
         autoplay: true,
       });
     });
@@ -107,7 +107,7 @@ export function PostListingCarousel({
           {isClient &&
             images.map((image, i) => (
               <PostListingImage
-                image={image}
+                image={image!}
                 key={`${image?.base}${i}`}
               />
             ))}
@@ -122,7 +122,7 @@ export function PostListingCarousel({
           >
             {images.map((image, i) => (
               <PostListingImage
-                image={image}
+                image={image!}
                 key={`${image?.base}${i}`}
               />
             ))}

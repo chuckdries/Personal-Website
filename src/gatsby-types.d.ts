@@ -582,9 +582,17 @@ type FileFieldsFilterInput = {
 };
 
 type FileFieldsImageMeta = {
-  readonly datePublished: Maybe<Scalars['String']>;
+  readonly datePublished: Maybe<Scalars['Date']>;
   readonly dateTaken: Maybe<Scalars['Date']>;
   readonly meta: Maybe<FileFieldsImageMetaMeta>;
+};
+
+
+type FileFieldsImageMeta_datePublishedArgs = {
+  difference: InputMaybe<Scalars['String']>;
+  formatString: InputMaybe<Scalars['String']>;
+  fromNow: InputMaybe<Scalars['Boolean']>;
+  locale: InputMaybe<Scalars['String']>;
 };
 
 
@@ -602,7 +610,7 @@ type FileFieldsImageMetaFieldSelector = {
 };
 
 type FileFieldsImageMetaFilterInput = {
-  readonly datePublished: InputMaybe<StringQueryOperatorInput>;
+  readonly datePublished: InputMaybe<DateQueryOperatorInput>;
   readonly dateTaken: InputMaybe<DateQueryOperatorInput>;
   readonly meta: InputMaybe<FileFieldsImageMetaMetaFilterInput>;
 };
@@ -2766,7 +2774,7 @@ type GalleryImageFileFragment = { readonly nodes: ReadonlyArray<{ readonly base:
 type GalleryPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type GalleryPageQueryQuery = { readonly recents: { readonly nodes: ReadonlyArray<{ readonly base: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null, readonly fields: { readonly imageMeta: { readonly dateTaken: string | null, readonly datePublished: string | null, readonly meta: { readonly Keywords: ReadonlyArray<string | null> | null, readonly Rating: number | null, readonly ObjectName: string | null, readonly CreateDate: string | null, readonly ModifyDate: string | null } | null } | null } | null }> }, readonly all: { readonly nodes: ReadonlyArray<{ readonly base: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null, readonly fields: { readonly imageMeta: { readonly dateTaken: string | null, readonly datePublished: string | null, readonly meta: { readonly Keywords: ReadonlyArray<string | null> | null, readonly Rating: number | null, readonly ObjectName: string | null, readonly CreateDate: string | null, readonly ModifyDate: string | null } | null } | null } | null }> } };
+type GalleryPageQueryQuery = { readonly all: { readonly nodes: ReadonlyArray<{ readonly base: string, readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData, readonly fluid: { readonly aspectRatio: number } | null } | null, readonly fields: { readonly imageMeta: { readonly dateTaken: string | null, readonly datePublished: string | null, readonly meta: { readonly Keywords: ReadonlyArray<string | null> | null, readonly Rating: number | null, readonly ObjectName: string | null, readonly CreateDate: string | null, readonly ModifyDate: string | null } | null } | null } | null }> } };
 
 type GatsbyImageSharpFixedFragment = { readonly base64: string | null, readonly width: number, readonly height: number, readonly src: string, readonly srcSet: string };
 

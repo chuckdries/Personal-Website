@@ -22,7 +22,7 @@ import { PostListingCarousel } from "../components/PostListing/PostListingCarous
 const env =
   process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
 
-// export type HomepageImage = Queries.IndexPageQuery["allFile"]["nodes"][number];
+export type HomepageImage = Queries.IndexPageQuery["allFile"]["nodes"][number];
 
 const getDifferentRand = (
   range: number,
@@ -114,7 +114,7 @@ const IndexPage = ({
         <PostListingCarousel
           fullWidth={true}
           galleryImages={mdx?.frontmatter?.galleryImages}
-          playing
+          playing={false}
         />
         <div className="mt-2 lg:mt-4 xl:mt-6 prose w-full p-4 mx-auto">
           <h2>
@@ -125,8 +125,8 @@ const IndexPage = ({
         </div>
         <PostListingCarousel
           fullWidth={true}
-          galleryImages={allFile.nodes.map((node) => node.childImageSharp)}
-          playing
+          galleryImages={allFile.nodes}
+          playing={false}
         />
       </main>
       <a className="hidden" href="https://hachyderm.io/@chuckletmilk" rel="me">

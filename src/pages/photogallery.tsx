@@ -14,7 +14,7 @@ import {
 import Nav from "../components/Nav";
 import { Item, Select } from "../components/Select";
 import { Switch } from "../components/Switch";
-import ColorPalette from "@spectrum-icons/workflow/ColorPalette";
+// import ColorPalette from "@spectrum-icons/workflow/ColorPalette";
 import { ToggleButton } from "../components/ToggleButton";
 
 const SORT_KEYS = {
@@ -164,12 +164,12 @@ const GalleryPage = ({
     }
   }, [data, sortKey, filterKeyword]);
 
-  const recents = React.useMemo(() => {
-    return R.sort(
-      (left, right) => smartCompareDates("datePublished", left, right),
-      data.recents.nodes,
-    );
-  }, [data]);
+  // const recents = React.useMemo(() => {
+  //   return R.sort(
+  //     (left, right) => smartCompareDates("datePublished", left, right),
+  //     data.recents.nodes,
+  //   );
+  // }, [data]);
 
   const [dbgTags, setDbgTags] = React.useState(false);
   const [dbgSortKey, setDbgSortKey] = React.useState(false);
@@ -254,7 +254,7 @@ const GalleryPage = ({
                 </Link>
               )}
             </div>
-            <MasonryGallery
+            {/* <MasonryGallery
               aspectsByBreakpoint={{
                 xs: 3,
                 sm: 3,
@@ -270,7 +270,7 @@ const GalleryPage = ({
                 filterKeyword,
               }}
               singleRow
-            />
+            /> */}
           </div>
         )}
         <div className="px-4 md:px-8">
@@ -374,13 +374,13 @@ const GalleryPage = ({
 
 export const query = graphql`
   query GalleryPageQuery {
-    recents: allFile(
-      filter: { sourceInstanceName: { eq: "photos" } }
-      sort: { fields: { imageMeta: { datePublished: DESC } } }
-      limit: 10
-    ) {
-      ...GalleryImageFile
-    }
+    # recents: allFile(
+    #   filter: { sourceInstanceName: { eq: "photos" } }
+    #   sort: { fields: { imageMeta: { datePublished: DESC } } }
+    #   limit: 10
+    # ) {
+    #   ...GalleryImageFile
+    # }
     all: allFile(
       filter: {
         sourceInstanceName: { eq: "photos" }
