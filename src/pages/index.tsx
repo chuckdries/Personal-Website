@@ -105,7 +105,9 @@ const IndexPage = ({
       <main className="font-serif min-h-screen max-w-screen flex flex-col pb-2 lg:pb-4">
         <Nav />
         <div className="prose w-full p-4 mx-auto">
-          <span className="text-sm text-gray-500 italic">featured blog post</span>
+          <span className="text-sm text-gray-500 italic">
+            featured blog post
+          </span>
           <h2 className="mt-0">
             <Link className="font-bold" to={`/posts${mdx?.frontmatter?.slug}`}>
               {mdx?.frontmatter?.title} &rarr;
@@ -121,7 +123,9 @@ const IndexPage = ({
           <span className="text-sm text-gray-500 italic">latest photos</span>
           <h2 className="mt-0">
             <Link className="font-bold" to="/photos">
-              New photos from {file?.fields?.organization?.monthSlug?.split("/")[1]} {file?.fields?.organization?.year} &rarr;
+              New photos from{" "}
+              {file?.fields?.organization?.monthSlug?.split("/")[1]}{" "}
+              {file?.fields?.organization?.year} &rarr;
             </Link>
           </h2>
         </div>
@@ -164,6 +168,9 @@ export const query = graphql`
           base
           childImageSharp {
             gatsbyImageData(height: 170, placeholder: DOMINANT_COLOR)
+            fluid {
+              aspectRatio
+            }
           }
         }
       }
