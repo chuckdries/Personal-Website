@@ -167,7 +167,7 @@ export const query = graphql`
         galleryImages {
           base
           childImageSharp {
-            gatsbyImageData(height: 170, placeholder: DOMINANT_COLOR)
+            gatsbyImageData(height: 250, placeholder: DOMINANT_COLOR)
             fluid {
               aspectRatio
             }
@@ -183,7 +183,7 @@ export const query = graphql`
           galleryImages {
             base
             childImageSharp {
-              gatsbyImageData(height: 400, placeholder: DOMINANT_COLOR)
+              gatsbyImageData(height: 250, placeholder: DOMINANT_COLOR)
               fluid {
                 aspectRatio
               }
