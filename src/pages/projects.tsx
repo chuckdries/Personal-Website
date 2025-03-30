@@ -42,24 +42,10 @@ const ProjectsPage = ({
       {/* @ts-ignore */}
       <Helmet>
         <title>Projects | Chuck Dries</title>
-        <body
-          className="bg-white transition-colors"
-          // @ts-ignore
-          style={getHelmetSafeBodyStyle(
-            // @ts-ignore
-            getVibrantStyle({
-              Muted: [0, 0, 0],
-              LightMuted: [0, 0, 0],
-              Vibrant: [0, 0, 0],
-              LightVibrant: [238, 238, 238],
-              DarkMuted: [238, 238, 238],
-              DarkVibrant: [238, 238, 238],
-            })
-          )}
-        />
+        <body className="bg-white" />
       </Helmet>
       <main className="font-sans flex flex-col h-screen">
-        <div className="bg-buzzwordsLightBg/70 h-[100vh] pb-8 flex flex-col">
+        <div className="bg-buzzwordsLightBg/70 h-[80vh] flex flex-col">
           <Nav />
           <div className="flex lg:flex-auto flex-col items-center lg:flex-row justify-center">
             <StaticImage
@@ -107,6 +93,21 @@ const ProjectsPage = ({
                 >
                   Play now
                 </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col">
+          <div className="flex lg:flex-auto flex-col items-center lg:flex-row justify-center">
+            <StaticImage
+              alt="personal website screenshot"
+              className="lg:max-w-[calc(1.53*50vh)] lg:w-[50vw]"
+              src="../images/personal-site-photos.png"
+            />
+            <div className="flex flex-col justify-center p-2 lg:p-5">
+              <div>
+                <h3 className="text-4xl font-bold">Personal Website</h3>
+                <span>A space to show off my photos</span>
               </div>
             </div>
           </div>

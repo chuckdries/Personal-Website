@@ -93,7 +93,6 @@ const IndexPage = ({
 
   return (
     <>
-      {/* @ts-ignore */}
       <Helmet>
         <title>Chuck Dries</title>
         <body className="bg-white" />
@@ -104,6 +103,13 @@ const IndexPage = ({
       </Helmet>
       <main className="font-serif min-h-screen max-w-screen flex flex-col pb-2 lg:pb-4">
         <Nav />
+        <div className="prose w-full p-4 mx-auto">
+          <h2 className="mt-0">
+            <Link className="font-bold" to="/projects">
+              Hobby programming projects &rarr;
+            </Link>
+          </h2>
+        </div>
         <div className="prose w-full p-4 mx-auto">
           <span className="text-sm text-gray-500 italic">
             featured blog post
