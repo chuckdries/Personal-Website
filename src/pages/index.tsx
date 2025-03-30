@@ -43,6 +43,7 @@ const IndexPage = ({
     mdx,
     file,
     allFile,
+    allMdx,
   },
 }: PageProps<Queries.IndexPageQuery>) => {
   const [isClient, setIsClient] = React.useState(false);
@@ -117,15 +118,32 @@ const IndexPage = ({
           playing
         />
         <div className="mt-2 lg:mt-4 xl:mt-6 prose w-full p-4 mx-auto">
-          <h2>
+          <span className="text-sm text-gray-500">latest photos</span>
+          <h2 className="mt-0">
             <Link className="font-bold" to="/photos">
-              New photos this month &rarr;
+              New photos from {file?.fields?.organization?.monthSlug?.split("/")[1]} {file?.fields?.organization?.year} &rarr;
             </Link>
           </h2>
         </div>
         <PostListingCarousel
           fullWidth={true}
           galleryImages={allFile.nodes}
+          playing
+        />
+        <div className="mt-2 lg:mt-4 xl:mt-6 prose w-full p-4 mx-auto">
+          <span className="text-sm text-gray-500">latest blog post</span>
+          <h2 className="mt-0">
+            <Link
+              className="font-bold"
+              to={`/posts${allMdx.nodes[0].frontmatter?.slug}`}
+            >
+              {allMdx.nodes[0].frontmatter?.title} &rarr;
+            </Link>
+          </h2>
+        </div>
+        <PostListingCarousel
+          fullWidth={true}
+          galleryImages={allMdx.nodes[0].frontmatter?.galleryImages}
           playing
         />
       </main>
@@ -139,16 +157,29 @@ const IndexPage = ({
 export const query = graphql`
   query IndexPage {
     mdx(frontmatter: { slug: { eq: "/2024-year-in-review" } }) {
-      excerpt
       frontmatter {
         slug
         title
         galleryImages {
           base
           childImageSharp {
-            gatsbyImageData(height: 400, placeholder: DOMINANT_COLOR)
-            fluid {
-              aspectRatio
+            gatsbyImageData(height: 170, placeholder: DOMINANT_COLOR)
+          }
+        }
+      }
+    }
+    allMdx(sort: { frontmatter: { date: DESC } }, limit: 1) {
+      nodes {
+        frontmatter {
+          slug
+          title
+          galleryImages {
+            base
+            childImageSharp {
+              gatsbyImageData(height: 400, placeholder: DOMINANT_COLOR)
+              fluid {
+                aspectRatio
+              }
             }
           }
         }
@@ -173,7 +204,7 @@ export const query = graphql`
       nodes {
         base
         childImageSharp {
-          gatsbyImageData(height: 400, placeholder: DOMINANT_COLOR)
+          gatsbyImageData(height: 250, placeholder: DOMINANT_COLOR)
           fluid {
             aspectRatio
           }
