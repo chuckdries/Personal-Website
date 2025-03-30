@@ -105,7 +105,7 @@ const IndexPage = ({
       <main className="font-serif min-h-screen max-w-screen flex flex-col pb-2 lg:pb-4">
         <Nav />
         <div className="prose w-full p-4 mx-auto">
-          <span className="text-sm text-gray-500">featured blog post</span>
+          <span className="text-sm text-gray-500 italic">featured blog post</span>
           <h2 className="mt-0">
             <Link className="font-bold" to={`/posts${mdx?.frontmatter?.slug}`}>
               {mdx?.frontmatter?.title} &rarr;
@@ -118,7 +118,7 @@ const IndexPage = ({
           playing
         />
         <div className="mt-2 lg:mt-4 xl:mt-6 prose w-full p-4 mx-auto">
-          <span className="text-sm text-gray-500">latest photos</span>
+          <span className="text-sm text-gray-500 italic">latest photos</span>
           <h2 className="mt-0">
             <Link className="font-bold" to="/photos">
               New photos from {file?.fields?.organization?.monthSlug?.split("/")[1]} {file?.fields?.organization?.year} &rarr;
@@ -131,7 +131,7 @@ const IndexPage = ({
           playing
         />
         <div className="mt-2 lg:mt-4 xl:mt-6 prose w-full p-4 mx-auto">
-          <span className="text-sm text-gray-500">latest blog post</span>
+          <span className="text-sm text-gray-500 italic">latest blog post</span>
           <h2 className="mt-0">
             <Link
               className="font-bold"
