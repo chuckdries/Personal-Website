@@ -1,6 +1,6 @@
 import * as React from "react";
 import { graphql, Link, PageProps } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
 import { sortBy } from "ramda";
 import classnames from "classnames";
@@ -103,12 +103,81 @@ const IndexPage = ({
       </Helmet>
       <main className="font-serif min-h-screen max-w-screen flex flex-col pb-2 lg:pb-4">
         <Nav />
-        <div className="prose w-full p-4 mx-auto">
-          <h2 className="mt-0">
+        <div className="mt-2 prose w-full p-4 mx-auto">
+          <h2 className="m-0">
             <Link className="font-bold" to="/projects">
-              Hobby programming projects &rarr;
+              Programming projects &rarr;
             </Link>
           </h2>
+        </div>
+        <div className="flex flex-col xl:flex-row justify-center items-center xl:items-stretch gap-4">
+          <div className="prose flex flex-col md:flex-row items-center gap-2 rounded-lg p-4">
+            <StaticImage
+              src="../images/buzzwords_screenshot.png"
+              alt="Buzzwords"
+              className="rounded-lg flex-shrink-0"
+              width={300}
+              objectFit="contain"
+            />
+            <div className="flex-1 flex flex-col justify-between">
+              <div>
+                <h3 className="m-0">Buzzwords</h3>
+                <p className="mb-0">
+                  Browser based word game with seamless url-based multiplayer.
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <a
+                  className="bg-buzzwordsPrimary text-black rounded-full px-3 py-1"
+                  href="https://buzzwords.gg"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Play now
+                </a>
+                <a
+                  className="bg-gray-500/10 text-black rounded-full px-3 py-1"
+                  href="https://github.com/ViciousFish/buzzwords"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="prose hidden lg:flex flex-col md:flex-row items-center gap-2 rounded-lg p-4">
+            <StaticImage
+              src="../images/personal-site-photos.png"
+              alt="Personal website"
+              className="rounded-lg flex-shrink-0"
+              width={300}
+              objectFit="contain"
+            />
+            <div className="flex-1 flex flex-col justify-between">
+              <div>
+                <h3 className="m-0">Personal website</h3>
+                <p className="mb-2">
+                  This website! A space to show off my photos. Click around to
+                  see more. I'm particularly proud of the{" "}
+                  <Link className="font-bold" to="/photos">
+                    photo gallery
+                  </Link>
+                  .
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <a
+                  className="bg-gray-500/10 text-black rounded-full px-3 py-1"
+                  href="https://github.com/chuckdries/Personal-Website"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="prose w-full p-4 mx-auto">
           <span className="text-sm text-gray-500 italic">
@@ -125,6 +194,7 @@ const IndexPage = ({
           galleryImages={mdx?.frontmatter?.galleryImages}
           playing
         />
+
         <div className="mt-2 lg:mt-4 xl:mt-6 prose w-full p-4 mx-auto">
           <span className="text-sm text-gray-500 italic">latest photos</span>
           <h2 className="mt-0">

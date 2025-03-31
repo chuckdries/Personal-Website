@@ -11,7 +11,7 @@ export function PhotoLayout({
   omitNav?: boolean;
 }) {
   return (
-    <div className="flex flex-col h-[100svh]">
+    <div className="flex flex-col h-[100svh] font-sans">
       <Helmet>
         <title>Photos | Chuck Dries</title>
         <body
