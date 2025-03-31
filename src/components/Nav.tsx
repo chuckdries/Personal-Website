@@ -13,7 +13,7 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
   <ul
     className={classnames(
       "z-30 overflow-hidden bg-white/50 backdrop-blur-lg",
-      "rounded shadow-lg border border-gray-400",
+      "rounded shadow-lg border border-gray-400 font-serif",
     )}
   >
     <li>
