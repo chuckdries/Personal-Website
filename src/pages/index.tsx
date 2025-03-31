@@ -122,8 +122,8 @@ const IndexPage = ({
             <div className="flex-1 flex flex-col justify-between">
               <div>
                 <h3 className="m-0">Buzzwords</h3>
-                <p className="mb-0">
-                  Browser based word game with seamless url-based multiplayer.
+                <p className="my-2">
+                  Browser based word game I made with a friend. Features a beautiful 3D game board and a seamless url-based multiplayer experience.
                 </p>
               </div>
               <div className="flex gap-2">
@@ -157,13 +157,12 @@ const IndexPage = ({
             <div className="flex-1 flex flex-col justify-between">
               <div>
                 <h3 className="m-0">Personal website</h3>
-                <p className="mb-2">
-                  This website! A space to show off my photos. Click around to
-                  see more. I'm particularly proud of the{" "}
+                <p className="my-2">
+                  This website! I'm particularly proud of the{" "}
                   <Link className="font-bold" to="/photos">
                     photo gallery
                   </Link>
-                  .
+                  {" "}page, which shows off my custom virtualized masonry component.
                 </p>
               </div>
               <div className="flex gap-2">
