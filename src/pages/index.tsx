@@ -97,7 +97,7 @@ const IndexPage = ({
         <title>Chuck Dries</title>
         <body className="bg-white" />
         <meta
-          content="Full Stack Software Engineer and Photographer"
+          content="Software Engineer and Photographer"
           name="description"
         />
       </Helmet>

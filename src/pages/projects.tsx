@@ -56,7 +56,7 @@ const ProjectsPage = ({
           >
             LinkedIn
           </a>{" "}
-          for more details on my professional experience
+          for details on my professional experience
         </p>
         <div className="flex flex-col items-center lg:flex-row justify-center">
           <StaticImage
