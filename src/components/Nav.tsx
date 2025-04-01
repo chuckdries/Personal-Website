@@ -13,7 +13,7 @@ const ExternalLinks = ({ scheme }: { scheme: "light" | "dark" }) => (
   <ul
     className={classnames(
       "z-30 overflow-hidden bg-white/50 backdrop-blur-lg",
-      "rounded shadow-lg border border-gray-400",
+      "rounded shadow-lg border border-gray-400 font-serif",
     )}
   >
     <li>
@@ -137,7 +137,7 @@ const Nav = ({ className, scheme: _scheme, compact }: NavProps) => {
         compact ? "my-0 px-4" : "py-4 px-4 lg:px-8",
         "flex flex-col-reverse lg:flex-row",
         "justify-between",
-        "items-center w-full font-sans ",
+        "items-center w-full font-serif",
         className,
       )}
     >

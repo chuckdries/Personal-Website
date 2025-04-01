@@ -15,11 +15,11 @@ import { PostListingImage } from "./PostListingImage";
 export function PostListingCarousel({
   galleryImages,
   playing,
-  to,
+  fullWidth,
 }: {
   galleryImages?: GalleryImages;
   playing: boolean;
-  to: string;
+  fullWidth?: boolean;
 }) {
   const { observe: observeOuter, width: outerWidth } = useDimensions();
 
@@ -70,7 +70,7 @@ export function PostListingCarousel({
         x: endValue,
         ease: "linear",
         loop: true,
-        duration: reduceMotion ? 0 : duration,
+        duration: reduceMotion || !playing ? 0 : duration,
         autoplay: true,
       });
     });
@@ -88,7 +88,8 @@ export function PostListingCarousel({
     <div
       className={classNames(
         "prog-blur-x",
-        "flex max-h-[30vw] max-w-[1280px] items-stretch relative overflow-x-hidden mx-auto",
+        "flex items-stretch relative overflow-x-hidden mx-auto",
+        fullWidth ? "max-w-full max-h-[min(40vw,30vh)]" : "max-w-[1280px] max-h-[25vw]",
       )}
       ref={observeOuter}
     >
@@ -106,9 +107,8 @@ export function PostListingCarousel({
           {isClient &&
             images.map((image, i) => (
               <PostListingImage
-                image={image}
+                image={image!}
                 key={`${image?.base}${i}`}
-                to={to}
               />
             ))}
         </div>
@@ -122,9 +122,8 @@ export function PostListingCarousel({
           >
             {images.map((image, i) => (
               <PostListingImage
-                image={image}
+                image={image!}
                 key={`${image?.base}${i}`}
-                to={to}
               />
             ))}
           </div>

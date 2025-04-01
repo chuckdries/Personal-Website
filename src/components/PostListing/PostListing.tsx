@@ -9,24 +9,14 @@ import { useMediaQuery } from "../../useMediaQuery";
 export function PostListing({
   node,
   df,
+  fullWidth,
 }: {
   node: PostsNode;
   df: DateFormatter;
+  fullWidth?: boolean;
 }) {
-  const isTouch = useMediaQuery('(pointer: coarse)');
-  const [isHover, setIsHover] = useState(false);
-  const onMouseEnter = useCallback(() => {
-    setIsHover(true);
-  }, []);
-  const onMouseLeave = useCallback(() => {
-    setIsHover(false);
-  }, []);
   return (
-    <div
-      className=""
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
+    <div className="">
       <div className="w-full prose mx-auto p-4 md:p-6">
         <div className="z-10 bg-white">
           {node.frontmatter?.date && (
@@ -44,9 +34,9 @@ export function PostListing({
         </div>
       </div>
       <PostListingCarousel
+        fullWidth={fullWidth}
         galleryImages={node.frontmatter?.galleryImages}
-        playing={isHover || isTouch}
-        to={`/posts${node.frontmatter!.slug}`}
+        playing
       />
     </div>
   );
