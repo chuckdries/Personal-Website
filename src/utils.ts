@@ -87,6 +87,9 @@ export const getShutterFractionFromExposureTime = (exposureTime: number) => {
   if (exposureTime === 0.16666666666666666) {
     return "1/6";
   }
+  if (exposureTime === 0.007142857142857143) {
+    return "1/140";
+  }
   let fraction = exposureTime;
   const len = fraction.toString().length - 2;
 
