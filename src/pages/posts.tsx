@@ -1,9 +1,7 @@
 import React, { useMemo } from "react";
-import { graphql, Link, PageProps } from "gatsby";
+import { graphql, PageProps } from "gatsby";
 import { PostsLayout } from "../components/Posts/PostsLayout";
 import { useDateFormatter } from "react-aria";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { PostListingCarousel } from "../components/PostListing/PostListingCarousel";
 import { PostListing } from "../components/PostListing/PostListing";
 
 export type GalleryImages = NonNullable<

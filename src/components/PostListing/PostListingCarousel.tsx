@@ -16,10 +16,12 @@ export function PostListingCarousel({
   galleryImages,
   playing,
   fullWidth,
+  shuffle = true,
 }: {
   galleryImages?: GalleryImages;
   playing: boolean;
   fullWidth?: boolean;
+  shuffle?: boolean;
 }) {
   const { observe: observeOuter, width: outerWidth } = useDimensions();
 
@@ -45,7 +47,7 @@ export function PostListingCarousel({
   const images: typeof galleryImages = useMemo(
     () =>
       galleryImages &&
-      (isClient ? utils.shuffle(R.clone(galleryImages)) : galleryImages),
+      (isClient && shuffle ? utils.shuffle(R.clone(galleryImages)) : galleryImages),
     [galleryImages, isClient],
   );
 
