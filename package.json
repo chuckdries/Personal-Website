@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@internationalized/date": "^3.7.0",
-    "@juliangarnierorg/anime-beta": "^4.0.0-rc.4",
+    "@juliangarnierorg/anime-beta": "^4.0.0",
     "@mdx-js/react": "^3.1.0",
     "@react-aria/utils": "^3.27.0",
     "@react-spectrum/provider": "^3.10.1",

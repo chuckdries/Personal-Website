@@ -2469,10 +2469,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@juliangarnierorg/anime-beta@npm:^4.0.0-rc.4":
-  version: 4.0.0-rc.4
-  resolution: "@juliangarnierorg/anime-beta@npm:4.0.0-rc.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40juliangarnierorg%2Fanime-beta%2F4.0.0-rc.4%2F4ee4a8d666c7af1437fdb36748b657ce8d4df4b7"
-  checksum: 10/fdaf9300cc90597c887008878f239a915cc5e4faeb3b768e97dc3bc203f5d9ceee5ef7679cd3e727a1fd1c16c51a215e98e9bfd9f9ede394699ba18b4f23bf7f
+"@juliangarnierorg/anime-beta@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@juliangarnierorg/anime-beta@npm:4.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40juliangarnierorg%2Fanime-beta%2F4.0.0%2F826832c41c944005599d56ec2ad6eb0a705bcde7"
+  checksum: 10/661271a0e6eaf7cbf4c54041a0f5713799924d6b53a42a23d0b77dd7fffe95ff61835b4fe5c2ecb753aafd3a9a42cf19c32ff54aaeec7c60d283edb47741d8f4
   languageName: node
   linkType: hard
 
@@ -7772,7 +7772,7 @@ __metadata:
   resolution: "chuck-dries@workspace:."
   dependencies:
     "@internationalized/date": "npm:^3.7.0"
-    "@juliangarnierorg/anime-beta": "npm:^4.0.0-rc.4"
+    "@juliangarnierorg/anime-beta": "npm:^4.0.0"
     "@mdx-js/react": "npm:^3.1.0"
     "@react-aria/utils": "npm:^3.27.0"
     "@react-spectrum/provider": "npm:^3.10.1"
