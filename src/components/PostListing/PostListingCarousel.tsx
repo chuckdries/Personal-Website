@@ -1,10 +1,5 @@
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import {
-  animate,
-  createScope,
-  utils,
-} from "@juliangarnierorg/anime-beta";
+import { animate, createScope, utils, waapi } from "animejs";
 import useDimensions from "react-cool-dimensions";
 import * as R from "ramda";
 
@@ -35,6 +30,7 @@ export function PostListingCarousel({
   );
 
   const animContainerRef = useRef<HTMLDivElement>(null);
+  const animProgressRef = useRef(0);
 
   const [isClient, setIsClient] = React.useState(false);
 
@@ -47,7 +43,9 @@ export function PostListingCarousel({
   const images: typeof galleryImages = useMemo(
     () =>
       galleryImages &&
-      (isClient && shuffle ? utils.shuffle(R.clone(galleryImages)) : galleryImages),
+      (isClient && shuffle
+        ? utils.shuffle(R.clone(galleryImages))
+        : galleryImages),
     [galleryImages, isClient],
   );
 
@@ -59,7 +57,7 @@ export function PostListingCarousel({
     const endValue = -innerWidth - 12;
     const beginValue = 0;
     const distanceRemaining = Math.abs(endValue - beginValue);
-    const duration = distanceRemaining * 55;
+    const duration = distanceRemaining * 40;
     scopeRef.current = createScope({
       root: animContainerRef.current,
       mediaQueries: {
@@ -68,12 +66,19 @@ export function PostListingCarousel({
       },
     }).add((self) => {
       const { reduceMotion, touch } = self.matches;
-      const animation = animate(animContainerRef.current!, {
+      const animation = waapi.animate(animContainerRef.current!, {
         x: endValue,
         ease: "linear",
         loop: true,
         duration: reduceMotion || !playing ? 0 : duration,
         autoplay: true,
+      });
+
+      self.add("slow", () => {
+        animation.speed = 0.5;
+      });
+      self.add("fast", () => {
+        animation.speed = 1;
       });
     });
 
@@ -88,10 +93,18 @@ export function PostListingCarousel({
 
   return (
     <div
+      onMouseEnter={() => {
+        scopeRef.current?.methods.slow();
+      }}
+      onMouseLeave={() => {
+        scopeRef.current?.methods.fast();
+      }}
       className={classNames(
         "prog-blur-x",
         "flex items-stretch relative overflow-x-hidden mx-auto",
-        fullWidth ? "max-w-full max-h-[min(40vw,30vh)]" : "max-w-[1280px] max-h-[25vw]",
+        fullWidth
+          ? "max-w-full max-h-[min(40vw,30vh)]"
+          : "max-w-[1280px] max-h-[25vw]",
       )}
       ref={observeOuter}
     >
@@ -108,10 +121,7 @@ export function PostListingCarousel({
         >
           {isClient &&
             images.map((image, i) => (
-              <PostListingImage
-                image={image!}
-                key={`${image?.base}${i}`}
-              />
+              <PostListingImage image={image!} key={`${image?.base}${i}`} />
             ))}
         </div>
         {filler.map((_, i) => (
@@ -123,10 +133,7 @@ export function PostListingCarousel({
             key={`filler-${i}`}
           >
             {images.map((image, i) => (
-              <PostListingImage
-                image={image!}
-                key={`${image?.base}${i}`}
-              />
+              <PostListingImage image={image!} key={`${image?.base}${i}`} />
             ))}
           </div>
         ))}
