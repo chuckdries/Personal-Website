@@ -2469,13 +2469,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@juliangarnierorg/anime-beta@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "@juliangarnierorg/anime-beta@npm:4.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40juliangarnierorg%2Fanime-beta%2F4.0.0%2F826832c41c944005599d56ec2ad6eb0a705bcde7"
-  checksum: 10/661271a0e6eaf7cbf4c54041a0f5713799924d6b53a42a23d0b77dd7fffe95ff61835b4fe5c2ecb753aafd3a9a42cf19c32ff54aaeec7c60d283edb47741d8f4
-  languageName: node
-  linkType: hard
-
 "@lezer/common@npm:^1.0.0":
   version: 1.2.1
   resolution: "@lezer/common@npm:1.2.1"
@@ -6431,6 +6424,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"animejs@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "animejs@npm:4.0.2"
+  checksum: 10/d0b66c26b19ab5016d03b2536bab5adf5ec0f9144f1a97cc863f899c3d77cca1a84f0e6d533723c4a7e0e6a877110f9ef165ca1ec801be84131b0adeb1bec115
+  languageName: node
+  linkType: hard
+
 "anser@npm:^2.1.1":
   version: 2.1.1
   resolution: "anser@npm:2.1.1"
@@ -7772,7 +7772,6 @@ __metadata:
   resolution: "chuck-dries@workspace:."
   dependencies:
     "@internationalized/date": "npm:^3.7.0"
-    "@juliangarnierorg/anime-beta": "npm:^4.0.0"
     "@mdx-js/react": "npm:^3.1.0"
     "@react-aria/utils": "npm:^3.27.0"
     "@react-spectrum/provider": "npm:^3.10.1"
@@ -7789,6 +7788,7 @@ __metadata:
     "@types/react-window": "npm:^1.8.8"
     "@typescript-eslint/eslint-plugin": "npm:^8.21.0"
     "@typescript-eslint/parser": "npm:^8.21.0"
+    animejs: "npm:^4.0.2"
     autoprefixer: "npm:^10.4.20"
     babel-plugin-preval: "npm:^5.1.0"
     bluesky-comments: "npm:^0.9.0"
