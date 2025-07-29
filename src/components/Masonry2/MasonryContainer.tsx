@@ -85,7 +85,8 @@ export function MasonryContainer({
 
   const { breakpoint } = useBreakpoint(themeBreakpoints, "sm")
 
-  const targetAspect = width / (breakpoint === 'sm' ? 150 : 250);
+  const idealItemSize = breakpoint === 'sm' ? 150 : 250;
+  const targetAspect = width / idealItemSize;
   const rows = useMasonryRows(targetAspect, groups);
 
   const itemSize = (index: number) => {
@@ -99,7 +100,7 @@ export function MasonryContainer({
     }
     const row = rows[index];
     if (row.type === "i" && !row.isWhole) {
-      return (width / targetAspect);
+      return idealItemSize;
     }
 
     return width / rows[index].aspect;
@@ -114,6 +115,7 @@ export function MasonryContainer({
           itemCount={rows.length}
           itemData={rows}
           itemSize={itemSize}
+          estimatedItemSize={idealItemSize}
           onScroll={onScroll}
           overscanCount={5}
           ref={listRef}
