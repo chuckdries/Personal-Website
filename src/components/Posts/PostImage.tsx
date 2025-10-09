@@ -19,7 +19,6 @@ export function PostImage({
 }) {
   const image = getPostImage(props, index);
   const meta = image?.fields?.imageMeta?.meta;
-  console.log("🚀 ~ meta:", meta);
   const film = meta?.Keywords?.includes("Film");
   const df = useDateFormatter({
     timeZone: meta?.OffsetTimeOriginal ?? "America/Los_Angeles",

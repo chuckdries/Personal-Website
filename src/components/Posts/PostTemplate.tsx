@@ -64,7 +64,7 @@ export default function PageTemplate({
         <MDXProvider components={components}>{children}</MDXProvider>
         <section className="not-prose">
           {/* <h2>Comments</h2> */}
-          <BlueskyComments author="chuckdries.com" />
+          {data.mdx!.frontmatter!.bskyPost && <BlueskyComments uri={data.mdx!.frontmatter!.bskyPost} />}
         </section>
       </div>
       {/* {tocEntries && (
@@ -113,6 +113,7 @@ export const query = graphql`
           }
         }
         slug
+        bskyPost
         galleryImages {
           base
           fields {

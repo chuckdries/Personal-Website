@@ -239,7 +239,7 @@ export const query = graphql`
       }
     }
     # todo: always pull latest month automatically
-    file(fields: { organization: { month: { eq: 5 }, year: { eq: 2025 } } }) {
+    file(fields: { organization: { month: { eq: 10 }, year: { eq: 2025 } } }) {
       fields {
         organization {
           month
@@ -252,7 +252,7 @@ export const query = graphql`
     }
     allFile(
       filter: {
-        fields: { organization: { month: { eq: 5 }, year: { eq: 2025 } } }
+        fields: { organization: { month: { eq: 10 }, year: { eq: 2025 } } }
       }
     ) {
       nodes {
