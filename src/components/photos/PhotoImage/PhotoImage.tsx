@@ -111,6 +111,7 @@ export const FilmstockKeywords = [
   "Cinestill 50D",
   "Ektar 100",
   "Kodak Gold 200",
+  "Kodak Gold",
   "Gold 200",
   "Ektachrome E100",
   "Instax Square",
@@ -119,7 +120,7 @@ export const FilmstockKeywords = [
   "Ektachrome",
   "Portra 160",
   "Candido 800",
-  "Harman Phoenix"
+  "Harman Phoenix",
 ];
 
 const smoothScrollSupported =
@@ -186,7 +187,10 @@ function PhotoImage({
         : null,
     [meta],
   );
-  const dt = React.useMemo(() => (dateTaken ? parseAbsoluteToLocal(dateTaken) : null), [dateTaken]);
+  const dt = React.useMemo(
+    () => (dateTaken ? parseAbsoluteToLocal(dateTaken) : null),
+    [dateTaken],
+  );
 
   const film = React.useMemo(
     () => meta?.Make === "NORITSU KOKI" || meta?.Keywords?.includes("Film"),
@@ -200,8 +204,8 @@ function PhotoImage({
     [film, meta],
   );
   const df = useDateFormatter({
-    timeZone: meta?.OffsetTimeOriginal ?? 'America/Los_Angeles'
-  })
+    timeZone: meta?.OffsetTimeOriginal ?? "America/Los_Angeles",
+  });
   return (
     <div className="min-h-screen p-0">
       <Helmet>
@@ -274,7 +278,11 @@ function PhotoImage({
                         title="ISO"
                       />
                       <MetadataItem
-                        data={meta.FocalLength ? round(meta.FocalLength) + "mm" : null}
+                        data={
+                          meta.FocalLength
+                            ? round(meta.FocalLength) + "mm"
+                            : null
+                        }
                         icon={<Ruler />}
                         title="focal"
                       />

@@ -38,18 +38,20 @@ const IndexPage = ({
 }: PageProps<Queries.IndexPageQuery>) => {
   const [isClient, setIsClient] = React.useState(false);
   const today = new Date();
-  const mostRecentPost = useMemo(() => allMdx.nodes.filter(node => {
-    const postDate = new Date(node.frontmatter?.date ?? "");
-    return postDate <= today;
-  })[0], [allMdx.nodes]);
-
+  const mostRecentPost = useMemo(
+    () =>
+      allMdx.nodes.filter((node) => {
+        const postDate = new Date(node.frontmatter?.date ?? "");
+        return postDate <= today;
+      })[0],
+    [allMdx.nodes],
+  );
 
   React.useEffect(() => {
     if (!isClient) {
       setIsClient(true);
     }
   }, [isClient]);
-
 
   const images = React.useMemo(() => {
     if (!mdx?.frontmatter?.galleryImages) {
@@ -66,10 +68,7 @@ const IndexPage = ({
       <Helmet>
         <title>Chuck Dries</title>
         <body className="bg-white" />
-        <meta
-          content="Software Engineer and Photographer"
-          name="description"
-        />
+        <meta content="Software Engineer and Photographer" name="description" />
       </Helmet>
       <main className="font-serif min-h-screen max-w-screen flex flex-col pb-2 lg:pb-4">
         <Nav />
@@ -93,7 +92,9 @@ const IndexPage = ({
               <div>
                 <h3 className="m-0">Buzzwords</h3>
                 <p className="my-2">
-                  Browser based word game I made with a friend. Features a beautiful 3D game board and a seamless url-based multiplayer experience.
+                  Browser based word game I made with a friend. Features a
+                  beautiful 3D game board and a seamless url-based multiplayer
+                  experience.
                 </p>
               </div>
               <div className="flex gap-2">
@@ -131,8 +132,8 @@ const IndexPage = ({
                   This website! I'm particularly proud of the{" "}
                   <Link className="font-bold" to="/photos">
                     photo gallery
-                  </Link>
-                  {" "}page, which shows off my custom virtualized masonry component.
+                  </Link>{" "}
+                  page, which shows off my custom virtualized masonry component.
                 </p>
               </div>
               <div className="flex gap-2">
@@ -239,7 +240,7 @@ export const query = graphql`
       }
     }
     # todo: always pull latest month automatically
-    file(fields: { organization: { month: { eq: 10 }, year: { eq: 2025 } } }) {
+    file(fields: { organization: { month: { eq: 11 }, year: { eq: 2025 } } }) {
       fields {
         organization {
           month
@@ -252,7 +253,7 @@ export const query = graphql`
     }
     allFile(
       filter: {
-        fields: { organization: { month: { eq: 10 }, year: { eq: 2025 } } }
+        fields: { organization: { month: { eq: 11 }, year: { eq: 2025 } } }
       }
     ) {
       nodes {
