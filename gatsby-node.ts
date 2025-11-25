@@ -195,12 +195,16 @@ function transformMetaToNodeData(
   };
 }
 
-function transformDate(imagePath: string, dateTimeOriginal: string, offsetTimeOriginal: string) {
+function transformDate(
+  imagePath: string,
+  dateTimeOriginal: string,
+  offsetTimeOriginal: string,
+) {
   if (!offsetTimeOriginal) {
-    console.log(`${imagePath} has no timezone offset. Defaulting to UTC-8`)
+    console.log(`${imagePath} has no timezone offset. Defaulting to UTC-8`);
   }
   const [date, time] = dateTimeOriginal.split(" ");
-  const iso8601 = `${date.replace(/\:/g, "-")}T${time}${offsetTimeOriginal ?? '-08:00'}`;
+  const iso8601 = `${date.replace(/\:/g, "-")}T${time}${offsetTimeOriginal ?? "-08:00"}`;
   return parseAbsoluteToLocal(iso8601);
 }
 
@@ -420,6 +424,74 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
   console.log("years", years);
   console.log("months", months);
+
+  // Extract unique keywords and create keyword pages
+  const keywordsQuery = await graphql<Queries.KeywordsQuery>(`
+    query Keywords {
+      allFile(filter: { sourceInstanceName: { eq: "photos" } }) {
+        nodes {
+          fields {
+            imageMeta {
+              meta {
+                Keywords
+              }
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  if (keywordsQuery.errors) {
+    reporter.panicOnBuild("Error while running keywords GraphQL query.");
+  } else {
+    const keywordsSet = new Set<string>();
+    keywordsQuery.data!.allFile.nodes.forEach((node) => {
+      const keywords = node.fields?.imageMeta?.meta?.Keywords;
+      if (keywords && Array.isArray(keywords)) {
+        keywords.forEach((keyword) => {
+          if (keyword && typeof keyword === "string") {
+            keywordsSet.add(keyword);
+          }
+        });
+      }
+    });
+
+    const uniqueKeywords = Array.from(keywordsSet);
+    console.log("uniqueKeywords", uniqueKeywords);
+
+    // Allowlist of keywords to publish
+    const keywordAllowlist = new Set([
+      "Film",
+      "waterfall",
+      "hopscotch",
+      "flowers",
+      "cactus",
+      "night",
+      "sunset",
+      "winter",
+      "landscape",
+      "northern lights"
+    ]);
+    const publishedKeywords = uniqueKeywords.filter((keyword) =>
+      keywordAllowlist.has(keyword),
+    );
+    console.log("publishedKeywords", publishedKeywords);
+
+    const photoKeywordTemplate = path.resolve(
+      "src/components/photos/PhotoKeyword.tsx",
+    );
+
+    publishedKeywords.forEach((keyword) => {
+      createPage({
+        path: `photos/${keyword}`,
+        component: photoKeywordTemplate,
+        context: {
+          keyword,
+        },
+      });
+    });
+  }
 
   // posts
   const postsQuery = await graphql<Queries.PostsQuery>(`

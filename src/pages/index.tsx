@@ -7,6 +7,7 @@ import { sortBy } from "ramda";
 import Nav from "../components/Nav";
 import "./index.css";
 import { PostListingCarousel } from "../components/PostListing/PostListingCarousel";
+import { KeywordNavigationRow } from "../components/photos/KeywordNavigationRow";
 import { useMemo } from "react";
 
 const env =
@@ -34,6 +35,7 @@ const IndexPage = ({
     file,
     allFile,
     allMdx,
+    keywordImages,
   },
 }: PageProps<Queries.IndexPageQuery>) => {
   const [isClient, setIsClient] = React.useState(false);
@@ -149,21 +151,12 @@ const IndexPage = ({
             </div>
           </div>
         </div>
-        <div className="prose w-full p-4 mx-auto">
-          <span className="text-sm text-gray-500 italic">
-            featured blog post
-          </span>
-          <h2 className="mt-0">
-            <Link className="font-bold" to={`/posts${mdx?.frontmatter?.slug}`}>
-              {mdx?.frontmatter?.title} &rarr;
-            </Link>
-          </h2>
+        <div className="mt-2 lg:mt-4 xl:mt-6 prose w-full p-4 mx-auto">
+          <span className="text-sm text-gray-500 italic">Browse</span>
+          <h2 className="mt-0">Photos by keyword</h2>
         </div>
-        <PostListingCarousel
-          fullWidth={true}
-          galleryImages={mdx?.frontmatter?.galleryImages}
-          playing
-        />
+        <KeywordNavigationRow allImages={keywordImages?.nodes || []} playing />
+
         <div className="mt-2 lg:mt-4 xl:mt-6 prose w-full p-4 mx-auto">
           <span className="text-sm text-gray-500 italic">latest photos</span>
           <h2 className="mt-0">
@@ -195,6 +188,22 @@ const IndexPage = ({
           galleryImages={mostRecentPost.frontmatter?.galleryImages}
           playing
           shuffle={false}
+        />
+
+        <div className="prose w-full p-4 mx-auto">
+          <span className="text-sm text-gray-500 italic">
+            featured blog post
+          </span>
+          <h2 className="mt-0">
+            <Link className="font-bold" to={`/posts${mdx?.frontmatter?.slug}`}>
+              {mdx?.frontmatter?.title} &rarr;
+            </Link>
+          </h2>
+        </div>
+        <PostListingCarousel
+          fullWidth={true}
+          galleryImages={mdx?.frontmatter?.galleryImages}
+          playing
         />
       </main>
       <a className="hidden" href="https://hachyderm.io/@chuckletmilk" rel="me">
@@ -262,6 +271,39 @@ export const query = graphql`
           gatsbyImageData(height: 250, placeholder: DOMINANT_COLOR)
           fluid {
             aspectRatio
+          }
+        }
+      }
+    }
+    keywordImages: allFile(
+      filter: {
+        sourceInstanceName: { eq: "photos" }
+        fields: {
+          imageMeta: {
+            meta: {
+              Keywords: {
+                in: ["Film", "waterfall", "landscape", "sunset", "flowers"]
+              }
+            }
+          }
+        }
+      }
+      sort: { fields: { imageMeta: { dateTaken: DESC } } }
+    ) {
+      nodes {
+        id
+        relativePath
+        childImageSharp {
+          gatsbyImageData(height: 90, placeholder: DOMINANT_COLOR)
+          fluid {
+            aspectRatio
+          }
+        }
+        fields {
+          imageMeta {
+            meta {
+              Keywords
+            }
           }
         }
       }

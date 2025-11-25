@@ -23,11 +23,30 @@ export interface MasonryGroup {
   nodes: PhotoMonthNode[];
 }
 
+type PhotoNode = {
+  id: string;
+  fields?: {
+    imageMeta?: {
+      meta?: {
+        Keywords?: readonly (string | null)[] | null;
+      } | null;
+    } | null;
+  } | null;
+  childImageSharp?: {
+    gatsbyImageData?: any;
+    fluid?: {
+      aspectRatio?: number;
+    } | null;
+  } | null;
+};
+
 interface MasonryContainerProps {
   groups: MasonryGroup[];
   onScroll?: (data: ListOnScrollProps) => void;
   scrollPosition?: number;
-  children: (row: MasonryRowData, props: ListChildComponentProps, targetAspect: number, width: number) => ReactNode;
+  allImages?: readonly PhotoNode[];
+  keyword?: string;
+  children: (row: MasonryRowData, props: ListChildComponentProps, targetAspect: number, width: number, allImages?: readonly PhotoNode[], keyword?: string) => ReactNode;
 }
 
 interface MasonryBaseRow {
@@ -68,6 +87,8 @@ export function MasonryContainer({
   children,
   onScroll,
   scrollPosition,
+  allImages,
+  keyword,
 }: MasonryContainerProps) {
   const { observe, width, height } = useDimensions();
   const listRef = useRef<List>(null);
@@ -91,8 +112,15 @@ export function MasonryContainer({
 
   const itemSize = (index: number) => {
     if (index === 0) {
-      // TODO: improve
-      return 210;
+      // Base Nav height + conditional keyword pills/header
+      let height = 200; // Base Nav height
+      if (allImages) {
+        height += 60; // Keyword pill buttons row
+      }
+      if (keyword) {
+        height += 80; // Keyword header
+      }
+      return height;
     }
 
     if (index === 1) {
@@ -121,7 +149,7 @@ export function MasonryContainer({
           ref={listRef}
           width={width}
         >
-          {(props) => children(rows[props.index], props, targetAspect, width)}
+          {(props) => children(rows[props.index], props, targetAspect, width, allImages, keyword)}
         </List>
       )}
     </div>
