@@ -74,14 +74,14 @@ const IndexPage = ({
       </Helmet>
       <main className="font-serif min-h-screen max-w-screen flex flex-col pb-2 lg:pb-4">
         <Nav />
-        <div className="mt-2 prose w-full px-4 mx-auto">
+        {/* <div className="mt-2 prose w-full px-4 mx-auto">
           <h2 className="m-0">
             <Link className="font-bold" to="/projects">
               Programming projects &rarr;
             </Link>
           </h2>
-        </div>
-        <div className="flex flex-col xl:flex-row justify-center items-center xl:items-stretch gap-4">
+        </div> */}
+        {/* <div className="flex flex-col xl:flex-row justify-center items-center xl:items-stretch gap-4">
           <div className="prose flex flex-col md:flex-row items-center gap-2 rounded-lg px-4">
             <StaticImage
               src="../images/buzzwords_screenshot.png"
@@ -150,8 +150,8 @@ const IndexPage = ({
               </div>
             </div>
           </div>
-        </div>
-        <div className="mt-2 lg:mt-4 xl:mt-6 prose w-full p-4 mx-auto">
+        </div> */}
+        <div className="prose w-full p-4 mx-auto">
           <span className="text-sm text-gray-500 italic">Browse</span>
           <h2 className="mt-0">Photos by keyword</h2>
         </div>
@@ -190,7 +190,7 @@ const IndexPage = ({
           shuffle={false}
         />
 
-        <div className="prose w-full p-4 mx-auto">
+        <div className="mt-2 lg:mt-4 lx:mt-6 prose w-full p-4 mx-auto">
           <span className="text-sm text-gray-500 italic">
             featured blog post
           </span>

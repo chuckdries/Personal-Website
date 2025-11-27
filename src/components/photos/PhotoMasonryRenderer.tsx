@@ -4,6 +4,8 @@ import Nav from "../Nav";
 import { MasonryRow } from "../Masonry2/MasonryRow";
 import { MasonryGroup, MasonryRowData } from "../Masonry2/MasonryContainer";
 import { ListChildComponentProps } from "react-window";
+import { CircleX, Cross, X } from "lucide-react";
+import classNames from "classnames";
 
 type PhotoNode = {
   id: string;
@@ -53,57 +55,59 @@ export function PhotoMasonryRenderer({
   // Extract keywords from allImages for pill navigation
   const keywords = useMemo(() => {
     if (!allImages) return [];
-    
+
     const grouped: Record<string, boolean> = {};
-    
+
     allImages.forEach((image) => {
       const imageKeywords = image.fields?.imageMeta?.meta?.Keywords;
       if (!imageKeywords || !Array.isArray(imageKeywords)) {
         return;
       }
-      
+
       imageKeywords.forEach((kw) => {
-        if (
-          kw &&
-          typeof kw === "string" &&
-          KEYWORD_ALLOWLIST.has(kw)
-        ) {
+        if (kw && typeof kw === "string" && KEYWORD_ALLOWLIST.has(kw)) {
           grouped[kw] = true;
         }
       });
     });
-    
+
     return Object.keys(grouped).sort();
   }, [allImages]);
 
   switch (row.type) {
     case "c":
       return (
-        <div className="flex flex-col" style={props.style}>
+        <div
+          className="flex flex-col justify-start font-serif"
+          style={props.style}
+        >
           <Nav className="mb-4" scheme="light" />
           {keywords.length > 0 && (
-            <div className="px-4 lg:px-8 py-3 flex flex-wrap gap-2.5">
-              {keywords.map((kw) => (
-                <Link
-                  key={kw}
-                  to={`/photos/${kw}`}
-                  className="px-4 py-2 rounded-full bg-white border border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-sm font-serif font-medium capitalize transition-all duration-200 shadow-sm hover:shadow-md"
-                >
-                  {kw}
-                </Link>
-              ))}
-            </div>
-          )}
-          {keyword && (
-            <div className="px-4 lg:px-8 py-3 flex items-center gap-4">
-              <h2 className="text-2xl font-serif font-bold capitalize m-0">{keyword}</h2>
-              <Link
-                to="/photos"
-                className="text-sm font-serif underline hover:no-underline text-gray-600 hover:text-gray-800 transition-colors"
-              >
-                View All Photos
-              </Link>
-            </div>
+            <>
+              <span className="px-4 lg:px-8">Filter by keyword</span>
+              <div className="px-4 lg:px-8 py-3 flex flex-wrap gap-2 items-center">
+                {keywords.map((kw) => {
+                  const isSelected = kw === keyword;
+                  return (
+                    <div key={kw} className="flex items-center gap-1.5">
+                      <Link
+                        to={isSelected ? "/photos" : `/photos/${kw}`}
+                        className={classNames(
+                          `pl-4 py-2 rounded-full border text-sm font-medium capitalize text-black transition-all duration-200 shadow-sm hover:shadow-md`,
+                          isSelected
+                            ? "bg-gray-100 border-gray-400 hover:bg-gray-200 pr-2"
+                            : "bg-white border-gray-300 hover:border-gray-400 hover:bg-gray-50 pr-4",
+                          "flex items-center gap-1",
+                        )}
+                      >
+                        {kw}
+                        {isSelected && <X className="h-4" />}
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            </>
           )}
         </div>
       );
@@ -149,4 +153,3 @@ export function PhotoMasonryRenderer({
       );
   }
 }
-

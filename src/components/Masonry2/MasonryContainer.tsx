@@ -110,15 +110,13 @@ export function MasonryContainer({
   const targetAspect = width / idealItemSize;
   const rows = useMasonryRows(targetAspect, groups);
 
+  // TODO: improve
   const itemSize = (index: number) => {
     if (index === 0) {
-      // Base Nav height + conditional keyword pills/header
+      // Base Nav height + keyword pills row
       let height = 200; // Base Nav height
       if (allImages) {
         height += 60; // Keyword pill buttons row
-      }
-      if (keyword) {
-        height += 80; // Keyword header
       }
       return height;
     }

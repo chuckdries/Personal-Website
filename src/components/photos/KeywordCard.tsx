@@ -95,7 +95,7 @@ export function KeywordCard({ keyword, images, playing }: KeywordCardProps) {
         >
           <div
             style={{ width: "300px", height: "300px" }}
-            className="relative shrink-0 rounded-full h-[300px] aspect-square relative mt-3 p-1 border border-black shadow overflow-hidden"
+            className="relative shrink-0 rounded-full h-[300px] aspect-square relative mt-3 p-1 border border-gray-500 shadow overflow-hidden"
           >
             <div className="rounded-full overflow-hidden w-full h-full prog-blur-radial">
               <div className="flex flex-col gap-4 relative">

@@ -12,7 +12,7 @@ function PhotoKeyword({
 }: PageProps<Queries.PhotoKeywordQuery, { keyword: string }>) {
   // Filter photos by keyword
   const filteredNodes = useMemo(() => {
-    return R.filter((node) => {
+    return R.filter((node: typeof data.allFile.nodes[number]) => {
       const keywords = node.fields?.imageMeta?.meta?.Keywords;
       if (!keywords || !Array.isArray(keywords)) {
         return false;
@@ -21,7 +21,7 @@ function PhotoKeyword({
     }, data.allFile.nodes);
   }, [data.allFile.nodes, pageContext.keyword]);
 
-  const [groups] = usePhotoGroupsFromNodes(filteredNodes);
+  const [groups] = usePhotoGroupsFromNodes(filteredNodes as any);
 
   const [initialScroll, setInitialScroll] = useState(0);
   useEffect(() => {
@@ -43,15 +43,17 @@ function PhotoKeyword({
             );
           }}
           scrollPosition={initialScroll}
+          allImages={data.allFile.nodes}
           keyword={pageContext.keyword}
         >
-          {(row, props, targetAspect, width, _allImages, keyword) => (
+          {(row, props, targetAspect, width, allImages, keyword) => (
             <PhotoMasonryRenderer
               row={row}
               props={props}
               targetAspect={targetAspect}
               width={width}
               groups={groups}
+              allImages={allImages}
               keyword={keyword}
             />
           )}

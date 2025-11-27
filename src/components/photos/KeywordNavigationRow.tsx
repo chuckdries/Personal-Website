@@ -77,8 +77,8 @@ export function KeywordNavigationRow({
   }
 
   return (
-    <div className="w-full overflow-x-auto overflow-y-visible px-4">
-      <div className="flex flex-nowrap gap-4 py-6 overflow-y-visible justify-around mr-4">
+    <div className="w-full overflow-x-hidden overflow-y-visible px-0">
+      <div className="w-full flex flex-nowrap gap-4 lg:gap-6 px-4 lg:px-6 py-6 overflow-y-visible overflow-x-auto justify-around">
         {imagesByKeyword.map(({ keyword, images }) => (
           <KeywordCard
             key={keyword}
