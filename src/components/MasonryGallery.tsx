@@ -1,15 +1,9 @@
 import * as React from "react";
-import { Link } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import * as R from "ramda";
-import { getAspectRatio, getVibrantStyle, getName, getVibrant } from "../utils";
 import useBreakpoint from "use-breakpoint";
-
-// @ts-ignore
 import themeBreakpoints from "../breakpoints";
 import classNames from "classnames";
-// import useDimensions from "react-cool-dimensions";
-import { GalleryImage } from "../pages/photogallery";
+import type { MasonryPhotoData } from "../types";
 
 interface Row {
   aspect: number;
@@ -18,12 +12,12 @@ interface Row {
 }
 
 interface MasonryGalleryProps {
-  images: readonly GalleryImage[];
+  images: MasonryPhotoData[];
   aspectsByBreakpoint: {
     [breakpoint: string]: number;
   };
   debugHue?: boolean;
-  dataFn?: (image: GalleryImage) => string[] | null;
+  dataFn?: (image: MasonryPhotoData) => string[] | null;
   linkState?: object;
   showPalette?: boolean;
   singleRow?: boolean;
@@ -54,7 +48,7 @@ const MasonryGallery = ({
   }px)`;
 
   const aspectRatios = React.useMemo(
-    () => R.map(getAspectRatio, _images).filter(Boolean),
+    () => _images.map((img) => img.aspectRatio).filter(Boolean),
     [_images]
   ) as number[];
 
@@ -69,11 +63,9 @@ const MasonryGallery = ({
         targetAspect - (currentRow.aspect + currentAspect)
       );
 
-      // does adding current image to our row get us closer to our target aspect ratio?
       if (currentDiff > diffIfImageIsAddedToCurrentRow) {
         currentRow.aspect += currentAspect;
         currentRow.images += 1;
-        // _rows.push(currentRow);
         continue;
       }
 
@@ -81,7 +73,6 @@ const MasonryGallery = ({
         break;
       }
 
-      // start a new row
       _rows.push({
         aspect: currentAspect,
         images: 1,
@@ -93,7 +84,7 @@ const MasonryGallery = ({
   }, [aspectRatios, targetAspect, singleRow]);
 
   const sortedImageList = React.useMemo(
-    () => _images.map((image) => image.base),
+    () => _images.map((image) => image.filename),
     [_images]
   );
 
@@ -106,7 +97,6 @@ const MasonryGallery = ({
         "flex items-center flex-wrap mx-auto px-4 md:px-8",
         isClient ? "" : ""
       )}
-      // ref={observe}
       style={{
         position: "relative",
       }}
@@ -118,46 +108,30 @@ const MasonryGallery = ({
           currentRow = rows[i];
         }
         const rowAspectRatioSum = currentRow.aspect;
-        const ar = getAspectRatio(image);
+        const ar = image.aspectRatio;
         let width: string;
         let height = `calc(${galleryWidth} / ${rowAspectRatioSum} ${
           showPalette ? "+ 10px" : "- 10px"
         })`;
         if (rowAspectRatioSum < targetAspect * 0.66 && !singleRow) {
-          // incomplete row, render stuff at "ideal" sizes instead of filling width
           width = `calc(calc(100vw - 160px) / ${targetAspect / ar})`;
           height = "unset";
         } else {
           const widthNumber = ((ar / rowAspectRatioSum) * 100).toFixed(7);
           width = `${widthNumber}%`;
         }
-        const vibrant = getVibrant(image);
-        // @ts-ignore
-        const img = getImage(image);
 
         const data = dataFn ? dataFn(image) : null;
         return (
-          <Link
+          <a
             className="border-8 border-white overflow-hidden relative"
-            id={singleRow ? undefined : image.base}
-            key={`${image.base}`}
-            state={{
-              ...linkState,
-              sortedImageList,
-              currentIndex: i,
-            }}
+            id={singleRow ? undefined : image.filename}
+            key={image.filename}
+            href={`/${image.slug}`}
             style={{
               height,
               width,
-              borderColor: debugHue
-                ? `hsl(
-                    ${image.fields?.imageMeta?.dominantHue?.[0]},
-                    ${image.fields?.imageMeta?.dominantHue?.[1] ?? 0 * 100}%,
-                    ${image.fields?.imageMeta?.dominantHue?.[2] ?? 0 * 100}%
-                  )`
-                : "",
             }}
-            to={`/photogallery/${image.base}/`}
           >
             {data && (
               <div className="text-white z-20 absolute flex flex-col items-start">
@@ -171,60 +145,20 @@ const MasonryGallery = ({
                 ))}
               </div>
             )}
-            {img && (
-              <div
-                className={`h-full ${
-                  showPalette && "grid grid-rows-[1fr_20px]"
-                }`}
-              >
-                <GatsbyImage
-                  alt={
-                    image.fields?.imageMeta?.meta?.Keywords?.length
-                      ? `image of ${image.fields?.imageMeta?.meta?.Keywords.join(
-                          " and "
-                        )}. ${getName(image)}`
-                      : getName(image)
-                  }
-                  className="w-full"
-                  image={img}
-                  objectFit="cover"
-                  objectPosition="center top"
-                />
-                {showPalette && vibrant && (
-                  <div className="grid grid-cols-6 flex-shrink-0 h-[20px] w-full">
-                    <div
-                      style={{
-                        background: `rgba(${vibrant.Vibrant?.join(",")})`,
-                      }}
-                    ></div>
-                    <div
-                      style={{
-                        background: `rgb(${vibrant.LightVibrant?.join(",")})`,
-                      }}
-                    ></div>
-                    <div
-                      style={{
-                        background: `rgb(${vibrant.DarkVibrant?.join(",")})`,
-                      }}
-                    ></div>
-                    <div
-                      style={{ background: `rgb(${vibrant.Muted?.join(",")})` }}
-                    ></div>
-                    <div
-                      style={{
-                        background: `rgb(${vibrant.LightMuted?.join(",")})`,
-                      }}
-                    ></div>
-                    <div
-                      style={{
-                        background: `rgb(${vibrant.DarkMuted?.join(",")})`,
-                      }}
-                    ></div>
-                  </div>
-                )}
-              </div>
-            )}
-          </Link>
+            <div className="h-full">
+              <img
+                alt={
+                  image.meta.Keywords?.length
+                    ? `image of ${image.meta.Keywords.join(" and ")}. ${image.meta.ObjectName ?? image.filename}`
+                    : (image.meta.ObjectName ?? image.filename)
+                }
+                className="w-full h-full object-cover"
+                loading="lazy"
+                src={image.src}
+                style={{ backgroundColor: image.dominantColor }}
+              />
+            </div>
+          </a>
         );
       })}
     </div>

@@ -1,0 +1,43 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import { PostListing, type PostListingData } from "../components/PostListing/PostListing";
+import { getCollection } from "astro:content";
+import { processPhotoForCarousel } from "../lib/images";
+import type { CarouselImageData } from "../types";
+
+const allPosts = await getCollection("posts");
+const today = new Date();
+const filteredPosts = allPosts
+  .filter((p) => new Date(p.data.date) <= today)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+// Process gallery images for each post
+const postsWithImages: PostListingData[] = await Promise.all(
+  filteredPosts.map(async (post) => {
+    let galleryImages: CarouselImageData[] = [];
+    if (post.data.galleryImages) {
+      const results = await Promise.all(
+        post.data.galleryImages.map((filename) => processPhotoForCarousel(filename)),
+      );
+      galleryImages = results.filter((r): r is CarouselImageData => r !== null);
+    }
+    return {
+      slug: post.data.slug,
+      title: post.data.title,
+      date: post.data.date.toISOString(),
+      excerpt: "", // Astro doesn't provide excerpt automatically
+      galleryImages,
+    };
+  }),
+);
+---
+
+<BaseLayout title="Posts" bodyClass="bg-white text-black">
+  <div class="flex flex-col h-screen font-serif pb-8">
+    <Nav currentPath="/posts" className="mb-4" scheme="light" />
+    {postsWithImages.map((node) => (
+      <PostListing client:load node={node} />
+    ))}
+  </div>
+</BaseLayout>

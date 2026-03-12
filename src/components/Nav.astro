@@ -1,0 +1,105 @@
+---
+interface Props {
+  className?: string;
+  scheme?: "dark" | "light";
+  compact?: boolean;
+  currentPath?: string;
+}
+
+const { className, scheme = "light", compact, currentPath } = Astro.props;
+
+const navLinkClass = (path: string) => {
+  const isActive = currentPath
+    ? path === "/" ? currentPath === "/" : currentPath.startsWith(path)
+    : false;
+  return [
+    "hover:underline hover:bg-black/10 block p-3 flex-shrink-0 whitespace-nowrap",
+    scheme === "dark" ? "text-white" : "text-black",
+    isActive ? "underline" : "",
+  ].filter(Boolean).join(" ");
+};
+
+const linksNavClass = [
+  "hover:underline hover:bg-black/10 block p-3 flex-shrink-0 whitespace-nowrap",
+  scheme === "dark" ? "text-white" : "text-black",
+].join(" ");
+---
+
+<nav
+  class:list={[
+    compact ? "my-0 px-4 lg:px-4" : "py-4 px-4 lg:px-8",
+    "flex flex-col-reverse lg:flex-row",
+    "justify-between",
+    "items-center w-full font-serif",
+    className,
+  ]}
+>
+  <div class="flex flex-auto items-center">
+    {!compact && (
+      <div class="h-[60px] w-[60px] lg:w-[100px] lg:h-[100px] mr-4 my-5 flex-shrink-0">
+        <img
+          alt="A picture of me"
+          class="relative"
+          src="/images/circle-profile.png"
+        />
+      </div>
+    )}
+    <div class="items-baseline">
+      <h1 class="font-bold mr-2">Chuck Dries</h1>
+      {!compact && (
+        <h2 class="text-md">Software Engineer & Photographer</h2>
+      )}
+    </div>
+  </div>
+
+  <div class="flex">
+    <ul class="flex">
+      <li><a class={navLinkClass("/")} href="/">Home</a></li>
+      <li><a class={navLinkClass("/photos")} href="/photos">Photos</a></li>
+      <li><a class={navLinkClass("/posts")} href="/posts">Blog</a></li>
+      <li><a class={navLinkClass("/projects")} href="/projects">Projects</a></li>
+    </ul>
+    <details class="relative" id="links-dropdown">
+      <summary
+        class:list={[
+          "hover:underline inline-flex align-middle items-center cursor-pointer list-none",
+          linksNavClass,
+        ]}
+      >
+        Links
+      </summary>
+      <div class="absolute right-0 top-full z-30 p-1">
+        <ul class="z-30 overflow-hidden bg-white/50 backdrop-blur-lg rounded shadow-lg border border-gray-400 font-serif">
+          <li>
+            <a
+              class="hover:underline hover:bg-gray-300 block p-3 flex-shrink-0 whitespace-nowrap text-black bg-buzzwordsLightBg"
+              href="https://buzzwords.gg"
+              target="_blank"
+            >
+              <img
+                alt="buzzwords icon"
+                class="mr-2 inline-block"
+                src="/images/buzzwords_icon.png"
+                style="height: 25px; width: 25px;"
+              />
+              Buzzwords
+            </a>
+          </li>
+          <li><a class={linksNavClass} href="https://bsky.app/profile/chuckdries.com" rel="noreferrer" target="_blank">Bluesky</a></li>
+          <li><a class={linksNavClass} href="https://www.instagram.com/chuck.dries.photo/" rel="noreferrer" target="_blank">Instagram</a></li>
+          <li><a class={linksNavClass} href="https://www.youtube.com/channel/UCknR_DdytuOgzus--b2gZhg" rel="noreferrer" target="_blank">YouTube</a></li>
+          <li><a class={linksNavClass} href="https://github.com/chuckdries" rel="noreferrer" target="_blank">GitHub</a></li>
+          <li><a class={linksNavClass} href="mailto:chuck@chuckdries.com">chuck@chuckdries.com</a></li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener("click", (e) => {
+    document.querySelectorAll("details[open]").forEach((d) => {
+      if (!d.contains(e.target as Node)) d.removeAttribute("open");
+    });
+  });
+</script>

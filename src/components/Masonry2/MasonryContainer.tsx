@@ -1,26 +1,23 @@
 import React, {
-  ReactNode,
+  type ReactNode,
   useEffect,
   useLayoutEffect,
   useRef,
 } from "react";
-import { PhotoMonthNode } from "../photos/PhotoMonth";
+import type { MasonryPhotoData } from "../../types";
 import useDimensions from "react-cool-dimensions";
-import { VariableSizeList as List, ListChildComponentProps, ListOnScrollProps } from "react-window";
+import { VariableSizeList as List } from "react-window";
+import type { ListChildComponentProps, ListOnScrollProps } from "react-window";
 import useBreakpoint from "use-breakpoint";
-// @ts-expect-error babel preval != ts
 import themeBreakpoints from "../../breakpoints";
 import { useMasonryRows } from "./hooks/useMasonryRows";
-
-// import "./MasonryContainer.css";
 
 export interface MasonryGroup {
   slug: string;
   tickLabel: string;
-  // label: ReactNode;
   month: string | null;
   year: string | null;
-  nodes: PhotoMonthNode[];
+  nodes: MasonryPhotoData[];
 }
 
 interface MasonryContainerProps {
@@ -31,14 +28,8 @@ interface MasonryContainerProps {
 }
 
 interface MasonryBaseRow {
-  type: "i" | "l" | "c";
-  aspect: number; // TODO: simply store height directly
-}
-
-/** placeholder for children */
-export interface MasonryChildrenRow extends MasonryBaseRow {
-  type: "c";
-  aspect: 0;
+  type: "i" | "l";
+  aspect: number;
 }
 
 export interface MasonryImageRow extends MasonryBaseRow {
@@ -57,11 +48,8 @@ export interface MasonryLabelRow extends MasonryBaseRow {
 }
 
 export type MasonryRowData =
-  | MasonryChildrenRow
   | MasonryImageRow
   | MasonryLabelRow;
-
-function MasonryVirtualizedRow() {}
 
 export function MasonryContainer({
   groups,
@@ -81,7 +69,6 @@ export function MasonryContainer({
       listRef.current.scrollTo(scrollPosition);
     }
   }, [scrollPosition]);
-  // listRef.current?.scrollTo(scrollPosition);
 
   const { breakpoint } = useBreakpoint(themeBreakpoints, "sm")
 
@@ -90,15 +77,10 @@ export function MasonryContainer({
   const rows = useMasonryRows(targetAspect, groups);
 
   const itemSize = (index: number) => {
-    if (index === 0) {
-      // TODO: improve
-      return 210;
-    }
-
-    if (index === 1) {
+    const row = rows[index];
+    if (row.type === "l") {
       return 120;
     }
-    const row = rows[index];
     if (row.type === "i" && !row.isWhole) {
       return idealItemSize;
     }
@@ -107,7 +89,7 @@ export function MasonryContainer({
   };
 
   return (
-    <div className="h-[100svh] w-full" ref={observe}>
+    <div className="h-full w-full" ref={observe}>
       {width && (
         <List
           className="masorny-container w-full"

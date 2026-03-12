@@ -1,41 +1,45 @@
-import React, { useCallback, useState } from "react";
-import { PostsNode } from "../../pages/posts";
+import React from "react";
 import { PostListingCarousel } from "./PostListingCarousel";
-import { Link } from "gatsby";
-import { DateFormatter } from "react-aria";
-import classNames from "classnames";
-import { useMediaQuery } from "../../useMediaQuery";
+import { useDateFormatter } from "react-aria";
+import type { CarouselImageData } from "../../types";
+
+export interface PostListingData {
+  slug: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  galleryImages?: CarouselImageData[];
+}
 
 export function PostListing({
   node,
-  df,
   fullWidth,
 }: {
-  node: PostsNode;
-  df: DateFormatter;
+  node: PostListingData;
   fullWidth?: boolean;
 }) {
+  const df = useDateFormatter({ timeZone: "utc" });
   return (
     <div className="">
       <div className="w-full prose mx-auto p-4 md:p-6">
         <div className="z-10 bg-white">
-          {node.frontmatter?.date && (
+          {node.date && (
             <span className="block text-sm opacity-60">
-              {df.format(new Date(node.frontmatter.date))}
+              {df.format(new Date(node.date))}
             </span>
           )}
-          <Link
+          <a
             className="underline text-blue-600 visited:text-purple-600 font-bold text-xl"
-            to={`/posts${node.frontmatter!.slug}`}
+            href={`/posts${node.slug}`}
           >
-            {node.frontmatter!.title}
-          </Link>
+            {node.title}
+          </a>
           <p className="my-0 not-prose">{node.excerpt}</p>
         </div>
       </div>
       <PostListingCarousel
         fullWidth={fullWidth}
-        galleryImages={node.frontmatter?.galleryImages}
+        galleryImages={node.galleryImages}
         playing
       />
     </div>

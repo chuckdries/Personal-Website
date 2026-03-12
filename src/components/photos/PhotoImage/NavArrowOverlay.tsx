@@ -1,8 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import debounce from "lodash.debounce";
 
-import { SiblingNavDatas } from "./PhotoImage";
-import { OverlayNavArrow } from "./OverlayNavArrow";
+import { OverlayNavArrow, type SiblingNavData } from "./OverlayNavArrow";
+
+export interface SiblingNavDatas {
+  left: SiblingNavData | null;
+  right: SiblingNavData | null;
+}
 
 export function NavArrowOverlay({
   siblingNavDatas,
@@ -11,7 +15,6 @@ export function NavArrowOverlay({
 }) {
   const [show, setShow] = useState(true);
   const timeout = useRef<number | undefined>(undefined);
-  // it's my website I do what I want
   // eslint-disable-next-line
   const debouncedSetTimeout = useCallback(
     debounce(() => {

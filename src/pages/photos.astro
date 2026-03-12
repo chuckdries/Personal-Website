@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import { PhotosPageClient } from "../components/PhotosPageClient";
+import { getCollection } from "astro:content";
+import { processPhotoForMasonry } from "../lib/images";
+import type { MasonryPhotoData } from "../types";
+import type { MasonryGroup } from "../components/Masonry2/MasonryContainer";
+
+const allPhotos = await getCollection("photos");
+
+// Sort by date taken descending
+const sortedPhotos = allPhotos.sort(
+  (a, b) => new Date(b.data.dateTaken).getTime() - new Date(a.data.dateTaken).getTime(),
+);
+
+// Group by yearFolder then by month
+const yearGroups: Record<string, typeof sortedPhotos> = {};
+for (const photo of sortedPhotos) {
+  const yf = photo.data.organization.yearFolder;
+  if (!yearGroups[yf]) yearGroups[yf] = [];
+  yearGroups[yf].push(photo);
+}
+
+// Sort years descending, "Older" last
+const sortedYearKeys = Object.keys(yearGroups).sort((a, b) => {
+  if (a === "Older") return 1;
+  if (b === "Older") return -1;
+  return Number(b) - Number(a);
+});
+
+// Build masonry groups
+const groups: MasonryGroup[] = [];
+
+for (const yearKey of sortedYearKeys) {
+  const yearPhotos = yearGroups[yearKey];
+
+  if (yearKey === "Older") {
+    const processed = await Promise.all(yearPhotos.map((p) => processPhotoForMasonry(p.data)));
+    const validPhotos = processed.filter((p): p is MasonryPhotoData => p !== null);
+    groups.push({
+      slug: "Older",
+      tickLabel: "Older",
+      month: null,
+      year: null,
+      nodes: validPhotos,
+    });
+  } else {
+    const monthGroups: Record<number, typeof yearPhotos> = {};
+    for (const photo of yearPhotos) {
+      const m = photo.data.organization.month;
+      if (!monthGroups[m]) monthGroups[m] = [];
+      monthGroups[m].push(photo);
+    }
+
+    const sortedMonths = Object.keys(monthGroups)
+      .map(Number)
+      .sort((a, b) => b - a);
+
+    for (const monthNum of sortedMonths) {
+      const monthPhotos = monthGroups[monthNum];
+      const monthSlug = monthPhotos[0].data.organization.monthSlug;
+      const monthName = monthSlug.split("/")[1];
+
+      const processed = await Promise.all(monthPhotos.map((p) => processPhotoForMasonry(p.data)));
+      const validPhotos = processed.filter((p): p is MasonryPhotoData => p !== null);
+
+      groups.push({
+        slug: monthSlug,
+        tickLabel: `${monthName} ${yearKey}`,
+        year: yearKey,
+        month: monthName,
+        nodes: validPhotos,
+      });
+    }
+  }
+}
+---
+
+<BaseLayout
+  title="Photos"
+  description="Full Stack Software Engineer and Photographer"
+  bodyClass="bg-white text-black"
+>
+  <div class="flex flex-col h-[100svh] font-sans overflow-hidden">
+    <Nav currentPath="/photos" scheme="light" className="mb-0" />
+    <div class="flex-auto overflow-hidden">
+      <PhotosPageClient client:load groups={groups} />
+    </div>
+  </div>
+</BaseLayout>

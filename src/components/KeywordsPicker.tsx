@@ -1,6 +1,5 @@
 import * as React from "react";
 import classNames from "classnames";
-import { Link } from "gatsby";
 
 interface KeywordsPickerProps {
   keywords: string[];
@@ -17,7 +16,7 @@ const KeywordsPicker = ({ keywords, value, getHref, onPick }: KeywordsPickerProp
           const selected = value === keyword;
           return (
             <li key={keyword}>
-              <Link
+              <a
                 className={classNames(
                   `py-[5px] px-3 rounded-full text-sm block capitalize`,
                   `text-black border border-gray-400`,
@@ -27,11 +26,10 @@ const KeywordsPicker = ({ keywords, value, getHref, onPick }: KeywordsPickerProp
                     hover:bg-black/10`
                 )}
                 onClick={() => onPick(keyword)}
-                replace={false}
-                to={getHref(keyword, selected)}
+                href={getHref(keyword, selected)}
               >
                 {keyword}{" "}
-              </Link>
+              </a>
             </li>
           );
         })}

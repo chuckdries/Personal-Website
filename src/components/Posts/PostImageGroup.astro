@@ -1,0 +1,62 @@
+---
+interface Props {
+  label?: string;
+}
+
+const { label } = Astro.props;
+---
+
+<div class="post-image-group-wrapper">
+  <div class="justify-center absolute left-0 right-0 flex overflow-y-hidden">
+    <div class="post-image-group-inner flex flex-nowrap items-center overflow-x-auto w-fit pr-3 lg:pr-6 gap-6 pb-2 pl-3 lg:pl-6">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<script>
+  // Measure height and detect overflow for each PostImageGroup
+  function initPostImageGroups() {
+    const wrappers = document.querySelectorAll<HTMLElement>('.post-image-group-wrapper');
+    wrappers.forEach((wrapper) => {
+      const inner = wrapper.querySelector<HTMLElement>('.post-image-group-inner');
+      const absoluteDiv = wrapper.querySelector<HTMLElement>(':scope > div');
+      if (!absoluteDiv || !inner) return;
+
+      // Measure the absolute-positioned content and set wrapper height
+      const updateHeight = () => {
+        const height = absoluteDiv.getBoundingClientRect().height;
+        wrapper.style.height = height ? `${height}px` : '90vh';
+      };
+
+      // Check overflow and add scroll prompt
+      const checkOverflow = () => {
+        if (inner.scrollWidth > inner.clientWidth) {
+          // Add scroll prompt if not already present
+          if (!inner.querySelector('.scroll-prompt')) {
+            const prompt = document.createElement('p');
+            prompt.className = 'scroll-prompt text-nowrap lg:text-lg lg:mr-6 pr-3 pl-6 lg:pl-8 py-8 italic opacity-40 bg-[var(--tw-prose-body)] text-white rounded-r-full';
+            prompt.innerHTML = '<span class="pointer-coarse:hidden">scroll &rarr;</span><span class="pointer-fine:hidden">swipe &larr;</span>';
+            inner.insertBefore(prompt, inner.firstChild);
+            inner.classList.remove('pl-3', 'lg:pl-6');
+          }
+        }
+      };
+
+      updateHeight();
+      checkOverflow();
+
+      // Re-check on resize
+      const observer = new ResizeObserver(() => {
+        updateHeight();
+      });
+      observer.observe(absoluteDiv);
+    });
+  }
+
+  // Run on page load
+  initPostImageGroups();
+
+  // Also run when Astro navigates (view transitions)
+  document.addEventListener('astro:page-load', initPostImageGroups);
+</script>

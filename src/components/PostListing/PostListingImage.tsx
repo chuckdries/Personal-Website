@@ -1,11 +1,10 @@
 import React from "react";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { HomepageImage } from "../../pages";
+import type { CarouselImageData } from "../../types";
 
 export function PostListingImage({
   image,
 }: {
-  image: HomepageImage;
+  image: CarouselImageData;
 }) {
   if (!image) {
     return <></>;
@@ -13,12 +12,12 @@ export function PostListingImage({
   return (
     <div
       className="rounded-md overflow-hidden min-h-full max-h-full"
-      style={{ aspectRatio: (image.childImageSharp?.fluid?.aspectRatio ?? 1) }}
+      style={{ aspectRatio: image.aspectRatio }}
     >
-      <GatsbyImage
+      <img
         alt=""
-        className="h-full w-full"
-        image={getImage(image.childImageSharp?.gatsbyImageData ?? null)!}
+        className="h-full w-full object-cover"
+        src={image.src}
       />
     </div>
   );

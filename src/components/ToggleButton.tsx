@@ -1,7 +1,8 @@
 import * as React from "react";
 
 import { useToggleState } from "react-stately";
-import { AriaToggleButtonProps, useToggleButton } from "react-aria";
+import { useToggleButton } from "react-aria";
+import type { AriaToggleButtonProps } from "react-aria";
 import { useRef } from "react";
 import classNames from "classnames";
 

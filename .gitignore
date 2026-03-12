@@ -10,3 +10,5 @@ public
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+dist
+.astro

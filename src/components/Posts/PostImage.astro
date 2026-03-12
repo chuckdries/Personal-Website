@@ -1,0 +1,75 @@
+---
+import { getPostGalleryImage } from "../../lib/postContext";
+import { getShutterFractionFromExposureTime } from "../../utils";
+import { parseAbsoluteToLocal } from "@internationalized/date";
+
+interface Props {
+  index: number;
+  alt?: string;
+}
+
+const { index, alt } = Astro.props;
+const image = getPostGalleryImage(index);
+
+if (!image) {
+  console.warn(`PostImage: No image found at index ${index}`);
+}
+
+const meta = image?.meta;
+const film = meta?.Keywords?.includes("Film");
+const FilmstockKeywords = [
+  "Cinestill 50D", "Ektar 100", "Kodak Gold 200", "Kodak Gold",
+  "Gold 200", "Ektachrome E100", "Instax Square", "Instax Monochrome",
+  "Portra 400", "Ektachrome", "Portra 160", "Candido 800", "Harman Phoenix",
+];
+const filmStock = film
+  ? meta?.Keywords?.find((k: string) => k && FilmstockKeywords.includes(k))
+  : null;
+
+const dt = meta?.DateTimeOriginal
+  ? parseAbsoluteToLocal(meta.DateTimeOriginal)
+  : null;
+const dateStr = dt
+  ? dt.toDate().toLocaleDateString("en-US", {
+      timeZone: meta?.OffsetTimeOriginal ?? "America/Los_Angeles",
+    })
+  : null;
+
+const shutterSpeed = meta?.ExposureTime
+  ? getShutterFractionFromExposureTime(meta.ExposureTime)
+  : null;
+---
+
+{image && (
+  <div
+    class="block my-2 flex-shrink-0 group"
+    id={image.filename}
+    style={`max-width: min(calc(${image.aspectRatio} * 85vh), calc(100vw - 32px));`}
+  >
+    <img
+      alt={alt ?? `A photo called ${image.filename}`}
+      class="overflow-visible not-prose w-full"
+      src={image.src}
+    />
+    <a
+      class="t-0 block opacity-0 group-hover:opacity-100 transition-opacity"
+      href={`/${image.slug}`}
+    >
+      {!film && (
+        <div class="text-sm float-right flex gap-2">
+          {shutterSpeed && <span>{shutterSpeed}s</span>}
+          {meta?.FNumber && <span>f/{meta.FNumber}</span>}
+          {meta?.ISO && <span>{meta.ISO} ISO</span>}
+        </div>
+      )}
+      {film && filmStock && (
+        <div class="text-sm float-right flex gap-2">
+          <span>{filmStock}</span>
+        </div>
+      )}
+      {dateStr && (
+        <span class="text-sm">{dateStr}</span>
+      )}
+    </a>
+  </div>
+)}

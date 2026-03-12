@@ -1,0 +1,44 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  bodyClass?: string;
+  bodyStyle?: string;
+}
+
+const {
+  title = "Chuck Dries",
+  description = "Software Engineer and Photographer",
+  ogImage,
+  bodyClass = "bg-white text-black",
+  bodyStyle,
+} = Astro.props;
+
+import "../styles/global.css";
+
+const siteUrl = "https://chuckdries.com";
+const fullTitle = title === "Chuck Dries" ? title : `${title} | Chuck Dries`;
+const isProd = import.meta.env.PROD;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {ogImage && <meta property="og:image" content={`${siteUrl}${ogImage}`} />}
+    {ogImage && <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />}
+    <link rel="icon" type="image/svg+xml" href="/images/glasses-outline.svg" />
+    <link rel="alternate" type="application/rss+xml" title="Chuck Dries Photos" href="/photos.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Chuck Dries Posts" href="/rss.xml" />
+    {isProd && (
+      <script defer data-domain="chuckdries.com" src="https://plausible.io/js/script.js"></script>
+    )}
+  </head>
+  <body class={bodyClass} style={bodyStyle}>
+    <slot />
+  </body>
+</html>

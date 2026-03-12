@@ -1,0 +1,101 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+---
+
+<BaseLayout title="Projects" bodyClass="bg-white">
+  <main class="font-serif flex flex-col justify-start gap-4 items-center h-screen">
+    <Nav currentPath="/projects" />
+    <p class="text-center max-w-[700px] bg-gray-200 rounded-full p-2 px-4 my-4">
+      Take a look at my{" "}
+      <a
+        class="font-bold underline"
+        rel="noreferrer"
+        target="_blank"
+        href="https://linkedin.com/in/chuckdries"
+      >
+        LinkedIn
+      </a>{" "}
+      for details on my professional experience
+    </p>
+    <div class="flex flex-col items-center lg:flex-row justify-center">
+      <img
+        alt="buzzwords screenshot"
+        style="object-fit: contain;"
+        width={700}
+        src="/images/buzzwords_screenshot.png"
+      />
+      <div class="flex flex-col justify-center p-2 lg:p-5">
+        <div>
+          <p class="italic opacity-60">Ongoing programming project</p>
+          <h3 class="text-4xl font-bold">Buzzwords</h3>
+          <p>Browser based word game</p>
+        </div>
+        <ul class="pl-4 list-disc mt-2 mb-4 w-full max-w-[400px]">
+          <li>Seamless url-based multiplayer</li>
+          <li>Beautiful UI with react, react-spring and react-three-fiber</li>
+          <li>Backend with Mongo, Express, Typescript</li>
+        </ul>
+        <div class="flex gap-3 px-2">
+          <a
+            class="text-black bg-gray-500/10 hover:bg-gray-500/30 rounded-full p-2 px-4"
+            href="https://github.com/ViciousFish/buzzwords"
+            rel="noreferrer"
+            target="_blank"
+          >
+            GitHub
+          </a>
+          <a
+            class="text-black bg-gray-500/10 hover:bg-gray-500/30 rounded-full p-2 px-4"
+            href="https://chuckdries.itch.io/buzzwords"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Itch.io
+          </a>
+          <a
+            class="bg-buzzwordsPrimary hover:bg-buzzwordsPrimary/60 text-black rounded-full p-2 px-4"
+            href="https://buzzwords.gg"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Play now
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col items-center lg:flex-row justify-center">
+      <img
+        alt="personal website screenshot"
+        style="object-fit: contain;"
+        width={700}
+        src="/images/personal-site-photos.png"
+      />
+      <div class="flex flex-col justify-center p-2 lg:p-5">
+        <div>
+          <p class="italic opacity-60">Ongoing programming project</p>
+          <h3 class="text-4xl font-bold">Personal Website</h3>
+          <p>A space to show off my photos</p>
+        </div>
+        <ul class="pl-4 list-disc mt-2 mb-4 w-full max-w-[400px]">
+          <li>Showcase for my frontend skills and photography</li>
+          <li>Fully custom virtualized masonry layout for /photos page</li>
+          <li>Built with Astro, Tailwind CSS, and TypeScript</li>
+        </ul>
+        <div class="flex gap-3 px-2">
+          <a
+            class="text-black bg-gray-500/10 hover:bg-gray-500/30 rounded-full p-2 px-4"
+            href="https://github.com/chuckdries/Personal-Website"
+            rel="noreferrer"
+            target="_blank"
+          >
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <a class="hidden" href="https://hachyderm.io/@chuckletmilk" rel="me">
+    Mastodon
+  </a>
+</BaseLayout>

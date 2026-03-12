@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import { PhotoGalleryClient } from "../components/PhotoGalleryClient";
+import { getCollection } from "astro:content";
+import { processPhotoForMasonry } from "../lib/images";
+import type { MasonryPhotoData } from "../types";
+
+const allPhotos = await getCollection("photos");
+
+// Filter to Rating >= 4, sorted by rating descending
+const ratedPhotos = allPhotos
+  .filter((p) => (p.data.meta.Rating ?? 0) >= 4)
+  .sort((a, b) => (b.data.meta.Rating ?? 0) - (a.data.meta.Rating ?? 0));
+
+const processed = await Promise.all(
+  ratedPhotos.map((p) => processPhotoForMasonry(p.data)),
+);
+const allImages = processed.filter((p): p is MasonryPhotoData => p !== null);
+---
+
+<BaseLayout
+  title="Photo Gallery"
+  bodyClass="bg-white transition-color"
+  bodyStyle="--dark-vibrant: 238, 238, 238; --light-vibrant: 238, 238, 238; --vibrant: 0, 0, 0; --muted: 0, 0, 0; --light-muted: 0, 0, 0; --dark-muted: 238, 238, 238;"
+>
+  <Nav currentPath="/photogallery" className="mb-4" />
+  <PhotoGalleryClient client:load allImages={allImages} />
+</BaseLayout>

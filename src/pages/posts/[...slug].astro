@@ -1,0 +1,81 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import { getCollection, render } from "astro:content";
+import { getImage } from "astro:assets";
+import { setPostGalleryImages, type ProcessedGalleryImage } from "../../lib/postContext";
+import { getGalleryImageModule } from "../../lib/images";
+import PostImage from "../../components/Posts/PostImage.astro";
+import PostImageGroup from "../../components/Posts/PostImageGroup.astro";
+import { BlueskyCommentsWrapper } from "../../components/Posts/BlueskyCommentsWrapper";
+import "../../components/Posts/PostTemplate.css";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map((post) => ({
+    params: { slug: post.data.slug.replace(/^\//, "") },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+// Process gallery images
+const galleryImages: ProcessedGalleryImage[] = [];
+if (post.data.galleryImages) {
+  const photos = await getCollection("photos");
+  for (const filename of post.data.galleryImages) {
+    const imageModule = getGalleryImageModule(filename);
+    const photoData = photos.find((p) => p.data.filename === filename);
+    if (imageModule) {
+      const optimized = await getImage({
+        src: imageModule,
+        width: 1400,
+      });
+      galleryImages.push({
+        src: optimized.src,
+        width: optimized.attributes.width as number,
+        height: optimized.attributes.height as number,
+        aspectRatio: (optimized.attributes.width as number) / (optimized.attributes.height as number),
+        filename,
+        slug: photoData?.data.slug ?? "",
+        meta: photoData?.data.meta ?? {
+          Make: null, Model: null, ExposureTime: null, FNumber: null,
+          ISO: null, DateTimeOriginal: null, OffsetTimeOriginal: null,
+          FocalLength: null, LensModel: null, ObjectName: null,
+          Caption: null, Rating: null, Keywords: [],
+        },
+      });
+    }
+  }
+}
+
+// Set gallery images in module-level context for PostImage.astro to read
+setPostGalleryImages(galleryImages);
+
+const { Content } = await render(post);
+
+const date = post.data.date ? new Date(post.data.date) : null;
+const dateStr = date
+  ? date.toLocaleDateString("en-US", { timeZone: "utc" })
+  : null;
+---
+
+<BaseLayout
+  title={post.data.title}
+  bodyClass="bg-white text-black"
+>
+  <div class="flex flex-col min-h-screen font-serif pb-8">
+    <Nav currentPath="/posts" className="mb-4" scheme="light" />
+    <div class="mx-auto prose px-4">
+      <h1 style={date ? "margin-bottom: 0" : ""}>{post.data.title}</h1>
+      {dateStr && <p style="margin-top: 0">{dateStr}</p>}
+      <Content components={{ PostImage, PostImageGroup }} />
+      <section class="not-prose">
+        {post.data.bskyPost && (
+          <BlueskyCommentsWrapper client:load uri={post.data.bskyPost} />
+        )}
+      </section>
+    </div>
+  </div>
+</BaseLayout>

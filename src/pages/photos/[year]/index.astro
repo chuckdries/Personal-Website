@@ -1,0 +1,17 @@
+---
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const photos = await getCollection("photos");
+  const years = new Set<string>();
+  for (const photo of photos) {
+    years.add(photo.data.organization.yearFolder);
+  }
+  return Array.from(years).map((year) => ({
+    params: { year },
+  }));
+}
+
+// Redirect to /photos
+return Astro.redirect("/photos");
+---

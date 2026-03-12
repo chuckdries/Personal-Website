@@ -1,0 +1,203 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import { PostListingCarousel } from "../components/PostListing/PostListingCarousel";
+import { getCollection } from "astro:content";
+import { processPhotoForCarousel } from "../lib/images";
+import type { CarouselImageData } from "../types";
+import "../pages/index.css";
+
+// Get posts
+const allPosts = await getCollection("posts");
+const today = new Date();
+const sortedPosts = allPosts
+  .filter((p) => new Date(p.data.date) <= today)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+// Featured post (year-in-review)
+const featuredPost = allPosts.find((p) => p.data.slug === "/2024-year-in-review");
+const mostRecentPost = sortedPosts[0];
+
+// Process gallery images for featured post carousel
+let featuredImages: CarouselImageData[] = [];
+if (featuredPost?.data.galleryImages) {
+  const results = await Promise.all(
+    featuredPost.data.galleryImages.map((filename) => processPhotoForCarousel(filename)),
+  );
+  featuredImages = results.filter((r): r is CarouselImageData => r !== null);
+}
+
+// Process gallery images for most recent post carousel
+let recentPostImages: CarouselImageData[] = [];
+if (mostRecentPost?.data.galleryImages) {
+  const results = await Promise.all(
+    mostRecentPost.data.galleryImages.map((filename) => processPhotoForCarousel(filename)),
+  );
+  recentPostImages = results.filter((r): r is CarouselImageData => r !== null);
+}
+
+// Get latest month's photos
+const allPhotos = await getCollection("photos");
+const sortedPhotos = allPhotos.sort(
+  (a, b) => new Date(b.data.dateTaken).getTime() - new Date(a.data.dateTaken).getTime(),
+);
+
+// Find the latest month with photos
+const latestPhoto = sortedPhotos[0];
+const latestYear = latestPhoto?.data.organization.year;
+const latestMonth = latestPhoto?.data.organization.month;
+const latestMonthSlug = latestPhoto?.data.organization.monthSlug;
+const latestMonthName = latestMonthSlug?.split("/")[1];
+
+const latestMonthPhotos = sortedPhotos.filter(
+  (p) => p.data.organization.year === latestYear && p.data.organization.month === latestMonth,
+);
+
+let latestPhotoImages: CarouselImageData[] = [];
+const photoResults = await Promise.all(
+  latestMonthPhotos.map((p) => processPhotoForCarousel(p.data.filename)),
+);
+latestPhotoImages = photoResults.filter((r): r is CarouselImageData => r !== null);
+---
+
+<BaseLayout title="Chuck Dries" description="Software Engineer and Photographer" bodyClass="bg-white">
+  <main class="font-serif min-h-screen max-w-screen flex flex-col pb-2 lg:pb-4">
+    <Nav currentPath="/" />
+    <div class="mt-2 prose w-full px-4 mx-auto">
+      <h2 class="m-0">
+        <a class="font-bold" href="/projects">
+          Programming projects &rarr;
+        </a>
+      </h2>
+    </div>
+    <div class="flex flex-col xl:flex-row justify-center items-center xl:items-stretch gap-4">
+      <div class="prose flex flex-col md:flex-row items-center gap-2 rounded-lg px-4">
+        <img
+          src="/images/buzzwords_screenshot.png"
+          alt="Buzzwords"
+          class="rounded-lg flex-shrink-0"
+          width={300}
+          style="object-fit: contain;"
+        />
+        <div class="flex-1 flex flex-col justify-between">
+          <div>
+            <h3 class="m-0">Buzzwords</h3>
+            <p class="my-2">
+              Browser based word game I made with a friend. Features a
+              beautiful 3D game board and a seamless url-based multiplayer
+              experience.
+            </p>
+          </div>
+          <div class="flex gap-2">
+            <a
+              class="bg-buzzwordsPrimary text-black rounded-full px-3 py-1"
+              href="https://buzzwords.gg"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Play now
+            </a>
+            <a
+              class="bg-gray-500/10 text-black rounded-full px-3 py-1"
+              href="https://github.com/ViciousFish/buzzwords"
+              rel="noreferrer"
+              target="_blank"
+            >
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="prose hidden lg:flex flex-col md:flex-row items-center gap-2 rounded-lg p-4">
+        <img
+          src="/images/personal-site-photos.png"
+          alt="Personal website"
+          class="rounded-lg flex-shrink-0"
+          width={300}
+          style="object-fit: contain;"
+        />
+        <div class="flex-1 flex flex-col justify-between">
+          <div>
+            <h3 class="m-0">Personal website</h3>
+            <p class="my-2">
+              This website! I'm particularly proud of the{" "}
+              <a class="font-bold" href="/photos">
+                photo gallery
+              </a>{" "}
+              page, which shows off my custom virtualized masonry component.
+            </p>
+          </div>
+          <div class="flex gap-2">
+            <a
+              class="bg-gray-500/10 text-black rounded-full px-3 py-1"
+              href="https://github.com/chuckdries/Personal-Website"
+              rel="noreferrer"
+              target="_blank"
+            >
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {featuredPost && (
+      <div class="prose w-full p-4 mx-auto">
+        <span class="text-sm text-gray-500 italic">
+          featured blog post
+        </span>
+        <h2 class="mt-0">
+          <a class="font-bold" href={`/posts${featuredPost.data.slug}`}>
+            {featuredPost.data.title} &rarr;
+          </a>
+        </h2>
+      </div>
+    )}
+    <PostListingCarousel
+      client:load
+      fullWidth={true}
+      galleryImages={featuredImages}
+      playing
+    />
+    <div class="mt-2 lg:mt-4 xl:mt-6 prose w-full p-4 mx-auto">
+      <span class="text-sm text-gray-500 italic">latest photos</span>
+      <h2 class="mt-0">
+        <a class="font-bold" href="/photos">
+          New photos from{" "}
+          {latestMonthName}{" "}
+          {latestYear} &rarr;
+        </a>
+      </h2>
+    </div>
+    <PostListingCarousel
+      client:load
+      fullWidth={true}
+      galleryImages={latestPhotoImages}
+      playing
+    />
+    {mostRecentPost && (
+      <>
+        <div class="mt-2 lg:mt-4 xl:mt-6 prose w-full p-4 mx-auto">
+          <span class="text-sm text-gray-500 italic">latest blog post</span>
+          <h2 class="mt-0">
+            <a
+              class="font-bold"
+              href={`/posts${mostRecentPost.data.slug}`}
+            >
+              {mostRecentPost.data.title} &rarr;
+            </a>
+          </h2>
+        </div>
+        <PostListingCarousel
+          client:load
+          fullWidth={true}
+          galleryImages={recentPostImages}
+          playing
+          shuffle={false}
+        />
+      </>
+    )}
+  </main>
+  <a class="hidden" href="https://hachyderm.io/@chuckletmilk" rel="me">
+    Mastodon
+  </a>
+</BaseLayout>

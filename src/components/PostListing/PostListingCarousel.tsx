@@ -1,5 +1,4 @@
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import {
   animate,
   createScope,
@@ -8,9 +7,9 @@ import {
 import useDimensions from "react-cool-dimensions";
 import * as R from "ramda";
 
-import { GalleryImages } from "../../pages/posts";
 import classNames from "classnames";
 import { PostListingImage } from "./PostListingImage";
+import type { CarouselImageData } from "../../types";
 
 export function PostListingCarousel({
   galleryImages,
@@ -18,7 +17,7 @@ export function PostListingCarousel({
   fullWidth,
   shuffle = true,
 }: {
-  galleryImages?: GalleryImages;
+  galleryImages?: CarouselImageData[];
   playing: boolean;
   fullWidth?: boolean;
   shuffle?: boolean;
@@ -110,7 +109,7 @@ export function PostListingCarousel({
             images.map((image, i) => (
               <PostListingImage
                 image={image!}
-                key={`${image?.base}${i}`}
+                key={`${image?.filename}${i}`}
               />
             ))}
         </div>
@@ -125,7 +124,7 @@ export function PostListingCarousel({
             {images.map((image, i) => (
               <PostListingImage
                 image={image!}
-                key={`${image?.base}${i}`}
+                key={`${image?.filename}${i}`}
               />
             ))}
           </div>
