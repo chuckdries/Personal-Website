@@ -149,21 +149,6 @@ const IndexPage = ({
             </div>
           </div>
         </div>
-        <div className="prose w-full p-4 mx-auto">
-          <span className="text-sm text-gray-500 italic">
-            featured blog post
-          </span>
-          <h2 className="mt-0">
-            <Link className="font-bold" to={`/posts${mdx?.frontmatter?.slug}`}>
-              {mdx?.frontmatter?.title} &rarr;
-            </Link>
-          </h2>
-        </div>
-        <PostListingCarousel
-          fullWidth={true}
-          galleryImages={mdx?.frontmatter?.galleryImages}
-          playing
-        />
         <div className="mt-2 lg:mt-4 xl:mt-6 prose w-full p-4 mx-auto">
           <span className="text-sm text-gray-500 italic">latest photos</span>
           <h2 className="mt-0">
@@ -177,6 +162,22 @@ const IndexPage = ({
         <PostListingCarousel
           fullWidth={true}
           galleryImages={allFile.nodes}
+          playing
+        />
+
+        <div className="prose w-full p-4 mx-auto">
+          <span className="text-sm text-gray-500 italic">
+            featured blog post
+          </span>
+          <h2 className="mt-0">
+            <Link className="font-bold" to={`/posts${mdx?.frontmatter?.slug}`}>
+              {mdx?.frontmatter?.title} &rarr;
+            </Link>
+          </h2>
+        </div>
+        <PostListingCarousel
+          fullWidth={true}
+          galleryImages={mdx?.frontmatter?.galleryImages}
           playing
         />
         <div className="mt-2 lg:mt-4 xl:mt-6 prose w-full p-4 mx-auto">
@@ -240,7 +241,7 @@ export const query = graphql`
       }
     }
     # todo: always pull latest month automatically
-    file(fields: { organization: { month: { eq: 11 }, year: { eq: 2025 } } }) {
+    file(fields: { organization: { month: { eq: 5 }, year: { eq: 2026 } } }) {
       fields {
         organization {
           month
@@ -253,7 +254,7 @@ export const query = graphql`
     }
     allFile(
       filter: {
-        fields: { organization: { month: { eq: 11 }, year: { eq: 2025 } } }
+        fields: { organization: { month: { eq: 5 }, year: { eq: 2026 } } }
       }
     ) {
       nodes {
